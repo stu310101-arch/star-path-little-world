@@ -1,0 +1,23 @@
+[
+  {
+    "variant": 0,
+    "branch_vertices": 5112,
+    "flower_cards": 312,
+    "flower_vertices": 2808,
+    "atlas": "sakura-atlas.png"
+  },
+  {
+    "variant": 1,
+    "branch_vertices": 5112,
+    "flower_cards": 312,
+    "flower_vertices": 2808,
+    "atlas": "sakura-atlas.png"
+  },
+  {
+    "variant": 2,
+    "branch_vertices": 5112,
+    "flower_cards": 312,
+    "flower_vertices": 2808,
+    "atlas": "sakura-atlas.png"
+  }
+]

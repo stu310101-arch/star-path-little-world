@@ -1,0 +1,26 @@
+[
+  {
+    "model": "b",
+    "roof_faces": 363
+  },
+  {
+    "model": "f",
+    "roof_faces": 301
+  },
+  {
+    "model": "a",
+    "roof_faces": 296
+  },
+  {
+    "model": "c",
+    "roof_faces": 228
+  },
+  {
+    "model": "d",
+    "roof_faces": 288
+  },
+  {
+    "model": "e",
+    "roof_faces": 240
+  }
+]

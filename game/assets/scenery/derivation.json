@@ -1,0 +1,82 @@
+[
+  {
+    "name": "sakura_0",
+    "source": "Original task-authored Blender geometry",
+    "vertices": 448,
+    "dimensions": [
+      3.683889389038086,
+      3.8605146408081055,
+      3.71018648147583
+    ]
+  },
+  {
+    "name": "sakura_1",
+    "source": "Original task-authored Blender geometry",
+    "vertices": 448,
+    "dimensions": [
+      3.815408229827881,
+      4.028847694396973,
+      3.989347457885742
+    ]
+  },
+  {
+    "name": "sakura_2",
+    "source": "Original task-authored Blender geometry",
+    "vertices": 448,
+    "dimensions": [
+      3.726571559906006,
+      4.326992988586426,
+      4.268635272979736
+    ]
+  },
+  {
+    "name": "fish_1",
+    "source": "Quaternius Animated Fish CC0; normalized static mesh; world supplies leap motion",
+    "vertices": 274,
+    "dimensions": [
+      0.12232169508934021,
+      0.8499999642372131,
+      0.28076261281967163
+    ]
+  },
+  {
+    "name": "fish_2",
+    "source": "Quaternius Animated Fish CC0; normalized static mesh; world supplies leap motion",
+    "vertices": 253,
+    "dimensions": [
+      0.16348786652088165,
+      0.8499999046325684,
+      0.5185953974723816
+    ]
+  },
+  {
+    "name": "tugboat",
+    "source": "Kenney Watercraft Kit 2.1 CC0; normalized and styled in Blender",
+    "vertices": 759,
+    "dimensions": [
+      2.2119598388671875,
+      4.300000190734863,
+      2.7720751762390137
+    ]
+  },
+  {
+    "name": "liner",
+    "source": "Kenney Watercraft Kit 2.1 CC0; normalized and styled in Blender",
+    "vertices": 2776,
+    "dimensions": [
+      2.442631244659424,
+      7.800000190734863,
+      4.584449768066406
+    ]
+  },
+  {
+    "name": "fishing_boat",
+    "source": "Kenney Watercraft Kit 2.1 CC0; normalized and styled in Blender; custom seated angler and rod",
+    "vertices": 482,
+    "dimensions": [
+      3.661959409713745,
+      4.403657913208008,
+      1.9861536026000977
+    ]
+  }
+]
