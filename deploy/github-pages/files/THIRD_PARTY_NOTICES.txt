@@ -1,0 +1,92 @@
+STAR PATH / LITTLE WORLD - THIRD-PARTY NOTICES
+
+These notices accompany this Web distribution. Original license files
+are copied byte-for-byte from the verified local source project.
+
+Vincent van Gogh - The Starry Night (1889)
+  Use: Public-domain painting reproduction used on the training-room wall and in its painting viewer.
+  Source: https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg
+  License: CC0 1.0 (as declared in the original file)
+  Original text: licenses/Van-Gogh-Starry-Night-Public-Domain.txt
+
+Kenney City Kit Suburban 2.0
+  Use: Kenney; user-supplied source pack. Red-roof houses are project modifications.
+  Source: https://kenney.nl
+  License: CC0 1.0 (as declared in the original file)
+  Original text: licenses/Kenney-City-Kit-Suburban-CC0.txt
+
+Kenney City Kit Commercial 2.1
+  Use: Commercial buildings; original archive assets/source/urban/kenney-city-commercial.zip.
+  Source: https://kenney.nl/assets/city-kit-commercial
+  License: CC0 1.0 (as declared in the original file)
+  Original text: licenses/Kenney-City-Kit-Commercial-CC0.txt
+
+Kenney Modular Buildings 2.1
+  Use: Source pack resources included by the current all_resources Web export.
+  Source: https://kenney.nl
+  License: CC0 1.0 (as declared in the original file)
+  Original text: licenses/Kenney-Modular-Buildings-CC0.txt
+
+Kenney 3D Road Tiles
+  Use: Source pack resources included by the current all_resources Web export; current road surfaces are authored procedurally.
+  Source: https://kenney.nl
+  License: CC0 1.0 (as declared in the original file)
+  Original text: licenses/Kenney-3D-Road-Tiles-CC0.txt
+
+Kenney Car Kit 3.1
+  Use: Sedan, hatchback-sports and SUV; original archive assets/source/urban/kenney-cars.zip.
+  Source: https://kenney.nl/assets/car-kit
+  License: CC0 1.0 (as declared in the original file)
+  Original text: licenses/Kenney-Car-Kit-CC0.txt
+
+Kenney Watercraft Kit 2.1
+  Use: Liner, tugboat and rowboat derivatives; original sources under assets/source/marine.
+  Source: https://kenney.nl/assets/watercraft-kit
+  License: CC0 1.0 (as declared in the original file)
+  Original text: licenses/Kenney-Watercraft-Kit-CC0.txt
+
+Quaternius base character
+  Use: User-supplied Blends-20260912T235614Z-1-001.zip; base character retained in art/Graduate. Graduate clothing and task animations are project modifications.
+  Source: See art/Graduate/README.md and SOURCE_LICENSE.txt in the source project.
+  License: CC0 1.0 (as declared in the original file)
+  Original text: licenses/Quaternius-Character-CC0.txt
+
+Quaternius Animated Fish
+  Use: Fish 1 and Fish 2 are normalized static derivatives; spherical-world motion is project-authored.
+  Source: https://opengameart.org/content/animated-fish
+  License: CC0 1.0 (as declared in the original file)
+  Original text: licenses/Quaternius-Animated-Fish-CC0.txt
+
+Noto Sans TC
+  Use: Embedded font metadata identifies Adobe, copyright 2014-2021, Reserved Font Name Source; accompanying SIL OFL 1.1 text is copied without editing.
+  Source: Font source file: game/assets/fonts/NotoSansTC.ttf; local font folder does not record a download URL.
+  License: SIL Open Font License 1.1
+  Original text: licenses/Noto-Sans-TC-OFL.txt
+
+Godot Web engine
+  Version: 4.7.2-stable (official)
+  Source: https://godotengine.org/
+  Engine license: licenses/Godot-Engine-MIT.txt
+  Engine-provided third-party texts: licenses/Godot-Third-Party-Licenses.txt
+  Engine-provided copyright metadata: licenses/Godot-Copyright-Information.json
+
+PROJECT-AUTHORED CONTENT AND DERIVATIVES
+
+World layout, buildings' foundations, paving, benches, dock details,
+botanical reserve geometry, graduate clothing and task animation edits
+are documented as authored or modified in this source project.
+Original scripts and editable Blender masters remain in the source project.
+
+Sakura blossom atlas
+  game/assets/scenery/SOURCES.md records that sakura-atlas.png was generated
+  with the image-generation tool on 2026-09-24 for this project.
+  It is project-generated artwork, not a downloaded asset declared CC0.
+  No CC0 dedication for the generated atlas is asserted here.
+
+Source records: game/assets/scenery/SOURCES.md, game/assets/ecology/SOURCES.md,
+game/assets/urban/SOURCES.md, game/assets/kenney/suburban-edited/SOURCES.md,
+and art/Graduate/README.md. This file inventories recorded provenance;
+it does not replace the original licenses or make a legal conclusion.
+
+Rebuild notices after every Web export:
+  python -X utf8 tools/package_web_notices.py
