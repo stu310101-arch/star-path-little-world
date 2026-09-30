@@ -1,0 +1,30 @@
+# Rebuildable editor/cache output and local review artifacts.
+**/.godot/
+**/*.blend1
+**/__pycache__/
+*.pyc
+/build/
+/deliverables/
+/assets/
+/PROGRESS_PAUSED.md
+
+# Keep the editable room and lake masters in the repository; older art
+# experiments and source attachments stay in the local workspace.
+/art/*
+!/art/TrainingRoom/
+!/art/Ecology/
+/art/TrainingRoom/*
+!/art/TrainingRoom/WordKing_TrainingRoom.blend
+!/art/TrainingRoom/WordKing_TrainingRoom_Game.blend
+!/art/TrainingRoom/*.md
+/art/Ecology/*
+!/art/Ecology/bank_stones.blend
+!/art/Ecology/BANK_STONES_REVISION.md
+
+# Local temporary files.
+*.log
+*.tmp
+/tools/*.json
+/tools/*.err
+/tools/*.npz
+/tools/*.png
