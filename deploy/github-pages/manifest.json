@@ -1,0 +1,137 @@
+{
+  "format": 1,
+  "game": "星途 · Little World",
+  "pck": {
+    "bytes": 176279832,
+    "sha256": "5c22ea453b2c0263e5bf2d420c719cbb2e0a253f94fd673662ed56620e993910",
+    "parts": [
+      {
+        "name": "index.pck.part000",
+        "bytes": 47185920,
+        "sha256": "15c1ffe2a8aaa15f90473092c6609c46b2a82e347b88f37eaf992ac6024bdf5d"
+      },
+      {
+        "name": "index.pck.part001",
+        "bytes": 47185920,
+        "sha256": "ac930dee0c3ec4d1a615f76747144e7c5857da36fb94c579fc958974af86d148"
+      },
+      {
+        "name": "index.pck.part002",
+        "bytes": 47185920,
+        "sha256": "3228f8a8d1ee73c96c98b1fc4296033a27048cbdccdef953d4d459d87d496816"
+      },
+      {
+        "name": "index.pck.part003",
+        "bytes": 34722072,
+        "sha256": "86702e65769b6548879ed914eb2c55754a3ccbfad7ab3b55167bd10fbe86619e"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "index.html",
+      "bytes": 5310,
+      "sha256": "32e327363e4ee0e680a4a00274405ece2bd638624470898f3afa5aee7154da52"
+    },
+    {
+      "path": "index.js",
+      "bytes": 315645,
+      "sha256": "ffc3898b59fba6f5af0c02f76e5ee526cc061e65c7d2d6f4f98186876cea15c4"
+    },
+    {
+      "path": "index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "index.wasm",
+      "bytes": 37902138,
+      "sha256": "11ea19645368f8e73cf337b59cfd7ceeb4ebb51f7a3bbf77d1a5c3ddfedbc522"
+    },
+    {
+      "path": "licenses/Godot-Copyright-Information.json",
+      "bytes": 33699,
+      "sha256": "f61103e8891fd07f5145ad41bba2c97fcc2fc82fd0b6cc0b4b6964a3c845046c"
+    },
+    {
+      "path": "licenses/Godot-Engine-MIT.txt",
+      "bytes": 1169,
+      "sha256": "0cc27400b8da8c06bb35350422c14715647cd2632c138921fd49caa6610a1ef6"
+    },
+    {
+      "path": "licenses/Godot-Third-Party-Licenses.txt",
+      "bytes": 79588,
+      "sha256": "279c71d5485be6e9a4a207349b6f62a5dbd485402de562eea9b9297a595ae934"
+    },
+    {
+      "path": "licenses/Kenney-3D-Road-Tiles-CC0.txt",
+      "bytes": 511,
+      "sha256": "ce73128708a9086bdcca3d1b7f70d1e90cdcade82413f8257875c0ccc1b50eb4"
+    },
+    {
+      "path": "licenses/Kenney-Car-Kit-CC0.txt",
+      "bytes": 696,
+      "sha256": "c33b7f6453d134deae7b1b8493717d9ccfa754c25ab97f6de89b88f8fda19b00"
+    },
+    {
+      "path": "licenses/Kenney-City-Kit-Commercial-CC0.txt",
+      "bytes": 708,
+      "sha256": "c38cee408d022e57e44e49f1cd655c2fe0dc881a07b881276b795215cdc0de69"
+    },
+    {
+      "path": "licenses/Kenney-City-Kit-Suburban-CC0.txt",
+      "bytes": 706,
+      "sha256": "d778fa769a89a7d9f167bc337fdf8fc2144e47d9abb0c35eb6ad897c0ee24d0a"
+    },
+    {
+      "path": "licenses/Kenney-Modular-Buildings-CC0.txt",
+      "bytes": 720,
+      "sha256": "84002607f647b608c2861d8413bd9136a36d4063d74bf1af79347e3a012abeb5"
+    },
+    {
+      "path": "licenses/Kenney-Watercraft-Kit-CC0.txt",
+      "bytes": 717,
+      "sha256": "f5f520f81277128fb422aebe334d2f08e6d8e5f7face6008885d8ff920253724"
+    },
+    {
+      "path": "licenses/manifest.json",
+      "bytes": 4520,
+      "sha256": "92eebab254e678c8caf7c37443028a0fbe1ae6b1d34482a1730da8fed788c48a"
+    },
+    {
+      "path": "licenses/Noto-Sans-TC-OFL.txt",
+      "bytes": 4388,
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    {
+      "path": "licenses/Quaternius-Animated-Fish-CC0.txt",
+      "bytes": 361,
+      "sha256": "2832c27ece15255677c5a6d7437ed05d6a2f49ccb73d867ab13d2be3f93e84e2"
+    },
+    {
+      "path": "licenses/Quaternius-Character-CC0.txt",
+      "bytes": 364,
+      "sha256": "83d8959f9fc56353ed571fbe2dc52e4bcd64508e2399501cd45ac2ce3df0bf8c"
+    },
+    {
+      "path": "licenses/Van-Gogh-Starry-Night-Public-Domain.txt",
+      "bytes": 581,
+      "sha256": "0b80c76981409db1b09c86bf413d81b17fc59e0254b13799f41dfe110b3c160d"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.txt",
+      "bytes": 4610,
+      "sha256": "9a90178133835e752f9a3afab605574eaac190905a50d4ef4a6c5ae29722f63f"
+    }
+  ]
+}
