@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://generated/districts/counseling.tscn" id="1_qdqvk"]
+[ext_resource type="PackedScene" path="res://generated/districts/admissions.tscn" id="2_fbnni"]
+[ext_resource type="PackedScene" path="res://generated/districts/recommendations.tscn" id="3_ydyfn"]
+[ext_resource type="PackedScene" path="res://generated/districts/universities.tscn" id="4_1krmu"]
+[ext_resource type="PackedScene" path="res://generated/districts/life.tscn" id="5_gkfgd"]
+[ext_resource type="PackedScene" path="res://generated/districts/wordking.tscn" id="6_gstc2"]
+
+[node name="Neighborhood" type="Node3D" unique_id=1680155001]
+
+[node name="counseling" type="Node3D" parent="." unique_id=529053971 instance=ExtResource("1_qdqvk")]
+
+[node name="admissions" type="Node3D" parent="." unique_id=807478155 instance=ExtResource("2_fbnni")]
+
+[node name="recommendations" type="Node3D" parent="." unique_id=1989806962 instance=ExtResource("3_ydyfn")]
+
+[node name="universities" type="Node3D" parent="." unique_id=2049341165 instance=ExtResource("4_1krmu")]
+
+[node name="life" type="Node3D" parent="." unique_id=598190313 instance=ExtResource("5_gkfgd")]
+
+[node name="wordking" type="Node3D" parent="." unique_id=2140106568 instance=ExtResource("6_gstc2")]

@@ -1,0 +1,11684 @@
+{
+	"aquatic_habitats": {
+		"districts": [
+			{
+				"description": "市政湖的睡蓮與觀魚淺灘；開闊中央水面保留橋景，兩側香蒲和卵石勾出水岸。",
+				"fish": 6.0,
+				"plant_clusters": 16.0,
+				"station": "counseling"
+			},
+			{
+				"description": "商務碼頭旁的河口蘆葦帶；河灣卵石、岸蕨與沿水道巡游的魚群，保留碼頭出入和河面視線。",
+				"fish": 9.0,
+				"plant_clusters": 12.0,
+				"station": "admissions"
+			},
+			{
+				"description": "文化院落東側的靜水花池；淡色睡蓮與蕨類石岸形成閱讀散步時的觀景焦點。",
+				"fish": 6.0,
+				"plant_clusters": 16.0,
+				"station": "recommendations"
+			},
+			{
+				"description": "大學校園的清淺溪谷；低矮蕨叢和成組溪石沿水流排列，小魚在跨溪步道兩側游動。",
+				"fish": 9.0,
+				"plant_clusters": 14.0,
+				"station": "universities"
+			},
+			{
+				"description": "住宅區的小型睡蓮池；近岸花葉與低矮溪石親切可近，香蒲集中在對岸，保留環湖散步空間。",
+				"fish": 6.0,
+				"plant_clusters": 11.0,
+				"station": "life"
+			},
+			{
+				"description": "濕地工坊的香蒲保育池；密疏交錯的挺水植物、浮葉和淺水魚群，木棧道穿過濕地仍保持完整通行寬度。",
+				"fish": 9.0,
+				"plant_clusters": 20.0,
+				"station": "wordking"
+			}
+		],
+		"fish": 45.0,
+		"plant_clusters": 89.0,
+		"walkable_water": false
+	},
+	"assets": [
+		{
+			"footprint": [
+				3.49444401902547,
+				3.49444493793045
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-skyscraper-a.glb",
+				"door_height": 2.0499998220139,
+				"door_inward_correction": 0.0,
+				"door_samples": 40.0,
+				"door_width": 0.950000035183299,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.00925921501569,
+				"height": 9.40925921501569,
+				"refined_door_centre": [
+					0.0,
+					0.0,
+					-0.5
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.184864863753319,
+						0.00000000000000136,
+						-0.5
+					],
+					"size": [
+						0.369729727506638,
+						0.797837734222412,
+						0.0
+					]
+				},
+				"source_door_centre": [
+					0.0,
+					0.0,
+					-0.5
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0700000002980232,
+						0.00000000000000046,
+						-0.5
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.0
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1396.0,
+				"triangles_before": 1292.0
+			},
+			"height": 9.40925921501569,
+			"kind": "building",
+			"offset": [
+				-9.0,
+				-7.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-skyscraper-a.glb",
+			"scale": 2.56944455505338,
+			"station": "counseling",
+			"up_dot": 1.0,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				3.75096713492961,
+				3.63495750230259
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-b.glb",
+				"door_height": 2.04999990780411,
+				"door_inward_correction": 0.0,
+				"door_samples": 40.0,
+				"door_width": 0.95000003457346,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.49024660660207,
+				"height": 6.49024660660207,
+				"refined_door_centre": [
+					-0.135,
+					0.0,
+					0.05
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.257835000753403,
+						0.00000000000000037,
+						0.0499999970197678
+					],
+					"size": [
+						0.245670005679131,
+						0.530129969120026,
+						0.00000002980232238
+					]
+				},
+				"source_door_centre": [
+					-0.135,
+					0.0,
+					0.05
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.204999998211861,
+						0.00000000000000019,
+						0.0499999970197678
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.00000002980232238
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1344.0,
+				"triangles_before": 1276.0
+			},
+			"height": 6.49024660660207,
+			"kind": "building",
+			"offset": [
+				6.0,
+				-7.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-b.glb",
+			"scale": 3.86697607608743,
+			"station": "counseling",
+			"up_dot": 0.999999940395355,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				2.59860802639015,
+				2.78422233224266
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-d.glb",
+				"door_height": 2.04999986170616,
+				"door_inward_correction": 0.0,
+				"door_samples": 64.0,
+				"door_width": 0.949999953902053,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.79960469268906,
+				"height": 5.79960469268906,
+				"refined_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"refined_panel_bounds": {
+					"min": [
+						0.0464562512934208,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.307087481021881,
+						0.662662446498871,
+						0.00000038743019104
+					]
+				},
+				"source_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.0799999982118607,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000038743019104
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1156.0,
+				"triangles_before": 1100.0
+			},
+			"height": 5.79960469268906,
+			"kind": "building",
+			"offset": [
+				-10.5,
+				8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-d.glb",
+			"scale": 3.09358086086994,
+			"station": "counseling",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				3.5,
+				2.76769240150791
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "suburban-edited/house-e-red.glb",
+				"door_height": 2.04999981660109,
+				"door_inward_correction": 0.0,
+				"door_samples": 20.0,
+				"door_width": 0.950000034387296,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.96011392061265,
+				"height": 5.02261416132373,
+				"refined_door_centre": [
+					0.0,
+					0.00000000000000027,
+					0.456
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.176428571343422,
+						0.00000000000000079,
+						0.455999970436096
+					],
+					"size": [
+						0.352857142686844,
+						0.761428475379944,
+						0.0
+					]
+				},
+				"source_door_centre": [
+					0.0,
+					0.00000000000000027,
+					0.456
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0700000002980232,
+						0.00000000000000045,
+						0.455999970436096
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.0
+					]
+				},
+				"surfaces": 2.0,
+				"triangles_after": 1925.0,
+				"triangles_before": 1731.0
+			},
+			"height": 5.02261416132373,
+			"kind": "building",
+			"offset": [
+				-6.6,
+				8.0
+			],
+			"path": "res://assets/kenney/suburban-edited/house-e-red.glb",
+			"scale": 2.69230779106095,
+			"station": "counseling",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				3.04416839010518,
+				3.37161855556357
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "suburban/Models/GLB format/building-type-k.glb",
+				"door_height": 2.04999982371568,
+				"door_inward_correction": 0.0,
+				"door_samples": 20.0,
+				"door_width": 0.949999802976343,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.71483365718953,
+				"height": 5.51483365718953,
+				"refined_door_centre": [
+					0.203095,
+					0.0,
+					0.46
+				],
+				"refined_panel_bounds": {
+					"min": [
+						0.059444472193718,
+						0.00000000000000046,
+						0.459999978542328
+					],
+					"size": [
+						0.287398993968964,
+						0.62017685174942,
+						0.0
+					]
+				},
+				"source_door_centre": [
+					0.203095,
+					0.0,
+					0.46
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.133118867874146,
+						0.0000000000000002,
+						0.459999978542328
+					],
+					"size": [
+						0.139999985694885,
+						0.269999980926514,
+						0.0
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1136.0,
+				"triangles_before": 1024.0
+			},
+			"height": 5.51483365718953,
+			"kind": "building",
+			"offset": [
+				5.0,
+				8.0
+			],
+			"path": "res://assets/kenney/suburban/Models/GLB format/building-type-k.glb",
+			"scale": 3.30550844961877,
+			"station": "counseling",
+			"up_dot": 0.999999940395355,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				2.13349083088378,
+				2.61606656680219
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-f.glb",
+				"door_height": 2.04999986973587,
+				"door_inward_correction": 0.0857759704431389,
+				"door_samples": 64.0,
+				"door_width": 0.949999950710869,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.02108906270062,
+				"height": 6.32108906270062,
+				"refined_door_centre": [
+					-0.166228203565575,
+					0.0,
+					-0.345
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.35324564576149,
+						0.00000000000000001,
+						-0.345000207424164
+					],
+					"size": [
+						0.374034881591797,
+						0.807127892971039,
+						0.00000035762786865
+					]
+				},
+				"source_door_centre": [
+					-0.2,
+					0.0,
+					-0.345
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.319999992847443,
+						0.0,
+						-0.345000207424164
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000035762786865
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1890.0,
+				"triangles_before": 1794.0
+			},
+			"height": 6.32108906270062,
+			"kind": "building",
+			"offset": [
+				8.7,
+				8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-f.glb",
+			"scale": 2.53986993584104,
+			"station": "counseling",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				2.32343285880107,
+				2.65029392973013
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-h.glb",
+				"door_height": 2.04999988014534,
+				"door_inward_correction": 0.0380465018366689,
+				"door_samples": 40.0,
+				"door_width": 0.949999976951026,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.98521954434126,
+				"height": 5.38521954434126,
+				"refined_door_centre": [
+					-0.163737199346558,
+					0.0,
+					-0.3561
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.344376862049103,
+						0.00000000000000131,
+						-0.356054335832596
+					],
+					"size": [
+						0.361279398202896,
+						0.779602885246277,
+						0.00000002980232238
+					]
+				},
+				"source_door_centre": [
+					-0.17820606,
+					0.0,
+					-0.3561
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.248206049203873,
+						0.00000000000000045,
+						-0.356054335832596
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.00000002980232238
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1616.0,
+				"triangles_before": 1512.0
+			},
+			"height": 5.38521954434126,
+			"kind": "building",
+			"offset": [
+				-23.0,
+				-10.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-h.glb",
+			"scale": 2.62954373173945,
+			"station": "counseling",
+			"up_dot": 1.0,
+			"yaw": 90.0
+		},
+		{
+			"footprint": [
+				2.79350362836941,
+				2.99303900716086
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-d.glb",
+				"door_height": 2.04999979716903,
+				"door_inward_correction": 0.0,
+				"door_samples": 64.0,
+				"door_width": 0.949999944682464,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.70679726686296,
+				"height": 6.00679726686296,
+				"refined_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"refined_panel_bounds": {
+					"min": [
+						0.0571686029434204,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.285662770271301,
+						0.616430163383484,
+						0.00000038743019104
+					]
+				},
+				"source_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.0799999982118607,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000038743019104
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1156.0,
+				"triangles_before": 1100.0
+			},
+			"height": 6.00679726686296,
+			"kind": "building",
+			"offset": [
+				21.0,
+				-6.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-d.glb",
+			"scale": 3.32559942543519,
+			"station": "counseling",
+			"up_dot": 1.0,
+			"yaw": -90.0
+		},
+		{
+			"footprint": [
+				2.47843090185335,
+				2.6873385824379
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-skyscraper-c.glb",
+				"door_height": 2.04999981008324,
+				"door_inward_correction": 0.0,
+				"door_samples": 60.0,
+				"door_width": 0.950000037252904,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.26252721863252,
+				"height": 10.1625272186325,
+				"refined_door_centre": [
+					0.0,
+					0.0,
+					-0.4461
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.245316460728645,
+						0.00000000000000106,
+						-0.446054399013519
+					],
+					"size": [
+						0.490632921457291,
+						1.0587340593338,
+						0.00000005960464477
+					]
+				},
+				"source_door_centre": [
+					0.0,
+					0.0,
+					-0.4461
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.120000004768372,
+						0.00000000000000027,
+						-0.446054399013519
+					],
+					"size": [
+						0.240000009536743,
+						0.269999980926514,
+						0.00000005960464477
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1832.0,
+				"triangles_before": 1704.0
+			},
+			"height": 10.1625272186325,
+			"kind": "building",
+			"offset": [
+				1.0,
+				-9.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-skyscraper-c.glb",
+			"scale": 1.93627454601128,
+			"station": "admissions",
+			"up_dot": 1.0,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				2.72888362089786,
+				3.34613165521211
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-f.glb",
+				"door_height": 2.04999993310761,
+				"door_inward_correction": 0.0,
+				"door_samples": 64.0,
+				"door_width": 0.949999952471195,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.73756869776953,
+				"height": 7.23756869776953,
+				"refined_door_centre": [
+					-0.2,
+					0.0,
+					-0.345
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.346213638782501,
+						0.00000000000000001,
+						-0.345000207424164
+					],
+					"size": [
+						0.292427271604538,
+						0.631027281284332,
+						0.00000035762786865
+					]
+				},
+				"source_door_centre": [
+					-0.2,
+					0.0,
+					-0.345
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.319999992847443,
+						0.0,
+						-0.345000207424164
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000035762786865
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1890.0,
+				"triangles_before": 1794.0
+			},
+			"height": 7.23756869776953,
+			"kind": "building",
+			"offset": [
+				-9.0,
+				-7.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-f.glb",
+			"scale": 3.24867084816877,
+			"station": "admissions",
+			"up_dot": 1.0,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				1.88541050171125,
+				2.31187277996473
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-f.glb",
+				"door_height": 2.04999990142174,
+				"door_inward_correction": 0.14484271806603,
+				"door_samples": 64.0,
+				"door_width": 0.95,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.13922254808858,
+				"height": 5.93922254808857,
+				"refined_door_centre": [
+					-0.135468754470348,
+					0.0,
+					-0.345
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.347093760967255,
+						0.00000000000000001,
+						-0.345000207424164
+					],
+					"size": [
+						0.423250019550323,
+						0.913328945636749,
+						0.00000035762786865
+					]
+				},
+				"source_door_centre": [
+					-0.2,
+					0.0,
+					-0.345
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.319999992847443,
+						0.0,
+						-0.345000207424164
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000035762786865
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1890.0,
+				"triangles_before": 1794.0
+			},
+			"height": 5.93922254808857,
+			"kind": "building",
+			"offset": [
+				9.0,
+				-7.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-f.glb",
+			"scale": 2.24453622237115,
+			"station": "admissions",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				2.46367391043207,
+				2.34176051199859
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-g.glb",
+				"door_height": 2.04999986973587,
+				"door_inward_correction": 0.0,
+				"door_samples": 64.0,
+				"door_width": 0.949999950710869,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.02108906270062,
+				"height": 6.32108906270062,
+				"refined_door_centre": [
+					-0.135,
+					0.0,
+					-0.399
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.322017431259155,
+						0.0,
+						-0.399000227451324
+					],
+					"size": [
+						0.374034881591797,
+						0.807127892971039,
+						0.00000038743019104
+					]
+				},
+				"source_door_centre": [
+					-0.135,
+					0.0,
+					-0.399
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.254999995231628,
+						0.0,
+						-0.399000227451324
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000038743019104
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 2134.0,
+				"triangles_before": 2006.0
+			},
+			"height": 6.32108906270062,
+			"kind": "building",
+			"offset": [
+				10.0,
+				7.1
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-g.glb",
+			"scale": 2.53986993584104,
+			"station": "admissions",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				2.59677790101296,
+				2.96209321558074
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-h.glb",
+				"door_height": 2.04999977872985,
+				"door_inward_correction": 0.0,
+				"door_samples": 40.0,
+				"door_width": 0.95,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.86147630990646,
+				"height": 5.66147630990646,
+				"refined_door_centre": [
+					-0.17820606,
+					0.0,
+					-0.3561
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.33983102440834,
+						0.00000000000000117,
+						-0.356054335832596
+					],
+					"size": [
+						0.323249995708466,
+						0.697539389133453,
+						0.00000002980232238
+					]
+				},
+				"source_door_centre": [
+					-0.17820606,
+					0.0,
+					-0.3561
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.248206049203873,
+						0.00000000000000045,
+						-0.356054335832596
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.00000002980232238
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1616.0,
+				"triangles_before": 1512.0
+			},
+			"height": 5.66147630990646,
+			"kind": "building",
+			"offset": [
+				2.0,
+				7.1
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-h.glb",
+			"scale": 2.93890181782644,
+			"station": "admissions",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				3.17380942210319,
+				3.33249998474405
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-i.glb",
+				"door_height": 2.04999984034471,
+				"door_inward_correction": 0.0,
+				"door_samples": 60.0,
+				"door_width": 0.950000067410012,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.01322755391005,
+				"height": 6.31322755391005,
+				"refined_door_centre": [
+					0.0,
+					0.0,
+					-0.589
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.185581415891647,
+						0.00000000000000013,
+						-0.589000225067139
+					],
+					"size": [
+						0.371162831783295,
+						0.800930202007294,
+						0.00000035762786865
+					]
+				},
+				"source_door_centre": [
+					0.0,
+					0.0,
+					-0.589
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.120000004768372,
+						0.00000000000000004,
+						-0.589000225067139
+					],
+					"size": [
+						0.240000009536743,
+						0.269999980926514,
+						0.00000035762786865
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 2682.0,
+				"triangles_before": 2544.0
+			},
+			"height": 6.31322755391005,
+			"kind": "building",
+			"offset": [
+				-10.0,
+				8.4
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-i.glb",
+			"scale": 2.55952370781748,
+			"station": "admissions",
+			"up_dot": 1.00000011920929,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				3.5,
+				2.25092476979019
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-j.glb",
+				"door_height": 2.04999981691692,
+				"door_inward_correction": 0.0,
+				"door_samples": 62.0,
+				"door_width": 0.950000955464812,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.36511921204569,
+				"height": 5.20901153768366,
+				"refined_door_centre": [
+					0.02179394,
+					0.0,
+					-0.6
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.260978698730469,
+						0.00000000000000113,
+						-0.600000262260437
+					],
+					"size": [
+						0.565545916557312,
+						1.22038722038269,
+						0.00000041723251342
+					]
+				},
+				"source_door_centre": [
+					0.02179394,
+					0.0,
+					-0.6
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0982060432434082,
+						0.00000000000000025,
+						-0.600000262260437
+					],
+					"size": [
+						0.240000233054161,
+						0.269999980926514,
+						0.00000041723251342
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 5634.0,
+				"triangles_before": 5246.0
+			},
+			"height": 5.20901153768366,
+			"kind": "building",
+			"offset": [
+				-24.0,
+				-6.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-j.glb",
+			"scale": 1.67979456247836,
+			"station": "admissions",
+			"up_dot": 1.0,
+			"yaw": 90.0
+		},
+		{
+			"footprint": [
+				2.85846882902917,
+				3.06264456546692
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-d.glb",
+				"door_height": 2.04999980638862,
+				"door_inward_correction": 0.0,
+				"door_samples": 64.0,
+				"door_width": 0.950000009219589,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.67586145825426,
+				"height": 6.07586145825426,
+				"refined_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"refined_panel_bounds": {
+					"min": [
+						0.0604147724807262,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.279170453548431,
+						0.602420389652252,
+						0.00000038743019104
+					]
+				},
+				"source_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.0799999982118607,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000038743019104
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1156.0,
+				"triangles_before": 1100.0
+			},
+			"height": 6.07586145825426,
+			"kind": "building",
+			"offset": [
+				20.0,
+				-18.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-d.glb",
+			"scale": 3.40293894695694,
+			"station": "admissions",
+			"up_dot": 1.0,
+			"yaw": -90.0
+		},
+		{
+			"footprint": [
+				2.5499995689307,
+				2.54999979244811
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-skyscraper-b.glb",
+				"door_height": 2.04999982437917,
+				"door_inward_correction": 0.0,
+				"door_samples": 40.0,
+				"door_width": 0.94999998403447,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.28703704023014,
+				"height": 10.6870370402301,
+				"refined_door_centre": [
+					0.0,
+					0.0,
+					-0.5
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.253333330154419,
+						0.00000000000000186,
+						-0.5
+					],
+					"size": [
+						0.506666660308838,
+						1.09333324432373,
+						0.0
+					]
+				},
+				"source_door_centre": [
+					0.0,
+					0.0,
+					-0.5
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0700000002980232,
+						0.00000000000000046,
+						-0.5
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.0
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1696.0,
+				"triangles_before": 1592.0
+			},
+			"height": 10.6870370402301,
+			"kind": "building",
+			"offset": [
+				-7.0,
+				-8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-skyscraper-b.glb",
+			"scale": 1.87499999201724,
+			"station": "recommendations",
+			"up_dot": 1.0,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				5.4,
+				3.47285535910487
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-j.glb",
+				"door_height": 2.04999983408096,
+				"door_inward_correction": 0.0,
+				"door_samples": 62.0,
+				"door_width": 0.950000955464813,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.00036382133611,
+				"height": 6.38808340946326,
+				"refined_door_centre": [
+					0.02179394,
+					0.0,
+					-0.6
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.161484614014626,
+						0.00000000000000073,
+						-0.600000262260437
+					],
+					"size": [
+						0.366557538509369,
+						0.790991723537445,
+						0.00000041723251342
+					]
+				},
+				"source_door_centre": [
+					0.02179394,
+					0.0,
+					-0.6
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0982060432434082,
+						0.00000000000000025,
+						-0.600000262260437
+					],
+					"size": [
+						0.240000233054161,
+						0.269999980926514,
+						0.00000041723251342
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 5634.0,
+				"triangles_before": 5246.0
+			},
+			"height": 6.38808340946326,
+			"kind": "building",
+			"offset": [
+				6.0,
+				-8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-j.glb",
+			"scale": 2.59168303925233,
+			"station": "recommendations",
+			"up_dot": 1.0,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				2.80476181488189,
+				2.944999986518
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-i.glb",
+				"door_height": 2.04999981550944,
+				"door_inward_correction": 0.0,
+				"door_samples": 60.0,
+				"door_width": 0.950000067410012,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.13227516822714,
+				"height": 5.93227516822714,
+				"refined_door_centre": [
+					0.0,
+					0.0,
+					-0.589
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.210000023245811,
+						0.00000000000000015,
+						-0.589000225067139
+					],
+					"size": [
+						0.420000046491623,
+						0.906315743923187,
+						0.00000035762786865
+					]
+				},
+				"source_door_centre": [
+					0.0,
+					0.0,
+					-0.589
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.120000004768372,
+						0.00000000000000004,
+						-0.589000225067139
+					],
+					"size": [
+						0.240000009536743,
+						0.269999980926514,
+						0.00000035762786865
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 2682.0,
+				"triangles_before": 2544.0
+			},
+			"height": 5.93227516822714,
+			"kind": "building",
+			"offset": [
+				-10.0,
+				5.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-i.glb",
+			"scale": 2.26190467202475,
+			"station": "recommendations",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				3.5,
+				2.25092476979019
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-j.glb",
+				"door_height": 2.04999981691692,
+				"door_inward_correction": 0.0,
+				"door_samples": 62.0,
+				"door_width": 0.950000955464812,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.36511921204569,
+				"height": 5.20901153768366,
+				"refined_door_centre": [
+					0.02179394,
+					0.0,
+					-0.6
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.260978698730469,
+						0.00000000000000113,
+						-0.600000262260437
+					],
+					"size": [
+						0.565545916557312,
+						1.22038722038269,
+						0.00000041723251342
+					]
+				},
+				"source_door_centre": [
+					0.02179394,
+					0.0,
+					-0.6
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0982060432434082,
+						0.00000000000000025,
+						-0.600000262260437
+					],
+					"size": [
+						0.240000233054161,
+						0.269999980926514,
+						0.00000041723251342
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 5634.0,
+				"triangles_before": 5246.0
+			},
+			"height": 5.20901153768366,
+			"kind": "building",
+			"offset": [
+				-10.0,
+				12.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-j.glb",
+			"scale": 1.67979456247836,
+			"station": "recommendations",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				3.37587042143665,
+				3.27146175207233
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-b.glb",
+				"door_height": 2.04999993085308,
+				"door_inward_correction": 0.0,
+				"door_samples": 40.0,
+				"door_width": 0.950000069146921,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.64492564964556,
+				"height": 6.14492564964556,
+				"refined_door_centre": [
+					-0.135,
+					0.0,
+					0.05
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.271483331918716,
+						0.00000000000000041,
+						0.0499999970197678
+					],
+					"size": [
+						0.272966682910919,
+						0.589033305644989,
+						0.00000002980232238
+					]
+				},
+				"source_door_centre": [
+					-0.135,
+					0.0,
+					0.05
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.204999998211861,
+						0.00000000000000019,
+						0.0499999970197678
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.00000002980232238
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1344.0,
+				"triangles_before": 1276.0
+			},
+			"height": 6.14492564964556,
+			"kind": "building",
+			"offset": [
+				7.0,
+				7.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-b.glb",
+			"scale": 3.48027846847868,
+			"station": "recommendations",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				2.59515421586019,
+				2.65577085348601
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-l.glb",
+				"door_height": 2.04999987921526,
+				"door_inward_correction": 0.0,
+				"door_samples": 60.0,
+				"door_width": 0.950000018380287,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.27932777956913,
+				"height": 6.57932777956913,
+				"refined_door_centre": [
+					0.065,
+					0.0,
+					-0.539
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.185755833983421,
+						0.0,
+						-0.53900009393692
+					],
+					"size": [
+						0.501511633396149,
+						1.0822092294693,
+						0.00000011920928955
+					]
+				},
+				"source_door_centre": [
+					0.065,
+					0.0,
+					-0.539
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0550000071525574,
+						0.0,
+						-0.53900009393692
+					],
+					"size": [
+						0.240000009536743,
+						0.269999980926514,
+						0.00000011920928955
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 3686.0,
+				"triangles_before": 3512.0
+			},
+			"height": 6.57932777956913,
+			"kind": "building",
+			"offset": [
+				22.0,
+				-3.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-l.glb",
+			"scale": 1.89427314366978,
+			"station": "recommendations",
+			"up_dot": 1.0,
+			"yaw": -90.0
+		},
+		{
+			"footprint": [
+				2.05198240323829,
+				2.0999118376401
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-l.glb",
+				"door_height": 2.04999976893353,
+				"door_inward_correction": 0.0,
+				"door_samples": 60.0,
+				"door_width": 0.950000010503021,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.43791808927171,
+				"height": 5.83791808927171,
+				"refined_door_centre": [
+					0.065,
+					0.0,
+					-0.539
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.25213235616684,
+						0.0,
+						-0.53900009393692
+					],
+					"size": [
+						0.634264707565308,
+						1.3686763048172,
+						0.00000011920928955
+					]
+				},
+				"source_door_centre": [
+					0.065,
+					0.0,
+					-0.539
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0550000071525574,
+						0.0,
+						-0.53900009393692
+					],
+					"size": [
+						0.240000009536743,
+						0.269999980926514,
+						0.00000011920928955
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 3686.0,
+				"triangles_before": 3512.0
+			},
+			"height": 5.83791808927171,
+			"kind": "building",
+			"offset": [
+				-24.0,
+				-8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-l.glb",
+			"scale": 1.49779736941331,
+			"station": "recommendations",
+			"up_dot": 1.0,
+			"yaw": 90.0
+		},
+		{
+			"footprint": [
+				2.39176928069685,
+				2.54447025161181
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-a.glb",
+				"door_height": 2.04999986170616,
+				"door_inward_correction": -0.0523732729750417,
+				"door_samples": 64.0,
+				"door_width": 0.950000046097947,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.95428373573256,
+				"height": 5.45428373573256,
+				"refined_door_centre": [
+					0.202445766840662,
+					0.0,
+					-0.34999985
+				],
+				"refined_panel_bounds": {
+					"min": [
+						0.0269671902060509,
+						0.0,
+						-0.350000202655792
+					],
+					"size": [
+						0.350957155227661,
+						0.757328510284424,
+						0.00000035762786865
+					]
+				},
+				"source_door_centre": [
+					0.22179395,
+					0.0,
+					-0.34999985
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.101793944835663,
+						0.0,
+						-0.350000202655792
+					],
+					"size": [
+						0.240000009536743,
+						0.269999980926514,
+						0.00000035762786865
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1340.0,
+				"triangles_before": 1252.0
+			},
+			"height": 5.45428373573256,
+			"kind": "building",
+			"offset": [
+				-5.0,
+				24.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-a.glb",
+			"scale": 2.7068832532612,
+			"station": "recommendations",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				2.89691633398347,
+				2.96458141784484
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-l.glb",
+				"door_height": 2.04999984245468,
+				"door_inward_correction": 0.0,
+				"door_samples": 60.0,
+				"door_width": 0.950000031509063,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.19122205195658,
+				"height": 6.99122205195658,
+				"refined_door_centre": [
+					0.065,
+					0.0,
+					-0.539
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.159635424613953,
+						0.0,
+						-0.53900009393692
+					],
+					"size": [
+						0.449270844459534,
+						0.969479084014893,
+						0.00000011920928955
+					]
+				},
+				"source_door_centre": [
+					0.065,
+					0.0,
+					-0.539
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0550000071525574,
+						0.0,
+						-0.53900009393692
+					],
+					"size": [
+						0.240000009536743,
+						0.269999980926514,
+						0.00000011920928955
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 3686.0,
+				"triangles_before": 3512.0
+			},
+			"height": 6.99122205195658,
+			"kind": "building",
+			"offset": [
+				-8.0,
+				-8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-l.glb",
+			"scale": 2.11453746270115,
+			"station": "universities",
+			"up_dot": 1.0,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				4.05952367943431,
+				4.26249998048658
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-i.glb",
+				"door_height": 2.04999979776996,
+				"door_inward_correction": 0.0,
+				"door_samples": 60.0,
+				"door_width": 0.950000051444483,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.72751327954903,
+				"height": 7.22751327954903,
+				"refined_door_centre": [
+					0.0,
+					0.0,
+					-0.589
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.14509092271328,
+						0.0000000000000001,
+						-0.589000225067139
+					],
+					"size": [
+						0.290181845426559,
+						0.626181781291962,
+						0.00000035762786865
+					]
+				},
+				"source_door_centre": [
+					0.0,
+					0.0,
+					-0.589
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.120000004768372,
+						0.00000000000000004,
+						-0.589000225067139
+					],
+					"size": [
+						0.240000009536743,
+						0.269999980926514,
+						0.00000035762786865
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 2682.0,
+				"triangles_before": 2544.0
+			},
+			"height": 7.22751327954903,
+			"kind": "building",
+			"offset": [
+				8.0,
+				-8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-i.glb",
+			"scale": 3.27380939372003,
+			"station": "universities",
+			"up_dot": 1.0,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				2.29339209773691,
+				2.34696028912717
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-l.glb",
+				"door_height": 2.04999991597583,
+				"door_inward_correction": 0.0,
+				"door_samples": 60.0,
+				"door_width": 0.95,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.36743350718167,
+				"height": 6.16743350718167,
+				"refined_door_centre": [
+					0.065,
+					0.0,
+					-0.539
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.218750014901161,
+						0.0,
+						-0.53900009393692
+					],
+					"size": [
+						0.567499995231628,
+						1.22460520267487,
+						0.00000011920928955
+					]
+				},
+				"source_door_centre": [
+					0.065,
+					0.0,
+					-0.539
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0550000071525574,
+						0.0,
+						-0.53900009393692
+					],
+					"size": [
+						0.240000009536743,
+						0.269999980926514,
+						0.00000011920928955
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 3686.0,
+				"triangles_before": 3512.0
+			},
+			"height": 6.16743350718167,
+			"kind": "building",
+			"offset": [
+				-9.0,
+				8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-l.glb",
+			"scale": 1.67400882463841,
+			"station": "universities",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				2.98839923034868,
+				3.20185568207905
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-d.glb",
+				"door_height": 2.05000002765877,
+				"door_inward_correction": 0.0,
+				"door_samples": 64.0,
+				"door_width": 0.949999958511848,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.61398984103686,
+				"height": 6.21398984103686,
+				"refined_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"refined_panel_bounds": {
+					"min": [
+						0.066483698785305,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.267032593488693,
+						0.576228260993958,
+						0.00000038743019104
+					]
+				},
+				"source_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.0799999982118607,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000038743019104
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1156.0,
+				"triangles_before": 1100.0
+			},
+			"height": 6.21398984103686,
+			"kind": "building",
+			"offset": [
+				9.0,
+				8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-d.glb",
+			"scale": 3.55761799000043,
+			"station": "universities",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				3.5,
+				2.74568953114373
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-n.glb",
+				"door_height": 2.05000004624498,
+				"door_inward_correction": 0.0,
+				"door_samples": 36.0,
+				"door_width": 0.949999966600848,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.67655176878826,
+				"height": 6.41793083107572,
+				"refined_door_centre": [
+					0.34,
+					0.0,
+					-0.69
+				],
+				"refined_panel_bounds": {
+					"min": [
+						0.0251428242772818,
+						0.00000000000000027,
+						-0.690000057220459
+					],
+					"size": [
+						0.62971431016922,
+						1.35885727405548,
+						0.0
+					]
+				},
+				"source_door_centre": [
+					0.34,
+					0.0,
+					-0.69
+				],
+				"source_door_size": [
+					0.6,
+					0.25
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.0399999916553497,
+						0.00000000000000005,
+						-0.690000057220459
+					],
+					"size": [
+						0.600000023841858,
+						0.25,
+						0.0
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 4558.0,
+				"triangles_before": 4350.0
+			},
+			"height": 6.41793083107572,
+			"kind": "building",
+			"offset": [
+				-24.0,
+				-3.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-n.glb",
+			"scale": 1.50862057802936,
+			"station": "universities",
+			"up_dot": 1.00000011920929,
+			"yaw": 90.0
+		},
+		{
+			"footprint": [
+				2.93845940199899,
+				3.12606345198023
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-a.glb",
+				"door_height": 2.04999979716903,
+				"door_inward_correction": 0.0,
+				"door_samples": 64.0,
+				"door_width": 0.949999944682464,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.70679726686296,
+				"height": 6.00679726686296,
+				"refined_door_centre": [
+					0.22179395,
+					0.0,
+					-0.34999985
+				],
+				"refined_panel_bounds": {
+					"min": [
+						0.0789625495672226,
+						0.0,
+						-0.350000202655792
+					],
+					"size": [
+						0.285662770271301,
+						0.616430163383484,
+						0.00000035762786865
+					]
+				},
+				"source_door_centre": [
+					0.22179395,
+					0.0,
+					-0.34999985
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.101793944835663,
+						0.0,
+						-0.350000202655792
+					],
+					"size": [
+						0.240000009536743,
+						0.269999980926514,
+						0.00000035762786865
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1340.0,
+				"triangles_before": 1252.0
+			},
+			"height": 6.00679726686296,
+			"kind": "building",
+			"offset": [
+				24.0,
+				-3.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-a.glb",
+			"scale": 3.32559942543519,
+			"station": "universities",
+			"up_dot": 1.00000011920929,
+			"yaw": -90.0
+		},
+		{
+			"footprint": [
+				3.18064537217044,
+				2.49516134304261
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-n.glb",
+				"door_height": 2.04999995193174,
+				"door_inward_correction": 0.0,
+				"door_samples": 36.0,
+				"door_width": 0.950000009613652,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.73161290744341,
+				"height": 6.13161290744341,
+				"refined_door_centre": [
+					0.34,
+					0.0,
+					-0.69
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.00647060060873628,
+						0.0000000000000003,
+						-0.690000057220459
+					],
+					"size": [
+						0.692941188812256,
+						1.49529409408569,
+						0.0
+					]
+				},
+				"source_door_centre": [
+					0.34,
+					0.0,
+					-0.69
+				],
+				"source_door_size": [
+					0.6,
+					0.25
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.0399999916553497,
+						0.00000000000000005,
+						-0.690000057220459
+					],
+					"size": [
+						0.600000023841858,
+						0.25,
+						0.0
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 4558.0,
+				"triangles_before": 4350.0
+			},
+			"height": 6.13161290744341,
+			"kind": "building",
+			"offset": [
+				-8.0,
+				-25.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-n.glb",
+			"scale": 1.37096773139148,
+			"station": "universities",
+			"up_dot": 1.0,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				3.15,
+				3.8858618287935
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-c.glb",
+				"door_height": 2.04999990555948,
+				"door_inward_correction": 0.0,
+				"door_samples": 40.0,
+				"door_width": 0.950000023610131,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.61103289582012,
+				"height": 4.79458716488589,
+				"refined_door_centre": [
+					-0.17820606,
+					0.0,
+					-0.275
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.311445474624634,
+						0.0000000000000004,
+						-0.275000005960464
+					],
+					"size": [
+						0.266478896141052,
+						0.575033366680145,
+						0.00000002980232238
+					]
+				},
+				"source_door_centre": [
+					-0.17820606,
+					0.0,
+					-0.275
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.248206049203873,
+						0.00000000000000019,
+						-0.275000005960464
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.00000002980232238
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1339.0,
+				"triangles_before": 1195.0
+			},
+			"height": 4.79458716488589,
+			"kind": "building",
+			"offset": [
+				8.0,
+				-25.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-c.glb",
+			"scale": 3.56501035304228,
+			"station": "universities",
+			"up_dot": 1.0,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				4.8,
+				2.99343529857361
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "suburban-edited/house-b-red.glb",
+				"door_height": 2.04999986957409,
+				"door_inward_correction": 0.0,
+				"door_samples": 20.0,
+				"door_width": 0.949999895659269,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.98670884891905,
+				"height": 4.97357975908846,
+				"refined_door_centre": [
+					-0.544,
+					0.0,
+					0.4
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.724895894527435,
+						0.00000000000000055,
+						0.399999976158142
+					],
+					"size": [
+						0.361791640520096,
+						0.780708312988281,
+						0.00000002980232238
+					]
+				},
+				"source_door_centre": [
+					-0.544,
+					0.0,
+					0.4
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.614000022411346,
+						0.00000000000000019,
+						0.399999976158142
+					],
+					"size": [
+						0.139999985694885,
+						0.269999980926514,
+						0.00000002980232238
+					]
+				},
+				"surfaces": 2.0,
+				"triangles_after": 2102.0,
+				"triangles_before": 1748.0
+			},
+			"height": 4.97357975908846,
+			"kind": "building",
+			"offset": [
+				-8.0,
+				-8.0
+			],
+			"path": "res://assets/kenney/suburban-edited/house-b-red.glb",
+			"scale": 2.62582047029498,
+			"station": "life",
+			"up_dot": 1.0,
+			"yaw": 90.0
+		},
+		{
+			"footprint": [
+				4.45847041488327,
+				5.5
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-c.glb",
+				"door_height": 2.04999992344359,
+				"door_inward_correction": 0.0,
+				"door_samples": 40.0,
+				"door_width": 0.94999995351932,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.01868869573017,
+				"height": 5.52465140138257,
+				"refined_door_centre": [
+					-0.17820606,
+					0.0,
+					-0.275
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.272342413663864,
+						0.00000000000000028,
+						-0.275000005960464
+					],
+					"size": [
+						0.188272744417191,
+						0.406272768974304,
+						0.00000002980232238
+					]
+				},
+				"source_door_centre": [
+					-0.17820606,
+					0.0,
+					-0.275
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.248206049203873,
+						0.00000000000000019,
+						-0.275000005960464
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.00000002980232238
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1339.0,
+				"triangles_before": 1195.0
+			},
+			"height": 5.52465140138257,
+			"kind": "building",
+			"offset": [
+				6.0,
+				-7.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-c.glb",
+			"scale": 5.04587085326717,
+			"station": "life",
+			"up_dot": 0.999999940395355,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				4.2,
+				4.13497413625856
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "suburban-edited/house-f-red.glb",
+				"door_height": 2.04999994156407,
+				"door_inward_correction": 0.0,
+				"door_samples": 20.0,
+				"door_width": 0.950000058435928,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.86056642680233,
+				"height": 5.20615486490349,
+				"refined_door_centre": [
+					0.056,
+					0.0,
+					0.6449
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.105499975383282,
+						0.0000000000000012,
+						0.644945621490479
+					],
+					"size": [
+						0.323000013828278,
+						0.696999967098236,
+						0.00000005960464477
+					]
+				},
+				"source_door_centre": [
+					0.056,
+					0.0,
+					0.6449
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0139999911189079,
+						0.00000000000000046,
+						0.644945621490479
+					],
+					"size": [
+						0.140000015497208,
+						0.269999980926514,
+						0.00000005960464477
+					]
+				},
+				"surfaces": 2.0,
+				"triangles_after": 1770.0,
+				"triangles_before": 1616.0
+			},
+			"height": 5.20615486490349,
+			"kind": "building",
+			"offset": [
+				-10.0,
+				5.0
+			],
+			"path": "res://assets/kenney/suburban-edited/house-f-red.glb",
+			"scale": 2.94117652558676,
+			"station": "life",
+			"up_dot": 1.0,
+			"yaw": 90.0
+		},
+		{
+			"footprint": [
+				4.8,
+				3.79620125829995
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "suburban-edited/house-a-red.glb",
+				"door_height": 2.04999982577103,
+				"door_inward_correction": 0.0,
+				"door_samples": 20.0,
+				"door_width": 0.949999954150272,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.56011390594074,
+				"height": 4.63780355646494,
+				"refined_door_centre": [
+					0.0,
+					0.0,
+					0.4559
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.128645822405815,
+						0.00000000000000038,
+						0.455931067466736
+					],
+					"size": [
+						0.25729164481163,
+						0.555208265781403,
+						0.00000005960464477
+					]
+				},
+				"source_door_centre": [
+					0.0,
+					0.0,
+					0.4559
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0700000002980232,
+						0.00000000000000018,
+						0.455931067466736
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.00000005960464477
+					]
+				},
+				"surfaces": 2.0,
+				"triangles_after": 1438.0,
+				"triangles_before": 1174.0
+			},
+			"height": 4.63780355646494,
+			"kind": "building",
+			"offset": [
+				-3.0,
+				10.0
+			],
+			"path": "res://assets/kenney/suburban-edited/house-a-red.glb",
+			"scale": 3.69230782774074,
+			"station": "life",
+			"up_dot": 0.999999940395355,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				4.3,
+				3.43676950293487
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "suburban-edited/house-c-red.glb",
+				"door_height": 2.04999983782692,
+				"door_inward_correction": 0.0,
+				"door_samples": 20.0,
+				"door_width": 0.950000046335166,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.69995187485469,
+				"height": 5.15478259395793,
+				"refined_door_centre": [
+					-0.0068,
+					0.0,
+					0.4559
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.148920103907585,
+						0.00000000000000041,
+						0.455931067466736
+					],
+					"size": [
+						0.284200310707092,
+						0.613274276256561,
+						0.00000005960464477
+					]
+				},
+				"source_door_centre": [
+					-0.0068,
+					0.0,
+					0.4559
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0768098309636116,
+						0.00000000000000018,
+						0.455931067466736
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.00000005960464477
+					]
+				},
+				"surfaces": 2.0,
+				"triangles_after": 1382.0,
+				"triangles_before": 1196.0
+			},
+			"height": 5.15478259395793,
+			"kind": "building",
+			"offset": [
+				5.0,
+				9.0
+			],
+			"path": "res://assets/kenney/suburban-edited/house-c-red.glb",
+			"scale": 3.34271290545587,
+			"station": "life",
+			"up_dot": 1.00000011920929,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				4.8,
+				2.80941430008961
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "suburban-edited/house-d-red.glb",
+				"door_height": 2.04999983031965,
+				"door_inward_correction": 0.0,
+				"door_samples": 20.0,
+				"door_width": 0.950000088233781,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.94387971878471,
+				"height": 5.3258353675996,
+				"refined_door_centre": [
+					0.1582,
+					0.0,
+					0.456
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.0156328622251749,
+						0.00000000000000126,
+						0.455999970436096
+					],
+					"size": [
+						0.347616970539093,
+						0.75012069940567,
+						0.0
+					]
+				},
+				"source_door_centre": [
+					0.1582,
+					0.0,
+					0.456
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.0881901755928993,
+						0.00000000000000045,
+						0.455999970436096
+					],
+					"size": [
+						0.140000015497208,
+						0.269999980926514,
+						0.0
+					]
+				},
+				"surfaces": 2.0,
+				"triangles_after": 1997.0,
+				"triangles_before": 1757.0
+			},
+			"height": 5.3258353675996,
+			"kind": "building",
+			"offset": [
+				12.0,
+				2.0
+			],
+			"path": "res://assets/kenney/suburban-edited/house-d-red.glb",
+			"scale": 2.73289329563081,
+			"station": "life",
+			"up_dot": 1.0,
+			"yaw": 90.0
+		},
+		{
+			"footprint": [
+				2.55065765175214,
+				2.47177110156576
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-b.glb",
+				"door_height": 2.04999988014534,
+				"door_inward_correction": 0.0,
+				"door_samples": 40.0,
+				"door_width": 0.950000055317537,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.98521954434126,
+				"height": 5.38521954434126,
+				"refined_door_centre": [
+					-0.135,
+					0.0,
+					0.05
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.315639704465866,
+						0.00000000000000055,
+						0.0499999970197678
+					],
+					"size": [
+						0.361279428005219,
+						0.779602885246277,
+						0.00000002980232238
+					]
+				},
+				"source_door_centre": [
+					-0.135,
+					0.0,
+					0.05
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.204999998211861,
+						0.00000000000000019,
+						0.0499999970197678
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.00000002980232238
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1344.0,
+				"triangles_before": 1276.0
+			},
+			"height": 5.38521954434126,
+			"kind": "building",
+			"offset": [
+				26.0,
+				-9.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-b.glb",
+			"scale": 2.62954373173945,
+			"station": "life",
+			"up_dot": 1.0,
+			"yaw": -90.0
+		},
+		{
+			"footprint": [
+				2.59860802639015,
+				2.78422233224266
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-d.glb",
+				"door_height": 2.04999986170616,
+				"door_inward_correction": 0.0,
+				"door_samples": 64.0,
+				"door_width": 0.949999953902053,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.79960469268906,
+				"height": 5.79960469268906,
+				"refined_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"refined_panel_bounds": {
+					"min": [
+						0.0464562512934208,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.307087481021881,
+						0.662662446498871,
+						0.00000038743019104
+					]
+				},
+				"source_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.0799999982118607,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000038743019104
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1156.0,
+				"triangles_before": 1100.0
+			},
+			"height": 5.79960469268906,
+			"kind": "building",
+			"offset": [
+				-24.0,
+				-12.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-d.glb",
+			"scale": 3.09358086086994,
+			"station": "life",
+			"up_dot": 1.0,
+			"yaw": 90.0
+		},
+		{
+			"footprint": [
+				3.96666618375864,
+				3.96666722683997
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-skyscraper-a.glb",
+				"door_height": 2.04999989651971,
+				"door_inward_correction": 0.0,
+				"door_samples": 40.0,
+				"door_width": 0.949999966886307,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.87037032014794,
+				"height": 10.2703703201479,
+				"refined_door_centre": [
+					0.0,
+					0.0,
+					-0.5
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.162857130169868,
+						0.0000000000000012,
+						-0.5
+					],
+					"size": [
+						0.325714260339737,
+						0.702857077121735,
+						0.0
+					]
+				},
+				"source_door_centre": [
+					0.0,
+					0.0,
+					-0.5
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.0700000002980232,
+						0.00000000000000046,
+						-0.5
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.0
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1396.0,
+				"triangles_before": 1292.0
+			},
+			"height": 10.2703703201479,
+			"kind": "building",
+			"offset": [
+				-11.5,
+				-8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-skyscraper-a.glb",
+			"scale": 2.91666679222275,
+			"station": "wordking",
+			"up_dot": 0.999999940395355,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				3.75849433041349,
+				4.2872401804458
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-h.glb",
+				"door_height": 2.04999990780411,
+				"door_inward_correction": 0.0,
+				"door_samples": 40.0,
+				"door_width": 0.95000003457346,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.33556756355857,
+				"height": 6.83556756355857,
+				"refined_door_centre": [
+					-0.17820606,
+					0.0,
+					-0.3561
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.289874225854874,
+						0.00000000000000081,
+						-0.356054335832596
+					],
+					"size": [
+						0.22333636879921,
+						0.48193633556366,
+						0.00000002980232238
+					]
+				},
+				"source_door_centre": [
+					-0.17820606,
+					0.0,
+					-0.3561
+				],
+				"source_door_size": [
+					0.14,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.248206049203873,
+						0.00000000000000045,
+						-0.356054335832596
+					],
+					"size": [
+						0.140000000596046,
+						0.269999980926514,
+						0.00000002980232238
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1616.0,
+				"triangles_before": 1512.0
+			},
+			"height": 6.83556756355857,
+			"kind": "building",
+			"offset": [
+				-6.0,
+				-8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-h.glb",
+			"scale": 4.25367368369617,
+			"station": "wordking",
+			"up_dot": 0.999999940395355,
+			"yaw": 0.0
+		},
+		{
+			"footprint": [
+				2.46867762507065,
+				2.64501121563052
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-d.glb",
+				"door_height": 2.04999977872985,
+				"door_inward_correction": -0.00596949980039589,
+				"door_samples": 64.0,
+				"door_width": 0.95,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.86147630990646,
+				"height": 5.66147630990646,
+				"refined_door_centre": [
+					0.197968799173832,
+					0.0,
+					-0.41
+				],
+				"refined_panel_bounds": {
+					"min": [
+						0.0363437980413437,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.323249995708466,
+						0.697539389133453,
+						0.00000038743019104
+					]
+				},
+				"source_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.0799999982118607,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000038743019104
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1156.0,
+				"triangles_before": 1100.0
+			},
+			"height": 5.66147630990646,
+			"kind": "building",
+			"offset": [
+				5.0,
+				-9.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-d.glb",
+			"scale": 2.93890181782644,
+			"station": "wordking",
+			"up_dot": 1.00000011920929,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				3.07513193232453,
+				3.27146175207233
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-a.glb",
+				"door_height": 2.04999993085308,
+				"door_inward_correction": 0.0,
+				"door_samples": 64.0,
+				"door_width": 0.950000069146921,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.64492564964556,
+				"height": 6.14492564964556,
+				"refined_door_centre": [
+					0.22179395,
+					0.0,
+					-0.34999985
+				],
+				"refined_panel_bounds": {
+					"min": [
+						0.0853106155991554,
+						0.0,
+						-0.350000202655792
+					],
+					"size": [
+						0.272966682910919,
+						0.589033305644989,
+						0.00000035762786865
+					]
+				},
+				"source_door_centre": [
+					0.22179395,
+					0.0,
+					-0.34999985
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.101793944835663,
+						0.0,
+						-0.350000202655792
+					],
+					"size": [
+						0.240000009536743,
+						0.269999980926514,
+						0.00000035762786865
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1340.0,
+				"triangles_before": 1252.0
+			},
+			"height": 6.14492564964556,
+			"kind": "building",
+			"offset": [
+				-12.0,
+				8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-a.glb",
+			"scale": 3.48027846847868,
+			"station": "wordking",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				1.88541050171125,
+				2.31187277996473
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-f.glb",
+				"door_height": 2.04999990142174,
+				"door_inward_correction": 0.14484271806603,
+				"door_samples": 64.0,
+				"door_width": 0.95,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.13922254808858,
+				"height": 5.93922254808857,
+				"refined_door_centre": [
+					-0.135468754470348,
+					0.0,
+					-0.345
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.347093760967255,
+						0.00000000000000001,
+						-0.345000207424164
+					],
+					"size": [
+						0.423250019550323,
+						0.913328945636749,
+						0.00000035762786865
+					]
+				},
+				"source_door_centre": [
+					-0.2,
+					0.0,
+					-0.345
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.319999992847443,
+						0.0,
+						-0.345000207424164
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000035762786865
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1890.0,
+				"triangles_before": 1794.0
+			},
+			"height": 5.93922254808857,
+			"kind": "building",
+			"offset": [
+				-4.0,
+				9.1
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-f.glb",
+			"scale": 2.24453622237115,
+			"station": "wordking",
+			"up_dot": 1.0,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				2.46367391043207,
+				2.34176051199859
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-g.glb",
+				"door_height": 2.04999986973587,
+				"door_inward_correction": 0.0,
+				"door_samples": 64.0,
+				"door_width": 0.949999950710869,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.02108906270062,
+				"height": 6.32108906270062,
+				"refined_door_centre": [
+					-0.135,
+					0.0,
+					-0.399
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.322017431259155,
+						0.0,
+						-0.399000227451324
+					],
+					"size": [
+						0.374034881591797,
+						0.807127892971039,
+						0.00000038743019104
+					]
+				},
+				"source_door_centre": [
+					-0.135,
+					0.0,
+					-0.399
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.254999995231628,
+						0.0,
+						-0.399000227451324
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000038743019104
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 2134.0,
+				"triangles_before": 2006.0
+			},
+			"height": 6.32108906270062,
+			"kind": "building",
+			"offset": [
+				6.0,
+				7.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-g.glb",
+			"scale": 2.53986993584104,
+			"station": "wordking",
+			"up_dot": 0.999999940395355,
+			"yaw": 180.0
+		},
+		{
+			"footprint": [
+				2.20881682243163,
+				2.36658898240626
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-d.glb",
+				"door_height": 2.04999988014534,
+				"door_inward_correction": -0.0678411314003542,
+				"door_samples": 64.0,
+				"door_width": 0.949999976951026,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 1.98521954434126,
+				"height": 5.38521954434126,
+				"refined_door_centre": [
+					0.174200417136445,
+					0.0,
+					-0.41
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.00643928907811642,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.361279398202896,
+						0.779602885246277,
+						0.00000038743019104
+					]
+				},
+				"source_door_centre": [
+					0.2,
+					0.0,
+					-0.41
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						0.0799999982118607,
+						0.0,
+						-0.410000205039978
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000038743019104
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 1156.0,
+				"triangles_before": 1100.0
+			},
+			"height": 5.38521954434126,
+			"kind": "building",
+			"offset": [
+				-25.0,
+				-3.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-d.glb",
+			"scale": 2.62954373173945,
+			"station": "wordking",
+			"up_dot": 1.0,
+			"yaw": 90.0
+		},
+		{
+			"footprint": [
+				2.0053159736075,
+				1.90608413767327
+			],
+			"frontage": {
+				"applied": true,
+				"asset": "commercial/Models/GLB format/building-g.glb",
+				"door_height": 2.04999989790109,
+				"door_inward_correction": 0.0,
+				"door_samples": 64.0,
+				"door_width": 0.949999943669565,
+				"floor_boundary_source": 0.4,
+				"floor_gain": 2.21010263932135,
+				"height": 5.71010263932135,
+				"refined_door_centre": [
+					-0.135,
+					0.0,
+					-0.399
+				],
+				"refined_panel_bounds": {
+					"min": [
+						-0.364764273166656,
+						0.0,
+						-0.399000227451324
+					],
+					"size": [
+						0.459528565406799,
+						0.991614282131195,
+						0.00000038743019104
+					]
+				},
+				"source_door_centre": [
+					-0.135,
+					0.0,
+					-0.399
+				],
+				"source_door_size": [
+					0.24,
+					0.27
+				],
+				"source_panel_bounds": {
+					"min": [
+						-0.254999995231628,
+						0.0,
+						-0.399000227451324
+					],
+					"size": [
+						0.239999994635582,
+						0.269999980926514,
+						0.00000038743019104
+					]
+				},
+				"surfaces": 1.0,
+				"triangles_after": 2134.0,
+				"triangles_before": 2006.0
+			},
+			"height": 5.71010263932135,
+			"kind": "building",
+			"offset": [
+				18.0,
+				-8.0
+			],
+			"path": "res://assets/kenney/commercial/Models/GLB format/building-g.glb",
+			"scale": 2.06733599428922,
+			"station": "wordking",
+			"up_dot": 1.0,
+			"yaw": -90.0
+		}
+	],
+	"boats": 7.0,
+	"civic_refinements": [
+		{
+			"clear_centre": true,
+			"paving_size": [
+				3.4,
+				4.02
+			],
+			"planters": 2.0,
+			"seats": 2.0,
+			"station": "counseling"
+		},
+		{
+			"clear_centre": true,
+			"paving_size": [
+				3.4,
+				4.02
+			],
+			"planters": 2.0,
+			"seats": 2.0,
+			"station": "admissions"
+		},
+		{
+			"clear_centre": true,
+			"paving_size": [
+				3.4,
+				4.02
+			],
+			"planters": 2.0,
+			"seats": 2.0,
+			"station": "recommendations"
+		},
+		{
+			"clear_centre": true,
+			"paving_size": [
+				3.4,
+				4.02
+			],
+			"planters": 2.0,
+			"seats": 2.0,
+			"station": "universities"
+		},
+		{
+			"clear_centre": true,
+			"paving_size": [
+				3.4,
+				4.02
+			],
+			"planters": 3.0,
+			"seats": 2.0,
+			"station": "life"
+		},
+		{
+			"clear_centre": true,
+			"paving_size": [
+				3.4,
+				4.02
+			],
+			"planters": 2.0,
+			"seats": 2.0,
+			"station": "wordking"
+		}
+	],
+	"districts": [
+		{
+			"buildings": 8.0,
+			"civic": [
+				6.0,
+				-2.6
+			],
+			"id": "counseling",
+			"loop": [
+				[
+					-16.0,
+					-15.0
+				],
+				[
+					14.0,
+					-15.0
+				],
+				[
+					14.0,
+					15.0
+				],
+				[
+					-16.0,
+					15.0
+				]
+			],
+			"plan": "湖畔市政中心",
+			"theme": "湖畔市政中心"
+		},
+		{
+			"buildings": 8.0,
+			"civic": [
+				-9.0,
+				-3.6
+			],
+			"id": "admissions",
+			"loop": [
+				[
+					-17.0,
+					-15.0
+				],
+				[
+					6.0,
+					-18.0
+				],
+				[
+					17.0,
+					-10.0
+				],
+				[
+					18.0,
+					12.0
+				],
+				[
+					-17.0,
+					15.0
+				]
+			],
+			"plan": "曲岸商務碼頭",
+			"theme": "曲岸商務碼頭"
+		},
+		{
+			"buildings": 8.0,
+			"civic": [
+				6.0,
+				-2.3
+			],
+			"id": "recommendations",
+			"loop": [
+				[
+					-17.0,
+					-15.0
+				],
+				[
+					15.0,
+					-15.0
+				],
+				[
+					15.0,
+					13.0
+				],
+				[
+					1.0,
+					13.0
+				],
+				[
+					1.0,
+					18.0
+				],
+				[
+					-17.0,
+					18.0
+				]
+			],
+			"plan": "文化步行院落",
+			"theme": "文化步行院落"
+		},
+		{
+			"buildings": 8.0,
+			"civic": [
+				8.0,
+				-3.65
+			],
+			"id": "universities",
+			"loop": [
+				[
+					-17.0,
+					-15.0
+				],
+				[
+					17.0,
+					-15.0
+				],
+				[
+					17.0,
+					15.0
+				],
+				[
+					-17.0,
+					15.0
+				]
+			],
+			"plan": "溪谷大學校園",
+			"theme": "溪谷大學校園"
+		},
+		{
+			"buildings": 8.0,
+			"civic": [
+				6.0,
+				-1.3
+			],
+			"id": "life",
+			"loop": [
+				[
+					-17.0,
+					-17.0
+				],
+				[
+					8.0,
+					-17.0
+				],
+				[
+					19.0,
+					-9.0
+				],
+				[
+					19.0,
+					8.0
+				],
+				[
+					9.0,
+					17.0
+				],
+				[
+					-8.0,
+					18.0
+				],
+				[
+					-18.0,
+					9.0
+				]
+			],
+			"plan": "林蔭慢行住宅",
+			"theme": "林蔭慢行住宅"
+		},
+		{
+			"buildings": 8.0,
+			"civic": [
+				-6.0,
+				-3.6
+			],
+			"id": "wordking",
+			"loop": [
+				[
+					-18.0,
+					-16.0
+				],
+				[
+					11.0,
+					-16.0
+				],
+				[
+					13.0,
+					13.0
+				],
+				[
+					-18.0,
+					16.0
+				]
+			],
+			"plan": "濕地創業工坊",
+			"theme": "濕地創業工坊"
+		}
+	],
+	"ecology": {
+		"authored_planting": true,
+		"districts": 6.0,
+		"planting_groups": [
+			{
+				"groups": [
+					{
+						"name": "Western alder shelter",
+						"tree_positions": [
+							[
+								"alder",
+								-29.0,
+								-5.0,
+								0.9,
+								18.0
+							],
+							[
+								"alder",
+								-29.0,
+								-10.0,
+								1.02,
+								102.0
+							],
+							[
+								"birch",
+								-29.0,
+								-14.0,
+								0.78,
+								218.0
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 3.0,
+						"understory_positions": [
+							[
+								"fern",
+								-30.1,
+								-6.1,
+								0.66,
+								20.0
+							],
+							[
+								"fern",
+								-28.1,
+								-10.8,
+								0.74,
+								126.0
+							],
+							[
+								"bank_stones",
+								-30.0,
+								-3.8,
+								0.68,
+								42.0
+							]
+						]
+					},
+					{
+						"name": "Southwest woodland edge",
+						"tree_positions": [
+							[
+								"alder",
+								-22.0,
+								-18.0,
+								0.92,
+								76.0
+							],
+							[
+								"birch",
+								-26.0,
+								-19.0,
+								0.8,
+								173.0
+							],
+							[
+								"alder",
+								-18.0,
+								-22.0,
+								0.84,
+								291.0
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 2.0,
+						"understory_positions": [
+							[
+								"fern",
+								-23.1,
+								-18.8,
+								0.7,
+								80.0
+							],
+							[
+								"fern",
+								-25.0,
+								-20.0,
+								0.61,
+								195.0
+							]
+						]
+					},
+					{
+						"name": "Upper lake backdrop",
+						"tree_positions": [
+							[
+								"birch",
+								-15.5,
+								26.2,
+								0.82,
+								35.0
+							],
+							[
+								"alder",
+								-9.0,
+								27.3,
+								0.92,
+								146.0
+							]
+						],
+						"trees": 2.0,
+						"understory_clusters": 5.0,
+						"understory_positions": [
+							[
+								"fern",
+								-14.0,
+								27.8,
+								0.67,
+								61.0
+							],
+							[
+								"bank_stones",
+								-30.6,
+								13.5,
+								0.63,
+								147.0
+							],
+							[
+								"cattail",
+								-32.2,
+								9.0,
+								0.55,
+								216.0
+							],
+							[
+								"cattail",
+								-32.4,
+								6.8,
+								0.66,
+								45.0
+							],
+							[
+								"bank_stones",
+								-31.7,
+								4.5,
+								0.7,
+								312.0
+							]
+						]
+					},
+					{
+						"name": "Pocket garden specimens",
+						"source": "authored district garden assemblies",
+						"tree_positions": [
+							[
+								"birch",
+								-5.0,
+								-3.0,
+								0.65,
+								0.0
+							],
+							[
+								"birch",
+								-5.0,
+								19.0,
+								0.65,
+								0.0
+							],
+							[
+								"birch",
+								9.0,
+								21.0,
+								0.65,
+								0.0
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 0.0,
+						"understory_positions": []
+					}
+				],
+				"station": "counseling",
+				"view_windows": [
+					{
+						"from": [
+							-21.0,
+							15.0
+						],
+						"half_width": 2.4,
+						"name": "Lake arrival opening",
+						"to": [
+							-27.0,
+							6.0
+						]
+					}
+				]
+			},
+			{
+				"groups": [
+					{
+						"name": "Far bank willow crown",
+						"tree_positions": [
+							[
+								"willow",
+								29.5,
+								16.5,
+								0.94,
+								22.0
+							],
+							[
+								"birch",
+								23.3,
+								21.3,
+								0.76,
+								134.0
+							]
+						],
+						"trees": 2.0,
+						"understory_clusters": 4.0,
+						"understory_positions": [
+							[
+								"fern",
+								26.4,
+								19.9,
+								0.68,
+								70.0
+							],
+							[
+								"fern",
+								22.8,
+								21.1,
+								0.61,
+								170.0
+							],
+							[
+								"cattail",
+								25.1,
+								21.5,
+								0.55,
+								248.0
+							],
+							[
+								"bank_stones",
+								24.2,
+								21.1,
+								0.67,
+								117.0
+							]
+						]
+					},
+					{
+						"name": "Downstream sheltered grove",
+						"tree_positions": [
+							[
+								"willow",
+								27.5,
+								-16.0,
+								0.85,
+								62.0
+							],
+							[
+								"willow",
+								30.0,
+								-12.0,
+								0.97,
+								194.0
+							],
+							[
+								"birch",
+								31.0,
+								-6.0,
+								0.8,
+								315.0
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 4.0,
+						"understory_positions": [
+							[
+								"fern",
+								28.3,
+								-15.2,
+								0.69,
+								28.0
+							],
+							[
+								"fern",
+								30.1,
+								-7.4,
+								0.72,
+								163.0
+							],
+							[
+								"cattail",
+								28.3,
+								-10.2,
+								0.58,
+								264.0
+							],
+							[
+								"bank_stones",
+								28.8,
+								-8.7,
+								0.73,
+								145.0
+							]
+						]
+					},
+					{
+						"name": "Southern birch screen",
+						"tree_positions": [
+							[
+								"birch",
+								17.0,
+								-24.0,
+								0.87,
+								52.0
+							],
+							[
+								"willow",
+								12.0,
+								-25.0,
+								0.9,
+								217.0
+							]
+						],
+						"trees": 2.0,
+						"understory_clusters": 2.0,
+						"understory_positions": [
+							[
+								"fern",
+								16.1,
+								-24.8,
+								0.66,
+								302.0
+							],
+							[
+								"bank_stones",
+								13.2,
+								-25.4,
+								0.62,
+								99.0
+							]
+						]
+					},
+					{
+						"name": "Pocket garden specimens",
+						"source": "authored district garden assemblies",
+						"tree_positions": [
+							[
+								"birch",
+								-22.2999992370605,
+								-10.0,
+								0.65,
+								57.2957795130823
+							],
+							[
+								"birch",
+								-19.0,
+								20.0,
+								0.65,
+								57.2957795130823
+							],
+							[
+								"birch",
+								9.0,
+								22.0,
+								0.65,
+								57.2957795130823
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 0.0,
+						"understory_positions": []
+					}
+				],
+				"station": "admissions",
+				"view_windows": [
+					{
+						"from": [
+							20.0,
+							16.0
+						],
+						"half_width": 2.2,
+						"name": "River bend overlook",
+						"to": [
+							24.0,
+							16.0
+						]
+					},
+					{
+						"from": [
+							30.0,
+							6.0
+						],
+						"half_width": 3.0,
+						"name": "Open marina arrival",
+						"to": [
+							41.0,
+							6.0
+						]
+					}
+				]
+			},
+			{
+				"groups": [
+					{
+						"name": "Southwest birch room",
+						"tree_positions": [
+							[
+								"birch",
+								-14.5,
+								-19.4,
+								0.9,
+								26.0
+							],
+							[
+								"birch",
+								-9.0,
+								-19.4,
+								1.02,
+								138.0
+							],
+							[
+								"birch",
+								-4.0,
+								-21.0,
+								0.78,
+								269.0
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 3.0,
+						"understory_positions": [
+							[
+								"fern",
+								-15.0,
+								-20.0,
+								0.66,
+								22.0
+							],
+							[
+								"fern",
+								-9.9,
+								-19.5,
+								0.78,
+								153.0
+							],
+							[
+								"bank_stones",
+								-6.9,
+								-21.4,
+								0.62,
+								259.0
+							]
+						]
+					},
+					{
+						"name": "Southeast birch room",
+						"tree_positions": [
+							[
+								"birch",
+								6.0,
+								-20.0,
+								0.95,
+								72.0
+							],
+							[
+								"birch",
+								10.0,
+								-20.0,
+								0.78,
+								183.0
+							],
+							[
+								"birch",
+								20.0,
+								-19.0,
+								0.9,
+								292.0
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 3.0,
+						"understory_positions": [
+							[
+								"fern",
+								7.0,
+								-19.2,
+								0.68,
+								114.0
+							],
+							[
+								"fern",
+								19.7,
+								-20.3,
+								0.62,
+								225.0
+							],
+							[
+								"bank_stones",
+								21.1,
+								-18.4,
+								0.69,
+								64.0
+							]
+						]
+					},
+					{
+						"name": "Quiet lake framing",
+						"tree_positions": [
+							[
+								"birch",
+								28.0,
+								4.0,
+								0.87,
+								48.0
+							],
+							[
+								"birch",
+								22.0,
+								22.0,
+								0.82,
+								219.0
+							]
+						],
+						"trees": 2.0,
+						"understory_clusters": 4.0,
+						"understory_positions": [
+							[
+								"fern",
+								27.1,
+								3.4,
+								0.63,
+								75.0
+							],
+							[
+								"cattail",
+								28.5,
+								7.3,
+								0.52,
+								186.0
+							],
+							[
+								"cattail",
+								29.8,
+								10.2,
+								0.6,
+								311.0
+							],
+							[
+								"bank_stones",
+								27.6,
+								17.6,
+								0.73,
+								157.0
+							]
+						]
+					},
+					{
+						"name": "Pocket garden specimens",
+						"source": "authored district garden assemblies",
+						"tree_positions": [
+							[
+								"birch",
+								-3.0,
+								4.0,
+								0.65,
+								114.591559026165
+							],
+							[
+								"birch",
+								9.0,
+								18.0,
+								0.65,
+								114.591559026165
+							],
+							[
+								"birch",
+								-22.0,
+								9.0,
+								0.65,
+								114.591559026165
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 0.0,
+						"understory_positions": []
+					}
+				],
+				"station": "recommendations",
+				"view_windows": [
+					{
+						"from": [
+							-10.0,
+							-25.0
+						],
+						"half_width": 2.5,
+						"name": "South promenade sea opening",
+						"to": [
+							-10.0,
+							-34.0
+						]
+					}
+				]
+			},
+			{
+				"groups": [
+					{
+						"name": "West river approach frame",
+						"tree_positions": [
+							[
+								"willow",
+								-25.0,
+								16.0,
+								0.93,
+								21.0
+							],
+							[
+								"willow",
+								-21.0,
+								18.0,
+								0.81,
+								129.0
+							],
+							[
+								"birch",
+								-16.0,
+								20.0,
+								0.86,
+								247.0
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 4.0,
+						"understory_positions": [
+							[
+								"fern",
+								-25.8,
+								15.3,
+								0.64,
+								31.0
+							],
+							[
+								"fern",
+								-20.3,
+								18.8,
+								0.7,
+								151.0
+							],
+							[
+								"cattail",
+								-23.5,
+								20.1,
+								0.53,
+								269.0
+							],
+							[
+								"bank_stones",
+								-21.8,
+								19.4,
+								0.67,
+								100.0
+							]
+						]
+					},
+					{
+						"name": "Northwestern willow backdrop",
+						"tree_positions": [
+							[
+								"willow",
+								-16.0,
+								30.0,
+								0.88,
+								62.0
+							],
+							[
+								"birch",
+								-10.0,
+								31.0,
+								0.77,
+								186.0
+							]
+						],
+						"trees": 2.0,
+						"understory_clusters": 3.0,
+						"understory_positions": [
+							[
+								"fern",
+								-14.9,
+								30.3,
+								0.68,
+								45.0
+							],
+							[
+								"bank_stones",
+								-12.1,
+								27.1,
+								0.68,
+								170.0
+							],
+							[
+								"cattail",
+								-16.8,
+								25.2,
+								0.57,
+								305.0
+							]
+						]
+					},
+					{
+						"name": "East river approach frame",
+						"tree_positions": [
+							[
+								"birch",
+								15.0,
+								20.5,
+								0.79,
+								199.0
+							],
+							[
+								"willow",
+								28.0,
+								16.0,
+								0.86,
+								291.0
+							]
+						],
+						"trees": 2.0,
+						"understory_clusters": 4.0,
+						"understory_positions": [
+							[
+								"fern",
+								11.9,
+								20.2,
+								0.65,
+								120.0
+							],
+							[
+								"fern",
+								27.2,
+								15.0,
+								0.7,
+								247.0
+							],
+							[
+								"bank_stones",
+								12.7,
+								21.6,
+								0.68,
+								164.0
+							],
+							[
+								"cattail",
+								14.3,
+								21.6,
+								0.54,
+								280.0
+							]
+						]
+					},
+					{
+						"name": "Pocket garden specimens",
+						"source": "authored district garden assemblies",
+						"tree_positions": [
+							[
+								"birch",
+								-5.0,
+								20.0,
+								0.65,
+								171.887338539247
+							],
+							[
+								"birch",
+								9.0,
+								20.0,
+								0.65,
+								171.887338539247
+							],
+							[
+								"birch",
+								24.7000007629395,
+								10.0,
+								0.65,
+								171.887338539247
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 0.0,
+						"understory_positions": []
+					}
+				],
+				"station": "universities",
+				"view_windows": [
+					{
+						"from": [
+							0.0,
+							28.0
+						],
+						"half_width": 3.0,
+						"name": "Campus river panorama",
+						"to": [
+							0.0,
+							21.0
+						]
+					}
+				]
+			},
+			{
+				"groups": [
+					{
+						"name": "Western pine shelter",
+						"tree_positions": [
+							[
+								"pine",
+								-29.0,
+								7.0,
+								0.87,
+								19.0
+							],
+							[
+								"pine",
+								-32.0,
+								10.0,
+								0.95,
+								148.0
+							],
+							[
+								"birch",
+								-30.0,
+								13.0,
+								0.76,
+								272.0
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 3.0,
+						"understory_positions": [
+							[
+								"fern",
+								-29.8,
+								7.9,
+								0.66,
+								73.0
+							],
+							[
+								"fern",
+								-31.4,
+								11.1,
+								0.78,
+								199.0
+							],
+							[
+								"bank_stones",
+								-28.8,
+								14.0,
+								0.68,
+								312.0
+							]
+						]
+					},
+					{
+						"name": "Northern pine backdrop",
+						"tree_positions": [
+							[
+								"pine",
+								-16.0,
+								29.0,
+								0.92,
+								60.0
+							],
+							[
+								"pine",
+								-10.0,
+								29.0,
+								0.8,
+								213.0
+							]
+						],
+						"trees": 2.0,
+						"understory_clusters": 3.0,
+						"understory_positions": [
+							[
+								"fern",
+								-15.0,
+								29.1,
+								0.62,
+								117.0
+							],
+							[
+								"fern",
+								-9.1,
+								28.4,
+								0.69,
+								254.0
+							],
+							[
+								"bank_stones",
+								-17.0,
+								29.5,
+								0.73,
+								167.0
+							]
+						]
+					},
+					{
+						"name": "Eastern woodland edge",
+						"tree_positions": [
+							[
+								"pine",
+								-9.0,
+								10.0,
+								0.86,
+								40.0
+							],
+							[
+								"birch",
+								-7.2,
+								12.5,
+								0.78,
+								180.0
+							]
+						],
+						"trees": 2.0,
+						"understory_clusters": 3.0,
+						"understory_positions": [
+							[
+								"fern",
+								-9.8,
+								10.1,
+								0.7,
+								37.0
+							],
+							[
+								"fern",
+								-6.2,
+								12.2,
+								0.61,
+								150.0
+							],
+							[
+								"bank_stones",
+								-30.8,
+								6.0,
+								0.69,
+								108.0
+							]
+						]
+					},
+					{
+						"name": "Pocket garden specimens",
+						"source": "authored district garden assemblies",
+						"tree_positions": [
+							[
+								"birch",
+								-5.0,
+								-1.0,
+								0.65,
+								229.183118052329
+							],
+							[
+								"birch",
+								11.0,
+								22.0,
+								0.65,
+								229.183118052329
+							],
+							[
+								"birch",
+								-23.2000007629395,
+								5.0,
+								0.65,
+								229.183118052329
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 0.0,
+						"understory_positions": []
+					}
+				],
+				"station": "life",
+				"view_windows": [
+					{
+						"from": [
+							-12.0,
+							23.0
+						],
+						"half_width": 2.5,
+						"name": "Pine lake arrival opening",
+						"to": [
+							-22.0,
+							18.0
+						]
+					}
+				]
+			},
+			{
+				"groups": [
+					{
+						"name": "Southeastern alder frame",
+						"tree_positions": [
+							[
+								"alder",
+								29.0,
+								8.0,
+								0.94,
+								25.0
+							],
+							[
+								"alder",
+								25.0,
+								7.0,
+								0.8,
+								145.0
+							],
+							[
+								"birch",
+								22.0,
+								10.0,
+								0.76,
+								271.0
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 4.0,
+						"understory_positions": [
+							[
+								"fern",
+								29.8,
+								7.6,
+								0.68,
+								82.0
+							],
+							[
+								"fern",
+								24.8,
+								5.9,
+								0.72,
+								201.0
+							],
+							[
+								"cattail",
+								28.4,
+								12.2,
+								0.54,
+								305.0
+							],
+							[
+								"bank_stones",
+								29.8,
+								13.0,
+								0.75,
+								118.0
+							]
+						]
+					},
+					{
+						"name": "Western wetland shelter",
+						"tree_positions": [
+							[
+								"birch",
+								10.0,
+								22.0,
+								0.76,
+								206.0
+							]
+						],
+						"trees": 1.0,
+						"understory_clusters": 4.0,
+						"understory_positions": [
+							[
+								"fern",
+								10.1,
+								18.2,
+								0.65,
+								18.0
+							],
+							[
+								"fern",
+								10.8,
+								22.6,
+								0.66,
+								143.0
+							],
+							[
+								"cattail",
+								15.0,
+								20.7,
+								0.51,
+								258.0
+							],
+							[
+								"bank_stones",
+								14.8,
+								22.8,
+								0.68,
+								96.0
+							]
+						]
+					},
+					{
+						"name": "Northern alder backdrop",
+						"tree_positions": [
+							[
+								"alder",
+								15.0,
+								30.8,
+								0.82,
+								51.0
+							],
+							[
+								"birch",
+								6.0,
+								29.0,
+								0.74,
+								190.0
+							],
+							[
+								"alder",
+								11.0,
+								32.0,
+								0.88,
+								290.0
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 2.0,
+						"understory_positions": [
+							[
+								"fern",
+								14.1,
+								30.2,
+								0.67,
+								99.0
+							],
+							[
+								"bank_stones",
+								12.7,
+								31.0,
+								0.68,
+								231.0
+							]
+						]
+					},
+					{
+						"name": "Pocket garden specimens",
+						"source": "authored district garden assemblies",
+						"tree_positions": [
+							[
+								"birch",
+								-6.0,
+								5.09999990463257,
+								0.65,
+								286.478897565412
+							],
+							[
+								"birch",
+								-24.0,
+								18.0,
+								0.65,
+								286.478897565412
+							],
+							[
+								"birch",
+								9.19999980926514,
+								18.5,
+								0.65,
+								286.478897565412
+							]
+						],
+						"trees": 3.0,
+						"understory_clusters": 0.0,
+						"understory_positions": []
+					}
+				],
+				"station": "wordking",
+				"view_windows": [
+					{
+						"from": [
+							20.0,
+							25.0
+						],
+						"half_width": 2.8,
+						"name": "Wetland arrival panorama",
+						"to": [
+							24.0,
+							19.0
+						]
+					}
+				]
+			}
+		],
+		"planting_version": 1.0,
+		"pocket_specimens_omitted": 0.0,
+		"pocket_specimens_preserved": 18.0,
+		"radius": 48.0,
+		"trees": 62.0,
+		"understory_clusters": 60.0,
+		"water_collision": false
+	},
+	"fish": 28.0,
+	"landscapes": [
+		{
+			"offset": [
+				-7.0,
+				-3.0
+			],
+			"preset": "planned pocket garden",
+			"station": "counseling"
+		},
+		{
+			"offset": [
+				-7.0,
+				19.0
+			],
+			"preset": "planned pocket garden",
+			"station": "counseling"
+		},
+		{
+			"offset": [
+				7.0,
+				21.0
+			],
+			"preset": "planned pocket garden",
+			"station": "counseling"
+		},
+		{
+			"offset": [
+				-24.3,
+				-10.0
+			],
+			"preset": "planned pocket garden",
+			"station": "admissions"
+		},
+		{
+			"offset": [
+				-21.0,
+				20.0
+			],
+			"preset": "planned pocket garden",
+			"station": "admissions"
+		},
+		{
+			"offset": [
+				7.0,
+				22.0
+			],
+			"preset": "planned pocket garden",
+			"station": "admissions"
+		},
+		{
+			"offset": [
+				-5.0,
+				4.0
+			],
+			"preset": "planned pocket garden",
+			"station": "recommendations"
+		},
+		{
+			"offset": [
+				7.0,
+				18.0
+			],
+			"preset": "planned pocket garden",
+			"station": "recommendations"
+		},
+		{
+			"offset": [
+				-24.0,
+				9.0
+			],
+			"preset": "planned pocket garden",
+			"station": "recommendations"
+		},
+		{
+			"offset": [
+				-7.0,
+				20.0
+			],
+			"preset": "planned pocket garden",
+			"station": "universities"
+		},
+		{
+			"offset": [
+				7.0,
+				20.0
+			],
+			"preset": "planned pocket garden",
+			"station": "universities"
+		},
+		{
+			"offset": [
+				22.7,
+				10.0
+			],
+			"preset": "planned pocket garden",
+			"station": "universities"
+		},
+		{
+			"offset": [
+				-7.0,
+				-1.0
+			],
+			"preset": "planned pocket garden",
+			"station": "life"
+		},
+		{
+			"offset": [
+				9.0,
+				22.0
+			],
+			"preset": "planned pocket garden",
+			"station": "life"
+		},
+		{
+			"offset": [
+				-25.2,
+				5.0
+			],
+			"preset": "planned pocket garden",
+			"station": "life"
+		},
+		{
+			"offset": [
+				-8.0,
+				5.1
+			],
+			"preset": "planned pocket garden",
+			"station": "wordking"
+		},
+		{
+			"offset": [
+				-26.0,
+				18.0
+			],
+			"preset": "planned pocket garden",
+			"station": "wordking"
+		},
+		{
+			"offset": [
+				7.2,
+				18.5
+			],
+			"preset": "planned pocket garden",
+			"station": "wordking"
+		}
+	],
+	"marina": {
+		"benches": 2.0,
+		"deck_width": 5.4,
+		"guardrails": true,
+		"moored_boats": 1.0
+	},
+	"road_markings": [
+		{
+			"crossing_positions": [
+				[
+					6.0,
+					2.0
+				],
+				[
+					3.49999904632568,
+					15.0
+				],
+				[
+					-16.0,
+					11.5
+				],
+				[
+					-16.0,
+					-2.00000095367432
+				],
+				[
+					14.0,
+					-2.0
+				]
+			],
+			"crossings": 5.0,
+			"junction_aware": true,
+			"mesh_batches": 3.0,
+			"station": "counseling"
+		},
+		{
+			"crossing_positions": [
+				[
+					-9.0,
+					1.0
+				],
+				[
+					17.2956199645996,
+					-3.49639010429382
+				],
+				[
+					-17.0,
+					-3.0
+				],
+				[
+					0.0,
+					-17.2173919677734
+				],
+				[
+					0.00000190734863281,
+					13.542857170105
+				]
+			],
+			"crossings": 5.0,
+			"junction_aware": true,
+			"mesh_batches": 3.0,
+			"station": "admissions"
+		},
+		{
+			"crossing_positions": [
+				[
+					0.0,
+					-15.0
+				],
+				[
+					15.0,
+					0.0000009536743164
+				],
+				[
+					-17.0,
+					0.0
+				],
+				[
+					-17.0,
+					9.55000019073486
+				],
+				[
+					-17.0,
+					-8.0
+				]
+			],
+			"crossings": 5.0,
+			"junction_aware": true,
+			"mesh_batches": 3.0,
+			"station": "recommendations"
+		},
+		{
+			"crossing_positions": [
+				[
+					8.0,
+					0.0
+				],
+				[
+					0.0,
+					-15.0
+				],
+				[
+					0.0,
+					15.0
+				],
+				[
+					-17.0,
+					-4.0
+				],
+				[
+					17.0,
+					4.0
+				]
+			],
+			"crossings": 5.0,
+			"junction_aware": true,
+			"mesh_batches": 3.0,
+			"station": "universities"
+		},
+		{
+			"crossing_positions": [
+				[
+					0.0,
+					-17.0
+				],
+				[
+					-17.6538467407227,
+					0.0000009536743164
+				],
+				[
+					19.0,
+					0.0
+				],
+				[
+					0.0,
+					17.529411315918
+				],
+				[
+					-17.1973419189453,
+					-11.8691291809082
+				]
+			],
+			"crossings": 5.0,
+			"junction_aware": true,
+			"mesh_batches": 3.0,
+			"station": "life"
+		},
+		{
+			"crossing_positions": [
+				[
+					-5.99999904632568,
+					1.0
+				],
+				[
+					12.708028793335,
+					8.76642417907715
+				],
+				[
+					4.0,
+					13.8709678649902
+				],
+				[
+					-18.0,
+					-3.0
+				],
+				[
+					11.8626403808594,
+					-3.49170613288879
+				]
+			],
+			"crossings": 5.0,
+			"junction_aware": true,
+			"mesh_batches": 3.0,
+			"station": "wordking"
+		}
+	],
+	"roads": [
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-15.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-13.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-11.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-9.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-7.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-5.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-3.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				1.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				3.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				5.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				7.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				9.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				13.0,
+				-15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				-14.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				-12.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				-10.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				-8.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				-6.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				-4.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				-2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				0.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				4.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				6.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				8.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				10.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				12.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				14.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				13.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				9.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				7.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				5.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				3.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				1.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-3.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-5.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-7.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-9.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-11.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-13.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-15.0,
+				15.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				14.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				12.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				10.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				8.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				6.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				4.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				0.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				-2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				-4.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				-6.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				-8.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				-10.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				-12.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				-14.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				-14.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				-12.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				-10.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				-8.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				-6.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				-4.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				-2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				0.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				4.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				6.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				8.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				10.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				12.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				14.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-15.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-13.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-11.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-9.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-7.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-5.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-3.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				1.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				3.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				5.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				7.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				9.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				13.0,
+				2.0
+			],
+			"station": "counseling",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0416660308838,
+				-15.125
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-14.125,
+				-15.375
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-12.2083339691162,
+				-15.625
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-10.2916669845581,
+				-15.875
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-8.375,
+				-16.125
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-6.45833301544189,
+				-16.375
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-4.54166603088379,
+				-16.625
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-2.625,
+				-16.875
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-0.708333969116211,
+				-17.125
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				1.20833396911621,
+				-17.375
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				3.125,
+				-17.625
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				5.04166603088379,
+				-17.875
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				6.7857141494751,
+				-17.4285717010498
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				8.35714340209961,
+				-16.2857151031494
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				9.9285717010498,
+				-15.1428565979004
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.5,
+				-14.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				13.0714282989502,
+				-12.8571434020996
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.6428565979004,
+				-11.7142858505249
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				16.2142868041992,
+				-10.5714282989502
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0416660308838,
+				-9.08333301544189
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.125,
+				-7.25
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.2083339691162,
+				-5.41666698455811
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.2916660308838,
+				-3.58333349227905
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.375,
+				-1.75
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.4583339691162,
+				0.0833339691162109
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.5416660308838,
+				1.91666698455811
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.625,
+				3.75
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.7083339691162,
+				5.58333301544189
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.7916660308838,
+				7.41666793823242
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.875,
+				9.25
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.9583339691162,
+				11.0833320617676
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0277786254883,
+				12.0833330154419
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0833330154419,
+				12.25
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				13.1388893127441,
+				12.4166669845581
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.1944446563721,
+				12.5833330154419
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				9.25,
+				12.75
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				7.30555534362793,
+				12.9166669845581
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				5.36111164093018,
+				13.0833330154419
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				3.41666698455811,
+				13.25
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				1.47222328186035,
+				13.4166669845581
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-0.472223281860352,
+				13.5833330154419
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-2.41666603088379,
+				13.75
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-4.36111068725586,
+				13.9166669845581
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-6.30555534362793,
+				14.0833330154419
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-8.25,
+				14.25
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-10.1944446563721,
+				14.4166669845581
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-12.1388893127441,
+				14.5833330154419
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-14.0833358764648,
+				14.75
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0277786254883,
+				14.9166660308838
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				14.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				12.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				10.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				8.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				6.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				4.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				2.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				0.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-2.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-4.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-6.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-8.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-10.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-12.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-14.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0277786254883,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-14.0833330154419,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-12.1388893127441,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-10.1944446563721,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-8.25,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-6.30555534362793,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-4.36111164093018,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-2.41666698455811,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-0.472223281860352,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				1.47222328186035,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				3.41666603088379,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				5.36111068725586,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				7.30555534362793,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				9.25,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.1944446563721,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				13.1388893127441,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0833358764648,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0277786254883,
+				1.0
+			],
+			"station": "admissions",
+			"surfaces": 1.0,
+			"up": [
+				1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-14.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-12.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-10.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-8.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-6.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-4.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-2.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				0.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				2.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				4.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				6.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				8.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				10.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				-15.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				-14.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				-12.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				-10.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				-8.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				-6.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				-4.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				-2.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				0.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				2.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				4.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				6.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				8.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				10.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0,
+				12.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				13.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.0,
+				13.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				10.0,
+				13.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				8.0,
+				13.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				6.0,
+				13.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				4.0,
+				13.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				2.0,
+				13.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				1.0,
+				13.8333330154419
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				1.0,
+				15.5
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				1.0,
+				17.1666660308838
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				0.0,
+				18.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-2.0,
+				18.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-4.0,
+				18.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-6.0,
+				18.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-8.0,
+				18.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-10.0,
+				18.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-12.0,
+				18.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-14.0,
+				18.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				18.0
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				17.029411315918
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				15.0882349014282
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				13.1470584869385
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				11.2058820724487
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				9.26470565795898
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				7.32352924346924
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				5.38235282897949
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				3.44117641448975
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				1.5
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-0.44117546081543
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-2.38235282897949
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-4.32352828979492
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-6.26470565795898
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-8.20588111877441
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-10.1470584869385
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-12.0882339477539
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-14.029411315918
+			],
+			"station": "recommendations",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				-1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-14.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-12.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-10.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-8.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-6.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-4.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-2.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				0.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				2.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				4.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				6.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				8.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				10.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				16.0,
+				-15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				-14.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				-12.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				-10.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				-8.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				-6.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				-4.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				-2.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				2.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				4.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				6.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				8.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				10.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				12.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				17.0,
+				14.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				16.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				10.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				8.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				6.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				4.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				2.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				0.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-2.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-4.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-6.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-8.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-10.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-12.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-14.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				15.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				14.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				12.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				10.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				8.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				6.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				4.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				2.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-2.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-4.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-6.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-8.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-10.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-12.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				-14.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-14.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-12.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-10.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-8.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-6.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-4.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				4.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				6.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				8.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				10.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				16.0,
+				0.0
+			],
+			"station": "universities",
+			"surfaces": 1.0,
+			"up": [
+				-1.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-16.0384616851807,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-14.115385055542,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-12.192307472229,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-10.269229888916,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-8.34615325927734,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-6.42307662963867,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-4.5,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-2.57692337036133,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-0.653846740722656,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				1.26922988891602,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				3.19230651855469,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				5.11538314819336,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				7.03846168518066,
+				-17.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				8.7857141494751,
+				-16.4285717010498
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				10.3571434020996,
+				-15.2857141494751
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.9285717010498,
+				-14.1428565979004
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				13.5,
+				-13.0
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.0714282989502,
+				-11.8571434020996
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				16.6428565979004,
+				-10.7142858505249
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				18.2142868041992,
+				-9.5714282989502
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				19.0,
+				-8.05555534362793
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				19.0,
+				-6.16666650772095
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				19.0,
+				-4.27777767181396
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				19.0,
+				-2.38888883590698
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				19.0,
+				-0.5
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				19.0,
+				1.38888835906982
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				19.0,
+				3.27777767181396
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				19.0,
+				5.16666603088379
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				19.0,
+				7.05555534362793
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				18.2857151031494,
+				8.64285755157471
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				16.8571434020996,
+				9.9285717010498
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				15.4285717010498,
+				11.2142858505249
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				14.0,
+				12.5
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.5714282989502,
+				13.7857141494751
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.1428575515747,
+				15.0714282989502
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				9.7142858505249,
+				16.3571434020996
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				8.05555534362793,
+				17.0555553436279
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				6.16666650772095,
+				17.1666660308838
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				4.27777767181396,
+				17.2777786254883
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				2.38888883590698,
+				17.3888893127441
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				0.5,
+				17.5
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.38888835906982,
+				17.6111106872559
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-3.27777767181396,
+				17.7222213745117
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-5.16666603088379,
+				17.8333339691162
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-7.05555534362793,
+				17.9444446563721
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-8.7142858505249,
+				17.3571434020996
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-10.1428565979004,
+				16.0714282989502
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-11.5714282989502,
+				14.7857141494751
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-13.0,
+				13.5
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-14.4285717010498,
+				12.2142858505249
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-15.8571424484253,
+				10.9285717010498
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.2857131958008,
+				9.64285755157471
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.9642848968506,
+				8.0714282989502
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.8928565979004,
+				6.2142858505249
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.8214282989502,
+				4.35714292526245
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.75,
+				2.5
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.6785717010498,
+				0.642857551574707
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.6071434020996,
+				-1.2142858505249
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.5357151031494,
+				-3.0714282989502
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.4642848968506,
+				-4.92857074737549
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.3928565979004,
+				-6.7857141494751
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.3214282989502,
+				-8.64285659790039
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.25,
+				-10.5
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.1785717010498,
+				-12.3571434020996
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.1071434020996,
+				-14.2142848968506
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0357151031494,
+				-16.0714282989502
+			],
+			"station": "life",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				0.0,
+				1.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.033332824707,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-15.1000003814697,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-13.1666660308838,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-11.2333335876465,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-9.29999923706055,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-7.36666679382324,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-5.43333339691162,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-3.5,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.5666675567627,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				0.366666793823242,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				2.29999923706055,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				4.23333358764648,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				6.16666603088379,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				8.09999847412109,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				10.033332824707,
+				-16.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.0666666030884,
+				-15.033332824707
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.1999998092651,
+				-13.1000003814697
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.3333330154419,
+				-11.1666660308838
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.4666662216187,
+				-9.23333358764648
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.6000003814697,
+				-7.29999923706055
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.7333335876465,
+				-5.36666679382324
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.8666667938232,
+				-3.43333339691162
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.0,
+				-1.5
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.1333332061768,
+				0.433332443237305
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.2666664123535,
+				2.36666679382324
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.3999996185303,
+				4.29999923706055
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.533332824707,
+				6.23333358764648
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.6666669845581,
+				8.16666603088379
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.8000001907349,
+				10.0999984741211
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.9333333969116,
+				12.033332824707
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				12.03125,
+				13.09375
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				10.09375,
+				13.28125
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				8.15625,
+				13.46875
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				6.21875,
+				13.65625
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				4.28125,
+				13.84375
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				2.34375,
+				14.03125
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				0.40625,
+				14.21875
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.53125,
+				14.40625
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-3.46875,
+				14.59375
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-5.40625,
+				14.78125
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-7.34375,
+				14.96875
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-9.28125,
+				15.15625
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-11.21875,
+				15.34375
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-13.15625,
+				15.53125
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-15.09375,
+				15.71875
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.03125,
+				15.90625
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				15.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				13.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				11.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				9.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				7.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				5.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				3.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				-1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				-3.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				-5.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				-7.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				-9.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				-11.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				-13.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-18.0,
+				-15.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-17.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-15.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-13.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-11.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-9.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-7.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-5.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-3.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				-1.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				1.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				3.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				5.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				7.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				9.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		},
+		{
+			"max_edge_before_projection": 0.4,
+			"offset": [
+				11.0,
+				1.0
+			],
+			"station": "wordking",
+			"surfaces": 1.0,
+			"up": [
+				0.0,
+				-1.0,
+				0.0
+			]
+		}
+	],
+	"sakura_bridge": {
+		"continuous_arch": true,
+		"deck_width": 2.7,
+		"finish": [
+			0.457304954528809,
+			0.722674787044525,
+			0.518278956413269
+		],
+		"segments": 30.0,
+		"start": [
+			0.370048105716705,
+			0.828961968421936,
+			0.419387876987457
+		],
+		"town_open_landing_length": 4.97106693920336,
+		"town_sidewalk_clearance": 0.22
+	},
+	"sakura_design": "authored blossom garden: accessible loop, open bridge arrival, two recessed scenic seating terraces",
+	"sakura_layout_version": 4,
+	"sakura_seating": {
+		"changed_nodes": [
+			"SakuraGrove/EastViewBench",
+			"SakuraGrove/WestViewBench",
+			"SakuraGrove/OverlookGuardrails"
+		],
+		"guard_return_x": 7.8,
+		"layout_version": 4,
+		"marina_benches_turned_inward": 2,
+		"open_entrance_width": 2.75,
+		"outer_guard_x": 8.25,
+		"seats": [
+			{
+				"approach": [
+					6.55000019073486,
+					2.15000009536743
+				],
+				"id": "EastViewBench",
+				"position": [
+					7.65000009536743,
+					2.15000009536743
+				],
+				"yaw": 1.5707963267949
+			},
+			{
+				"approach": [
+					-6.55000019073486,
+					2.15000009536743
+				],
+				"id": "WestViewBench",
+				"position": [
+					-7.65000009536743,
+					2.15000009536743
+				],
+				"yaw": -1.5707963267949
+			}
+		]
+	},
+	"sakura_trees": 12.0,
+	"stations": [
+		{
+			"id": "counseling",
+			"position": [
+				5.96738052368164,
+				47.7390441894531,
+				-2.58586478233337
+			]
+		},
+		{
+			"id": "admissions",
+			"position": [
+				47.2266464233398,
+				8.85499572753906,
+				-3.54199814796448
+			]
+		},
+		{
+			"id": "recommendations",
+			"position": [
+				5.96925020217896,
+				-2.28821229934692,
+				-47.7540016174316
+			]
+		},
+		{
+			"id": "universities",
+			"position": [
+				-47.3913345336914,
+				7.89855527877808,
+				-3.60371613502502
+			]
+		},
+		{
+			"id": "life",
+			"position": [
+				-5.97383689880371,
+				-1.29433131217957,
+				47.7906951904297
+			]
+		},
+		{
+			"id": "wordking",
+			"position": [
+				5.95951271057129,
+				-47.6761016845703,
+				-3.57570743560791
+			]
+		}
+	]
+}

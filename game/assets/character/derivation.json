@@ -1,0 +1,15 @@
+{
+  "source": "art\\Graduate\\Godot\\assets\\graduate.glb",
+  "source_sha256": "40ca8bd6d23af612ba079e2b0669a228f21829bc92b9bd4976dfe4ca4e0f355d",
+  "source_bytes": 118455232,
+  "world_bytes": 58256952,
+  "kept_clips": [
+    "Walk",
+    "Run",
+    "JumpDown",
+    "Idle (frozen first pose)"
+  ],
+  "removed_weights_all_zero": true,
+  "targets_before": 6216,
+  "targets_after": 3003
+}

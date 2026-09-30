@@ -1,0 +1,14 @@
+{
+  "source": "game/assets/character/graduate.glb",
+  "source_sha256": "cef60f3c9b551cbdbbf6ad8e0e7967575b1e9b53e671375dc51395dad6cb5e4b",
+  "source_pose": "Idle at 0 seconds",
+  "derived_asset": "graduate_rest.glb",
+  "authoring_tool": "tools/author_bench_rest.py",
+  "editable_source": "art/Graduate/Male_Graduate_Bench_Rest.blend",
+  "method": "13 baked mesh poses using the original skeleton and materials, quaternion interpolation, seated lap and hanging hem corrections, and seat contact projection",
+  "forward_axis": "+Z",
+  "seat_top_metres": 0.52,
+  "mesh_parts": 27,
+  "morph_targets_per_part": 12,
+  "changes_original_character_assets": false
+}

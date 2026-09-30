@@ -1,0 +1,30 @@
+[
+  {
+    "asset": "alder",
+    "vertices": 15825
+  },
+  {
+    "asset": "birch",
+    "vertices": 16650
+  },
+  {
+    "asset": "willow",
+    "vertices": 15825
+  },
+  {
+    "asset": "pine",
+    "vertices": 15825
+  },
+  {
+    "asset": "fern",
+    "vertices": 3240
+  },
+  {
+    "asset": "cattail",
+    "vertices": 1053
+  },
+  {
+    "asset": "bank_stones",
+    "vertices": 936
+  }
+]
