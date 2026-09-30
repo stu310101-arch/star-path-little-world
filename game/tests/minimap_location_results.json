@@ -1,0 +1,196 @@
+{
+	"checks": [
+		{
+			"detail": "",
+			"name": "District centre keeps its region 0",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Authored nature visit keeps its district 0",
+			"passed": true
+		},
+		{
+			"detail": "128 boundary samples",
+			"name": "Every near-coast sample retains district 0",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "District centre keeps its region 1",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Authored nature visit keeps its district 1",
+			"passed": true
+		},
+		{
+			"detail": "128 boundary samples",
+			"name": "Every near-coast sample retains district 1",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "District centre keeps its region 2",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Authored nature visit keeps its district 2",
+			"passed": true
+		},
+		{
+			"detail": "128 boundary samples",
+			"name": "Every near-coast sample retains district 2",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "District centre keeps its region 3",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Authored nature visit keeps its district 3",
+			"passed": true
+		},
+		{
+			"detail": "128 boundary samples",
+			"name": "Every near-coast sample retains district 3",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "District centre keeps its region 4",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Authored nature visit keeps its district 4",
+			"passed": true
+		},
+		{
+			"detail": "128 boundary samples",
+			"name": "Every near-coast sample retains district 4",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "District centre keeps its region 5",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Authored nature visit keeps its district 5",
+			"passed": true
+		},
+		{
+			"detail": "128 boundary samples",
+			"name": "Every near-coast sample retains district 5",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Life [-12,23] is inside life coast",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Life [-12,23] is outside Sakura coast",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Life [-12,23] is never labelled Sakura",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Actual Sakura centre is Sakura",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Actual Sakura bridge garden landing is Sakura",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "All actual Sakura edge samples remain Sakura",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Sakura bridge town landing stays in counseling",
+			"passed": true
+		},
+		{
+			"detail": "湖畔市政中心 / 湖畔市政中心 / 曲岸商務碼頭",
+			"name": "Bridge labels follow its two real shores (0, 1)",
+			"passed": true
+		},
+		{
+			"detail": "湖畔市政中心 / 文化步行院落 / 文化步行院落",
+			"name": "Bridge labels follow its two real shores (0, 2)",
+			"passed": true
+		},
+		{
+			"detail": "湖畔市政中心 / 溪谷大學校園 / 溪谷大學校園",
+			"name": "Bridge labels follow its two real shores (0, 3)",
+			"passed": true
+		},
+		{
+			"detail": "湖畔市政中心 / 林蔭慢行住宅 / 林蔭慢行住宅",
+			"name": "Bridge labels follow its two real shores (0, 4)",
+			"passed": true
+		},
+		{
+			"detail": "濕地創業工坊 / 濕地創業工坊 / 曲岸商務碼頭",
+			"name": "Bridge labels follow its two real shores (5, 1)",
+			"passed": true
+		},
+		{
+			"detail": "濕地創業工坊 / 濕地創業工坊 / 文化步行院落",
+			"name": "Bridge labels follow its two real shores (5, 2)",
+			"passed": true
+		},
+		{
+			"detail": "濕地創業工坊 / 溪谷大學校園 / 溪谷大學校園",
+			"name": "Bridge labels follow its two real shores (5, 3)",
+			"passed": true
+		},
+		{
+			"detail": "濕地創業工坊 / 林蔭慢行住宅 / 林蔭慢行住宅",
+			"name": "Bridge labels follow its two real shores (5, 4)",
+			"passed": true
+		},
+		{
+			"detail": "曲岸商務碼頭 / 文化步行院落 / 文化步行院落",
+			"name": "Bridge labels follow its two real shores (1, 2)",
+			"passed": true
+		},
+		{
+			"detail": "文化步行院落 / 文化步行院落 / 溪谷大學校園",
+			"name": "Bridge labels follow its two real shores (2, 3)",
+			"passed": true
+		},
+		{
+			"detail": "溪谷大學校園 / 溪谷大學校園 / 林蔭慢行住宅",
+			"name": "Bridge labels follow its two real shores (3, 4)",
+			"passed": true
+		},
+		{
+			"detail": "林蔭慢行住宅 / 林蔭慢行住宅 / 曲岸商務碼頭",
+			"name": "Bridge labels follow its two real shores (4, 1)",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Region queries do not change map frame or arrow",
+			"passed": true
+		}
+	],
+	"failed": 0,
+	"passed": true
+}

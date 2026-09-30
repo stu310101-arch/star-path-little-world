@@ -1,0 +1,512 @@
+{
+	"checks": [
+		{
+			"detail": "thresholds=2 mismatches=[]",
+			"passed": true,
+			"test": "Dry and timber meshes share every threshold vertex: counseling"
+		},
+		{
+			"detail": "thresholds=4 mismatches=[]",
+			"passed": true,
+			"test": "Dry and timber meshes share every threshold vertex: admissions"
+		},
+		{
+			"detail": "thresholds=0 mismatches=[]",
+			"passed": true,
+			"test": "Dry and timber meshes share every threshold vertex: recommendations"
+		},
+		{
+			"detail": "thresholds=4 mismatches=[]",
+			"passed": true,
+			"test": "Dry and timber meshes share every threshold vertex: universities"
+		},
+		{
+			"detail": "thresholds=6 mismatches=[]",
+			"passed": true,
+			"test": "Dry and timber meshes share every threshold vertex: life"
+		},
+		{
+			"detail": "thresholds=2 mismatches=[]",
+			"passed": true,
+			"test": "Dry and timber meshes share every threshold vertex: wordking"
+		},
+		{
+			"detail": "18",
+			"passed": true,
+			"test": "Geometry probe includes actual wet/dry transitions"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "WordKing wetland paths share a joined corner"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Lake path return shares a joined corner"
+		},
+		{
+			"detail": "12",
+			"passed": true,
+			"test": "All twelve island connections exist"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_0_1 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_0_1 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_0_1 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_0_1 protects both exposed sides continuously"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_0_2 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_0_2 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_0_2 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_0_2 protects both exposed sides continuously"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_0_3 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_0_3 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_0_3 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_0_3 protects both exposed sides continuously"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_0_4 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_0_4 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_0_4 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_0_4 protects both exposed sides continuously"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_5_1 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_5_1 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_5_1 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_5_1 protects both exposed sides continuously"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_5_2 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_5_2 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_5_2 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_5_2 protects both exposed sides continuously"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_5_3 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_5_3 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_5_3 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_5_3 protects both exposed sides continuously"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_5_4 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_5_4 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_5_4 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_5_4 protects both exposed sides continuously"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_1_2 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_1_2 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_1_2 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_1_2 protects both exposed sides continuously"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_2_3 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_2_3 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_2_3 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_2_3 protects both exposed sides continuously"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_3_4 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_3_4 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_3_4 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_3_4 protects both exposed sides continuously"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_4_1 has a deck and guardrails"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_4_1 is grounded across width and both bank joins"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Bridge_4_1 rails collide on layer 8"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Bridge_4_1 protects both exposed sides continuously"
+		},
+		{
+			"detail": "remaining=0.154m frames=177 stalled=0 position=(44.51801, 18.60701, 0.004614)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 0 to 1"
+		},
+		{
+			"detail": "remaining=0.122m frames=177 stalled=0 position=(18.57463, 44.52173, 0.003216)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 1 to 0"
+		},
+		{
+			"detail": "remaining=0.208m frames=177 stalled=0 position=(0.004381, 18.67538, -44.53952)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 0 to 2"
+		},
+		{
+			"detail": "remaining=0.219m frames=176 stalled=0 position=(0.005977, 44.48505, -18.66411)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 2 to 0"
+		},
+		{
+			"detail": "remaining=0.218m frames=177 stalled=0 position=(-44.49448, 18.66681, 0.008871)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 0 to 3"
+		},
+		{
+			"detail": "remaining=0.254m frames=176 stalled=0 position=(-18.69641, 44.47169, 0.009385)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 3 to 0"
+		},
+		{
+			"detail": "remaining=0.138m frames=177 stalled=0 position=(0.003374, 18.59828, 44.53755)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 0 to 4"
+		},
+		{
+			"detail": "remaining=0.127m frames=177 stalled=0 position=(0.00155, 44.51954, 18.57887)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 4 to 0"
+		},
+		{
+			"detail": "remaining=0.276m frames=176 stalled=0 position=(44.46999, -18.72014, 0.003084)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 5 to 1"
+		},
+		{
+			"detail": "remaining=0.194m frames=177 stalled=0 position=(18.66275, -44.54662, 0.004272)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 1 to 5"
+		},
+		{
+			"detail": "remaining=0.152m frames=177 stalled=0 position=(0.004475, -18.60176, -44.51033)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 5 to 2"
+		},
+		{
+			"detail": "remaining=0.169m frames=177 stalled=0 position=(0.005479, -44.5045, -18.61836)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 2 to 5"
+		},
+		{
+			"detail": "remaining=0.162m frames=177 stalled=0 position=(-44.51556, -18.61533, 0.004656)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 5 to 3"
+		},
+		{
+			"detail": "remaining=0.150m frames=177 stalled=0 position=(-18.60041, -44.51096, 0.000507)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 3 to 5"
+		},
+		{
+			"detail": "remaining=0.270m frames=176 stalled=0 position=(0.009177, -18.71565, 44.47359)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 5 to 4"
+		},
+		{
+			"detail": "remaining=0.212m frames=177 stalled=0 position=(0.005105, -44.48771, 18.65767)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 4 to 5"
+		},
+		{
+			"detail": "remaining=0.223m frames=177 stalled=0 position=(18.66797, 0.002867, -44.48347)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 1 to 2"
+		},
+		{
+			"detail": "remaining=0.277m frames=176 stalled=0 position=(44.4827, 0.008803, -18.72665)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 2 to 1"
+		},
+		{
+			"detail": "remaining=0.308m frames=176 stalled=0 position=(-44.45037, 0.002921, -18.74664)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 2 to 3"
+		},
+		{
+			"detail": "remaining=0.151m frames=177 stalled=0 position=(-18.60412, 0.004671, -44.51897)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 3 to 2"
+		},
+		{
+			"detail": "remaining=0.259m frames=176 stalled=0 position=(-18.71058, 0.004464, 44.49091)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 3 to 4"
+		},
+		{
+			"detail": "remaining=0.200m frames=177 stalled=0 position=(-44.49221, 0.009497, 18.64709)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 4 to 3"
+		},
+		{
+			"detail": "remaining=0.143m frames=177 stalled=0 position=(44.51353, 0.006523, 18.594)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 4 to 1"
+		},
+		{
+			"detail": "remaining=0.123m frames=177 stalled=0 position=(18.59273, 0.003595, 44.56436)",
+			"passed": true,
+			"test": "Actual bridge and approaches walk 1 to 4"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Admissions has a furnished marina"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Marina deck has collision across its full usable width"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Marina entrance stays open across a usable walking corridor"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Marina guardrail has layer 8 collision"
+		},
+		{
+			"detail": "segment rays=66 player capsule sweeps=64 misses=[]",
+			"passed": true,
+			"test": "Marina has continuous collision on both long sides"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Marina closes the exposed seaward end"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Marina includes a moored boat and lifesaving equipment"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Built boardwalks and thresholds carry collision: counseling"
+		},
+		{
+			"detail": "wet probes=90 errors=[]",
+			"passed": true,
+			"test": "Actual wet route tops belong to timber only: counseling"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Built boardwalks and thresholds carry collision: admissions"
+		},
+		{
+			"detail": "wet probes=144 errors=[]",
+			"passed": true,
+			"test": "Actual wet route tops belong to timber only: admissions"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Built boardwalks and thresholds carry collision: recommendations"
+		},
+		{
+			"detail": "wet probes=0 errors=[]",
+			"passed": true,
+			"test": "Actual wet route tops belong to timber only: recommendations"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Built boardwalks and thresholds carry collision: universities"
+		},
+		{
+			"detail": "wet probes=111 errors=[]",
+			"passed": true,
+			"test": "Actual wet route tops belong to timber only: universities"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Built boardwalks and thresholds carry collision: life"
+		},
+		{
+			"detail": "wet probes=189 errors=[]",
+			"passed": true,
+			"test": "Actual wet route tops belong to timber only: life"
+		},
+		{
+			"detail": "[]",
+			"passed": true,
+			"test": "Built boardwalks and thresholds carry collision: wordking"
+		},
+		{
+			"detail": "wet probes=225 errors=[]",
+			"passed": true,
+			"test": "Actual wet route tops belong to timber only: wordking"
+		}
+	],
+	"failed": 0,
+	"passed": true,
+	"ray_probes": 7544
+}

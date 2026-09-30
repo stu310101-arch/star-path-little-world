@@ -1,0 +1,183 @@
+{
+  "radius": 48.0,
+  "stations": [
+    {
+      "id": "counseling",
+      "label": "興趣輔導室",
+      "subtitle": "從認識自己開始",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "color": "f1bc6a"
+    },
+    {
+      "id": "admissions",
+      "label": "落點分析所",
+      "subtitle": "找到下一個可能",
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "color": "83c9dd"
+    },
+    {
+      "id": "recommendations",
+      "label": "選校研究所",
+      "subtitle": "探索適合你的方向",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "color": "b2b4ed"
+    },
+    {
+      "id": "universities",
+      "label": "大學展覽館",
+      "subtitle": "看見不同的校園",
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "color": "efaa95"
+    },
+    {
+      "id": "life",
+      "label": "校園生活誌",
+      "subtitle": "想像未來的日常",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "color": "a4d295"
+    },
+    {
+      "id": "wordking",
+      "label": "練功區",
+      "subtitle": "每天前進一小步",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "color": "e4ce81"
+    }
+  ],
+  "placements": [
+    {
+      "asset": "suburban/Models/GLB format/building-type-b.glb",
+      "offset": [
+        -5,
+        -3
+      ],
+      "yaw": 0,
+      "height": 4.2,
+      "kind": "building"
+    },
+    {
+      "asset": "suburban/Models/GLB format/building-type-f.glb",
+      "offset": [
+        5,
+        -3
+      ],
+      "yaw": 0,
+      "height": 3.7,
+      "kind": "building"
+    },
+    {
+      "asset": "modular/Models/GLB format/building-sample-tower-a.glb",
+      "offset": [
+        -5,
+        4
+      ],
+      "yaw": 90,
+      "height": 4.6,
+      "kind": "building"
+    },
+    {
+      "asset": "suburban/Models/GLB format/tree-large.glb",
+      "offset": [
+        -9,
+        -5
+      ],
+      "yaw": 25,
+      "height": 3.1,
+      "kind": "tree"
+    },
+    {
+      "asset": "suburban/Models/GLB format/tree-large.glb",
+      "offset": [
+        9,
+        -4
+      ],
+      "yaw": 80,
+      "height": 2.8,
+      "kind": "tree"
+    },
+    {
+      "asset": "suburban/Models/GLB format/tree-large.glb",
+      "offset": [
+        8,
+        6
+      ],
+      "yaw": 40,
+      "height": 3.0,
+      "kind": "tree"
+    },
+    {
+      "asset": "suburban/Models/GLB format/tree-small.glb",
+      "offset": [
+        -8,
+        8
+      ],
+      "yaw": 10,
+      "height": 2.0,
+      "kind": "tree"
+    },
+    {
+      "asset": "suburban/Models/GLB format/tree-small.glb",
+      "offset": [
+        4,
+        8
+      ],
+      "yaw": 75,
+      "height": 1.8,
+      "kind": "tree"
+    },
+    {
+      "asset": "suburban/Models/GLB format/fence.glb",
+      "offset": [
+        -8,
+        1
+      ],
+      "yaw": 90,
+      "height": 0.7,
+      "kind": "fence"
+    },
+    {
+      "asset": "suburban/Models/GLB format/fence.glb",
+      "offset": [
+        8,
+        1
+      ],
+      "yaw": 90,
+      "height": 0.7,
+      "kind": "fence"
+    },
+    {
+      "asset": "suburban/Models/GLB format/planter.glb",
+      "offset": [
+        2,
+        4
+      ],
+      "yaw": 0,
+      "height": 0.55,
+      "kind": "prop"
+    }
+  ]
+}

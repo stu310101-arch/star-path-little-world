@@ -1,0 +1,274 @@
+{
+	"marina_misses": [
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(32.05882, 6.0)",
+			"sample": 2,
+			"side": -1.0
+		},
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(32.05882, 6.0)",
+			"sample": 2,
+			"side": 1.0
+		},
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(32.33823, 6.0)",
+			"sample": 3,
+			"side": 1.0
+		},
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(32.61765, 6.0)",
+			"sample": 4,
+			"side": 1.0
+		},
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(33.17647, 6.0)",
+			"sample": 6,
+			"side": -1.0
+		},
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(33.17647, 6.0)",
+			"sample": 6,
+			"side": 1.0
+		},
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(33.45588, 6.0)",
+			"sample": 7,
+			"side": -1.0
+		},
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(36.52941, 6.0)",
+			"sample": 18,
+			"side": -1.0
+		},
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(36.52941, 6.0)",
+			"sample": 18,
+			"side": 1.0
+		},
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(37.92647, 6.0)",
+			"sample": 23,
+			"side": -1.0
+		},
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(39.60294, 6.0)",
+			"sample": 29,
+			"side": 1.0
+		},
+		{
+			"hit": "EMPTY",
+			"mid_hit": "/root/LittleWorld/Neighborhood/admissions/Marina/HarborGuardrails/SurfaceCollision",
+			"mid_rails": true,
+			"point": "(40.16177, 6.0)",
+			"sample": 31,
+			"side": 1.0
+		}
+	],
+	"walks": [
+		{
+			"end": "(42.34473, 23.09379, 0.04149)",
+			"hits": {
+				"/root/LittleWorld/Globe/Bridge_0_1/Deck/SurfaceCollision": {
+					"count": 219,
+					"first": "(26.92891, 40.02382, 0.043929)",
+					"last": "(40.10765, 26.82779, 0.020198)",
+					"layer": 1,
+					"normal": "(0.558958, 0.829196, 0.0)"
+				},
+				"/root/LittleWorld/Neighborhood/admissions/@MeshInstance3D@1122/SurfaceCollision": {
+					"count": 41,
+					"first": "(40.21661, 26.64398, 0.020364)",
+					"last": "(42.35408, 23.09889, 0.041499)",
+					"layer": 1,
+					"normal": "(0.832441, 0.554107, 0.002606)"
+				},
+				"/root/LittleWorld/Neighborhood/admissions/building-j/Foundation/SurfaceCollision": {
+					"count": 132,
+					"first": "(42.35408, 23.09889, 0.041499)",
+					"last": "(42.34473, 23.09379, 0.04149)",
+					"layer": 1,
+					"normal": "(-0.447215, 0.894426, 0.0)"
+				},
+				"/root/LittleWorld/Neighborhood/counseling/@MeshInstance3D@1043/SurfaceCollision": {
+					"count": 88,
+					"first": "(18.65741, 44.4876, -0.000065)",
+					"last": "(26.75228, 40.14311, 0.045131)",
+					"layer": 1,
+					"normal": "(0.383132, 0.92369, -0.00275)"
+				}
+			},
+			"reverse": false,
+			"snapshots": [
+				{
+					"frame": 0,
+					"position": "(18.65741, 44.4876, -0.000065)",
+					"remaining": 37.4876489639282
+				},
+				{
+					"frame": 30,
+					"position": "(24.40568, 41.61264, 0.022533)",
+					"remaining": 31.0879611968994
+				},
+				{
+					"frame": 60,
+					"position": "(29.69886, 38.03151, 0.039201)",
+					"remaining": 24.7253437042236
+				},
+				{
+					"frame": 90,
+					"position": "(34.45836, 33.75908, 0.030228)",
+					"remaining": 18.3575592041016
+				},
+				{
+					"frame": 120,
+					"position": "(38.61907, 28.90871, 0.02295)",
+					"remaining": 11.9942650794983
+				},
+				{
+					"frame": 150,
+					"position": "(42.09341, 23.56505, 0.039823)",
+					"remaining": 5.64771902561188
+				},
+				{
+					"frame": 180,
+					"position": "(42.34483, 23.09384, 0.04149)",
+					"remaining": 5.11633658409119
+				},
+				{
+					"frame": 210,
+					"position": "(42.34483, 23.09384, 0.04149)",
+					"remaining": 5.11633658409119
+				},
+				{
+					"frame": 240,
+					"position": "(42.34483, 23.09384, 0.04149)",
+					"remaining": 5.11633658409119
+				},
+				{
+					"frame": 270,
+					"position": "(42.34483, 23.09384, 0.04149)",
+					"remaining": 5.11633658409119
+				}
+			]
+		},
+		{
+			"end": "(43.8806, 20.02436, 0.000951)",
+			"hits": {
+				"/root/LittleWorld/Neighborhood/admissions/@MeshInstance3D@1122/SurfaceCollision": {
+					"count": 9,
+					"first": "(44.24411, 19.25, 0.000091)",
+					"last": "(43.888, 20.02775, 0.000951)",
+					"layer": 1,
+					"normal": "(0.917921, 0.396754, 0.002763)"
+				},
+				"/root/LittleWorld/Neighborhood/admissions/@MeshInstance3D@1175/SurfaceCollision": {
+					"count": 1,
+					"first": "(43.97778, 19.83092, 0.001045)",
+					"last": "(43.97778, 19.83092, 0.001045)",
+					"layer": 1,
+					"normal": "(0.913996, 0.405706, 0.003834)"
+				},
+				"/root/LittleWorld/Neighborhood/admissions/Sidewalk/SurfaceCollision": {
+					"count": 7,
+					"first": "(44.49583, 18.66137, 0.000282)",
+					"last": "(44.32891, 19.05442, 0.000023)",
+					"layer": 1,
+					"normal": "(0.921963, 0.387277, 0.000197)"
+				},
+				"/root/LittleWorld/Neighborhood/admissions/building-j/Foundation/SurfaceCollision": {
+					"count": 277,
+					"first": "(43.87928, 20.02376, 0.000951)",
+					"last": "(43.8806, 20.02436, 0.000951)",
+					"layer": 1,
+					"normal": "(0.447215, -0.894426, 0.0)"
+				}
+			},
+			"reverse": true,
+			"snapshots": [
+				{
+					"frame": 0,
+					"position": "(44.49583, 18.66137, 0.000282)",
+					"remaining": 37.4871797561646
+				},
+				{
+					"frame": 30,
+					"position": "(43.8806, 20.02436, 0.000951)",
+					"remaining": 35.9993076324463
+				},
+				{
+					"frame": 60,
+					"position": "(43.8806, 20.02436, 0.000951)",
+					"remaining": 35.9993076324463
+				},
+				{
+					"frame": 90,
+					"position": "(43.8806, 20.02436, 0.000951)",
+					"remaining": 35.9993076324463
+				},
+				{
+					"frame": 120,
+					"position": "(43.8806, 20.02436, 0.000951)",
+					"remaining": 35.9993076324463
+				},
+				{
+					"frame": 150,
+					"position": "(43.8806, 20.02436, 0.000951)",
+					"remaining": 35.9993076324463
+				},
+				{
+					"frame": 180,
+					"position": "(43.8806, 20.02436, 0.000951)",
+					"remaining": 35.9993076324463
+				},
+				{
+					"frame": 210,
+					"position": "(43.8806, 20.02436, 0.000951)",
+					"remaining": 35.9993076324463
+				},
+				{
+					"frame": 240,
+					"position": "(43.8806, 20.02436, 0.000951)",
+					"remaining": 35.9993076324463
+				},
+				{
+					"frame": 270,
+					"position": "(43.8806, 20.02436, 0.000951)",
+					"remaining": 35.9993076324463
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,1318 @@
+{
+  "schema": 1,
+  "radius": 48.0,
+  "water_height": 0.055,
+  "intent": "六區各有能在人物視角看見的淡水生態，保留開闊水面、完整道路及棧道；新增植物均為裝飾，不增加行走障礙。",
+  "footprints": {
+    "water_lily": 0.52,
+    "cattail": 0.95,
+    "bank_stones": 1.15,
+    "fern": 0.85
+  },
+  "districts": [
+    {
+      "station": "counseling",
+      "description": "市政湖的睡蓮與觀魚淺灘；開闊中央水面保留橋景，兩側香蒲和卵石勾出水岸。",
+      "review": {
+        "point": [
+          -20.8,
+          8.5
+        ],
+        "target": [
+          -27,
+          6
+        ],
+        "pitch": 0.45
+      },
+      "plants": [
+        {
+          "kind": "water_lily",
+          "point": [
+            -25.0,
+            9.0
+          ],
+          "scale": 0.94,
+          "yaw": 0.0,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            -27.5,
+            10.1
+          ],
+          "scale": 0.94,
+          "yaw": 2.3911,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            -28.2,
+            7.8
+          ],
+          "scale": 0.94,
+          "yaw": 4.7822,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            -25.1,
+            4.9
+          ],
+          "scale": 0.94,
+          "yaw": 0.89012,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            -27.7,
+            2.2
+          ],
+          "scale": 0.94,
+          "yaw": 3.28122,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            -28.5,
+            4.6
+          ],
+          "scale": 0.94,
+          "yaw": 5.67232,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            -25.316,
+            2.003
+          ],
+          "scale": 0.94,
+          "yaw": 1.78024,
+          "height": 0.075
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            -31.14,
+            7.0
+          ],
+          "scale": 0.78,
+          "yaw": 0.0,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            -30.7,
+            3.0
+          ],
+          "scale": 0.78,
+          "yaw": 2.3911,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            -29.972,
+            11.363
+          ],
+          "scale": 0.78,
+          "yaw": 4.7822,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            -24.7,
+            12.1
+          ],
+          "scale": 0.78,
+          "yaw": 0.89012,
+          "height": -0.12
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            -22.78,
+            6.0
+          ],
+          "scale": 0.64,
+          "yaw": 0.0,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            -25.668,
+            12.907
+          ],
+          "scale": 0.64,
+          "yaw": 2.3911,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            -28.405,
+            11.158
+          ],
+          "scale": 0.64,
+          "yaw": 4.7822,
+          "height": 0.035
+        },
+        {
+          "kind": "fern",
+          "point": [
+            -24.656,
+            -2.156
+          ],
+          "scale": 0.73,
+          "yaw": 0.0,
+          "height": 0.16
+        },
+        {
+          "kind": "fern",
+          "point": [
+            -29.667,
+            -2.249
+          ],
+          "scale": 0.73,
+          "yaw": 2.3911,
+          "height": 0.16
+        }
+      ],
+      "fish_paths": [
+        {
+          "center": [
+            -26.3,
+            6.5
+          ],
+          "axes": [
+            [
+              1.1,
+              0.1
+            ],
+            [
+              0,
+              2
+            ]
+          ],
+          "size": 0.66,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 0.0
+        },
+        {
+          "center": [
+            -27.3,
+            4
+          ],
+          "axes": [
+            [
+              0.9,
+              0.2
+            ],
+            [
+              -0.2,
+              1.25
+            ]
+          ],
+          "size": 0.57,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 2.1
+        }
+      ]
+    },
+    {
+      "station": "admissions",
+      "description": "商務碼頭旁的河口蘆葦帶；河灣卵石、岸蕨與沿水道巡游的魚群，保留碼頭出入和河面視線。",
+      "review": {
+        "point": [
+          23.1,
+          9.2
+        ],
+        "target": [
+          25.7,
+          9.5
+        ],
+        "pitch": 0.45
+      },
+      "plants": [
+        {
+          "kind": "cattail",
+          "point": [
+            27.4,
+            8.4
+          ],
+          "scale": 0.72,
+          "yaw": 0.64577,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            26.8,
+            12.7
+          ],
+          "scale": 0.72,
+          "yaw": 3.03687,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            24.8,
+            16.2
+          ],
+          "scale": 0.72,
+          "yaw": 5.42797,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            22.6,
+            19.8
+          ],
+          "scale": 0.72,
+          "yaw": 1.53589,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            28.1,
+            -4.6
+          ],
+          "scale": 0.72,
+          "yaw": 3.92699,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            24.633,
+            -11.933
+          ],
+          "scale": 0.72,
+          "yaw": 0.03491,
+          "height": -0.12
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            24.6,
+            7.5
+          ],
+          "scale": 0.54,
+          "yaw": 0.64577,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            22.884,
+            15.943
+          ],
+          "scale": 0.54,
+          "yaw": 3.03687,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            25.0,
+            -4.0
+          ],
+          "scale": 0.54,
+          "yaw": 5.42797,
+          "height": 0.035
+        },
+        {
+          "kind": "fern",
+          "point": [
+            28.3,
+            11.3
+          ],
+          "scale": 0.7,
+          "yaw": 0.64577,
+          "height": 0.16
+        },
+        {
+          "kind": "fern",
+          "point": [
+            23.9,
+            19.5
+          ],
+          "scale": 0.7,
+          "yaw": 3.03687,
+          "height": 0.16
+        },
+        {
+          "kind": "fern",
+          "point": [
+            29.1,
+            -7.3
+          ],
+          "scale": 0.7,
+          "yaw": 5.42797,
+          "height": 0.16
+        }
+      ],
+      "fish_paths": [
+        {
+          "center": [
+            25.5,
+            8
+          ],
+          "axes": [
+            [
+              -0.19,
+              1.9
+            ],
+            [
+              0.29,
+              0.03
+            ]
+          ],
+          "size": 0.57,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 0.0
+        },
+        {
+          "center": [
+            23.1,
+            16.5
+          ],
+          "axes": [
+            [
+              -1.0,
+              1.85
+            ],
+            [
+              0.28,
+              0.15
+            ]
+          ],
+          "size": 0.56,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 2.1
+        },
+        {
+          "center": [
+            26.55,
+            -3.1
+          ],
+          "axes": [
+            [
+              -0.15,
+              1.5
+            ],
+            [
+              0.3,
+              0.03
+            ]
+          ],
+          "size": 0.53,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "station": "recommendations",
+      "description": "文化院落東側的靜水花池；淡色睡蓮與蕨類石岸形成閱讀散步時的觀景焦點。",
+      "review": {
+        "point": [
+          19.4,
+          10.4
+        ],
+        "target": [
+          25,
+          12
+        ],
+        "pitch": 0.45
+      },
+      "plants": [
+        {
+          "kind": "water_lily",
+          "point": [
+            23.2,
+            9.0
+          ],
+          "scale": 0.88,
+          "yaw": 1.29154,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            24.8,
+            8.4
+          ],
+          "scale": 0.88,
+          "yaw": 3.68264,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            26.8,
+            10.0
+          ],
+          "scale": 0.88,
+          "yaw": 6.07375,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            27.0,
+            13.0
+          ],
+          "scale": 0.88,
+          "yaw": 2.18166,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            24.7,
+            14.8
+          ],
+          "scale": 0.88,
+          "yaw": 4.57276,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            22.8,
+            13.3
+          ],
+          "scale": 0.88,
+          "yaw": 0.68068,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            24.3,
+            11.5
+          ],
+          "scale": 0.88,
+          "yaw": 3.07178,
+          "height": 0.075
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            21.1,
+            9.0
+          ],
+          "scale": 0.63,
+          "yaw": 1.29154,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            20.733,
+            14.967
+          ],
+          "scale": 0.63,
+          "yaw": 3.68264,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            26.4,
+            17.6
+          ],
+          "scale": 0.63,
+          "yaw": 6.07375,
+          "height": 0.035
+        },
+        {
+          "kind": "fern",
+          "point": [
+            19.668,
+            12.286
+          ],
+          "scale": 0.79,
+          "yaw": 1.29154,
+          "height": 0.16
+        },
+        {
+          "kind": "fern",
+          "point": [
+            23.1,
+            18.1
+          ],
+          "scale": 0.79,
+          "yaw": 3.68264,
+          "height": 0.16
+        },
+        {
+          "kind": "fern",
+          "point": [
+            30.9,
+            11.8
+          ],
+          "scale": 0.79,
+          "yaw": 6.07375,
+          "height": 0.16
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            28.94,
+            15.0
+          ],
+          "scale": 0.68,
+          "yaw": 1.29154,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            29.2,
+            10.3
+          ],
+          "scale": 0.68,
+          "yaw": 3.68264,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            27.24,
+            7.0
+          ],
+          "scale": 0.68,
+          "yaw": 6.07375,
+          "height": -0.12
+        }
+      ],
+      "fish_paths": [
+        {
+          "center": [
+            24.8,
+            11.6
+          ],
+          "axes": [
+            [
+              1.55,
+              0.1
+            ],
+            [
+              0,
+              1.45
+            ]
+          ],
+          "size": 0.62,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 0.0
+        },
+        {
+          "center": [
+            24.2,
+            13.3
+          ],
+          "axes": [
+            [
+              0.9,
+              0.2
+            ],
+            [
+              -0.2,
+              1.05
+            ]
+          ],
+          "size": 0.54,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 2.4
+        }
+      ]
+    },
+    {
+      "station": "universities",
+      "description": "大學校園的清淺溪谷；低矮蕨叢和成組溪石沿水流排列，小魚在跨溪步道兩側游動。",
+      "review": {
+        "point": [
+          6.2,
+          26.8
+        ],
+        "target": [
+          6.1,
+          23.55
+        ],
+        "pitch": 0.45
+      },
+      "plants": [
+        {
+          "kind": "bank_stones",
+          "point": [
+            4.2,
+            25.0
+          ],
+          "scale": 0.53,
+          "yaw": 1.93732,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            8.6,
+            22.6
+          ],
+          "scale": 0.53,
+          "yaw": 4.32842,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            13.3,
+            25.0
+          ],
+          "scale": 0.53,
+          "yaw": 0.43633,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            -7.1,
+            23.0
+          ],
+          "scale": 0.53,
+          "yaw": 2.82743,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            -15.5,
+            24.8
+          ],
+          "scale": 0.53,
+          "yaw": 5.21853,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            17.7,
+            21.4
+          ],
+          "scale": 0.53,
+          "yaw": 1.32645,
+          "height": 0.035
+        },
+        {
+          "kind": "fern",
+          "point": [
+            3.678,
+            25.778
+          ],
+          "scale": 0.7,
+          "yaw": 1.93732,
+          "height": 0.16
+        },
+        {
+          "kind": "fern",
+          "point": [
+            10.4,
+            20.9
+          ],
+          "scale": 0.7,
+          "yaw": 4.32842,
+          "height": 0.16
+        },
+        {
+          "kind": "fern",
+          "point": [
+            -7.3,
+            21.7
+          ],
+          "scale": 0.7,
+          "yaw": 0.43633,
+          "height": 0.16
+        },
+        {
+          "kind": "fern",
+          "point": [
+            -17.0,
+            25.8
+          ],
+          "scale": 0.7,
+          "yaw": 2.82743,
+          "height": 0.16
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            10.4,
+            25.5
+          ],
+          "scale": 0.65,
+          "yaw": 1.93732,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            16.1,
+            23.9
+          ],
+          "scale": 0.65,
+          "yaw": 4.32842,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            -10.1,
+            26.4
+          ],
+          "scale": 0.65,
+          "yaw": 0.43633,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            -20.5,
+            20.9
+          ],
+          "scale": 0.65,
+          "yaw": 2.82743,
+          "height": -0.12
+        }
+      ],
+      "fish_paths": [
+        {
+          "center": [
+            6.1,
+            23.555
+          ],
+          "axes": [
+            [
+              1.8,
+              0.164
+            ],
+            [
+              -0.027,
+              0.3
+            ]
+          ],
+          "size": 0.57,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 0.0
+        },
+        {
+          "center": [
+            -5.5,
+            24.1
+          ],
+          "axes": [
+            [
+              1.65,
+              -0.33
+            ],
+            [
+              0.058,
+              0.29
+            ]
+          ],
+          "size": 0.53,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 2.1
+        },
+        {
+          "center": [
+            15.5,
+            23.182
+          ],
+          "axes": [
+            [
+              1.65,
+              -0.3
+            ],
+            [
+              0.055,
+              0.3
+            ]
+          ],
+          "size": 0.57,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 4.2
+        }
+      ]
+    },
+    {
+      "station": "life",
+      "description": "住宅區的小型睡蓮池；近岸花葉與低矮溪石親切可近，香蒲集中在對岸，保留環湖散步空間。",
+      "review": {
+        "point": [
+          -16.1,
+          20.2
+        ],
+        "target": [
+          -22,
+          18
+        ],
+        "pitch": 0.45
+      },
+      "plants": [
+        {
+          "kind": "water_lily",
+          "point": [
+            -20.1,
+            18.2
+          ],
+          "scale": 0.78,
+          "yaw": 2.58309,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            -22.2,
+            19.6
+          ],
+          "scale": 0.78,
+          "yaw": 4.97419,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            -24.1,
+            18.7
+          ],
+          "scale": 0.78,
+          "yaw": 1.0821,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            -23.8,
+            16.5
+          ],
+          "scale": 0.78,
+          "yaw": 3.47321,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            -21.7,
+            16.1
+          ],
+          "scale": 0.78,
+          "yaw": 5.86431,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            -20.5,
+            20.3
+          ],
+          "scale": 0.78,
+          "yaw": 1.97222,
+          "height": 0.075
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            -18.7,
+            17.0
+          ],
+          "scale": 0.58,
+          "yaw": 2.58309,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            -22.1,
+            13.9
+          ],
+          "scale": 0.58,
+          "yaw": 4.97419,
+          "height": 0.035
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            -20.86,
+            13.8
+          ],
+          "scale": 0.67,
+          "yaw": 2.58309,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            -19.1,
+            15.6
+          ],
+          "scale": 0.67,
+          "yaw": 4.97419,
+          "height": -0.12
+        },
+        {
+          "kind": "fern",
+          "point": [
+            -18.629,
+            14.747
+          ],
+          "scale": 0.66,
+          "yaw": 2.58309,
+          "height": 0.16
+        }
+      ],
+      "fish_paths": [
+        {
+          "center": [
+            -21.2,
+            18.3
+          ],
+          "axes": [
+            [
+              1.05,
+              0.15
+            ],
+            [
+              -0.15,
+              0.95
+            ]
+          ],
+          "size": 0.59,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 0.0
+        },
+        {
+          "center": [
+            -23.1,
+            17.7
+          ],
+          "axes": [
+            [
+              0.65,
+              0.1
+            ],
+            [
+              -0.1,
+              0.8
+            ]
+          ],
+          "size": 0.51,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 2.6
+        }
+      ]
+    },
+    {
+      "station": "wordking",
+      "description": "濕地工坊的香蒲保育池；密疏交錯的挺水植物、浮葉和淺水魚群，木棧道穿過濕地仍保持完整通行寬度。",
+      "review": {
+        "point": [
+          14.3,
+          20.2
+        ],
+        "target": [
+          20.2,
+          19.8
+        ],
+        "pitch": 0.45
+      },
+      "plants": [
+        {
+          "kind": "cattail",
+          "point": [
+            17.0,
+            18.2
+          ],
+          "scale": 0.76,
+          "yaw": 3.22886,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            16.4,
+            20.0
+          ],
+          "scale": 0.76,
+          "yaw": 5.61996,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            17.4,
+            22.7
+          ],
+          "scale": 0.76,
+          "yaw": 1.72788,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            25.7,
+            12.6
+          ],
+          "scale": 0.76,
+          "yaw": 4.11898,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            28.5,
+            13.5
+          ],
+          "scale": 0.76,
+          "yaw": 0.22689,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            28.3,
+            16.0
+          ],
+          "scale": 0.76,
+          "yaw": 2.61799,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            28.3,
+            19.0
+          ],
+          "scale": 0.76,
+          "yaw": 5.00909,
+          "height": -0.12
+        },
+        {
+          "kind": "cattail",
+          "point": [
+            27.42,
+            21.9
+          ],
+          "scale": 0.76,
+          "yaw": 1.11701,
+          "height": -0.12
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            19.0,
+            18.0
+          ],
+          "scale": 0.86,
+          "yaw": 3.22886,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            19.9,
+            20.0
+          ],
+          "scale": 0.86,
+          "yaw": 5.61996,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            19.1,
+            21.7
+          ],
+          "scale": 0.86,
+          "yaw": 1.72788,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            20.02,
+            21.444
+          ],
+          "scale": 0.86,
+          "yaw": 4.11898,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            26.4,
+            15.8
+          ],
+          "scale": 0.86,
+          "yaw": 0.22689,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            28.3,
+            17.5
+          ],
+          "scale": 0.86,
+          "yaw": 2.61799,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            28.7,
+            20.4
+          ],
+          "scale": 0.86,
+          "yaw": 5.00909,
+          "height": 0.075
+        },
+        {
+          "kind": "water_lily",
+          "point": [
+            26.957,
+            22.716
+          ],
+          "scale": 0.86,
+          "yaw": 1.11701,
+          "height": 0.075
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            16.668,
+            21.286
+          ],
+          "scale": 0.65,
+          "yaw": 3.22886,
+          "height": 0.035
+        },
+        {
+          "kind": "bank_stones",
+          "point": [
+            29.203,
+            14.584
+          ],
+          "scale": 0.65,
+          "yaw": 5.61996,
+          "height": 0.035
+        },
+        {
+          "kind": "fern",
+          "point": [
+            14.8,
+            18.3
+          ],
+          "scale": 0.7,
+          "yaw": 3.22886,
+          "height": 0.16
+        },
+        {
+          "kind": "fern",
+          "point": [
+            27.829,
+            11.653
+          ],
+          "scale": 0.7,
+          "yaw": 5.61996,
+          "height": 0.16
+        }
+      ],
+      "fish_paths": [
+        {
+          "center": [
+            19.7,
+            19.8
+          ],
+          "axes": [
+            [
+              0.8,
+              0.1
+            ],
+            [
+              -0.1,
+              1.45
+            ]
+          ],
+          "size": 0.59,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 0.0
+        },
+        {
+          "center": [
+            27.4,
+            18.7
+          ],
+          "axes": [
+            [
+              1.2,
+              0.25
+            ],
+            [
+              -0.2,
+              1.6
+            ]
+          ],
+          "size": 0.62,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 2.2
+        },
+        {
+          "center": [
+            24,
+            23.2
+          ],
+          "axes": [
+            [
+              1.1,
+              0.2
+            ],
+            [
+              -0.2,
+              0.6
+            ]
+          ],
+          "size": 0.52,
+          "depth": 0.19,
+          "speed": 0.25,
+          "phase": 4.1
+        }
+      ]
+    }
+  ]
+}

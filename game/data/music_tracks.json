@@ -1,0 +1,7 @@
+{
+  "world": {"title": "星球漫遊", "path": "res://assets/audio/music/Campus_Orbit_96s_Loop.ogg"},
+  "admissions": {"title": "靜光座標", "path": "res://assets/audio/music/Region01_Quiet_Coordinates_120s_Loop.ogg"},
+  "wordking": {"title": "蓄力迴路", "path": "res://assets/audio/music/Training_Pulse_120s_Loop.ogg"},
+  "recommendations": {"title": "精靈羅盤", "path": "res://assets/audio/music/Pixie_Compass_120s_Loop.ogg"},
+  "counseling": {"title": "暖窗絮語", "path": "res://assets/audio/music/Warm_Window_120s_Loop.ogg"}
+}

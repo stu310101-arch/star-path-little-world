@@ -1,0 +1,980 @@
+{
+  "version": 1,
+  "intent": "Hand-authored groves frame the water. Open banks, arrival thresholds and the full walking network remain the primary foreground.",
+  "districts": {
+    "counseling": {
+      "view_windows": [
+        {
+          "name": "Lake arrival opening",
+          "from": [
+            -21,
+            15
+          ],
+          "to": [
+            -27,
+            6
+          ],
+          "half_width": 2.4
+        }
+      ],
+      "groups": [
+        {
+          "name": "Western alder shelter",
+          "trees": [
+            [
+              "alder",
+              -29,
+              -5,
+              0.9,
+              18
+            ],
+            [
+              "alder",
+              -29,
+              -10,
+              1.02,
+              102
+            ],
+            [
+              "birch",
+              -29,
+              -14,
+              0.78,
+              218
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              -30.1,
+              -6.1,
+              0.66,
+              20
+            ],
+            [
+              "fern",
+              -28.1,
+              -10.8,
+              0.74,
+              126
+            ],
+            [
+              "bank_stones",
+              -30,
+              -3.8,
+              0.68,
+              42
+            ]
+          ]
+        },
+        {
+          "name": "Southwest woodland edge",
+          "trees": [
+            [
+              "alder",
+              -22,
+              -18,
+              0.92,
+              76
+            ],
+            [
+              "birch",
+              -26,
+              -19,
+              0.8,
+              173
+            ],
+            [
+              "alder",
+              -18,
+              -22,
+              0.84,
+              291
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              -23.1,
+              -18.8,
+              0.7,
+              80
+            ],
+            [
+              "fern",
+              -25,
+              -20,
+              0.61,
+              195
+            ]
+          ]
+        },
+        {
+          "name": "Upper lake backdrop",
+          "trees": [
+            [
+              "birch",
+              -15.5,
+              26.2,
+              0.82,
+              35
+            ],
+            [
+              "alder",
+              -9,
+              27.3,
+              0.92,
+              146
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              -14,
+              27.8,
+              0.67,
+              61
+            ],
+            [
+              "bank_stones",
+              -30.6,
+              13.5,
+              0.63,
+              147
+            ],
+            [
+              "cattail",
+              -32.2,
+              9,
+              0.55,
+              216
+            ],
+            [
+              "cattail",
+              -32.4,
+              6.8,
+              0.66,
+              45
+            ],
+            [
+              "bank_stones",
+              -31.7,
+              4.5,
+              0.7,
+              312
+            ]
+          ]
+        }
+      ]
+    },
+    "admissions": {
+      "view_windows": [
+        {
+          "name": "River bend overlook",
+          "from": [
+            20,
+            16
+          ],
+          "to": [
+            24,
+            16
+          ],
+          "half_width": 2.2
+        },
+        {
+          "name": "Open marina arrival",
+          "from": [
+            30,
+            6
+          ],
+          "to": [
+            41,
+            6
+          ],
+          "half_width": 3.0
+        }
+      ],
+      "groups": [
+        {
+          "name": "Far bank willow crown",
+          "trees": [
+            [
+              "willow",
+              29.5,
+              16.5,
+              0.94,
+              22
+            ],
+            [
+              "birch",
+              23.3,
+              21.3,
+              0.76,
+              134
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              26.4,
+              19.9,
+              0.68,
+              70
+            ],
+            [
+              "fern",
+              22.8,
+              21.1,
+              0.61,
+              170
+            ],
+            [
+              "cattail",
+              25.1,
+              21.5,
+              0.55,
+              248
+            ],
+            [
+              "bank_stones",
+              24.2,
+              21.1,
+              0.67,
+              117
+            ]
+          ]
+        },
+        {
+          "name": "Downstream sheltered grove",
+          "trees": [
+            [
+              "willow",
+              27.5,
+              -16,
+              0.85,
+              62
+            ],
+            [
+              "willow",
+              30,
+              -12,
+              0.97,
+              194
+            ],
+            [
+              "birch",
+              31,
+              -6,
+              0.8,
+              315
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              28.3,
+              -15.2,
+              0.69,
+              28
+            ],
+            [
+              "fern",
+              30.1,
+              -7.4,
+              0.72,
+              163
+            ],
+            [
+              "cattail",
+              28.3,
+              -10.2,
+              0.58,
+              264
+            ],
+            [
+              "bank_stones",
+              28.8,
+              -8.7,
+              0.73,
+              145
+            ]
+          ]
+        },
+        {
+          "name": "Southern birch screen",
+          "trees": [
+            [
+              "birch",
+              17,
+              -24,
+              0.87,
+              52
+            ],
+            [
+              "willow",
+              12,
+              -25,
+              0.9,
+              217
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              16.1,
+              -24.8,
+              0.66,
+              302
+            ],
+            [
+              "bank_stones",
+              13.2,
+              -25.4,
+              0.62,
+              99
+            ]
+          ]
+        }
+      ]
+    },
+    "recommendations": {
+      "view_windows": [
+        {
+          "name": "South promenade sea opening",
+          "from": [
+            -10,
+            -25
+          ],
+          "to": [
+            -10,
+            -34
+          ],
+          "half_width": 2.5
+        }
+      ],
+      "groups": [
+        {
+          "name": "Southwest birch room",
+          "trees": [
+            [
+              "birch",
+              -14.5,
+              -19.4,
+              0.9,
+              26
+            ],
+            [
+              "birch",
+              -9,
+              -19.4,
+              1.02,
+              138
+            ],
+            [
+              "birch",
+              -4,
+              -21,
+              0.78,
+              269
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              -15,
+              -20,
+              0.66,
+              22
+            ],
+            [
+              "fern",
+              -9.9,
+              -19.5,
+              0.78,
+              153
+            ],
+            [
+              "bank_stones",
+              -6.9,
+              -21.4,
+              0.62,
+              259
+            ]
+          ]
+        },
+        {
+          "name": "Southeast birch room",
+          "trees": [
+            [
+              "birch",
+              6,
+              -20,
+              0.95,
+              72
+            ],
+            [
+              "birch",
+              10,
+              -20,
+              0.78,
+              183
+            ],
+            [
+              "birch",
+              20,
+              -19,
+              0.9,
+              292
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              7,
+              -19.2,
+              0.68,
+              114
+            ],
+            [
+              "fern",
+              19.7,
+              -20.3,
+              0.62,
+              225
+            ],
+            [
+              "bank_stones",
+              21.1,
+              -18.4,
+              0.69,
+              64
+            ]
+          ]
+        },
+        {
+          "name": "Quiet lake framing",
+          "trees": [
+            [
+              "birch",
+              28,
+              4,
+              0.87,
+              48
+            ],
+            [
+              "birch",
+              22,
+              22,
+              0.82,
+              219
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              27.1,
+              3.4,
+              0.63,
+              75
+            ],
+            [
+              "cattail",
+              28.5,
+              7.3,
+              0.52,
+              186
+            ],
+            [
+              "cattail",
+              29.8,
+              10.2,
+              0.6,
+              311
+            ],
+            [
+              "bank_stones",
+              27.6,
+              17.6,
+              0.73,
+              157
+            ]
+          ]
+        }
+      ]
+    },
+    "universities": {
+      "view_windows": [
+        {
+          "name": "Campus river panorama",
+          "from": [
+            0,
+            28
+          ],
+          "to": [
+            0,
+            21
+          ],
+          "half_width": 3.0
+        }
+      ],
+      "groups": [
+        {
+          "name": "West river approach frame",
+          "trees": [
+            [
+              "willow",
+              -25,
+              16,
+              0.93,
+              21
+            ],
+            [
+              "willow",
+              -21,
+              18,
+              0.81,
+              129
+            ],
+            [
+              "birch",
+              -16,
+              20,
+              0.86,
+              247
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              -25.8,
+              15.3,
+              0.64,
+              31
+            ],
+            [
+              "fern",
+              -20.3,
+              18.8,
+              0.7,
+              151
+            ],
+            [
+              "cattail",
+              -23.5,
+              20.1,
+              0.53,
+              269
+            ],
+            [
+              "bank_stones",
+              -21.8,
+              19.4,
+              0.67,
+              100
+            ]
+          ]
+        },
+        {
+          "name": "Northwestern willow backdrop",
+          "trees": [
+            [
+              "willow",
+              -16,
+              30,
+              0.88,
+              62
+            ],
+            [
+              "birch",
+              -10,
+              31,
+              0.77,
+              186
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              -14.9,
+              30.3,
+              0.68,
+              45
+            ],
+            [
+              "bank_stones",
+              -12.1,
+              27.1,
+              0.68,
+              170
+            ],
+            [
+              "cattail",
+              -16.8,
+              25.2,
+              0.57,
+              305
+            ]
+          ]
+        },
+        {
+          "name": "East river approach frame",
+          "trees": [
+            [
+              "birch",
+              15,
+              20.5,
+              0.79,
+              199
+            ],
+            [
+              "willow",
+              28,
+              16,
+              0.86,
+              291
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              11.9,
+              20.2,
+              0.65,
+              120
+            ],
+            [
+              "fern",
+              27.2,
+              15,
+              0.7,
+              247
+            ],
+            [
+              "bank_stones",
+              12.7,
+              21.6,
+              0.68,
+              164
+            ],
+            [
+              "cattail",
+              14.3,
+              21.6,
+              0.54,
+              280
+            ]
+          ]
+        }
+      ]
+    },
+    "life": {
+      "view_windows": [
+        {
+          "name": "Pine lake arrival opening",
+          "from": [
+            -12,
+            23
+          ],
+          "to": [
+            -22,
+            18
+          ],
+          "half_width": 2.5
+        }
+      ],
+      "groups": [
+        {
+          "name": "Western pine shelter",
+          "trees": [
+            [
+              "pine",
+              -29,
+              7,
+              0.87,
+              19
+            ],
+            [
+              "pine",
+              -32,
+              10,
+              0.95,
+              148
+            ],
+            [
+              "birch",
+              -30,
+              13,
+              0.76,
+              272
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              -29.8,
+              7.9,
+              0.66,
+              73
+            ],
+            [
+              "fern",
+              -31.4,
+              11.1,
+              0.78,
+              199
+            ],
+            [
+              "bank_stones",
+              -28.8,
+              14,
+              0.68,
+              312
+            ]
+          ]
+        },
+        {
+          "name": "Northern pine backdrop",
+          "trees": [
+            [
+              "pine",
+              -16,
+              29,
+              0.92,
+              60
+            ],
+            [
+              "pine",
+              -10,
+              29,
+              0.8,
+              213
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              -15,
+              29.1,
+              0.62,
+              117
+            ],
+            [
+              "fern",
+              -9.1,
+              28.4,
+              0.69,
+              254
+            ],
+            [
+              "bank_stones",
+              -17,
+              29.5,
+              0.73,
+              167
+            ]
+          ]
+        },
+        {
+          "name": "Eastern woodland edge",
+          "trees": [
+            [
+              "pine",
+              -9,
+              10,
+              0.86,
+              40
+            ],
+            [
+              "birch",
+              -7.2,
+              12.5,
+              0.78,
+              180
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              -9.8,
+              10.1,
+              0.7,
+              37
+            ],
+            [
+              "fern",
+              -6.2,
+              12.2,
+              0.61,
+              150
+            ],
+            [
+              "bank_stones",
+              -30.8,
+              6,
+              0.69,
+              108
+            ]
+          ]
+        }
+      ]
+    },
+    "wordking": {
+      "view_windows": [
+        {
+          "name": "Wetland arrival panorama",
+          "from": [
+            20,
+            25
+          ],
+          "to": [
+            24,
+            19
+          ],
+          "half_width": 2.8
+        }
+      ],
+      "groups": [
+        {
+          "name": "Southeastern alder frame",
+          "trees": [
+            [
+              "alder",
+              29,
+              8,
+              0.94,
+              25
+            ],
+            [
+              "alder",
+              25,
+              7,
+              0.8,
+              145
+            ],
+            [
+              "birch",
+              22,
+              10,
+              0.76,
+              271
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              29.8,
+              7.6,
+              0.68,
+              82
+            ],
+            [
+              "fern",
+              24.8,
+              5.9,
+              0.72,
+              201
+            ],
+            [
+              "cattail",
+              28.4,
+              12.2,
+              0.54,
+              305
+            ],
+            [
+              "bank_stones",
+              29.8,
+              13,
+              0.75,
+              118
+            ]
+          ]
+        },
+        {
+          "name": "Western wetland shelter",
+          "trees": [
+            [
+              "birch",
+              10,
+              22,
+              0.76,
+              206
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              10.1,
+              18.2,
+              0.65,
+              18
+            ],
+            [
+              "fern",
+              10.8,
+              22.6,
+              0.66,
+              143
+            ],
+            [
+              "cattail",
+              15,
+              20.7,
+              0.51,
+              258
+            ],
+            [
+              "bank_stones",
+              14.8,
+              22.8,
+              0.68,
+              96
+            ]
+          ]
+        },
+        {
+          "name": "Northern alder backdrop",
+          "trees": [
+            [
+              "alder",
+              15,
+              30.8,
+              0.82,
+              51
+            ],
+            [
+              "birch",
+              6,
+              29,
+              0.74,
+              190
+            ],
+            [
+              "alder",
+              11,
+              32,
+              0.88,
+              290
+            ]
+          ],
+          "understory": [
+            [
+              "fern",
+              14.1,
+              30.2,
+              0.67,
+              99
+            ],
+            [
+              "bank_stones",
+              12.7,
+              31,
+              0.68,
+              231
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

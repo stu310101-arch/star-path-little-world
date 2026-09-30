@@ -1,0 +1,596 @@
+{
+	"checks": [
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Six distinct stations"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Six planned modern districts have 48 buildings"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Larger sphere without scaling the player"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Faster walk and run"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Props align to radial up"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Connected city roads cover all six districts"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Landscaping occupies designated courtyards"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Authored sakura and sea content built"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Entrance platform clears moving traffic 0"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Asphalt covers inner and outer corners 0"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Full promenade width joins at bends 0"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Ecology arrival is dry 0"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Promenades and boardwalks continuous 0"
+		},
+		{
+			"detail": "18",
+			"passed": true,
+			"test": "Lake and river water has no hidden land 0"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Entrance platform clears moving traffic 1"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Asphalt covers inner and outer corners 1"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Full promenade width joins at bends 1"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Ecology arrival is dry 1"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Promenades and boardwalks continuous 1"
+		},
+		{
+			"detail": "9",
+			"passed": true,
+			"test": "Lake and river water has no hidden land 1"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Entrance platform clears moving traffic 2"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Asphalt covers inner and outer corners 2"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Full promenade width joins at bends 2"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Ecology arrival is dry 2"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Promenades and boardwalks continuous 2"
+		},
+		{
+			"detail": "17",
+			"passed": true,
+			"test": "Lake and river water has no hidden land 2"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Entrance platform clears moving traffic 3"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Asphalt covers inner and outer corners 3"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Full promenade width joins at bends 3"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Ecology arrival is dry 3"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Promenades and boardwalks continuous 3"
+		},
+		{
+			"detail": "12",
+			"passed": true,
+			"test": "Lake and river water has no hidden land 3"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Entrance platform clears moving traffic 4"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Asphalt covers inner and outer corners 4"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Full promenade width joins at bends 4"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Ecology arrival is dry 4"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Promenades and boardwalks continuous 4"
+		},
+		{
+			"detail": "10",
+			"passed": true,
+			"test": "Lake and river water has no hidden land 4"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Entrance platform clears moving traffic 5"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Asphalt covers inner and outer corners 5"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Full promenade width joins at bends 5"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Ecology arrival is dry 5"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Promenades and boardwalks continuous 5"
+		},
+		{
+			"detail": "19",
+			"passed": true,
+			"test": "Lake and river water has no hidden land 5"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "All six urban arrangements differ"
+		},
+		{
+			"detail": "{ \"authored_planting\": true, \"districts\": 6.0, \"planting_groups\": [{ \"groups\": [{ \"name\": \"Western alder shelter\", \"tree_positions\": [[\"alder\", -29.0, -5.0, 0.9, 18.0], [\"alder\", -29.0, -10.0, 1.02, 102.0], [\"birch\", -29.0, -14.0, 0.78, 218.0]], \"trees\": 3.0, \"understory_clusters\": 3.0, \"understory_positions\": [[\"fern\", -30.1, -6.1, 0.66, 20.0], [\"fern\", -28.1, -10.8, 0.74, 126.0], [\"bank_stones\", -30.0, -3.8, 0.68, 42.0]] }, { \"name\": \"Southwest woodland edge\", \"tree_positions\": [[\"alder\", -22.0, -18.0, 0.92, 76.0], [\"birch\", -26.0, -19.0, 0.8, 173.0], [\"alder\", -18.0, -22.0, 0.84, 291.0]], \"trees\": 3.0, \"understory_clusters\": 2.0, \"understory_positions\": [[\"fern\", -23.1, -18.8, 0.7, 80.0], [\"fern\", -25.0, -20.0, 0.61, 195.0]] }, { \"name\": \"Upper lake backdrop\", \"tree_positions\": [[\"birch\", -15.5, 26.2, 0.82, 35.0], [\"alder\", -9.0, 27.3, 0.92, 146.0]], \"trees\": 2.0, \"understory_clusters\": 5.0, \"understory_positions\": [[\"fern\", -14.0, 27.8, 0.67, 61.0], [\"bank_stones\", -30.6, 13.5, 0.63, 147.0], [\"cattail\", -32.2, 9.0, 0.55, 216.0], [\"cattail\", -32.4, 6.8, 0.66, 45.0], [\"bank_stones\", -31.7, 4.5, 0.7, 312.0]] }, { \"name\": \"Pocket garden specimens\", \"source\": \"authored district garden assemblies\", \"tree_positions\": [[\"birch\", -5.0, -3.0, 0.65, 0.0], [\"birch\", -5.0, 19.0, 0.65, 0.0], [\"birch\", 9.0, 21.0, 0.65, 0.0]], \"trees\": 3.0, \"understory_clusters\": 0.0, \"understory_positions\": [] }], \"station\": \"counseling\", \"view_windows\": [{ \"from\": [-21.0, 15.0], \"half_width\": 2.4, \"name\": \"Lake arrival opening\", \"to\": [-27.0, 6.0] }] }, { \"groups\": [{ \"name\": \"Far bank willow crown\", \"tree_positions\": [[\"willow\", 29.5, 16.5, 0.94, 22.0], [\"birch\", 23.3, 21.3, 0.76, 134.0]], \"trees\": 2.0, \"understory_clusters\": 4.0, \"understory_positions\": [[\"fern\", 26.4, 19.9, 0.68, 70.0], [\"fern\", 22.8, 21.1, 0.61, 170.0], [\"cattail\", 25.1, 21.5, 0.55, 248.0], [\"bank_stones\", 24.2, 21.1, 0.67, 117.0]] }, { \"name\": \"Downstream sheltered grove\", \"tree_positions\": [[\"willow\", 27.5, -16.0, 0.85, 62.0], [\"willow\", 30.0, -12.0, 0.97, 194.0], [\"birch\", 31.0, -6.0, 0.8, 315.0]], \"trees\": 3.0, \"understory_clusters\": 4.0, \"understory_positions\": [[\"fern\", 28.3, -15.2, 0.69, 28.0], [\"fern\", 30.1, -7.4, 0.72, 163.0], [\"cattail\", 28.3, -10.2, 0.58, 264.0], [\"bank_stones\", 28.8, -8.7, 0.73, 145.0]] }, { \"name\": \"Southern birch screen\", \"tree_positions\": [[\"birch\", 17.0, -24.0, 0.87, 52.0], [\"willow\", 12.0, -25.0, 0.9, 217.0]], \"trees\": 2.0, \"understory_clusters\": 2.0, \"understory_positions\": [[\"fern\", 16.1, -24.8, 0.66, 302.0], [\"bank_stones\", 13.2, -25.4, 0.62, 99.0]] }, { \"name\": \"Pocket garden specimens\", \"source\": \"authored district garden assemblies\", \"tree_positions\": [[\"birch\", -22.2999992370605, -10.0, 0.65, 57.2957795130823], [\"birch\", -19.0, 20.0, 0.65, 57.2957795130823], [\"birch\", 9.0, 22.0, 0.65, 57.2957795130823]], \"trees\": 3.0, \"understory_clusters\": 0.0, \"understory_positions\": [] }], \"station\": \"admissions\", \"view_windows\": [{ \"from\": [20.0, 16.0], \"half_width\": 2.2, \"name\": \"River bend overlook\", \"to\": [24.0, 16.0] }, { \"from\": [30.0, 6.0], \"half_width\": 3.0, \"name\": \"Open marina arrival\", \"to\": [41.0, 6.0] }] }, { \"groups\": [{ \"name\": \"Southwest birch room\", \"tree_positions\": [[\"birch\", -14.5, -19.4, 0.9, 26.0], [\"birch\", -9.0, -19.4, 1.02, 138.0], [\"birch\", -4.0, -21.0, 0.78, 269.0]], \"trees\": 3.0, \"understory_clusters\": 3.0, \"understory_positions\": [[\"fern\", -15.0, -20.0, 0.66, 22.0], [\"fern\", -9.9, -19.5, 0.78, 153.0], [\"bank_stones\", -6.9, -21.4, 0.62, 259.0]] }, { \"name\": \"Southeast birch room\", \"tree_positions\": [[\"birch\", 6.0, -20.0, 0.95, 72.0], [\"birch\", 10.0, -20.0, 0.78, 183.0], [\"birch\", 20.0, -19.0, 0.9, 292.0]], \"trees\": 3.0, \"understory_clusters\": 3.0, \"understory_positions\": [[\"fern\", 7.0, -19.2, 0.68, 114.0], [\"fern\", 19.7, -20.3, 0.62, 225.0], [\"bank_stones\", 21.1, -18.4, 0.69, 64.0]] }, { \"name\": \"Quiet lake framing\", \"tree_positions\": [[\"birch\", 28.0, 4.0, 0.87, 48.0], [\"birch\", 22.0, 22.0, 0.82, 219.0]], \"trees\": 2.0, \"understory_clusters\": 4.0, \"understory_positions\": [[\"fern\", 27.1, 3.4, 0.63, 75.0], [\"cattail\", 28.5, 7.3, 0.52, 186.0], [\"cattail\", 29.8, 10.2, 0.6, 311.0], [\"bank_stones\", 27.6, 17.6, 0.73, 157.0]] }, { \"name\": \"Pocket garden specimens\", \"source\": \"authored district garden assemblies\", \"tree_positions\": [[\"birch\", -3.0, 4.0, 0.65, 114.591559026165], [\"birch\", 9.0, 18.0, 0.65, 114.591559026165], [\"birch\", -22.0, 9.0, 0.65, 114.591559026165]], \"trees\": 3.0, \"understory_clusters\": 0.0, \"understory_positions\": [] }], \"station\": \"recommendations\", \"view_windows\": [{ \"from\": [-10.0, -25.0], \"half_width\": 2.5, \"name\": \"South promenade sea opening\", \"to\": [-10.0, -34.0] }] }, { \"groups\": [{ \"name\": \"West river approach frame\", \"tree_positions\": [[\"willow\", -25.0, 16.0, 0.93, 21.0], [\"willow\", -21.0, 18.0, 0.81, 129.0], [\"birch\", -16.0, 20.0, 0.86, 247.0]], \"trees\": 3.0, \"understory_clusters\": 4.0, \"understory_positions\": [[\"fern\", -25.8, 15.3, 0.64, 31.0], [\"fern\", -20.3, 18.8, 0.7, 151.0], [\"cattail\", -23.5, 20.1, 0.53, 269.0], [\"bank_stones\", -21.8, 19.4, 0.67, 100.0]] }, { \"name\": \"Northwestern willow backdrop\", \"tree_positions\": [[\"willow\", -16.0, 30.0, 0.88, 62.0], [\"birch\", -10.0, 31.0, 0.77, 186.0]], \"trees\": 2.0, \"understory_clusters\": 3.0, \"understory_positions\": [[\"fern\", -14.9, 30.3, 0.68, 45.0], [\"bank_stones\", -12.1, 27.1, 0.68, 170.0], [\"cattail\", -16.8, 25.2, 0.57, 305.0]] }, { \"name\": \"East river approach frame\", \"tree_positions\": [[\"birch\", 15.0, 20.5, 0.79, 199.0], [\"willow\", 28.0, 16.0, 0.86, 291.0]], \"trees\": 2.0, \"understory_clusters\": 4.0, \"understory_positions\": [[\"fern\", 11.9, 20.2, 0.65, 120.0], [\"fern\", 27.2, 15.0, 0.7, 247.0], [\"bank_stones\", 12.7, 21.6, 0.68, 164.0], [\"cattail\", 14.3, 21.6, 0.54, 280.0]] }, { \"name\": \"Pocket garden specimens\", \"source\": \"authored district garden assemblies\", \"tree_positions\": [[\"birch\", -5.0, 20.0, 0.65, 171.887338539247], [\"birch\", 9.0, 20.0, 0.65, 171.887338539247], [\"birch\", 24.7000007629395, 10.0, 0.65, 171.887338539247]], \"trees\": 3.0, \"understory_clusters\": 0.0, \"understory_positions\": [] }], \"station\": \"universities\", \"view_windows\": [{ \"from\": [0.0, 28.0], \"half_width\": 3.0, \"name\": \"Campus river panorama\", \"to\": [0.0, 21.0] }] }, { \"groups\": [{ \"name\": \"Western pine shelter\", \"tree_positions\": [[\"pine\", -29.0, 7.0, 0.87, 19.0], [\"pine\", -32.0, 10.0, 0.95, 148.0], [\"birch\", -30.0, 13.0, 0.76, 272.0]], \"trees\": 3.0, \"understory_clusters\": 3.0, \"understory_positions\": [[\"fern\", -29.8, 7.9, 0.66, 73.0], [\"fern\", -31.4, 11.1, 0.78, 199.0], [\"bank_stones\", -28.8, 14.0, 0.68, 312.0]] }, { \"name\": \"Northern pine backdrop\", \"tree_positions\": [[\"pine\", -16.0, 29.0, 0.92, 60.0], [\"pine\", -10.0, 29.0, 0.8, 213.0]], \"trees\": 2.0, \"understory_clusters\": 3.0, \"understory_positions\": [[\"fern\", -15.0, 29.1, 0.62, 117.0], [\"fern\", -9.1, 28.4, 0.69, 254.0], [\"bank_stones\", -17.0, 29.5, 0.73, 167.0]] }, { \"name\": \"Eastern woodland edge\", \"tree_positions\": [[\"pine\", -9.0, 10.0, 0.86, 40.0], [\"birch\", -7.2, 12.5, 0.78, 180.0]], \"trees\": 2.0, \"understory_clusters\": 3.0, \"understory_positions\": [[\"fern\", -9.8, 10.1, 0.7, 37.0], [\"fern\", -6.2, 12.2, 0.61, 150.0], [\"bank_stones\", -30.8, 6.0, 0.69, 108.0]] }, { \"name\": \"Pocket garden specimens\", \"source\": \"authored district garden assemblies\", \"tree_positions\": [[\"birch\", -5.0, -1.0, 0.65, 229.183118052329], [\"birch\", 11.0, 22.0, 0.65, 229.183118052329], [\"birch\", -23.2000007629395, 5.0, 0.65, 229.183118052329]], \"trees\": 3.0, \"understory_clusters\": 0.0, \"understory_positions\": [] }], \"station\": \"life\", \"view_windows\": [{ \"from\": [-12.0, 23.0], \"half_width\": 2.5, \"name\": \"Pine lake arrival opening\", \"to\": [-22.0, 18.0] }] }, { \"groups\": [{ \"name\": \"Southeastern alder frame\", \"tree_positions\": [[\"alder\", 29.0, 8.0, 0.94, 25.0], [\"alder\", 25.0, 7.0, 0.8, 145.0], [\"birch\", 22.0, 10.0, 0.76, 271.0]], \"trees\": 3.0, \"understory_clusters\": 4.0, \"understory_positions\": [[\"fern\", 29.8, 7.6, 0.68, 82.0], [\"fern\", 24.8, 5.9, 0.72, 201.0], [\"cattail\", 28.4, 12.2, 0.54, 305.0], [\"bank_stones\", 29.8, 13.0, 0.75, 118.0]] }, { \"name\": \"Western wetland shelter\", \"tree_positions\": [[\"birch\", 10.0, 22.0, 0.76, 206.0]], \"trees\": 1.0, \"understory_clusters\": 4.0, \"understory_positions\": [[\"fern\", 10.1, 18.2, 0.65, 18.0], [\"fern\", 10.8, 22.6, 0.66, 143.0], [\"cattail\", 15.0, 20.7, 0.51, 258.0], [\"bank_stones\", 14.8, 22.8, 0.68, 96.0]] }, { \"name\": \"Northern alder backdrop\", \"tree_positions\": [[\"alder\", 15.0, 30.8, 0.82, 51.0], [\"birch\", 6.0, 29.0, 0.74, 190.0], [\"alder\", 11.0, 32.0, 0.88, 290.0]], \"trees\": 3.0, \"understory_clusters\": 2.0, \"understory_positions\": [[\"fern\", 14.1, 30.2, 0.67, 99.0], [\"bank_stones\", 12.7, 31.0, 0.68, 231.0]] }, { \"name\": \"Pocket garden specimens\", \"source\": \"authored district garden assemblies\", \"tree_positions\": [[\"birch\", -6.0, 5.09999990463257, 0.65, 286.478897565412], [\"birch\", -24.0, 18.0, 0.65, 286.478897565412], [\"birch\", 9.19999980926514, 18.5, 0.65, 286.478897565412]], \"trees\": 3.0, \"understory_clusters\": 0.0, \"understory_positions\": [] }], \"station\": \"wordking\", \"view_windows\": [{ \"from\": [20.0, 25.0], \"half_width\": 2.8, \"name\": \"Wetland arrival panorama\", \"to\": [24.0, 19.0] }] }], \"planting_version\": 1.0, \"pocket_specimens_omitted\": 0.0, \"pocket_specimens_preserved\": 18.0, \"radius\": 48.0, \"trees\": 62.0, \"understory_clusters\": 60.0, \"water_collision\": false }",
+			"passed": true,
+			"test": "Six reserves use authored groves with open view windows and preserved garden specimens"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Boat routes stay over water"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Boats actually travel"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Fish schools leap and dive"
+		},
+		{
+			"detail": "[\"Idle\", \"JumpDown\", \"Run\", \"Walk\"]",
+			"passed": true,
+			"test": "Character has Walk Run and JumpDown"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Right drag rotates overview horizontally and vertically"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Right release restores cursor"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Right drag rotates character camera and pitch"
+		},
+		{
+			"detail": "48.2649612426758",
+			"passed": true,
+			"test": "Station landing counseling"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Radial orientation counseling"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Arrival faces entrance counseling"
+		},
+		{
+			"detail": "48.2662124633789",
+			"passed": true,
+			"test": "Station landing admissions"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Radial orientation admissions"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Arrival faces entrance admissions"
+		},
+		{
+			"detail": "48.6610107421875",
+			"passed": true,
+			"test": "Station landing recommendations"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Radial orientation recommendations"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Arrival faces entrance recommendations"
+		},
+		{
+			"detail": "48.2662162780762",
+			"passed": true,
+			"test": "Station landing universities"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Radial orientation universities"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Arrival faces entrance universities"
+		},
+		{
+			"detail": "48.1447525024414",
+			"passed": true,
+			"test": "Station landing life"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Radial orientation life"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Arrival faces entrance life"
+		},
+		{
+			"detail": "48.2662124633789",
+			"passed": true,
+			"test": "Station landing wordking"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Radial orientation wordking"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Arrival faces entrance wordking"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Road tops have matching collisions"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Clear street counseling"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Clear street admissions"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Clear street recommendations"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Clear street universities"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Clear street life"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Clear street wordking"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Entrance begins the existing jump clip"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Jump rises and disappears before the panel"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Panel retains world position"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Returning restores character"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Sakura grove can be visited on foot"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Sakura bridge has continuous walkable collision"
+		},
+		{
+			"detail": "(21.83958, 35.27621, 24.75046)",
+			"passed": true,
+			"test": "Sakura bridge actual walk outbound"
+		},
+		{
+			"detail": "(18.20219, 39.72357, 20.62908)",
+			"passed": true,
+			"test": "Sakura bridge actual walk return"
+		},
+		{
+			"detail": "(23.7808, 32.19542, 26.95079)",
+			"passed": true,
+			"test": "Continuous city to garden walk outbound"
+		},
+		{
+			"detail": "(9.512401, 44.41969, 16.26675)",
+			"passed": true,
+			"test": "Continuous city to garden walk return"
+		},
+		{
+			"detail": "(-16.86633, -40.14899, 20.75308)",
+			"passed": true,
+			"test": "Walk through wetland boardwalk turns"
+		},
+		{
+			"detail": "(11.06734, 13.63549, 44.95845)",
+			"passed": true,
+			"test": "Actual lake road corner traversal false"
+		},
+		{
+			"detail": "(3.036954, 16.66585, 45.19497)",
+			"passed": true,
+			"test": "Actual lake road corner traversal true"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Cars advance along the city route"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Traffic yields to the player"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Traffic route stays on the city surface"
+		},
+		{
+			"detail": "10.3548495769501",
+			"passed": true,
+			"test": "Cars do not intersect the Sakura bridge"
+		},
+		{
+			"detail": "(0.101176, 43.67061, -20.49514)",
+			"passed": true,
+			"test": "Walk/run advances through street seams"
+		},
+		{
+			"detail": "0.0",
+			"passed": true,
+			"test": "Standing still does not drift"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Shore test finds exposed water"
+		},
+		{
+			"detail": "(-19.23063, 39.69362, -19.23063)",
+			"passed": true,
+			"test": "Cannot walk from land onto ocean"
+		},
+		{
+			"detail": "min=47.992413 max=47.992550",
+			"passed": true,
+			"test": "Full sphere traversal stays grounded"
+		},
+		{
+			"detail": "0.99999004602432",
+			"passed": true,
+			"test": "Pole crossing has no heading flip"
+		},
+		{
+			"detail": "(0.0, 47.99218, -0.153603)",
+			"passed": true,
+			"test": "Completed a full great circle"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap centres player at counseling"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap frame stays fixed and arrow follows character at counseling"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap centres player at admissions"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap frame stays fixed and arrow follows character at admissions"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap centres player at recommendations"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap frame stays fixed and arrow follows character at recommendations"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap centres player at universities"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap frame stays fixed and arrow follows character at universities"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap centres player at life"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap frame stays fixed and arrow follows character at life"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap centres player at wordking"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap frame stays fixed and arrow follows character at wordking"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Left hold rotates overview"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Left release stops rotation"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Left hold rotates roaming camera"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Focus loss releases left drag"
+		}
+	],
+	"failed": 0,
+	"passed": true
+}

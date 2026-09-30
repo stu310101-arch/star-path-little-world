@@ -1,0 +1,1952 @@
+{
+	"capsule_sweeps": 74780,
+	"checks": [
+		{
+			"detail": [
+				{
+					"destination": "street sidewalk",
+					"path": 0,
+					"point": [
+						0.0,
+						15.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 0,
+					"point": [
+						-16.0,
+						12.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 1,
+					"point": [
+						-16.0,
+						2.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 1,
+					"point": [
+						-16.0,
+						-4.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 2,
+					"point": [
+						-15.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 2,
+					"point": [
+						-32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 3,
+					"point": [
+						15.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 3,
+					"point": [
+						32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 4,
+					"point": [
+						0.0,
+						-15.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 4,
+					"point": [
+						0.0,
+						-32.0725746201263
+					]
+				},
+				{
+					"destination": "joined public path 0",
+					"path": 5,
+					"point": [
+						0.0,
+						22.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 5,
+					"point": [
+						0.0,
+						32.0725746201263
+					]
+				}
+			],
+			"passed": true,
+			"test": "Every public path has a real destination: counseling"
+		},
+		{
+			"detail": [
+				{
+					"destination": "street sidewalk",
+					"path": 0,
+					"point": [
+						18.0,
+						10.0
+					]
+				},
+				{
+					"destination": "joined public path 5",
+					"path": 0,
+					"point": [
+						0.0,
+						26.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 1,
+					"point": [
+						18.0,
+						0.0
+					]
+				},
+				{
+					"destination": "Marina timber deck entrance",
+					"path": 1,
+					"point": [
+						32.0,
+						6.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 2,
+					"point": [
+						-15.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 2,
+					"point": [
+						-32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "joined public path 1",
+					"path": 3,
+					"point": [
+						30.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 3,
+					"point": [
+						32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 4,
+					"point": [
+						0.0,
+						-15.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 4,
+					"point": [
+						0.0,
+						-32.0725746201263
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 5,
+					"point": [
+						0.0,
+						15.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 5,
+					"point": [
+						0.0,
+						32.0725746201263
+					]
+				}
+			],
+			"passed": true,
+			"test": "Every public path has a real destination: admissions"
+		},
+		{
+			"detail": [
+				{
+					"destination": "street sidewalk",
+					"path": 0,
+					"point": [
+						0.0,
+						-15.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 0,
+					"point": [
+						0.0,
+						13.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 1,
+					"point": [
+						-17.0,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 1,
+					"point": [
+						15.0,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 2,
+					"point": [
+						-17.0,
+						-15.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 2,
+					"point": [
+						15.0,
+						-15.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 3,
+					"point": [
+						-17.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 3,
+					"point": [
+						-32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 4,
+					"point": [
+						15.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 4,
+					"point": [
+						32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 5,
+					"point": [
+						0.0,
+						-15.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 5,
+					"point": [
+						0.0,
+						-32.0725746201263
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 6,
+					"point": [
+						0.0,
+						13.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 6,
+					"point": [
+						0.0,
+						32.0725746201263
+					]
+				}
+			],
+			"passed": true,
+			"test": "Every public path has a real destination: recommendations"
+		},
+		{
+			"detail": [
+				{
+					"destination": "joined public path 5",
+					"path": 0,
+					"point": [
+						0.0,
+						-26.0
+					]
+				},
+				{
+					"destination": "joined public path 6",
+					"path": 0,
+					"point": [
+						0.0,
+						29.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 1,
+					"point": [
+						-17.0,
+						-15.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 1,
+					"point": [
+						17.0,
+						-15.0
+					]
+				},
+				{
+					"destination": "joined public path 0",
+					"path": 2,
+					"point": [
+						0.0,
+						28.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 2,
+					"point": [
+						17.0,
+						15.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 3,
+					"point": [
+						-15.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 3,
+					"point": [
+						-32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 4,
+					"point": [
+						15.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 4,
+					"point": [
+						32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "joined public path 0",
+					"path": 5,
+					"point": [
+						0.0,
+						-26.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 5,
+					"point": [
+						0.0,
+						-32.0725746201263
+					]
+				},
+				{
+					"destination": "joined public path 0",
+					"path": 6,
+					"point": [
+						0.0,
+						29.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 6,
+					"point": [
+						0.0,
+						32.0725746201263
+					]
+				}
+			],
+			"passed": true,
+			"test": "Every public path has a real destination: universities"
+		},
+		{
+			"detail": [
+				{
+					"destination": "street sidewalk",
+					"path": 0,
+					"point": [
+						0.0,
+						-17.0
+					]
+				},
+				{
+					"destination": "actual building forecourt: suburban-edited/house-f-red.glb",
+					"path": 0,
+					"point": [
+						-5.0,
+						4.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 1,
+					"point": [
+						-8.0,
+						18.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 1,
+					"point": [
+						-18.0,
+						9.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 2,
+					"point": [
+						-15.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 2,
+					"point": [
+						-32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 3,
+					"point": [
+						19.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 3,
+					"point": [
+						32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 4,
+					"point": [
+						0.0,
+						-17.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 4,
+					"point": [
+						0.0,
+						-32.0725746201263
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 5,
+					"point": [
+						0.0,
+						15.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 5,
+					"point": [
+						0.0,
+						32.0725746201263
+					]
+				}
+			],
+			"passed": true,
+			"test": "Every public path has a real destination: life"
+		},
+		{
+			"detail": [
+				{
+					"destination": "street sidewalk",
+					"path": 0,
+					"point": [
+						13.0,
+						9.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 0,
+					"point": [
+						4.0,
+						14.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 1,
+					"point": [
+						-15.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 1,
+					"point": [
+						-32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 2,
+					"point": [
+						15.0,
+						0.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 2,
+					"point": [
+						32.0725746201263,
+						0.0
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 3,
+					"point": [
+						0.0,
+						-15.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 3,
+					"point": [
+						0.0,
+						-32.0725746201263
+					]
+				},
+				{
+					"destination": "street sidewalk",
+					"path": 4,
+					"point": [
+						0.0,
+						15.0
+					]
+				},
+				{
+					"destination": "inter-island bridge mouth",
+					"path": 4,
+					"point": [
+						0.0,
+						32.0725746201263
+					]
+				}
+			],
+			"passed": true,
+			"test": "Every public path has a real destination: wordking"
+		},
+		{
+			"detail": 18,
+			"passed": true,
+			"test": "All eighteen authored pocket gardens retained"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Sakura promenade returns to its entrance"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Sakura entrance joins the loop"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Sakura has two deliberate overlooks"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Use the actual player's capsule"
+		},
+		{
+			"detail": {
+				"garden_bench_nodes": 22,
+				"lamp_poles": 83,
+				"tree_capsules": 74
+			},
+			"passed": true,
+			"test": "Actual scene contains garden seats and visible lamp poles"
+		},
+		{
+			"detail": "",
+			"passed": true,
+			"test": "Minimap matches the actual built Sakura paths and coastline"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1200,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling public path 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling public path 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling public path 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling public path 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling public path 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 260,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling public path 5"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 3730,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling street loop and sidewalks"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 970,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling interior street 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 970,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling interior street 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 200,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling building forecourt 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 200,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling building forecourt 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 110,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling building forecourt 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 110,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling building forecourt 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 120,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling building forecourt 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 110,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling building forecourt 5"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 140,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling building forecourt 6"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 140,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: counseling building forecourt 7"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 920,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions public path 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 560,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions public path 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions public path 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 50,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions public path 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions public path 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions public path 5"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 3840,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions street loop and sidewalks"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1120,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions interior street 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 230,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions building forecourt 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 170,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions building forecourt 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 160,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions building forecourt 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 120,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions building forecourt 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 130,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions building forecourt 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 170,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions building forecourt 5"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 130,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions building forecourt 6"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 180,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: admissions building forecourt 7"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 910,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations public path 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1030,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations public path 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1570,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations public path 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 400,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations public path 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations public path 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations public path 5"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 520,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations public path 6"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 4020,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations street loop and sidewalks"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 170,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations building forecourt 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 170,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations building forecourt 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 90,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations building forecourt 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 220,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations building forecourt 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 150,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations building forecourt 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 110,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations building forecourt 5"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 130,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations building forecourt 6"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 80,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: recommendations building forecourt 7"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1670,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: universities public path 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1320,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: universities public path 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1030,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: universities public path 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: universities public path 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: universities public path 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 150,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: universities public path 5"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 80,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: universities public path 6"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 3940,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: universities street loop and sidewalks"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 450,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: universities interior street 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 450,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: universities interior street 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 170,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: universities building forecourt 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 170,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: universities building forecourt 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 190,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: universities building forecourt 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 170,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: universities building forecourt 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 110,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: universities building forecourt 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 110,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: universities building forecourt 5"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 70,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: universities building forecourt 6"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 60,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: universities building forecourt 7"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 780,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: life public path 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1090,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: life public path 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: life public path 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 340,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: life public path 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 400,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: life public path 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: life public path 5"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 3890,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: life street loop and sidewalks"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 170,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: life building forecourt 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 200,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: life building forecourt 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 70,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: life building forecourt 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 100,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: life building forecourt 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 230,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: life building forecourt 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 110,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: life building forecourt 5"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 110,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: life building forecourt 6"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 100,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: life building forecourt 7"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1380,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking public path 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking public path 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking public path 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking public path 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 460,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking public path 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 3750,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking street loop and sidewalks"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 970,
+				"width": 6.3
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking interior street 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 170,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking building forecourt 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 200,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking building forecourt 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 140,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking building forecourt 2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 150,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking building forecourt 3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 190,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking building forecourt 4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 120,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking building forecourt 5"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 130,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking building forecourt 6"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 130,
+				"width": 1.4
+			},
+			"passed": true,
+			"test": "Full body corridor: wordking building forecourt 7"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 0-1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 0-2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 0-3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 0-4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 5-1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 5-2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 5-3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 5-4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 1-2"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 2-3"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 3-4"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1160,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: bridge mouths 4-1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 220,
+				"width": 2.2
+			},
+			"passed": true,
+			"test": "Full body corridor: marina approach and central usable aisle"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 350,
+				"width": 2.7
+			},
+			"passed": true,
+			"test": "Full body corridor: Sakura town approach"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 280,
+				"width": 2.7
+			},
+			"passed": true,
+			"test": "Full body corridor: Sakura arch bridge"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 140,
+				"width": 2.4
+			},
+			"passed": true,
+			"test": "Full body corridor: Sakura garden route 0"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 1280,
+				"width": 2.4
+			},
+			"passed": true,
+			"test": "Full body corridor: Sakura garden route 1"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 50,
+				"width": 1.5
+			},
+			"passed": true,
+			"test": "Full body corridor: Sakura overlook entrance EastWaterView"
+		},
+		{
+			"detail": {
+				"both_directions": true,
+				"five_lanes": true,
+				"obstructions": [],
+				"sweeps": 50,
+				"width": 1.5
+			},
+			"passed": true,
+			"test": "Full body corridor: Sakura overlook entrance WestCanopyView"
+		}
+	],
+	"failed": 0,
+	"floor_probes": 37970,
+	"lamp_poles": 83,
+	"passed": true
+}
