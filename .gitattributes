@@ -5,6 +5,7 @@ deploy/github-pages/parts/** -text
 *.blend -text
 *.wasm -text
 *.pck -text
+*.scn -text
 
 # Keep hand-authored code with consistent line endings in the repository.
 *.gd text eol=lf

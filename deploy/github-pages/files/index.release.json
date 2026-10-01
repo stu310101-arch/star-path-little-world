@@ -1,0 +1,25 @@
+{
+  "build_id": "streaming-3f7c73f0246b34c7",
+  "created_utc": "2026-10-01T03:36:23.580769+00:00",
+  "source_base_commit": "1cd1bbd5411e01c09136af8c86d7da670a577d28",
+  "source_sha256": "3f7c73f0246b34c740e866336cbda418d8f1f132a45efd6b36834a807391f34b",
+  "export": "Web release; Compatibility; single-threaded",
+  "files": {
+    "index.html": {
+      "bytes": 5381,
+      "sha256": "6f7a18ac952f2e8d00bf9a50bf477968ab6c08ddf2765637992437b2861d9d57"
+    },
+    "index.js": {
+      "bytes": 279815,
+      "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+    },
+    "index.wasm": {
+      "bytes": 39514754,
+      "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
+    },
+    "index.pck": {
+      "bytes": 154560308,
+      "sha256": "5210d188c2b2214b0f2d6f0e88814dd0fb4b18957c8509a1b18c2e7a56db0961"
+    }
+  }
+}

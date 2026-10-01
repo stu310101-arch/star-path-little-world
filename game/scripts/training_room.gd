@@ -28,6 +28,7 @@ var music_button: Button
 var ui_root: Control
 var ui_font: FontVariation
 var status_clock: float = 0.0
+var performance_enabled: bool = false
 var layout: Dictionary = {}
 var interactions: Node
 var furniture_actions: Node3D
@@ -37,6 +38,8 @@ func set_shared_music(music_node: Node) -> void:
 
 func _ready() -> void:
 	name = "TrainingRoom"
+	if OS.has_feature("web"):
+		performance_enabled = bool(JavaScriptBridge.eval("new URLSearchParams(location.search).has('performance')"))
 	_setup_input()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_window().mouse_exited.connect(_finish_drag)
@@ -371,7 +374,7 @@ func _process(delta: float) -> void:
 	if player.position.y < -3.0:
 		player.call("place_at", Vector3(0, .09, 6.2), Vector3.FORWARD)
 		camera_yaw = 0.0
-	if OS.has_feature("web") and OS.is_debug_build():
+	if OS.has_feature("web") and (OS.is_debug_build() or performance_enabled):
 		status_clock += delta
 		if status_clock > .25:
 			status_clock = 0.0
@@ -381,5 +384,5 @@ func _process(delta: float) -> void:
 func _exit_tree() -> void:
 	if is_instance_valid(music) and music.is_connected("state_changed", _refresh_music):
 		music.disconnect("state_changed", _refresh_music)
-	if OS.has_feature("web") and OS.is_debug_build():
+	if OS.has_feature("web") and (OS.is_debug_build() or performance_enabled):
 		JavaScriptBridge.eval("window.trainingRoomState = null;")

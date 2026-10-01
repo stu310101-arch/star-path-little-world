@@ -2,7 +2,7 @@ extends SceneTree
 
 const Geo = preload("res://scripts/planet_geometry.gd")
 const Sakura = preload("res://scripts/sakura_routes.gd")
-const OUTPUT: String = "res://../deliverables/bench-rest/checks.json"
+const OUTPUT: String = "res://../deliverables/performance/bench-checks.json"
 
 var world: Node3D
 var player: PlanetPlayer
@@ -52,13 +52,13 @@ func run_checks() -> void:
 	var counts: Dictionary = {}
 	for seat: StaticBody3D in seats:
 		var path: String = str(world.get_path_to(seat))
-		var district: String = "sakura" if path.begins_with("Globe/SakuraGrove/") else path.get_slice("/",1)
+		var district: String = bench_district(seat)
 		counts[district] = int(counts.get(district,0))+1
 		inventory.append({"path":path,"district":district,"position":vec(seat.global_position)})
 	for district: String in ["counseling","admissions","recommendations","universities","life","wordking","sakura"]:
 		var expected: int = 2 if district=="sakura" else (7 if district=="admissions" else 5)
 		check("Complete bench coverage in "+district,int(counts.get(district,0))==expected,counts.get(district,0))
-	await check_garden_access()
+	check_garden_access()
 	for index: int in range(seats.size()):
 		if not seat_filter.is_empty() and not str(world.get_path_to(seats[index])).contains(seat_filter):
 			continue
@@ -304,6 +304,19 @@ func on_portal(station: String,_return_token: Dictionary) -> void:
 func vec(value: Vector3) -> Array[float]:
 	return [value.x,value.y,value.z]
 
+func bench_district(seat: StaticBody3D) -> String:
+	# Static seat bodies are permanent and flattened by the offline builder.
+	# Keep the original seven-area coverage assertion using their authored key
+	# or preserved source-path name, instead of assuming the old node hierarchy.
+	var visual_key: String = str(seat.get_meta("camera_visual_group", ""))
+	var path: String = str(world.get_path_to(seat))
+	if visual_key.contains("/SakuraGrove/") or path.contains("SakuraGrove"):
+		return "sakura"
+	for district: String in ["counseling", "admissions", "recommendations", "universities", "life", "wordking"]:
+		if visual_key.begins_with(district + "/") or str(seat.name).begins_with(district + "_") or path.begins_with("Neighborhood/" + district + "/"):
+			return district
+	return "unidentified"
+
 func finish() -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUTPUT.get_base_dir()))
 	var destination: String = OUTPUT.replace("checks.json","access-checks.json") if access_only else OUTPUT
@@ -317,5 +330,11 @@ func finish() -> void:
 		else:
 			notes = "Focused E sit/stand cycles for benches whose path contains '"+seat_filter+"', plus complete registry counts and both Sakura entrance/guard checks."
 	file.store_string(JSON.stringify({"passed":failures==0,"failures":failures,"checks":checks,"inventory":inventory,"access_only":access_only,"seat_filter":seat_filter,"notes":notes},"\t"))
+	file.close()
 	print("BENCH_INTERACTION_CHECKS checks=",checks.size()," failures=",failures," seats=",inventory.size())
+	if is_instance_valid(world):
+		world.free()
+	world = null
+	player = null
+	benches = null
 	quit(1 if failures>0 else 0)

@@ -1,0 +1,2758 @@
+{
+  "notes": [
+    "Single local run per build, not a statistical guarantee for other devices.",
+    "ready_ms is world_ready signal; excludes later first-render/input latency.",
+    "warm means same browser context revisited; PCK/WASM may transfer again (see Resource Timing).",
+    "Headless data measures initialization, retained memory and nodes, not GPU rendering/FPS.",
+    "Web release static-memory monitor returns zero/unavailable; JS heap is not total browser/WASM/GPU memory.",
+    "Process time is a whole-engine monitor, not isolated GDScript profiler time.",
+    "Old export exposed debug telemetry; new build is release. Compiler/debug differences are part of the artifact comparison.",
+    "Startup-only supplement records first rAF callback after world_ready, not physical GPU presentation or input-response latency."
+  ],
+  "browser": {
+    "before": {
+      "build_id": null,
+      "browser": "154.0.8037.57",
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "viewport": {
+        "width": 1200,
+        "height": 800
+      },
+      "started": "2026-09-30T23:49:30.407Z",
+      "finished": "2026-09-30T23:59:58.060Z",
+      "runs": [
+        {
+          "cache": "cold",
+          "ready_ms": 39867.90000000002,
+          "after_download_ms": 38058.40000000002,
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.js",
+              "start": 438.5,
+              "end": 472.5,
+              "duration": 34,
+              "transfer": 315945,
+              "encoded": 315645,
+              "decoded": 315645
+            },
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.wasm",
+              "start": 665,
+              "end": 1474.7999999999884,
+              "duration": 809.7999999999884,
+              "transfer": 37902438,
+              "encoded": 37902138,
+              "decoded": 37902138
+            },
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.pck",
+              "start": 665.4000000000233,
+              "end": 1809.5,
+              "duration": 1144.0999999999767,
+              "transfer": 176280132,
+              "encoded": 176279832,
+              "decoded": 176279832
+            }
+          ]
+        },
+        {
+          "cache": "warm",
+          "ready_ms": 43435.30000000005,
+          "after_download_ms": 35360.59999999998,
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.js",
+              "start": 5126.70000000007,
+              "end": 5126.70000000007,
+              "duration": 0,
+              "transfer": 0,
+              "encoded": 315645,
+              "decoded": 315645
+            },
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.wasm",
+              "start": 5294.599999999977,
+              "end": 5963.099999999977,
+              "duration": 668.5,
+              "transfer": 37902438,
+              "encoded": 37902138,
+              "decoded": 37902138
+            },
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.pck",
+              "start": 5295.20000000007,
+              "end": 8074.70000000007,
+              "duration": 2779.5,
+              "transfer": 176280132,
+              "encoded": 176279832,
+              "decoded": 176279832
+            }
+          ]
+        }
+      ],
+      "stages": {
+        "overview": {
+          "raf_ms": {
+            "median": 1113.6000000000058,
+            "p95": 1546.2999999999884,
+            "max": 1546.2999999999884
+          },
+          "fps_sample_median": 1.5,
+          "fps_sample_range": [
+            1,
+            3
+          ],
+          "draw_calls_last": null,
+          "process_ms_last": null,
+          "physics_ms_last": null,
+          "render_buffer_bytes_last": null,
+          "nodes_last": null,
+          "streaming_last": null,
+          "obstruction_last": null,
+          "js_heap": {
+            "used": 381291378,
+            "total": 383470326
+          }
+        },
+        "rotate_zoom": {
+          "raf_ms": {
+            "median": 197.59999999997672,
+            "p95": 814.2000000000116,
+            "max": 910.5
+          },
+          "fps_sample_median": 1,
+          "fps_sample_range": [
+            1,
+            6
+          ],
+          "draw_calls_last": null,
+          "process_ms_last": null,
+          "physics_ms_last": null,
+          "render_buffer_bytes_last": null,
+          "nodes_last": null,
+          "streaming_last": null,
+          "obstruction_last": null,
+          "js_heap": {
+            "used": 194032825,
+            "total": 197756745
+          }
+        },
+        "near": {
+          "raf_ms": {
+            "median": 166.5,
+            "p95": 696.0999999999767,
+            "max": 715.7999999999884
+          },
+          "fps_sample_median": 5,
+          "fps_sample_range": [
+            1,
+            7
+          ],
+          "draw_calls_last": null,
+          "process_ms_last": null,
+          "physics_ms_last": null,
+          "render_buffer_bytes_last": null,
+          "nodes_last": null,
+          "streaming_last": null,
+          "obstruction_last": null,
+          "js_heap": {
+            "used": 196480040,
+            "total": 199443236
+          }
+        },
+        "fast_turn": {
+          "raf_ms": {
+            "median": 182.5,
+            "p95": 632.4000000000233,
+            "max": 681.7999999999884
+          },
+          "fps_sample_median": 4,
+          "fps_sample_range": [
+            1,
+            7
+          ],
+          "draw_calls_last": null,
+          "process_ms_last": null,
+          "physics_ms_last": null,
+          "render_buffer_bytes_last": null,
+          "nodes_last": null,
+          "streaming_last": null,
+          "obstruction_last": null,
+          "js_heap": {
+            "used": 200093195,
+            "total": 203146567
+          }
+        },
+        "teleport": {
+          "raf_ms": {
+            "median": 620.6000000000349,
+            "p95": 697.7999999999884,
+            "max": 697.7999999999884
+          },
+          "fps_sample_median": 2,
+          "fps_sample_range": [
+            1,
+            2
+          ],
+          "draw_calls_last": null,
+          "process_ms_last": null,
+          "physics_ms_last": null,
+          "render_buffer_bytes_last": null,
+          "nodes_last": null,
+          "streaming_last": null,
+          "obstruction_last": null,
+          "js_heap": {
+            "used": 201266963,
+            "total": 203987047
+          }
+        },
+        "near_transition": null,
+        "teleport_transition": null
+      },
+      "errors": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ]
+    },
+    "after": {
+      "build_id": "streaming-3f7c73f0246b34c7",
+      "browser": "154.0.8037.58",
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "viewport": {
+        "width": 1200,
+        "height": 800
+      },
+      "started": "2026-10-01T03:37:42.869Z",
+      "finished": "2026-10-01T03:40:00.868Z",
+      "runs": [
+        {
+          "cache": "cold",
+          "ready_ms": 10405.299999998882,
+          "after_download_ms": 8962.099999999627,
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8947/_site/index.js",
+              "start": 26.299999998882413,
+              "end": 56.59999999962747,
+              "duration": 30.300000000745058,
+              "transfer": 280115,
+              "encoded": 279815,
+              "decoded": 279815
+            },
+            {
+              "name": "http://127.0.0.1:8947/_site/index.wasm",
+              "start": 437.7999999988824,
+              "end": 890.7999999988824,
+              "duration": 453,
+              "transfer": 39515054,
+              "encoded": 39514754,
+              "decoded": 39514754
+            },
+            {
+              "name": "http://127.0.0.1:8947/_site/index.pck",
+              "start": 438.19999999925494,
+              "end": 1443.199999999255,
+              "duration": 1005,
+              "transfer": 154560608,
+              "encoded": 154560308,
+              "decoded": 154560308
+            }
+          ]
+        },
+        {
+          "cache": "warm",
+          "ready_ms": 6811.799999998882,
+          "after_download_ms": 5928.5999999996275,
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8947/_site/index.js",
+              "start": 92.5,
+              "end": 99,
+              "duration": 6.5,
+              "transfer": 300,
+              "encoded": 0,
+              "decoded": 0
+            },
+            {
+              "name": "http://127.0.0.1:8947/_site/index.wasm",
+              "start": 119.09999999962747,
+              "end": 534,
+              "duration": 414.90000000037253,
+              "transfer": 39515054,
+              "encoded": 39514754,
+              "decoded": 39514754
+            },
+            {
+              "name": "http://127.0.0.1:8947/_site/index.pck",
+              "start": 119.19999999925494,
+              "end": 883.1999999992549,
+              "duration": 764,
+              "transfer": 154560608,
+              "encoded": 154560308,
+              "decoded": 154560308
+            }
+          ]
+        }
+      ],
+      "stages": {
+        "overview": {
+          "raf_ms": {
+            "median": 49.69999999999709,
+            "p95": 66.5,
+            "max": 100.09999999999854
+          },
+          "fps_sample_median": 27,
+          "fps_sample_range": [
+            6,
+            29
+          ],
+          "draw_calls_last": 511,
+          "process_ms_last": 57.2,
+          "physics_ms_last": 0.8,
+          "render_buffer_bytes_last": 137017950,
+          "nodes_last": 1245,
+          "streaming_last": {
+            "active_regions": 0,
+            "detail_nodes": 0,
+            "last_operation_ms": 0,
+            "loaded_chunks": 0,
+            "max_operation_ms": 0,
+            "operations": 0,
+            "pending_regions": 0,
+            "ready_districts": 0,
+            "ready_regions": 0,
+            "saved_animation_groups": 0
+          },
+          "obstruction_last": {
+            "active": false,
+            "bounds_rebuilds": 0,
+            "cached_groups": 0,
+            "cached_trees": 0,
+            "candidates": 0,
+            "decision_usec": 0,
+            "decisions": 0,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "js_heap": {
+            "used": 174134255,
+            "total": 178020471
+          }
+        },
+        "rotate_zoom": {
+          "raf_ms": {
+            "median": 49.900000000001455,
+            "p95": 66.59999999999854,
+            "max": 83
+          },
+          "fps_sample_median": 17.5,
+          "fps_sample_range": [
+            16,
+            18
+          ],
+          "draw_calls_last": 511,
+          "process_ms_last": 60.7,
+          "physics_ms_last": 0.2,
+          "render_buffer_bytes_last": 137017950,
+          "nodes_last": 1246,
+          "streaming_last": {
+            "active_regions": 0,
+            "detail_nodes": 0,
+            "last_operation_ms": 0,
+            "loaded_chunks": 0,
+            "max_operation_ms": 0,
+            "operations": 0,
+            "pending_regions": 0,
+            "ready_districts": 0,
+            "ready_regions": 0,
+            "saved_animation_groups": 0
+          },
+          "obstruction_last": {
+            "active": false,
+            "bounds_rebuilds": 0,
+            "cached_groups": 0,
+            "cached_trees": 0,
+            "candidates": 0,
+            "decision_usec": 0,
+            "decisions": 0,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "js_heap": {
+            "used": 183792015,
+            "total": 190013163
+          }
+        },
+        "near": {
+          "raf_ms": {
+            "median": 49.900000000001455,
+            "p95": 66.5,
+            "max": 66.60000000000582
+          },
+          "fps_sample_median": 18,
+          "fps_sample_range": [
+            12,
+            19
+          ],
+          "draw_calls_last": 384,
+          "process_ms_last": 59.3,
+          "physics_ms_last": 0.8,
+          "render_buffer_bytes_last": 155654132,
+          "nodes_last": 1623,
+          "streaming_last": {
+            "active_regions": 3,
+            "detail_nodes": 353,
+            "last_operation_ms": 0.4,
+            "loaded_chunks": 23,
+            "max_operation_ms": 15.8,
+            "operations": 46,
+            "pending_regions": 0,
+            "ready_districts": 1,
+            "ready_regions": 14,
+            "saved_animation_groups": 0
+          },
+          "obstruction_last": {
+            "active": true,
+            "bounds_rebuilds": 111,
+            "cached_groups": 80,
+            "cached_trees": 11,
+            "candidates": 0,
+            "decision_usec": 300,
+            "decisions": 140,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "js_heap": {
+            "used": 191468800,
+            "total": 202012068
+          }
+        },
+        "fast_turn": {
+          "raf_ms": {
+            "median": 49.90000000000873,
+            "p95": 66.5,
+            "max": 66.69999999999709
+          },
+          "fps_sample_median": 18.0,
+          "fps_sample_range": [
+            16,
+            18
+          ],
+          "draw_calls_last": 403,
+          "process_ms_last": 65.8,
+          "physics_ms_last": 0.6,
+          "render_buffer_bytes_last": 155654132,
+          "nodes_last": 1623,
+          "streaming_last": {
+            "active_regions": 3,
+            "detail_nodes": 353,
+            "last_operation_ms": 0.4,
+            "loaded_chunks": 23,
+            "max_operation_ms": 15.8,
+            "operations": 46,
+            "pending_regions": 0,
+            "ready_districts": 1,
+            "ready_regions": 14,
+            "saved_animation_groups": 0
+          },
+          "obstruction_last": {
+            "active": true,
+            "bounds_rebuilds": 111,
+            "cached_groups": 80,
+            "cached_trees": 11,
+            "candidates": 0,
+            "decision_usec": 300,
+            "decisions": 241,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "js_heap": {
+            "used": 204577552,
+            "total": 215024720
+          }
+        },
+        "teleport": {
+          "raf_ms": {
+            "median": 49.89999999999418,
+            "p95": 66.59999999999127,
+            "max": 99.80000000000291
+          },
+          "fps_sample_median": 18.0,
+          "fps_sample_range": [
+            17,
+            19
+          ],
+          "draw_calls_last": 384,
+          "process_ms_last": 56,
+          "physics_ms_last": 1.3,
+          "render_buffer_bytes_last": 155882316,
+          "nodes_last": 1646,
+          "streaming_last": {
+            "active_regions": 3,
+            "detail_nodes": 370,
+            "last_operation_ms": 0.6,
+            "loaded_chunks": 29,
+            "max_operation_ms": 15.8,
+            "operations": 58,
+            "pending_regions": 0,
+            "ready_districts": 1,
+            "ready_regions": 20,
+            "saved_animation_groups": 0
+          },
+          "obstruction_last": {
+            "active": true,
+            "bounds_rebuilds": 111,
+            "cached_groups": 80,
+            "cached_trees": 11,
+            "candidates": 0,
+            "decision_usec": 1200,
+            "decisions": 387,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "js_heap": {
+            "used": 185609512,
+            "total": 208691440
+          }
+        },
+        "near_transition": {
+          "raf_ms": {
+            "median": 49.900000000001455,
+            "p95": 99.79999999999563,
+            "max": 349.09999999999854
+          },
+          "fps_sample_median": 18.0,
+          "fps_sample_range": [
+            8,
+            26
+          ],
+          "draw_calls_last": 384,
+          "process_ms_last": 57.1,
+          "physics_ms_last": 0.6,
+          "render_buffer_bytes_last": 155654132,
+          "nodes_last": 1623,
+          "streaming_last": {
+            "active_regions": 3,
+            "detail_nodes": 353,
+            "last_operation_ms": 0.4,
+            "loaded_chunks": 23,
+            "max_operation_ms": 15.8,
+            "operations": 46,
+            "pending_regions": 0,
+            "ready_districts": 1,
+            "ready_regions": 14,
+            "saved_animation_groups": 0
+          },
+          "obstruction_last": {
+            "active": true,
+            "bounds_rebuilds": 111,
+            "cached_groups": 80,
+            "cached_trees": 11,
+            "candidates": 0,
+            "decision_usec": 300,
+            "decisions": 69,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "js_heap": {
+            "used": 181882608,
+            "total": 193947692
+          }
+        },
+        "teleport_transition": {
+          "raf_ms": {
+            "median": 66.39999999999418,
+            "p95": 99.69999999999709,
+            "max": 199.40000000000873
+          },
+          "fps_sample_median": 16.0,
+          "fps_sample_range": [
+            12,
+            18
+          ],
+          "draw_calls_last": 384,
+          "process_ms_last": 58.9,
+          "physics_ms_last": 0.5,
+          "render_buffer_bytes_last": 155882316,
+          "nodes_last": 1646,
+          "streaming_last": {
+            "active_regions": 3,
+            "detail_nodes": 370,
+            "last_operation_ms": 0.6,
+            "loaded_chunks": 29,
+            "max_operation_ms": 15.8,
+            "operations": 58,
+            "pending_regions": 0,
+            "ready_districts": 1,
+            "ready_regions": 20,
+            "saved_animation_groups": 0
+          },
+          "obstruction_last": {
+            "active": true,
+            "bounds_rebuilds": 111,
+            "cached_groups": 80,
+            "cached_trees": 11,
+            "candidates": 0,
+            "decision_usec": 300,
+            "decisions": 314,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "js_heap": {
+            "used": 180782032,
+            "total": 208679540
+          }
+        }
+      },
+      "errors": []
+    }
+  },
+  "native": {
+    "before": {
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "headless": true,
+      "load_ms": 2767,
+      "instantiate_ms": 1338,
+      "ready_ms": 6422,
+      "failures": 0,
+      "samples": [
+        {
+          "draw_calls": 0.0,
+          "fps": 2.0,
+          "frame_ms_max": 168.331,
+          "frame_ms_median": 54.626,
+          "frame_ms_p95": 168.331,
+          "memory_bytes": 357953549.0,
+          "nodes": 2610.0,
+          "physics_ms": 10663.315,
+          "primitives": 0.0,
+          "process_ms": 29.711,
+          "resources": 2851.0,
+          "stage": "overview"
+        },
+        {
+          "draw_calls": 0.0,
+          "fps": 25.0,
+          "frame_ms_max": 74.552,
+          "frame_ms_median": 62.119,
+          "frame_ms_p95": 74.552,
+          "memory_bytes": 358022605.0,
+          "nodes": 2611.0,
+          "physics_ms": 40.677,
+          "primitives": 0.0,
+          "process_ms": 68.92,
+          "resources": 2851.0,
+          "stage": "near"
+        },
+        {
+          "draw_calls": 0.0,
+          "fps": 60.0,
+          "frame_ms_max": 27.999,
+          "frame_ms_median": 16.457,
+          "frame_ms_p95": 27.999,
+          "memory_bytes": 360839927.0,
+          "nodes": 2614.0,
+          "physics_ms": 1.908,
+          "primitives": 0.0,
+          "process_ms": 38.754,
+          "resources": 2861.0,
+          "stage": "repeat_unloaded_0"
+        },
+        {
+          "draw_calls": 0.0,
+          "fps": 51.0,
+          "frame_ms_max": 36.644,
+          "frame_ms_median": 13.851,
+          "frame_ms_p95": 36.644,
+          "memory_bytes": 360842719.0,
+          "nodes": 2614.0,
+          "physics_ms": 19.19,
+          "primitives": 0.0,
+          "process_ms": 49.474,
+          "resources": 2861.0,
+          "stage": "repeat_unloaded_1"
+        },
+        {
+          "draw_calls": 0.0,
+          "fps": 60.0,
+          "frame_ms_max": 26.552,
+          "frame_ms_median": 16.675,
+          "frame_ms_p95": 26.552,
+          "memory_bytes": 360845487.0,
+          "nodes": 2614.0,
+          "physics_ms": 1.613,
+          "primitives": 0.0,
+          "process_ms": 29.351,
+          "resources": 2861.0,
+          "stage": "repeat_unloaded_2"
+        }
+      ],
+      "checks": [
+        {
+          "passed": true,
+          "test": "ground_counseling"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_counseling"
+        },
+        {
+          "passed": true,
+          "test": "interaction_counseling"
+        },
+        {
+          "passed": true,
+          "test": "ground_admissions"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_admissions"
+        },
+        {
+          "passed": true,
+          "test": "interaction_admissions"
+        },
+        {
+          "passed": true,
+          "test": "ground_recommendations"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_recommendations"
+        },
+        {
+          "passed": true,
+          "test": "interaction_recommendations"
+        },
+        {
+          "passed": true,
+          "test": "ground_universities"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_universities"
+        },
+        {
+          "passed": true,
+          "test": "interaction_universities"
+        },
+        {
+          "passed": true,
+          "test": "ground_life"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_life"
+        },
+        {
+          "passed": true,
+          "test": "interaction_life"
+        },
+        {
+          "passed": true,
+          "test": "ground_wordking"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_wordking"
+        },
+        {
+          "passed": true,
+          "test": "indoor_enter"
+        },
+        {
+          "passed": true,
+          "test": "indoor_return_same_world"
+        }
+      ]
+    },
+    "after": {
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "headless": true,
+      "load_ms": 713,
+      "instantiate_ms": 272,
+      "ready_ms": 1455,
+      "failures": 0,
+      "samples": [
+        {
+          "draw_calls": 0.0,
+          "fps": 2.0,
+          "frame_ms_max": 26.469,
+          "frame_ms_median": 16.66,
+          "frame_ms_p95": 26.469,
+          "memory_bytes": 330140530.0,
+          "nodes": 1246.0,
+          "obstruction": {
+            "active": false,
+            "bounds_rebuilds": 0,
+            "cached_groups": 0,
+            "cached_trees": 0,
+            "candidates": 0,
+            "decision_usec": 0,
+            "decisions": 0,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "physics_ms": 2466.516,
+          "primitives": 0.0,
+          "process_ms": 3.776,
+          "resources": 930.0,
+          "stage": "overview",
+          "streaming": {
+            "active_regions": 0,
+            "detail_nodes": 0,
+            "last_operation_ms": 0.0,
+            "loaded_chunks": 0,
+            "max_operation_ms": 0.0,
+            "operations": 0,
+            "pending_regions": 0,
+            "ready_districts": 0,
+            "ready_regions": 0,
+            "saved_animation_groups": 0
+          }
+        },
+        {
+          "draw_calls": 0.0,
+          "fps": 25.0,
+          "frame_ms_max": 17.703,
+          "frame_ms_median": 16.658,
+          "frame_ms_p95": 17.703,
+          "memory_bytes": 353625899.0,
+          "nodes": 1612.0,
+          "obstruction": {
+            "active": true,
+            "bounds_rebuilds": 111,
+            "cached_groups": 80,
+            "cached_trees": 11,
+            "candidates": 0,
+            "decision_usec": 159,
+            "decisions": 20,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "physics_ms": 0.204,
+          "primitives": 0.0,
+          "process_ms": 7.923,
+          "resources": 937.0,
+          "stage": "near",
+          "streaming": {
+            "active_regions": 3,
+            "detail_nodes": 345,
+            "last_operation_ms": 0.151,
+            "loaded_chunks": 20,
+            "max_operation_ms": 13.654,
+            "operations": 40,
+            "pending_regions": 3,
+            "ready_districts": 1,
+            "ready_regions": 11,
+            "saved_animation_groups": 0
+          }
+        },
+        {
+          "draw_calls": 0.0,
+          "fps": 60.0,
+          "frame_ms_max": 17.48,
+          "frame_ms_median": 16.668,
+          "frame_ms_p95": 17.48,
+          "memory_bytes": 335506218.0,
+          "nodes": 1250.0,
+          "obstruction": {
+            "active": false,
+            "bounds_rebuilds": 580,
+            "cached_groups": 24,
+            "cached_trees": 0,
+            "candidates": 2,
+            "decision_usec": 516,
+            "decisions": 281,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "physics_ms": 0.576,
+          "primitives": 0.0,
+          "process_ms": 9.202,
+          "resources": 944.0,
+          "stage": "repeat_unloaded_0",
+          "streaming": {
+            "active_regions": 0,
+            "detail_nodes": 0,
+            "last_operation_ms": 0.127,
+            "loaded_chunks": 0,
+            "max_operation_ms": 13.654,
+            "operations": 351,
+            "pending_regions": 0,
+            "ready_districts": 0,
+            "ready_regions": 0,
+            "saved_animation_groups": 54
+          }
+        },
+        {
+          "draw_calls": 0.0,
+          "fps": 60.0,
+          "frame_ms_max": 16.71,
+          "frame_ms_median": 16.667,
+          "frame_ms_p95": 16.71,
+          "memory_bytes": 335513334.0,
+          "nodes": 1250.0,
+          "obstruction": {
+            "active": false,
+            "bounds_rebuilds": 667,
+            "cached_groups": 24,
+            "cached_trees": 0,
+            "candidates": 2,
+            "decision_usec": 156,
+            "decisions": 301,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "physics_ms": 0.113,
+          "primitives": 0.0,
+          "process_ms": 8.377,
+          "resources": 944.0,
+          "stage": "repeat_unloaded_1",
+          "streaming": {
+            "active_regions": 0,
+            "detail_nodes": 0,
+            "last_operation_ms": 0.265,
+            "loaded_chunks": 0,
+            "max_operation_ms": 13.654,
+            "operations": 411,
+            "pending_regions": 0,
+            "ready_districts": 0,
+            "ready_regions": 0,
+            "saved_animation_groups": 54
+          }
+        },
+        {
+          "draw_calls": 0.0,
+          "fps": 60.0,
+          "frame_ms_max": 16.717,
+          "frame_ms_median": 16.668,
+          "frame_ms_p95": 16.717,
+          "memory_bytes": 335520406.0,
+          "nodes": 1250.0,
+          "obstruction": {
+            "active": false,
+            "bounds_rebuilds": 754,
+            "cached_groups": 24,
+            "cached_trees": 0,
+            "candidates": 2,
+            "decision_usec": 246,
+            "decisions": 322,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "physics_ms": 0.415,
+          "primitives": 0.0,
+          "process_ms": 6.888,
+          "resources": 944.0,
+          "stage": "repeat_unloaded_2",
+          "streaming": {
+            "active_regions": 0,
+            "detail_nodes": 0,
+            "last_operation_ms": 0.176,
+            "loaded_chunks": 0,
+            "max_operation_ms": 13.654,
+            "operations": 473,
+            "pending_regions": 0,
+            "ready_districts": 0,
+            "ready_regions": 0,
+            "saved_animation_groups": 54
+          }
+        }
+      ],
+      "checks": [
+        {
+          "passed": true,
+          "test": "ground_counseling"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_counseling"
+        },
+        {
+          "passed": true,
+          "test": "interaction_counseling"
+        },
+        {
+          "passed": true,
+          "test": "ground_admissions"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_admissions"
+        },
+        {
+          "passed": true,
+          "test": "interaction_admissions"
+        },
+        {
+          "passed": true,
+          "test": "ground_recommendations"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_recommendations"
+        },
+        {
+          "passed": true,
+          "test": "interaction_recommendations"
+        },
+        {
+          "passed": true,
+          "test": "ground_universities"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_universities"
+        },
+        {
+          "passed": true,
+          "test": "interaction_universities"
+        },
+        {
+          "passed": true,
+          "test": "ground_life"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_life"
+        },
+        {
+          "passed": true,
+          "test": "interaction_life"
+        },
+        {
+          "passed": true,
+          "test": "ground_wordking"
+        },
+        {
+          "passed": true,
+          "test": "player_radius_wordking"
+        },
+        {
+          "passed": true,
+          "test": "indoor_enter"
+        },
+        {
+          "passed": true,
+          "test": "indoor_return_same_world"
+        }
+      ]
+    }
+  },
+  "startup_supplement": {
+    "before": {
+      "browser": "154.0.8037.58",
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "viewport": {
+        "width": 1200,
+        "height": 800
+      },
+      "build_id": null,
+      "started": "2026-10-01T03:54:36.419Z",
+      "finished": "2026-10-01T03:56:25.278Z",
+      "runs": [
+        {
+          "cache": "cold",
+          "ready_ms": 7028,
+          "first_responsive_frame_ms": 48938.5,
+          "after_download_ms": 6035.89999999851,
+          "after_download_responsive_frame_ms": 47946.39999999851,
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.js",
+              "start": 72.80000000074506,
+              "end": 90,
+              "duration": 17.199999999254942,
+              "transfer": 315945,
+              "encoded": 315645,
+              "decoded": 315645
+            },
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.wasm",
+              "start": 130.30000000074506,
+              "end": 508.90000000037253,
+              "duration": 378.59999999962747,
+              "transfer": 37902438,
+              "encoded": 37902138,
+              "decoded": 37902138
+            },
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.pck",
+              "start": 130.5,
+              "end": 992.1000000014901,
+              "duration": 861.6000000014901,
+              "transfer": 176280132,
+              "encoded": 176279832,
+              "decoded": 176279832
+            }
+          ]
+        },
+        {
+          "cache": "warm",
+          "ready_ms": 8160.200000001118,
+          "first_responsive_frame_ms": 55237.70000000112,
+          "after_download_ms": 7125.5,
+          "after_download_responsive_frame_ms": 54203,
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.js",
+              "start": 81.20000000111759,
+              "end": 81.20000000111759,
+              "duration": 0,
+              "transfer": 0,
+              "encoded": 315645,
+              "decoded": 315645
+            },
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.wasm",
+              "start": 108.40000000037253,
+              "end": 481.80000000074506,
+              "duration": 373.40000000037253,
+              "transfer": 37902438,
+              "encoded": 37902138,
+              "decoded": 37902138
+            },
+            {
+              "name": "http://127.0.0.1:8947/build/performance-before/index.pck",
+              "start": 108.70000000111759,
+              "end": 1034.7000000011176,
+              "duration": 926,
+              "transfer": 176280132,
+              "encoded": 176279832,
+              "decoded": 176279832
+            }
+          ]
+        }
+      ],
+      "errors": []
+    },
+    "after": {
+      "browser": "154.0.8037.58",
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "viewport": {
+        "width": 1200,
+        "height": 800
+      },
+      "build_id": "streaming-3f7c73f0246b34c7",
+      "started": "2026-10-01T03:56:57.686Z",
+      "finished": "2026-10-01T03:57:41.381Z",
+      "runs": [
+        {
+          "cache": "cold",
+          "ready_ms": 6580.60000000149,
+          "first_responsive_frame_ms": 35730.40000000037,
+          "after_download_ms": 5615.4000000003725,
+          "after_download_responsive_frame_ms": 34765.199999999255,
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8947/_site/index.js",
+              "start": 15.300000000745058,
+              "end": 34.100000001490116,
+              "duration": 18.800000000745058,
+              "transfer": 280115,
+              "encoded": 279815,
+              "decoded": 279815
+            },
+            {
+              "name": "http://127.0.0.1:8947/_site/index.wasm",
+              "start": 108.20000000111759,
+              "end": 474.80000000074506,
+              "duration": 366.59999999962747,
+              "transfer": 39515054,
+              "encoded": 39514754,
+              "decoded": 39514754
+            },
+            {
+              "name": "http://127.0.0.1:8947/_site/index.pck",
+              "start": 108.80000000074506,
+              "end": 965.2000000011176,
+              "duration": 856.4000000003725,
+              "transfer": 154560608,
+              "encoded": 154560308,
+              "decoded": 154560308
+            }
+          ]
+        },
+        {
+          "cache": "warm",
+          "ready_ms": 4638.700000001118,
+          "first_responsive_frame_ms": 5967.5,
+          "after_download_ms": 3475.5,
+          "after_download_responsive_frame_ms": 4804.299999998882,
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8947/_site/index.js",
+              "start": 130.5,
+              "end": 130.5,
+              "duration": 0,
+              "transfer": 0,
+              "encoded": 279815,
+              "decoded": 279815
+            },
+            {
+              "name": "http://127.0.0.1:8947/_site/index.wasm",
+              "start": 174.2000000011176,
+              "end": 595.7000000011176,
+              "duration": 421.5,
+              "transfer": 39515054,
+              "encoded": 39514754,
+              "decoded": 39514754
+            },
+            {
+              "name": "http://127.0.0.1:8947/_site/index.pck",
+              "start": 174.40000000037253,
+              "end": 1163.2000000011176,
+              "duration": 988.8000000007451,
+              "transfer": 154560608,
+              "encoded": 154560308,
+              "decoded": 154560308
+            }
+          ]
+        }
+      ],
+      "errors": []
+    }
+  },
+  "functional": {
+    "browser": "154.0.8037.58",
+    "started": "2026-10-01T03:49:04.952Z",
+    "finished": "2026-10-01T03:54:09.170Z",
+    "checks": [
+      {
+        "name": "Current release identity (initial navigation)",
+        "passed": true,
+        "evidence": {
+          "meta_build_id": "streaming-3f7c73f0246b34c7",
+          "served_build_id": "streaming-3f7c73f0246b34c7",
+          "manifest_files_match": true
+        },
+        "at": "2026-10-01T03:49:06.079Z"
+      },
+      {
+        "name": "RestoreGraphicsDefaults",
+        "passed": true,
+        "evidence": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "at": "2026-10-01T03:49:41.661Z"
+      },
+      {
+        "name": "MSAAToggle",
+        "passed": true,
+        "evidence": {
+          "applied_max_fps": 60,
+          "applied_msaa": 0,
+          "frame_limit": 60,
+          "msaa_enabled": false,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "at": "2026-10-01T03:49:43.009Z"
+      },
+      {
+        "name": "MSAAToggle",
+        "passed": true,
+        "evidence": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "at": "2026-10-01T03:49:45.025Z"
+      },
+      {
+        "name": "FPS30",
+        "passed": true,
+        "evidence": {
+          "applied_max_fps": 30,
+          "applied_msaa": 1,
+          "frame_limit": 30,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "at": "2026-10-01T03:49:46.387Z"
+      },
+      {
+        "name": "FPS60",
+        "passed": true,
+        "evidence": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "at": "2026-10-01T03:49:47.707Z"
+      },
+      {
+        "name": "FPS90",
+        "passed": true,
+        "evidence": {
+          "applied_max_fps": 90,
+          "applied_msaa": 1,
+          "frame_limit": 90,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "at": "2026-10-01T03:49:49.097Z"
+      },
+      {
+        "name": "MSAAToggle",
+        "passed": true,
+        "evidence": {
+          "applied_max_fps": 90,
+          "applied_msaa": 0,
+          "frame_limit": 90,
+          "msaa_enabled": false,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "at": "2026-10-01T03:49:51.196Z"
+      },
+      {
+        "name": "Current release identity (persistence reload)",
+        "passed": true,
+        "evidence": {
+          "meta_build_id": "streaming-3f7c73f0246b34c7",
+          "served_build_id": "streaming-3f7c73f0246b34c7",
+          "manifest_files_match": true
+        },
+        "at": "2026-10-01T03:49:55.990Z"
+      },
+      {
+        "name": "Web reload persists 90 FPS / MSAA off",
+        "passed": true,
+        "evidence": {
+          "applied_max_fps": 90,
+          "applied_msaa": 0,
+          "frame_limit": 90,
+          "msaa_enabled": false,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "at": "2026-10-01T03:50:37.227Z"
+      },
+      {
+        "name": "RestoreGraphicsDefaults",
+        "passed": true,
+        "evidence": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "at": "2026-10-01T03:50:39.432Z"
+      },
+      {
+        "name": "390 px viewport exposes settings toggle and fixed close action",
+        "passed": true,
+        "evidence": [
+          {
+            "center": [
+              0.745138883590698,
+              0.0666666701436043
+            ],
+            "name": "MusicMute",
+            "text": "音樂：開",
+            "visible": true
+          },
+          {
+            "center": [
+              0.115972220897675,
+              0.476111114025116
+            ],
+            "name": "@Button@19",
+            "text": "開始漫遊    ↗",
+            "visible": true
+          },
+          {
+            "center": [
+              0.115972220897675,
+              0.543888866901398
+            ],
+            "name": "@Button@20",
+            "text": "選擇目的地    +",
+            "visible": true
+          },
+          {
+            "center": [
+              0.115972220897675,
+              0.611666679382324
+            ],
+            "name": "GraphicsSettingsButton",
+            "text": "畫面設定",
+            "visible": true
+          },
+          {
+            "center": [
+              0.5,
+              0.298333346843719
+            ],
+            "name": "MSAAToggle",
+            "text": "MSAA：開啟（2×）",
+            "visible": true
+          },
+          {
+            "center": [
+              0.40069442987442,
+              0.444999992847443
+            ],
+            "name": "FPS30",
+            "text": "30",
+            "visible": true
+          },
+          {
+            "center": [
+              0.499652773141861,
+              0.444999992847443
+            ],
+            "name": "FPS60",
+            "text": "60",
+            "visible": true
+          },
+          {
+            "center": [
+              0.598958313465118,
+              0.444999992847443
+            ],
+            "name": "FPS90",
+            "text": "90",
+            "visible": true
+          },
+          {
+            "center": [
+              0.5,
+              0.612222194671631
+            ],
+            "name": "RestoreGraphicsDefaults",
+            "text": "恢復預設：MSAA 開／60 FPS",
+            "visible": true
+          },
+          {
+            "center": [
+              0.5,
+              0.795000016689301
+            ],
+            "name": "CloseGraphicsSettings",
+            "text": "完成",
+            "visible": true
+          }
+        ],
+        "at": "2026-10-01T03:50:44.784Z"
+      },
+      {
+        "name": "Teleport and load counseling",
+        "passed": true,
+        "evidence": {
+          "player": {
+            "entering": false,
+            "overview": false,
+            "paused": false,
+            "position": [
+              5.98650407791138,
+              47.892032623291,
+              -0.0801389515399933
+            ]
+          },
+          "streaming": {
+            "active_regions": 3,
+            "detail_nodes": 367,
+            "last_operation_ms": 0.8,
+            "loaded_chunks": 28,
+            "max_operation_ms": 24.6,
+            "operations": 56,
+            "pending_regions": 0,
+            "ready_districts": 1,
+            "ready_regions": 19,
+            "saved_animation_groups": 0
+          }
+        },
+        "at": "2026-10-01T03:50:57.836Z"
+      },
+      {
+        "name": "counseling interaction opens",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": true,
+          "position": [
+            5.98472023010254,
+            47.8777618408203,
+            -2.59337878227234
+          ]
+        },
+        "at": "2026-10-01T03:51:05.708Z"
+      },
+      {
+        "name": "counseling interaction returns to outdoor world",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": false,
+          "position": [
+            5.98650407791138,
+            47.892032623291,
+            -0.0801389515399933
+          ]
+        },
+        "at": "2026-10-01T03:51:06.677Z"
+      },
+      {
+        "name": "Teleport and load admissions",
+        "passed": true,
+        "evidence": {
+          "player": {
+            "entering": false,
+            "overview": false,
+            "paused": false,
+            "position": [
+              47.4285087585449,
+              8.89284610748291,
+              -1.03986370563507
+            ]
+          },
+          "streaming": {
+            "active_regions": 8,
+            "detail_nodes": 641,
+            "last_operation_ms": 0.8,
+            "loaded_chunks": 35,
+            "max_operation_ms": 24.6,
+            "operations": 70,
+            "pending_regions": 0,
+            "ready_districts": 2,
+            "ready_regions": 20,
+            "saved_animation_groups": 0
+          }
+        },
+        "at": "2026-10-01T03:51:12.133Z"
+      },
+      {
+        "name": "admissions interaction opens",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": true,
+          "position": [
+            47.3638725280762,
+            8.8807258605957,
+            -3.55228996276855
+          ]
+        },
+        "at": "2026-10-01T03:51:16.679Z"
+      },
+      {
+        "name": "admissions interaction returns to outdoor world",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": false,
+          "position": [
+            47.4285087585449,
+            8.89284610748291,
+            -1.03986370563507
+          ]
+        },
+        "at": "2026-10-01T03:51:17.649Z"
+      },
+      {
+        "name": "Teleport and load recommendations",
+        "passed": true,
+        "evidence": {
+          "player": {
+            "entering": false,
+            "overview": false,
+            "paused": false,
+            "position": [
+              8.36388492584229,
+              -3.2538275718689,
+              -47.8327102661133
+            ]
+          },
+          "streaming": {
+            "active_regions": 13,
+            "detail_nodes": 634,
+            "last_operation_ms": 0.5,
+            "loaded_chunks": 31,
+            "max_operation_ms": 24.6,
+            "operations": 110,
+            "pending_regions": 0,
+            "ready_districts": 2,
+            "ready_regions": 16,
+            "saved_animation_groups": 12
+          }
+        },
+        "at": "2026-10-01T03:51:25.188Z"
+      },
+      {
+        "name": "recommendations interaction opens",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": true,
+          "position": [
+            5.98659563064575,
+            -2.29486131668091,
+            -47.892765045166
+          ]
+        },
+        "at": "2026-10-01T03:51:28.763Z"
+      },
+      {
+        "name": "recommendations interaction returns to outdoor world",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": false,
+          "position": [
+            8.3638858795166,
+            -3.25382804870605,
+            -47.8327140808105
+          ]
+        },
+        "at": "2026-10-01T03:51:30.403Z"
+      },
+      {
+        "name": "Teleport and load universities",
+        "passed": true,
+        "evidence": {
+          "player": {
+            "entering": false,
+            "overview": false,
+            "paused": false,
+            "position": [
+              -47.597095489502,
+              7.93284845352173,
+              -1.1018477678299
+            ]
+          },
+          "streaming": {
+            "active_regions": 1,
+            "detail_nodes": 281,
+            "last_operation_ms": 0.6,
+            "loaded_chunks": 24,
+            "max_operation_ms": 24.6,
+            "operations": 189,
+            "pending_regions": 0,
+            "ready_districts": 1,
+            "ready_regions": 18,
+            "saved_animation_groups": 29
+          }
+        },
+        "at": "2026-10-01T03:51:38.489Z"
+      },
+      {
+        "name": "universities interaction opens",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": true,
+          "position": [
+            -47.5290451049805,
+            7.92150735855103,
+            -3.61418795585632
+          ]
+        },
+        "at": "2026-10-01T03:51:46.688Z"
+      },
+      {
+        "name": "universities interaction returns to outdoor world",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": false,
+          "position": [
+            -47.5970993041992,
+            7.93284893035889,
+            -1.10184788703918
+          ]
+        },
+        "at": "2026-10-01T03:51:47.667Z"
+      },
+      {
+        "name": "Teleport and load life",
+        "passed": true,
+        "evidence": {
+          "player": {
+            "entering": false,
+            "overview": false,
+            "paused": false,
+            "position": [
+              -3.95130586624146,
+              -0.765235602855682,
+              47.9847183227539
+            ]
+          },
+          "streaming": {
+            "active_regions": 1,
+            "detail_nodes": 551,
+            "last_operation_ms": 0.3,
+            "loaded_chunks": 36,
+            "max_operation_ms": 27.6,
+            "operations": 213,
+            "pending_regions": 0,
+            "ready_districts": 2,
+            "ready_regions": 25,
+            "saved_animation_groups": 29
+          }
+        },
+        "at": "2026-10-01T03:51:56.000Z"
+      },
+      {
+        "name": "Walk around nearby seating to life portal",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": false,
+          "position": [
+            -5.30455923080444,
+            -2.10979819297791,
+            47.9663887023926
+          ]
+        },
+        "at": "2026-10-01T03:52:01.418Z"
+      },
+      {
+        "name": "life interaction opens",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": true,
+          "position": [
+            -5.99119520187378,
+            -1.29809236526489,
+            47.9295616149902
+          ]
+        },
+        "at": "2026-10-01T03:52:09.758Z"
+      },
+      {
+        "name": "life interaction returns to outdoor world",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": false,
+          "position": [
+            -5.30455923080444,
+            -2.10979819297791,
+            47.9663887023926
+          ]
+        },
+        "at": "2026-10-01T03:52:10.781Z"
+      },
+      {
+        "name": "Teleport and load wordking",
+        "passed": true,
+        "evidence": {
+          "player": {
+            "entering": false,
+            "overview": false,
+            "paused": false,
+            "position": [
+              5.98520565032959,
+              -47.8816452026367,
+              -1.07371842861176
+            ]
+          },
+          "streaming": {
+            "active_regions": 11,
+            "detail_nodes": 548,
+            "last_operation_ms": 0.3,
+            "loaded_chunks": 36,
+            "max_operation_ms": 27.6,
+            "operations": 267,
+            "pending_regions": 0,
+            "ready_districts": 2,
+            "ready_regions": 26,
+            "saved_animation_groups": 37
+          }
+        },
+        "at": "2026-10-01T03:52:15.694Z"
+      },
+      {
+        "name": "Training room entry with E",
+        "passed": true,
+        "evidence": {
+          "device_count": 1,
+          "display_sockets": 6,
+          "fps": 20,
+          "near_exit": false,
+          "player": [
+            0,
+            0.0175878871232271,
+            6.19999980926514
+          ],
+          "ready": true
+        },
+        "at": "2026-10-01T03:52:35.052Z"
+      },
+      {
+        "name": "Training room return with real movement and E",
+        "passed": true,
+        "evidence": {
+          "entering": false,
+          "overview": false,
+          "paused": false,
+          "position": [
+            5.98520565032959,
+            -47.8816452026367,
+            -1.07371842861176
+          ]
+        },
+        "at": "2026-10-01T03:52:37.556Z"
+      },
+      {
+        "name": "Fast camera turns retain a live near scene and obstruction telemetry",
+        "passed": true,
+        "evidence": {
+          "active": true,
+          "bounds_rebuilds": 531,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 2,
+          "decision_usec": 400,
+          "decisions": 737,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "at": "2026-10-01T03:52:56.738Z"
+      },
+      {
+        "name": "Real walking changes player position without falling below terrain",
+        "passed": true,
+        "evidence": {
+          "distance": 5.700252222443024,
+          "start": [
+            5.98667860031128,
+            47.8934288024902,
+            -0.0801412910223007
+          ],
+          "end": [
+            5.93001317977905,
+            47.4348602294922,
+            5.60135316848755
+          ]
+        },
+        "at": "2026-10-01T03:53:15.815Z"
+      },
+      {
+        "name": "Overview rotate/zoom stays active",
+        "passed": true,
+        "evidence": null,
+        "at": "2026-10-01T03:53:24.175Z"
+      },
+      {
+        "name": "Three repeated entries unload all detail chunks",
+        "passed": true,
+        "evidence": [
+          {
+            "iteration": 0,
+            "nodes": 1250,
+            "static_memory_bytes": 0,
+            "heap": {
+              "used": 216130765,
+              "total": 226985077
+            }
+          },
+          {
+            "iteration": 1,
+            "nodes": 1250,
+            "static_memory_bytes": 0,
+            "heap": {
+              "used": 226136762,
+              "total": 235895230
+            }
+          },
+          {
+            "iteration": 2,
+            "nodes": 1250,
+            "static_memory_bytes": 0,
+            "heap": {
+              "used": 233333105,
+              "total": 242994121
+            }
+          }
+        ],
+        "at": "2026-10-01T03:54:05.909Z"
+      },
+      {
+        "name": "RestoreGraphicsDefaults",
+        "passed": true,
+        "evidence": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "at": "2026-10-01T03:54:09.072Z"
+      },
+      {
+        "name": "QA restores original graphics defaults",
+        "passed": true,
+        "evidence": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "at": "2026-10-01T03:54:09.167Z"
+      }
+    ],
+    "errors": [],
+    "unmeasured": [
+      "Attempted 12-second real-input walking route did not cross a district boundary; do not count it as cross-district walking coverage."
+    ],
+    "method": "Real Playwright mouse/keyboard inputs; read-only planetPerformance/trainingRoomState snapshots.",
+    "passed": true,
+    "build_id": "streaming-3f7c73f0246b34c7",
+    "repeated_entry": [
+      {
+        "iteration": 0,
+        "nodes": 1250,
+        "objects": 3926,
+        "resources": 939,
+        "render_buffer_bytes": 141311050,
+        "static_memory_bytes": 0,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0.1,
+          "loaded_chunks": 0,
+          "max_operation_ms": 27.6,
+          "operations": 474,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 54
+        },
+        "js_heap": {
+          "used": 216130765,
+          "total": 226985077
+        }
+      },
+      {
+        "iteration": 1,
+        "nodes": 1250,
+        "objects": 3926,
+        "resources": 939,
+        "render_buffer_bytes": 141311050,
+        "static_memory_bytes": 0,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0.3,
+          "loaded_chunks": 0,
+          "max_operation_ms": 27.6,
+          "operations": 558,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 54
+        },
+        "js_heap": {
+          "used": 226136762,
+          "total": 235895230
+        }
+      },
+      {
+        "iteration": 2,
+        "nodes": 1250,
+        "objects": 3926,
+        "resources": 939,
+        "render_buffer_bytes": 141311050,
+        "static_memory_bytes": 0,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0.2,
+          "loaded_chunks": 0,
+          "max_operation_ms": 27.6,
+          "operations": 642,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 54
+        },
+        "js_heap": {
+          "used": 233333105,
+          "total": 242994121
+        }
+      }
+    ],
+    "snapshots": [
+      {
+        "name": "initial-overview",
+        "nodes": 1245,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0,
+          "loaded_chunks": 0,
+          "max_operation_ms": 0,
+          "operations": 0,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 0
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": false,
+          "bounds_rebuilds": 0,
+          "cached_groups": 0,
+          "cached_trees": 0,
+          "candidates": 0,
+          "decision_usec": 0,
+          "decisions": 0,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 335233064,
+          "total": 340888600
+        }
+      },
+      {
+        "name": "settings-90-msaa-off",
+        "nodes": 1246,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0,
+          "loaded_chunks": 0,
+          "max_operation_ms": 0,
+          "operations": 0,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 0
+        },
+        "graphics": {
+          "applied_max_fps": 90,
+          "applied_msaa": 0,
+          "frame_limit": 90,
+          "msaa_enabled": false,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": false,
+          "bounds_rebuilds": 0,
+          "cached_groups": 0,
+          "cached_trees": 0,
+          "candidates": 0,
+          "decision_usec": 0,
+          "decisions": 0,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 344966675,
+          "total": 355777211
+        }
+      },
+      {
+        "name": "settings-mobile-390",
+        "nodes": 1246,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0,
+          "loaded_chunks": 0,
+          "max_operation_ms": 0,
+          "operations": 0,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 0
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": false,
+          "bounds_rebuilds": 0,
+          "cached_groups": 0,
+          "cached_trees": 0,
+          "candidates": 0,
+          "decision_usec": 0,
+          "decisions": 0,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 336566343,
+          "total": 341086351
+        }
+      },
+      {
+        "name": "district-counseling",
+        "nodes": 1642,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 367,
+          "last_operation_ms": 0.8,
+          "loaded_chunks": 28,
+          "max_operation_ms": 24.6,
+          "operations": 56,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 19,
+          "saved_animation_groups": 0
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 111,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 2,
+          "decision_usec": 700,
+          "decisions": 51,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 180834537,
+          "total": 186355501
+        }
+      },
+      {
+        "name": "district-admissions",
+        "nodes": 1924,
+        "streaming": {
+          "active_regions": 8,
+          "detail_nodes": 641,
+          "last_operation_ms": 0.8,
+          "loaded_chunks": 35,
+          "max_operation_ms": 24.6,
+          "operations": 70,
+          "pending_regions": 0,
+          "ready_districts": 2,
+          "ready_regions": 20,
+          "saved_animation_groups": 0
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 167,
+          "cached_groups": 118,
+          "cached_trees": 21,
+          "candidates": 2,
+          "decision_usec": 300,
+          "decisions": 119,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 194271692,
+          "total": 199467600
+        }
+      },
+      {
+        "name": "district-recommendations",
+        "nodes": 1914,
+        "streaming": {
+          "active_regions": 13,
+          "detail_nodes": 634,
+          "last_operation_ms": 0.5,
+          "loaded_chunks": 31,
+          "max_operation_ms": 24.6,
+          "operations": 110,
+          "pending_regions": 0,
+          "ready_districts": 2,
+          "ready_regions": 16,
+          "saved_animation_groups": 12
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 216,
+          "cached_groups": 113,
+          "cached_trees": 21,
+          "candidates": 1,
+          "decision_usec": 400,
+          "decisions": 233,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 189050540,
+          "total": 198028392
+        }
+      },
+      {
+        "name": "district-universities",
+        "nodes": 1554,
+        "streaming": {
+          "active_regions": 1,
+          "detail_nodes": 281,
+          "last_operation_ms": 0.6,
+          "loaded_chunks": 24,
+          "max_operation_ms": 24.6,
+          "operations": 189,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 18,
+          "saved_animation_groups": 29
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 271,
+          "cached_groups": 61,
+          "cached_trees": 10,
+          "candidates": 0,
+          "decision_usec": 300,
+          "decisions": 348,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 181316409,
+          "total": 188019021
+        }
+      },
+      {
+        "name": "district-life",
+        "nodes": 1836,
+        "streaming": {
+          "active_regions": 1,
+          "detail_nodes": 541,
+          "last_operation_ms": 2,
+          "loaded_chunks": 35,
+          "max_operation_ms": 27.6,
+          "operations": 214,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 24,
+          "saved_animation_groups": 29
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 320,
+          "cached_groups": 92,
+          "cached_trees": 14,
+          "candidates": 0,
+          "decision_usec": 1300,
+          "decisions": 451,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 196276102,
+          "total": 205524198
+        }
+      },
+      {
+        "name": "portal-life",
+        "nodes": 1554,
+        "streaming": {
+          "active_regions": 1,
+          "detail_nodes": 287,
+          "last_operation_ms": 0.1,
+          "loaded_chunks": 18,
+          "max_operation_ms": 27.6,
+          "operations": 231,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 13,
+          "saved_animation_groups": 37
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 320,
+          "cached_groups": 55,
+          "cached_trees": 10,
+          "candidates": 0,
+          "decision_usec": 1700,
+          "decisions": 482,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 197688305,
+          "total": 207103149
+        }
+      },
+      {
+        "name": "district-wordking",
+        "nodes": 1834,
+        "streaming": {
+          "active_regions": 11,
+          "detail_nodes": 548,
+          "last_operation_ms": 0.3,
+          "loaded_chunks": 36,
+          "max_operation_ms": 27.6,
+          "operations": 267,
+          "pending_regions": 0,
+          "ready_districts": 2,
+          "ready_regions": 26,
+          "saved_animation_groups": 37
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 370,
+          "cached_groups": 87,
+          "cached_trees": 20,
+          "candidates": 1,
+          "decision_usec": 500,
+          "decisions": 540,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 186329116,
+          "total": 194820176
+        }
+      },
+      {
+        "name": "training-room",
+        "nodes": 1552,
+        "streaming": {
+          "active_regions": 11,
+          "detail_nodes": 278,
+          "last_operation_ms": 0.1,
+          "loaded_chunks": 24,
+          "max_operation_ms": 27.6,
+          "operations": 279,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 19,
+          "saved_animation_groups": 40
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 370,
+          "cached_groups": 56,
+          "cached_trees": 10,
+          "candidates": 0,
+          "decision_usec": 300,
+          "decisions": 571,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 200411325,
+          "total": 206821553
+        }
+      },
+      {
+        "name": "fast-camera",
+        "nodes": 1645,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 367,
+          "last_operation_ms": 0.4,
+          "loaded_chunks": 28,
+          "max_operation_ms": 27.6,
+          "operations": 359,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 19,
+          "saved_animation_groups": 54
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 531,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 2,
+          "decision_usec": 400,
+          "decisions": 737,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 197198767,
+          "total": 201496679
+        }
+      },
+      {
+        "name": "walking-route",
+        "nodes": 1649,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 370,
+          "last_operation_ms": 1.4,
+          "loaded_chunks": 29,
+          "max_operation_ms": 27.6,
+          "operations": 361,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 20,
+          "saved_animation_groups": 54
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 531,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 2,
+          "decision_usec": 500,
+          "decisions": 884,
+          "faded_meshes": 2,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 209124256,
+          "total": 216454596
+        }
+      },
+      {
+        "name": "overview-rotate-zoom",
+        "nodes": 1279,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 19,
+          "last_operation_ms": 0.2,
+          "loaded_chunks": 7,
+          "max_operation_ms": 27.6,
+          "operations": 383,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 7,
+          "saved_animation_groups": 54
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": false,
+          "bounds_rebuilds": 531,
+          "cached_groups": 24,
+          "cached_trees": 0,
+          "candidates": 2,
+          "decision_usec": 400,
+          "decisions": 893,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 212022949,
+          "total": 219348581
+        }
+      },
+      {
+        "name": "repeat-0-near",
+        "nodes": 1645,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 367,
+          "last_operation_ms": 0.6,
+          "loaded_chunks": 28,
+          "max_operation_ms": 27.6,
+          "operations": 446,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 19,
+          "saved_animation_groups": 54
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 618,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 2,
+          "decision_usec": 500,
+          "decisions": 927,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 213028200,
+          "total": 224091000
+        }
+      },
+      {
+        "name": "repeat-1-near",
+        "nodes": 1645,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 367,
+          "last_operation_ms": 0.5,
+          "loaded_chunks": 28,
+          "max_operation_ms": 27.6,
+          "operations": 530,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 19,
+          "saved_animation_groups": 54
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 705,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 2,
+          "decision_usec": 300,
+          "decisions": 964,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 222938443,
+          "total": 233525551
+        }
+      },
+      {
+        "name": "repeat-2-near",
+        "nodes": 1645,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 367,
+          "last_operation_ms": 0.4,
+          "loaded_chunks": 28,
+          "max_operation_ms": 27.6,
+          "operations": 614,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 19,
+          "saved_animation_groups": 54
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 792,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 2,
+          "decision_usec": 200,
+          "decisions": 995,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 230101787,
+          "total": 239838011
+        }
+      },
+      {
+        "name": "repeated-entry-unloaded",
+        "nodes": 1250,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0.2,
+          "loaded_chunks": 0,
+          "max_operation_ms": 27.6,
+          "operations": 642,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 54
+        },
+        "graphics": {
+          "applied_max_fps": 60,
+          "applied_msaa": 1,
+          "frame_limit": 60,
+          "msaa_enabled": true,
+          "persistent": true,
+          "settings_error": 0
+        },
+        "obstruction": {
+          "active": false,
+          "bounds_rebuilds": 792,
+          "cached_groups": 24,
+          "cached_trees": 0,
+          "candidates": 2,
+          "decision_usec": 400,
+          "decisions": 997,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        },
+        "js_heap": {
+          "used": 233612697,
+          "total": 243256265
+        }
+      }
+    ]
+  },
+  "release": {
+    "build_id": "streaming-3f7c73f0246b34c7",
+    "created_utc": "2026-10-01T03:36:23.580769+00:00",
+    "source_base_commit": "1cd1bbd5411e01c09136af8c86d7da670a577d28",
+    "source_sha256": "3f7c73f0246b34c740e866336cbda418d8f1f132a45efd6b36834a807391f34b",
+    "export": "Web release; Compatibility; single-threaded",
+    "files": {
+      "index.html": {
+        "bytes": 5381,
+        "sha256": "6f7a18ac952f2e8d00bf9a50bf477968ab6c08ddf2765637992437b2861d9d57"
+      },
+      "index.js": {
+        "bytes": 279815,
+        "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+      },
+      "index.wasm": {
+        "bytes": 39514754,
+        "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
+      },
+      "index.pck": {
+        "bytes": 154560308,
+        "sha256": "5210d188c2b2214b0f2d6f0e88814dd0fb4b18957c8509a1b18c2e7a56db0961"
+      }
+    }
+  }
+}

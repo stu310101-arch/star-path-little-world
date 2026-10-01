@@ -15,5 +15,6 @@ func build() -> void:
 	build_report["aquatic_habitats"]=report
 	FileAccess.open("res://generated/build_report.json",FileAccess.WRITE).store_string(JSON.stringify(build_report,"\t"))
 	globe.free()
+	preload("res://tools/streaming_world_builder.gd").new().build()
 	print("WATER_ECOLOGY_BUILT "+JSON.stringify(report))
 	quit()

@@ -1,0 +1,1135 @@
+{
+	"build": {
+		"chunk_count": 86,
+		"chunk_target_nodes": 80,
+		"chunk_target_triangles": 45000,
+		"max_chunk_bytes": 1127060,
+		"max_chunk_mesh_triangles": 44198,
+		"max_chunk_nodes": 78,
+		"overview_input_triangles": 2118820,
+		"overview_triangles": 1009913,
+		"overview_vertices": 893393,
+		"permanent_collision_bodies": 384,
+		"protected_surface_meshes": 316
+	},
+	"districts": [
+		{
+			"center": [
+				0.0,
+				48.0,
+				0.0
+			],
+			"chunks": [
+				{
+					"bytes": 809587,
+					"nodes": 45,
+					"path": "res://generated/streaming/counseling_000.scn",
+					"triangles": 44198
+				},
+				{
+					"bytes": 147548,
+					"nodes": 78,
+					"path": "res://generated/streaming/counseling_001.scn",
+					"triangles": 13261
+				},
+				{
+					"bytes": 186501,
+					"nodes": 65,
+					"path": "res://generated/streaming/counseling_002.scn",
+					"triangles": 10290
+				},
+				{
+					"bytes": 623815,
+					"nodes": 23,
+					"path": "res://generated/streaming/counseling_003.scn",
+					"triangles": 27576
+				},
+				{
+					"bytes": 690559,
+					"nodes": 3,
+					"path": "res://generated/streaming/counseling_004.scn",
+					"triangles": 22214
+				},
+				{
+					"bytes": 1012401,
+					"nodes": 10,
+					"path": "res://generated/streaming/counseling_005.scn",
+					"triangles": 29590
+				}
+			],
+			"detail_nodes": 224,
+			"id": "counseling",
+			"overview_triangles": 157970
+		},
+		{
+			"center": [
+				48.0,
+				0.0,
+				0.0
+			],
+			"chunks": [
+				{
+					"bytes": 674387,
+					"nodes": 14,
+					"path": "res://generated/streaming/admissions_000.scn",
+					"triangles": 35418
+				},
+				{
+					"bytes": 286814,
+					"nodes": 77,
+					"path": "res://generated/streaming/admissions_001.scn",
+					"triangles": 22296
+				},
+				{
+					"bytes": 163652,
+					"nodes": 76,
+					"path": "res://generated/streaming/admissions_002.scn",
+					"triangles": 15766
+				},
+				{
+					"bytes": 186206,
+					"nodes": 65,
+					"path": "res://generated/streaming/admissions_003.scn",
+					"triangles": 10290
+				},
+				{
+					"bytes": 650425,
+					"nodes": 29,
+					"path": "res://generated/streaming/admissions_004.scn",
+					"triangles": 31412
+				},
+				{
+					"bytes": 644836,
+					"nodes": 3,
+					"path": "res://generated/streaming/admissions_005.scn",
+					"triangles": 22214
+				},
+				{
+					"bytes": 1012367,
+					"nodes": 10,
+					"path": "res://generated/streaming/admissions_006.scn",
+					"triangles": 29590
+				}
+			],
+			"detail_nodes": 274,
+			"id": "admissions",
+			"overview_triangles": 162469
+		},
+		{
+			"center": [
+				0.0,
+				0.0,
+				-48.0
+			],
+			"chunks": [
+				{
+					"bytes": 747216,
+					"nodes": 23,
+					"path": "res://generated/streaming/recommendations_000.scn",
+					"triangles": 40568
+				},
+				{
+					"bytes": 334670,
+					"nodes": 75,
+					"path": "res://generated/streaming/recommendations_001.scn",
+					"triangles": 28400
+				},
+				{
+					"bytes": 7807,
+					"nodes": 76,
+					"path": "res://generated/streaming/recommendations_002.scn",
+					"triangles": 6600
+				},
+				{
+					"bytes": 184749,
+					"nodes": 23,
+					"path": "res://generated/streaming/recommendations_003.scn",
+					"triangles": 6594
+				},
+				{
+					"bytes": 605413,
+					"nodes": 21,
+					"path": "res://generated/streaming/recommendations_004.scn",
+					"triangles": 24928
+				},
+				{
+					"bytes": 1012637,
+					"nodes": 10,
+					"path": "res://generated/streaming/recommendations_005.scn",
+					"triangles": 29590
+				}
+			],
+			"detail_nodes": 228,
+			"id": "recommendations",
+			"overview_triangles": 162306
+		},
+		{
+			"center": [
+				-48.0,
+				0.0,
+				0.0
+			],
+			"chunks": [
+				{
+					"bytes": 787089,
+					"nodes": 27,
+					"path": "res://generated/streaming/universities_000.scn",
+					"triangles": 43744
+				},
+				{
+					"bytes": 278013,
+					"nodes": 77,
+					"path": "res://generated/streaming/universities_001.scn",
+					"triangles": 23753
+				},
+				{
+					"bytes": 7195,
+					"nodes": 64,
+					"path": "res://generated/streaming/universities_002.scn",
+					"triangles": 5544
+				},
+				{
+					"bytes": 185058,
+					"nodes": 23,
+					"path": "res://generated/streaming/universities_003.scn",
+					"triangles": 6594
+				},
+				{
+					"bytes": 653840,
+					"nodes": 29,
+					"path": "res://generated/streaming/universities_004.scn",
+					"triangles": 30758
+				},
+				{
+					"bytes": 644821,
+					"nodes": 3,
+					"path": "res://generated/streaming/universities_005.scn",
+					"triangles": 22214
+				},
+				{
+					"bytes": 1012403,
+					"nodes": 10,
+					"path": "res://generated/streaming/universities_006.scn",
+					"triangles": 29590
+				}
+			],
+			"detail_nodes": 233,
+			"id": "universities",
+			"overview_triangles": 158780
+		},
+		{
+			"center": [
+				0.0,
+				0.0,
+				48.0
+			],
+			"chunks": [
+				{
+					"bytes": 730815,
+					"nodes": 77,
+					"path": "res://generated/streaming/life_000.scn",
+					"triangles": 43522
+				},
+				{
+					"bytes": 63128,
+					"nodes": 78,
+					"path": "res://generated/streaming/life_001.scn",
+					"triangles": 8954
+				},
+				{
+					"bytes": 186189,
+					"nodes": 65,
+					"path": "res://generated/streaming/life_002.scn",
+					"triangles": 10290
+				},
+				{
+					"bytes": 727926,
+					"nodes": 23,
+					"path": "res://generated/streaming/life_003.scn",
+					"triangles": 33384
+				},
+				{
+					"bytes": 691562,
+					"nodes": 3,
+					"path": "res://generated/streaming/life_004.scn",
+					"triangles": 22214
+				},
+				{
+					"bytes": 962282,
+					"nodes": 7,
+					"path": "res://generated/streaming/life_005.scn",
+					"triangles": 28134
+				}
+			],
+			"detail_nodes": 253,
+			"id": "life",
+			"overview_triangles": 146624
+		},
+		{
+			"center": [
+				0.0,
+				-48.0,
+				0.0
+			],
+			"chunks": [
+				{
+					"bytes": 769549,
+					"nodes": 60,
+					"path": "res://generated/streaming/wordking_000.scn",
+					"triangles": 43546
+				},
+				{
+					"bytes": 112859,
+					"nodes": 78,
+					"path": "res://generated/streaming/wordking_001.scn",
+					"triangles": 11978
+				},
+				{
+					"bytes": 186239,
+					"nodes": 47,
+					"path": "res://generated/streaming/wordking_002.scn",
+					"triangles": 8706
+				},
+				{
+					"bytes": 759792,
+					"nodes": 29,
+					"path": "res://generated/streaming/wordking_003.scn",
+					"triangles": 37174
+				},
+				{
+					"bytes": 690476,
+					"nodes": 3,
+					"path": "res://generated/streaming/wordking_004.scn",
+					"triangles": 22214
+				},
+				{
+					"bytes": 1012350,
+					"nodes": 10,
+					"path": "res://generated/streaming/wordking_005.scn",
+					"triangles": 29590
+				}
+			],
+			"detail_nodes": 227,
+			"id": "wordking",
+			"overview_triangles": 153710
+		},
+		{
+			"center": [
+				23.8154830932617,
+				31.7539749145508,
+				26.9908828735352
+			],
+			"chunks": [
+				{
+					"bytes": 1127060,
+					"nodes": 10,
+					"path": "res://generated/streaming/sakura_000.scn",
+					"triangles": 43944
+				},
+				{
+					"bytes": 1107477,
+					"nodes": 9,
+					"path": "res://generated/streaming/sakura_001.scn",
+					"triangles": 37308
+				},
+				{
+					"bytes": 1107470,
+					"nodes": 9,
+					"path": "res://generated/streaming/sakura_002.scn",
+					"triangles": 37308
+				},
+				{
+					"bytes": 1107476,
+					"nodes": 9,
+					"path": "res://generated/streaming/sakura_003.scn",
+					"triangles": 37308
+				},
+				{
+					"bytes": 472564,
+					"nodes": 59,
+					"path": "res://generated/streaming/sakura_004.scn",
+					"triangles": 22140
+				}
+			],
+			"detail_nodes": 96,
+			"id": "sakura",
+			"overview_triangles": 65164
+		},
+		{
+			"center": [
+				-27.7128124237061,
+				-27.7128124237061,
+				-27.7128124237061
+			],
+			"chunks": [
+				{
+					"bytes": 49261,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_00_000.scn",
+					"triangles": 1750
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_00",
+			"overview_triangles": 800
+		},
+		{
+			"center": [
+				-31.0801811218262,
+				-24.0471668243408,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17805,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_01_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_01",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-31.0801811218262,
+				-24.0471668243408,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17751,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_02_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_02",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-31.0801811218262,
+				-24.0471668243408,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17827,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_03_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_03",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-31.0801811218262,
+				-24.0471668243408,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17751,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_04_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_04",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-31.0801811218262,
+				-24.0471668243408,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 1728,
+					"nodes": 2,
+					"path": "res://generated/streaming/ocean_05_000.scn",
+					"triangles": 192
+				}
+			],
+			"detail_nodes": 2,
+			"id": "ocean_05",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-27.7128124237061,
+				-27.7128124237061,
+				27.7128124237061
+			],
+			"chunks": [
+				{
+					"bytes": 18602,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_06_000.scn",
+					"triangles": 574
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_06",
+			"overview_triangles": 140
+		},
+		{
+			"center": [
+				-31.0801811218262,
+				-24.0471668243408,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17821,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_07_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_07",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-31.0801811218262,
+				-24.0471668243408,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17758,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_08_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_08",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-31.0801811218262,
+				-24.0471668243408,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17827,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_09_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_09",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-31.0801811218262,
+				-24.0471668243408,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17754,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_10_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_10",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-31.0801811218262,
+				-24.0471668243408,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 1736,
+					"nodes": 2,
+					"path": "res://generated/streaming/ocean_11_000.scn",
+					"triangles": 192
+				}
+			],
+			"detail_nodes": 2,
+			"id": "ocean_11",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-27.7128124237061,
+				27.7128124237061,
+				-27.7128124237061
+			],
+			"chunks": [
+				{
+					"bytes": 13969,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_12_000.scn",
+					"triangles": 471
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_12",
+			"overview_triangles": 105
+		},
+		{
+			"center": [
+				-24.0471668243408,
+				31.0801811218262,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17817,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_13_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_13",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-24.0471668243408,
+				31.0801811218262,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17759,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_14_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_14",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-24.0471668243408,
+				31.0801811218262,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17825,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_15_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_15",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-24.0471668243408,
+				31.0801811218262,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17757,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_16_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_16",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-24.0471668243408,
+				31.0801811218262,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 1737,
+					"nodes": 2,
+					"path": "res://generated/streaming/ocean_17_000.scn",
+					"triangles": 192
+				}
+			],
+			"detail_nodes": 2,
+			"id": "ocean_17",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-27.7128124237061,
+				27.7128124237061,
+				27.7128124237061
+			],
+			"chunks": [
+				{
+					"bytes": 49274,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_18_000.scn",
+					"triangles": 1750
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_18",
+			"overview_triangles": 800
+		},
+		{
+			"center": [
+				-24.0471668243408,
+				31.0801811218262,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17818,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_19_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_19",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-24.0471668243408,
+				31.0801811218262,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17759,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_20_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_20",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-24.0471668243408,
+				31.0801811218262,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17824,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_21_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_21",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-24.0471668243408,
+				31.0801811218262,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17758,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_22_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_22",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				-24.0471668243408,
+				31.0801811218262,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 1734,
+					"nodes": 2,
+					"path": "res://generated/streaming/ocean_23_000.scn",
+					"triangles": 192
+				}
+			],
+			"detail_nodes": 2,
+			"id": "ocean_23",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				27.7128124237061,
+				-27.7128124237061,
+				-27.7128124237061
+			],
+			"chunks": [
+				{
+					"bytes": 18609,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_24_000.scn",
+					"triangles": 574
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_24",
+			"overview_triangles": 140
+		},
+		{
+			"center": [
+				24.0471668243408,
+				-31.0801811218262,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17818,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_25_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_25",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				24.0471668243408,
+				-31.0801811218262,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17759,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_26_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_26",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				24.0471668243408,
+				-31.0801811218262,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17827,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_27_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_27",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				24.0471668243408,
+				-31.0801811218262,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17756,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_28_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_28",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				24.0471668243408,
+				-31.0801811218262,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 1736,
+					"nodes": 2,
+					"path": "res://generated/streaming/ocean_29_000.scn",
+					"triangles": 192
+				}
+			],
+			"detail_nodes": 2,
+			"id": "ocean_29",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				27.7128124237061,
+				-27.7128124237061,
+				27.7128124237061
+			],
+			"chunks": [
+				{
+					"bytes": 13974,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_30_000.scn",
+					"triangles": 471
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_30",
+			"overview_triangles": 105
+		},
+		{
+			"center": [
+				24.0471668243408,
+				-31.0801811218262,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17813,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_31_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_31",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				24.0471668243408,
+				-31.0801811218262,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17760,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_32_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_32",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				24.0471668243408,
+				-31.0801811218262,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17827,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_33_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_33",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				24.0471668243408,
+				-31.0801811218262,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17757,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_34_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_34",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				24.0471668243408,
+				-31.0801811218262,
+				27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 1733,
+					"nodes": 2,
+					"path": "res://generated/streaming/ocean_35_000.scn",
+					"triangles": 192
+				}
+			],
+			"detail_nodes": 2,
+			"id": "ocean_35",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				27.7128124237061,
+				27.7128124237061,
+				-27.7128124237061
+			],
+			"chunks": [
+				{
+					"bytes": 49276,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_36_000.scn",
+					"triangles": 1750
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_36",
+			"overview_triangles": 800
+		},
+		{
+			"center": [
+				31.0801811218262,
+				24.0471668243408,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17817,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_37_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_37",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				31.0801811218262,
+				24.0471668243408,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17759,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_38_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_38",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				31.0801811218262,
+				24.0471668243408,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17826,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_39_000.scn",
+					"triangles": 544
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_39",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				31.0801811218262,
+				24.0471668243408,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 17759,
+					"nodes": 3,
+					"path": "res://generated/streaming/ocean_40_000.scn",
+					"triangles": 502
+				}
+			],
+			"detail_nodes": 3,
+			"id": "ocean_40",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				31.0801811218262,
+				24.0471668243408,
+				-27.5636730194092
+			],
+			"chunks": [
+				{
+					"bytes": 1735,
+					"nodes": 2,
+					"path": "res://generated/streaming/ocean_41_000.scn",
+					"triangles": 192
+				}
+			],
+			"detail_nodes": 2,
+			"id": "ocean_41",
+			"overview_triangles": 0
+		},
+		{
+			"center": [
+				23.8154830932617,
+				31.7539749145508,
+				26.9908828735352
+			],
+			"chunks": [
+				{
+					"bytes": 2517,
+					"nodes": 2,
+					"path": "res://generated/streaming/ocean_42_000.scn",
+					"triangles": 8
+				}
+			],
+			"detail_nodes": 2,
+			"id": "ocean_42",
+			"overview_triangles": 0
+		}
+	],
+	"radius": 48.0,
+	"version": 1
+}

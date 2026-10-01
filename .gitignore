@@ -4,6 +4,7 @@
 **/__pycache__/
 *.pyc
 /build/
+/_site/
 /deliverables/
 /assets/
 /PROGRESS_PAUSED.md

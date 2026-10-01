@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 const MinimapScript = preload("res://scripts/world_minimap.gd")
+const GraphicsSettingsScript = preload("res://scripts/graphics_settings.gd")
 
 var world: Node3D
 var view_button: Button
@@ -21,6 +22,15 @@ var music_button: Button
 var music_slider: HSlider
 var music_title: Label
 var music_percent: Label
+var graphics_settings: Node
+var settings_button: Button
+var settings_overlay: Control
+var settings_panel: PanelContainer
+var settings_scroll: ScrollContainer
+var msaa_button: Button
+var frame_buttons: Array[Button] = []
+var settings_status: Label
+var _settings_previous_controls: bool = false
 var font: Font = preload("res://assets/fonts/NotoSansTC.ttf")
 var ink: Color = Color("203e46")
 
@@ -62,6 +72,9 @@ func button(text: String, accent: bool = false) -> Button:
 	return node
 
 func _ready() -> void:
+	graphics_settings = GraphicsSettingsScript.new() as Node
+	graphics_settings.name = "GraphicsSettings"
+	add_child(graphics_settings)
 	var weighted_font: FontVariation = FontVariation.new()
 	weighted_font.base_font = font
 	weighted_font.variation_opentype = {2003265652:550.0}
@@ -193,6 +206,11 @@ func _ready() -> void:
 			world.get("player").cancel_jump_input()
 		destination_toggle.text = "收起目的地    −" if destination_card.visible else "選擇目的地    +")
 	sidebar.add_child(destination_toggle)
+	settings_button = button("畫面設定")
+	settings_button.name = "GraphicsSettingsButton"
+	settings_button.focus_mode = Control.FOCUS_ALL
+	settings_button.pressed.connect(open_graphics_settings)
+	sidebar.add_child(settings_button)
 	var card: PanelContainer = PanelContainer.new()
 	destination_card = card
 	card.visible = false
@@ -284,6 +302,145 @@ func _ready() -> void:
 	var close: Button = button("繼續探索", true)
 	close.pressed.connect(func() -> void: world.call("resume_world", {}))
 	content.add_child(close)
+	_build_graphics_settings(screen)
+
+func _build_graphics_settings(screen: Control) -> void:
+	settings_overlay = Control.new()
+	settings_overlay.name = "GraphicsSettingsOverlay"
+	settings_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	settings_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	settings_overlay.visible = false
+	screen.add_child(settings_overlay)
+	var shade: ColorRect = ColorRect.new()
+	shade.color = Color(0.025, 0.08, 0.10, 0.76)
+	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	settings_overlay.add_child(shade)
+	var safe_area: MarginContainer = MarginContainer.new()
+	safe_area.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	for side: String in ["left", "right", "top", "bottom"]:
+		safe_area.add_theme_constant_override("margin_" + side, 16)
+	settings_overlay.add_child(safe_area)
+	var center: CenterContainer = CenterContainer.new()
+	safe_area.add_child(center)
+	settings_panel = PanelContainer.new()
+	settings_panel.name = "SettingsPanel"
+	settings_panel.add_theme_stylebox_override("panel", style(Color("f7f3e7"), 22))
+	center.add_child(settings_panel)
+	var panel_content: VBoxContainer = VBoxContainer.new()
+	panel_content.add_theme_constant_override("separation", 12)
+	settings_panel.add_child(panel_content)
+	settings_scroll = ScrollContainer.new()
+	settings_scroll.name = "SettingsScroll"
+	settings_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	panel_content.add_child(settings_scroll)
+	var content: VBoxContainer = VBoxContainer.new()
+	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.add_theme_constant_override("separation", 12)
+	settings_scroll.add_child(content)
+	content.add_child(label("畫面設定", 26))
+	var detail: Label = label("即時套用，並記住這台裝置的選擇。", 14, Color("647b75"))
+	detail.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	content.add_child(detail)
+	msaa_button = button("MSAA：開啟（2×）")
+	msaa_button.name = "MSAAToggle"
+	msaa_button.focus_mode = Control.FOCUS_ALL
+	msaa_button.toggle_mode = true
+	msaa_button.pressed.connect(func() -> void:
+		graphics_settings.call("set_msaa_enabled", msaa_button.button_pressed))
+	content.add_child(msaa_button)
+	var aa_help: Label = label("開啟：邊緣更平滑。關閉：減少顯示負擔，邊緣鋸齒會較明顯。", 14, Color("647b75"))
+	aa_help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	content.add_child(aa_help)
+	content.add_child(label("幀率上限", 17))
+	var frame_row: HBoxContainer = HBoxContainer.new()
+	frame_row.add_theme_constant_override("separation", 8)
+	content.add_child(frame_row)
+	var frame_group: ButtonGroup = ButtonGroup.new()
+	for fps: int in GraphicsSettingsScript.FRAME_LIMITS:
+		var choice: Button = button(str(fps), true)
+		choice.name = "FPS" + str(fps)
+		choice.focus_mode = Control.FOCUS_ALL
+		choice.toggle_mode = true
+		choice.button_group = frame_group
+		choice.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		choice.set_meta("frame_limit", fps)
+		choice.pressed.connect(func() -> void: graphics_settings.call("set_frame_limit", fps))
+		frame_row.add_child(choice)
+		frame_buttons.append(choice)
+	var fps_help: Label = label("30 較省電，60 均衡，90 適合高更新率螢幕。實際幀率仍依裝置、螢幕與瀏覽器而定。", 14, Color("647b75"))
+	fps_help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	content.add_child(fps_help)
+	settings_status = label("", 13, Color("647b75"))
+	settings_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	content.add_child(settings_status)
+	var reset: Button = button("恢復預設：MSAA 開／60 FPS")
+	reset.name = "RestoreGraphicsDefaults"
+	reset.add_theme_font_size_override("font_size", 14)
+	reset.focus_mode = Control.FOCUS_ALL
+	reset.pressed.connect(func() -> void: graphics_settings.call("restore_defaults"))
+	content.add_child(reset)
+	var close_settings: Button = button("完成", true)
+	close_settings.name = "CloseGraphicsSettings"
+	close_settings.focus_mode = Control.FOCUS_ALL
+	close_settings.pressed.connect(close_graphics_settings)
+	panel_content.add_child(close_settings)
+	graphics_settings.connect("state_changed", _refresh_graphics_settings)
+	get_viewport().size_changed.connect(_resize_graphics_settings)
+	_resize_graphics_settings()
+	_refresh_graphics_settings()
+
+func _resize_graphics_settings() -> void:
+	var available: Vector2 = get_viewport().get_visible_rect().size
+	settings_panel.custom_minimum_size.x = minf(460.0, maxf(240.0, available.x - 32.0))
+	# Keep the close action outside the scroll area, even on short landscape
+	# viewports. The remaining height covers panel margins and the footer.
+	settings_scroll.custom_minimum_size.y = minf(520.0, maxf(100.0, available.y - 144.0))
+
+func _refresh_graphics_settings() -> void:
+	var state: Dictionary = graphics_settings.call("get_state") as Dictionary
+	var enabled: bool = bool(state.get("msaa_enabled", true))
+	msaa_button.set_pressed_no_signal(enabled)
+	msaa_button.text = "MSAA：開啟（2×）" if enabled else "MSAA：關閉"
+	for choice: Button in frame_buttons:
+		choice.set_pressed_no_signal(int(choice.get_meta("frame_limit")) == int(state.get("frame_limit", 60)))
+	if int(state.get("settings_error", OK)) != OK:
+		settings_status.text = "目前選擇已套用，但無法儲存；重新開啟後可能不會保留。"
+	elif not bool(state.get("persistent", true)):
+		settings_status.text = "此瀏覽模式無法保留設定，這次遊玩仍可套用。"
+	else:
+		settings_status.text = "設定會自動儲存。"
+
+func is_settings_open() -> bool:
+	return settings_overlay != null and settings_overlay.visible
+
+func open_graphics_settings() -> void:
+	if is_settings_open() or bool(world.get("entering")):
+		return
+	world.call("finish_view_drag")
+	var actor: Node = world.get("player") as Node
+	_settings_previous_controls = bool(actor.get("controls_enabled"))
+	actor.call("cancel_jump_input")
+	actor.set("controls_enabled", false)
+	destination_card.visible = false
+	destination_toggle.text = "選擇目的地    +"
+	settings_overlay.visible = true
+	msaa_button.grab_focus()
+
+func close_graphics_settings() -> void:
+	if not is_settings_open():
+		return
+	settings_overlay.visible = false
+	var actor: Node = world.get("player") as Node
+	actor.set("controls_enabled", _settings_previous_controls and not bool(world.get("overview")) and not bool(world.get("paused")) and not bool(world.get("entering")))
+	actor.call("cancel_jump_input")
+	# Return Space/Tab to jumping and view switching after leaving the menu.
+	get_viewport().gui_release_focus()
+
+func _input(event: InputEvent) -> void:
+	if is_settings_open() and event.is_action_pressed("ui_cancel"):
+		close_graphics_settings()
+		get_viewport().set_input_as_handled()
 
 func refresh_music_controls() -> void:
 	var state: Dictionary = world.get("music").call("get_state")

@@ -11,6 +11,10 @@ const SakuraPlan = preload("res://scripts/sakura_routes.gd")
 const MusicScript = preload("res://scripts/world_music.gd")
 const BenchScript = preload("res://scripts/bench_interaction.gd")
 const TrainingTransition = preload("res://scripts/training_room_transition.gd")
+const DistrictStreaming = preload("res://scripts/district_streaming.gd")
+const PerformanceTelemetry = preload("res://scripts/performance_telemetry.gd")
+var streaming: Node
+var performance_telemetry: Node
 var benches: Node
 var music: Node
 var music_context: String = "world"
@@ -74,8 +78,19 @@ func _ready() -> void:
 	benches = BenchScript.new()
 	benches.name = "BenchInteraction"
 	add_child(benches)
+	streaming = DistrictStreaming.new() as Node
+	streaming.name = "DistrictStreaming"
+	add_child(streaming)
+	streaming.connect("chunk_added", _on_detail_added)
+	streaming.connect("chunk_removing", _on_detail_removing)
+	streaming.call("configure", self)
+	performance_telemetry = PerformanceTelemetry.new() as Node
+	performance_telemetry.name = "PerformanceTelemetry"
+	add_child(performance_telemetry)
+	camera_obstruction.call("set_active", false)
 	refresh_music_context(0.0, true)
 	player.controls_enabled = false
+	player.process_mode = Node.PROCESS_MODE_DISABLED
 	world_ready.emit()
 	print("WORLD_READY stations=6 radius=", layout.radius)
 	if OS.has_feature("web"):
@@ -185,7 +200,7 @@ func setup_water_review(index: int, hide_habitat: bool) -> void:
 	near_distance=7.0
 	near_pitch=clampf(float(review.get("pitch", .45)),.08,1.42)
 	camera.fov=42.0
-	camera_obstruction.call("reset")
+	camera_obstruction.call("force_update")
 	set_overview(false)
 	# Use the ordinary player physics and camera so this view remains playable.
 	if hide_habitat:
@@ -227,7 +242,9 @@ func _process(delta: float) -> void:
 				hud.call("show_station",entry_station)
 	if not review_mode:
 		update_camera(delta)
-	update_nearest()
+	streaming.call("update_context", overview, player.global_position, camera.global_position, camera_aim, delta)
+	if not overview:
+		update_nearest()
 	hud.call("update_status", overview, nearest_label, player.global_position.length())
 	if OS.has_feature("web") and OS.is_debug_build():
 		web_status_clock += delta
@@ -313,7 +330,7 @@ func _process(delta: float) -> void:
 			elif capture_stage == 16:
 				capture("sakura")
 			elif capture_stage == 17:
-				for actor: Node in $Globe/OceanLife.get_children():
+				for actor: Node in find_children("fishing_boat*", "Node3D", true, false):
 					if str(actor.name).begins_with("fishing_boat"):
 						capture_focus = actor as Node3D
 						break
@@ -391,7 +408,7 @@ func capture(label: String) -> void:
 	print("CAPTURE ", path)
 
 func update_camera(delta: float) -> void:
-	if capture_focus != null:
+	if is_instance_valid(capture_focus):
 		var up: Vector3 = capture_focus.global_position.normalized()
 		var aim: Vector3 = capture_focus.global_position+up*.6
 		var eye: Vector3 = aim+up*4.0+capture_focus.basis.x*5.0+capture_focus.basis.z*7.0
@@ -399,7 +416,7 @@ func update_camera(delta: float) -> void:
 			eye = aim+up*8.0+capture_focus.basis.x*10.0+capture_focus.basis.z*10.0
 		camera_aim = aim
 		camera.global_transform = Transform3D(Basis.IDENTITY,eye).looking_at(aim,up)
-		camera_obstruction.call("reset")
+		camera_obstruction.call("set_active", false)
 	elif overview:
 		# Interpolating camera positions cuts a chord through the orbit, causing
 		# involuntary zoom. Build the camera from its orientation and fixed radius.
@@ -407,8 +424,9 @@ func update_camera(delta: float) -> void:
 		var orbit_basis: Basis = Basis(Vector3.UP,orbit_yaw)*Basis(Vector3.RIGHT,-orbit_pitch)
 		camera_aim = Vector3.ZERO
 		camera.global_transform = Transform3D(orbit_basis,orbit_basis.z*orbit_distance)
-		camera_obstruction.call("reset")
+		camera_obstruction.call("set_active", false)
 	else:
+		camera_obstruction.call("set_active", true)
 		var up: Vector3 = player.global_position.normalized()
 		camera_aim = player.global_position+up*1.0
 		var offset: Vector3 = -player.heading*cos(near_pitch)+up*sin(near_pitch)
@@ -420,7 +438,7 @@ func update_camera(delta: float) -> void:
 	first_camera = false
 
 func begin_view_drag(button_index: MouseButton) -> void:
-	if paused or dragging_view:
+	if paused or dragging_view or hud.call("is_settings_open"):
 		return
 	drag_origin = get_viewport().get_mouse_position()
 	drag_button = button_index
@@ -445,6 +463,8 @@ func _notification(what: int) -> void:
 func _input(event: InputEvent) -> void:
 	if music != null and ((event is InputEventKey and event.is_pressed() and not event.is_echo()) or (event is InputEventMouseButton and event.is_pressed()) or (event is InputEventScreenTouch and event.is_pressed())):
 		music.call("unlock")
+	if hud != null and bool(hud.call("is_settings_open")):
+		return
 	# Handle the drag before GUI containers can consume mouse motion.
 	if event is InputEventMouseButton:
 		var mouse: InputEventMouseButton = event as InputEventMouseButton
@@ -470,6 +490,8 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if hud != null and bool(hud.call("is_settings_open")):
+		return
 	if paused and not (event is InputEventKey and (event as InputEventKey).keycode == KEY_ESCAPE):
 		return
 	if event.is_action_pressed("switch_view"):
@@ -506,6 +528,11 @@ func set_overview(enabled: bool) -> void:
 	finish_view_drag()
 	player.cancel_jump_input()
 	overview = enabled
+	player.process_mode = Node.PROCESS_MODE_DISABLED if overview else Node.PROCESS_MODE_INHERIT
+	camera_obstruction.call("set_active", not overview)
+	camera_obstruction.call("force_update")
+	if not overview:
+		streaming.call("pin_position", player.global_position)
 	player.controls_enabled = not overview and not paused
 	if OS.get_cmdline_user_args().has("--capture") or OS.get_cmdline_user_args().has("--capture-tour"):
 		player.controls_enabled = false
@@ -611,7 +638,7 @@ func open_training_room() -> void:
 		resume_world(entry_return)
 
 func can_player_jump() -> bool:
-	if overview or paused or entering or player.is_resting:
+	if overview or paused or entering or player.is_resting or hud.call("is_settings_open"):
 		return false
 	var destinations: Control = hud.get("destination_card") as Control
 	return destinations == null or not destinations.visible
@@ -626,6 +653,9 @@ func resume_world(return_token: Dictionary) -> void:
 		player.teleport((return_token.position as Vector3).normalized(), (return_token.position as Vector3).length())
 		player.heading = return_token.heading
 	paused = false
+	if not overview:
+		streaming.call("pin_position", player.global_position)
+		camera_obstruction.call("force_update")
 	player.controls_enabled = not overview
 	hud.call("close_panel")
 	entry_return = {}
@@ -668,3 +698,16 @@ func visit_ecology(index: int) -> void:
 	paused=false
 	hud.call("close_panel")
 	set_overview(false)
+
+func _on_detail_added(detail: Node) -> void:
+	camera_obstruction.call("register_region", detail)
+
+func _on_detail_removing(detail: Node) -> void:
+	camera_obstruction.call("unregister_region", detail)
+	if is_instance_valid(capture_focus) and detail.is_ancestor_of(capture_focus):
+		capture_focus = null
+	restore_review_habitats()
+
+func _exit_tree() -> void:
+	# The room transition detaches this world too. Re-index lazily on return.
+	camera_obstruction.call("reset")

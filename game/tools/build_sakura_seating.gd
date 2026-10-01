@@ -39,6 +39,7 @@ func build() -> void:
 	build_report["sakura_seating"] = report
 	FileAccess.open("res://generated/build_report.json",FileAccess.WRITE).store_string(JSON.stringify(build_report,"\t"))
 	globe.free()
+	preload("res://tools/streaming_world_builder.gd").new().build()
 	print("SAKURA_SEATING_BUILT "+JSON.stringify(report))
 	quit()
 

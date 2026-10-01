@@ -92,23 +92,7 @@ func run_checks() -> void:
 	for district_planting: Dictionary in build.ecology.get("planting_groups",[]):
 		authored_planting = authored_planting and (district_planting.groups as Array).size()>=3 and not (district_planting.view_windows as Array).is_empty()
 	check("Six reserves use authored groves with open view windows and preserved garden specimens",authored_planting and int(build.ecology.get("pocket_specimens_preserved",0))==18,str(build.ecology))
-	var life: Node3D = world.get_node("Globe/OceanLife") as Node3D
-	var sea_safe: bool = true
-	var fish_leap: bool = false
-	var fish_dive: bool = false
-	var boat_start: Vector3 = (life.get_child(0) as Node3D).position
-	for step: int in range(60):
-		life.call("update_life",float(step)*0.5)
-		for actor: Node in life.get_children():
-			var spatial: Node3D = actor as Node3D
-			if actor.get_meta("kind","") == "boat":
-				sea_safe = sea_safe and player.ground_at(spatial.position.normalized()).is_empty()
-			elif actor.get_meta("kind","") == "fish":
-				fish_leap = fish_leap or (spatial.visible and spatial.position.length()>radius+1.0)
-				fish_dive = fish_dive or not spatial.visible
-	check("Boat routes stay over water",sea_safe)
-	check("Boats actually travel",(life.get_child(0) as Node3D).position.distance_to(boat_start)>1.0)
-	check("Fish schools leap and dive",fish_leap and fish_dive)
+	check_ocean_chunks(world, player, radius)
 	var sources: PackedStringArray = player.animator.get_animation_list()
 	check("Character has Walk Run and JumpDown", sources.has("Walk") and sources.has("Run") and sources.has("JumpDown"), str(sources))
 	var press: InputEventMouseButton = InputEventMouseButton.new()
@@ -186,7 +170,12 @@ func run_checks() -> void:
 	for i: int in range(45):
 		await physics_frame
 	check("Sakura grove can be visited on foot",player.is_on_floor() and player.position.length()>radius)
-	var bridge: Node3D = world.get_node("Globe/SakuraGrove/SakuraBridge") as Node3D
+	await wait_for_detail(world, "sakura")
+	var bridge: Node3D = detail_node(world, "sakura", "SakuraBridge")
+	check("Sakura bridge detail is available after its streaming region loads", bridge != null)
+	if bridge == null:
+		finish_checks(world)
+		return
 	var bridge_a: Vector3 = bridge.get_meta("start") as Vector3
 	var bridge_b: Vector3 = bridge.get_meta("finish") as Vector3
 	var bridge_grounded: bool = true
@@ -234,8 +223,6 @@ func run_checks() -> void:
 			completed = completed and reached
 			player.test_direction = Vector2.ZERO
 		check("Continuous city to garden walk " + ("return" if reverse else "outbound"),completed,str(player.position))
-	var traffic: Node3D = world.get_node("Neighborhood/counseling/CityTraffic") as Node3D
-	var car: Node3D = traffic.get_child(0) as Node3D
 	# Traverse an actual wetland boardwalk corner with the normal controller.
 	var swamp_normal: Array=world.get("layout").stations[5].normal
 	var swamp_up: Vector3=Vector3(swamp_normal[0],swamp_normal[1],swamp_normal[2])
@@ -282,6 +269,16 @@ func run_checks() -> void:
 			completed = completed and reached
 			player.test_direction = Vector2.ZERO
 		check("Actual lake road corner traversal " + str(reverse),completed,str(player.position))
+	# Resolve traffic only when needed. Holding its node while visiting other
+	# districts would correctly become invalid after the original chunk unloads.
+	world.call("teleport_to", "counseling")
+	await wait_for_detail(world, "counseling")
+	var traffic: Node3D = detail_node(world, "counseling", "CityTraffic")
+	check("City traffic is available after its streaming region reloads", traffic != null)
+	if traffic == null or traffic.get_child_count() == 0:
+		finish_checks(world)
+		return
+	var car: Node3D = traffic.get_child(0) as Node3D
 	player.teleport(Vector3.DOWN,radius+.8)
 	var car_start: Vector3 = car.position
 	traffic.call("update_traffic",1.0)
@@ -388,11 +385,83 @@ func run_checks() -> void:
 	check("Left hold rotates roaming camera",heading_before.dot(player.heading)<.95)
 	world.call("_notification",MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT)
 	check("Focus loss releases left drag",not bool(world.get("dragging_view")))
+	finish_checks(world)
+
+func finish_checks(world: Node3D) -> void:
 	var output: Dictionary = {"passed":failures == 0,"failed":failures,"checks":checks}
-	var file: FileAccess = FileAccess.open("res://tests/results.json", FileAccess.WRITE)
+	var output_path: String = "res://../deliverables/performance/world-checks.json"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output_path.get_base_dir()))
+	var file: FileAccess = FileAccess.open(output_path, FileAccess.WRITE)
 	file.store_string(JSON.stringify(output, "\t"))
+	file.close()
 	print(JSON.stringify(output))
+	world.free()
 	quit(0 if failures == 0 else 1)
+
+func wait_for_detail(world: Node3D, id: String) -> void:
+	var streaming: Node = world.get("streaming") as Node
+	var player: Node3D = world.get("player") as Node3D
+	streaming.call("pin_position", player.global_position)
+	var frames: int = 0
+	var regions: Dictionary = streaming.get("_regions") as Dictionary
+	while not bool(regions[id].ready) and frames < 2400:
+		await process_frame
+		frames += 1
+	check("Streaming region ready: " + id, bool(regions[id].ready), str(frames) + " frames")
+
+func detail_node(world: Node3D, id: String, pattern: String) -> Node3D:
+	var streaming: Node = world.get("streaming") as Node
+	var regions: Dictionary = streaming.get("_regions") as Dictionary
+	for chunk: Node3D in regions[id].roots:
+		var found: Node3D = chunk.find_child(pattern, true, false) as Node3D
+		if found != null:
+			return found
+	return null
+
+func check_ocean_chunks(world: Node3D, player: PlanetPlayer, radius: float) -> void:
+	# Audit the generated animated actors one chunk at a time. This test does
+	# not reintroduce the removed all-ocean dependency into the production world.
+	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://generated/streaming/catalog.json")) as Dictionary
+	var sea_safe: bool = true
+	var boats_travel: bool = true
+	var fish_leap: bool = false
+	var fish_dive: bool = false
+	var boats: int = 0
+	var fish: int = 0
+	for region: Dictionary in catalog.districts:
+		if not str(region.id).begins_with("ocean_"):
+			continue
+		for row: Dictionary in region.chunks:
+			var packed: PackedScene = ResourceLoader.load(str(row.path), "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene
+			var chunk: Node3D = packed.instantiate() as Node3D
+			chunk.process_mode = Node.PROCESS_MODE_DISABLED
+			world.add_child(chunk)
+			for life: Node3D in chunk.get_children():
+				if not life.has_method("update_life"):
+					continue
+				var starts: Dictionary = {}
+				for actor: Node3D in life.get_children():
+					if str(actor.get_meta("kind", "")) == "boat":
+						boats += 1
+						starts[actor.get_instance_id()] = actor.position
+					elif str(actor.get_meta("kind", "")) == "fish":
+						fish += 1
+				for step: int in range(60):
+					life.call("update_life", float(step) * .5)
+					for actor: Node3D in life.get_children():
+						if str(actor.get_meta("kind", "")) == "boat":
+							sea_safe = sea_safe and player.ground_at(actor.global_position.normalized()).is_empty()
+						elif str(actor.get_meta("kind", "")) == "fish":
+							fish_leap = fish_leap or (actor.visible and actor.global_position.length() > radius + 1.0)
+							fish_dive = fish_dive or not actor.visible
+				for actor: Node3D in life.get_children():
+					if starts.has(actor.get_instance_id()):
+						boats_travel = boats_travel and actor.position.distance_to(starts[actor.get_instance_id()] as Vector3) > 1.0
+			chunk.free()
+	check("Generated ocean chunks retain seven boats and twenty-eight fish", boats == 7 and fish == 28, str([boats, fish]))
+	check("Boat routes stay over water", sea_safe and boats == 7)
+	check("Boats actually travel", boats_travel and boats == 7)
+	check("Fish schools leap and dive", fish_leap and fish_dive and fish == 28)
 
 func joined_surface_covered(world: Node3D,points: Array[Vector3],radius: float,height: float,width: float,closed: bool) -> bool:
 	var sides: Array[Vector3] = PlanetGeometry.path_sides(points,closed)

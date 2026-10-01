@@ -38,6 +38,8 @@ def prepare(source: Path, package: Path) -> None:
     pck = source / "index.pck"
     if not pck.is_file() or not (source / "index.html").is_file():
         raise FileNotFoundError("Export Godot Web before packaging it")
+    previous_path = package / "manifest.json"
+    previous = json.loads(previous_path.read_text(encoding="utf-8")) if previous_path.is_file() else {}
     (package / "parts").mkdir(parents=True, exist_ok=True)
     (package / "files").mkdir(parents=True, exist_ok=True)
 
@@ -74,6 +76,18 @@ def prepare(source: Path, package: Path) -> None:
         "files": files,
     }
     (package / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # A smaller release must not leave old, unused PCK parts in Git. Only prune
+    # files owned by the preceding manifest, after the replacement is complete.
+    old_owned = {"parts/" + str(item["name"]) for item in previous.get("pck", {}).get("parts", [])}
+    old_owned.update("files/" + str(item["path"]) for item in previous.get("files", []))
+    new_owned = {"parts/" + str(item["name"]) for item in parts}
+    new_owned.update("files/" + str(item["path"]) for item in files)
+    for name in old_owned - new_owned:
+        obsolete = (package / safe_relative(name)).resolve()
+        if not obsolete.is_relative_to(package):
+            raise ValueError(f"Release path escapes package: {name}")
+        if obsolete.is_file():
+            obsolete.unlink()
     print(f"Prepared {len(parts)} PCK parts and {len(files)} site files; PCK SHA-256 {whole.hexdigest()}")
 
 

@@ -28,6 +28,7 @@ func build() -> void:
 			report[key]=[]
 		build_districts()
 		build_stations()
+		preload("res://tools/streaming_world_builder.gd").new().build()
 		var output: FileAccess=FileAccess.open("res://generated/build_report.json",FileAccess.WRITE)
 		output.store_string(JSON.stringify(report,"\t"))
 		print("DISTRICTS_BUILD_OK")
@@ -65,6 +66,7 @@ func build() -> void:
 	build_districts()
 	build_stations()
 	refine_lighting()
+	preload("res://tools/streaming_world_builder.gd").new().build()
 	var file: FileAccess = FileAccess.open("res://generated/build_report.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "\t"))
 	print("WORLD_BUILD_OK: globe, district, six stations and curved road collisions")
@@ -79,6 +81,7 @@ func refine_lighting() -> void:
 	environment.ambient_light_energy = .36
 	environment_node.environment = environment
 	(scene.get_node("Sun") as DirectionalLight3D).light_energy = .45
+	(scene.get_node("Sun") as DirectionalLight3D).shadow_enabled = false
 	(scene.get_node("Fill") as DirectionalLight3D).light_energy = .12
 	var packed: PackedScene = PackedScene.new()
 	assert(packed.pack(scene)==OK)

@@ -87,4 +87,5 @@ func run() -> void:
 	verified.free()
 	asset.free()
 	globe.free()
+	preload("res://tools/streaming_world_builder.gd").new().build()
 	quit()

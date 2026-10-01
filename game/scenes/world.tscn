@@ -1,8 +1,8 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1"]
-[ext_resource type="PackedScene" path="res://generated/globe.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://generated/neighborhood.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://generated/streaming/globe_base.scn" id="2_k0juu"]
+[ext_resource type="PackedScene" path="res://generated/streaming/neighborhood_base.scn" id="3_71j4m"]
 [ext_resource type="PackedScene" path="res://generated/stations.tscn" id="4"]
 
 [sub_resource type="Environment" id="Environment_k0juu"]
@@ -17,9 +17,9 @@ tonemap_mode = 2
 [node name="LittleWorld" type="Node3D" unique_id=1314872386]
 script = ExtResource("1")
 
-[node name="Globe" type="Node3D" parent="." unique_id=1778517412 instance=ExtResource("2")]
+[node name="Globe" type="Node3D" parent="." unique_id=523093727 instance=ExtResource("2_k0juu")]
 
-[node name="Neighborhood" type="Node3D" parent="." unique_id=2053921327 instance=ExtResource("3")]
+[node name="Neighborhood" type="Node3D" parent="." unique_id=665495765 instance=ExtResource("3_71j4m")]
 
 [node name="Stations" type="Node3D" parent="." unique_id=1921951510 instance=ExtResource("4")]
 
@@ -30,7 +30,6 @@ environment = SubResource("Environment_k0juu")
 transform = Transform3D(0.7450099, 0.5656502, -0.35355338, -0.1830127, 0.68301266, 0.70710677, 0.64145654, -0.46209678, 0.6123724, 0, 0, 0)
 light_color = Color(1, 0.93, 0.79, 1)
 light_energy = 0.45
-shadow_enabled = true
 directional_shadow_max_distance = 150.0
 
 [node name="Fill" type="DirectionalLight3D" parent="." unique_id=1068674916]

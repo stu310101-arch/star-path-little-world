@@ -2,13 +2,13 @@
   "format": 1,
   "game": "星途 · Little World",
   "pck": {
-    "bytes": 176279832,
-    "sha256": "5c22ea453b2c0263e5bf2d420c719cbb2e0a253f94fd673662ed56620e993910",
+    "bytes": 154560308,
+    "sha256": "5210d188c2b2214b0f2d6f0e88814dd0fb4b18957c8509a1b18c2e7a56db0961",
     "parts": [
       {
         "name": "index.pck.part000",
         "bytes": 47185920,
-        "sha256": "15c1ffe2a8aaa15f90473092c6609c46b2a82e347b88f37eaf992ac6024bdf5d"
+        "sha256": "4707b513582549bc8279761d8cbe2fa6fcc2b64369bce8d37812bb3ba129a6c4"
       },
       {
         "name": "index.pck.part001",
@@ -18,12 +18,12 @@
       {
         "name": "index.pck.part002",
         "bytes": 47185920,
-        "sha256": "3228f8a8d1ee73c96c98b1fc4296033a27048cbdccdef953d4d459d87d496816"
+        "sha256": "f724ac1b00317ff1b5d7b97f7f4ed4fa6aba28ead9cb49f4e4f963809370435d"
       },
       {
         "name": "index.pck.part003",
-        "bytes": 34722072,
-        "sha256": "86702e65769b6548879ed914eb2c55754a3ccbfad7ab3b55167bd10fbe86619e"
+        "bytes": 13002548,
+        "sha256": "f6aa7eaf1632433571fe7b7856acfe08908cebd4ed337a14fcf480aeb05a03b8"
       }
     ]
   },
@@ -40,13 +40,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 5310,
-      "sha256": "32e327363e4ee0e680a4a00274405ece2bd638624470898f3afa5aee7154da52"
+      "bytes": 5381,
+      "sha256": "6f7a18ac952f2e8d00bf9a50bf477968ab6c08ddf2765637992437b2861d9d57"
     },
     {
       "path": "index.js",
-      "bytes": 315645,
-      "sha256": "ffc3898b59fba6f5af0c02f76e5ee526cc061e65c7d2d6f4f98186876cea15c4"
+      "bytes": 279815,
+      "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
     },
     {
       "path": "index.png",
@@ -54,9 +54,14 @@
       "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
     },
     {
+      "path": "index.release.json",
+      "bytes": 863,
+      "sha256": "fd7d2adfa0efd4f0b3d4633649595585bb5ab34c7eaa8c4de45e820b637933d6"
+    },
+    {
       "path": "index.wasm",
-      "bytes": 37902138,
-      "sha256": "11ea19645368f8e73cf337b59cfd7ceeb4ebb51f7a3bbf77d1a5c3ddfedbc522"
+      "bytes": 39514754,
+      "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
     },
     {
       "path": "licenses/Godot-Copyright-Information.json",

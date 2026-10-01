@@ -2,6 +2,7 @@ extends SceneTree
 
 var checks: Array[Dictionary] = []
 var failures: int = 0
+var vegetation_probe: Dictionary = {}
 
 func _initialize() -> void:
 	call_deferred("run")
@@ -90,24 +91,117 @@ func run() -> void:
 	check("Leaving obstruction restores exact shared materials and visibility",wall.material_override==material and wall.get_surface_override_material(0)==null and wall.visible)
 	# Use a real imported concave building, rather than treating a primitive
 	# solid-box test as proof that a lens inside a GLB house remains readable.
+	var streaming: Node = world.get("streaming") as Node
+	streaming.call("pin_position", player.global_position)
+	var load_frames: int = 0
+	while not bool(streaming.call("is_position_ready", player.global_position)) and load_frames < 2400:
+		streaming.call("update_context", false, player.global_position, camera.global_position, world.get("camera_aim") as Vector3, 1.0 / 60.0)
+		load_frames += 1
+		await process_frame
+	# A ready signal precedes the next context tick that activates its chunks.
+	streaming.call("update_context", false, player.global_position, camera.global_position, world.get("camera_aim") as Vector3, .2)
+	check("Required district details load incrementally before the real shell check", bool(streaming.call("is_position_ready", player.global_position)))
 	var shell: Array[Node]=[]
-	for candidate: Node in world.get_node("Neighborhood/counseling").get_children():
-		if candidate.has_node("Foundation"):
-			shell=candidate.find_children("*","MeshInstance3D",true,false)
+	var shell_key: String = ""
+	var regions: Dictionary = streaming.get("_regions") as Dictionary
+	for chunk: Node3D in regions.counseling.roots:
+		for candidate: Node in chunk.get_children():
+			if candidate.has_node("Foundation"):
+				shell = candidate.find_children("*", "MeshInstance3D", true, false)
+				shell_key = str(candidate.get_meta("camera_visual_group", ""))
+				break
+		if not shell.is_empty():
 			break
-	var shell_mesh: MeshInstance3D=shell[-1] as MeshInstance3D
-	camera.global_position=shell_mesh.to_global(shell_mesh.get_aabb().get_center())
-	fade.call("update",world,camera,camera.global_position+Vector3.UP*8,.25)
-	var shell_hidden: bool=true
-	for node: MeshInstance3D in shell:
-		shell_hidden=shell_hidden and not node.visible
-	check("Lens inside a real concave building hides the complete obstructing shell",shell_hidden)
-	fade.call("reset")
-	var shell_restored: bool=true
-	for node: MeshInstance3D in shell:
-		shell_restored=shell_restored and node.visible
-	check("Leaving a building restores its original complete silhouette",shell_restored)
+	var has_concave: bool = false
+	for collider: Node in world.find_children("*", "StaticBody3D", true, false):
+		if str(collider.get_meta("camera_visual_group", "")) != shell_key or shell_key.is_empty():
+			continue
+		for collision: Node in collider.get_children():
+			if collision is CollisionShape3D and (collision as CollisionShape3D).shape is ConcavePolygonShape3D:
+				has_concave = true
+	check("Streamed real building retains its matching permanent concave collision", not shell.is_empty() and has_concave)
+	if not shell.is_empty():
+		var shell_mesh: MeshInstance3D=shell[-1] as MeshInstance3D
+		camera.global_position=shell_mesh.to_global(shell_mesh.get_aabb().get_center())
+		fade.call("force_update")
+		fade.call("update",world,camera,camera.global_position+Vector3.UP*8,.25)
+		var shell_hidden: bool=true
+		for node: MeshInstance3D in shell:
+			shell_hidden=shell_hidden and not node.visible
+		check("Lens inside a real concave building hides the complete obstructing shell",shell_hidden)
+		fade.call("reset")
+		var shell_restored: bool=true
+		for node: MeshInstance3D in shell:
+			shell_restored=shell_restored and node.visible
+		check("Leaving a building restores its original complete silhouette",shell_restored)
+	check_generated_vegetation(world, camera, fade, regions.counseling.roots as Array)
 	var file: FileAccess = FileAccess.open("res://../deliverables/camera-drag-checks.json",FileAccess.WRITE)
-	file.store_string(JSON.stringify({"checks":checks,"failures":failures},"\t"))
+	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"vegetation_probe":vegetation_probe},"\t"))
+	file.close()
 	print("CAMERA_DRAG_CHECKS ",checks.size()," failures=",failures)
+	world.free()
 	quit(1 if failures else 0)
+
+func check_generated_vegetation(world: Node3D, camera: Camera3D, fade: RefCounted, chunks: Array) -> void:
+	var members: Array[MultiMeshInstance3D] = []
+	var key: String = ""
+	for chunk: Node3D in chunks:
+		for candidate: Node in chunk.find_children("*", "MultiMeshInstance3D", true, false):
+			var node: MultiMeshInstance3D = candidate as MultiMeshInstance3D
+			if not node.is_visible_in_tree() or str(node.get_meta("ecology_kind", "")) not in ["alder", "birch", "willow", "pine"]:
+				continue
+			if key.is_empty():
+				key = str(node.get_meta("ecology_batch_key", ""))
+			if str(node.get_meta("ecology_batch_key", "")) == key:
+				members.append(node)
+	check("Real generated tree keeps paired bark and canopy in an active streamed chunk", members.size() >= 2 and not key.is_empty())
+	if members.is_empty():
+		return
+	var originals: Array[Dictionary] = []
+	var canopy_bounds: AABB = AABB()
+	var largest_volume: float = -1.0
+	for node: MultiMeshInstance3D in members:
+		var placements: Array = node.get_meta("placements", []) as Array
+		check("Real tree metadata retains every original instance: " + str(node.name), placements.size() == node.multimesh.instance_count and not placements.is_empty())
+		if placements.is_empty():
+			return
+		var bounds: AABB = node.global_transform * (placements[0] as Transform3D) * node.multimesh.mesh.get_aabb()
+		if bounds.get_volume() > largest_volume:
+			canopy_bounds = bounds
+			largest_volume = bounds.get_volume()
+		var transforms: Array[Transform3D] = []
+		for index: int in range(node.multimesh.instance_count):
+			transforms.append(node.multimesh.get_instance_transform(index))
+		originals.append({"visible":node.multimesh.visible_instance_count,"transforms":transforms,"placements":placements.duplicate()})
+	var vegetation: RefCounted = fade.get("vegetation") as RefCounted
+	camera.global_position = canopy_bounds.get_center()
+	var outward: Vector3 = camera.global_position.normalized()
+	var tangent: Vector3 = outward.cross(Vector3.RIGHT).normalized()
+	camera.look_at(camera.global_position + tangent * 8.0, outward)
+	fade.call("force_update")
+	fade.call("update", world, camera, camera.global_position + tangent * 8.0, .016)
+	var candidates: int = int(vegetation.get("candidate_count"))
+	var hidden: bool = true
+	for node: MultiMeshInstance3D in members:
+		hidden = hidden and node.multimesh.visible_instance_count >= 0 and node.multimesh.visible_instance_count < node.multimesh.instance_count
+	check("Lens inside a real generated canopy finds nearby candidates and hides matching bark and leaves", candidates > 0 and hidden)
+	var decisions: int = int(fade.get("decision_count"))
+	camera.rotate(outward, TAU / 3.0)
+	fade.call("update", world, camera, camera.global_position + tangent * 8.0, .016)
+	check("Fast turn beside real generated vegetation immediately reevaluates before the interval", int(fade.get("decision_count")) == decisions + 1 and int(vegetation.get("candidate_count")) > 0)
+	fade.call("set_active", false)
+	var restored: bool = true
+	var restored_transforms: bool = true
+	var real_renderer: bool = DisplayServer.get_name() != "headless"
+	for member_index: int in range(members.size()):
+		var node: MultiMeshInstance3D = members[member_index]
+		var original: Dictionary = originals[member_index]
+		restored = restored and node.multimesh.visible_instance_count == int(original.visible) and (node.get_meta("placements") as Array) == (original.placements as Array)
+		if real_renderer:
+			for index: int in range(node.multimesh.instance_count):
+				restored_transforms = restored_transforms and node.multimesh.get_instance_transform(index).is_equal_approx(original.transforms[index] as Transform3D)
+	check("Leaving real tree obstruction restores original visibility and canonical placement metadata", restored)
+	if real_renderer:
+		check("Real renderer restores all original generated tree instance matrices", restored_transforms)
+	vegetation_probe = {"batch":key,"members":members.size(),"instances":members[0].multimesh.instance_count,"candidates":candidates,"fast_turn_decisions":int(fade.get("decision_count")) - decisions,"renderer":DisplayServer.get_name(),"matrix_readback_measured":real_renderer}
+	fade.call("reset")
