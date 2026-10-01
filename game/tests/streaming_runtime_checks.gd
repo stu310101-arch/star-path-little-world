@@ -155,6 +155,22 @@ func run() -> void:
 	check_ground(false)
 	await advance(true, a, 4)
 	check("Initial panorama loads zero high-detail chunks", int(streaming.call("metrics").loaded_chunks) == 0)
+	# First-entry preparation pins detail while the view is still panorama.
+	# Cancelling it must work without relying on a false-to-true view change.
+	streaming.call("pin_position", a)
+	await advance(true, a, 1)
+	check("Preparation in unchanged panorama queues one detail resource", streaming.get("_pending_scene") != null)
+	var preparation_added: int = loaded_signals
+	streaming.call("clear_pin")
+	await advance(true, a, 1)
+	check("Cancelling unchanged panorama preparation prevents pending construction", streaming.get("_pending_scene") == null and not bool(region("a").requested) and loaded_signals == preparation_added)
+	streaming.call("pin_position", a)
+	await advance(true, a, 8)
+	check("Preparation can preload detail with actors still disabled", bool(region("a").ready) and (region("a").roots[0] as Node3D).process_mode == Node.PROCESS_MODE_DISABLED)
+	streaming.call("clear_pin")
+	streaming.call("clear_pin")
+	await advance(true, a, 26, .20)
+	check("Cancelled unchanged panorama releases detail after normal unload grace", int(streaming.call("metrics").loaded_chunks) == 0 and world.find_children("*", "", true, false).size() == baseline_nodes)
 	streaming.call("pin_position", a)
 	await advance(false, a, 8)
 	check("Pinned nearby region becomes ready", bool(streaming.call("is_position_ready", a)))

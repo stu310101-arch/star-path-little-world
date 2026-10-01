@@ -1,13 +1,13 @@
 {
-  "build_id": "streaming-3f7c73f0246b34c7",
-  "created_utc": "2026-10-01T03:36:23.580769+00:00",
-  "source_base_commit": "1cd1bbd5411e01c09136af8c86d7da670a577d28",
-  "source_sha256": "3f7c73f0246b34c740e866336cbda418d8f1f132a45efd6b36834a807391f34b",
+  "build_id": "packs-c674b2a47ed31edd",
+  "created_utc": "2026-10-01T09:00:29.028562+00:00",
+  "source_base_commit": "42883300eda4352200268736f18437560a30ca5f",
+  "source_sha256": "c674b2a47ed31edd5ee75f4c86fcb389ffae87065f618b4cf8322a997dca1658",
   "export": "Web release; Compatibility; single-threaded",
   "files": {
     "index.html": {
-      "bytes": 5381,
-      "sha256": "6f7a18ac952f2e8d00bf9a50bf477968ab6c08ddf2765637992437b2861d9d57"
+      "bytes": 5376,
+      "sha256": "4f661dfd4f18dd4052283334a0ad2facc6bfef865086eaf17237fafcadc4e4c0"
     },
     "index.js": {
       "bytes": 279815,
@@ -18,8 +18,76 @@
       "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
     },
     "index.pck": {
-      "bytes": 154560308,
-      "sha256": "5210d188c2b2214b0f2d6f0e88814dd0fb4b18957c8509a1b18c2e7a56db0961"
+      "bytes": 35404024,
+      "sha256": "32520e066b344b8e2b29b245423ebbc7b6a9888b75ee8a4124542d2102c277d1"
+    },
+    "index.packs.json": {
+      "bytes": 11086,
+      "sha256": "d8671fc0bec253fcbdde1c5ecf43a2c3d41e34b184913de456e5db73c61a3d31"
+    },
+    "packs/avatar-dbf4017c84a82ebd.pck": {
+      "bytes": 50904340,
+      "sha256": "dbf4017c84a82ebdb9988189b61d0a6fa00e5e53c70a95e4dfc9f3044f2185ac"
+    },
+    "packs/district_admissions-b9990e78225097d4.pck": {
+      "bytes": 3614436,
+      "sha256": "b9990e78225097d47c172f2a4503783425e2dd720b8d92d1cc90d389426656f7"
+    },
+    "packs/district_counseling-c94cdc8453e08139.pck": {
+      "bytes": 3465044,
+      "sha256": "c94cdc8453e08139d2e3f45209ef49a4eaef4926cc11837f90ede351b3d6cce7"
+    },
+    "packs/district_life-b375c982e7a81f3b.pck": {
+      "bytes": 3356052,
+      "sha256": "b375c982e7a81f3bf9ce10185a3ad2326948bfdca66b7a99b56ebef2345d4936"
+    },
+    "packs/district_ocean-205618f4a153be51.pck": {
+      "bytes": 729528,
+      "sha256": "205618f4a153be51994e9beaa4696751f73dae2775eae656d9a0ab65d41f5ce3"
+    },
+    "packs/district_recommendations-dd767596f5068425.pck": {
+      "bytes": 2888636,
+      "sha256": "dd767596f5068425ab405c59851f72daf81cc77e75238bb40f6ffe8e4adc18ac"
+    },
+    "packs/district_sakura-6315d0720e217884.pck": {
+      "bytes": 4921072,
+      "sha256": "6315d0720e217884ae2d71457062edbfbc820b10e1aa01791cfb8e12ebb1dc08"
+    },
+    "packs/district_universities-83ab9e6fad509274.pck": {
+      "bytes": 3564404,
+      "sha256": "83ab9e6fad509274bc05e77c6bba84aa4be22db51801720165a78e311428016e"
+    },
+    "packs/district_wordking-d88484e6cbd7c882.pck": {
+      "bytes": 3527084,
+      "sha256": "d88484e6cbd7c882841053806b029db95b191ee9b451794a60eb0686f99c7653"
+    },
+    "packs/music_admissions-2ce1c35030bcc9fb.pck": {
+      "bytes": 1728528,
+      "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0"
+    },
+    "packs/music_counseling-f3b97506778458ba.pck": {
+      "bytes": 1443824,
+      "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4"
+    },
+    "packs/music_recommendations-66382088fcc4b843.pck": {
+      "bytes": 2195960,
+      "sha256": "66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8"
+    },
+    "packs/music_wordking-a45c153d522c439d.pck": {
+      "bytes": 2315480,
+      "sha256": "a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995"
+    },
+    "packs/music_world-e1a7f96b4f7f8400.pck": {
+      "bytes": 1351376,
+      "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf"
+    },
+    "packs/shared-4b7143129f228685.pck": {
+      "bytes": 176264,
+      "sha256": "4b7143129f228685e51f78030a171343c09b5aaaa3b39b0ee3631daf5d7bbe81"
+    },
+    "packs/training_room-00e45f0b5f24b903.pck": {
+      "bytes": 15104300,
+      "sha256": "00e45f0b5f24b9037f1b64cac3ecd244e845063525b8211cabeaf9cc503752aa"
     }
   }
 }

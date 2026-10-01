@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
+
 const Geo = preload("res://scripts/planet_geometry.gd")
 const Routes = preload("res://scripts/world_routes.gd")
 const Waterfront = preload("res://scripts/waterfront_routes.gd")
@@ -274,6 +276,9 @@ func check_marina() -> void:
 
 func check_bridge_walks() -> void:
 	var player: PlanetPlayer = world.get("player") as PlanetPlayer
+	check("Bridge walk fixture prepares character", await StartupFixture.prepare_player(player, self))
+	world.call("set_overview", false)
+	check("Bridge walk starts after roaming preparation", await StartupFixture.wait_roaming(world, self))
 	var directions: Array[Vector3] = Routes.directions()
 	player.set_physics_process(true)
 	player.allow_test_input = true

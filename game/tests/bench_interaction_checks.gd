@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
+
 const Geo = preload("res://scripts/planet_geometry.gd")
 const Sakura = preload("res://scripts/sakura_routes.gd")
 const OUTPUT: String = "res://../deliverables/performance/bench-checks.json"
@@ -44,6 +46,7 @@ func run_checks() -> void:
 		return
 	world.connect("request_open_station",on_portal)
 	world.call("set_overview",false)
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	player.allow_test_input = true
 	player.test_direction = Vector2.ZERO
 	await tick(30)
@@ -180,6 +183,7 @@ func check_safety_gates(seat: StaticBody3D) -> void:
 		check("Bench activation is gated while "+mode,not bool(benches.call("interact")) and str(benches.get("state"))=="idle")
 		if mode=="overview":
 			world.call("set_overview",false)
+			check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 		elif mode=="paused":
 			world.call("resume_world",{})
 		elif mode=="destinations":
@@ -225,6 +229,7 @@ func check_ui_and_teleport(seat: StaticBody3D) -> void:
 	blocked_exit.queue_free()
 	await tick(3)
 	world.call("teleport_to","life")
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	await tick(30)
 	check("Destination teleport clears rest and restores player collision",str(benches.get("state"))=="idle" and benches.get("active")==null and not player.is_resting and player.collision_mask==9 and player.is_on_floor())
 	await approach(seat,target.point)
@@ -232,12 +237,14 @@ func check_ui_and_teleport(seat: StaticBody3D) -> void:
 	await tick(8)
 	check("Second teleport test starts during the sitting transition",str(benches.get("state"))=="sitting")
 	world.call("visit_sakura")
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	await tick(30)
 	check("Sakura travel cancels an unfinished sit safely",str(benches.get("state"))=="idle" and not player.is_resting and player.collision_mask==9 and player.is_on_floor())
 
 func check_station_entry() -> void:
 	player.allow_test_input = false
 	world.call("teleport_to","counseling")
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	await tick(30)
 	world.call("update_nearest")
 	check("Existing station E remains available at arrival",str(world.get("nearest_id"))=="counseling")

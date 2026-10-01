@@ -1,0 +1,223 @@
+{
+  "packs": {
+    "avatar": {
+      "bytes": 50904340,
+      "dependencies": [],
+      "sha256": "dbf4017c84a82ebdb9988189b61d0a6fa00e5e53c70a95e4dfc9f3044f2185ac",
+      "url": "packs/avatar-dbf4017c84a82ebd.pck"
+    },
+    "district_admissions": {
+      "bytes": 3614436,
+      "dependencies": [
+        "shared"
+      ],
+      "sha256": "b9990e78225097d47c172f2a4503783425e2dd720b8d92d1cc90d389426656f7",
+      "url": "packs/district_admissions-b9990e78225097d4.pck"
+    },
+    "district_counseling": {
+      "bytes": 3465044,
+      "dependencies": [
+        "shared"
+      ],
+      "sha256": "c94cdc8453e08139d2e3f45209ef49a4eaef4926cc11837f90ede351b3d6cce7",
+      "url": "packs/district_counseling-c94cdc8453e08139.pck"
+    },
+    "district_life": {
+      "bytes": 3356052,
+      "dependencies": [
+        "shared"
+      ],
+      "sha256": "b375c982e7a81f3bf9ce10185a3ad2326948bfdca66b7a99b56ebef2345d4936",
+      "url": "packs/district_life-b375c982e7a81f3b.pck"
+    },
+    "district_ocean": {
+      "bytes": 729528,
+      "dependencies": [
+        "shared"
+      ],
+      "sha256": "205618f4a153be51994e9beaa4696751f73dae2775eae656d9a0ab65d41f5ce3",
+      "url": "packs/district_ocean-205618f4a153be51.pck"
+    },
+    "district_recommendations": {
+      "bytes": 2888636,
+      "dependencies": [
+        "shared"
+      ],
+      "sha256": "dd767596f5068425ab405c59851f72daf81cc77e75238bb40f6ffe8e4adc18ac",
+      "url": "packs/district_recommendations-dd767596f5068425.pck"
+    },
+    "district_sakura": {
+      "bytes": 4921072,
+      "dependencies": [
+        "shared"
+      ],
+      "sha256": "6315d0720e217884ae2d71457062edbfbc820b10e1aa01791cfb8e12ebb1dc08",
+      "url": "packs/district_sakura-6315d0720e217884.pck"
+    },
+    "district_universities": {
+      "bytes": 3564404,
+      "dependencies": [
+        "shared"
+      ],
+      "sha256": "83ab9e6fad509274bc05e77c6bba84aa4be22db51801720165a78e311428016e",
+      "url": "packs/district_universities-83ab9e6fad509274.pck"
+    },
+    "district_wordking": {
+      "bytes": 3527084,
+      "dependencies": [
+        "shared"
+      ],
+      "sha256": "d88484e6cbd7c882841053806b029db95b191ee9b451794a60eb0686f99c7653",
+      "url": "packs/district_wordking-d88484e6cbd7c882.pck"
+    },
+    "music_admissions": {
+      "bytes": 1728528,
+      "dependencies": [],
+      "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0",
+      "url": "packs/music_admissions-2ce1c35030bcc9fb.pck"
+    },
+    "music_counseling": {
+      "bytes": 1443824,
+      "dependencies": [],
+      "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4",
+      "url": "packs/music_counseling-f3b97506778458ba.pck"
+    },
+    "music_recommendations": {
+      "bytes": 2195960,
+      "dependencies": [],
+      "sha256": "66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8",
+      "url": "packs/music_recommendations-66382088fcc4b843.pck"
+    },
+    "music_wordking": {
+      "bytes": 2315480,
+      "dependencies": [],
+      "sha256": "a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995",
+      "url": "packs/music_wordking-a45c153d522c439d.pck"
+    },
+    "music_world": {
+      "bytes": 1351376,
+      "dependencies": [],
+      "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf",
+      "url": "packs/music_world-e1a7f96b4f7f8400.pck"
+    },
+    "shared": {
+      "bytes": 176264,
+      "dependencies": [],
+      "sha256": "4b7143129f228685e51f78030a171343c09b5aaaa3b39b0ee3631daf5d7bbe81",
+      "url": "packs/shared-4b7143129f228685.pck"
+    },
+    "training_room": {
+      "bytes": 15104300,
+      "dependencies": [
+        "avatar"
+      ],
+      "sha256": "00e45f0b5f24b9037f1b64cac3ecd244e845063525b8211cabeaf9cc503752aa",
+      "url": "packs/training_room-00e45f0b5f24b903.pck"
+    }
+  },
+  "resources": {
+    "res://assets/audio/music/Campus_Orbit_96s_Loop.ogg": "music_world",
+    "res://assets/audio/music/Pixie_Compass_120s_Loop.ogg": "music_recommendations",
+    "res://assets/audio/music/Region01_Quiet_Coordinates_120s_Loop.ogg": "music_admissions",
+    "res://assets/audio/music/Training_Pulse_120s_Loop.ogg": "music_wordking",
+    "res://assets/audio/music/Warm_Window_120s_Loop.ogg": "music_counseling",
+    "res://assets/character/graduate.glb": "avatar",
+    "res://assets/character/graduate_jump.glb": "avatar",
+    "res://assets/character/graduate_rest.glb": "avatar",
+    "res://assets/scenery/sakura_petal_sakura-atlas.png": "shared",
+    "res://assets/training_room/layout.json": "training_room",
+    "res://assets/training_room/textures/starry_night.jpg": "training_room",
+    "res://assets/training_room/wordking_training_room.glb": "training_room",
+    "res://assets/training_room/wordking_training_room_starry_night.jpg": "training_room",
+    "res://assets/urban/Textures/colormap.png": "shared",
+    "res://generated/streaming/admissions_000.scn": "district_admissions",
+    "res://generated/streaming/admissions_001.scn": "district_admissions",
+    "res://generated/streaming/admissions_002.scn": "district_admissions",
+    "res://generated/streaming/admissions_003.scn": "district_admissions",
+    "res://generated/streaming/admissions_004.scn": "district_admissions",
+    "res://generated/streaming/admissions_005.scn": "district_admissions",
+    "res://generated/streaming/admissions_006.scn": "district_admissions",
+    "res://generated/streaming/counseling_000.scn": "district_counseling",
+    "res://generated/streaming/counseling_001.scn": "district_counseling",
+    "res://generated/streaming/counseling_002.scn": "district_counseling",
+    "res://generated/streaming/counseling_003.scn": "district_counseling",
+    "res://generated/streaming/counseling_004.scn": "district_counseling",
+    "res://generated/streaming/counseling_005.scn": "district_counseling",
+    "res://generated/streaming/life_000.scn": "district_life",
+    "res://generated/streaming/life_001.scn": "district_life",
+    "res://generated/streaming/life_002.scn": "district_life",
+    "res://generated/streaming/life_003.scn": "district_life",
+    "res://generated/streaming/life_004.scn": "district_life",
+    "res://generated/streaming/life_005.scn": "district_life",
+    "res://generated/streaming/ocean_00_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_01_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_02_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_03_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_04_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_05_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_06_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_07_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_08_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_09_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_10_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_11_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_12_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_13_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_14_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_15_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_16_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_17_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_18_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_19_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_20_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_21_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_22_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_23_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_24_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_25_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_26_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_27_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_28_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_29_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_30_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_31_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_32_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_33_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_34_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_35_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_36_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_37_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_38_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_39_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_40_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_41_000.scn": "district_ocean",
+    "res://generated/streaming/ocean_42_000.scn": "district_ocean",
+    "res://generated/streaming/recommendations_000.scn": "district_recommendations",
+    "res://generated/streaming/recommendations_001.scn": "district_recommendations",
+    "res://generated/streaming/recommendations_002.scn": "district_recommendations",
+    "res://generated/streaming/recommendations_003.scn": "district_recommendations",
+    "res://generated/streaming/recommendations_004.scn": "district_recommendations",
+    "res://generated/streaming/recommendations_005.scn": "district_recommendations",
+    "res://generated/streaming/sakura_000.scn": "district_sakura",
+    "res://generated/streaming/sakura_001.scn": "district_sakura",
+    "res://generated/streaming/sakura_002.scn": "district_sakura",
+    "res://generated/streaming/sakura_003.scn": "district_sakura",
+    "res://generated/streaming/sakura_004.scn": "district_sakura",
+    "res://generated/streaming/universities_000.scn": "district_universities",
+    "res://generated/streaming/universities_001.scn": "district_universities",
+    "res://generated/streaming/universities_002.scn": "district_universities",
+    "res://generated/streaming/universities_003.scn": "district_universities",
+    "res://generated/streaming/universities_004.scn": "district_universities",
+    "res://generated/streaming/universities_005.scn": "district_universities",
+    "res://generated/streaming/universities_006.scn": "district_universities",
+    "res://generated/streaming/wordking_000.scn": "district_wordking",
+    "res://generated/streaming/wordking_001.scn": "district_wordking",
+    "res://generated/streaming/wordking_002.scn": "district_wordking",
+    "res://generated/streaming/wordking_003.scn": "district_wordking",
+    "res://generated/streaming/wordking_004.scn": "district_wordking",
+    "res://generated/streaming/wordking_005.scn": "district_wordking",
+    "res://scenes/training_room.tscn": "training_room",
+    "res://shaders/lake_fish.gdshader": "shared"
+  },
+  "version": 1
+}

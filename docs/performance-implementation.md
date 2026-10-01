@@ -48,16 +48,14 @@
 godot_console --headless --path game --script res://tools/build_streaming_world.gd
 godot_console --headless --path game --script res://tools/configure_performance_world.gd
 godot_console --headless --path game --script res://tests/streaming_build_checks.gd
-godot_console --headless --path game --export-release Web ../build/web/index.html
-python tools/package_web_notices.py
-python tools/stamp_web_release.py
-python deploy/github-pages/package.py prepare --source build/web --package deploy/github-pages
-python deploy/github-pages/package.py assemble --package deploy/github-pages --output _site
+python tools/build_web_release.py --godot godot_console
 ```
 
 完整世界生成與區域、水域、石岸、櫻花座椅更新工具已接上衍生場景重建，避免只修改一次輸出、下次生成失效。生成器會刪除上一個 catalog 已不再使用的 chunks。
 
 `index.release.json` 記錄來源摘要、build ID，以及同次匯出的 HTML／JS／WASM／PCK 大小和 SHA-256。manifest 與 assemble 驗證每個 PCK 分片及所有發布檔；prepare 只移除上一份 manifest 所擁有、這次已不用的檔案。
+
+2026-10-01 起，上述統一建置命令還會列舉靜態與明確宣告的動態依賴，將普通 Web 匯出拆成啟動包及按需下載包，並從隔離目錄實際解碼所有匯出資源。`index.packs.json` 與啟動包內的同名清單必須一致；`index.release.json` 也涵蓋全部分包。直接省略此步驟匯出，會回到單一大 PCK。
 
 現有 GitHub workflow **只組裝已匯出的發布檔，不執行 Godot 匯出**。因此必須連同 `deploy/github-pages/` 一起提交。依本次最新要求，只做 localhost 驗證、Git 提交與推送，不檢查 Actions 或公開網站。
 

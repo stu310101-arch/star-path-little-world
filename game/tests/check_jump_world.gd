@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
+
 const Geo = preload("res://scripts/planet_geometry.gd")
 const Plan = preload("res://scripts/sakura_routes.gd")
 const Routes = preload("res://scripts/world_routes.gd")
@@ -44,6 +46,7 @@ func run() -> void:
 	radius = float((world.get("layout") as Dictionary).radius)
 	world.connect("request_open_station",on_portal)
 	world.call("set_overview",false)
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	player.set("allow_test_input",true)
 	player.set("test_direction",Vector2.ZERO)
 	player.set("test_running",false)
@@ -264,6 +267,7 @@ func shore_safety() -> void:
 func world_input_gates() -> void:
 	player.set("allow_test_input",false)
 	world.call("teleport_to","counseling")
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	await tick(35)
 	for mode: String in ["overview","paused","destinations"]:
 		if mode=="overview":
@@ -285,12 +289,14 @@ func world_input_gates() -> void:
 			((world.get("hud") as CanvasLayer).get("destination_toggle") as Button).pressed.emit()
 		elif mode=="overview":
 			world.call("set_overview",false)
+			check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 		else:
 			world.call("resume_world",{})
 		await tick(2)
 
 func portal_unchanged() -> void:
 	world.call("teleport_to","counseling")
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	await tick(35)
 	world.call("update_nearest")
 	check("E portal is available at the same station arrival",str(world.get("nearest_id"))=="counseling")

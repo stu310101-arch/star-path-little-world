@@ -31,6 +31,9 @@ var msaa_button: Button
 var frame_buttons: Array[Button] = []
 var settings_status: Label
 var _settings_previous_controls: bool = false
+var preparation_overlay: CenterContainer
+var preparation_label: Label
+var preparation_retry: Button
 var font: Font = preload("res://assets/fonts/NotoSansTC.ttf")
 var ink: Color = Color("203e46")
 
@@ -128,10 +131,7 @@ func _ready() -> void:
 	music_button.name = "MusicMute"
 	music_button.add_theme_font_size_override("font_size", 14)
 	music_button.tooltip_text = "開啟／靜音背景音樂"
-	music_button.pressed.connect(func() -> void:
-		var audio: Node = world.get("music") as Node
-		var state: Dictionary = audio.call("get_state")
-		audio.call("set_muted", not bool(state.get("muted", false))))
+	music_button.pressed.connect(_activate_music_button)
 	music_row.add_child(music_button)
 	music_slider = HSlider.new()
 	music_slider.name = "MusicVolume"
@@ -304,6 +304,33 @@ func _ready() -> void:
 	content.add_child(close)
 	_build_graphics_settings(screen)
 
+func set_preparation(message: String, failed: bool) -> void:
+	if preparation_overlay == null:
+		if message.is_empty():
+			return
+		preparation_overlay = CenterContainer.new()
+		preparation_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		get_node("Screen").add_child(preparation_overlay)
+		var card: PanelContainer = PanelContainer.new()
+		card.add_theme_stylebox_override("panel", style(Color("f7f3e7"), 22))
+		card.custom_minimum_size = Vector2(420, 170)
+		preparation_overlay.add_child(card)
+		var content: VBoxContainer = VBoxContainer.new()
+		content.add_theme_constant_override("separation", 16)
+		card.add_child(content)
+		preparation_label = label("", 20)
+		preparation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		content.add_child(preparation_label)
+		preparation_retry = button("重新下載", true)
+		preparation_retry.pressed.connect(func() -> void: world.call("retry_preparation"))
+		content.add_child(preparation_retry)
+		var cancel: Button = button("返回世界總覽")
+		cancel.pressed.connect(func() -> void: world.call("cancel_preparation"))
+		content.add_child(cancel)
+	preparation_overlay.visible = not message.is_empty()
+	preparation_label.text = message
+	preparation_retry.visible = failed
+
 func _build_graphics_settings(screen: Control) -> void:
 	settings_overlay = Control.new()
 	settings_overlay.name = "GraphicsSettingsOverlay"
@@ -415,7 +442,7 @@ func is_settings_open() -> bool:
 	return settings_overlay != null and settings_overlay.visible
 
 func open_graphics_settings() -> void:
-	if is_settings_open() or bool(world.get("entering")):
+	if is_settings_open() or bool(world.get("entering")) or bool(world.get("preparing_roam")) or bool(world.get("preparing_room")):
 		return
 	world.call("finish_view_drag")
 	var actor: Node = world.get("player") as Node
@@ -432,7 +459,8 @@ func close_graphics_settings() -> void:
 		return
 	settings_overlay.visible = false
 	var actor: Node = world.get("player") as Node
-	actor.set("controls_enabled", _settings_previous_controls and not bool(world.get("overview")) and not bool(world.get("paused")) and not bool(world.get("entering")))
+	var prepared: bool = not actor.has_method("visuals_ready") or bool(actor.call("visuals_ready"))
+	actor.set("controls_enabled", _settings_previous_controls and prepared and not bool(world.get("overview")) and not bool(world.get("paused")) and not bool(world.get("entering")) and not bool(world.get("preparing_roam")) and not bool(world.get("preparing_room")))
 	actor.call("cancel_jump_input")
 	# Return Space/Tab to jumping and view switching after leaving the menu.
 	get_viewport().gui_release_focus()
@@ -442,9 +470,24 @@ func _input(event: InputEvent) -> void:
 		close_graphics_settings()
 		get_viewport().set_input_as_handled()
 
+func _pending_music_failed(state: Dictionary) -> bool:
+	var pending: String = str(state.get("pending_context", ""))
+	return not pending.is_empty() and (state.get("load_errors", {}) as Dictionary).has(pending)
+
+func _activate_music_button() -> void:
+	var audio: Node = world.get("music") as Node
+	var state: Dictionary = audio.call("get_state")
+	# Historical errors from another district must not disable mute controls.
+	if _pending_music_failed(state):
+		audio.call("retry_pending_music")
+		return
+	audio.call("set_muted", not bool(state.get("muted", false)))
+
 func refresh_music_controls() -> void:
 	var state: Dictionary = world.get("music").call("get_state")
 	music_button.text = "音樂：靜音" if bool(state.get("muted", false)) else "音樂：開"
+	if _pending_music_failed(state):
+		music_button.text = "重試音樂"
 	var volume: float = float(state.get("volume", 0.4))
 	music_slider.set_value_no_signal(volume)
 	music_percent.text = "%d%%" % roundi(volume * 100.0)
@@ -452,6 +495,8 @@ func refresh_music_controls() -> void:
 		music_title.text = "點擊畫面播放音樂"
 	else:
 		music_title.text = str(state.get("title", "星球漫遊"))
+		if music_title.text.is_empty() and not str(state.get("pending_context", "")).is_empty():
+			music_title.text = "音樂準備中"
 
 func update_status(is_overview: bool, nearby: String, _radial_height: float) -> void:
 	if last_overview != is_overview:

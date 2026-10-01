@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
+
 const Geo = preload("res://scripts/planet_geometry.gd")
 const Sakura = preload("res://scripts/sakura_routes.gd")
 var checks: Array[Dictionary] = []
@@ -152,9 +154,12 @@ func run() -> void:
 	current_scene = world
 	world.set_process(false)
 	player = world.get("player") as PlanetPlayer
+	check("Region fixture prepares station entry animations", await StartupFixture.prepare_player(player, self))
 	player.set_physics_process(false)
 	music = world.get("music") as Node
 	music.set_process(false)
+	music.call("begin_prepare_music")
+	music.call("_process", 0.0)
 	hud = world.get("hud") as CanvasLayer
 	await process_frame
 	world.set("overview", false)

@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("startup_fixture.gd")
+
 # Native companion to measure_web_performance.cjs; measures engine counters,
 # functional transitions and retained nodes using the same route before/after.
 var world: Node3D
@@ -48,8 +50,8 @@ func run_route() -> void:
 		check("player_radius_" + str(station.id), player.global_position.length() > float(layout.radius) - 0.2)
 		world.call("open_station", str(station.id))
 		if str(station.id) == "wordking":
-			await create_timer(2.5).timeout
-			check("indoor_enter", current_scene != world and is_instance_valid(current_scene))
+			var room: Node3D = await StartupFixture.wait_room_scene(self)
+			check("indoor_enter", room != null and current_scene != world)
 			var transition: Node = root.get_node_or_null("TrainingRoomTransition")
 			if transition != null:
 				transition.call("return_to_world")
@@ -86,6 +88,7 @@ func run_route() -> void:
 	quit(0 if failures == 0 else 1)
 
 func wait_details() -> void:
+	check("roaming_preparation_ready", await StartupFixture.wait_roaming(world, self))
 	var streaming: Node = world.get_node_or_null("DistrictStreaming")
 	if streaming == null:
 		await create_timer(0.5).timeout

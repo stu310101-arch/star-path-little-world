@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
+
 const Geo = preload("res://scripts/planet_geometry.gd")
 const PlayerScript = preload("res://scripts/planet_player.gd")
 const RADIUS: float = 48.0
@@ -39,6 +41,7 @@ func run() -> void:
 	player = PlayerScript.new() as CharacterBody3D
 	player.set("planet_radius",RADIUS)
 	arena.add_child(player)
+	check("Jump fixture prepares original character animations", await StartupFixture.prepare_player(player, self))
 	player.set("allow_test_input",true)
 	player.set("controls_enabled",true)
 	check("Runtime exposes actual jump state and launch counters",has_property("jump_state") and has_property("jump_count") and has_property("landing_count"))

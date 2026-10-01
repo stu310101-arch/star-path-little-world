@@ -20,6 +20,7 @@ func run() -> void:
 	room = (load("res://scenes/training_room.tscn") as PackedScene).instantiate() as Node3D
 	root.add_child(room)
 	current_scene = room
+	check("Indoor preparation completes before interaction checks", await StartupFixture.wait_room(room, self))
 	indoor = room.get("player") as CharacterBody3D
 	await tick(20)
 	check("Revision room loads and places a grounded player",bool(room.get("ready_for_play")) and indoor.is_on_floor())

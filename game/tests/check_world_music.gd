@@ -28,6 +28,8 @@ func new_manager(manifest: String, settings: String) -> Node:
 	manager.set("settings_path", settings)
 	root.add_child(manager)
 	manager.set_process(false)
+	manager.call("begin_prepare_music")
+	manager.call("_process", 0.0)
 	return manager
 
 func state(manager: Node) -> Dictionary:
@@ -89,7 +91,7 @@ func run() -> void:
 	var first: Dictionary = state(manager)
 	check("Native playback unlocks automatically", bool(first.unlocked))
 	check("Default volume is 40 percent and not muted", is_equal_approx(float(first.volume), 0.4) and not bool(first.muted))
-	check("Every declared fixture context loads without fallback", (first.available_ids as Array).size() == 5 and (first.missing_ids as Array).is_empty())
+	check("Only initial context loads; remaining tracks stay lazy", (first.available_ids as Array) == ["world"] and (first.missing_ids as Array).is_empty())
 	check("Only the world voice starts initially", str(first.context) == "world" and live_count(first) == 1)
 	advance(manager, 2.0)
 	for context_id: String in IDS:
@@ -169,6 +171,7 @@ func run() -> void:
 	write_json(missing_manifest, missing_catalog)
 	var fallback: Node = new_manager(missing_manifest, settings)
 	fallback.call("set_context", "admissions")
+	advance(fallback, 0.05)
 	var fallback_state: Dictionary = state(fallback)
 	check("Missing track falls back honestly to the world stream", str(fallback_state.context) == "world" and str(fallback_state.requested_context) == "admissions" and bool(fallback_state.fallback) and "admissions" in (fallback_state.missing_ids as Array), fallback_state)
 	fallback.call("set_context", "nonexistent")
@@ -188,11 +191,11 @@ func run() -> void:
 func check_production_assets() -> void:
 	var required: bool = OS.get_cmdline_user_args().has("--require-all-music")
 	var manager: Node = new_manager("res://data/music_tracks.json", temporary_directory + "/production-settings.cfg")
-	production_state = state(manager)
-	if required:
-		check("All five real generated music assets are installed", (production_state.available_ids as Array).size() == 5 and (production_state.missing_ids as Array).is_empty(), production_state)
-	for context_id: String in production_state.available_ids:
+	for context_id: String in IDS:
 		manager.call("set_context", context_id)
+		advance(manager, 0.05)
+		if not (state(manager).available_ids as Array).has(context_id):
+			continue
 		# Let AudioServer consume the playback registration before teardown.
 		# Starting and freeing every Ogg in one frame leaves pending mixers.
 		await create_timer(0.06).timeout
@@ -208,6 +211,9 @@ func check_production_assets() -> void:
 		var audio_frames: PackedVector2Array = playback.mix_audio(1.0, 8192)
 		check("Actual Ogg decoder crosses its loop boundary: " + context_id, playback.get_loop_count() > 0 and audio_frames.size() == 8192, {"loops": playback.get_loop_count(), "position": playback.get_playback_position(), "frames": audio_frames.size()})
 		playback.stop()
+	production_state = state(manager)
+	if required:
+		check("All five real generated music assets load on demand", (production_state.available_ids as Array).size() == 5 and (production_state.missing_ids as Array).is_empty(), production_state)
 	manager.free()
 
 func finish() -> void:

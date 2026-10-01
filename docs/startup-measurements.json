@@ -1,0 +1,4003 @@
+{
+  "schema": 1,
+  "date": "2026-10-01",
+  "units": {
+    "time": "milliseconds unless explicitly named seconds",
+    "size": "bytes; report MB is decimal 1000000 bytes"
+  },
+  "conclusion": {
+    "initial_download_reduced": true,
+    "fresh_context_initialization_improved": true,
+    "same_context_revisit_improved_in_this_observation": true,
+    "browser_pck_wasm_cache_hit_observed": false,
+    "steady_state_fps_improvement_measured": false,
+    "fresh_context_initialization_qualification": "Observed once: navigation to first ready rAF 52679.5 -> 43019.4 ms; post-download 49917 -> 42266.1 ms. Still a severe startup pause. Prior candidate was worse; one pair cannot isolate causation or guarantee all devices.",
+    "same_context_revisit_qualification": "Observed once: 48402.3 -> 4810.4 ms despite PCK/WASM full HTTP 200 transfers. Browser/driver warm-state contribution is an inference, not an isolated causal measurement."
+  },
+  "environment": {
+    "os": "Windows 11",
+    "cpu": "Intel Core i7-1165G7",
+    "ram": "approximately 8 GB",
+    "hardware_record": "deliverables/startup-audit-2026-10-01/findings.md",
+    "browser": "Chrome 154.0.8037.58 headless",
+    "viewport": {
+      "width": 1200,
+      "height": 800
+    },
+    "gpu": "ANGLE Intel Iris Xe, Direct3D11",
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "renderer": "gl_compatibility",
+    "web_threads": false,
+    "msaa": "2x",
+    "fps_limit": 60,
+    "server": "localhost Python SimpleHTTP/0.6 Python/3.12.10; no content encoding on measured PCK/WASM",
+    "method": "tools/measure_startup_packs.cjs; one fresh-context navigation and one same-context revisit per build; initial overview, no input route",
+    "cache_control_limit": "Browser context reset does not clear OS/driver caches. PCK and WASM returned HTTP 200 with full response bodies on both navigations. HTML/JS may reuse or revalidate separately. No new persistent resource cache."
+  },
+  "builds": {
+    "before": {
+      "build_id": "streaming-3f7c73f0246b34c7",
+      "created_utc": "2026-10-01T03:36:23.580769+00:00",
+      "source_base_commit": "1cd1bbd5411e01c09136af8c86d7da670a577d28",
+      "source_sha256": "3f7c73f0246b34c740e866336cbda418d8f1f132a45efd6b36834a807391f34b",
+      "export": "Web release; Compatibility; single-threaded",
+      "files": {
+        "index.html": {
+          "bytes": 5381,
+          "sha256": "6f7a18ac952f2e8d00bf9a50bf477968ab6c08ddf2765637992437b2861d9d57"
+        },
+        "index.js": {
+          "bytes": 279815,
+          "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+        },
+        "index.wasm": {
+          "bytes": 39514754,
+          "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
+        },
+        "index.pck": {
+          "bytes": 154560308,
+          "sha256": "5210d188c2b2214b0f2d6f0e88814dd0fb4b18957c8509a1b18c2e7a56db0961"
+        }
+      }
+    },
+    "final": {
+      "build_id": "packs-c674b2a47ed31edd",
+      "created_utc": "2026-10-01T09:00:29.028562+00:00",
+      "source_base_commit": "42883300eda4352200268736f18437560a30ca5f",
+      "source_sha256": "c674b2a47ed31edd5ee75f4c86fcb389ffae87065f618b4cf8322a997dca1658",
+      "export": "Web release; Compatibility; single-threaded",
+      "files": {
+        "index.html": {
+          "bytes": 5376,
+          "sha256": "4f661dfd4f18dd4052283334a0ad2facc6bfef865086eaf17237fafcadc4e4c0"
+        },
+        "index.js": {
+          "bytes": 279815,
+          "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+        },
+        "index.wasm": {
+          "bytes": 39514754,
+          "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
+        },
+        "index.pck": {
+          "bytes": 35404024,
+          "sha256": "32520e066b344b8e2b29b245423ebbc7b6a9888b75ee8a4124542d2102c277d1"
+        },
+        "index.packs.json": {
+          "bytes": 11086,
+          "sha256": "d8671fc0bec253fcbdde1c5ecf43a2c3d41e34b184913de456e5db73c61a3d31"
+        },
+        "packs/avatar-dbf4017c84a82ebd.pck": {
+          "bytes": 50904340,
+          "sha256": "dbf4017c84a82ebdb9988189b61d0a6fa00e5e53c70a95e4dfc9f3044f2185ac"
+        },
+        "packs/district_admissions-b9990e78225097d4.pck": {
+          "bytes": 3614436,
+          "sha256": "b9990e78225097d47c172f2a4503783425e2dd720b8d92d1cc90d389426656f7"
+        },
+        "packs/district_counseling-c94cdc8453e08139.pck": {
+          "bytes": 3465044,
+          "sha256": "c94cdc8453e08139d2e3f45209ef49a4eaef4926cc11837f90ede351b3d6cce7"
+        },
+        "packs/district_life-b375c982e7a81f3b.pck": {
+          "bytes": 3356052,
+          "sha256": "b375c982e7a81f3bf9ce10185a3ad2326948bfdca66b7a99b56ebef2345d4936"
+        },
+        "packs/district_ocean-205618f4a153be51.pck": {
+          "bytes": 729528,
+          "sha256": "205618f4a153be51994e9beaa4696751f73dae2775eae656d9a0ab65d41f5ce3"
+        },
+        "packs/district_recommendations-dd767596f5068425.pck": {
+          "bytes": 2888636,
+          "sha256": "dd767596f5068425ab405c59851f72daf81cc77e75238bb40f6ffe8e4adc18ac"
+        },
+        "packs/district_sakura-6315d0720e217884.pck": {
+          "bytes": 4921072,
+          "sha256": "6315d0720e217884ae2d71457062edbfbc820b10e1aa01791cfb8e12ebb1dc08"
+        },
+        "packs/district_universities-83ab9e6fad509274.pck": {
+          "bytes": 3564404,
+          "sha256": "83ab9e6fad509274bc05e77c6bba84aa4be22db51801720165a78e311428016e"
+        },
+        "packs/district_wordking-d88484e6cbd7c882.pck": {
+          "bytes": 3527084,
+          "sha256": "d88484e6cbd7c882841053806b029db95b191ee9b451794a60eb0686f99c7653"
+        },
+        "packs/music_admissions-2ce1c35030bcc9fb.pck": {
+          "bytes": 1728528,
+          "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0"
+        },
+        "packs/music_counseling-f3b97506778458ba.pck": {
+          "bytes": 1443824,
+          "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4"
+        },
+        "packs/music_recommendations-66382088fcc4b843.pck": {
+          "bytes": 2195960,
+          "sha256": "66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8"
+        },
+        "packs/music_wordking-a45c153d522c439d.pck": {
+          "bytes": 2315480,
+          "sha256": "a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995"
+        },
+        "packs/music_world-e1a7f96b4f7f8400.pck": {
+          "bytes": 1351376,
+          "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf"
+        },
+        "packs/shared-4b7143129f228685.pck": {
+          "bytes": 176264,
+          "sha256": "4b7143129f228685e51f78030a171343c09b5aaaa3b39b0ee3631daf5d7bbe81"
+        },
+        "packs/training_room-00e45f0b5f24b903.pck": {
+          "bytes": 15104300,
+          "sha256": "00e45f0b5f24b9037f1b64cac3ecd244e845063525b8211cabeaf9cc503752aa"
+        }
+      }
+    },
+    "historical_failed_candidate": {
+      "build_id": "packs-a1a1d122a56b7fd4",
+      "created_utc": "2026-10-01T08:41:46.518171+00:00",
+      "source_base_commit": "42883300eda4352200268736f18437560a30ca5f",
+      "source_sha256": "a1a1d122a56b7fd4f58eba3748207187572027f683b6f3a8bb7eb4d2f1e6e3c4",
+      "export": "Web release; Compatibility; single-threaded",
+      "files": {
+        "index.html": {
+          "bytes": 5376,
+          "sha256": "3a214c0128d123073641c51812052ec20b63effb9529cbd712e244fba957b6fc"
+        },
+        "index.js": {
+          "bytes": 279815,
+          "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+        },
+        "index.wasm": {
+          "bytes": 39514754,
+          "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
+        },
+        "index.pck": {
+          "bytes": 35400360,
+          "sha256": "c655eb7003a11f1707619fb6b56befd464dd5df05ef80f89c170cc030ebfb3d2"
+        },
+        "index.packs.json": {
+          "bytes": 11086,
+          "sha256": "d8671fc0bec253fcbdde1c5ecf43a2c3d41e34b184913de456e5db73c61a3d31"
+        },
+        "packs/avatar-dbf4017c84a82ebd.pck": {
+          "bytes": 50904340,
+          "sha256": "dbf4017c84a82ebdb9988189b61d0a6fa00e5e53c70a95e4dfc9f3044f2185ac"
+        },
+        "packs/district_admissions-b9990e78225097d4.pck": {
+          "bytes": 3614436,
+          "sha256": "b9990e78225097d47c172f2a4503783425e2dd720b8d92d1cc90d389426656f7"
+        },
+        "packs/district_counseling-c94cdc8453e08139.pck": {
+          "bytes": 3465044,
+          "sha256": "c94cdc8453e08139d2e3f45209ef49a4eaef4926cc11837f90ede351b3d6cce7"
+        },
+        "packs/district_life-b375c982e7a81f3b.pck": {
+          "bytes": 3356052,
+          "sha256": "b375c982e7a81f3bf9ce10185a3ad2326948bfdca66b7a99b56ebef2345d4936"
+        },
+        "packs/district_ocean-205618f4a153be51.pck": {
+          "bytes": 729528,
+          "sha256": "205618f4a153be51994e9beaa4696751f73dae2775eae656d9a0ab65d41f5ce3"
+        },
+        "packs/district_recommendations-dd767596f5068425.pck": {
+          "bytes": 2888636,
+          "sha256": "dd767596f5068425ab405c59851f72daf81cc77e75238bb40f6ffe8e4adc18ac"
+        },
+        "packs/district_sakura-6315d0720e217884.pck": {
+          "bytes": 4921072,
+          "sha256": "6315d0720e217884ae2d71457062edbfbc820b10e1aa01791cfb8e12ebb1dc08"
+        },
+        "packs/district_universities-83ab9e6fad509274.pck": {
+          "bytes": 3564404,
+          "sha256": "83ab9e6fad509274bc05e77c6bba84aa4be22db51801720165a78e311428016e"
+        },
+        "packs/district_wordking-d88484e6cbd7c882.pck": {
+          "bytes": 3527084,
+          "sha256": "d88484e6cbd7c882841053806b029db95b191ee9b451794a60eb0686f99c7653"
+        },
+        "packs/music_admissions-2ce1c35030bcc9fb.pck": {
+          "bytes": 1728528,
+          "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0"
+        },
+        "packs/music_counseling-f3b97506778458ba.pck": {
+          "bytes": 1443824,
+          "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4"
+        },
+        "packs/music_recommendations-66382088fcc4b843.pck": {
+          "bytes": 2195960,
+          "sha256": "66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8"
+        },
+        "packs/music_wordking-a45c153d522c439d.pck": {
+          "bytes": 2315480,
+          "sha256": "a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995"
+        },
+        "packs/music_world-e1a7f96b4f7f8400.pck": {
+          "bytes": 1351376,
+          "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf"
+        },
+        "packs/shared-4b7143129f228685.pck": {
+          "bytes": 176264,
+          "sha256": "4b7143129f228685e51f78030a171343c09b5aaaa3b39b0ee3631daf5d7bbe81"
+        },
+        "packs/training_room-00e45f0b5f24b903.pck": {
+          "bytes": 15104300,
+          "sha256": "00e45f0b5f24b9037f1b64cac3ecd244e845063525b8211cabeaf9cc503752aa"
+        }
+      },
+      "measurement_role": "Timing candidate packs-a1a1d122a56b7fd4; later Web delivery QA failed. New runtime fix and export require separate validation; these recorded timings must not be relabeled as another build."
+    }
+  },
+  "download_budget": {
+    "build_id": "packs-c674b2a47ed31edd",
+    "before_initial_pck_bytes": 154560308,
+    "final_initial_pck_bytes": 35404024,
+    "before_wasm_bytes": 39514754,
+    "final_wasm_bytes": 39514754,
+    "before_pck_plus_wasm_bytes": 194075062,
+    "final_boot_pck_plus_wasm_bytes": 74918778,
+    "initial_pck_reduction_percent": 77.0937,
+    "initial_pck_plus_wasm_reduction_percent": 61.397,
+    "all_final_pcks_bytes": 136690352,
+    "all_pck_reduction_percent": 11.5618,
+    "deferred_pack_count": 16,
+    "avatar_pack_bytes": 50904340,
+    "pack_build": {
+      "source_entries": 1294,
+      "runtime_source_count": 154,
+      "required_entries": 208,
+      "source_sha256": "6a7f5b55c39d49909bc1142f9c491caca31e0582cbed168e8bd3e3be98f8d925",
+      "source_bytes": 154531000,
+      "godot_version": [
+        4,
+        7,
+        2
+      ],
+      "packs": {
+        "avatar": {
+          "bytes": 50904340,
+          "sha256": "dbf4017c84a82ebdb9988189b61d0a6fa00e5e53c70a95e4dfc9f3044f2185ac",
+          "entries": 6,
+          "deduplicated_bytes": 0
+        },
+        "district_admissions": {
+          "bytes": 3614436,
+          "sha256": "b9990e78225097d47c172f2a4503783425e2dd720b8d92d1cc90d389426656f7",
+          "entries": 7,
+          "deduplicated_bytes": 0
+        },
+        "district_counseling": {
+          "bytes": 3465044,
+          "sha256": "c94cdc8453e08139d2e3f45209ef49a4eaef4926cc11837f90ede351b3d6cce7",
+          "entries": 6,
+          "deduplicated_bytes": 0
+        },
+        "district_life": {
+          "bytes": 3356052,
+          "sha256": "b375c982e7a81f3bf9ce10185a3ad2326948bfdca66b7a99b56ebef2345d4936",
+          "entries": 6,
+          "deduplicated_bytes": 0
+        },
+        "district_ocean": {
+          "bytes": 729528,
+          "sha256": "205618f4a153be51994e9beaa4696751f73dae2775eae656d9a0ab65d41f5ce3",
+          "entries": 43,
+          "deduplicated_bytes": 0
+        },
+        "district_recommendations": {
+          "bytes": 2888636,
+          "sha256": "dd767596f5068425ab405c59851f72daf81cc77e75238bb40f6ffe8e4adc18ac",
+          "entries": 6,
+          "deduplicated_bytes": 0
+        },
+        "district_sakura": {
+          "bytes": 4921072,
+          "sha256": "6315d0720e217884ae2d71457062edbfbc820b10e1aa01791cfb8e12ebb1dc08",
+          "entries": 5,
+          "deduplicated_bytes": 0
+        },
+        "district_universities": {
+          "bytes": 3564404,
+          "sha256": "83ab9e6fad509274bc05e77c6bba84aa4be22db51801720165a78e311428016e",
+          "entries": 7,
+          "deduplicated_bytes": 0
+        },
+        "district_wordking": {
+          "bytes": 3527084,
+          "sha256": "d88484e6cbd7c882841053806b029db95b191ee9b451794a60eb0686f99c7653",
+          "entries": 6,
+          "deduplicated_bytes": 0
+        },
+        "music_admissions": {
+          "bytes": 1728528,
+          "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0",
+          "entries": 2,
+          "deduplicated_bytes": 0
+        },
+        "music_counseling": {
+          "bytes": 1443824,
+          "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4",
+          "entries": 2,
+          "deduplicated_bytes": 0
+        },
+        "music_recommendations": {
+          "bytes": 2195960,
+          "sha256": "66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8",
+          "entries": 2,
+          "deduplicated_bytes": 0
+        },
+        "music_wordking": {
+          "bytes": 2315480,
+          "sha256": "a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995",
+          "entries": 2,
+          "deduplicated_bytes": 0
+        },
+        "music_world": {
+          "bytes": 1351376,
+          "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf",
+          "entries": 2,
+          "deduplicated_bytes": 0
+        },
+        "shared": {
+          "bytes": 176264,
+          "sha256": "4b7143129f228685e51f78030a171343c09b5aaaa3b39b0ee3631daf5d7bbe81",
+          "entries": 4,
+          "deduplicated_bytes": 0
+        },
+        "training_room": {
+          "bytes": 15104300,
+          "sha256": "00e45f0b5f24b9037f1b64cac3ecd244e845063525b8211cabeaf9cc503752aa",
+          "entries": 9,
+          "deduplicated_bytes": 0
+        },
+        "boot": {
+          "bytes": 35404024,
+          "sha256": "32520e066b344b8e2b29b245423ebbc7b6a9888b75ee8a4124542d2102c277d1",
+          "entries": 94,
+          "deduplicated_bytes": 2106020
+        }
+      },
+      "published_pck_bytes": 136690352,
+      "omitted_payload_bytes": 15625134,
+      "exact_duplicate_payload_bytes_removed": 2106020
+    },
+    "interpretation": "Reduced critical-path download; all deferred content remains available. Native local files bypass HTTP. Published total differs from initial download and from runtime memory."
+  },
+  "browser_runs": {
+    "before": {
+      "source": "deliverables/startup-packs/startup-before.json",
+      "started_utc": "2026-10-01T08:24:05.469Z",
+      "finished_utc": "2026-10-01T08:25:52.863Z",
+      "console_errors": [],
+      "comparison_eligible": true,
+      "runs": [
+        {
+          "navigation": "fresh-context",
+          "build_id": "streaming-3f7c73f0246b34c7",
+          "marks_ms": {
+            "start": 1665.2,
+            "domContentLoaded": 1854.7,
+            "progressComplete": 2857.3,
+            "firstGLCall": 3243.9,
+            "worldReady": 12684.6,
+            "overlayRemoved": 52676.7,
+            "firstRafAfterReady": 52679.5
+          },
+          "resources": [
+            {
+              "file": "index.wasm",
+              "start_ms": 1843.2,
+              "response_end_ms": 2204,
+              "duration_ms": 360.8,
+              "encoded_body_bytes": 39514754,
+              "decoded_body_bytes": 39514754,
+              "resource_timing_transfer_bytes": 39515054,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            },
+            {
+              "file": "index.pck",
+              "start_ms": 1843.9,
+              "response_end_ms": 2762.5,
+              "duration_ms": 918.6,
+              "encoded_body_bytes": 154560308,
+              "decoded_body_bytes": 154560308,
+              "resource_timing_transfer_bytes": 154560608,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            }
+          ],
+          "main_download_complete_ms": 2762.5,
+          "download_to_world_ready_ms": 9922.1,
+          "download_to_first_ready_raf_ms": 49917.0,
+          "wasm_calls": [
+            {
+              "name": "instantiateStreaming",
+              "start_ms": 1874.6,
+              "end_ms": 2240.5
+            }
+          ],
+          "gl_api_wall_clock": {
+            "linkProgram": {
+              "count": 93,
+              "total_ms": 1.8,
+              "max_ms": 0.7,
+              "max_start": 3244.8
+            },
+            "compileShader": {
+              "count": 186,
+              "total_ms": 1.0,
+              "max_ms": 0.2,
+              "max_start": 6293.5
+            },
+            "getProgramParameter": {
+              "count": 184,
+              "total_ms": 43119.0,
+              "max_ms": 3209.8,
+              "max_start": 18481.5
+            },
+            "getShaderParameter": {
+              "count": 184,
+              "total_ms": 1150.4,
+              "max_ms": 73.6,
+              "max_start": 29426.7
+            },
+            "bufferData": {
+              "count": 9959,
+              "total_ms": 71.2,
+              "max_ms": 3.7,
+              "max_start": 11340.2
+            }
+          },
+          "initial_overview_snapshot": {
+            "draw_calls": 511,
+            "primitives": 1156230,
+            "nodes": 1245,
+            "objects": 3748,
+            "resources": 925,
+            "render_buffer_bytes": 137017950,
+            "overview": true,
+            "avatar": null,
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0,
+              "loaded_chunks": 0,
+              "max_operation_ms": 0,
+              "operations": 0,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 0
+            },
+            "packs": null,
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 0,
+              "cached_groups": 0,
+              "cached_trees": 0,
+              "candidates": 0,
+              "decision_usec": 0,
+              "decisions": 0,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "static_memory_bytes": null,
+          "static_memory_reason": "Web release monitor returned 0; unsupported/unmeasured rather than zero memory."
+        },
+        {
+          "navigation": "same-context-revisit",
+          "build_id": "streaming-3f7c73f0246b34c7",
+          "marks_ms": {
+            "start": 15.2,
+            "domContentLoaded": 54.2,
+            "progressComplete": 1258.9,
+            "firstGLCall": 1715.6,
+            "worldReady": 9377.2,
+            "overlayRemoved": 48401.4,
+            "firstRafAfterReady": 48402.3
+          },
+          "resources": [
+            {
+              "file": "index.wasm",
+              "start_ms": 42.5,
+              "response_end_ms": 440.5,
+              "duration_ms": 398,
+              "encoded_body_bytes": 39514754,
+              "decoded_body_bytes": 39514754,
+              "resource_timing_transfer_bytes": 39515054,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            },
+            {
+              "file": "index.pck",
+              "start_ms": 43,
+              "response_end_ms": 1019.2,
+              "duration_ms": 976.2,
+              "encoded_body_bytes": 154560308,
+              "decoded_body_bytes": 154560308,
+              "resource_timing_transfer_bytes": 154560608,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            }
+          ],
+          "main_download_complete_ms": 1019.2,
+          "download_to_world_ready_ms": 8358.0,
+          "download_to_first_ready_raf_ms": 47383.1,
+          "wasm_calls": [
+            {
+              "name": "instantiateStreaming",
+              "start_ms": 69.9,
+              "end_ms": 662
+            }
+          ],
+          "gl_api_wall_clock": {
+            "linkProgram": {
+              "count": 93,
+              "total_ms": 1.6,
+              "max_ms": 0.3,
+              "max_start": 1715.8
+            },
+            "compileShader": {
+              "count": 186,
+              "total_ms": 1.0,
+              "max_ms": 0.1,
+              "max_start": 1753.5
+            },
+            "getProgramParameter": {
+              "count": 184,
+              "total_ms": 42289.8,
+              "max_ms": 2758.5,
+              "max_start": 14768.6
+            },
+            "getShaderParameter": {
+              "count": 184,
+              "total_ms": 1126.0,
+              "max_ms": 51.3,
+              "max_start": 48308.8
+            },
+            "bufferData": {
+              "count": 9959,
+              "total_ms": 61.4,
+              "max_ms": 2.8,
+              "max_start": 8571.2
+            }
+          },
+          "initial_overview_snapshot": {
+            "draw_calls": 511,
+            "primitives": 1156230,
+            "nodes": 1245,
+            "objects": 3748,
+            "resources": 925,
+            "render_buffer_bytes": 137017950,
+            "overview": true,
+            "avatar": null,
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0,
+              "loaded_chunks": 0,
+              "max_operation_ms": 0,
+              "operations": 0,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 0
+            },
+            "packs": null,
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 0,
+              "cached_groups": 0,
+              "cached_trees": 0,
+              "candidates": 0,
+              "decision_usec": 0,
+              "decisions": 0,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "static_memory_bytes": null,
+          "static_memory_reason": "Web release monitor returned 0; unsupported/unmeasured rather than zero memory."
+        }
+      ]
+    },
+    "final": {
+      "source": "deliverables/startup-packs/startup-release.json",
+      "started_utc": "2026-10-01T09:09:57.916Z",
+      "finished_utc": "2026-10-01T09:10:51.990Z",
+      "console_errors": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "comparison_eligible": true,
+      "runs": [
+        {
+          "navigation": "fresh-context",
+          "build_id": "packs-c674b2a47ed31edd",
+          "marks_ms": {
+            "start": 20,
+            "domContentLoaded": 149.9,
+            "progressComplete": 782.6,
+            "firstGLCall": 997.9,
+            "worldReady": 7296,
+            "overlayRemoved": 43018.9,
+            "firstRafAfterReady": 43019.4
+          },
+          "resources": [
+            {
+              "file": "index.wasm",
+              "start_ms": 143.1,
+              "response_end_ms": 668.1,
+              "duration_ms": 525,
+              "encoded_body_bytes": 39514754,
+              "decoded_body_bytes": 39514754,
+              "resource_timing_transfer_bytes": 39515054,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            },
+            {
+              "file": "index.pck",
+              "start_ms": 144.9,
+              "response_end_ms": 753.3,
+              "duration_ms": 608.4,
+              "encoded_body_bytes": 35404024,
+              "decoded_body_bytes": 35404024,
+              "resource_timing_transfer_bytes": 35404324,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            }
+          ],
+          "main_download_complete_ms": 753.3,
+          "download_to_world_ready_ms": 6542.7,
+          "download_to_first_ready_raf_ms": 42266.1,
+          "wasm_calls": [
+            {
+              "name": "instantiateStreaming",
+              "start_ms": 183,
+              "end_ms": 716.7
+            }
+          ],
+          "gl_api_wall_clock": {
+            "linkProgram": {
+              "count": 87,
+              "total_ms": 2.1,
+              "max_ms": 0.2,
+              "max_start": 30527.8
+            },
+            "compileShader": {
+              "count": 174,
+              "total_ms": 0.8,
+              "max_ms": 0.1,
+              "max_start": 4694.2
+            },
+            "getProgramParameter": {
+              "count": 172,
+              "total_ms": 37848.4,
+              "max_ms": 2747.8,
+              "max_start": 13670.8
+            },
+            "getShaderParameter": {
+              "count": 172,
+              "total_ms": 967.2,
+              "max_ms": 50.2,
+              "max_start": 42931
+            },
+            "bufferData": {
+              "count": 1270,
+              "total_ms": 19.7,
+              "max_ms": 1.3,
+              "max_start": 5975.8
+            }
+          },
+          "initial_overview_snapshot": {
+            "draw_calls": 466,
+            "primitives": 1144356,
+            "nodes": 1174,
+            "objects": 3451,
+            "resources": 704,
+            "render_buffer_bytes": 51320960,
+            "overview": true,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0,
+              "max_operation_ms": 0,
+              "ready": false,
+              "stage": 1
+            },
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0,
+              "loaded_chunks": 0,
+              "max_operation_ms": 0,
+              "operations": 0,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 0
+            },
+            "packs": {
+              "current": "avatar",
+              "downloaded_bytes": 6291456,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 50904340,
+              "max_download_frame_bytes": 524288,
+              "mounted_bytes": 0,
+              "queued_packs": 1,
+              "ready_packs": 0,
+              "received_bytes": 0,
+              "state": "downloading",
+              "transport": "http_client"
+            },
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 0,
+              "cached_groups": 0,
+              "cached_trees": 0,
+              "candidates": 0,
+              "decision_usec": 0,
+              "decisions": 0,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "static_memory_bytes": null,
+          "static_memory_reason": "Web release monitor returned 0; unsupported/unmeasured rather than zero memory."
+        },
+        {
+          "navigation": "same-context-revisit",
+          "build_id": "packs-c674b2a47ed31edd",
+          "marks_ms": {
+            "start": 30.2,
+            "domContentLoaded": 65.1,
+            "progressComplete": 809.4,
+            "firstGLCall": 940.3,
+            "worldReady": 3139.9,
+            "overlayRemoved": 4810.1,
+            "firstRafAfterReady": 4810.4
+          },
+          "resources": [
+            {
+              "file": "index.wasm",
+              "start_ms": 61.1,
+              "response_end_ms": 514.8,
+              "duration_ms": 453.7,
+              "encoded_body_bytes": 39514754,
+              "decoded_body_bytes": 39514754,
+              "resource_timing_transfer_bytes": 39515054,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            },
+            {
+              "file": "index.pck",
+              "start_ms": 61.8,
+              "response_end_ms": 763.4,
+              "duration_ms": 701.6,
+              "encoded_body_bytes": 35404024,
+              "decoded_body_bytes": 35404024,
+              "resource_timing_transfer_bytes": 35404324,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            }
+          ],
+          "main_download_complete_ms": 763.4,
+          "download_to_world_ready_ms": 2376.5,
+          "download_to_first_ready_raf_ms": 4047.0,
+          "wasm_calls": [
+            {
+              "name": "instantiateStreaming",
+              "start_ms": 76.9,
+              "end_ms": 647.3
+            }
+          ],
+          "gl_api_wall_clock": {
+            "linkProgram": {
+              "count": 87,
+              "total_ms": 2.0,
+              "max_ms": 0.1,
+              "max_start": 940.5
+            },
+            "compileShader": {
+              "count": 174,
+              "total_ms": 0.5,
+              "max_ms": 0.1,
+              "max_start": 1031.7
+            },
+            "getProgramParameter": {
+              "count": 172,
+              "total_ms": 165.1,
+              "max_ms": 5.5,
+              "max_start": 3312.4
+            },
+            "getShaderParameter": {
+              "count": 172,
+              "total_ms": 1105.5,
+              "max_ms": 50.8,
+              "max_start": 4749.3
+            },
+            "bufferData": {
+              "count": 1270,
+              "total_ms": 23.8,
+              "max_ms": 2.2,
+              "max_start": 1931.5
+            }
+          },
+          "initial_overview_snapshot": {
+            "draw_calls": 466,
+            "primitives": 1144356,
+            "nodes": 1174,
+            "objects": 3451,
+            "resources": 704,
+            "render_buffer_bytes": 51320960,
+            "overview": true,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0,
+              "max_operation_ms": 0,
+              "ready": false,
+              "stage": 1
+            },
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0,
+              "loaded_chunks": 0,
+              "max_operation_ms": 0,
+              "operations": 0,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 0
+            },
+            "packs": {
+              "current": "avatar",
+              "downloaded_bytes": 6815744,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 50904340,
+              "max_download_frame_bytes": 524288,
+              "mounted_bytes": 0,
+              "queued_packs": 1,
+              "ready_packs": 0,
+              "received_bytes": 0,
+              "state": "downloading",
+              "transport": "http_client"
+            },
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 0,
+              "cached_groups": 0,
+              "cached_trees": 0,
+              "candidates": 0,
+              "decision_usec": 0,
+              "decisions": 0,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "static_memory_bytes": null,
+          "static_memory_reason": "Web release monitor returned 0; unsupported/unmeasured rather than zero memory."
+        }
+      ],
+      "limitations": "One fresh/revisit pair. New context does not clear OS/GPU driver caches. The recorded generic 404 lacks URL; tracked PCK/WASM requests succeeded. First ready rAF is not exact presentation or input latency."
+    },
+    "intermediate": {
+      "source": "deliverables/startup-packs/startup-after.json",
+      "started_utc": "2026-10-01T08:32:24.301Z",
+      "finished_utc": "2026-10-01T08:34:27.598Z",
+      "console_errors": [],
+      "comparison_eligible": true,
+      "runs": [
+        {
+          "navigation": "fresh-context",
+          "build_id": "packs-8391b673f1753e4d",
+          "marks_ms": {
+            "start": 47.7,
+            "domContentLoaded": 360.8,
+            "firstGLCall": 1185.3,
+            "worldReady": 8046.9,
+            "overlayRemoved": 59453.2,
+            "firstRafAfterReady": 59453.8,
+            "progressComplete": 59454
+          },
+          "resources": [
+            {
+              "file": "index.wasm",
+              "start_ms": 354.1,
+              "response_end_ms": 799.1,
+              "duration_ms": 445,
+              "encoded_body_bytes": 39514754,
+              "decoded_body_bytes": 39514754,
+              "resource_timing_transfer_bytes": 39515054,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            },
+            {
+              "file": "index.pck",
+              "start_ms": 355,
+              "response_end_ms": 898.4,
+              "duration_ms": 543.4,
+              "encoded_body_bytes": 35400248,
+              "decoded_body_bytes": 35400248,
+              "resource_timing_transfer_bytes": 35400548,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            }
+          ],
+          "main_download_complete_ms": 898.4,
+          "download_to_world_ready_ms": 7148.5,
+          "download_to_first_ready_raf_ms": 58555.4,
+          "wasm_calls": [
+            {
+              "name": "instantiateStreaming",
+              "start_ms": 385.3,
+              "end_ms": 858.8
+            }
+          ],
+          "gl_api_wall_clock": {
+            "linkProgram": {
+              "count": 87,
+              "total_ms": 2.1,
+              "max_ms": 0.3,
+              "max_start": 1185.5
+            },
+            "compileShader": {
+              "count": 174,
+              "total_ms": 1.0,
+              "max_ms": 0.1,
+              "max_start": 1291.2
+            },
+            "getProgramParameter": {
+              "count": 172,
+              "total_ms": 54144.5,
+              "max_ms": 5067.7,
+              "max_start": 23955.9
+            },
+            "getShaderParameter": {
+              "count": 172,
+              "total_ms": 1101.5,
+              "max_ms": 56.6,
+              "max_start": 59354.4
+            },
+            "bufferData": {
+              "count": 1270,
+              "total_ms": 22.2,
+              "max_ms": 1.4,
+              "max_start": 7290.4
+            }
+          },
+          "initial_overview_snapshot": {
+            "draw_calls": 466,
+            "primitives": 1144356,
+            "nodes": 1176,
+            "objects": 3454,
+            "resources": 704,
+            "render_buffer_bytes": 51333632,
+            "overview": true,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0,
+              "max_operation_ms": 0,
+              "ready": false,
+              "stage": 1
+            },
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0,
+              "loaded_chunks": 0,
+              "max_operation_ms": 0,
+              "operations": 0,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 0
+            },
+            "packs": {
+              "current": "avatar",
+              "downloaded_bytes": 9437184,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 50904340,
+              "mounted_bytes": 0,
+              "queued_packs": 1,
+              "ready_packs": 0,
+              "received_bytes": 0,
+              "state": "downloading"
+            },
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 0,
+              "cached_groups": 0,
+              "cached_trees": 0,
+              "candidates": 0,
+              "decision_usec": 0,
+              "decisions": 0,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "static_memory_bytes": null,
+          "static_memory_reason": "Web release monitor returned 0; unsupported/unmeasured rather than zero memory."
+        },
+        {
+          "navigation": "same-context-revisit",
+          "build_id": "packs-8391b673f1753e4d",
+          "marks_ms": {
+            "start": 33.7,
+            "domContentLoaded": 103.2,
+            "progressComplete": 910.6,
+            "firstGLCall": 1342,
+            "worldReady": 9668.9,
+            "overlayRemoved": 56535.3,
+            "firstRafAfterReady": 56536.8
+          },
+          "resources": [
+            {
+              "file": "index.wasm",
+              "start_ms": 97.7,
+              "response_end_ms": 857.4,
+              "duration_ms": 759.7,
+              "encoded_body_bytes": 39514754,
+              "decoded_body_bytes": 39514754,
+              "resource_timing_transfer_bytes": 39515054,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            },
+            {
+              "file": "index.pck",
+              "start_ms": 98.2,
+              "response_end_ms": 610.1,
+              "duration_ms": 511.9,
+              "encoded_body_bytes": 35400248,
+              "decoded_body_bytes": 35400248,
+              "resource_timing_transfer_bytes": 35400548,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            }
+          ],
+          "main_download_complete_ms": 857.4,
+          "download_to_world_ready_ms": 8811.5,
+          "download_to_first_ready_raf_ms": 55679.4,
+          "wasm_calls": [
+            {
+              "name": "instantiateStreaming",
+              "start_ms": 111.3,
+              "end_ms": 1054.8
+            }
+          ],
+          "gl_api_wall_clock": {
+            "linkProgram": {
+              "count": 87,
+              "total_ms": 2.1,
+              "max_ms": 0.2,
+              "max_start": 7300.1
+            },
+            "compileShader": {
+              "count": 174,
+              "total_ms": 0.8,
+              "max_ms": 0.2,
+              "max_start": 7248.7
+            },
+            "getProgramParameter": {
+              "count": 172,
+              "total_ms": 51030.7,
+              "max_ms": 4349.6,
+              "max_start": 32909.6
+            },
+            "getShaderParameter": {
+              "count": 172,
+              "total_ms": 1148.3,
+              "max_ms": 94,
+              "max_start": 56374.7
+            },
+            "bufferData": {
+              "count": 1270,
+              "total_ms": 25.9,
+              "max_ms": 1.6,
+              "max_start": 8214.3
+            }
+          },
+          "initial_overview_snapshot": {
+            "draw_calls": 466,
+            "primitives": 1144356,
+            "nodes": 1176,
+            "objects": 3454,
+            "resources": 704,
+            "render_buffer_bytes": 51333632,
+            "overview": true,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0,
+              "max_operation_ms": 0,
+              "ready": false,
+              "stage": 1
+            },
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0,
+              "loaded_chunks": 0,
+              "max_operation_ms": 0,
+              "operations": 0,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 0
+            },
+            "packs": {
+              "current": "avatar",
+              "downloaded_bytes": 8388608,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 50904340,
+              "mounted_bytes": 0,
+              "queued_packs": 1,
+              "ready_packs": 0,
+              "received_bytes": 0,
+              "state": "downloading"
+            },
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 0,
+              "cached_groups": 0,
+              "cached_trees": 0,
+              "candidates": 0,
+              "decision_usec": 0,
+              "decisions": 0,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "static_memory_bytes": null,
+          "static_memory_reason": "Web release monitor returned 0; unsupported/unmeasured rather than zero memory."
+        }
+      ],
+      "note": "Same implementation before Compatibility positional-light capacity changed from 8/32 to 4/8. Retained to disclose that splitting alone did not improve first-frame startup in this run."
+    },
+    "shader_diagnostic": {
+      "source": "deliverables/startup-packs/shader-detail.json",
+      "started_utc": "2026-10-01T08:36:01.572Z",
+      "finished_utc": "2026-10-01T08:37:42.892Z",
+      "console_errors": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "comparison_eligible": false,
+      "runs": [
+        {
+          "navigation": "fresh-context",
+          "build_id": "packs-8391b673f1753e4d",
+          "marks_ms": {
+            "start": 24.1,
+            "domContentLoaded": 148.6,
+            "progressComplete": 1114.2,
+            "firstGLCall": 1681.3,
+            "worldReady": 14100.7,
+            "overlayRemoved": 93244.7,
+            "firstRafAfterReady": 93259.2
+          },
+          "resources": [
+            {
+              "file": "index.wasm",
+              "start_ms": 140.9,
+              "response_end_ms": 927.2,
+              "duration_ms": 786.3,
+              "encoded_body_bytes": 39514754,
+              "decoded_body_bytes": 39514754,
+              "resource_timing_transfer_bytes": 39515054,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            },
+            {
+              "file": "index.pck",
+              "start_ms": 141.4,
+              "response_end_ms": 1069.2,
+              "duration_ms": 927.8,
+              "encoded_body_bytes": 35400248,
+              "decoded_body_bytes": 35400248,
+              "resource_timing_transfer_bytes": 35400548,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            }
+          ],
+          "main_download_complete_ms": 1069.2,
+          "download_to_world_ready_ms": 13031.5,
+          "download_to_first_ready_raf_ms": 92190.0,
+          "wasm_calls": [
+            {
+              "name": "instantiateStreaming",
+              "start_ms": 187.6,
+              "end_ms": 1024.9
+            }
+          ],
+          "gl_api_wall_clock": {
+            "linkProgram": {
+              "count": 87,
+              "total_ms": 42.4,
+              "max_ms": 24.6,
+              "max_start": 50516.2
+            },
+            "compileShader": {
+              "count": 174,
+              "total_ms": 2.0,
+              "max_ms": 0.7,
+              "max_start": 49629.9
+            },
+            "getProgramParameter": {
+              "count": 172,
+              "total_ms": 78839.2,
+              "max_ms": 7327.5,
+              "max_start": 14339.3
+            },
+            "getShaderParameter": {
+              "count": 172,
+              "total_ms": 3948.2,
+              "max_ms": 943.4,
+              "max_start": 27861.5
+            },
+            "bufferData": {
+              "count": 1270,
+              "total_ms": 28.4,
+              "max_ms": 1.8,
+              "max_start": 12692.7
+            }
+          },
+          "initial_overview_snapshot": {
+            "draw_calls": 466,
+            "primitives": 1144356,
+            "nodes": 1176,
+            "objects": 3454,
+            "resources": 704,
+            "render_buffer_bytes": 53463824,
+            "overview": true,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0,
+              "max_operation_ms": 0,
+              "ready": false,
+              "stage": 1
+            },
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0,
+              "loaded_chunks": 0,
+              "max_operation_ms": 0,
+              "operations": 0,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 0
+            },
+            "packs": {
+              "current": "avatar",
+              "downloaded_bytes": 0,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 50904340,
+              "mounted_bytes": 0,
+              "queued_packs": 1,
+              "ready_packs": 0,
+              "received_bytes": 0,
+              "state": "downloading"
+            },
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 0,
+              "cached_groups": 0,
+              "cached_trees": 0,
+              "candidates": 0,
+              "decision_usec": 0,
+              "decisions": 0,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "static_memory_bytes": null,
+          "static_memory_reason": "Web release monitor returned 0; unsupported/unmeasured rather than zero memory."
+        }
+      ],
+      "note": "Extra shader-source/program-source instrumentation; 93.2592 s navigation-to-first-ready-rAF is diagnostic only, excluded from ordinary startup comparison."
+    },
+    "historical_failed_candidate": {
+      "source": "deliverables/startup-packs/startup-final.json",
+      "started_utc": "2026-10-01T08:41:59.225Z",
+      "finished_utc": "2026-10-01T08:43:18.768Z",
+      "console_errors": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "comparison_eligible": true,
+      "runs": [
+        {
+          "navigation": "fresh-context",
+          "build_id": "packs-a1a1d122a56b7fd4",
+          "marks_ms": {
+            "start": 75.6,
+            "domContentLoaded": 402,
+            "progressComplete": 1102.9,
+            "firstGLCall": 1494.9,
+            "worldReady": 13047.5,
+            "overlayRemoved": 66034.9,
+            "firstRafAfterReady": 66035.3
+          },
+          "resources": [
+            {
+              "file": "index.wasm",
+              "start_ms": 395,
+              "response_end_ms": 1023,
+              "duration_ms": 628,
+              "encoded_body_bytes": 39514754,
+              "decoded_body_bytes": 39514754,
+              "resource_timing_transfer_bytes": 39515054,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            },
+            {
+              "file": "index.pck",
+              "start_ms": 396.9,
+              "response_end_ms": 841.5,
+              "duration_ms": 444.6,
+              "encoded_body_bytes": 35400360,
+              "decoded_body_bytes": 35400360,
+              "resource_timing_transfer_bytes": 35400660,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            }
+          ],
+          "main_download_complete_ms": 1023,
+          "download_to_world_ready_ms": 12024.5,
+          "download_to_first_ready_raf_ms": 65012.3,
+          "wasm_calls": [
+            {
+              "name": "instantiateStreaming",
+              "start_ms": 449.6,
+              "end_ms": 1095.4
+            }
+          ],
+          "gl_api_wall_clock": {
+            "linkProgram": {
+              "count": 87,
+              "total_ms": 2.9,
+              "max_ms": 0.2,
+              "max_start": 1495.4
+            },
+            "compileShader": {
+              "count": 174,
+              "total_ms": 1.3,
+              "max_ms": 0.1,
+              "max_start": 1662.4
+            },
+            "getProgramParameter": {
+              "count": 172,
+              "total_ms": 58314.8,
+              "max_ms": 3867.3,
+              "max_start": 1827
+            },
+            "getShaderParameter": {
+              "count": 172,
+              "total_ms": 1519.6,
+              "max_ms": 75.8,
+              "max_start": 56946.8
+            },
+            "bufferData": {
+              "count": 1270,
+              "total_ms": 28.9,
+              "max_ms": 2,
+              "max_start": 11694.9
+            }
+          },
+          "initial_overview_snapshot": {
+            "draw_calls": 466,
+            "primitives": 1144356,
+            "nodes": 1176,
+            "objects": 3454,
+            "resources": 704,
+            "render_buffer_bytes": 51320960,
+            "overview": true,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0,
+              "max_operation_ms": 0,
+              "ready": false,
+              "stage": 1
+            },
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0,
+              "loaded_chunks": 0,
+              "max_operation_ms": 0,
+              "operations": 0,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 0
+            },
+            "packs": {
+              "current": "avatar",
+              "downloaded_bytes": 8388608,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 50904340,
+              "mounted_bytes": 0,
+              "queued_packs": 1,
+              "ready_packs": 0,
+              "received_bytes": 0,
+              "state": "downloading"
+            },
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 0,
+              "cached_groups": 0,
+              "cached_trees": 0,
+              "candidates": 0,
+              "decision_usec": 0,
+              "decisions": 0,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "static_memory_bytes": null,
+          "static_memory_reason": "Web release monitor returned 0; unsupported/unmeasured rather than zero memory."
+        },
+        {
+          "navigation": "same-context-revisit",
+          "build_id": "packs-a1a1d122a56b7fd4",
+          "marks_ms": {
+            "start": 33.9,
+            "domContentLoaded": 71.6,
+            "progressComplete": 857.6,
+            "firstGLCall": 1027.3,
+            "worldReady": 3991,
+            "overlayRemoved": 6340.4,
+            "firstRafAfterReady": 6340.9
+          },
+          "resources": [
+            {
+              "file": "index.wasm",
+              "start_ms": 67.5,
+              "response_end_ms": 624.5,
+              "duration_ms": 557,
+              "encoded_body_bytes": 39514754,
+              "decoded_body_bytes": 39514754,
+              "resource_timing_transfer_bytes": 39515054,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            },
+            {
+              "file": "index.pck",
+              "start_ms": 68.5,
+              "response_end_ms": 807.2,
+              "duration_ms": 738.7,
+              "encoded_body_bytes": 35400360,
+              "decoded_body_bytes": 35400360,
+              "resource_timing_transfer_bytes": 35400660,
+              "http_status": 200,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "served_from_cache": false
+            }
+          ],
+          "main_download_complete_ms": 807.2,
+          "download_to_world_ready_ms": 3183.8,
+          "download_to_first_ready_raf_ms": 5533.7,
+          "wasm_calls": [
+            {
+              "name": "instantiateStreaming",
+              "start_ms": 161.8,
+              "end_ms": 790.6
+            }
+          ],
+          "gl_api_wall_clock": {
+            "linkProgram": {
+              "count": 87,
+              "total_ms": 2.1,
+              "max_ms": 0.2,
+              "max_start": 4934.4
+            },
+            "compileShader": {
+              "count": 174,
+              "total_ms": 0.5,
+              "max_ms": 0.1,
+              "max_start": 1068.9
+            },
+            "getProgramParameter": {
+              "count": 172,
+              "total_ms": 236.5,
+              "max_ms": 7,
+              "max_start": 6063.2
+            },
+            "getShaderParameter": {
+              "count": 172,
+              "total_ms": 1593.1,
+              "max_ms": 66.9,
+              "max_start": 6256.2
+            },
+            "bufferData": {
+              "count": 1270,
+              "total_ms": 28.3,
+              "max_ms": 2.2,
+              "max_start": 2940.6
+            }
+          },
+          "initial_overview_snapshot": {
+            "draw_calls": 466,
+            "primitives": 1144356,
+            "nodes": 1176,
+            "objects": 3454,
+            "resources": 704,
+            "render_buffer_bytes": 51320960,
+            "overview": true,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0,
+              "max_operation_ms": 0,
+              "ready": false,
+              "stage": 1
+            },
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0,
+              "loaded_chunks": 0,
+              "max_operation_ms": 0,
+              "operations": 0,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 0
+            },
+            "packs": {
+              "current": "avatar",
+              "downloaded_bytes": 0,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 50904340,
+              "mounted_bytes": 0,
+              "queued_packs": 1,
+              "ready_packs": 0,
+              "received_bytes": 0,
+              "state": "downloading"
+            },
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 0,
+              "cached_groups": 0,
+              "cached_trees": 0,
+              "candidates": 0,
+              "decision_usec": 0,
+              "decisions": 0,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "static_memory_bytes": null,
+          "static_memory_reason": "Web release monitor returned 0; unsupported/unmeasured rather than zero memory."
+        }
+      ]
+    }
+  },
+  "native_headless": {
+    "source": "deliverables/startup-packs/native-route.json",
+    "headless": true,
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "rendering_method": "gl_compatibility",
+    "load_ms": 862,
+    "instantiate_ms": 319,
+    "ready_ms": 1778,
+    "checks_passed": 29,
+    "checks_total": 29,
+    "failures": 0,
+    "before_comparable_run": null,
+    "before_comparable_run_reason": "No same-round native baseline provided; do not infer a before/after RAM reduction from previous differently timed reports.",
+    "samples": [
+      {
+        "stage": "overview",
+        "memory_bytes": 221099920.0,
+        "nodes": 1175.0,
+        "resources": 711.0,
+        "process_ms": 12.628,
+        "physics_ms": 3029.86,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0.0,
+          "loaded_chunks": 0,
+          "max_operation_ms": 0.0,
+          "operations": 0,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 0
+        },
+        "obstruction": {
+          "active": false,
+          "bounds_rebuilds": 0,
+          "cached_groups": 0,
+          "cached_trees": 0,
+          "candidates": 0,
+          "decision_usec": 0,
+          "decisions": 0,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "overview_rotate_zoom",
+        "memory_bytes": 221103324.0,
+        "nodes": 1175.0,
+        "resources": 711.0,
+        "process_ms": 12.628,
+        "physics_ms": 3029.86,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0.0,
+          "loaded_chunks": 0,
+          "max_operation_ms": 0.0,
+          "operations": 0,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 0
+        },
+        "obstruction": {
+          "active": false,
+          "bounds_rebuilds": 0,
+          "cached_groups": 0,
+          "cached_trees": 0,
+          "candidates": 0,
+          "decision_usec": 0,
+          "decisions": 0,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "near",
+        "memory_bytes": 340683568.0,
+        "nodes": 1617.0,
+        "resources": 806.0,
+        "process_ms": 369.822,
+        "physics_ms": 0.421,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 348,
+          "last_operation_ms": 0.297,
+          "loaded_chunks": 21,
+          "max_operation_ms": 37.878,
+          "operations": 42,
+          "pending_regions": 2,
+          "ready_districts": 1,
+          "ready_regions": 12,
+          "saved_animation_groups": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 111,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 0,
+          "decision_usec": 349,
+          "decisions": 9,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "district_counseling",
+        "memory_bytes": 341147132.0,
+        "nodes": 1647.0,
+        "resources": 806.0,
+        "process_ms": 369.822,
+        "physics_ms": 0.421,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 370,
+          "last_operation_ms": 0.436,
+          "loaded_chunks": 29,
+          "max_operation_ms": 37.878,
+          "operations": 58,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 20,
+          "saved_animation_groups": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 111,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 2,
+          "decision_usec": 534,
+          "decisions": 17,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "camera_turn_counseling",
+        "memory_bytes": 341983102.0,
+        "nodes": 1647.0,
+        "resources": 806.0,
+        "process_ms": 14.705,
+        "physics_ms": 0.123,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 370,
+          "last_operation_ms": 0.436,
+          "loaded_chunks": 29,
+          "max_operation_ms": 37.878,
+          "operations": 58,
+          "pending_regions": 0,
+          "ready_districts": 1,
+          "ready_regions": 20,
+          "saved_animation_groups": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 111,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 0,
+          "decision_usec": 170,
+          "decisions": 34,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "district_admissions",
+        "memory_bytes": 355970805.0,
+        "nodes": 1929.0,
+        "resources": 807.0,
+        "process_ms": 29.462,
+        "physics_ms": 2.28,
+        "streaming": {
+          "active_regions": 8,
+          "detail_nodes": 644,
+          "last_operation_ms": 0.742,
+          "loaded_chunks": 36,
+          "max_operation_ms": 37.878,
+          "operations": 72,
+          "pending_regions": 0,
+          "ready_districts": 2,
+          "ready_regions": 21,
+          "saved_animation_groups": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 167,
+          "cached_groups": 118,
+          "cached_trees": 21,
+          "candidates": 2,
+          "decision_usec": 208,
+          "decisions": 44,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "camera_turn_admissions",
+        "memory_bytes": 355979329.0,
+        "nodes": 1929.0,
+        "resources": 807.0,
+        "process_ms": 12.232,
+        "physics_ms": 0.534,
+        "streaming": {
+          "active_regions": 9,
+          "detail_nodes": 644,
+          "last_operation_ms": 0.742,
+          "loaded_chunks": 36,
+          "max_operation_ms": 37.878,
+          "operations": 72,
+          "pending_regions": 0,
+          "ready_districts": 2,
+          "ready_regions": 21,
+          "saved_animation_groups": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 167,
+          "cached_groups": 118,
+          "cached_trees": 21,
+          "candidates": 3,
+          "decision_usec": 1023,
+          "decisions": 61,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "district_recommendations",
+        "memory_bytes": 368287941.0,
+        "nodes": 2187.0,
+        "resources": 808.0,
+        "process_ms": 15.348,
+        "physics_ms": 1.5,
+        "streaming": {
+          "active_regions": 13,
+          "detail_nodes": 889,
+          "last_operation_ms": 0.383,
+          "loaded_chunks": 48,
+          "max_operation_ms": 37.878,
+          "operations": 96,
+          "pending_regions": 0,
+          "ready_districts": 3,
+          "ready_regions": 28,
+          "saved_animation_groups": 0
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 216,
+          "cached_groups": 148,
+          "cached_trees": 32,
+          "candidates": 1,
+          "decision_usec": 383,
+          "decisions": 76,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "camera_turn_recommendations",
+        "memory_bytes": 358623255.0,
+        "nodes": 1934.0,
+        "resources": 808.0,
+        "process_ms": 17.878,
+        "physics_ms": 1.096,
+        "streaming": {
+          "active_regions": 13,
+          "detail_nodes": 648,
+          "last_operation_ms": 0.127,
+          "loaded_chunks": 36,
+          "max_operation_ms": 37.878,
+          "operations": 108,
+          "pending_regions": 0,
+          "ready_districts": 2,
+          "ready_regions": 21,
+          "saved_animation_groups": 8
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 216,
+          "cached_groups": 113,
+          "cached_trees": 21,
+          "candidates": 0,
+          "decision_usec": 405,
+          "decisions": 103,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "district_universities",
+        "memory_bytes": 369774989.0,
+        "nodes": 2205.0,
+        "resources": 808.0,
+        "process_ms": 19.261,
+        "physics_ms": 3.186,
+        "streaming": {
+          "active_regions": 1,
+          "detail_nodes": 904,
+          "last_operation_ms": 1.438,
+          "loaded_chunks": 51,
+          "max_operation_ms": 37.878,
+          "operations": 139,
+          "pending_regions": 4,
+          "ready_districts": 3,
+          "ready_regions": 30,
+          "saved_animation_groups": 8
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 271,
+          "cached_groups": 150,
+          "cached_trees": 31,
+          "candidates": 0,
+          "decision_usec": 308,
+          "decisions": 119,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "camera_turn_universities",
+        "memory_bytes": 347844917.0,
+        "nodes": 1835.0,
+        "resources": 807.0,
+        "process_ms": 11.309,
+        "physics_ms": 0.497,
+        "streaming": {
+          "active_regions": 2,
+          "detail_nodes": 543,
+          "last_operation_ms": 0.144,
+          "loaded_chunks": 42,
+          "max_operation_ms": 37.878,
+          "operations": 159,
+          "pending_regions": 0,
+          "ready_districts": 2,
+          "ready_regions": 31,
+          "saved_animation_groups": 11
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 271,
+          "cached_groups": 91,
+          "cached_trees": 21,
+          "candidates": 0,
+          "decision_usec": 428,
+          "decisions": 150,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "district_life",
+        "memory_bytes": 357895205.0,
+        "nodes": 2117.0,
+        "resources": 807.0,
+        "process_ms": 15.649,
+        "physics_ms": 1.018,
+        "streaming": {
+          "active_regions": 1,
+          "detail_nodes": 813,
+          "last_operation_ms": 0.277,
+          "loaded_chunks": 54,
+          "max_operation_ms": 37.878,
+          "operations": 183,
+          "pending_regions": 0,
+          "ready_districts": 3,
+          "ready_regions": 38,
+          "saved_animation_groups": 11
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 320,
+          "cached_groups": 122,
+          "cached_trees": 31,
+          "candidates": 0,
+          "decision_usec": 475,
+          "decisions": 163,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "camera_turn_life",
+        "memory_bytes": 348033809.0,
+        "nodes": 1837.0,
+        "resources": 807.0,
+        "process_ms": 12.223,
+        "physics_ms": 0.856,
+        "streaming": {
+          "active_regions": 1,
+          "detail_nodes": 551,
+          "last_operation_ms": 0.136,
+          "loaded_chunks": 36,
+          "max_operation_ms": 37.878,
+          "operations": 201,
+          "pending_regions": 0,
+          "ready_districts": 2,
+          "ready_regions": 25,
+          "saved_animation_groups": 25
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 320,
+          "cached_groups": 92,
+          "cached_trees": 20,
+          "candidates": 0,
+          "decision_usec": 333,
+          "decisions": 195,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "district_wordking",
+        "memory_bytes": 361512756.0,
+        "nodes": 2117.0,
+        "resources": 808.0,
+        "process_ms": 28.352,
+        "physics_ms": 2.993,
+        "streaming": {
+          "active_regions": 11,
+          "detail_nodes": 812,
+          "last_operation_ms": 0.221,
+          "loaded_chunks": 54,
+          "max_operation_ms": 37.878,
+          "operations": 237,
+          "pending_regions": 0,
+          "ready_districts": 3,
+          "ready_regions": 38,
+          "saved_animation_groups": 25
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 370,
+          "cached_groups": 124,
+          "cached_trees": 30,
+          "candidates": 1,
+          "decision_usec": 314,
+          "decisions": 215,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "camera_turn_wordking",
+        "memory_bytes": 352143867.0,
+        "nodes": 1854.0,
+        "resources": 818.0,
+        "process_ms": 12.648,
+        "physics_ms": 0.749,
+        "streaming": {
+          "active_regions": 11,
+          "detail_nodes": 562,
+          "last_operation_ms": 0.293,
+          "loaded_chunks": 41,
+          "max_operation_ms": 37.878,
+          "operations": 250,
+          "pending_regions": 0,
+          "ready_districts": 2,
+          "ready_regions": 31,
+          "saved_animation_groups": 33
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 493,
+          "cached_groups": 87,
+          "cached_trees": 20,
+          "candidates": 0,
+          "decision_usec": 413,
+          "decisions": 248,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "repeat_near_0",
+        "memory_bytes": 368446185.0,
+        "nodes": 2179.0,
+        "resources": 819.0,
+        "process_ms": 12.648,
+        "physics_ms": 0.749,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 871,
+          "last_operation_ms": 0.358,
+          "loaded_chunks": 57,
+          "max_operation_ms": 37.878,
+          "operations": 291,
+          "pending_regions": 4,
+          "ready_districts": 2,
+          "ready_regions": 40,
+          "saved_animation_groups": 34
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 580,
+          "cached_groups": 140,
+          "cached_trees": 21,
+          "candidates": 2,
+          "decision_usec": 673,
+          "decisions": 270,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "repeat_unloaded_0",
+        "memory_bytes": 330625223.0,
+        "nodes": 1251.0,
+        "resources": 816.0,
+        "process_ms": 9.788,
+        "physics_ms": 0.246,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0.25,
+          "loaded_chunks": 0,
+          "max_operation_ms": 37.878,
+          "operations": 348,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 54
+        },
+        "obstruction": {
+          "active": false,
+          "bounds_rebuilds": 580,
+          "cached_groups": 24,
+          "cached_trees": 0,
+          "candidates": 2,
+          "decision_usec": 673,
+          "decisions": 270,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "repeat_near_1",
+        "memory_bytes": 352081957.0,
+        "nodes": 1616.0,
+        "resources": 819.0,
+        "process_ms": 42.986,
+        "physics_ms": 1.451,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 345,
+          "last_operation_ms": 1.641,
+          "loaded_chunks": 20,
+          "max_operation_ms": 39.635,
+          "operations": 389,
+          "pending_regions": 8,
+          "ready_districts": 1,
+          "ready_regions": 11,
+          "saved_animation_groups": 54
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 667,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 2,
+          "decision_usec": 243,
+          "decisions": 279,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "repeat_unloaded_1",
+        "memory_bytes": 330633207.0,
+        "nodes": 1251.0,
+        "resources": 816.0,
+        "process_ms": 9.75,
+        "physics_ms": 0.196,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0.247,
+          "loaded_chunks": 0,
+          "max_operation_ms": 39.635,
+          "operations": 410,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 54
+        },
+        "obstruction": {
+          "active": false,
+          "bounds_rebuilds": 667,
+          "cached_groups": 24,
+          "cached_trees": 0,
+          "candidates": 2,
+          "decision_usec": 243,
+          "decisions": 279,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "repeat_near_2",
+        "memory_bytes": 352089981.0,
+        "nodes": 1616.0,
+        "resources": 819.0,
+        "process_ms": 21.068,
+        "physics_ms": 0.131,
+        "streaming": {
+          "active_regions": 3,
+          "detail_nodes": 345,
+          "last_operation_ms": 5.229,
+          "loaded_chunks": 20,
+          "max_operation_ms": 39.635,
+          "operations": 451,
+          "pending_regions": 8,
+          "ready_districts": 1,
+          "ready_regions": 11,
+          "saved_animation_groups": 54
+        },
+        "obstruction": {
+          "active": true,
+          "bounds_rebuilds": 754,
+          "cached_groups": 80,
+          "cached_trees": 11,
+          "candidates": 2,
+          "decision_usec": 546,
+          "decisions": 288,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      },
+      {
+        "stage": "repeat_unloaded_2",
+        "memory_bytes": 330640811.0,
+        "nodes": 1251.0,
+        "resources": 816.0,
+        "process_ms": 38.69,
+        "physics_ms": 1.005,
+        "streaming": {
+          "active_regions": 0,
+          "detail_nodes": 0,
+          "last_operation_ms": 0.235,
+          "loaded_chunks": 0,
+          "max_operation_ms": 39.635,
+          "operations": 472,
+          "pending_regions": 0,
+          "ready_districts": 0,
+          "ready_regions": 0,
+          "saved_animation_groups": 54
+        },
+        "obstruction": {
+          "active": false,
+          "bounds_rebuilds": 754,
+          "cached_groups": 24,
+          "cached_trees": 0,
+          "candidates": 2,
+          "decision_usec": 546,
+          "decisions": 288,
+          "faded_meshes": 0,
+          "multimesh_transform_writes": 0
+        }
+      }
+    ],
+    "interpretation": "Godot MEMORY_STATIC is engine allocation accounting, not OS working set, browser RAM or GPU memory. Headless frame/FPS/draw-call counters are not a rendered-game benchmark. Quick route samples are not pure GDScript CPU profiles."
+  },
+  "unmeasured": [
+    {
+      "item": "Web process total resident RAM and peak RAM",
+      "reason": "Static-memory monitor returned zero; no OS browser/WASM/GPU attribution captured."
+    },
+    {
+      "item": "Steady-state Web overview/near FPS and frame-time distribution after this final build",
+      "reason": "Startup tool samples only briefly after first callback; native route is headless. Do not use those FPS counters as stable gameplay results."
+    },
+    {
+      "item": "Pure script CPU time, GPU frame time, exact shader compilation time",
+      "reason": "API wall-clock and Godot process/physics monitors are not separate CPU/GPU profilers."
+    },
+    {
+      "item": "Exact first presented frame and first accepted player input latency",
+      "reason": "First ready rAF is a main-thread response proxy, not presentation or input-event instrumentation."
+    },
+    {
+      "item": "Final-build public CDN/download performance",
+      "reason": "This implementation round validates localhost; no new GitHub/Cloudflare live benchmark."
+    },
+    {
+      "item": "Phone/other computer startup performance",
+      "reason": "No physical additional device benchmark supplied."
+    },
+    {
+      "item": "Long-session Web memory stability",
+      "reason": "Only short native repeats and three actual Web entries are recorded; mounted Web packs remain resident for this page lifetime."
+    }
+  ],
+  "source_artifacts": {
+    "deliverables/startup-packs/startup-before.json": {
+      "bytes": 43404,
+      "sha256": "34ed59ed5925ce01956f20fa31272b3a890962d77de098b936b30c0ed81ba608"
+    },
+    "deliverables/startup-packs/startup-final.json": {
+      "bytes": 38060,
+      "sha256": "1c723c18a50c64c7c68746ef6dca5a840753ddc6f3a77edf17d6343541a0481b"
+    },
+    "deliverables/startup-packs/startup-after.json": {
+      "bytes": 37088,
+      "sha256": "1305a9018bd88a61e3e80788b73e4ca9803d7603c34ca9e039b7dade675ea574"
+    },
+    "deliverables/startup-packs/shader-detail.json": {
+      "bytes": 9183575,
+      "sha256": "37bebdeb6a200974c891bbf95cc09d684e6e5cfdf6a449b5bbe6b25f2ca3d149"
+    },
+    "deliverables/performance/web-pack-build.json": {
+      "bytes": 228581,
+      "sha256": "9377960533ddc67ef5ca1c0700eb56b9fce8bfea2afe01ef5d3b0734ea828c01"
+    },
+    "deliverables/startup-packs/native-route.json": {
+      "bytes": 20176,
+      "sha256": "dedb5a67c17cc8c9dbbb24b953915598078c9e4782fdb1b2d7107c2f32428f79"
+    },
+    "build/web-validate-packs.log": {
+      "bytes": 168,
+      "sha256": "ac3cca68e2594dd511b06e4093b98e0128a12f1ee80355b2ea0af778982e4549"
+    },
+    "deliverables/startup-packs/web-delivery-first-failure.json": {
+      "bytes": 46826,
+      "sha256": "57fc066f4ae00e66829b8c3669ff336732253a6f973a8d86eb6cee73713e4f03"
+    },
+    "deliverables/startup-packs/lazy-avatar-music-regression.log": {
+      "bytes": 4222,
+      "sha256": "dbeb7b3f65ceac4f6e4a8369cde66ec4fd57b8e260e48e842f7d293f7e008e3c"
+    },
+    "deliverables/performance/streaming-runtime-regression.log": {
+      "bytes": 149,
+      "sha256": "1775b92f48c737443c4f9316ca0dc0357958cb4c19aed59b1aeea35f9ca95f7b"
+    },
+    "deliverables/startup-packs/web-pack-http-client-checks.log": {
+      "bytes": 107,
+      "sha256": "ae17d4a00c8ec31b1398fd85e52049706664577c19a5ba8fb4cc0e7675a95aad"
+    },
+    "deliverables/startup-packs/web-delivery-fixed.json": {
+      "bytes": 47477,
+      "sha256": "c51f25e07cd27470fbad155232c1a2fa66cdf6aeff8d1afaac81f0b75995b6f7"
+    },
+    "deliverables/performance/startup-functional.json": {
+      "bytes": 127818,
+      "sha256": "6ef8289193789be1e3fdf0009bbece16c4caef1a2613cac2f6634a5e9b577e1c"
+    },
+    "deliverables/startup-packs/startup-release.json": {
+      "bytes": 38933,
+      "sha256": "cf640b59c94bb21ccb476a262ea46bed0774708f42da1340949bbbf8962723ff"
+    },
+    "_site/index.release.json": {
+      "bytes": 3657,
+      "sha256": "ea410301cd8e841533403147cfdd3712729080bee743d820547f1fe0dfd61886"
+    },
+    "deliverables/performance/startup-crosswalk.json": {
+      "bytes": 41102,
+      "sha256": "1e8bfa59a0ef3cc515bb94c0526f4e36da404786bd878795dfdbe09c6e7793cc"
+    },
+    "deliverables/performance/startup-crosswalk-final.json": {
+      "bytes": 59708,
+      "sha256": "40da1843ea74daebf44754f19e7df8b0bad79c6c79f3b20c69a40afe0a0ba521"
+    }
+  },
+  "release_validation": {
+    "status": "local_release_validation_complete",
+    "fix_status": "Actual release c674: real Web delivery 11/11, full input route 37/37, supplemental physical cross-district walking 6/6 all pass with zero unexpected errors. Same-probe fresh/revisit startup comparison complete. Unmeasured RAM/GPU/steady-FPS/multi-device limits remain; no Git push or live deployment claim is made here.",
+    "candidate_after_runtime_fix": {
+      "build_id": "packs-c674b2a47ed31edd",
+      "created_utc": "2026-10-01T09:00:29.028562+00:00",
+      "source_base_commit": "42883300eda4352200268736f18437560a30ca5f",
+      "source_sha256": "c674b2a47ed31edd5ee75f4c86fcb389ffae87065f618b4cf8322a997dca1658",
+      "export": "Web release; Compatibility; single-threaded",
+      "files": {
+        "index.html": {
+          "bytes": 5376,
+          "sha256": "4f661dfd4f18dd4052283334a0ad2facc6bfef865086eaf17237fafcadc4e4c0"
+        },
+        "index.js": {
+          "bytes": 279815,
+          "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+        },
+        "index.wasm": {
+          "bytes": 39514754,
+          "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
+        },
+        "index.pck": {
+          "bytes": 35404024,
+          "sha256": "32520e066b344b8e2b29b245423ebbc7b6a9888b75ee8a4124542d2102c277d1"
+        },
+        "index.packs.json": {
+          "bytes": 11086,
+          "sha256": "d8671fc0bec253fcbdde1c5ecf43a2c3d41e34b184913de456e5db73c61a3d31"
+        },
+        "packs/avatar-dbf4017c84a82ebd.pck": {
+          "bytes": 50904340,
+          "sha256": "dbf4017c84a82ebdb9988189b61d0a6fa00e5e53c70a95e4dfc9f3044f2185ac"
+        },
+        "packs/district_admissions-b9990e78225097d4.pck": {
+          "bytes": 3614436,
+          "sha256": "b9990e78225097d47c172f2a4503783425e2dd720b8d92d1cc90d389426656f7"
+        },
+        "packs/district_counseling-c94cdc8453e08139.pck": {
+          "bytes": 3465044,
+          "sha256": "c94cdc8453e08139d2e3f45209ef49a4eaef4926cc11837f90ede351b3d6cce7"
+        },
+        "packs/district_life-b375c982e7a81f3b.pck": {
+          "bytes": 3356052,
+          "sha256": "b375c982e7a81f3bf9ce10185a3ad2326948bfdca66b7a99b56ebef2345d4936"
+        },
+        "packs/district_ocean-205618f4a153be51.pck": {
+          "bytes": 729528,
+          "sha256": "205618f4a153be51994e9beaa4696751f73dae2775eae656d9a0ab65d41f5ce3"
+        },
+        "packs/district_recommendations-dd767596f5068425.pck": {
+          "bytes": 2888636,
+          "sha256": "dd767596f5068425ab405c59851f72daf81cc77e75238bb40f6ffe8e4adc18ac"
+        },
+        "packs/district_sakura-6315d0720e217884.pck": {
+          "bytes": 4921072,
+          "sha256": "6315d0720e217884ae2d71457062edbfbc820b10e1aa01791cfb8e12ebb1dc08"
+        },
+        "packs/district_universities-83ab9e6fad509274.pck": {
+          "bytes": 3564404,
+          "sha256": "83ab9e6fad509274bc05e77c6bba84aa4be22db51801720165a78e311428016e"
+        },
+        "packs/district_wordking-d88484e6cbd7c882.pck": {
+          "bytes": 3527084,
+          "sha256": "d88484e6cbd7c882841053806b029db95b191ee9b451794a60eb0686f99c7653"
+        },
+        "packs/music_admissions-2ce1c35030bcc9fb.pck": {
+          "bytes": 1728528,
+          "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0"
+        },
+        "packs/music_counseling-f3b97506778458ba.pck": {
+          "bytes": 1443824,
+          "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4"
+        },
+        "packs/music_recommendations-66382088fcc4b843.pck": {
+          "bytes": 2195960,
+          "sha256": "66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8"
+        },
+        "packs/music_wordking-a45c153d522c439d.pck": {
+          "bytes": 2315480,
+          "sha256": "a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995"
+        },
+        "packs/music_world-e1a7f96b4f7f8400.pck": {
+          "bytes": 1351376,
+          "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf"
+        },
+        "packs/shared-4b7143129f228685.pck": {
+          "bytes": 176264,
+          "sha256": "4b7143129f228685e51f78030a171343c09b5aaaa3b39b0ee3631daf5d7bbe81"
+        },
+        "packs/training_room-00e45f0b5f24b903.pck": {
+          "bytes": 15104300,
+          "sha256": "00e45f0b5f24b9037f1b64cac3ecd244e845063525b8211cabeaf9cc503752aa"
+        }
+      }
+    },
+    "failed_candidate_run": {
+      "measured_candidate_build_id": "packs-a1a1d122a56b7fd4",
+      "source": "deliverables/startup-packs/web-delivery-first-failure.json",
+      "checks_passed_before_failure": 6,
+      "passed": false,
+      "failure": "The intentional first avatar HTTP 503 did not block overview; retry HTTP 200 then failed download-file validation and never mounted avatar/music/shared packs. Roaming readiness timed out. Native pack decoding does not validate Web HTTP file-writing behavior."
+    },
+    "fixed_web_delivery": {
+      "source": "deliverables/startup-packs/web-delivery-fixed.json",
+      "build_id": "packs-c674b2a47ed31edd",
+      "passed": true,
+      "started_utc": "2026-10-01T09:00:47.389Z",
+      "finished_utc": "2026-10-01T09:03:30.623Z",
+      "checks": [
+        {
+          "name": "First avatar request deliberately failed without blocking overview",
+          "passed": true,
+          "evidence": {
+            "attempts": 1,
+            "avatar_error": "下載失敗（HTTP 503），請重試。",
+            "clock": {
+              "time_origin": 1790845254349.7,
+              "world_ready_ms": 38793.199999999255,
+              "first_raf_after_ready_ms": 127183.59999999776
+            }
+          },
+          "at": "2026-10-01T09:03:02.568Z"
+        },
+        {
+          "name": "Overview defers avatar construction and all full-detail chunks",
+          "passed": true,
+          "evidence": {
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0,
+              "max_operation_ms": 0,
+              "ready": false,
+              "stage": 1
+            },
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0,
+              "loaded_chunks": 0,
+              "max_operation_ms": 0,
+              "operations": 0,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 0
+            }
+          },
+          "at": "2026-10-01T09:03:02.570Z"
+        },
+        {
+          "name": "Deferred pack requests begin after first browser rAF following world readiness",
+          "passed": true,
+          "evidence": [
+            {
+              "url": "http://127.0.0.1:8947/_site/packs/avatar-dbf4017c84a82ebd.pck",
+              "after_first_raf_ms": 282.2939453125
+            },
+            {
+              "url": "http://127.0.0.1:8947/_site/packs/music_world-e1a7f96b4f7f8400.pck",
+              "after_first_raf_ms": 567.988037109375
+            }
+          ],
+          "at": "2026-10-01T09:03:02.571Z"
+        },
+        {
+          "name": "Tab opens preparation while preserving the overview",
+          "passed": true,
+          "evidence": null,
+          "at": "2026-10-01T09:03:03.479Z"
+        },
+        {
+          "name": "Movement and jump input cannot move an unprepared player",
+          "passed": true,
+          "evidence": {
+            "before": [
+              0,
+              48.5053558349609,
+              3.03158473968506
+            ],
+            "after": [
+              0,
+              48.5053558349609,
+              3.03158473968506
+            ]
+          },
+          "at": "2026-10-01T09:03:05.275Z"
+        },
+        {
+          "name": "Escape cancellation stays in the original world",
+          "passed": true,
+          "evidence": null,
+          "at": "2026-10-01T09:03:08.170Z"
+        },
+        {
+          "name": "Real retry button resumes download and completes roaming preparation",
+          "passed": true,
+          "evidence": {
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0.5,
+              "max_operation_ms": 317.7,
+              "ready": true,
+              "stage": 6
+            },
+            "packs": {
+              "current": "music_counseling",
+              "downloaded_bytes": 524288,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 1443824,
+              "max_download_frame_bytes": 524288,
+              "mounted_bytes": 61547624,
+              "queued_packs": 0,
+              "ready_packs": 6,
+              "received_bytes": 61547624,
+              "state": "downloading",
+              "transport": "http_client"
+            },
+            "streaming": {
+              "active_regions": 3,
+              "detail_nodes": 331,
+              "last_operation_ms": 0.3,
+              "loaded_chunks": 15,
+              "max_operation_ms": 25.9,
+              "operations": 32,
+              "pending_regions": 8,
+              "ready_districts": 1,
+              "ready_regions": 6,
+              "saved_animation_groups": 0
+            }
+          },
+          "at": "2026-10-01T09:03:30.153Z"
+        },
+        {
+          "name": "Avatar pack is requested exactly once again after the injected failure",
+          "passed": true,
+          "evidence": [
+            {
+              "id": "13768.12",
+              "url": "http://127.0.0.1:8947/_site/packs/avatar-dbf4017c84a82ebd.pck",
+              "kind": "Fetch",
+              "start_monotonic_seconds": 33560.810897,
+              "start_epoch_ms": 1790845381815.594,
+              "decoded_body_bytes": 48,
+              "encoded_body_bytes": 48,
+              "status": 503,
+              "mime": "text/plain",
+              "response_monotonic_seconds": 33560.951027,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "content_encoding": null,
+              "end_monotonic_seconds": 33560.895901,
+              "transferred_bytes_with_headers": 124
+            },
+            {
+              "id": "13768.19",
+              "url": "http://127.0.0.1:8947/_site/packs/avatar-dbf4017c84a82ebd.pck",
+              "kind": "Fetch",
+              "start_monotonic_seconds": 33569.751951,
+              "start_epoch_ms": 1790845390755.33,
+              "decoded_body_bytes": 50904340,
+              "encoded_body_bytes": 50904340,
+              "status": 200,
+              "mime": "application/octet-stream",
+              "response_monotonic_seconds": 33569.886286,
+              "from_disk_cache": false,
+              "from_service_worker": false,
+              "content_encoding": null,
+              "end_monotonic_seconds": 33571.959349,
+              "transferred_bytes_with_headers": 50904547
+            }
+          ],
+          "at": "2026-10-01T09:03:30.155Z"
+        },
+        {
+          "name": "Retry reuses the loaded boot package without another boot download",
+          "passed": true,
+          "evidence": null,
+          "at": "2026-10-01T09:03:30.157Z"
+        },
+        {
+          "name": "Successful recovery clears the avatar pack failure",
+          "passed": true,
+          "evidence": {},
+          "at": "2026-10-01T09:03:30.158Z"
+        },
+        {
+          "name": "Web downloads use bounded streaming writes",
+          "passed": true,
+          "evidence": {
+            "transport": "http_client",
+            "max_download_frame_bytes": 524288
+          },
+          "at": "2026-10-01T09:03:30.159Z"
+        }
+      ],
+      "errors": [],
+      "expected_failures": [
+        {
+          "url": "http://127.0.0.1:8947/_site/packs/avatar-dbf4017c84a82ebd.pck",
+          "status": 503,
+          "at": "2026-10-01T09:03:01.888Z"
+        }
+      ],
+      "avatar_attempts": 2,
+      "limitations": [
+        "The first rAF after world-ready is a browser callback, not a measured physical display presentation.",
+        "Avatar readiness/stage and withheld pack bytes establish deferred resource construction; individual GPU texture origins are not instrumented.",
+        "Request interception disables the browser HTTP cache for this failure fixture; it is not a cache or bandwidth benchmark."
+      ]
+    },
+    "functional": {
+      "source": "deliverables/performance/startup-functional.json",
+      "build_id": "packs-c674b2a47ed31edd",
+      "passed": true,
+      "checks_passed": 37,
+      "checks_total": 37,
+      "checks": [
+        {
+          "name": "Current release identity (initial navigation)",
+          "passed": true
+        },
+        {
+          "name": "RestoreGraphicsDefaults",
+          "passed": true
+        },
+        {
+          "name": "MSAAToggle",
+          "passed": true
+        },
+        {
+          "name": "MSAAToggle",
+          "passed": true
+        },
+        {
+          "name": "FPS30",
+          "passed": true
+        },
+        {
+          "name": "FPS60",
+          "passed": true
+        },
+        {
+          "name": "FPS90",
+          "passed": true
+        },
+        {
+          "name": "MSAAToggle",
+          "passed": true
+        },
+        {
+          "name": "Current release identity (persistence reload)",
+          "passed": true
+        },
+        {
+          "name": "Web reload persists 90 FPS / MSAA off",
+          "passed": true
+        },
+        {
+          "name": "RestoreGraphicsDefaults",
+          "passed": true
+        },
+        {
+          "name": "390 px viewport exposes settings toggle and fixed close action",
+          "passed": true
+        },
+        {
+          "name": "Teleport and load counseling",
+          "passed": true
+        },
+        {
+          "name": "counseling interaction opens",
+          "passed": true
+        },
+        {
+          "name": "counseling interaction returns to outdoor world",
+          "passed": true
+        },
+        {
+          "name": "Teleport and load admissions",
+          "passed": true
+        },
+        {
+          "name": "admissions interaction opens",
+          "passed": true
+        },
+        {
+          "name": "admissions interaction returns to outdoor world",
+          "passed": true
+        },
+        {
+          "name": "Teleport and load recommendations",
+          "passed": true
+        },
+        {
+          "name": "recommendations interaction opens",
+          "passed": true
+        },
+        {
+          "name": "recommendations interaction returns to outdoor world",
+          "passed": true
+        },
+        {
+          "name": "Teleport and load universities",
+          "passed": true
+        },
+        {
+          "name": "universities interaction opens",
+          "passed": true
+        },
+        {
+          "name": "universities interaction returns to outdoor world",
+          "passed": true
+        },
+        {
+          "name": "Teleport and load life",
+          "passed": true
+        },
+        {
+          "name": "Walk around nearby seating to life portal",
+          "passed": true
+        },
+        {
+          "name": "life interaction opens",
+          "passed": true
+        },
+        {
+          "name": "life interaction returns to outdoor world",
+          "passed": true
+        },
+        {
+          "name": "Teleport and load wordking",
+          "passed": true
+        },
+        {
+          "name": "Training room entry with E",
+          "passed": true
+        },
+        {
+          "name": "Training room return with real movement and E",
+          "passed": true
+        },
+        {
+          "name": "Fast camera turns retain a live near scene and obstruction telemetry",
+          "passed": true
+        },
+        {
+          "name": "Real walking changes player position without falling below terrain",
+          "passed": true
+        },
+        {
+          "name": "Overview rotate/zoom stays active",
+          "passed": true
+        },
+        {
+          "name": "Three repeated entries unload all detail chunks",
+          "passed": true
+        },
+        {
+          "name": "RestoreGraphicsDefaults",
+          "passed": true
+        },
+        {
+          "name": "QA restores original graphics defaults",
+          "passed": true
+        }
+      ],
+      "errors": [],
+      "unmeasured": [
+        "Attempted 12-second real-input walking route did not cross a district boundary; do not count it as cross-district walking coverage."
+      ],
+      "started_utc": "2026-10-01T09:04:04.620Z",
+      "finished_utc": "2026-10-01T09:09:11.332Z",
+      "events": [
+        {
+          "text": "TRAINING_ROOM_ENTERED world_instance=42463135016",
+          "at": "2026-10-01T09:07:04.216Z"
+        },
+        {
+          "text": "TRAINING_ROOM_READY device=1 display_sockets=6 floor=20x18",
+          "at": "2026-10-01T09:07:20.501Z"
+        },
+        {
+          "text": "TRAINING_ROOM_RETURNED world_instance=42463135016",
+          "at": "2026-10-01T09:07:22.433Z"
+        }
+      ],
+      "repeated_entries": [
+        {
+          "iteration": 0,
+          "near": {
+            "nodes": 1646,
+            "objects": 4929,
+            "resources": 813,
+            "render_buffer_bytes": 157913944,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0.3,
+              "max_operation_ms": 402.1,
+              "ready": true,
+              "stage": 6
+            },
+            "packs": {
+              "current": "",
+              "downloaded_bytes": 0,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 0,
+              "max_download_frame_bytes": 524288,
+              "mounted_bytes": 101286328,
+              "queued_packs": 0,
+              "ready_packs": 16,
+              "received_bytes": 101286328,
+              "state": "idle",
+              "transport": "http_client"
+            },
+            "streaming": {
+              "active_regions": 3,
+              "detail_nodes": 367,
+              "last_operation_ms": 2.3,
+              "loaded_chunks": 28,
+              "max_operation_ms": 30.3,
+              "operations": 446,
+              "pending_regions": 0,
+              "ready_districts": 1,
+              "ready_regions": 19,
+              "saved_animation_groups": 54
+            },
+            "obstruction": {
+              "active": true,
+              "bounds_rebuilds": 618,
+              "cached_groups": 80,
+              "cached_trees": 11,
+              "candidates": 2,
+              "decision_usec": 300,
+              "decisions": 941,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "unloaded": {
+            "nodes": 1251,
+            "objects": 3817,
+            "resources": 810,
+            "render_buffer_bytes": 141307814,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0.3,
+              "max_operation_ms": 402.1,
+              "ready": true,
+              "stage": 6
+            },
+            "packs": {
+              "current": "",
+              "downloaded_bytes": 0,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 0,
+              "max_download_frame_bytes": 524288,
+              "mounted_bytes": 101286328,
+              "queued_packs": 0,
+              "ready_packs": 16,
+              "received_bytes": 101286328,
+              "state": "idle",
+              "transport": "http_client"
+            },
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0.2,
+              "loaded_chunks": 0,
+              "max_operation_ms": 30.3,
+              "operations": 474,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 54
+            },
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 618,
+              "cached_groups": 24,
+              "cached_trees": 0,
+              "candidates": 2,
+              "decision_usec": 1200,
+              "decisions": 942,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "js_heap": {
+            "used": 202804573,
+            "total": 210736497
+          }
+        },
+        {
+          "iteration": 1,
+          "near": {
+            "nodes": 1646,
+            "objects": 4929,
+            "resources": 813,
+            "render_buffer_bytes": 157913944,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0.3,
+              "max_operation_ms": 402.1,
+              "ready": true,
+              "stage": 6
+            },
+            "packs": {
+              "current": "",
+              "downloaded_bytes": 0,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 0,
+              "max_download_frame_bytes": 524288,
+              "mounted_bytes": 101286328,
+              "queued_packs": 0,
+              "ready_packs": 16,
+              "received_bytes": 101286328,
+              "state": "idle",
+              "transport": "http_client"
+            },
+            "streaming": {
+              "active_regions": 3,
+              "detail_nodes": 367,
+              "last_operation_ms": 1.5,
+              "loaded_chunks": 28,
+              "max_operation_ms": 30.3,
+              "operations": 530,
+              "pending_regions": 0,
+              "ready_districts": 1,
+              "ready_regions": 19,
+              "saved_animation_groups": 54
+            },
+            "obstruction": {
+              "active": true,
+              "bounds_rebuilds": 705,
+              "cached_groups": 80,
+              "cached_trees": 11,
+              "candidates": 2,
+              "decision_usec": 400,
+              "decisions": 964,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "unloaded": {
+            "nodes": 1251,
+            "objects": 3817,
+            "resources": 810,
+            "render_buffer_bytes": 141307814,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0.3,
+              "max_operation_ms": 402.1,
+              "ready": true,
+              "stage": 6
+            },
+            "packs": {
+              "current": "",
+              "downloaded_bytes": 0,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 0,
+              "max_download_frame_bytes": 524288,
+              "mounted_bytes": 101286328,
+              "queued_packs": 0,
+              "ready_packs": 16,
+              "received_bytes": 101286328,
+              "state": "idle",
+              "transport": "http_client"
+            },
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0.3,
+              "loaded_chunks": 0,
+              "max_operation_ms": 30.3,
+              "operations": 558,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 54
+            },
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 705,
+              "cached_groups": 24,
+              "cached_trees": 0,
+              "candidates": 2,
+              "decision_usec": 600,
+              "decisions": 966,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "js_heap": {
+            "used": 215490342,
+            "total": 220444558
+          }
+        },
+        {
+          "iteration": 2,
+          "near": {
+            "nodes": 1646,
+            "objects": 4929,
+            "resources": 813,
+            "render_buffer_bytes": 157913944,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0.3,
+              "max_operation_ms": 402.1,
+              "ready": true,
+              "stage": 6
+            },
+            "packs": {
+              "current": "",
+              "downloaded_bytes": 0,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 0,
+              "max_download_frame_bytes": 524288,
+              "mounted_bytes": 101286328,
+              "queued_packs": 0,
+              "ready_packs": 16,
+              "received_bytes": 101286328,
+              "state": "idle",
+              "transport": "http_client"
+            },
+            "streaming": {
+              "active_regions": 3,
+              "detail_nodes": 367,
+              "last_operation_ms": 1.4,
+              "loaded_chunks": 28,
+              "max_operation_ms": 30.3,
+              "operations": 614,
+              "pending_regions": 0,
+              "ready_districts": 1,
+              "ready_regions": 19,
+              "saved_animation_groups": 54
+            },
+            "obstruction": {
+              "active": true,
+              "bounds_rebuilds": 792,
+              "cached_groups": 80,
+              "cached_trees": 11,
+              "candidates": 2,
+              "decision_usec": 400,
+              "decisions": 992,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "unloaded": {
+            "nodes": 1254,
+            "objects": 3826,
+            "resources": 811,
+            "render_buffer_bytes": 141314306,
+            "avatar": {
+              "error": "",
+              "last_operation_ms": 0.3,
+              "max_operation_ms": 402.1,
+              "ready": true,
+              "stage": 6
+            },
+            "packs": {
+              "current": "",
+              "downloaded_bytes": 0,
+              "enabled": true,
+              "errors": {},
+              "expected_bytes": 0,
+              "max_download_frame_bytes": 524288,
+              "mounted_bytes": 101286328,
+              "queued_packs": 0,
+              "ready_packs": 16,
+              "received_bytes": 101286328,
+              "state": "idle",
+              "transport": "http_client"
+            },
+            "streaming": {
+              "active_regions": 0,
+              "detail_nodes": 0,
+              "last_operation_ms": 0.2,
+              "loaded_chunks": 0,
+              "max_operation_ms": 30.3,
+              "operations": 642,
+              "pending_regions": 0,
+              "ready_districts": 0,
+              "ready_regions": 0,
+              "saved_animation_groups": 54
+            },
+            "obstruction": {
+              "active": false,
+              "bounds_rebuilds": 792,
+              "cached_groups": 24,
+              "cached_trees": 0,
+              "candidates": 2,
+              "decision_usec": 1900,
+              "decisions": 996,
+              "faded_meshes": 0,
+              "multimesh_transform_writes": 0
+            }
+          },
+          "js_heap": {
+            "used": 189871120,
+            "total": 211721632
+          }
+        }
+      ],
+      "final_unloaded": {
+        "metrics": {
+          "nodes": 1251,
+          "objects": 3817,
+          "resources": 810,
+          "render_buffer_bytes": 141307814,
+          "avatar": {
+            "error": "",
+            "last_operation_ms": 0.3,
+            "max_operation_ms": 402.1,
+            "ready": true,
+            "stage": 6
+          },
+          "packs": {
+            "current": "",
+            "downloaded_bytes": 0,
+            "enabled": true,
+            "errors": {},
+            "expected_bytes": 0,
+            "max_download_frame_bytes": 524288,
+            "mounted_bytes": 101286328,
+            "queued_packs": 0,
+            "ready_packs": 16,
+            "received_bytes": 101286328,
+            "state": "idle",
+            "transport": "http_client"
+          },
+          "streaming": {
+            "active_regions": 0,
+            "detail_nodes": 0,
+            "last_operation_ms": 0.2,
+            "loaded_chunks": 0,
+            "max_operation_ms": 30.3,
+            "operations": 642,
+            "pending_regions": 0,
+            "ready_districts": 0,
+            "ready_regions": 0,
+            "saved_animation_groups": 54
+          },
+          "obstruction": {
+            "active": false,
+            "bounds_rebuilds": 792,
+            "cached_groups": 24,
+            "cached_trees": 0,
+            "candidates": 2,
+            "decision_usec": 1900,
+            "decisions": 996,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          }
+        },
+        "js_heap": {
+          "used": 190171835,
+          "total": 211723475
+        }
+      },
+      "interpretation": "Real inputs validated functional transitions. Three near entries had identical nodes/resources. A third unload briefly had 3 more nodes and 1 more Resource; final snapshot returned to prior values. Short run is not a long-term memory-leak proof. JS heap is not total RAM. The 12-second walking route did not cross districts."
+    },
+    "first_supplemental_crosswalk": {
+      "source": "deliverables/performance/startup-crosswalk.json",
+      "build_id": "packs-c674b2a47ed31edd",
+      "passed": false,
+      "checks": [
+        {
+          "name": "Current release identity (initial navigation)",
+          "passed": true,
+          "evidence": {
+            "meta_build_id": "packs-c674b2a47ed31edd",
+            "served_build_id": "packs-c674b2a47ed31edd",
+            "manifest_files_match": true
+          }
+        },
+        {
+          "name": "Fast camera turns retain a live near scene and obstruction telemetry",
+          "passed": true,
+          "evidence": {
+            "active": true,
+            "bounds_rebuilds": 111,
+            "cached_groups": 80,
+            "cached_trees": 11,
+            "candidates": 2,
+            "decision_usec": 2000,
+            "decisions": 100,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          }
+        },
+        {
+          "name": "Real walking changes player position without falling below terrain",
+          "passed": true,
+          "evidence": {
+            "distance": 28.226439099916572,
+            "start": [
+              5.98667860031128,
+              47.8934288024902,
+              -0.0801412910223007
+            ],
+            "end": [
+              0.0846294090151787,
+              40.3451728820801,
+              26.4702167510986
+            ]
+          }
+        },
+        {
+          "name": "Walking crosses the nearest-district boundary",
+          "passed": false,
+          "evidence": {
+            "from": "counseling",
+            "to": "counseling",
+            "samples": 6
+          }
+        },
+        {
+          "name": "Overview rotate/zoom stays active",
+          "passed": true,
+          "evidence": null
+        }
+      ],
+      "errors": [],
+      "unmeasured": [
+        "The bounded 60-second real-input bridge route did not cross a district boundary; cross-district walking coverage remains incomplete."
+      ],
+      "crossed": false,
+      "from": "counseling",
+      "to": "counseling",
+      "elapsed_ms": 60149,
+      "route": "counseling central road and Bridge_0_4 to life",
+      "positions": [
+        [
+          0.0190914086997509,
+          47.929027557373,
+          5.78729057312012
+        ],
+        [
+          0.0303529277443886,
+          47.6958465576172,
+          7.48002099990845
+        ],
+        [
+          0.0680395141243935,
+          45.6308937072754,
+          15.7642726898193
+        ],
+        [
+          0.082270435988903,
+          42.9264221191406,
+          22.0386753082275
+        ],
+        [
+          0.084632508456707,
+          41.2585220336914,
+          25.0225429534912
+        ],
+        [
+          0.0846294090151787,
+          40.3451728820801,
+          26.4702167510986
+        ]
+      ],
+      "interpretation": "60-second wall-time budget included browser/engine response waits. Six recorded positions advanced toward bridge, but the nearest district did not change. This is an incomplete/failed coverage check, not proof of a map blocker and not a passing crosswalk."
+    },
+    "final_supplemental_crosswalk": {
+      "source": "deliverables/performance/startup-crosswalk-final.json",
+      "build_id": "packs-c674b2a47ed31edd",
+      "passed": true,
+      "checks": [
+        {
+          "name": "Current release identity (initial navigation)",
+          "passed": true,
+          "evidence": {
+            "meta_build_id": "packs-c674b2a47ed31edd",
+            "served_build_id": "packs-c674b2a47ed31edd",
+            "manifest_files_match": true
+          },
+          "at": "2026-10-01T10:31:44.343Z"
+        },
+        {
+          "name": "Fast camera turns retain a live near scene and obstruction telemetry",
+          "passed": true,
+          "evidence": {
+            "active": true,
+            "bounds_rebuilds": 111,
+            "cached_groups": 80,
+            "cached_trees": 11,
+            "candidates": 2,
+            "decision_usec": 900,
+            "decisions": 90,
+            "faded_meshes": 0,
+            "multimesh_transform_writes": 0
+          },
+          "at": "2026-10-01T10:35:36.911Z"
+        },
+        {
+          "name": "Real walking changes player position without falling below terrain",
+          "passed": true,
+          "evidence": {
+            "distance": 43.870856825931455,
+            "start": [
+              5.98667860031128,
+              47.8934288024902,
+              -0.0801412910223007
+            ],
+            "end": [
+              0.0777537673711777,
+              28.589822769165,
+              38.8699226379395
+            ]
+          },
+          "at": "2026-10-01T10:37:05.310Z"
+        },
+        {
+          "name": "Walking crosses the nearest-district boundary",
+          "passed": true,
+          "evidence": {
+            "from": "counseling",
+            "to": "life",
+            "samples": 11
+          },
+          "at": "2026-10-01T10:37:05.317Z"
+        },
+        {
+          "name": "Cross-district walking retains controls and completes nearby detail",
+          "passed": true,
+          "evidence": {
+            "player": {
+              "entering": false,
+              "overview": false,
+              "paused": false,
+              "position": [
+                0.0777537673711777,
+                28.589822769165,
+                38.8699226379395
+              ]
+            },
+            "streaming": {
+              "active_regions": 10,
+              "detail_nodes": 592,
+              "last_operation_ms": 6.5,
+              "loaded_chunks": 24,
+              "max_operation_ms": 83.7,
+              "operations": 84,
+              "pending_regions": 0,
+              "ready_districts": 2,
+              "ready_regions": 10,
+              "saved_animation_groups": 12
+            }
+          },
+          "at": "2026-10-01T10:37:05.540Z"
+        },
+        {
+          "name": "Overview rotate/zoom stays active",
+          "passed": true,
+          "evidence": null,
+          "at": "2026-10-01T10:37:17.374Z"
+        }
+      ],
+      "checks_passed": 6,
+      "checks_total": 6,
+      "errors": [],
+      "unmeasured": [],
+      "started_utc": "2026-10-01T10:31:42.373Z",
+      "finished_utc": "2026-10-01T10:37:17.382Z",
+      "crossed": true,
+      "from": "counseling",
+      "to": "life",
+      "elapsed_ms": 80753,
+      "route": "counseling central road and Bridge_0_4 to life",
+      "method_limit": "At most 30 real-keyboard movement steps, each held 2 seconds; overall walking wall-time budget 180 seconds. Not a gameplay FPS benchmark.",
+      "sample_count": 11,
+      "positions": [
+        [
+          -0.0395591966807842,
+          48.1495132446289,
+          3.34276723861694
+        ],
+        [
+          0.0174431372433901,
+          46.8209838867188,
+          11.7747030258179
+        ],
+        [
+          0.0298266187310219,
+          46.374626159668,
+          13.4245204925537
+        ],
+        [
+          0.0436640344560146,
+          43.9926795959473,
+          19.8246994018555
+        ],
+        [
+          0.0693469643592834,
+          42.4788093566895,
+          22.8885440826416
+        ],
+        [
+          0.0765597745776176,
+          41.6413269042969,
+          24.3789501190186
+        ],
+        [
+          0.081608846783638,
+          39.320011138916,
+          27.9680099487305
+        ],
+        [
+          0.0806374996900558,
+          37.2425880432129,
+          30.6795787811279
+        ],
+        [
+          0.0810136795043945,
+          36.1354446411133,
+          31.9767837524414
+        ],
+        [
+          0.0807052627205849,
+          34.981502532959,
+          33.2355995178223
+        ],
+        [
+          0.0777537673711777,
+          28.589822769165,
+          38.8699226379395
+        ]
+      ],
+      "last_state": {
+        "player": {
+          "entering": false,
+          "overview": false,
+          "paused": false,
+          "position": [
+            0.0777537673711777,
+            28.589822769165,
+            38.8699226379395
+          ]
+        },
+        "avatar": {
+          "error": "",
+          "last_operation_ms": 2.2,
+          "max_operation_ms": 929.2,
+          "ready": true,
+          "stage": 6
+        },
+        "streaming": {
+          "active_regions": 10,
+          "detail_nodes": 592,
+          "last_operation_ms": 6.5,
+          "loaded_chunks": 24,
+          "max_operation_ms": 83.7,
+          "operations": 84,
+          "pending_regions": 0,
+          "ready_districts": 2,
+          "ready_regions": 10,
+          "saved_animation_groups": 12
+        },
+        "packs": {
+          "current": "",
+          "downloaded_bytes": 0,
+          "enabled": true,
+          "errors": {},
+          "expected_bytes": 0,
+          "max_download_frame_bytes": 524288,
+          "mounted_bytes": 66347500,
+          "queued_packs": 0,
+          "ready_packs": 8,
+          "received_bytes": 66347500,
+          "state": "idle",
+          "transport": "http_client"
+        }
+      },
+      "interpretation": "Actually crossed counseling -> life along Bridge_0_4 using keyboard movement. Nearby detail completed, player controls remained live and no below-terrain fall was observed. Home overview/rotate/zoom remained responsive. Earlier bounded failures are preserved separately."
+    }
+  },
+  "native_regressions_after_delivery_fix": {
+    "lazy_avatar_music": {
+      "source": "deliverables/startup-packs/lazy-avatar-music-regression.log",
+      "result": {
+        "checks": [
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Ready creates collision and pivot without an avatar"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Neither original avatar is cached during initial overview"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Beginning preparation still creates no avatar"
+          },
+          {
+            "evidence": {
+              "error": "",
+              "last_operation_ms": 306.444,
+              "max_operation_ms": 306.444,
+              "ready": false,
+              "stage": 2
+            },
+            "passed": true,
+            "test": "Preparation stage has bounded model construction 1"
+          },
+          {
+            "evidence": {
+              "error": "",
+              "last_operation_ms": 26.521,
+              "max_operation_ms": 306.444,
+              "ready": false,
+              "stage": 3
+            },
+            "passed": true,
+            "test": "Preparation stage has bounded model construction 2"
+          },
+          {
+            "evidence": {
+              "error": "",
+              "last_operation_ms": 250.727,
+              "max_operation_ms": 306.444,
+              "ready": false,
+              "stage": 4
+            },
+            "passed": true,
+            "test": "Preparation stage has bounded model construction 3"
+          },
+          {
+            "evidence": {
+              "error": "",
+              "last_operation_ms": 2.296,
+              "max_operation_ms": 306.444,
+              "ready": false,
+              "stage": 5
+            },
+            "passed": true,
+            "test": "Preparation stage has bounded model construction 4"
+          },
+          {
+            "evidence": {
+              "error": "",
+              "last_operation_ms": 0.079,
+              "max_operation_ms": 306.444,
+              "ready": true,
+              "stage": 6
+            },
+            "passed": true,
+            "test": "Preparation stage has bounded model construction 5"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "External preparation works while player processing is disabled"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Walking and jump animation players are present"
+          },
+          {
+            "evidence": 31,
+            "passed": true,
+            "test": "Landing recovery retains mapped skeleton bones"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Original animation and visibility retained: Walk"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Original animation and visibility retained: Run"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Original animation and visibility retained: JumpStart"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Original animation and visibility retained: JumpAir"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Original animation and visibility retained: JumpLand"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Original animation and visibility retained: Idle"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Repeated preparation does not duplicate model nodes"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Entry and restoration preserve avatar materials and controls state"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Audio fixture saved: world"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Audio fixture saved: counseling"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Audio fixture saved: admissions"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Audio fixture saved: recommendations"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Audio fixture saved: wordking"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Music ready reads only manifest and settings"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Frames before explicit startup gate do not load music"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Opening music gate queues without synchronous audio loading"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Only the selected world track is loaded"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Repeated context does not restart existing playback"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Changing context preserves old audio until new stream is ready"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Next frame loads one requested stream and begins crossfade"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Completed fade retires prior voice"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Rapid context change avoids loading superseded track"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Background suspension defers stream construction"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Returning foreground prepares the pending context"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Unknown context reuses already loaded world fallback"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Historical district music error does not replace healthy mute control"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Healthy track can still be muted after another district failed"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Currently pending failed music exposes retry control"
+          },
+          {
+            "evidence": null,
+            "passed": true,
+            "test": "Retry clears only pending failure without changing mute preference"
+          }
+        ],
+        "failed": 0,
+        "passed": true
+      },
+      "browser_delivery_verified_by_this_test": false
+    },
+    "district_streaming": {
+      "source": "deliverables/performance/streaming-runtime-regression.log",
+      "result": {
+        "bridge_samples": 396,
+        "checks": 35,
+        "failures": 0
+      },
+      "browser_delivery_verified_by_this_test": false
+    },
+    "http_client": {
+      "source": "deliverables/startup-packs/web-pack-http-client-checks.log",
+      "checks_passed": 56,
+      "checks_total": 56,
+      "failures": [],
+      "browser_delivery_verified_by_this_test": false,
+      "log_note": "Prior tool output preserved to this file; file modification time is not the test execution time."
+    }
+  },
+  "historical_failed_candidate_download_budget": {
+    "before_initial_pck_bytes": 154560308,
+    "final_initial_pck_bytes": 35400360,
+    "before_wasm_bytes": 39514754,
+    "final_wasm_bytes": 39514754,
+    "before_pck_plus_wasm_bytes": 194075062,
+    "final_boot_pck_plus_wasm_bytes": 74915114,
+    "initial_pck_reduction_percent": 77.0961,
+    "initial_pck_plus_wasm_reduction_percent": 61.3989,
+    "all_final_pcks_bytes": 136686688,
+    "all_pck_reduction_percent": 11.5642,
+    "deferred_pack_count": 16,
+    "avatar_pack_bytes": 50904340,
+    "pack_build": {
+      "source_entries": 1294,
+      "runtime_source_count": 154,
+      "required_entries": 208,
+      "source_sha256": "b541a84c232c151ef3ca7fff275cce81fa4dc665a914d6ef07b3cd9a122b7314",
+      "source_bytes": 154527336,
+      "godot_version": [
+        4,
+        7,
+        2
+      ],
+      "packs": {
+        "avatar": {
+          "bytes": 50904340,
+          "sha256": "dbf4017c84a82ebdb9988189b61d0a6fa00e5e53c70a95e4dfc9f3044f2185ac",
+          "entries": 6,
+          "deduplicated_bytes": 0
+        },
+        "district_admissions": {
+          "bytes": 3614436,
+          "sha256": "b9990e78225097d47c172f2a4503783425e2dd720b8d92d1cc90d389426656f7",
+          "entries": 7,
+          "deduplicated_bytes": 0
+        },
+        "district_counseling": {
+          "bytes": 3465044,
+          "sha256": "c94cdc8453e08139d2e3f45209ef49a4eaef4926cc11837f90ede351b3d6cce7",
+          "entries": 6,
+          "deduplicated_bytes": 0
+        },
+        "district_life": {
+          "bytes": 3356052,
+          "sha256": "b375c982e7a81f3bf9ce10185a3ad2326948bfdca66b7a99b56ebef2345d4936",
+          "entries": 6,
+          "deduplicated_bytes": 0
+        },
+        "district_ocean": {
+          "bytes": 729528,
+          "sha256": "205618f4a153be51994e9beaa4696751f73dae2775eae656d9a0ab65d41f5ce3",
+          "entries": 43,
+          "deduplicated_bytes": 0
+        },
+        "district_recommendations": {
+          "bytes": 2888636,
+          "sha256": "dd767596f5068425ab405c59851f72daf81cc77e75238bb40f6ffe8e4adc18ac",
+          "entries": 6,
+          "deduplicated_bytes": 0
+        },
+        "district_sakura": {
+          "bytes": 4921072,
+          "sha256": "6315d0720e217884ae2d71457062edbfbc820b10e1aa01791cfb8e12ebb1dc08",
+          "entries": 5,
+          "deduplicated_bytes": 0
+        },
+        "district_universities": {
+          "bytes": 3564404,
+          "sha256": "83ab9e6fad509274bc05e77c6bba84aa4be22db51801720165a78e311428016e",
+          "entries": 7,
+          "deduplicated_bytes": 0
+        },
+        "district_wordking": {
+          "bytes": 3527084,
+          "sha256": "d88484e6cbd7c882841053806b029db95b191ee9b451794a60eb0686f99c7653",
+          "entries": 6,
+          "deduplicated_bytes": 0
+        },
+        "music_admissions": {
+          "bytes": 1728528,
+          "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0",
+          "entries": 2,
+          "deduplicated_bytes": 0
+        },
+        "music_counseling": {
+          "bytes": 1443824,
+          "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4",
+          "entries": 2,
+          "deduplicated_bytes": 0
+        },
+        "music_recommendations": {
+          "bytes": 2195960,
+          "sha256": "66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8",
+          "entries": 2,
+          "deduplicated_bytes": 0
+        },
+        "music_wordking": {
+          "bytes": 2315480,
+          "sha256": "a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995",
+          "entries": 2,
+          "deduplicated_bytes": 0
+        },
+        "music_world": {
+          "bytes": 1351376,
+          "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf",
+          "entries": 2,
+          "deduplicated_bytes": 0
+        },
+        "shared": {
+          "bytes": 176264,
+          "sha256": "4b7143129f228685e51f78030a171343c09b5aaaa3b39b0ee3631daf5d7bbe81",
+          "entries": 4,
+          "deduplicated_bytes": 0
+        },
+        "training_room": {
+          "bytes": 15104300,
+          "sha256": "00e45f0b5f24b9037f1b64cac3ecd244e845063525b8211cabeaf9cc503752aa",
+          "entries": 9,
+          "deduplicated_bytes": 0
+        },
+        "boot": {
+          "bytes": 35400360,
+          "sha256": "c655eb7003a11f1707619fb6b56befd464dd5df05ef80f89c170cc030ebfb3d2",
+          "entries": 94,
+          "deduplicated_bytes": 2106020
+        }
+      },
+      "published_pck_bytes": 136686688,
+      "omitted_payload_bytes": 15625134,
+      "exact_duplicate_payload_bytes_removed": 2106020
+    },
+    "interpretation": "Reduced critical-path download; all deferred content remains available. Native local files bypass HTTP. Published total differs from initial download and from runtime memory."
+  },
+  "historical_artifact_records": {
+    "deliverables/performance/web-pack-build.json": {
+      "bytes": 228581,
+      "sha256": "50c4d799923d0c3b6a8f8d7a827653e0b19904e4ee9969c6d1917384546bd187"
+    },
+    "build/web-validate-packs.log": {
+      "bytes": 168,
+      "sha256": "ac3cca68e2594dd511b06e4093b98e0128a12f1ee80355b2ea0af778982e4549"
+    }
+  }
+}

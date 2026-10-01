@@ -25,6 +25,9 @@ var _fade_from: Dictionary[String, float] = {}
 var _starts: Dictionary[String, int] = {}
 var _fade_elapsed: float = FADE_SECONDS
 var _catalog_ready: bool = false
+var _preparation_enabled: bool = false
+var _pending_context: String = ""
+var _load_errors: Dictionary[String, String] = {}
 
 func _ready() -> void:
 	name = "WorldMusic"
@@ -78,28 +81,22 @@ func _load_catalog() -> void:
 		var parser: JSON = JSON.new()
 		if parser.parse(FileAccess.get_file_as_string(manifest_path)) == OK and parser.data is Dictionary:
 			_catalog = parser.data as Dictionary
+	# Validate only the small manifest here. A resource may live in a Web pack
+	# that has not been downloaded yet, so exists()/load() are deliberately late.
 	for context_id: String in CONTEXTS:
 		var entry: Dictionary = _catalog.get(context_id, {}) as Dictionary
-		var resource_path: String = str(entry.get("path", ""))
-		if resource_path.is_empty() or not ResourceLoader.exists(resource_path):
+		if str(entry.get("path", "")).is_empty():
 			missing_ids.append(context_id)
-			continue
-		var source: AudioStream = load(resource_path) as AudioStream
-		if source == null or source.get_length() <= 0.0:
-			missing_ids.append(context_id)
-			continue
-		# Duplicate only the resource settings; leave the source files untouched.
-		var stream: AudioStream = source.duplicate() as AudioStream
-		if stream is AudioStreamOggVorbis:
-			(stream as AudioStreamOggVorbis).loop = true
-			(stream as AudioStreamOggVorbis).loop_offset = 0.0
-		elif stream is AudioStreamMP3:
-			(stream as AudioStreamMP3).loop = true
-		elif stream is AudioStreamWAV:
-			(stream as AudioStreamWAV).loop_mode = AudioStreamWAV.LOOP_FORWARD
-		_streams[context_id] = stream
 		_gains[context_id] = 0.0
 		_starts[context_id] = 0
+
+func begin_prepare_music() -> void:
+	# Explicit first-frame gate: no music request competes with the initial
+	# overview. Only the current context is prepared, never the whole catalog.
+	if _preparation_enabled:
+		return
+	_preparation_enabled = true
+	_queue_requested_context()
 
 func set_context(context_id: String) -> void:
 	var next_request: String = "world" if context_id.is_empty() else context_id
@@ -107,17 +104,93 @@ func set_context(context_id: String) -> void:
 	requested_context = next_request
 	if not _catalog_ready:
 		return
-	var next_context: String = next_request if _streams.has(next_request) else "world"
-	if not _streams.has(next_context):
-		next_context = ""
-	if context == next_context:
-		if request_changed:
-			state_changed.emit()
+	_queue_requested_context()
+	if request_changed:
+		state_changed.emit()
+
+func _queue_requested_context() -> void:
+	if not _preparation_enabled:
 		return
-	context = next_context
+	var next_context: String = requested_context
+	if not _catalog.has(next_context) or next_context in missing_ids:
+		next_context = "world"
+	if next_context in missing_ids:
+		next_context = ""
+	if next_context.is_empty():
+		_pending_context = ""
+		_activate_context("")
+		return
+	if _streams.has(next_context):
+		_pending_context = ""
+		_activate_context(next_context)
+		return
+	if _pending_context == next_context:
+		return
+	_pending_context = next_context
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	if packs != null:
+		var entry: Dictionary = _catalog.get(next_context, {}) as Dictionary
+		packs.call("request_resource", str(entry.get("path", "")), -10)
+
+func _prepare_pending_stream() -> void:
+	if not _preparation_enabled or _pending_context.is_empty() or background_paused:
+		return
+	var context_id: String = _pending_context
+	var entry: Dictionary = _catalog.get(context_id, {}) as Dictionary
+	var resource_path: String = str(entry.get("path", ""))
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	if packs != null:
+		var pack_error: String = str(packs.call("resource_error", resource_path))
+		if not pack_error.is_empty():
+			if _load_errors.get(context_id, "") != pack_error:
+				_load_errors[context_id] = pack_error
+				state_changed.emit()
+			return
+		if not bool(packs.call("is_resource_ready", resource_path)):
+			return
+	var source: AudioStream
+	if ResourceLoader.exists(resource_path):
+		source = load(resource_path) as AudioStream
+	if source == null or source.get_length() <= 0.0:
+		missing_ids.append(context_id)
+		_load_errors[context_id] = "Missing or invalid music: " + resource_path
+		_pending_context = ""
+		_queue_requested_context()
+		state_changed.emit()
+		return
+	# Each call prepares at most this one stream. Duplicating resource settings
+	# preserves the compressed audio data and leaves the source asset untouched.
+	var stream: AudioStream = source.duplicate() as AudioStream
+	if stream is AudioStreamOggVorbis:
+		(stream as AudioStreamOggVorbis).loop = true
+		(stream as AudioStreamOggVorbis).loop_offset = 0.0
+	elif stream is AudioStreamMP3:
+		(stream as AudioStreamMP3).loop = true
+	elif stream is AudioStreamWAV:
+		(stream as AudioStreamWAV).loop_mode = AudioStreamWAV.LOOP_FORWARD
+	_streams[context_id] = stream
+	_load_errors.erase(context_id)
+	_pending_context = ""
+	_activate_context(context_id)
+
+func _activate_context(context_id: String) -> void:
+	if context == context_id:
+		return
+	context = context_id
 	if unlocked:
 		_start_voice(context)
 		_rebase_fade()
+	state_changed.emit()
+
+func retry_pending_music() -> void:
+	if _pending_context.is_empty():
+		return
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	if packs != null:
+		packs.call("retry_failed")
+		var entry: Dictionary = _catalog.get(_pending_context, {}) as Dictionary
+		packs.call("request_resource", str(entry.get("path", "")), -10)
+	_load_errors.erase(_pending_context)
 	state_changed.emit()
 
 func unlock() -> void:
@@ -157,6 +230,7 @@ func _rebase_fade() -> void:
 	_fade_elapsed = 0.0
 
 func _process(delta: float) -> void:
+	_prepare_pending_stream()
 	if not unlocked or background_paused or _fade_elapsed >= FADE_SECONDS:
 		return
 	_fade_elapsed = minf(_fade_elapsed + delta, FADE_SECONDS)
@@ -227,6 +301,8 @@ func get_state() -> Dictionary:
 		"requested_context": requested_context, "context": context,
 		"title": str(entry.get("title", "")), "path": str(entry.get("path", "")),
 		"available_ids": _streams.keys(), "missing_ids": missing_ids.duplicate(),
+		"pending_context": _pending_context, "preparation_enabled": _preparation_enabled,
+		"load_errors": _load_errors.duplicate(),
 		"fallback": not requested_context.is_empty() and context != requested_context,
 		"unlocked": unlocked, "muted": muted, "volume": music_volume,
 		"background_paused": background_paused, "settings_error": settings_error,

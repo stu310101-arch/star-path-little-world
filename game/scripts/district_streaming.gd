@@ -56,6 +56,11 @@ func pin_position(point: Vector3) -> void:
 		_regions[id].requested = true
 		_regions[id].priority = -100.0 + point.distance_to(_regions[id].center as Vector3)
 
+func clear_pin() -> void:
+	_pin_until = -1.0
+	_pin_position = Vector3.ZERO
+	_context_clock = CONTEXT_INTERVAL
+
 func is_position_ready(point: Vector3) -> bool:
 	for id: String in _required_ids(point):
 		if not bool(_regions[id].ready):
@@ -83,14 +88,14 @@ func update_context(overview: bool, player_position: Vector3, camera_position: V
 	if _overview != overview:
 		_context_clock = CONTEXT_INTERVAL
 		if overview:
-			_pin_until = -1.0
+			clear_pin()
 	_overview = overview
 	if _context_clock >= CONTEXT_INTERVAL:
 		_context_clock = 0.0
 		_refresh_context(player_position, camera_position, target)
 	# Web uses the existing single-thread export. Binary chunks bound each
 	# synchronous engine operation; load and instantiate occur on separate
-	# frames. This is scheduling local PCK resources, not network streaming.
+	# frames, only after the Web resource pack has downloaded and mounted.
 	_step()
 
 func _refresh_context(player_position: Vector3, camera_position: Vector3, _target: Vector3) -> void:
@@ -179,9 +184,15 @@ func _step() -> void:
 			return
 	var best_id: String = ""
 	var priority: float = INF
+	var packs: Node = get_node_or_null("/root/WebPacks")
 	for id: String in _regions:
 		var region: Dictionary = _regions[id]
 		if bool(region.requested) and not bool(region.ready) and not bool(region.failed) and float(region.priority) < priority:
+			if packs != null and int(region.next) < (region.chunks as Array).size():
+				var path: String = str(region.chunks[int(region.next)].path)
+				packs.call("request_resource", path, 50 - int(region.priority))
+				if not bool(packs.call("is_resource_ready", path)):
+					continue
 			best_id = id
 			priority = float(region.priority)
 	if best_id.is_empty():
@@ -198,6 +209,23 @@ func _step() -> void:
 		best.failed = true
 		push_error("Unable to load streaming chunk: " + _pending_path)
 	_record_operation(started)
+
+func position_error(point: Vector3) -> String:
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	for id: String in _required_ids(point):
+		var region: Dictionary = _regions[id]
+		if bool(region.failed):
+			return "區域建立失敗，請重試。"
+		if packs != null:
+			for chunk: Dictionary in region.chunks:
+				var message: String = str(packs.call("resource_error", str(chunk.path)))
+				if not message.is_empty():
+					return message
+	return ""
+
+func retry_failed() -> void:
+	for region: Dictionary in _regions.values():
+		region.failed = false
 
 func _record_operation(started: int) -> void:
 	_last_operation_ms = float(Time.get_ticks_usec() - started) / 1000.0

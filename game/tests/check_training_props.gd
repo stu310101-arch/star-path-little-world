@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
+
 # Real E/keyboard events enter through the room router. Positioning chooses a
 # supported, unobstructed starting point; no target action is invoked directly.
 const OUTPUT: String = "res://../deliverables/training-room/"
@@ -31,6 +33,7 @@ func run() -> void:
 	room = (load("res://scenes/training_room.tscn") as PackedScene).instantiate() as Node3D
 	root.add_child(room)
 	current_scene = room
+	check("Indoor preparation completes before interaction checks", await StartupFixture.wait_room(room, self))
 	player = room.get("player") as CharacterBody3D
 	router = room.get("interactions") as Node
 	props = room.get("furniture_actions") as Node3D

@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
+
 # This exercises the actual station/input/return path. Test positioning only
 # chooses a starting point; collision checks retain every authored obstacle.
 const OUTPUT: String = "res://../deliverables/training-room/"
@@ -40,8 +42,10 @@ func run() -> void:
 	await tick(8)
 	check("The game starts in the existing world overview",bool(world.get("overview")))
 	await press(KEY_TAB)
+	check("Tab waits for avatar and district preparation", await StartupFixture.wait_roaming(world, self))
 	check("Tab enters the existing 3D world",not bool(world.get("overview")))
 	world.call("teleport_to","wordking")
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	await tick(36)
 	world.call("update_nearest")
 	check("The real training district arrival offers WordKing entry",str(world.get("nearest_id")) == "wordking",world.get("nearest_id"))
@@ -83,7 +87,8 @@ func find_room() -> Node3D:
 	return null
 
 func wait_for_room(expected: bool) -> void:
-	for frame: int in range(480):
+	var deadline: int = Time.get_ticks_msec() + 60000
+	while Time.get_ticks_msec() <= deadline:
 		room = find_room()
 		if expected and room != null and bool(room.get("ready_for_play")):
 			return

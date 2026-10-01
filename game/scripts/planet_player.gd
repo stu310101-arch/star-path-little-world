@@ -14,6 +14,7 @@ const LAND_LOCOMOTION_BLEND: float = 0.18
 # Sample the authored flip against flight/contact; keep the landing cloth
 # running after the body has recovered and can already walk or jump again.
 const JUMP_AIR_DURATION: float = 0.72
+const WALK_MODEL: String = "res://assets/character/graduate.glb"
 const JUMP_MODEL: String = "res://assets/character/graduate_jump.glb"
 var heading: Vector3 = Vector3.FORWARD
 var controls_enabled: bool = true
@@ -56,6 +57,13 @@ var jump_rig: Node3D
 var recovery_bones: Array[Vector2i] = []
 var recovery_clip: StringName = &""
 var recovery_clock: float = 0.0
+# The world drives one preparation step per frame after presenting its overview.
+# No GLB is touched by _ready(), including in exported Web packs.
+var _visual_stage: int = 0
+var _visual_error: String = ""
+var _visual_packed: PackedScene
+var _visual_operation_usec: int = 0
+var _visual_max_operation_usec: int = 0
 
 func _ready() -> void:
 	collision_layer = 4
@@ -75,31 +83,99 @@ func _ready() -> void:
 	visual = Node3D.new()
 	visual.name = "VisualPivot"
 	add_child(visual)
-	locomotion_model = (load("res://assets/character/graduate.glb") as PackedScene).instantiate() as Node3D
-	visual.add_child(locomotion_model)
-	locomotion_animator = locomotion_model.find_child("AnimationPlayer", true, false) as AnimationPlayer
-	animator = locomotion_animator
-	if ResourceLoader.exists(JUMP_MODEL):
-		jump_model = (load(JUMP_MODEL) as PackedScene).instantiate() as Node3D
-		visual.add_child(jump_model)
-		jump_model.visible = false
-		jump_animator = jump_model.find_child("AnimationPlayer", true, false) as AnimationPlayer
-		if jump_animator != null:
-			jump_animator.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
-	if animator != null:
-		animator.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
-		set_clip(&"Idle")
-	if jump_model != null:
-		locomotion_skeleton = find_skeleton(locomotion_model)
-		jump_skeleton = find_skeleton(jump_model)
-		locomotion_rig = locomotion_model.find_child("GraduateRig", true, false) as Node3D
-		jump_rig = jump_model.find_child("GraduateRig", true, false) as Node3D
-		if locomotion_skeleton != null and jump_skeleton != null:
-			for index: int in range(jump_skeleton.get_bone_count()):
-				var source_index: int = locomotion_skeleton.find_bone(jump_skeleton.get_bone_name(index))
-				if source_index >= 0:
-					recovery_bones.append(Vector2i(index, source_index))
 	visual.rotation.y = PI
+
+func begin_prepare_visuals() -> void:
+	if _visual_stage != 0 or not _visual_error.is_empty():
+		return
+	_visual_stage = 1
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	if packs != null:
+		packs.call("request_resource", WALK_MODEL, 20)
+		packs.call("request_resource", JUMP_MODEL, 20)
+
+func visuals_ready() -> bool:
+	return _visual_stage == 6
+
+func visuals_error() -> String:
+	return _visual_error
+
+func get_visual_preparation_state() -> Dictionary:
+	return {"stage": _visual_stage, "ready": visuals_ready(), "error": _visual_error,
+		"last_operation_ms": float(_visual_operation_usec) / 1000.0,
+		"max_operation_ms": float(_visual_max_operation_usec) / 1000.0}
+
+func step_prepare_visuals() -> void:
+	if _visual_stage == 0 or visuals_ready() or not _visual_error.is_empty():
+		return
+	var started: int = Time.get_ticks_usec()
+	match _visual_stage:
+		1, 3:
+			var resource_path: String = WALK_MODEL if _visual_stage == 1 else JUMP_MODEL
+			var packs: Node = get_node_or_null("/root/WebPacks")
+			if packs != null:
+				var pack_error: String = str(packs.call("resource_error", resource_path))
+				if not pack_error.is_empty():
+					_visual_error = pack_error
+					return
+				if not bool(packs.call("is_resource_ready", resource_path)):
+					return
+			# load and instantiate have separate frame budgets. No threaded Web
+			# feature is required, and neither operation retries every frame.
+			_visual_packed = load(resource_path) as PackedScene
+			if _visual_packed == null:
+				_visual_error = "Unable to load avatar: " + resource_path
+				return
+			_visual_stage += 1
+		2:
+			locomotion_model = _visual_packed.instantiate() as Node3D
+			_visual_packed = null
+			if locomotion_model == null:
+				_visual_error = "Unable to instantiate walking avatar"
+				return
+			visual.add_child(locomotion_model)
+			locomotion_animator = locomotion_model.find_child("AnimationPlayer", true, false) as AnimationPlayer
+			if locomotion_animator != null:
+				locomotion_animator.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
+			set_clip(&"Idle")
+			_visual_stage = 3
+		4:
+			jump_model = _visual_packed.instantiate() as Node3D
+			_visual_packed = null
+			if jump_model == null:
+				_visual_error = "Unable to instantiate jumping avatar"
+				return
+			visual.add_child(jump_model)
+			jump_model.visible = false
+			jump_animator = jump_model.find_child("AnimationPlayer", true, false) as AnimationPlayer
+			if jump_animator != null:
+				jump_animator.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
+			_visual_stage = 5
+		5:
+			locomotion_skeleton = find_skeleton(locomotion_model)
+			jump_skeleton = find_skeleton(jump_model)
+			locomotion_rig = locomotion_model.find_child("GraduateRig", true, false) as Node3D
+			jump_rig = jump_model.find_child("GraduateRig", true, false) as Node3D
+			if locomotion_skeleton != null and jump_skeleton != null:
+				for index: int in range(jump_skeleton.get_bone_count()):
+					var source_index: int = locomotion_skeleton.find_bone(jump_skeleton.get_bone_name(index))
+					if source_index >= 0:
+						recovery_bones.append(Vector2i(index, source_index))
+			_visual_stage = 6
+	_visual_operation_usec = Time.get_ticks_usec() - started
+	_visual_max_operation_usec = maxi(_visual_max_operation_usec, _visual_operation_usec)
+
+func retry_prepare_visuals() -> void:
+	# A retry resumes the failed stage, retaining already prepared models.
+	_visual_error = ""
+	if _visual_stage in [2, 4] and _visual_packed == null:
+		_visual_stage -= 1
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	if packs != null:
+		packs.call("request_resource", WALK_MODEL, 20)
+		packs.call("request_resource", JUMP_MODEL, 20)
+	if _visual_stage == 0:
+		begin_prepare_visuals()
 
 func find_skeleton(model: Node3D) -> Skeleton3D:
 	for node: Node in model.find_children("*", "Skeleton3D", true, false):
@@ -146,7 +222,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func request_jump() -> bool:
-	if is_resting or entering or not (controls_enabled or allow_test_input) or needs_settle or not is_on_floor():
+	if not visuals_ready() or is_resting or entering or not (controls_enabled or allow_test_input) or needs_settle or not is_on_floor():
 		return false
 	if jump_state == &"anticipation" or jump_state == &"airborne":
 		return false
@@ -395,6 +471,8 @@ func rotate_heading(angle: float) -> void:
 	heading = heading.rotated(global_position.normalized(), angle).normalized()
 
 func begin_entry() -> void:
+	if not visuals_ready():
+		return
 	entering = true
 	controls_enabled = false
 	velocity = Vector3.ZERO

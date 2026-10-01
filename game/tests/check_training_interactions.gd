@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
+
 const OUTPUT: String = "res://../deliverables/training-room/"
 var room: Node3D
 var player: PlanetPlayer
@@ -66,6 +68,7 @@ func run() -> void:
 	room = (load("res://scenes/training_room.tscn") as PackedScene).instantiate() as Node3D
 	root.add_child(room)
 	current_scene = room
+	check("Indoor preparation completes before interaction checks", await StartupFixture.wait_room(room, self))
 	await tick(20)
 	player = room.get("player") as PlanetPlayer
 	router = room.get("interactions") as Node

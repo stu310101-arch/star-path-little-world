@@ -50,6 +50,10 @@ var web_status_clock: float = 0.0
 var review_mode: bool = false
 var last_review_hash: String = ""
 var review_hidden_habitats: Array[Node3D] = []
+var preparing_roam: bool = false
+var preparing_room: bool = false
+var startup_presented: bool = false
+var startup_frames: int = 0
 
 func _ready() -> void:
 	layout = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
@@ -229,6 +233,21 @@ func setup_input() -> void:
 
 func _process(delta: float) -> void:
 	elapsed += delta
+	# The first two frames present the overview before optional HTTP or model work.
+	startup_frames += 1
+	if not startup_presented and startup_frames >= 3:
+		startup_presented = true
+		player.begin_prepare_visuals()
+		music.call("begin_prepare_music")
+	if preparing_roam:
+		player.step_prepare_visuals()
+		streaming.call("pin_position", player.global_position)
+		if player.visuals_ready() and bool(streaming.call("is_position_ready", player.global_position)):
+			preparing_roam = false
+			set_overview(false)
+	if preparing_room:
+		_continue_training_room.call_deferred()
+	_update_preparation_status()
 	refresh_music_context(delta)
 	if entering:
 		entry_elapsed += delta
@@ -492,6 +511,10 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if hud != null and bool(hud.call("is_settings_open")):
 		return
+	if preparing_roam or preparing_room:
+		if event.is_action_pressed("switch_view") or (event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE):
+			cancel_preparation()
+		return
 	if paused and not (event is InputEventKey and (event as InputEventKey).keycode == KEY_ESCAPE):
 		return
 	if event.is_action_pressed("switch_view"):
@@ -525,6 +548,18 @@ func _unhandled_input(event: InputEvent) -> void:
 func set_overview(enabled: bool) -> void:
 	if entering:
 		return
+	if enabled:
+		# Cancelling first-entry preparation can keep overview=true throughout.
+		# Release its pin explicitly even when the camera mode never changed.
+		streaming.call("clear_pin")
+	if not enabled and (not player.visuals_ready() or not bool(streaming.call("is_position_ready", player.global_position))):
+		preparing_roam = true
+		player.begin_prepare_visuals()
+		streaming.call("pin_position", player.global_position)
+		player.controls_enabled = false
+		player.process_mode = Node.PROCESS_MODE_DISABLED
+		return
+	preparing_roam = false
 	finish_view_drag()
 	player.cancel_jump_input()
 	overview = enabled
@@ -592,7 +627,7 @@ func update_nearest() -> void:
 		benches.set("nearest", null)
 
 func interact_nearest() -> void:
-	if paused or overview or entering:
+	if paused or overview or entering or preparing_roam or preparing_room:
 		return
 	var destinations: Control = hud.get("destination_card") as Control
 	if destinations != null and destinations.visible:
@@ -604,7 +639,7 @@ func interact_nearest() -> void:
 		open_station(nearest_id)
 
 func open_station(station_id: String) -> void:
-	if paused or entering:
+	if paused or entering or preparing_roam or preparing_room or not player.visuals_ready():
 		return
 	var station: Node3D = get_node_or_null("Stations/"+station_id) as Node3D
 	if station == null:
@@ -630,6 +665,21 @@ func pause_world() -> void:
 func open_training_room() -> void:
 	if not paused or entry_station != "wordking":
 		return
+	preparing_room = true
+
+func _continue_training_room() -> void:
+	if not preparing_room:
+		return
+	if not paused or entry_station != "wordking":
+		preparing_room = false
+		return
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	if packs != null:
+		packs.call("request_resource", TrainingTransition.ROOM_SCENE, 200)
+		if not bool(packs.call("is_resource_ready", TrainingTransition.ROOM_SCENE)):
+			return
+	preparing_room = false
+	hud.call("set_preparation", "", false)
 	var transition: Node = TrainingTransition.new()
 	transition.name = "TrainingRoomTransition"
 	get_tree().root.add_child(transition)
@@ -637,8 +687,42 @@ func open_training_room() -> void:
 		transition.queue_free()
 		resume_world(entry_return)
 
+func _update_preparation_status() -> void:
+	if not preparing_roam and not preparing_room:
+		hud.call("set_preparation", "", false)
+		return
+	var message: String = "正在準備訓練室…" if preparing_room else "正在準備角色與目的地…"
+	var error: String = player.visuals_error() if preparing_roam else ""
+	if error.is_empty() and preparing_roam:
+		error = str(streaming.call("position_error", player.global_position))
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	if packs != null:
+		if preparing_room:
+			error = str(packs.call("resource_error", TrainingTransition.ROOM_SCENE))
+		var status: Dictionary = packs.call("get_status") as Dictionary
+		if int(status.expected_bytes) > 0:
+			message += "\n下載 %.1f / %.1f MB" % [float(status.downloaded_bytes) / 1000000.0, float(status.expected_bytes) / 1000000.0]
+			if str(status.state) == "verifying":
+				message = "正在確認下載內容…"
+	hud.call("set_preparation", error if not error.is_empty() else message, not error.is_empty())
+
+func retry_preparation() -> void:
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	if packs != null:
+		packs.call("retry_failed")
+	player.retry_prepare_visuals()
+	streaming.call("retry_failed")
+
+func cancel_preparation() -> void:
+	preparing_roam = false
+	preparing_room = false
+	if paused:
+		resume_world(entry_return)
+	set_overview(true)
+	hud.call("set_preparation", "", false)
+
 func can_player_jump() -> bool:
-	if overview or paused or entering or player.is_resting or hud.call("is_settings_open"):
+	if overview or paused or entering or preparing_roam or preparing_room or player.is_resting or hud.call("is_settings_open"):
 		return false
 	var destinations: Control = hud.get("destination_card") as Control
 	return destinations == null or not destinations.visible

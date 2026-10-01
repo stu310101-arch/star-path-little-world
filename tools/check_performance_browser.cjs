@@ -1,19 +1,23 @@
 // Release-build functional QA. Every game action is a mouse/key input.
 // The browser only reads opt-in ?performance telemetry; no engine JS commands.
-// NODE_PATH must contain Playwright. Usage: node tools/check_performance_browser.cjs URL [label] [local-release-json]
+// NODE_PATH must contain Playwright. Usage: node tools/check_performance_browser.cjs URL [label] [local-release-json] [--crosswalk-only]
 const { chromium } = require('playwright');
 const fs = require('node:fs');
 const path = require('node:path');
 
+const args = process.argv.slice(2);
+const crosswalkOnly = args.includes('--crosswalk-only');
+const positional = args.filter(arg => !arg.startsWith('--'));
+if (args.some(arg => arg.startsWith('--') && arg !== '--crosswalk-only')) throw new Error('Unknown QA option');
 const repo = path.resolve(__dirname, '..');
-const url = new URL(process.argv[2] || 'http://127.0.0.1:8947/build/web/index.html');
+const url = new URL(positional[0] || 'http://127.0.0.1:8947/build/web/index.html');
 if (!['localhost', '127.0.0.1', '[::1]'].includes(url.hostname)) {
   throw new Error('This QA runner is restricted to localhost; it does not verify the public deployment.');
 }
 url.searchParams.set('performance', '');
-const label = (process.argv[3] || 'release-functional').replace(/[^a-zA-Z0-9_-]/g, '-');
+const label = (positional[1] || 'release-functional').replace(/[^a-zA-Z0-9_-]/g, '-');
 const out = path.join(repo, 'deliverables', 'performance');
-const localReleasePath = path.resolve(repo, process.argv[4] || '_site/index.release.json');
+const localReleasePath = path.resolve(repo, positional[2] || '_site/index.release.json');
 const localRelease = JSON.parse(fs.readFileSync(localReleasePath, 'utf8'));
 if (typeof localRelease.build_id !== 'string' || !localRelease.build_id) throw new Error('Local release manifest has no build_id');
 const projectConfig = fs.readFileSync(path.join(repo, 'game', 'project.godot'), 'utf8');
@@ -25,11 +29,13 @@ const stretchAspect = projectConfig.match(/^window\/stretch\/aspect="([^"]+)"/m)
 if (!baseViewport.width || !baseViewport.height || stretchAspect !== 'keep') {
   throw new Error('QA input mapping expects the project\'s existing fixed-aspect Godot viewport');
 }
-const stations = JSON.parse(fs.readFileSync(path.join(repo, 'game', 'data', 'world_layout.json'), 'utf8')).stations;
+const layout = JSON.parse(fs.readFileSync(path.join(repo, 'game', 'data', 'world_layout.json'), 'utf8'));
+const stations = layout.stations;
 fs.mkdirSync(out, { recursive: true });
 const reportPath = path.join(out, `${label}.json`);
 const report = {
   label, url: url.href, started: new Date().toISOString(), viewport: { width: 1200, height: 800 },
+  mode: crosswalkOnly ? 'crosswalk-only' : 'full-functional',
   checks: [], events: [], snapshots: [], errors: [], unmeasured: [],
   expected_release: {path:localReleasePath,build_id:localRelease.build_id,source_sha256:localRelease.source_sha256,pck:localRelease.files?.['index.pck']},
   godot_viewport: {...baseViewport,stretch_aspect:stretchAspect},
@@ -102,6 +108,11 @@ async function waitFor(description, predicate, timeout = 45000, afterTicks = -1)
 
 const matches = (button, selector) => selector.name ? button.name === selector.name : selector.text.test(button.text || '');
 const visibleButton = (state, selector) => (state.metrics?.buttons || []).find(b => matches(b, selector) && b.visible);
+// Teleport can retain the old near-view state while its new district/avatar
+// prepares. Wait for the real controls gate, not just overview=false.
+const roamReady = state => !state.room && state.metrics?.avatar?.ready === true &&
+  !state.metrics?.preparing_roam && Boolean(state.metrics?.player) &&
+  !state.metrics.player.overview && !state.metrics.player.entering && !state.metrics.player.paused;
 async function canvasBox() {
   const box = await page.locator('#canvas').boundingBox();
   if (!box?.width || !box?.height) throw new Error('Game canvas has no visible bounds');
@@ -222,12 +233,12 @@ async function destination(station) {
   if (!state.metrics?.destinations_open) await clickButton({ text: /選擇目的地/ });
   await waitFor('destination list open', s => s.metrics?.destinations_open);
   await clickButton({ text: new RegExp(`^\\d{2}\\s+${station.label}`) }, { scroll: true });
-  state = await waitFor(`arrival at ${station.id}`, s => !s.metrics?.player?.overview && !s.metrics?.player?.entering && !s.metrics?.player?.paused && s.metrics?.nearest_id === station.id, 60000);
+  state = await waitFor(`arrival at ${station.id}`, s => roamReady(s) && s.metrics.nearest_id === station.id, 180000);
   if (state.metrics.destinations_open) {
     await clickButton({ text: /收起目的地/ });
     await waitFor('destination list closed', s => !s.metrics?.destinations_open);
   }
-  return waitFor(`detail ready near ${station.id}`, s => s.metrics?.streaming?.active_regions > 0 && s.metrics?.streaming?.pending_regions === 0, 120000);
+  return waitFor(`detail ready near ${station.id}`, s => roamReady(s) && s.metrics?.streaming?.active_regions > 0 && s.metrics?.streaming?.pending_regions === 0, 180000);
 }
 
 async function leaveTrainingRoom() {
@@ -243,7 +254,7 @@ async function leaveTrainingRoom() {
   if (!state.room?.near_exit) throw new Error('Room exit was not reached by real backwards movement');
   const before = state.metrics?.ticks_ms ?? -1;
   await page.keyboard.press('e');
-  await waitFor('training room return', s => !s.room && !s.metrics?.player?.paused && !s.metrics?.player?.entering, 120000, before);
+  await waitFor('training room return', roamReady, 180000, before);
 }
 
 async function approachPortal(station) {
@@ -275,12 +286,12 @@ async function approachPortal(station) {
 
 async function stationRoute(station) {
   const arrived = await destination(station);
-  check(`Teleport and load ${station.id}`, true, {player:arrived.metrics.player,streaming:arrived.metrics.streaming});
+  check(`Teleport and load ${station.id}`, true, {player:arrived.metrics.player,streaming:arrived.metrics.streaming,avatar:arrived.metrics.avatar,preparing_roam:arrived.metrics.preparing_roam});
   await screenshot(`district-${station.id}`);
   await approachPortal(station);
   await page.keyboard.press('e');
   if (station.id === 'wordking') {
-    const room = await waitFor('training room ready', s => s.room?.ready, 120000);
+    const room = await waitFor('training room ready', s => s.room?.ready, 180000);
     check('Training room entry with E', true, room.room);
     await screenshot('training-room');
     await leaveTrainingRoom();
@@ -289,7 +300,7 @@ async function stationRoute(station) {
     const interaction = await waitFor(`${station.id} interaction`, s => s.metrics?.player?.paused && !s.metrics?.player?.entering, 60000);
     check(`${station.id} interaction opens`, true, interaction.metrics.player);
     await page.keyboard.press('Escape');
-    const resumed = await waitFor(`${station.id} interaction closes`, s => !s.metrics?.player?.paused && !s.metrics?.player?.entering);
+    const resumed = await waitFor(`${station.id} interaction closes`, roamReady);
     check(`${station.id} interaction returns to outdoor world`, true, resumed.metrics.player);
   }
 }
@@ -308,6 +319,25 @@ function dominantDistrict(position) {
   return stations.map(station => ({id:station.id,dot:station.normal.reduce((sum,n,i)=>sum+n*position[i],0)})).sort((a,b)=>b.dot-a.dot)[0].id;
 }
 
+async function alignCounselingBridge(deadline, evidence) {
+  // Authored counseling roads include x=-1,z=-15..15; its promenade and
+  // approach continue at x=0,z=15..22..32.07 to Bridge_0_4 (life).
+  // The civic spawn is x=6: simply backing up hits the house at [5,8].
+  // Read position to steer onto the central road using ordinary A/D keys.
+  for (let attempt = 0; attempt < 16 && Date.now() < deadline; attempt++) {
+    const state = await snapshot();
+    if (!roamReady(state)) throw new Error('Walking controls became unavailable before the bridge');
+    const position = state.metrics.player.position;
+    const localX = layout.radius * position[0] / position[1];
+    if (Math.abs(localX) <= .40) return state;
+    const ms = Math.min(450, Math.max(70, (Math.abs(localX) - .2) / 3.8 * 1000), deadline - Date.now());
+    await hold([localX > 0 ? 'a' : 'd'], ms);
+    const next = await waitFor('fresh bridge alignment position', roamReady, 30000, state.metrics.ticks_ms);
+    evidence.push({key:localX > 0 ? 'a' : 'd',held_ms:ms,from:position,to:next.metrics.player.position});
+  }
+  throw new Error('Could not reach the authored bridge center using real A/D movement');
+}
+
 async function cameraAndWalkingRoute() {
   await destination(stations[0]);
   for (const [dx, dy] of [[260, 70], [-290, -100], [220, 25], [-190, 5]]) await drag(dx, dy);
@@ -317,23 +347,38 @@ async function cameraAndWalkingRoute() {
   await screenshot('fast-camera');
   await destination(stations[0]); // Restore authored heading before the walking route.
   const start = await snapshot();
+  const alignment = [];
   const samples = [];
-  for (let i = 0; i < 6; i++) {
-    await hold(['Shift', 's'], 2000);
-    samples.push(await snapshot());
+  const walkingStarted = Date.now();
+  // Bound held walking to 30 x 2 seconds, independently of slow rendered
+  // frames / destination shaders. The full route still has a 3-minute cap.
+  const walkingDeadline = walkingStarted + 180000;
+  await alignCounselingBridge(walkingDeadline, alignment);
+  const fromDistrict = dominantDistrict(start.metrics.player.position);
+  for (let i = 0; i < 30 && Date.now() < walkingDeadline; i++) {
+    const before = await snapshot();
+    await hold(['Shift', 's'], Math.min(2000, walkingDeadline - Date.now()));
+    const current = await waitFor('fresh walking position', roamReady, 30000, before.metrics.ticks_ms);
+    samples.push(current);
+    if (dominantDistrict(current.metrics.player.position) !== fromDistrict) break;
+    await alignCounselingBridge(walkingDeadline, alignment);
   }
+  if (!samples.length) throw new Error('No walking sample before the 180-second route limit');
   const end = samples.at(-1);
   const a = start.metrics.player.position;
   const b = end.metrics.player.position;
   const distance = Math.hypot(...b.map((value, i) => value - a[i]));
-  check('Real walking changes player position without falling below terrain', distance > 1 && samples.every(s => Math.hypot(...s.metrics.player.position) >= 47), {distance,start:a,end:b});
+  check('Real walking changes player position without falling below terrain', distance > 1 && samples.every(s => Math.hypot(...s.metrics.player.position) >= 47) && alignment.every(s => Math.hypot(...s.to) >= 47), {distance,start:a,end:b});
   const crossed = dominantDistrict(a) !== dominantDistrict(b);
-  report.crosswalk = {crossed,from:dominantDistrict(a),to:dominantDistrict(b),samples};
-  if (crossed) check('Walking crosses the nearest-district boundary', true, {from:dominantDistrict(a),to:dominantDistrict(b)});
-  else report.unmeasured.push('Attempted 12-second real-input walking route did not cross a district boundary; do not count it as cross-district walking coverage.');
+  report.crosswalk = {crossed,from:dominantDistrict(a),to:dominantDistrict(b),elapsed_ms:Date.now()-walkingStarted,route:'counseling central road and Bridge_0_4 to life',alignment,samples};
+  check('Walking crosses the nearest-district boundary', crossed, {from:dominantDistrict(a),to:dominantDistrict(b),samples:samples.length});
+  if (crossed) {
+    const settled = await waitFor('crossed district detail settles', s => roamReady(s) && s.metrics?.streaming?.pending_regions === 0, 180000);
+    check('Cross-district walking retains controls and completes nearby detail', true, {player:settled.metrics.player,streaming:settled.metrics.streaming});
+  } else report.unmeasured.push('The bridge route (at most 60 seconds held walking / 180 seconds wall time) did not cross a district boundary; cross-district walking coverage remains incomplete.');
   await screenshot('walking-route');
   await page.keyboard.press('Home');
-  await waitFor('Home teleport returns to counseling', s => s.metrics?.nearest_id === 'counseling' && !s.metrics?.player?.entering);
+  await waitFor('Home teleport returns to counseling', s => roamReady(s) && s.metrics.nearest_id === 'counseling', 180000);
   await page.keyboard.press('Tab');
   await waitFor('overview after Tab', s => s.metrics?.player?.overview);
   await drag(160, 50, 12);
@@ -381,10 +426,12 @@ async function repetitionRoute() {
     await waitWorld();
     console.log('READY', label);
     await screenshot('initial-overview');
-    await settingsRoute();
-    for (const station of stations) await stationRoute(station);
+    if (!crosswalkOnly) {
+      await settingsRoute();
+      for (const station of stations) await stationRoute(station);
+    }
     await cameraAndWalkingRoute();
-    await repetitionRoute();
+    if (!crosswalkOnly) await repetitionRoute();
   } catch (error) {
     report.errors.push(String(error.stack || error));
     if (page && !page.isClosed()) await screenshot('failure').catch(() => {});
@@ -395,7 +442,10 @@ async function repetitionRoute() {
       try {
         await leaveTrainingRoom();
         const s = await snapshot();
-        if (s.metrics?.player?.paused) await page.keyboard.press('Escape');
+        if (s.metrics?.preparing_roam || s.metrics?.player?.paused) {
+          await page.keyboard.press('Escape');
+          await waitFor('preparation or interaction cancelled for default restoration', state => !state.room && !state.metrics?.preparing_roam && !state.metrics?.player?.paused);
+        }
         await openSettings();
         await graphicsChoice('RestoreGraphicsDefaults', g => g.msaa_enabled && g.frame_limit === 60 && g.applied_msaa === 1 && g.applied_max_fps === 60);
         check('QA restores original graphics defaults', true, (await snapshot()).metrics.graphics);

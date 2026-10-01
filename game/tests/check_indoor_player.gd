@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
+
 const IndoorPlayer = preload("res://scripts/indoor_player.gd")
 var failures: int = 0
 var checks: Array[Dictionary] = []
@@ -35,6 +37,7 @@ func run_checks() -> void:
 	solid(room, Vector3(0, 1.5, -2), Vector3(20, 3, 0.2))
 	var player: PlanetPlayer = IndoorPlayer.new() as PlanetPlayer
 	room.add_child(player)
+	check("Indoor fixture prepares original character animations", await StartupFixture.prepare_player(player, self))
 	player.call("place_at", Vector3(4, 0.1, 4), Vector3.FORWARD)
 	player.allow_test_input = true
 	for frame: int in range(30):

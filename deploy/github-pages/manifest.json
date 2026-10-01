@@ -2,28 +2,13 @@
   "format": 1,
   "game": "星途 · Little World",
   "pck": {
-    "bytes": 154560308,
-    "sha256": "5210d188c2b2214b0f2d6f0e88814dd0fb4b18957c8509a1b18c2e7a56db0961",
+    "bytes": 35404024,
+    "sha256": "32520e066b344b8e2b29b245423ebbc7b6a9888b75ee8a4124542d2102c277d1",
     "parts": [
       {
         "name": "index.pck.part000",
-        "bytes": 47185920,
-        "sha256": "4707b513582549bc8279761d8cbe2fa6fcc2b64369bce8d37812bb3ba129a6c4"
-      },
-      {
-        "name": "index.pck.part001",
-        "bytes": 47185920,
-        "sha256": "ac930dee0c3ec4d1a615f76747144e7c5857da36fb94c579fc958974af86d148"
-      },
-      {
-        "name": "index.pck.part002",
-        "bytes": 47185920,
-        "sha256": "f724ac1b00317ff1b5d7b97f7f4ed4fa6aba28ead9cb49f4e4f963809370435d"
-      },
-      {
-        "name": "index.pck.part003",
-        "bytes": 13002548,
-        "sha256": "f6aa7eaf1632433571fe7b7856acfe08908cebd4ed337a14fcf480aeb05a03b8"
+        "bytes": 35404024,
+        "sha256": "32520e066b344b8e2b29b245423ebbc7b6a9888b75ee8a4124542d2102c277d1"
       }
     ]
   },
@@ -40,13 +25,18 @@
     },
     {
       "path": "index.html",
-      "bytes": 5381,
-      "sha256": "6f7a18ac952f2e8d00bf9a50bf477968ab6c08ddf2765637992437b2861d9d57"
+      "bytes": 5376,
+      "sha256": "4f661dfd4f18dd4052283334a0ad2facc6bfef865086eaf17237fafcadc4e4c0"
     },
     {
       "path": "index.js",
       "bytes": 279815,
       "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+    },
+    {
+      "path": "index.packs.json",
+      "bytes": 11086,
+      "sha256": "d8671fc0bec253fcbdde1c5ecf43a2c3d41e34b184913de456e5db73c61a3d31"
     },
     {
       "path": "index.png",
@@ -55,8 +45,8 @@
     },
     {
       "path": "index.release.json",
-      "bytes": 863,
-      "sha256": "fd7d2adfa0efd4f0b3d4633649595585bb5ab34c7eaa8c4de45e820b637933d6"
+      "bytes": 3657,
+      "sha256": "ea410301cd8e841533403147cfdd3712729080bee743d820547f1fe0dfd61886"
     },
     {
       "path": "index.wasm",
@@ -132,6 +122,86 @@
       "path": "licenses/Van-Gogh-Starry-Night-Public-Domain.txt",
       "bytes": 581,
       "sha256": "0b80c76981409db1b09c86bf413d81b17fc59e0254b13799f41dfe110b3c160d"
+    },
+    {
+      "path": "packs/avatar-dbf4017c84a82ebd.pck",
+      "bytes": 50904340,
+      "sha256": "dbf4017c84a82ebdb9988189b61d0a6fa00e5e53c70a95e4dfc9f3044f2185ac"
+    },
+    {
+      "path": "packs/district_admissions-b9990e78225097d4.pck",
+      "bytes": 3614436,
+      "sha256": "b9990e78225097d47c172f2a4503783425e2dd720b8d92d1cc90d389426656f7"
+    },
+    {
+      "path": "packs/district_counseling-c94cdc8453e08139.pck",
+      "bytes": 3465044,
+      "sha256": "c94cdc8453e08139d2e3f45209ef49a4eaef4926cc11837f90ede351b3d6cce7"
+    },
+    {
+      "path": "packs/district_life-b375c982e7a81f3b.pck",
+      "bytes": 3356052,
+      "sha256": "b375c982e7a81f3bf9ce10185a3ad2326948bfdca66b7a99b56ebef2345d4936"
+    },
+    {
+      "path": "packs/district_ocean-205618f4a153be51.pck",
+      "bytes": 729528,
+      "sha256": "205618f4a153be51994e9beaa4696751f73dae2775eae656d9a0ab65d41f5ce3"
+    },
+    {
+      "path": "packs/district_recommendations-dd767596f5068425.pck",
+      "bytes": 2888636,
+      "sha256": "dd767596f5068425ab405c59851f72daf81cc77e75238bb40f6ffe8e4adc18ac"
+    },
+    {
+      "path": "packs/district_sakura-6315d0720e217884.pck",
+      "bytes": 4921072,
+      "sha256": "6315d0720e217884ae2d71457062edbfbc820b10e1aa01791cfb8e12ebb1dc08"
+    },
+    {
+      "path": "packs/district_universities-83ab9e6fad509274.pck",
+      "bytes": 3564404,
+      "sha256": "83ab9e6fad509274bc05e77c6bba84aa4be22db51801720165a78e311428016e"
+    },
+    {
+      "path": "packs/district_wordking-d88484e6cbd7c882.pck",
+      "bytes": 3527084,
+      "sha256": "d88484e6cbd7c882841053806b029db95b191ee9b451794a60eb0686f99c7653"
+    },
+    {
+      "path": "packs/music_admissions-2ce1c35030bcc9fb.pck",
+      "bytes": 1728528,
+      "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0"
+    },
+    {
+      "path": "packs/music_counseling-f3b97506778458ba.pck",
+      "bytes": 1443824,
+      "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4"
+    },
+    {
+      "path": "packs/music_recommendations-66382088fcc4b843.pck",
+      "bytes": 2195960,
+      "sha256": "66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8"
+    },
+    {
+      "path": "packs/music_wordking-a45c153d522c439d.pck",
+      "bytes": 2315480,
+      "sha256": "a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995"
+    },
+    {
+      "path": "packs/music_world-e1a7f96b4f7f8400.pck",
+      "bytes": 1351376,
+      "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf"
+    },
+    {
+      "path": "packs/shared-4b7143129f228685.pck",
+      "bytes": 176264,
+      "sha256": "4b7143129f228685e51f78030a171343c09b5aaaa3b39b0ee3631daf5d7bbe81"
+    },
+    {
+      "path": "packs/training_room-00e45f0b5f24b903.pck",
+      "bytes": 15104300,
+      "sha256": "00e45f0b5f24b9037f1b64cac3ecd244e845063525b8211cabeaf9cc503752aa"
     },
     {
       "path": "THIRD_PARTY_NOTICES.txt",

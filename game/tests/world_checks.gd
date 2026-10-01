@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
+
 var checks: Array[Dictionary] = []
 var failures: int = 0
 
@@ -20,6 +22,7 @@ func run_checks() -> void:
 	current_scene = world
 	await physics_frame
 	var player: PlanetPlayer = world.get("player") as PlanetPlayer
+	check("Character preparation completes before animation inspection", await StartupFixture.prepare_player(player, self))
 	var radius: float = player.planet_radius
 	check("Six distinct stations", world.get_node("Stations").get_child_count() == 6)
 	var build: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://generated/build_report.json")) as Dictionary
@@ -109,6 +112,7 @@ func run_checks() -> void:
 	world.call("_input",press)
 	check("Right release restores cursor",not bool(world.get("dragging_view")))
 	world.call("set_overview",false)
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	press.pressed = true
 	world.call("_input",press)
 	var heading_before: Vector3 = player.heading
@@ -118,6 +122,7 @@ func run_checks() -> void:
 	world.call("_input",press)
 	for station: Node in world.get_node("Stations").get_children():
 		world.call("teleport_to", str(station.name))
+		check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 		for i: int in range(45):
 			await physics_frame
 		check("Station landing " + str(station.name), player.is_on_floor() and player.position.length() > radius and player.position.length() < radius + 1.0, str(player.position.length()))
@@ -153,6 +158,7 @@ func run_checks() -> void:
 		check("Clear street " + str(district.id),player.position.distance_to(street_start) > 3.5 and player.position.length() > radius)
 	player.test_direction = Vector2.ZERO
 	world.call("teleport_to", "counseling")
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	for i: int in range(30):
 		await physics_frame
 	var before: Vector3 = player.position
@@ -167,6 +173,7 @@ func run_checks() -> void:
 	check("Panel retains world position", before.distance_to(player.position) < 0.03)
 	check("Returning restores character",player.visual.visible and not player.entering and player.visual.position.is_zero_approx())
 	world.call("visit_sakura")
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	for i: int in range(45):
 		await physics_frame
 	check("Sakura grove can be visited on foot",player.is_on_floor() and player.position.length()>radius)
@@ -272,6 +279,7 @@ func run_checks() -> void:
 	# Resolve traffic only when needed. Holding its node while visiting other
 	# districts would correctly become invalid after the original chunk unloads.
 	world.call("teleport_to", "counseling")
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	await wait_for_detail(world, "counseling")
 	var traffic: Node3D = detail_node(world, "counseling", "CityTraffic")
 	check("City traffic is available after its streaming region reloads", traffic != null)
@@ -355,6 +363,7 @@ func run_checks() -> void:
 	var minimap: Control = (world.get("hud") as CanvasLayer).get("minimap") as Control
 	for station: Dictionary in world.get("layout").stations:
 		world.call("teleport_to",str(station.id))
+		check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 		minimap.call("refresh")
 		var projected: Vector2 = minimap.call("project_point",player.position.normalized()) as Vector2
 		check("Minimap centres player at " + str(station.id),projected.distance_to(minimap.size*.5)<.01)
@@ -378,6 +387,7 @@ func run_checks() -> void:
 	world.call("_input",motion)
 	check("Left release stops rotation",not bool(world.get("dragging_view")) and is_equal_approx(yaw_before,float(world.get("orbit_yaw"))))
 	world.call("set_overview",false)
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	press.pressed = true
 	world.call("_unhandled_input",press)
 	heading_before = player.heading

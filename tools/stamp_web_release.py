@@ -30,10 +30,10 @@ def stamp(folder: Path) -> dict:
     if config.get("experimentalVK", False) or config.get("gdextensionLibs", []):
         raise ValueError("Unexpected export variant")
     source_paths = sorted([
-        path for subdir in ("scripts", "scenes", "generated/streaming")
+        path for subdir in ("scripts", "scenes", "generated/streaming", "data", "tools")
         for path in (ROOT / "game" / subdir).rglob("*")
         if path.is_file() and path.suffix in (".gd", ".tscn", ".scn", ".json")
-    ] + [ROOT / "game/project.godot", ROOT / "game/export_presets.cfg"])
+    ] + [ROOT / "game/project.godot", ROOT / "game/export_presets.cfg", ROOT / "tools/split_web_packs.py"])
     source_hash = hashlib.sha256()
     for path in source_paths:
         source_hash.update(path.relative_to(ROOT).as_posix().encode())
@@ -41,13 +41,23 @@ def stamp(folder: Path) -> dict:
         # exact. Keep the source ID stable across Windows and Linux checkouts.
         payload = path.read_bytes() if path.suffix == ".scn" else path.read_text(encoding="utf-8").encode("utf-8")
         source_hash.update(hashlib.sha256(payload).digest())
-    build_id = "streaming-" + source_hash.hexdigest()[:16]
+    build_id = "packs-" + source_hash.hexdigest()[:16]
     marker = f'<meta name="little-world-build" content="{build_id}">'
     html = re.sub(r'<meta name="little-world-build"[^>]*>\n?', '', html)
     html = html.replace("</head>", marker + "\n\t</head>")
     html_path.write_text(html, encoding="utf-8", newline="\n")
-    files = {name: {"bytes": (folder / name).stat().st_size, "sha256": digest(folder / name)}
-             for name in ("index.html", "index.js", "index.wasm", "index.pck")}
+    names = ["index.html", "index.js", "index.wasm", "index.pck"]
+    pack_manifest = folder / "index.packs.json"
+    if pack_manifest.is_file():
+        packs = json.loads(pack_manifest.read_text(encoding="utf-8"))
+        names.append("index.packs.json")
+        for pack in packs["packs"].values():
+            name = pack["url"]
+            target = (folder / name).resolve()
+            if not target.is_relative_to(folder.resolve()) or target.stat().st_size != pack["bytes"] or digest(target) != pack["sha256"]:
+                raise ValueError(f"Deferred pack does not match manifest: {name}")
+            names.append(name)
+    files = {name: {"bytes": (folder / name).stat().st_size, "sha256": digest(folder / name)} for name in names}
     info = {
         "build_id": build_id,
         "created_utc": dt.datetime.now(dt.timezone.utc).isoformat(),

@@ -1,5 +1,6 @@
 """Check release integrity and safe pruning with tiny temporary packages."""
 import importlib.util
+import json
 from pathlib import Path
 import tempfile
 import unittest
@@ -11,6 +12,23 @@ SPEC.loader.exec_module(PACKAGE)
 
 
 class WebPackageTests(unittest.TestCase):
+    def test_deferred_pack_survives_assembly_and_hash_validation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source, package, output = (root / name for name in ("source", "package", "output"))
+            (source / "packs").mkdir(parents=True)
+            (source / "index.html").write_text("new", encoding="utf-8")
+            (source / "index.pck").write_bytes(b"boot")
+            (source / "index.packs.json").write_text(json.dumps({"version": 1}), encoding="utf-8")
+            (source / "packs/avatar.pck").write_bytes(b"avatar")
+            (source / "THIRD_PARTY_NOTICES.txt").write_text("notices", encoding="utf-8")
+            PACKAGE.prepare(source, package)
+            PACKAGE.assemble(package, output)
+            self.assertEqual((output / "packs/avatar.pck").read_bytes(), b"avatar")
+            (package / "files/packs/avatar.pck").write_bytes(b"broken")
+            with self.assertRaises(RuntimeError):
+                PACKAGE.assemble(package, output)
+
     def test_smaller_release_prunes_only_preceding_manifest_files_and_detects_tampering(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

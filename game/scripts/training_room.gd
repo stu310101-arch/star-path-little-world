@@ -55,6 +55,9 @@ func _ready() -> void:
 	player = IndoorPlayer.new() as CharacterBody3D
 	player.name = "Player"
 	add_child(player)
+	player.set("controls_enabled", false)
+	player.process_mode = Node.PROCESS_MODE_DISABLED
+	player.call("begin_prepare_visuals")
 	player.call("place_at", Vector3(0, .09, 6.2), Vector3.FORWARD)
 	camera = Camera3D.new()
 	camera.name = "RoomCamera"
@@ -75,9 +78,7 @@ func _ready() -> void:
 		music.connect("state_changed", _refresh_music)
 		_refresh_music()
 	update_camera(0.0, true)
-	ready_for_play = true
-	room_ready.emit()
-	print("TRAINING_ROOM_READY device=1 display_sockets=6 floor=20x18")
+	return_prompt.text = "正在準備角色…"
 
 func _setup_input() -> void:
 	var keys: Dictionary = {"move_left": KEY_A, "move_right": KEY_D, "move_forward": KEY_W, "move_back": KEY_S, "run": KEY_SHIFT, "jump": KEY_SPACE, "interact": KEY_E}
@@ -287,7 +288,17 @@ func can_player_jump() -> bool:
 	return ready_for_play and not returning and (interactions == null or not bool(interactions.call("is_busy")))
 
 func _unhandled_input(event: InputEvent) -> void:
-	if returning or not ready_for_play:
+	if returning:
+		return
+	if not ready_for_play:
+		if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
+			returning = true
+			request_return_to_world.emit()
+		elif event is InputEventKey and event.is_pressed() and event.keycode == KEY_R:
+			var packs: Node = get_node_or_null("/root/WebPacks")
+			if packs != null:
+				packs.call("retry_failed")
+			player.call("retry_prepare_visuals")
 		return
 	if is_instance_valid(music) and (event is InputEventKey or event is InputEventMouseButton):
 		music.call("unlock")
@@ -360,8 +371,19 @@ func update_camera(delta: float, snap: bool = false) -> void:
 		camera.look_at(aim, Vector3.UP)
 
 func _process(delta: float) -> void:
-	if not ready_for_play or returning:
+	if returning:
 		return
+	if not ready_for_play:
+		player.call("step_prepare_visuals")
+		if not bool(player.call("visuals_ready")):
+			var message: String = str(player.call("visuals_error"))
+			return_prompt.text = "正在準備角色…  Esc 返回" if message.is_empty() else message + "  R 重試 / Esc 返回"
+			return
+		ready_for_play = true
+		player.process_mode = Node.PROCESS_MODE_INHERIT
+		player.set("controls_enabled", true)
+		room_ready.emit()
+		print("TRAINING_ROOM_READY device=1 display_sockets=6 floor=20x18")
 	if dragging_view and not Input.is_mouse_button_pressed(drag_button):
 		_finish_drag()
 	if interactions != null:

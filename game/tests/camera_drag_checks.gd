@@ -1,5 +1,7 @@
 extends SceneTree
 
+const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
+
 var checks: Array[Dictionary] = []
 var failures: int = 0
 var vegetation_probe: Dictionary = {}
@@ -57,6 +59,7 @@ func run() -> void:
 		world.call("_input",motion)
 		check("Unheld pointer does not rotate "+str(button),is_equal_approx(float(world.get("orbit_yaw")),yaw-.45))
 	world.call("set_overview",false)
+	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
 	var original_position: Vector3 = player.global_position
 	var near_stable: bool = true
 	for step: int in range(73):

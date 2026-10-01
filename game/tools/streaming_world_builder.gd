@@ -6,13 +6,14 @@ const OUTPUT: String = "res://generated/streaming/"
 const CHUNK_NODES: int = 80
 const CHUNK_TRIANGLES: int = 45000
 const Geo = preload("res://scripts/planet_geometry.gd")
+const MaterialPool = preload("res://tools/streaming_material_pool.gd")
+var material_pool: RefCounted = MaterialPool.new()
 var radius: float = 48.0
 var entries: Dictionary = {}
 var details: Dictionary = {}
 var overview_batches: Dictionary = {}
 var mesh_cache: Dictionary = {}
 var indexed_mesh_cache: Dictionary = {}
-var material_cache: Dictionary = {}
 var source_triangles: int = 0
 var overview_triangles: int = 0
 var overview_vertices: int = 0
@@ -118,7 +119,7 @@ func build() -> void:
 			max_triangles = maxi(max_triangles, int(chunk.triangles))
 			max_bytes = maxi(max_bytes, int(chunk.bytes))
 			chunk_count += 1
-	var catalog: Dictionary = {"version":1,"radius":radius,"districts":entries.values(),"build":{"overview_input_triangles":source_triangles,"overview_triangles":overview_triangles,"overview_vertices":overview_vertices,"protected_surface_meshes":protected_surface_meshes,"permanent_collision_bodies":collision_count,"chunk_count":chunk_count,"chunk_target_nodes":CHUNK_NODES,"chunk_target_triangles":CHUNK_TRIANGLES,"max_chunk_nodes":max_nodes,"max_chunk_mesh_triangles":max_triangles,"max_chunk_bytes":max_bytes}}
+	var catalog: Dictionary = {"version":1,"radius":radius,"districts":entries.values(),"build":{"overview_input_triangles":source_triangles,"overview_triangles":overview_triangles,"overview_vertices":overview_vertices,"protected_surface_meshes":protected_surface_meshes,"permanent_collision_bodies":collision_count,"chunk_count":chunk_count,"chunk_target_nodes":CHUNK_NODES,"chunk_target_triangles":CHUNK_TRIANGLES,"max_chunk_nodes":max_nodes,"max_chunk_mesh_triangles":max_triangles,"max_chunk_bytes":max_bytes,"material_optimization":material_pool.call("statistics")}}
 	FileAccess.open(OUTPUT + "catalog.json", FileAccess.WRITE).store_string(JSON.stringify(catalog,"\t"))
 	var live_paths: Array[String] = []
 	for row: Dictionary in entries.values():
@@ -248,23 +249,7 @@ func collect_overview(node: Node, parent_transform: Transform3D, id: String) -> 
 		collect_overview(child, transform, id)
 
 func material_key(material: Material) -> String:
-	if material == null:
-		return "default"
-	var resource_id: int = material.get_instance_id()
-	if material_cache.has(resource_id):
-		return str(material_cache[resource_id])
-	if material is StandardMaterial3D:
-		var values: PackedStringArray = PackedStringArray()
-		for property: Dictionary in material.get_property_list():
-			var key: String = str(property.name)
-			if int(property.usage) & PROPERTY_USAGE_STORAGE == 0 or key.begins_with("resource_"):
-				continue
-			var value: Variant = material.get(key)
-			values.append(key + "=" + (str((value as Resource).get_instance_id()) if value is Resource else var_to_str(value)))
-		var signature: String = str(values)
-		material_cache[resource_id] = signature
-		return signature
-	return "shader_" + str(material.get_instance_id())
+	return str(material_pool.call("material_key", material))
 
 func reduced_mesh(mesh: Mesh) -> Mesh:
 	var key: int = mesh.get_instance_id()
@@ -311,6 +296,7 @@ func append_overview(mesh: Mesh, transform: Transform3D, source: MeshInstance3D,
 	var batches: Dictionary = overview_batches[id]
 	for surface: int in range(mesh.get_surface_count()):
 		var material: Material = source.get_active_material(surface) if source != null else mesh.surface_get_material(surface)
+		material = material_pool.call("canonical_material", material) as Material
 		var key: String = material_key(material)
 		if not batches.has(key):
 			var tool: SurfaceTool = SurfaceTool.new()
@@ -437,10 +423,12 @@ func write_chunk(id: String, chunk: Node3D, nodes: int, triangles: int) -> void:
 	chunk.free()
 
 func save_scene(node: Node, path: String) -> void:
+	material_pool.call("canonicalize_scene", node)
 	set_owners(node, node)
 	var packed: PackedScene = PackedScene.new()
 	assert(packed.pack(node) == OK)
 	assert(ResourceSaver.save(packed, path, ResourceSaver.FLAG_COMPRESS) == OK)
+	material_pool.call("clear_geometry_cache")
 
 func set_owners(node: Node, scene_root: Node) -> void:
 	for child: Node in node.get_children():
