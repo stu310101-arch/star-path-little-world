@@ -7,7 +7,9 @@ const CHUNK_NODES: int = 80
 const CHUNK_TRIANGLES: int = 45000
 const Geo = preload("res://scripts/planet_geometry.gd")
 const MaterialPool = preload("res://tools/streaming_material_pool.gd")
+const OverviewMaterialNormalizer = preload("res://tools/overview_material_normalizer.gd")
 var material_pool: RefCounted = MaterialPool.new()
+var overview_materials: RefCounted = OverviewMaterialNormalizer.new()
 var radius: float = 48.0
 var entries: Dictionary = {}
 var details: Dictionary = {}
@@ -20,8 +22,9 @@ var overview_vertices: int = 0
 var protected_surface_meshes: int = 0
 var collision_count: int = 0
 var layout: Dictionary = {}
+var build_failed: bool = false
 
-func build() -> void:
+func build() -> bool:
 	DirAccess.make_dir_recursive_absolute(OUTPUT)
 	var old_paths: Array[String] = []
 	if FileAccess.file_exists(OUTPUT + "catalog.json"):
@@ -99,6 +102,7 @@ func build() -> void:
 			# permanent. They are lightweight and remain valid during traversal.
 			var copy: Node = child.duplicate(7)
 			strip_collisions(copy)
+			overview_materials.call("normalize_scene", copy)
 			globe.add_child(copy)
 	full_globe.free()
 	for id: String in entries:
@@ -107,6 +111,12 @@ func build() -> void:
 		write_chunks(id)
 	save_scene(neighborhood, OUTPUT + "neighborhood_base.scn")
 	save_scene(globe, OUTPUT + "globe_base.scn")
+	# Keep the editable/canonical station scene intact, including its labels,
+	# interaction metadata and collisions. Only the startup visual copy changes.
+	var stations: Node3D = (load("res://generated/stations.tscn") as PackedScene).instantiate() as Node3D
+	overview_materials.call("normalize_scene", stations)
+	save_scene(stations, OUTPUT + "stations_base.scn")
+	stations.free()
 	neighborhood.free()
 	globe.free()
 	var max_nodes: int = 0
@@ -120,7 +130,19 @@ func build() -> void:
 			max_bytes = maxi(max_bytes, int(chunk.bytes))
 			chunk_count += 1
 	var catalog: Dictionary = {"version":1,"radius":radius,"districts":entries.values(),"build":{"overview_input_triangles":source_triangles,"overview_triangles":overview_triangles,"overview_vertices":overview_vertices,"protected_surface_meshes":protected_surface_meshes,"permanent_collision_bodies":collision_count,"chunk_count":chunk_count,"chunk_target_nodes":CHUNK_NODES,"chunk_target_triangles":CHUNK_TRIANGLES,"max_chunk_nodes":max_nodes,"max_chunk_mesh_triangles":max_triangles,"max_chunk_bytes":max_bytes,"material_optimization":material_pool.call("statistics")}}
-	FileAccess.open(OUTPUT + "catalog.json", FileAccess.WRITE).store_string(JSON.stringify(catalog,"\t"))
+	catalog.build["overview_shader_normalization"] = overview_materials.call("statistics")
+	if build_failed:
+		return false
+	var catalog_path: String = OUTPUT + "catalog.json"
+	var catalog_temporary: String = temporary_path(catalog_path)
+	var catalog_file: FileAccess = FileAccess.open(catalog_temporary, FileAccess.WRITE)
+	if catalog_file == null:
+		push_error("Cannot create generated catalog staging file: " + catalog_temporary)
+		return false
+	catalog_file.store_string(JSON.stringify(catalog,"\t"))
+	catalog_file.close()
+	if not publish_generated(catalog_temporary, catalog_path):
+		return false
 	var live_paths: Array[String] = []
 	for row: Dictionary in entries.values():
 		for chunk: Dictionary in row.chunks:
@@ -129,6 +151,7 @@ func build() -> void:
 		if path.begins_with(OUTPUT) and path.ends_with(".scn") and not live_paths.has(path):
 			DirAccess.remove_absolute(path)
 	print("STREAMING_BUILD_OK ", JSON.stringify(catalog.build))
+	return true
 
 func new_entry(id: String, center: Vector3) -> void:
 	entries[id] = {"id":id,"center":[center.x,center.y,center.z],"chunks":[],"detail_nodes":0,"overview_triangles":0}
@@ -368,6 +391,7 @@ func make_overview(id: String, target: Node3D) -> void:
 		tool.deindex()
 		tool.index()
 		visual.mesh = tool.commit()
+		overview_materials.call("normalize_visual", visual)
 		baked_triangles += triangle_count(visual.mesh, 0)
 		overview_vertices += (visual.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX] as PackedVector3Array).size()
 		visual.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
@@ -426,9 +450,37 @@ func save_scene(node: Node, path: String) -> void:
 	material_pool.call("canonicalize_scene", node)
 	set_owners(node, node)
 	var packed: PackedScene = PackedScene.new()
-	assert(packed.pack(node) == OK)
-	assert(ResourceSaver.save(packed, path, ResourceSaver.FLAG_COMPRESS) == OK)
+	var temporary: String = temporary_path(path)
+	if packed.pack(node) != OK or ResourceSaver.save(packed, temporary, ResourceSaver.FLAG_COMPRESS) != OK:
+		build_failed = true
+		push_error("Cannot save generated scene: " + path)
+	else:
+		# The staging filename must not assign a fresh identity to an existing
+		# scene or leave its UID pointing at a short-lived publication filename.
+		var uid: int = ResourceLoader.get_resource_uid(path) if FileAccess.file_exists(path) else -1
+		if uid >= 0 and ResourceSaver.set_uid(temporary, uid) != OK:
+			build_failed = true
+			push_error("Cannot preserve generated scene UID: " + path)
+		elif not publish_generated(temporary, path):
+			build_failed = true
 	material_pool.call("clear_geometry_cache")
+
+func temporary_path(path: String) -> String:
+	return path.get_base_dir().path_join(".building_%d_" % OS.get_process_id() + path.get_file())
+
+func publish_generated(temporary: String, path: String) -> bool:
+	# File scanners may briefly hold an existing generated file open on Windows.
+	# Save to a sibling first: a failed publication must not truncate the old one.
+	if FileAccess.file_exists(path) and FileAccess.get_sha256(path) == FileAccess.get_sha256(temporary):
+		DirAccess.remove_absolute(temporary)
+		return true
+	var output: Array = []
+	var python: String = "python" if OS.has_feature("windows") else "python3"
+	var arguments: PackedStringArray = PackedStringArray([ProjectSettings.globalize_path("res://../tools/atomic_replace_generated.py"), ProjectSettings.globalize_path(temporary), ProjectSettings.globalize_path(path), ProjectSettings.globalize_path(OUTPUT)])
+	var result: int = OS.execute(python, arguments, output, true, false)
+	if result != 0:
+		push_error("Cannot publish generated file after bounded retries: %s. Preserved staged file: %s. %s" % [path, temporary, str(output)])
+	return result == 0
 
 func set_owners(node: Node, scene_root: Node) -> void:
 	for child: Node in node.get_children():

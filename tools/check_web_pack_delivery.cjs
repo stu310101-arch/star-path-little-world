@@ -208,8 +208,8 @@ function distance(a, b) { return Math.hypot(...a.map((value, index) => value - b
       !initial.metrics.avatar.ready && initial.metrics.streaming.loaded_chunks === 0, { avatar: initial.metrics.avatar, streaming: initial.metrics.streaming });
     const firstRafEpoch = initial.clock.time_origin + initial.clock.first_raf_after_ready_ms;
     const deferredRequests = [...network.values()].filter(item => new URL(item.url).pathname.includes('/packs/') && /\.pck$/.test(new URL(item.url).pathname));
-    check('Deferred pack requests begin after first browser rAF following world readiness', deferredRequests.length > 0 &&
-      deferredRequests.every(item => item.start_epoch_ms >= firstRafEpoch - 2),
+    check('Full resource download starts during boot before the first world frame', initial.metrics.packs.all_requested &&
+      initial.metrics.packs.total_packs === Object.keys(manifest.packs).length && deferredRequests.some(item => item.start_epoch_ms < firstRafEpoch),
       deferredRequests.map(item => ({ url: item.url, after_first_raf_ms: item.start_epoch_ms - firstRafEpoch })));
     await capture('overview-avatar-failed');
 
@@ -248,10 +248,10 @@ function distance(a, b) { return Math.hypot(...a.map((value, index) => value - b
     check('Avatar pack is requested exactly once again after the injected failure', avatarAttempts === 2 && avatarRequests.length === 2 &&
       avatarRequests[0].status === 503 && avatarRequests[1].status === 200, avatarRequests);
     const bootUrl = new URL('index.pck', url).href;
-    check('Retry reuses the loaded boot package without another boot download', [...network.values()].filter(item => item.url === bootUrl).length === 1);
+    check('Retry reuses the loaded boot package without another boot download', [...network.values()].filter(item => item.url === bootUrl || /index\.boot\.[a-f0-9]+\.pck\.gz$/.test(item.url)).length === 1);
     check('Successful recovery clears the avatar pack failure', !resumed.metrics.packs.errors.avatar, resumed.metrics.packs.errors);
-    check('Web downloads use bounded streaming writes', resumed.metrics.packs.transport === 'http_client' &&
-      resumed.metrics.packs.max_download_frame_bytes > 0 && resumed.metrics.packs.max_download_frame_bytes <= 524288,
+    check('Web downloads use bounded streaming writes', resumed.metrics.packs.transport === 'background_fetch' &&
+      resumed.metrics.packs.max_download_frame_bytes > 0 && resumed.metrics.packs.max_download_frame_bytes <= 4194304,
       { transport: resumed.metrics.packs.transport, max_download_frame_bytes: resumed.metrics.packs.max_download_frame_bytes });
     await capture('roaming-ready');
     report.request_summary = Object.fromEntries([...new Set([...network.values()].map(item => new URL(item.url).pathname))]

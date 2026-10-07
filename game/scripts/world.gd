@@ -54,6 +54,7 @@ var preparing_roam: bool = false
 var preparing_room: bool = false
 var startup_presented: bool = false
 var startup_frames: int = 0
+var preparation_status_clock: float = 0.0
 
 func _ready() -> void:
 	layout = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
@@ -237,17 +238,23 @@ func _process(delta: float) -> void:
 	startup_frames += 1
 	if not startup_presented and startup_frames >= 3:
 		startup_presented = true
+		var packs: Node = get_node_or_null("/root/WebPacks")
+		if packs != null:
+			packs.call("start_all_downloads")
 		player.begin_prepare_visuals()
 		music.call("begin_prepare_music")
 	if preparing_roam:
 		player.step_prepare_visuals()
 		streaming.call("pin_position", player.global_position)
-		if player.visuals_ready() and bool(streaming.call("is_position_ready", player.global_position)):
+		if _all_downloads_ready() and player.visuals_ready() and bool(streaming.call("is_position_ready", player.global_position)):
 			preparing_roam = false
 			set_overview(false)
 	if preparing_room:
 		_continue_training_room.call_deferred()
-	_update_preparation_status()
+	preparation_status_clock += delta
+	if preparation_status_clock >= 0.1:
+		preparation_status_clock = 0.0
+		_update_preparation_status()
 	refresh_music_context(delta)
 	if entering:
 		entry_elapsed += delta
@@ -545,6 +552,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				near_distance = clampf(near_distance + change * 0.6, 4.0, 12.0)
 
+func _all_downloads_ready() -> bool:
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	return packs == null or bool(packs.call("all_resources_ready"))
+
 func set_overview(enabled: bool) -> void:
 	if entering:
 		return
@@ -552,7 +563,7 @@ func set_overview(enabled: bool) -> void:
 		# Cancelling first-entry preparation can keep overview=true throughout.
 		# Release its pin explicitly even when the camera mode never changed.
 		streaming.call("clear_pin")
-	if not enabled and (not player.visuals_ready() or not bool(streaming.call("is_position_ready", player.global_position))):
+	if not enabled and (not _all_downloads_ready() or not player.visuals_ready() or not bool(streaming.call("is_position_ready", player.global_position))):
 		preparing_roam = true
 		player.begin_prepare_visuals()
 		streaming.call("pin_position", player.global_position)
@@ -675,6 +686,8 @@ func _continue_training_room() -> void:
 		return
 	var packs: Node = get_node_or_null("/root/WebPacks")
 	if packs != null:
+		if not bool(packs.call("all_resources_ready")):
+			return
 		packs.call("request_resource", TrainingTransition.ROOM_SCENE, 200)
 		if not bool(packs.call("is_resource_ready", TrainingTransition.ROOM_SCENE)):
 			return
@@ -688,6 +701,18 @@ func _continue_training_room() -> void:
 		resume_world(entry_return)
 
 func _update_preparation_status() -> void:
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	var status: Dictionary = packs.call("get_status") as Dictionary if packs != null else {}
+	var complete: bool = bool(status.get("all_ready", true))
+	var startup_message: String = ""
+	var startup_error: String = str(packs.call("startup_error")) if packs != null else ""
+	if bool(status.get("enabled", false)) and not complete:
+		var network_done: bool = int(status.network_received_bytes) >= int(status.total_bytes)
+		startup_message = ("全部資源已下載，正在準備…" if network_done else "遊戲資源下載 %.1f / %.1f MB" % [float(status.network_received_bytes)/1000000.0, float(status.total_bytes)/1000000.0])
+		startup_message += "\n可返回總覽或切換分頁，下載會繼續"
+		hud.call("set_background_download", startup_message if startup_error.is_empty() else startup_error, not startup_error.is_empty())
+	else:
+		hud.call("set_background_download", "")
 	if not preparing_roam and not preparing_room:
 		hud.call("set_preparation", "", false)
 		return
@@ -695,15 +720,15 @@ func _update_preparation_status() -> void:
 	var error: String = player.visuals_error() if preparing_roam else ""
 	if error.is_empty() and preparing_roam:
 		error = str(streaming.call("position_error", player.global_position))
-	var packs: Node = get_node_or_null("/root/WebPacks")
 	if packs != null:
-		if preparing_room:
+		if error.is_empty():
+			error = str(packs.call("startup_error"))
+		if preparing_room and error.is_empty():
 			error = str(packs.call("resource_error", TrainingTransition.ROOM_SCENE))
-		var status: Dictionary = packs.call("get_status") as Dictionary
-		if int(status.expected_bytes) > 0:
-			message += "\n下載 %.1f / %.1f MB" % [float(status.downloaded_bytes) / 1000000.0, float(status.expected_bytes) / 1000000.0]
-			if str(status.state) == "verifying":
-				message = "正在確認下載內容…"
+		if not complete:
+			message = startup_message
+		elif preparing_roam:
+			message = "正在建立角色…" if not player.visuals_ready() else "正在建立目的地細節…"
 	hud.call("set_preparation", error if not error.is_empty() else message, not error.is_empty())
 
 func retry_preparation() -> void:

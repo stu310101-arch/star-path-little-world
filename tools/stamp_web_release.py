@@ -9,6 +9,9 @@ from pathlib import Path
 import re
 import subprocess
 
+from prepare_web_delivery import verify as verify_boot_delivery
+from prepare_web_delivery import verify_background_budget
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -33,7 +36,9 @@ def stamp(folder: Path) -> dict:
         path for subdir in ("scripts", "scenes", "generated/streaming", "data", "tools")
         for path in (ROOT / "game" / subdir).rglob("*")
         if path.is_file() and path.suffix in (".gd", ".tscn", ".scn", ".json")
-    ] + [ROOT / "game/project.godot", ROOT / "game/export_presets.cfg", ROOT / "tools/split_web_packs.py"])
+    ] + [ROOT / "game/project.godot", ROOT / "game/export_presets.cfg", ROOT / "tools/split_web_packs.py",
+         ROOT / "tools/prepare_web_delivery.py", ROOT / "tools/web_boot_delivery.js",
+         ROOT / "tools/web_background_packs.js"])
     source_hash = hashlib.sha256()
     for path in source_paths:
         source_hash.update(path.relative_to(ROOT).as_posix().encode())
@@ -47,8 +52,11 @@ def stamp(folder: Path) -> dict:
     html = html.replace("</head>", marker + "\n\t</head>")
     html_path.write_text(html, encoding="utf-8", newline="\n")
     names = ["index.html", "index.js", "index.wasm", "index.pck"]
+    if (folder / "index.delivery.json").is_file():
+        names.extend(verify_boot_delivery(folder))
     pack_manifest = folder / "index.packs.json"
     if pack_manifest.is_file():
+        verify_background_budget(folder)
         packs = json.loads(pack_manifest.read_text(encoding="utf-8"))
         names.append("index.packs.json")
         for pack in packs["packs"].values():

@@ -11,64 +11,64 @@
       "dependencies": [
         "shared"
       ],
-      "sha256": "b9990e78225097d47c172f2a4503783425e2dd720b8d92d1cc90d389426656f7",
-      "url": "packs/district_admissions-b9990e78225097d4.pck"
+      "sha256": "41393c3779cac4095c84af704b440ec9f3a311bf55f0ae3bf441f36e9670a66b",
+      "url": "packs/district_admissions-41393c3779cac409.pck"
     },
     "district_counseling": {
-      "bytes": 3465044,
+      "bytes": 3465028,
       "dependencies": [
         "shared"
       ],
-      "sha256": "c94cdc8453e08139d2e3f45209ef49a4eaef4926cc11837f90ede351b3d6cce7",
-      "url": "packs/district_counseling-c94cdc8453e08139.pck"
+      "sha256": "4f9b115ddce12bb5eb9d114b93883e47ba166835a8b57d69b1ce42760645fa94",
+      "url": "packs/district_counseling-4f9b115ddce12bb5.pck"
     },
     "district_life": {
       "bytes": 3356052,
       "dependencies": [
         "shared"
       ],
-      "sha256": "b375c982e7a81f3bf9ce10185a3ad2326948bfdca66b7a99b56ebef2345d4936",
-      "url": "packs/district_life-b375c982e7a81f3b.pck"
+      "sha256": "087f10a2781e82066ef3fed9c6e9e1df30752d7ef0afe0a27df9460a6be105c1",
+      "url": "packs/district_life-087f10a2781e8206.pck"
     },
     "district_ocean": {
-      "bytes": 729528,
+      "bytes": 729512,
       "dependencies": [
         "shared"
       ],
-      "sha256": "205618f4a153be51994e9beaa4696751f73dae2775eae656d9a0ab65d41f5ce3",
-      "url": "packs/district_ocean-205618f4a153be51.pck"
+      "sha256": "0179e92a0746f786e5e6ebf033014a9d31e12d5c3e3d643b190d0b5dfed9019d",
+      "url": "packs/district_ocean-0179e92a0746f786.pck"
     },
     "district_recommendations": {
-      "bytes": 2888636,
+      "bytes": 2888620,
       "dependencies": [
         "shared"
       ],
-      "sha256": "dd767596f5068425ab405c59851f72daf81cc77e75238bb40f6ffe8e4adc18ac",
-      "url": "packs/district_recommendations-dd767596f5068425.pck"
+      "sha256": "0d2127f80f38544437f4128082379966748fc5d45b7eeda0e14ca7a3610633e8",
+      "url": "packs/district_recommendations-0d2127f80f385444.pck"
     },
     "district_sakura": {
       "bytes": 4921072,
       "dependencies": [
         "shared"
       ],
-      "sha256": "6315d0720e217884ae2d71457062edbfbc820b10e1aa01791cfb8e12ebb1dc08",
-      "url": "packs/district_sakura-6315d0720e217884.pck"
+      "sha256": "deaf0395ce6baa5cd2c8ee51564685860ed2f3b36b11cba532b3c30392dc8409",
+      "url": "packs/district_sakura-deaf0395ce6baa5c.pck"
     },
     "district_universities": {
       "bytes": 3564404,
       "dependencies": [
         "shared"
       ],
-      "sha256": "83ab9e6fad509274bc05e77c6bba84aa4be22db51801720165a78e311428016e",
-      "url": "packs/district_universities-83ab9e6fad509274.pck"
+      "sha256": "4e0f970db4d24e4fc01e29e627a16d3a00035f71b100ce0cb8c3a0622979f4b0",
+      "url": "packs/district_universities-4e0f970db4d24e4f.pck"
     },
     "district_wordking": {
-      "bytes": 3527084,
+      "bytes": 3527100,
       "dependencies": [
         "shared"
       ],
-      "sha256": "d88484e6cbd7c882841053806b029db95b191ee9b451794a60eb0686f99c7653",
-      "url": "packs/district_wordking-d88484e6cbd7c882.pck"
+      "sha256": "fc7437d12b89ac4e4ed934a865432605928b53a35d6cd3277793d8ff0f454c9d",
+      "url": "packs/district_wordking-fc7437d12b89ac4e.pck"
     },
     "music_admissions": {
       "bytes": 1728528,

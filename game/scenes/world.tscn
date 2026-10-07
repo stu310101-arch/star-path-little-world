@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/world.gd" id="1"]
 [ext_resource type="PackedScene" path="res://generated/streaming/globe_base.scn" id="2_k0juu"]
 [ext_resource type="PackedScene" path="res://generated/streaming/neighborhood_base.scn" id="3_71j4m"]
-[ext_resource type="PackedScene" path="res://generated/stations.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://generated/streaming/stations_base.scn" id="4"]
 
 [sub_resource type="Environment" id="Environment_k0juu"]
 background_mode = 1

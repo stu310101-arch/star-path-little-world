@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "engine_version": "4.7.2",
+  "loader_sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba",
+  "files": {
+    "index.pck": {
+      "url": "index.boot.3b82fbab3c012c77.pck.gz",
+      "bytes": 35604120,
+      "sha256": "fc96b410a113aac873db3afa71cc1fa503c919779bfd9d9d1cbcc7b12ff895a7",
+      "compressed_bytes": 32542325,
+      "compressed_sha256": "3b82fbab3c012c778f07c9c49387def23b9df3d5c73ef1e9ee2e5931268489c5"
+    },
+    "index.wasm": {
+      "url": "index.boot.a8767fcc27ac87dc.wasm.gz",
+      "bytes": 39514754,
+      "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
+      "compressed_bytes": 10114291,
+      "compressed_sha256": "a8767fcc27ac87dc3d13f63f87e7dc36f698bbeb0a1712d0cba0b93b56b66b7e"
+    }
+  }
+}

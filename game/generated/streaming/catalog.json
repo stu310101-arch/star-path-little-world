@@ -4,9 +4,9 @@
 		"chunk_target_nodes": 80,
 		"chunk_target_triangles": 45000,
 		"material_optimization": {
-			"standard_material_reuses": 928,
-			"standard_material_sources": 985,
-			"standard_material_unique": 57,
+			"standard_material_reuses": 933,
+			"standard_material_sources": 1043,
+			"standard_material_unique": 110,
 			"texture_aliases": {
 				"res://assets/kenney/suburban-edited/house-a-red_colormap.png": "res://assets/kenney/suburban-edited/house-e-red_colormap.png",
 				"res://assets/kenney/suburban-edited/house-b-red_colormap.png": "res://assets/kenney/suburban-edited/house-e-red_colormap.png",
@@ -20,10 +20,16 @@
 				"res://assets/scenery/tugboat_colormap.png": "res://assets/scenery/fishing_boat_colormap.png"
 			}
 		},
-		"max_chunk_bytes": 1126216,
+		"max_chunk_bytes": 1126220,
 		"max_chunk_mesh_triangles": 44198,
 		"max_chunk_nodes": 78,
 		"overview_input_triangles": 2118820,
+		"overview_shader_normalization": {
+			"neutral_color_surfaces": 148,
+			"normalized_materials": 94,
+			"normalized_meshes": 192,
+			"skipped_complex_meshes": 0
+		},
 		"overview_triangles": 1009913,
 		"overview_vertices": 893393,
 		"permanent_collision_bodies": 384,
@@ -38,25 +44,25 @@
 			],
 			"chunks": [
 				{
-					"bytes": 808218,
+					"bytes": 808221,
 					"nodes": 45,
 					"path": "res://generated/streaming/counseling_000.scn",
 					"triangles": 44198
 				},
 				{
-					"bytes": 145132,
+					"bytes": 145134,
 					"nodes": 78,
 					"path": "res://generated/streaming/counseling_001.scn",
 					"triangles": 13261
 				},
 				{
-					"bytes": 184563,
+					"bytes": 184556,
 					"nodes": 65,
 					"path": "res://generated/streaming/counseling_002.scn",
 					"triangles": 10290
 				},
 				{
-					"bytes": 623542,
+					"bytes": 623544,
 					"nodes": 23,
 					"path": "res://generated/streaming/counseling_003.scn",
 					"triangles": 27576
@@ -68,7 +74,7 @@
 					"triangles": 22214
 				},
 				{
-					"bytes": 1012399,
+					"bytes": 1012398,
 					"nodes": 10,
 					"path": "res://generated/streaming/counseling_005.scn",
 					"triangles": 29590
@@ -86,25 +92,25 @@
 			],
 			"chunks": [
 				{
-					"bytes": 674149,
+					"bytes": 674146,
 					"nodes": 14,
 					"path": "res://generated/streaming/admissions_000.scn",
 					"triangles": 35418
 				},
 				{
-					"bytes": 286236,
+					"bytes": 286240,
 					"nodes": 77,
 					"path": "res://generated/streaming/admissions_001.scn",
 					"triangles": 22296
 				},
 				{
-					"bytes": 161951,
+					"bytes": 161950,
 					"nodes": 76,
 					"path": "res://generated/streaming/admissions_002.scn",
 					"triangles": 15766
 				},
 				{
-					"bytes": 184236,
+					"bytes": 184237,
 					"nodes": 65,
 					"path": "res://generated/streaming/admissions_003.scn",
 					"triangles": 10290
@@ -122,7 +128,7 @@
 					"triangles": 22214
 				},
 				{
-					"bytes": 1012367,
+					"bytes": 1012368,
 					"nodes": 10,
 					"path": "res://generated/streaming/admissions_006.scn",
 					"triangles": 29590
@@ -140,13 +146,13 @@
 			],
 			"chunks": [
 				{
-					"bytes": 746843,
+					"bytes": 746845,
 					"nodes": 23,
 					"path": "res://generated/streaming/recommendations_000.scn",
 					"triangles": 40568
 				},
 				{
-					"bytes": 333757,
+					"bytes": 333759,
 					"nodes": 75,
 					"path": "res://generated/streaming/recommendations_001.scn",
 					"triangles": 28400
@@ -158,19 +164,19 @@
 					"triangles": 6600
 				},
 				{
-					"bytes": 182525,
+					"bytes": 182528,
 					"nodes": 23,
 					"path": "res://generated/streaming/recommendations_003.scn",
 					"triangles": 6594
 				},
 				{
-					"bytes": 605414,
+					"bytes": 605415,
 					"nodes": 21,
 					"path": "res://generated/streaming/recommendations_004.scn",
 					"triangles": 24928
 				},
 				{
-					"bytes": 1012637,
+					"bytes": 1012617,
 					"nodes": 10,
 					"path": "res://generated/streaming/recommendations_005.scn",
 					"triangles": 29590
@@ -188,37 +194,37 @@
 			],
 			"chunks": [
 				{
-					"bytes": 785898,
+					"bytes": 785904,
 					"nodes": 27,
 					"path": "res://generated/streaming/universities_000.scn",
 					"triangles": 43744
 				},
 				{
-					"bytes": 276752,
+					"bytes": 276747,
 					"nodes": 77,
 					"path": "res://generated/streaming/universities_001.scn",
 					"triangles": 23753
 				},
 				{
-					"bytes": 6462,
+					"bytes": 6458,
 					"nodes": 64,
 					"path": "res://generated/streaming/universities_002.scn",
 					"triangles": 5544
 				},
 				{
-					"bytes": 183410,
+					"bytes": 183412,
 					"nodes": 23,
 					"path": "res://generated/streaming/universities_003.scn",
 					"triangles": 6594
 				},
 				{
-					"bytes": 653945,
+					"bytes": 653946,
 					"nodes": 29,
 					"path": "res://generated/streaming/universities_004.scn",
 					"triangles": 30758
 				},
 				{
-					"bytes": 644818,
+					"bytes": 644819,
 					"nodes": 3,
 					"path": "res://generated/streaming/universities_005.scn",
 					"triangles": 22214
@@ -242,13 +248,13 @@
 			],
 			"chunks": [
 				{
-					"bytes": 727898,
+					"bytes": 727903,
 					"nodes": 77,
 					"path": "res://generated/streaming/life_000.scn",
 					"triangles": 43522
 				},
 				{
-					"bytes": 61898,
+					"bytes": 61899,
 					"nodes": 78,
 					"path": "res://generated/streaming/life_001.scn",
 					"triangles": 8954
@@ -260,13 +266,13 @@
 					"triangles": 10290
 				},
 				{
-					"bytes": 727601,
+					"bytes": 727605,
 					"nodes": 23,
 					"path": "res://generated/streaming/life_003.scn",
 					"triangles": 33384
 				},
 				{
-					"bytes": 691562,
+					"bytes": 691561,
 					"nodes": 3,
 					"path": "res://generated/streaming/life_004.scn",
 					"triangles": 22214
@@ -290,13 +296,13 @@
 			],
 			"chunks": [
 				{
-					"bytes": 767917,
+					"bytes": 767922,
 					"nodes": 60,
 					"path": "res://generated/streaming/wordking_000.scn",
 					"triangles": 43546
 				},
 				{
-					"bytes": 111769,
+					"bytes": 111770,
 					"nodes": 78,
 					"path": "res://generated/streaming/wordking_001.scn",
 					"triangles": 11978
@@ -308,7 +314,7 @@
 					"triangles": 8706
 				},
 				{
-					"bytes": 759575,
+					"bytes": 759579,
 					"nodes": 29,
 					"path": "res://generated/streaming/wordking_003.scn",
 					"triangles": 37174
@@ -338,31 +344,31 @@
 			],
 			"chunks": [
 				{
-					"bytes": 1126216,
+					"bytes": 1126220,
 					"nodes": 10,
 					"path": "res://generated/streaming/sakura_000.scn",
 					"triangles": 43944
 				},
 				{
-					"bytes": 1107272,
+					"bytes": 1107273,
 					"nodes": 9,
 					"path": "res://generated/streaming/sakura_001.scn",
 					"triangles": 37308
 				},
 				{
-					"bytes": 1107274,
+					"bytes": 1107275,
 					"nodes": 9,
 					"path": "res://generated/streaming/sakura_002.scn",
 					"triangles": 37308
 				},
 				{
-					"bytes": 1107274,
+					"bytes": 1107278,
 					"nodes": 9,
 					"path": "res://generated/streaming/sakura_003.scn",
 					"triangles": 37308
 				},
 				{
-					"bytes": 472500,
+					"bytes": 472503,
 					"nodes": 59,
 					"path": "res://generated/streaming/sakura_004.scn",
 					"triangles": 22140
@@ -380,7 +386,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 49311,
+					"bytes": 49306,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_00_000.scn",
 					"triangles": 1750
@@ -398,7 +404,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17803,
+					"bytes": 17804,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_01_000.scn",
 					"triangles": 544
@@ -416,7 +422,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17750,
+					"bytes": 17749,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_02_000.scn",
 					"triangles": 502
@@ -434,7 +440,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17828,
+					"bytes": 17825,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_03_000.scn",
 					"triangles": 544
@@ -452,7 +458,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17758,
+					"bytes": 17752,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_04_000.scn",
 					"triangles": 502
@@ -470,7 +476,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 1725,
+					"bytes": 1727,
 					"nodes": 2,
 					"path": "res://generated/streaming/ocean_05_000.scn",
 					"triangles": 192
@@ -488,7 +494,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 18602,
+					"bytes": 18606,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_06_000.scn",
 					"triangles": 574
@@ -506,7 +512,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17818,
+					"bytes": 17817,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_07_000.scn",
 					"triangles": 544
@@ -524,7 +530,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17756,
+					"bytes": 17759,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_08_000.scn",
 					"triangles": 502
@@ -542,7 +548,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17828,
+					"bytes": 17824,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_09_000.scn",
 					"triangles": 544
@@ -560,7 +566,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17756,
+					"bytes": 17752,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_10_000.scn",
 					"triangles": 502
@@ -578,7 +584,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 1732,
+					"bytes": 1736,
 					"nodes": 2,
 					"path": "res://generated/streaming/ocean_11_000.scn",
 					"triangles": 192
@@ -596,7 +602,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 13967,
+					"bytes": 13970,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_12_000.scn",
 					"triangles": 471
@@ -632,7 +638,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17757,
+					"bytes": 17760,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_14_000.scn",
 					"triangles": 502
@@ -650,7 +656,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17826,
+					"bytes": 17824,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_15_000.scn",
 					"triangles": 544
@@ -668,7 +674,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17755,
+					"bytes": 17753,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_16_000.scn",
 					"triangles": 502
@@ -686,7 +692,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 1741,
+					"bytes": 1737,
 					"nodes": 2,
 					"path": "res://generated/streaming/ocean_17_000.scn",
 					"triangles": 192
@@ -704,7 +710,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 49320,
+					"bytes": 49322,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_18_000.scn",
 					"triangles": 1750
@@ -722,7 +728,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17816,
+					"bytes": 17821,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_19_000.scn",
 					"triangles": 544
@@ -740,7 +746,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17757,
+					"bytes": 17759,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_20_000.scn",
 					"triangles": 502
@@ -776,7 +782,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17751,
+					"bytes": 17757,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_22_000.scn",
 					"triangles": 502
@@ -830,7 +836,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17819,
+					"bytes": 17816,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_25_000.scn",
 					"triangles": 544
@@ -866,7 +872,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17827,
+					"bytes": 17824,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_27_000.scn",
 					"triangles": 544
@@ -902,7 +908,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 1738,
+					"bytes": 1737,
 					"nodes": 2,
 					"path": "res://generated/streaming/ocean_29_000.scn",
 					"triangles": 192
@@ -920,7 +926,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 13974,
+					"bytes": 13972,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_30_000.scn",
 					"triangles": 471
@@ -938,7 +944,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17813,
+					"bytes": 17811,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_31_000.scn",
 					"triangles": 544
@@ -956,7 +962,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17757,
+					"bytes": 17762,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_32_000.scn",
 					"triangles": 502
@@ -974,7 +980,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17828,
+					"bytes": 17826,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_33_000.scn",
 					"triangles": 544
@@ -992,7 +998,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17752,
+					"bytes": 17756,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_34_000.scn",
 					"triangles": 502
@@ -1010,7 +1016,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 1734,
+					"bytes": 1735,
 					"nodes": 2,
 					"path": "res://generated/streaming/ocean_35_000.scn",
 					"triangles": 192
@@ -1028,7 +1034,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 49324,
+					"bytes": 49319,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_36_000.scn",
 					"triangles": 1750
@@ -1046,7 +1052,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17818,
+					"bytes": 17816,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_37_000.scn",
 					"triangles": 544
@@ -1064,7 +1070,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17756,
+					"bytes": 17758,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_38_000.scn",
 					"triangles": 502
@@ -1082,7 +1088,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17827,
+					"bytes": 17828,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_39_000.scn",
 					"triangles": 544
@@ -1100,7 +1106,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 17752,
+					"bytes": 17758,
 					"nodes": 3,
 					"path": "res://generated/streaming/ocean_40_000.scn",
 					"triangles": 502
@@ -1136,7 +1142,7 @@
 			],
 			"chunks": [
 				{
-					"bytes": 2519,
+					"bytes": 2518,
 					"nodes": 2,
 					"path": "res://generated/streaming/ocean_42_000.scn",
 					"triangles": 8

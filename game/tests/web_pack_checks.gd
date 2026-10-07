@@ -2,6 +2,30 @@ extends SceneTree
 
 const Loader = preload("res://scripts/web_packs.gd")
 
+# Exercise the same FileAccess allocation on native without spoofing Web.
+# The framing cases below must still reject short/oversize/corrupted bodies
+# even though the temporary file already has the expected final length.
+class PreallocatingLoader extends Loader:
+	var allocations: Array[Dictionary] = []
+
+	func _open_download_file() -> bool:
+		if not super._open_download_file():
+			return false
+		if not _preallocate_download_file():
+			return false
+		allocations.append({"length": _download_file.get_length(), "expected": int(_packs[_current].bytes), "position": _download_file.get_position(), "received": _downloaded_bytes, "hashed": _hashed_bytes})
+		return true
+
+# Native cannot construct the browser's JavaScriptObject. Trace recursive
+# requests to verify that a mounting pack returns before dependency/network
+# reprioritization; the headed browser suite checks actual request counts.
+class RequestTracingLoader extends PreallocatingLoader:
+	var requests: Array[String] = []
+
+	func _request_pack(id: String, priority: int) -> void:
+		requests.append(id)
+		super._request_pack(id, priority)
+
 # Exercise actual HTTPClient wire framing, especially EOF without Content-Length.
 # Web uses that mode even when Fetch receives a Content-Length response header.
 class FramingServer extends Node:
@@ -106,10 +130,11 @@ func run() -> void:
 	corrupt.seek(128)
 	corrupt.store_8(corrupt.get_8() ^ 255)
 	corrupt.close()
-	var loader: Node = Loader.new()
+	var loader: PreallocatingLoader = PreallocatingLoader.new()
 	root.add_child(loader)
 	loader.call("configure", manifest, "http://127.0.0.1:8947/build/pack-fixtures/", fixture_dir.path_join("downloads"))
 	check(not bool(loader.call("is_resource_ready", b)), "deferred resource starts unavailable")
+	check(not bool(loader.call("all_resources_ready")), "complete game remains gated before startup download")
 	check(bool(loader.call("is_resource_ready", "res://boot.txt")), "boot path is ready")
 	loader.call("request_resource", b, 10)
 	await wait_pack(loader, b)
@@ -129,12 +154,70 @@ func run() -> void:
 	await wait_pack(loader, c)
 	check(FileAccess.file_exists(c), "retry mounts validated pack")
 	check(int((loader.call("get_status") as Dictionary).ready_packs) == 3, "three packs mounted exactly once")
-	check(int((loader.call("get_status") as Dictionary).max_download_frame_bytes) <= 524288, "download writes stay within 512 KiB per frame")
+	check(int((loader.call("get_status") as Dictionary).max_download_frame_bytes) <= 4194304, "download writes remain bounded to 4 MiB per frame")
+	loader.call("start_all_downloads")
+	check(bool(loader.call("all_resources_ready")), "startup readiness requires every pack mounted")
+	var timings: Dictionary = (loader.call("get_status") as Dictionary).pack_timings
+	for id: String in timings:
+		check(int(timings[id].verified_ms) - int(timings[id].received_ms) < 100, "incremental SHA needs no second full-file frame sweep for " + id)
+	check_preallocation(loader)
 	loader.queue_free()
 	await process_frame
+	await check_mounting_retry()
 	await check_http_framing()
 	print("WEB_PACK_CHECKS ", checks - failures.size(), "/", checks, " failures=", failures)
 	quit(0 if failures.is_empty() else 1)
+
+func check_mounting_retry() -> void:
+	var base: String = "res://pack_fixture/retry_base.txt"
+	var target: String = "res://pack_fixture/retry_target.txt"
+	var manifest: Dictionary = {"version": 1, "resources": {base: "retry_base", target: "retry_target"}, "packs": {}}
+	manifest.packs.retry_base = make_pack("retry_base", base, 2000)
+	manifest.packs.retry_target = make_pack("retry_target", target, 2000)
+	manifest.packs.retry_target.dependencies = ["retry_base"]
+	var total: int = int(manifest.packs.retry_base.bytes) + int(manifest.packs.retry_target.bytes)
+	var loader: RequestTracingLoader = RequestTracingLoader.new()
+	root.add_child(loader)
+	# Drive the real download state machine manually so the fixture can stop
+	# exactly after SHA verification, before the next-frame mount attempt.
+	loader.set_process(false)
+	loader.configure(manifest, "http://127.0.0.1:8947/build/pack-fixtures/", fixture_dir.path_join("mount-retry-downloads"))
+	loader.start_all_downloads()
+	for attempt: int in range(2):
+		var deadline: int = Time.get_ticks_msec() + 15000
+		while loader._states.get("retry_target", "") != "mounting" and Time.get_ticks_msec() < deadline:
+			loader._process(0.0)
+			await process_frame
+		if loader._states.get("retry_target", "") != "mounting":
+			check(false, "HTTP retry reaches verified mounting boundary")
+			loader.queue_free()
+			await process_frame
+			return
+		check(int(loader.get_status().received_bytes) == total, "verified bytes count each pack once before mount attempt %d" % attempt)
+		check(not loader.all_resources_ready(), "verified but unmounted content keeps play gated")
+		loader.requests.clear()
+		loader.request_resource(target, 1000 + attempt)
+		check(loader.requests == ["retry_target"] and loader._queue.is_empty(), "higher priority cannot resubmit a mounting pack or its dependencies")
+		# Inject the same failure transition used by load_resource_pack(false),
+		# with real verified bytes. The next attempt uses real HTTP and mounting.
+		loader._fail("Injected mount failure")
+		check(int(loader.get_status().received_bytes) == int(manifest.packs.retry_base.bytes), "mount failure removes only its discarded verified bytes")
+		check(not loader.all_resources_ready() and not loader.resource_error(target).is_empty(), "mount failure remains retryable and keeps play gated")
+		loader.retry_failed()
+		check(loader.resource_error(target).is_empty(), "retry clears the mount failure")
+	loader.set_process(true)
+	await wait_pack(loader, target)
+	var status: Dictionary = loader.get_status()
+	check(loader.all_resources_ready() and int(status.ready_packs) == 2, "retried content mounts and releases the startup gate")
+	check(int(status.received_bytes) == total and int(status.network_received_bytes) == total and int(status.mounted_bytes) == total, "two mount retries never inflate download or mounted byte totals")
+	check_preallocation(loader)
+	loader.queue_free()
+	await process_frame
+
+func check_preallocation(loader: PreallocatingLoader) -> void:
+	check(not loader.allocations.is_empty(), "fixture exercised download preallocation")
+	for allocation: Dictionary in loader.allocations:
+		check(int(allocation.length) == int(allocation.expected) and int(allocation.position) == 0 and int(allocation.received) == 0 and int(allocation.hashed) == 0, "preallocation reserves exact length at cursor zero without claiming received/hashed bytes")
 
 func check_http_framing() -> void:
 	var server: FramingServer = FramingServer.new()
@@ -156,7 +239,7 @@ func check_http_framing() -> void:
 		elif name == "oversize":
 			body.append_array("unexpected bytes".to_utf8_buffer())
 		server.routes["/" + name + ".pck"] = {"body": body, "chunked": name == "chunked", "code": 404 if name == "missing" else 200}
-	var loader: Node = Loader.new()
+	var loader: PreallocatingLoader = PreallocatingLoader.new()
 	root.add_child(loader)
 	var directory: String = fixture_dir.path_join("framing-downloads")
 	loader.call("configure", manifest, "http://127.0.0.1:18948/", directory)
@@ -179,6 +262,7 @@ func check_http_framing() -> void:
 	for name: String in ["short", "oversize", "missing"]:
 		await wait_pack(loader, "res://pack_fixture/" + name + ".txt")
 	check(int((loader.call("get_status") as Dictionary).ready_packs) == 5, "all framing and failed-response retries mount exactly once")
+	check_preallocation(loader)
 	loader.queue_free()
 	server.queue_free()
 	await process_frame

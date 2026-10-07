@@ -91,7 +91,7 @@ body {
 }
 		</style>
 		
-	<meta name="little-world-build" content="packs-c674b2a47ed31edd">
+	<meta name="little-world-build" content="packs-d07f707a87666ad1">
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -109,8 +109,24 @@ body {
 		</div>
 
 		<script src="index.js"></script>
+		<script src="index.delivery.js"></script>
+		<script src="index.background.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":35404024,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":35604120,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+// LITTLE_WORLD_BOOT_DELIVERY_BEGIN
+const LITTLE_WORLD_BOOT_DELIVERY = {"version":1,"engine_version":"4.7.2","loader_sha256":"33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba","files":{"index.pck":{"url":"index.boot.3b82fbab3c012c77.pck.gz","bytes":35604120,"sha256":"fc96b410a113aac873db3afa71cc1fa503c919779bfd9d9d1cbcc7b12ff895a7","compressed_bytes":32542325,"compressed_sha256":"3b82fbab3c012c778f07c9c49387def23b9df3d5c73ef1e9ee2e5931268489c5"},"index.wasm":{"url":"index.boot.a8767fcc27ac87dc.wasm.gz","bytes":39514754,"sha256":"fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0","compressed_bytes":10114291,"compressed_sha256":"a8767fcc27ac87dc3d13f63f87e7dc36f698bbeb0a1712d0cba0b93b56b66b7e"}}};
+window.LittleWorldBootDelivery.install(GODOT_CONFIG, LITTLE_WORLD_BOOT_DELIVERY);
+const LITTLE_WORLD_BOOT_STATUS = window.LittleWorldBootDelivery.attachStatusUI();
+const LITTLE_WORLD_BACKGROUND_PACKS = {"version":1,"packs":{"avatar":{"bytes":50904340,"dependencies":[],"sha256":"dbf4017c84a82ebdb9988189b61d0a6fa00e5e53c70a95e4dfc9f3044f2185ac","url":"packs/avatar-dbf4017c84a82ebd.pck"},"district_admissions":{"bytes":3614436,"dependencies":["shared"],"sha256":"41393c3779cac4095c84af704b440ec9f3a311bf55f0ae3bf441f36e9670a66b","url":"packs/district_admissions-41393c3779cac409.pck"},"district_counseling":{"bytes":3465028,"dependencies":["shared"],"sha256":"4f9b115ddce12bb5eb9d114b93883e47ba166835a8b57d69b1ce42760645fa94","url":"packs/district_counseling-4f9b115ddce12bb5.pck"},"district_life":{"bytes":3356052,"dependencies":["shared"],"sha256":"087f10a2781e82066ef3fed9c6e9e1df30752d7ef0afe0a27df9460a6be105c1","url":"packs/district_life-087f10a2781e8206.pck"},"district_ocean":{"bytes":729512,"dependencies":["shared"],"sha256":"0179e92a0746f786e5e6ebf033014a9d31e12d5c3e3d643b190d0b5dfed9019d","url":"packs/district_ocean-0179e92a0746f786.pck"},"district_recommendations":{"bytes":2888620,"dependencies":["shared"],"sha256":"0d2127f80f38544437f4128082379966748fc5d45b7eeda0e14ca7a3610633e8","url":"packs/district_recommendations-0d2127f80f385444.pck"},"district_sakura":{"bytes":4921072,"dependencies":["shared"],"sha256":"deaf0395ce6baa5cd2c8ee51564685860ed2f3b36b11cba532b3c30392dc8409","url":"packs/district_sakura-deaf0395ce6baa5c.pck"},"district_universities":{"bytes":3564404,"dependencies":["shared"],"sha256":"4e0f970db4d24e4fc01e29e627a16d3a00035f71b100ce0cb8c3a0622979f4b0","url":"packs/district_universities-4e0f970db4d24e4f.pck"},"district_wordking":{"bytes":3527100,"dependencies":["shared"],"sha256":"fc7437d12b89ac4e4ed934a865432605928b53a35d6cd3277793d8ff0f454c9d","url":"packs/district_wordking-fc7437d12b89ac4e.pck"},"music_admissions":{"bytes":1728528,"dependencies":[],"sha256":"2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0","url":"packs/music_admissions-2ce1c35030bcc9fb.pck"},"music_counseling":{"bytes":1443824,"dependencies":[],"sha256":"f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4","url":"packs/music_counseling-f3b97506778458ba.pck"},"music_recommendations":{"bytes":2195960,"dependencies":[],"sha256":"66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8","url":"packs/music_recommendations-66382088fcc4b843.pck"},"music_wordking":{"bytes":2315480,"dependencies":[],"sha256":"a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995","url":"packs/music_wordking-a45c153d522c439d.pck"},"music_world":{"bytes":1351376,"dependencies":[],"sha256":"e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf","url":"packs/music_world-e1a7f96b4f7f8400.pck"},"shared":{"bytes":176264,"dependencies":[],"sha256":"4b7143129f228685e51f78030a171343c09b5aaaa3b39b0ee3631daf5d7bbe81","url":"packs/shared-4b7143129f228685.pck"},"training_room":{"bytes":15104300,"dependencies":["avatar"],"sha256":"00e45f0b5f24b9037f1b64cac3ecd244e845063525b8211cabeaf9cc503752aa","url":"packs/training_room-00e45f0b5f24b903.pck"}}};
+function startLittleWorldBackgroundDownloads() {
+  const transport = window.LittleWorldBackgroundPacks;
+  transport.configure(new URL('.', location.href).href);
+  for (const [id, pack] of Object.entries(LITTLE_WORLD_BACKGROUND_PACKS.packs)) {
+    transport.enqueue(id, pack.url, pack.bytes, id === 'avatar' ? 20 : 0);
+  }
+}
+// LITTLE_WORLD_BOOT_DELIVERY_END
+
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -198,8 +214,10 @@ const engine = new Engine(GODOT_CONFIG);
 		}
 	} else {
 		setStatusMode('progress');
+		startLittleWorldBackgroundDownloads();
 		engine.startGame({
 			'onProgress': function (current, total) {
+				if (!LITTLE_WORLD_BOOT_STATUS.engineProgress(current, total)) return;
 				if (current > 0 && total > 0) {
 					statusProgress.value = current;
 					statusProgress.max = total;

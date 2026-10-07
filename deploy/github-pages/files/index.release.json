@@ -1,13 +1,13 @@
 {
-  "build_id": "packs-c674b2a47ed31edd",
-  "created_utc": "2026-10-01T09:00:29.028562+00:00",
-  "source_base_commit": "42883300eda4352200268736f18437560a30ca5f",
-  "source_sha256": "c674b2a47ed31edd5ee75f4c86fcb389ffae87065f618b4cf8322a997dca1658",
+  "build_id": "packs-d07f707a87666ad1",
+  "created_utc": "2026-10-07T09:47:56.332473+00:00",
+  "source_base_commit": "b5a2d1e65d8d924a3543e41b21d92cf4026f8c1f",
+  "source_sha256": "d07f707a87666ad1dff98c5d3dc68e0e68710ab16e603330fe64dfa35abaf2f4",
   "export": "Web release; Compatibility; single-threaded",
   "files": {
     "index.html": {
-      "bytes": 5376,
-      "sha256": "4f661dfd4f18dd4052283334a0ad2facc6bfef865086eaf17237fafcadc4e4c0"
+      "bytes": 9881,
+      "sha256": "989bbcbfd9ee0a5b4176157850e9e67b865ea332619d3f586ec1a1d645af1bab"
     },
     "index.js": {
       "bytes": 279815,
@@ -18,48 +18,68 @@
       "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
     },
     "index.pck": {
-      "bytes": 35404024,
-      "sha256": "32520e066b344b8e2b29b245423ebbc7b6a9888b75ee8a4124542d2102c277d1"
+      "bytes": 35604120,
+      "sha256": "fc96b410a113aac873db3afa71cc1fa503c919779bfd9d9d1cbcc7b12ff895a7"
+    },
+    "index.delivery.json": {
+      "bytes": 786,
+      "sha256": "1b6d9f561c7f47e1e7fd1bcbc84fec2516c0c8ea5e5ca98cc15bdd31ff0eafa6"
+    },
+    "index.delivery.js": {
+      "bytes": 10198,
+      "sha256": "ae3ff7fea9f628b41f8d8ce1925b4c4ebd1e4b4eef1797ee39c11b2f110722a2"
+    },
+    "index.background.js": {
+      "bytes": 5438,
+      "sha256": "d8b2ab7bee5ea8ccd215d804e6cced86cf571f2f8f6e104db383bdc39eb55f79"
+    },
+    "index.boot.3b82fbab3c012c77.pck.gz": {
+      "bytes": 32542325,
+      "sha256": "3b82fbab3c012c778f07c9c49387def23b9df3d5c73ef1e9ee2e5931268489c5"
+    },
+    "index.boot.a8767fcc27ac87dc.wasm.gz": {
+      "bytes": 10114291,
+      "sha256": "a8767fcc27ac87dc3d13f63f87e7dc36f698bbeb0a1712d0cba0b93b56b66b7e"
     },
     "index.packs.json": {
       "bytes": 11086,
-      "sha256": "d8671fc0bec253fcbdde1c5ecf43a2c3d41e34b184913de456e5db73c61a3d31"
+      "sha256": "4eb5d50143c23efca2738409c2295a0cde42e3082e2234b0b9baa7b4640de2f5"
     },
     "packs/avatar-dbf4017c84a82ebd.pck": {
       "bytes": 50904340,
       "sha256": "dbf4017c84a82ebdb9988189b61d0a6fa00e5e53c70a95e4dfc9f3044f2185ac"
     },
-    "packs/district_admissions-b9990e78225097d4.pck": {
+    "packs/district_admissions-41393c3779cac409.pck": {
       "bytes": 3614436,
-      "sha256": "b9990e78225097d47c172f2a4503783425e2dd720b8d92d1cc90d389426656f7"
+      "sha256": "41393c3779cac4095c84af704b440ec9f3a311bf55f0ae3bf441f36e9670a66b"
     },
-    "packs/district_counseling-c94cdc8453e08139.pck": {
-      "bytes": 3465044,
-      "sha256": "c94cdc8453e08139d2e3f45209ef49a4eaef4926cc11837f90ede351b3d6cce7"
+    "packs/district_counseling-4f9b115ddce12bb5.pck": {
+      "bytes": 3465028,
+      "sha256": "4f9b115ddce12bb5eb9d114b93883e47ba166835a8b57d69b1ce42760645fa94"
     },
-    "packs/district_life-b375c982e7a81f3b.pck": {
+    "packs/district_life-087f10a2781e8206.pck": {
       "bytes": 3356052,
-      "sha256": "b375c982e7a81f3bf9ce10185a3ad2326948bfdca66b7a99b56ebef2345d4936"
+      "sha256": "087f10a2781e82066ef3fed9c6e9e1df30752d7ef0afe0a27df9460a6be105c1"
     },
-    "packs/district_ocean-205618f4a153be51.pck": {
-      "bytes": 729528,
-      "sha256": "205618f4a153be51994e9beaa4696751f73dae2775eae656d9a0ab65d41f5ce3"
+    "packs/district_ocean-0179e92a0746f786.pck": {
+      "bytes": 729512,
+      "sha256": "0179e92a0746f786e5e6ebf033014a9d31e12d5c3e3d643b190d0b5dfed9019d"
     },
-    "packs/district_recommendations-dd767596f5068425.pck": {
-      "bytes": 2888636,
-      "sha256": "dd767596f5068425ab405c59851f72daf81cc77e75238bb40f6ffe8e4adc18ac"
+    "packs/district_recommendations-0d2127f80f385444.pck": {
+      "bytes": 2888620,
+      "sha256": "0d2127f80f38544437f4128082379966748fc5d45b7eeda0e14ca7a3610633e8"
     },
-    "packs/district_sakura-6315d0720e217884.pck": {
+    "packs/district_sakura-deaf0395ce6baa5c.pck": {
       "bytes": 4921072,
-      "sha256": "6315d0720e217884ae2d71457062edbfbc820b10e1aa01791cfb8e12ebb1dc08"
+      "sha256": "deaf0395ce6baa5cd2c8ee51564685860ed2f3b36b11cba532b3c30392dc8409"
     },
-    "packs/district_universities-83ab9e6fad509274.pck": {
+    "packs/district_universities-4e0f970db4d24e4f.pck": {
       "bytes": 3564404,
-      "sha256": "83ab9e6fad509274bc05e77c6bba84aa4be22db51801720165a78e311428016e"
+      "sha256": "4e0f970db4d24e4fc01e29e627a16d3a00035f71b100ce0cb8c3a0622979f4b0"
     },
-    "packs/district_wordking-d88484e6cbd7c882.pck": {
-      "bytes": 3527084,
-      "sha256": "d88484e6cbd7c882841053806b029db95b191ee9b451794a60eb0686f99c7653"
+    "packs/district_wordking-fc7437d12b89ac4e.pck": {
+      "bytes": 3527100,
+      "sha256": "fc7437d12b89ac4e4ed934a865432605928b53a35d6cd3277793d8ff0f454c9d"
     },
     "packs/music_admissions-2ce1c35030bcc9fb.pck": {
       "bytes": 1728528,

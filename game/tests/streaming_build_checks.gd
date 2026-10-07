@@ -17,6 +17,7 @@ func inspect_dependencies(path: String) -> void:
 	for dependency: String in ResourceLoader.get_dependencies(path):
 		var parts: PackedStringArray = dependency.split("::")
 		var resolved: String = parts[-1]
+		check(not ".building_" in resolved, "Generated dependency leaked a temporary publication path: " + resolved)
 		check(not resolved in ["res://generated/globe.tscn", "res://generated/neighborhood.tscn"] and not resolved.begins_with("res://generated/districts/"), "Eager canonical scene dependency: " + resolved)
 		check(not resolved.ends_with(".glb"), "Full imported scene dependency: " + resolved)
 		if resolved.begins_with("res://") and ResourceLoader.exists(resolved):
@@ -30,6 +31,7 @@ func run() -> void:
 	check(int(catalog.build.overview_triangles) < int(catalog.build.overview_input_triangles), "Overview geometry was not reduced")
 	check(int(catalog.build.overview_vertices) <= int(catalog.build.overview_triangles) * 3, "Overview retained unreferenced high-detail vertices")
 	check(int(catalog.build.protected_surface_meshes) >= 194, "Walkable terrain and shore surfaces must retain their curved source geometry")
+	check(int(catalog.build.overview_shader_normalization.normalized_meshes) > 0, "Overview shader variants were not normalized")
 	var district_count: int = 0
 	var chunk_count: int = 0
 	for row: Dictionary in catalog.districts:
@@ -44,10 +46,15 @@ func run() -> void:
 	check(district_count == 6, "All six districts must be preserved")
 	check(chunk_count == int(catalog.build.chunk_count), "Chunk count does not match catalog")
 	var baked_triangles: int = 0
-	for base: String in ["globe_base.scn", "neighborhood_base.scn"]:
+	for base: String in ["globe_base.scn", "neighborhood_base.scn", "stations_base.scn"]:
 		var path: String = "res://generated/streaming/" + base
 		inspect_dependencies(path)
 		var scene: Node3D = (load(path) as PackedScene).instantiate() as Node3D
+		if base == "stations_base.scn":
+			check(scene.get_child_count() == 6, "Startup stations retain all six portals")
+			for station: Node in scene.get_children():
+				check(station.has_meta("station_id") and station.has_meta("label"), "Station interaction metadata retained")
+				check(station.has_node("Platform") and station.has_node("LuminousRing") and station.has_node("Beacon") and station.has_node("StationLabel"), "Station visuals and readable label retained")
 		for node: Node in scene.find_children("*", "", true, false):
 			check(not node.has_meta("streaming_district"), "Base instantiated a detail chunk")
 			check(node.get_script() == null, "Overview has a running script: " + str(node.name))

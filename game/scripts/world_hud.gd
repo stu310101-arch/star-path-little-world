@@ -34,6 +34,8 @@ var _settings_previous_controls: bool = false
 var preparation_overlay: CenterContainer
 var preparation_label: Label
 var preparation_retry: Button
+var background_download_label: Label
+var background_download_retry: Button
 var font: Font = preload("res://assets/fonts/NotoSansTC.ttf")
 var ink: Color = Color("203e46")
 
@@ -159,6 +161,18 @@ func _ready() -> void:
 	top.add_child(badge)
 	mode_label = label("●   世界總覽", 16, Color("e6eada"))
 	badge.add_child(mode_label)
+	background_download_label = label("", 14, Color("f8eed7"))
+	background_download_label.name = "BackgroundDownloadStatus"
+	background_download_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	background_download_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	background_download_label.visible = false
+	column.add_child(background_download_label)
+	background_download_retry = button("重試背景下載")
+	background_download_retry.name = "BackgroundDownloadRetry"
+	background_download_retry.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	background_download_retry.pressed.connect(func() -> void: world.call("retry_preparation"))
+	background_download_retry.visible = false
+	column.add_child(background_download_retry)
 	var body: HBoxContainer = HBoxContainer.new()
 	body.name = "Body"
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -303,6 +317,11 @@ func _ready() -> void:
 	close.pressed.connect(func() -> void: world.call("resume_world", {}))
 	content.add_child(close)
 	_build_graphics_settings(screen)
+
+func set_background_download(message: String, failed: bool = false) -> void:
+	background_download_label.text = message
+	background_download_label.visible = not message.is_empty()
+	background_download_retry.visible = failed
 
 func set_preparation(message: String, failed: bool) -> void:
 	if preparation_overlay == null:
