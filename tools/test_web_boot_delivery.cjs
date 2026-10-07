@@ -78,6 +78,22 @@ test('unsupported decompressor or WebCrypto leaves original fetch untouched', ()
   }
 });
 
+test('validated body uses a stream without a second BufferSource Response copy', async () => {
+  const f=fixture(); let handedOff=0;
+  f.env.Response=class extends Response {
+    constructor(body, init) {
+      assert.ok(body instanceof ReadableStream);
+      assert.equal(f.env.planetBootDelivery.files['index.pck'].phase,'ready');
+      handedOff++; super(body,init);
+    }
+  };
+  const adapter=install(f.config,f.manifest,f.env);
+  const response=await f.env.fetch('index.pck');
+  assert.deepEqual(Buffer.from(await response.arrayBuffer()),f.originals['index.pck']);
+  assert.equal(handedOff,1);
+  adapter.restore();
+});
+
 for(const problem of ['http404','networkError','bodyInterrupted','truncated','corrupt','wrongContent','oversized']) {
   test(problem+' falls back to the exact original request', async () => {
     const f=fixture({[problem]:true});

@@ -23,6 +23,8 @@ class TestWorld:
 	var overview: bool = false
 	var paused: bool = false
 	var entering: bool = false
+	var preparing_roam: bool = false
+	var preparing_room: bool = false
 	var dragging_view: bool = true
 	func finish_view_drag() -> void:
 		dragging_view = false
@@ -48,7 +50,21 @@ func run() -> void:
 	var physics_ticks: int = Engine.physics_ticks_per_second
 	var test_path: String = "user://graphics_settings_test_%d.cfg" % Time.get_ticks_usec()
 	var settings: Node = new_settings(test_path)
-	check("Missing config preserves existing defaults (2x MSAA, 60 FPS)", root.msaa_3d == Viewport.MSAA_2X and Engine.max_fps == 60)
+	check("Fresh settings use low profile, no MSAA, 30 FPS", settings.call("is_low_quality") and root.msaa_3d == Viewport.MSAA_DISABLED and Engine.max_fps == 30)
+	check("720p scale caps only large 3D buffers", is_equal_approx(SettingsScript.low_render_scale(Vector2(1920, 1080)), 2.0 / 3.0) and SettingsScript.low_render_scale(Vector2(640, 360)) == 1.0)
+	# Keep the production canvas_items stretch enabled: the former fixture only
+	# used an unstretched root and missed the double-applied texture stretch.
+	root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+	root.content_scale_size = Vector2i(1440, 900)
+	root.size = Vector2i(1280, 800)
+	for frame: int in range(4):
+		await process_frame
+	for repeat: int in range(3):
+		settings.call("apply_settings")
+	var physical_state: Dictionary = settings.call("get_state")
+	check("Stretched 1280x800 canvas keeps full UI and renders 3D at 1152x720", physical_state.ui_pixels == [1280, 800] and physical_state.internal_3d_pixels == [1152, 720] and is_equal_approx(root.scaling_3d_scale, .9), physical_state)
+	settings.call("set_quality_profile", "standard")
+	check("Standard profile restores original 3D scale and AA defaults", root.scaling_3d_scale == 1.0 and root.msaa_3d == Viewport.MSAA_2X and Engine.max_fps == 60)
 	for limit: int in [30, 60, 90]:
 		settings.call("set_frame_limit", limit)
 		check("Frame limit applies %d without changing physics" % limit, Engine.max_fps == limit and Engine.physics_ticks_per_second == physics_ticks)
@@ -64,17 +80,18 @@ func run() -> void:
 	var invalid: ConfigFile = ConfigFile.new()
 	invalid.set_value("graphics", "msaa_enabled", "false")
 	invalid.set_value("graphics", "frame_limit", 60.0)
+	invalid.set_value("graphics", "quality_profile", "low")
 	invalid.save(test_path)
 	settings = new_settings(test_path)
-	check("Invalid saved types fall back to defaults", root.msaa_3d == Viewport.MSAA_2X and Engine.max_fps == 60)
+	check("Invalid saved types fall back to safe defaults", root.msaa_3d == Viewport.MSAA_DISABLED and Engine.max_fps == 30)
 	settings.free()
 	invalid.set_value("graphics", "msaa_enabled", false)
 	invalid.set_value("graphics", "frame_limit", 144)
 	invalid.save(test_path)
 	settings = new_settings(test_path)
-	check("Invalid stored limit falls back independently of valid AA choice", root.msaa_3d == Viewport.MSAA_DISABLED and Engine.max_fps == 60)
+	check("Invalid stored limit falls back independently of valid AA choice", root.msaa_3d == Viewport.MSAA_DISABLED and Engine.max_fps == 30)
 	settings.call("restore_defaults")
-	check("Restore defaults applies and saves successfully", root.msaa_3d == Viewport.MSAA_2X and Engine.max_fps == 60 and int(settings.get("settings_error")) == OK)
+	check("Restore defaults applies and saves successfully", root.msaa_3d == Viewport.MSAA_DISABLED and Engine.max_fps == 30 and settings.call("is_low_quality") and int(settings.get("settings_error")) == OK)
 	var world: TestWorld = TestWorld.new()
 	var actor: TestActor = TestActor.new()
 	world.player = actor
@@ -150,10 +167,15 @@ func run() -> void:
 	# Indoor transitions temporarily detach the complete world from the same
 	# root Window. Applied render state must survive that tree transition.
 	settings.reparent(world)
+	hud.reparent(world)
 	root.remove_child(world)
 	check("Shared root viewport retains settings while world is suspended indoors", root.msaa_3d == Viewport.MSAA_DISABLED and Engine.max_fps == 30)
+	hud.settings_panel.custom_minimum_size.x = 0.0
+	root.size_changed.emit()
+	check("Detached HUD handles viewport resize without a scene-tree viewport lookup", hud.settings_panel.custom_minimum_size.x > 0.0)
 	root.add_child(world)
 	settings.reparent(root)
+	hud.reparent(root)
 	check("Returning the world retains the selected rendering values", root.msaa_3d == Viewport.MSAA_DISABLED and Engine.max_fps == 30)
 	world.entering = false
 	world.paused = false

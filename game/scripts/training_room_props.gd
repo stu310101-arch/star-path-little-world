@@ -2,7 +2,6 @@ extends Node3D
 
 # Room furniture actions share the seating/book router's nearest-target rules.
 # The controls below operate the imported authored parts, never a second model.
-const STARRY_NIGHT: String = "res://assets/training_room/textures/starry_night.jpg"
 var room: Node3D
 var model: Node3D
 var router: Node
@@ -19,6 +18,7 @@ var lamp_meshes: Array[Node3D] = []
 var lamp_light: OmniLight3D
 var preview: SubViewport
 var preview_turntable: Node3D
+var low_quality: bool = false
 
 func configure(host: Node3D, art: Node3D, interactions: Node, layout: Dictionary) -> void:
 	room = host
@@ -140,11 +140,24 @@ func _activate(id: String) -> void:
 							material.emission_enabled = lamp_on
 							mesh.set_surface_override_material(surface, material)
 		"painting":
-			router.call("show_inspection", "梵谷《星夜》", "Vincent van Gogh · 1889", load(STARRY_NIGHT) as Texture2D)
+			# The light room already contains a small painting texture. Inspect it
+			# while the full pack is pending; never synchronously open missing data.
+			router.call("show_inspection", "梵谷《星夜》", "Vincent van Gogh · 1889", _painting_texture())
 		_:
 			var source: Node3D = _part(str(details.get("node_name", "")))
 			var texture: Texture2D = _make_preview(source) if source != null else null
 			router.call("show_inspection", str(details.get("label", "擺飾")), "左右方向鍵旋轉查看 · Esc 放回", texture)
+
+func _painting_texture() -> Texture2D:
+	for node: Node in model.find_children("*", "MeshInstance3D", true, false):
+		var mesh_node: MeshInstance3D = node as MeshInstance3D
+		if mesh_node.mesh == null:
+			continue
+		for surface: int in range(mesh_node.mesh.get_surface_count()):
+			var material: StandardMaterial3D = mesh_node.get_active_material(surface) as StandardMaterial3D
+			if material != null and material.resource_name.contains("Starry_Night"):
+				return material.albedo_texture
+	return null
 
 func _mesh_nodes(parent: Node3D) -> Array[Node]:
 	var result: Array[Node] = parent.find_children("*", "MeshInstance3D", true, false)
@@ -156,7 +169,7 @@ func _make_preview(source: Node3D) -> Texture2D:
 	_clear_preview()
 	preview = SubViewport.new()
 	preview.name = "ObjectInspection"
-	preview.size = Vector2i(512,512)
+	preview.size = Vector2i(256,256) if low_quality else Vector2i(512,512)
 	preview.own_world_3d = true
 	preview.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	add_child(preview)

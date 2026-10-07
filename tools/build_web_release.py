@@ -19,6 +19,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", default=shutil.which("godot_console") or shutil.which("godot"))
     parser.add_argument("--rebuild-world", action="store_true")
+    parser.add_argument("--local-only", action="store_true", help="Keep publication files untouched; produce build/web and _site for localhost only")
     args = parser.parse_args()
     if not args.godot:
         parser.error("Pass --godot with the installed Godot 4.7.2 console executable")
@@ -50,8 +51,9 @@ def main() -> None:
     run("boot-delivery", [sys.executable, "tools/prepare_web_delivery.py", "--web-dir", str(web)])
     run("notices", [sys.executable, "tools/package_web_notices.py"])
     run("stamp", [sys.executable, "tools/stamp_web_release.py"])
-    run("prepare", [sys.executable, "deploy/github-pages/package.py", "prepare", "--source", str(web), "--package", "deploy/github-pages"])
-    run("assemble", [sys.executable, "deploy/github-pages/package.py", "assemble", "--package", "deploy/github-pages", "--output", "_site"])
+    package = "build/local-web-package" if args.local_only else "deploy/github-pages"
+    run("prepare", [sys.executable, "deploy/github-pages/package.py", "prepare", "--source", str(web), "--package", package])
+    run("assemble", [sys.executable, "deploy/github-pages/package.py", "assemble", "--package", package, "--output", "_site"])
     print("Exported, split, stamped and assembled. Validate localhost before committing/pushing.")
 
 

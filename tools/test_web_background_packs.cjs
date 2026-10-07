@@ -43,6 +43,12 @@ function fixture(t, limit = 128) {
   return {api,routes,calls,held};
 }
 
+function readRange(api,id,offset,count) {
+  const bytes=[];
+  while(bytes.length<count){const part=api.read(id,offset+bytes.length,count-bytes.length);if(!part.length)break;bytes.push(...part);}
+  return bytes;
+}
+
 test('network drains every chunk to EOF without RAF or game-frame polling', async t => {
   const f=fixture(t);
   f.routes.set('all.pck',[[1,2],[3],[4,5],[6,7,8]]);
@@ -52,7 +58,7 @@ test('network drains every chunk to EOF without RAF or game-frame polling', asyn
     f.api.enqueue('all','packs/all.pck',8,0);
     await until(()=>f.api.status('all').state==='downloaded');
     assert.equal(f.api.status('all').received,8);
-    assert.deepEqual([...f.api.read('all',2,3)],[3,4,5]);
+    assert.deepEqual(readRange(f.api,'all',2,3),[3,4,5]);
     assert.equal(f.api.read('all',20,2).length,0);
     assert.equal(f.calls.length,1);
     assert.equal(f.api.snapshot().buffered_bytes,8);
@@ -130,7 +136,7 @@ for(const [name,route] of Object.entries(failures)) {
     f.api.enqueue('job','packs/broken.pck',4,5);
     await until(()=>f.api.status('job').state==='downloaded','retry');
     assert.equal(f.calls.length,2);
-    assert.deepEqual([...f.api.read('job',0,10)],[1,2,3,4]);
+    assert.deepEqual(readRange(f.api,'job',0,10),[1,2,3,4]);
   });
 }
 
@@ -183,4 +189,23 @@ test('URL and numeric bounds fail before network or allocation',t=>{
   assert.equal(f.calls.length,0);
   assert.equal(f.api.snapshot().buffered_bytes,0);
   assert.equal(f.api.read('missing',0,4).length,0);
+});
+
+test('acknowledged segments release incrementally before full download or mounting',async t=>{
+  const f=fixture(t,12);f.routes.set('stream.pck','hold');
+  f.api.enqueue('s','packs/stream.pck',12,1);
+  f.held.get('stream.pck').push([1,2,3,4]);
+  await until(()=>f.api.status('s').received===4);
+  assert.deepEqual(readRange(f.api,'s',0,4),[1,2,3,4]);
+  f.api.consume('s',4);
+  assert.equal(f.api.snapshot().buffered_bytes,0);
+  assert.equal(f.api.status('s').state,'downloading');
+  assert.equal(f.api.read('s',0,4).length,0);
+  assert.throws(()=>f.api.consume('s',5),/offset/);
+  f.held.get('stream.pck').push([5,6,7,8]);f.held.get('stream.pck').push([9,10,11,12]);f.held.get('stream.pck').finish();
+  await until(()=>f.api.status('s').state==='downloaded');
+  assert.deepEqual(readRange(f.api,'s',4,8),[5,6,7,8,9,10,11,12]);
+  f.api.consume('s',12);assert.equal(f.api.snapshot().buffered_bytes,0);
+  assert.equal(f.api.status('s').received,12);
+  f.api.release('s');assert.equal(f.api.snapshot().reserved_bytes,0);
 });

@@ -33,9 +33,9 @@ def stamp(folder: Path) -> dict:
     if config.get("experimentalVK", False) or config.get("gdextensionLibs", []):
         raise ValueError("Unexpected export variant")
     source_paths = sorted([
-        path for subdir in ("scripts", "scenes", "generated/streaming", "data", "tools")
+        path for subdir in ("scripts", "scenes", "generated/streaming", "generated/training_room", "assets/character/runtime", "data", "tools")
         for path in (ROOT / "game" / subdir).rglob("*")
-        if path.is_file() and path.suffix in (".gd", ".tscn", ".scn", ".json")
+        if path.is_file() and path.suffix in (".gd", ".tscn", ".scn", ".json", ".res", ".glb")
     ] + [ROOT / "game/project.godot", ROOT / "game/export_presets.cfg", ROOT / "tools/split_web_packs.py",
          ROOT / "tools/prepare_web_delivery.py", ROOT / "tools/web_boot_delivery.js",
          ROOT / "tools/web_background_packs.js"])
@@ -44,7 +44,7 @@ def stamp(folder: Path) -> dict:
         source_hash.update(path.relative_to(ROOT).as_posix().encode())
         # Git normalizes source text line endings; binary scene bytes remain
         # exact. Keep the source ID stable across Windows and Linux checkouts.
-        payload = path.read_bytes() if path.suffix == ".scn" else path.read_text(encoding="utf-8").encode("utf-8")
+        payload = path.read_bytes() if path.suffix in (".scn", ".res", ".glb") else path.read_text(encoding="utf-8").encode("utf-8")
         source_hash.update(hashlib.sha256(payload).digest())
     build_id = "packs-" + source_hash.hexdigest()[:16]
     marker = f'<meta name="little-world-build" content="{build_id}">'

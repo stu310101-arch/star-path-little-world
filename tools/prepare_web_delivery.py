@@ -33,9 +33,15 @@ def verify_background_budget(folder: Path) -> int:
     packs = json.loads((folder / "index.packs.json").read_text(encoding="utf-8"))
     if packs.get("version") != 1 or not isinstance(packs.get("packs"), dict):
         raise ValueError("Missing or invalid deferred pack manifest")
-    sizes = [item.get("bytes") for item in packs["packs"].values()]
-    if any(type(size) is not int or size <= 0 for size in sizes):
+    all_sizes = [item.get("bytes") for item in packs["packs"].values()]
+    if any(type(size) is not int or size <= 0 or size > BACKGROUND_BUFFER_LIMIT for size in all_sizes):
         raise ValueError("Invalid deferred pack size")
+    sizes = [item["bytes"] for item in packs["packs"].values() if item.get("startup", True)]
+    for item in packs["packs"].values():
+        if item.get("startup", True):
+            for dependency in item.get("dependencies", []):
+                if dependency not in packs["packs"] or not packs["packs"][dependency].get("startup", True):
+                    raise ValueError("Startup pack depends on missing or on-demand content")
     total = sum(sizes)
     if total > BACKGROUND_BUFFER_LIMIT:
         raise ValueError(f"All startup packs need {total} bytes; background buffer limit is {BACKGROUND_BUFFER_LIMIT}. Review scheduling before increasing it.")
@@ -111,6 +117,7 @@ def prepare(folder: Path, expected_loader_sha256: str = LOADER_SHA256) -> dict:
                  + "  const transport = window.LittleWorldBackgroundPacks;\n"
                  + "  transport.configure(new URL('.', location.href).href);\n"
                  + "  for (const [id, pack] of Object.entries(LITTLE_WORLD_BACKGROUND_PACKS.packs)) {\n"
+                 + "    if (pack.startup === false) continue;\n"
                  + "    transport.enqueue(id, pack.url, pack.bytes, id === 'avatar' ? 20 : 0);\n"
                  + "  }\n}\n"
                  + CONFIG_END + "\n")

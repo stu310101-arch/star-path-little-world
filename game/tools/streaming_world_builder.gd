@@ -8,8 +8,12 @@ const CHUNK_TRIANGLES: int = 45000
 const Geo = preload("res://scripts/planet_geometry.gd")
 const MaterialPool = preload("res://tools/streaming_material_pool.gd")
 const OverviewMaterialNormalizer = preload("res://tools/overview_material_normalizer.gd")
+const OverviewFoliageLOD = preload("res://tools/overview_foliage_lod.gd")
+const OverviewColorBatcher = preload("res://tools/overview_color_batcher.gd")
 var material_pool: RefCounted = MaterialPool.new()
 var overview_materials: RefCounted = OverviewMaterialNormalizer.new()
+var overview_foliage: RefCounted = OverviewFoliageLOD.new()
+var overview_colors: RefCounted = OverviewColorBatcher.new()
 var radius: float = 48.0
 var entries: Dictionary = {}
 var details: Dictionary = {}
@@ -19,7 +23,9 @@ var indexed_mesh_cache: Dictionary = {}
 var source_triangles: int = 0
 var overview_triangles: int = 0
 var overview_vertices: int = 0
+var overview_meshes: int = 0
 var protected_surface_meshes: int = 0
+var protected_surface_triangles: int = 0
 var collision_count: int = 0
 var layout: Dictionary = {}
 var build_failed: bool = false
@@ -50,6 +56,7 @@ func build() -> bool:
 		write_chunks(id)
 		mesh_cache.clear()
 		indexed_mesh_cache.clear()
+		overview_colors.call("clear_geometry_cache")
 		print("STREAMING_DISTRICT_BUILT ", id, " chunks=", (entries[id].chunks as Array).size(), " overview_triangles=", entries[id].overview_triangles)
 	var full_globe: Node3D = (load("res://generated/globe.tscn") as PackedScene).instantiate() as Node3D
 	stamp_visual_keys(full_globe, "globe")
@@ -131,6 +138,10 @@ func build() -> bool:
 			chunk_count += 1
 	var catalog: Dictionary = {"version":1,"radius":radius,"districts":entries.values(),"build":{"overview_input_triangles":source_triangles,"overview_triangles":overview_triangles,"overview_vertices":overview_vertices,"protected_surface_meshes":protected_surface_meshes,"permanent_collision_bodies":collision_count,"chunk_count":chunk_count,"chunk_target_nodes":CHUNK_NODES,"chunk_target_triangles":CHUNK_TRIANGLES,"max_chunk_nodes":max_nodes,"max_chunk_mesh_triangles":max_triangles,"max_chunk_bytes":max_bytes,"material_optimization":material_pool.call("statistics")}}
 	catalog.build["overview_shader_normalization"] = overview_materials.call("statistics")
+	catalog.build["overview_foliage_lod"] = overview_foliage.call("statistics")
+	catalog.build["overview_color_batching"] = overview_colors.call("statistics")
+	catalog.build["overview_meshes"] = overview_meshes
+	catalog.build["protected_surface_triangles"] = protected_surface_triangles
 	if build_failed:
 		return false
 	var catalog_path: String = OUTPUT + "catalog.json"
@@ -263,11 +274,14 @@ func collect_overview(node: Node, parent_transform: Transform3D, id: String) -> 
 				append_overview(mi.mesh, transform, mi, id)
 	elif node is MultiMeshInstance3D:
 		var multi: MultiMeshInstance3D = node as MultiMeshInstance3D
-		var kind: String = str(multi.get_meta("ecology_kind", ""))
+		var kind: String = str(multi.get_meta("ecology_kind", multi.get_meta("aquatic_kind", "")))
 		if multi.multimesh != null and not kind in ["fern", "cattail", "water_lily"] and str(multi.name) != "SettledBlossoms":
 			var placements: Array = multi.get_meta("placements", []) as Array
+			var overview_mesh: Mesh = multi.multimesh.mesh
+			if kind in ["alder", "birch", "willow", "pine"]:
+				overview_mesh = overview_foliage.call("reduce", overview_mesh) as Mesh
 			for placement: Transform3D in placements:
-				append_overview(multi.multimesh.mesh, transform * placement, null, id)
+				append_overview(overview_mesh, transform * placement, null, id, multi.multimesh.mesh)
 	for child: Node in node.get_children():
 		collect_overview(child, transform, id)
 
@@ -294,8 +308,9 @@ func reduced_mesh(mesh: Mesh) -> Mesh:
 		var arrays: Array = importer.get_surface_arrays(surface)
 		var original_indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX] is PackedInt32Array else PackedInt32Array()
 		var count: int = original_indices.size() if not original_indices.is_empty() else (arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array).size()
-		# Retain at least a fifth of triangles and avoid the extreme final LOD
-		# which may destroy a small roof or narrow authored shoreline.
+		# Retain the established connected-geometry LOD floor. A 10% trial lost
+		# tower panels and roof silhouettes in the fixed-camera comparison, so
+		# new reduction is limited to the separate distant-leaf export copies.
 		var selected: PackedInt32Array = original_indices
 		for level: int in range(importer.get_surface_lod_count(surface)):
 			var candidate: PackedInt32Array = importer.get_surface_lod_indices(surface, level)
@@ -306,7 +321,7 @@ func reduced_mesh(mesh: Mesh) -> Mesh:
 	mesh_cache[key] = result
 	return result
 
-func append_overview(mesh: Mesh, transform: Transform3D, source: MeshInstance3D, id: String) -> void:
+func append_overview(mesh: Mesh, transform: Transform3D, source: MeshInstance3D, id: String, original_mesh: Mesh = null) -> void:
 	if mesh == null:
 		return
 	# The visual ocean stays at radius 48. A decimated curved ground patch
@@ -319,6 +334,10 @@ func append_overview(mesh: Mesh, transform: Transform3D, source: MeshInstance3D,
 	var batches: Dictionary = overview_batches[id]
 	for surface: int in range(mesh.get_surface_count()):
 		var material: Material = source.get_active_material(surface) if source != null else mesh.surface_get_material(surface)
+		var prepared: Dictionary = overview_colors.call("prepare", reduced, surface, material)
+		material = prepared.material as Material
+		if prepared.mesh != reduced:
+			material = overview_materials.call("normalize_material", material) as Material
 		material = material_pool.call("canonical_material", material) as Material
 		var key: String = material_key(material)
 		if not batches.has(key):
@@ -326,9 +345,11 @@ func append_overview(mesh: Mesh, transform: Transform3D, source: MeshInstance3D,
 			tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 			tool.set_material(material)
 			batches[key] = tool
-		(batches[key] as SurfaceTool).append_from(reduced, surface, transform)
-		source_triangles += triangle_count(mesh, surface)
+		(batches[key] as SurfaceTool).append_from(prepared.mesh as Mesh, int(prepared.surface), transform)
+		source_triangles += triangle_count(original_mesh if original_mesh != null else mesh, surface)
 		var triangles: int = triangle_count(reduced, surface)
+		if preserve_surface:
+			protected_surface_triangles += triangles
 		overview_triangles += triangles
 		entries[id].overview_triangles += triangles
 
@@ -396,6 +417,7 @@ func make_overview(id: String, target: Node3D) -> void:
 		overview_vertices += (visual.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX] as PackedVector3Array).size()
 		visual.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		overview.add_child(visual)
+		overview_meshes += 1
 	assert(baked_triangles == int(entries[id].overview_triangles), "Baking dropped authored triangles in " + id)
 	target.add_child(overview)
 	(overview_batches[id] as Dictionary).clear()

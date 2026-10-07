@@ -14,6 +14,12 @@ const UNLOAD_DELAY: float = 4.0
 const CONTEXT_INTERVAL: float = .15
 const OVERVIEW_DETAIL_CAMERA_ALTITUDE: float = 70.0
 const PIN_SECONDS: float = 20.0
+const LOW_LOAD_DISTANCE: float = 33.0
+const LOW_ACTIVE_DISTANCE: float = 27.0
+const LOW_UNLOAD_DISTANCE: float = 45.0
+const LOW_ANIMATION_INTERVAL: float = .10
+const LOW_UNDERSTORY_FRACTION: int = 60
+const ANIMATED_SCRIPTS: Array[String] = ["res://scripts/lake_life.gd", "res://scripts/ocean_life.gd", "res://scripts/city_traffic.gd"]
 var _world: Node3D
 var _regions: Dictionary = {}
 var _clock: float = 0.0
@@ -30,9 +36,18 @@ var _loaded_count: int = 0
 var _operation_count: int = 0
 var _overview: bool = true
 var _radius: float = 48.0
+var _low_quality: bool = false
+var _interior_active: bool = false
+var _quality_settings: Node
 
 func configure(world: Node3D, catalog_path: String = CATALOG) -> void:
 	_world = world
+	_quality_settings = get_tree().get_first_node_in_group("graphics_settings")
+	if _quality_settings == null:
+		_quality_settings = get_node_or_null("/root/GraphicsSettings")
+	if _quality_settings != null and _quality_settings.has_method("is_low_quality"):
+		_quality_settings.connect("state_changed", _refresh_quality)
+		_refresh_quality()
 	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(catalog_path)) as Dictionary
 	_radius = float(catalog.get("radius", 48.0))
 	for row: Dictionary in catalog.get("districts", []):
@@ -46,6 +61,73 @@ func configure(world: Node3D, catalog_path: String = CATALOG) -> void:
 			var id: String = str(child.get_meta("streaming_overview_id", ""))
 			if _regions.has(id):
 				_regions[id].overview = child
+
+func _refresh_quality() -> void:
+	set_low_quality(bool(_quality_settings.call("is_low_quality")))
+
+func set_low_quality(enabled: bool) -> void:
+	_low_quality = enabled
+	_context_clock = CONTEXT_INTERVAL
+	for region: Dictionary in _regions.values():
+		for chunk: Node3D in region.roots:
+			_apply_chunk_quality(chunk)
+	if _interior_active and _low_quality:
+		_suspend_outdoor_details()
+
+func _apply_chunk_quality(chunk: Node3D) -> void:
+	# Build once per new chunk / quality change, never scan the world per frame.
+	for actor: Node in chunk.find_children("*", "", true, false):
+		if actor.get_script() != null and actor.get_script().resource_path in ANIMATED_SCRIPTS:
+			actor.set("quality_update_interval", LOW_ANIMATION_INTERVAL if _low_quality else 0.0)
+		if actor is MultiMeshInstance3D and str(actor.get_meta("ecology_kind", actor.get_meta("aquatic_kind", ""))) in ["fern", "cattail", "water_lily"]:
+			_apply_understory_density(actor as MultiMeshInstance3D)
+
+func _apply_understory_density(node: MultiMeshInstance3D) -> void:
+	# Tree batches belong to the obstruction controller and are never modified
+	# here. Noncolliding understory uses a compact visible prefix, with exact
+	# authored transforms restored when quality changes back to standard.
+	if node.multimesh == null or (node.has_meta("quality_density_low") and bool(node.get_meta("quality_density_low")) == _low_quality):
+		return
+	var placements: Array = node.get_meta("placements", []) as Array
+	if placements.size() != node.multimesh.instance_count:
+		return
+	if not node.has_meta("quality_original_visible"):
+		node.set_meta("quality_original_visible", node.multimesh.visible_instance_count)
+	var original_visible: int = int(node.get_meta("quality_original_visible"))
+	var limit: int = placements.size() if original_visible < 0 else mini(original_visible, placements.size())
+	var visible_count: int = 0
+	for index: int in range(placements.size()):
+		if _low_quality and (index >= limit or (index * 73) % 100 >= LOW_UNDERSTORY_FRACTION):
+			continue
+		node.multimesh.set_instance_transform(visible_count, placements[index] as Transform3D)
+		visible_count += 1
+	node.multimesh.visible_instance_count = visible_count if _low_quality else original_visible
+	node.set_meta("quality_density_low", _low_quality)
+
+func set_interior_active(active: bool) -> void:
+	_interior_active = active
+	_context_clock = CONTEXT_INTERVAL
+	if active and _low_quality:
+		_suspend_outdoor_details()
+
+func _suspend_outdoor_details() -> void:
+	clear_pin()
+	_pending_scene = null
+	_pending_id = ""
+	_pending_path = ""
+	for region: Dictionary in _regions.values():
+		region.wanted = false
+		region.requested = false
+		_set_active(region, false)
+
+func step_suspended_release() -> void:
+	# The indoor transition may retain the outdoor world outside SceneTree.
+	# Release one detail chunk per caller frame while preserving scalar state.
+	if _interior_active and _low_quality:
+		_step()
+
+func is_interior_release_complete() -> bool:
+	return _loaded_count == 0 and _pending_scene == null
 
 func pin_position(point: Vector3) -> void:
 	_pin_position = point
@@ -73,7 +155,7 @@ func _required_ids(point: Vector3) -> Array[String]:
 	var distance: float = INF
 	for id: String in _regions:
 		var d: float = point.distance_to(_regions[id].center as Vector3)
-		if d <= ACTIVE_DISTANCE:
+		if d <= (LOW_ACTIVE_DISTANCE if _low_quality else ACTIVE_DISTANCE):
 			result.append(id)
 		if not id.begins_with("ocean_") and d < distance:
 			distance = d
@@ -99,7 +181,13 @@ func update_context(overview: bool, player_position: Vector3, camera_position: V
 	_step()
 
 func _refresh_context(player_position: Vector3, camera_position: Vector3, _target: Vector3) -> void:
-	var close_overview: bool = _overview and camera_position.length() - _radius <= OVERVIEW_DETAIL_CAMERA_ALTITUDE
+	if _interior_active and _low_quality:
+		_suspend_outdoor_details()
+		return
+	var load_distance: float = LOW_LOAD_DISTANCE if _low_quality else LOAD_DISTANCE
+	var unload_distance: float = LOW_UNLOAD_DISTANCE if _low_quality else UNLOAD_DISTANCE
+	# The optimized far representation is always used for low-profile overview.
+	var close_overview: bool = not _low_quality and _overview and camera_position.length() - _radius <= OVERVIEW_DETAIL_CAMERA_ALTITUDE
 	var focus: Vector3 = camera_position.normalized() * _radius if close_overview else player_position
 	var pinned: Array[String] = []
 	if _clock < _pin_until:
@@ -112,12 +200,12 @@ func _refresh_context(player_position: Vector3, camera_position: Vector3, _targe
 		var distance: float = focus.distance_to(region.center as Vector3)
 		var pin: bool = pinned.has(id)
 		var eligible: bool = not _overview or close_overview
-		var wanted: bool = pin or (eligible and (distance < LOAD_DISTANCE or required.has(id)))
+		var wanted: bool = pin or (eligible and (distance < load_distance or required.has(id)))
 		region.requested = wanted
 		if wanted:
 			region.wanted = true
 			region.outside_since = _clock
-		elif not eligible or distance > UNLOAD_DISTANCE:
+		elif not eligible or distance > unload_distance:
 			if _clock - float(region.outside_since) >= UNLOAD_DELAY:
 				region.wanted = false
 		else:
@@ -125,7 +213,7 @@ func _refresh_context(player_position: Vector3, camera_position: Vector3, _targe
 			# Start the delay only after crossing the outer boundary.
 			region.outside_since = _clock
 		region.priority = distance - (100.0 if pin else 0.0)
-		var active_distance: float = LOAD_DISTANCE if bool(region.active) else ACTIVE_DISTANCE
+		var active_distance: float = load_distance if bool(region.active) else (LOW_ACTIVE_DISTANCE if _low_quality else ACTIVE_DISTANCE)
 		var active: bool = eligible and distance <= active_distance and bool(region.ready)
 		_set_active(region, active)
 
@@ -150,6 +238,7 @@ func _step() -> void:
 				chunk.process_mode = Node.PROCESS_MODE_DISABLED
 				_world.add_child(chunk)
 				_restore_actor_state(chunk, _pending_path)
+				_apply_chunk_quality(chunk)
 				(region.roots as Array).append(chunk)
 				region.next += 1
 				_loaded_count += 1
@@ -182,6 +271,9 @@ func _step() -> void:
 			_loaded_count -= 1
 			_record_operation(started)
 			return
+	if _interior_active and _low_quality:
+		# Once drained, the detached world has no absolute SceneTree paths.
+		return
 	var best_id: String = ""
 	var priority: float = INF
 	var packs: Node = get_node_or_null("/root/WebPacks")
@@ -287,4 +379,4 @@ func metrics() -> Dictionary:
 			pending_count += 1
 		for index: int in range((region.roots as Array).size()):
 			loaded_nodes += int(region.chunks[index].nodes)
-	return {"ready_districts":ready_districts,"ready_regions":ready_count,"active_regions":active_count,"pending_regions":pending_count,"loaded_chunks":_loaded_count,"detail_nodes":loaded_nodes,"last_operation_ms":_last_operation_ms,"max_operation_ms":_max_operation_ms,"operations":_operation_count,"saved_animation_groups":_actor_state.size()}
+	return {"ready_districts":ready_districts,"ready_regions":ready_count,"active_regions":active_count,"pending_regions":pending_count,"loaded_chunks":_loaded_count,"detail_nodes":loaded_nodes,"last_operation_ms":_last_operation_ms,"max_operation_ms":_max_operation_ms,"operations":_operation_count,"saved_animation_groups":_actor_state.size(),"low_quality":_low_quality,"interior_active":_interior_active}

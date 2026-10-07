@@ -153,9 +153,16 @@
         const actual = Array.from(hash, v => v.toString(16).padStart(2, '0')).join('');
         if (actual !== item.sha256) throw new Error('Decoded boot file hash differs');
         setPhase(row, 'ready');
-        // Response owns a completed, validated body. No gzip header is forwarded:
-        // bytes are already decoded and fileSizes remain the original sizes.
-        return new env.Response(bytes, {status: 200, headers: {
+        // A BufferSource Response copies its input. Transfer our already verified
+        // array to a one-chunk stream instead, so the loader can consume it without
+        // a second full decoded PCK/WASM copy owned by this adapter.
+        const body = new env.ReadableStream({start(controller) {
+          controller.enqueue(bytes);
+          controller.close();
+        }});
+        bytes = null;
+        // No gzip header: the body is decoded and fileSizes remain unchanged.
+        return new env.Response(body, {status: 200, headers: {
           'Content-Type': entry.name.endsWith('.wasm') ? 'application/wasm' : 'application/octet-stream',
           'Content-Length': String(item.bytes),
         }});

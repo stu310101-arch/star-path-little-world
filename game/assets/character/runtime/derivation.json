@@ -1,0 +1,380 @@
+{
+  "method": "Adaptive authored cloth pose sampling and exact duplicate pose sharing; at most two active morphs per mesh. Original animation times and skeletal tracks retained.",
+  "interpolation_bound": "LINEAR morph curves share the original key times; intermediate vector error is bounded by endpoint errors. Root scale is included; skin scale tracks are checked as unity.",
+  "originals_preserved": {
+    "game\\assets\\character\\graduate.glb": "cef60f3c9b551cbdbbf6ad8e0e7967575b1e9b53e671375dc51395dad6cb5e4b",
+    "game\\assets\\character\\graduate_jump.glb": "785f53c1f26577d781f782656be620304f35fde0e1aa1e3174a7c28abb4cd489",
+    "game\\assets\\character\\graduate_rest.glb": "ed43c4a23a697836acc72d072d2d813fd20613143ae3c17eb273905c8eedd30d"
+  },
+  "assets": [
+    {
+      "source": "game\\assets\\character\\graduate.glb",
+      "source_sha256": "cef60f3c9b551cbdbbf6ad8e0e7967575b1e9b53e671375dc51395dad6cb5e4b",
+      "output": "game\\assets\\character\\runtime\\graduate.glb",
+      "output_sha256": "28c4f7d1b9fc1f04203538cb4ffbeaa763e6bfc7d05a58f2c10ac5f3aa700b24",
+      "source_bytes": 58256952,
+      "output_bytes": 42021116,
+      "position_tolerance_metres": 0.002,
+      "normal_delta_tolerance": 0.05,
+      "triangles": 11874,
+      "vertices": 18070,
+      "bone_tracks_and_times_exact": true,
+      "mesh_topology_attributes_materials_exact": true,
+      "targets_before": 3003,
+      "targets_after": 916,
+      "meshes": [
+        {
+          "mesh": "EXPORT_TEMPLATE_01_Pleated_bachelor_gown.001",
+          "targets_before": 132,
+          "targets_after": 119,
+          "max_position_error_metres": 0.001419044017791748,
+          "max_normal_delta_error": 0.03911684155464173,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_02_Bell_sleeve_L.001",
+          "targets_before": 129,
+          "targets_after": 36,
+          "max_position_error_metres": 0.0016312611103057862,
+          "max_normal_delta_error": 0.04128722548484803,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_02_Bell_sleeve_R.001",
+          "targets_before": 129,
+          "targets_after": 36,
+          "max_position_error_metres": 0.0016716028451919556,
+          "max_normal_delta_error": 0.04101976752281189,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_03_Blue_and_gold_stole_L.001",
+          "targets_before": 132,
+          "targets_after": 78,
+          "max_position_error_metres": 0.0014317114353179932,
+          "max_normal_delta_error": 0.04088027775287628,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_03_Blue_and_gold_stole_R.001",
+          "targets_before": 132,
+          "targets_after": 93,
+          "max_position_error_metres": 0.0015131149291992187,
+          "max_normal_delta_error": 0.04041542410850525,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_03_Continuous_stole_back_collar.001",
+          "targets_before": 99,
+          "targets_after": 0,
+          "max_position_error_metres": 3.484780609142035e-07,
+          "max_normal_delta_error": 0.00014136867830529808,
+          "sample_count": 138,
+          "maximum_active_targets": 0
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_04_Stole_woven_bar_L0.001",
+          "targets_before": 132,
+          "targets_after": 64,
+          "max_position_error_metres": 0.001511934757232666,
+          "max_normal_delta_error": 0.04151601195335389,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_04_Stole_woven_bar_L1.001",
+          "targets_before": 132,
+          "targets_after": 57,
+          "max_position_error_metres": 0.001619973659515381,
+          "max_normal_delta_error": 0.041591045260429386,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_04_Stole_woven_bar_R0.001",
+          "targets_before": 132,
+          "targets_after": 69,
+          "max_position_error_metres": 0.0016535216569900514,
+          "max_normal_delta_error": 0.042426240444183354,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_04_Stole_woven_bar_R1.001",
+          "targets_before": 132,
+          "targets_after": 67,
+          "max_position_error_metres": 0.0016359773874282837,
+          "max_normal_delta_error": 0.040972244739532475,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_05_Folded_shirt_collar_1.002",
+          "targets_before": 98,
+          "targets_after": 0,
+          "max_position_error_metres": 1.3124532415531577e-07,
+          "max_normal_delta_error": 8.26521310955286e-05,
+          "sample_count": 138,
+          "maximum_active_targets": 0
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_05_Folded_shirt_collar_1.003",
+          "targets_before": 98,
+          "targets_after": 0,
+          "max_position_error_metres": 1.3066780229564757e-07,
+          "max_normal_delta_error": 8.26521310955286e-05,
+          "sample_count": 138,
+          "maximum_active_targets": 0
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_05_Ivory_shirt_bib.001",
+          "targets_before": 98,
+          "targets_after": 0,
+          "max_position_error_metres": 1.3187628064770253e-07,
+          "max_normal_delta_error": 9.233442251570523e-05,
+          "sample_count": 138,
+          "maximum_active_targets": 0
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_06_Fitted_graduation_cap.001",
+          "targets_before": 98,
+          "targets_after": 0,
+          "max_position_error_metres": 2.1903763990849257e-07,
+          "max_normal_delta_error": 0.0002067850669845939,
+          "sample_count": 138,
+          "maximum_active_targets": 0
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_07_Square_mortarboard.001",
+          "targets_before": 98,
+          "targets_after": 0,
+          "max_position_error_metres": 2.173713583033532e-07,
+          "max_normal_delta_error": 0.00021601682528853418,
+          "sample_count": 138,
+          "maximum_active_targets": 0
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_08_Cap_button.001",
+          "targets_before": 98,
+          "targets_after": 0,
+          "max_position_error_metres": 1.7438188660889865e-07,
+          "max_normal_delta_error": 9.683959069661796e-05,
+          "sample_count": 138,
+          "maximum_active_targets": 0
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_09_Gold_tassel_cord.001",
+          "targets_before": 104,
+          "targets_after": 18,
+          "max_position_error_metres": 0.001494067430496216,
+          "max_normal_delta_error": 0.03872112035751343,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_10_Tassel_knot.001",
+          "targets_before": 104,
+          "targets_after": 18,
+          "max_position_error_metres": 0.001658798098564148,
+          "max_normal_delta_error": 0.038739392161369325,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_11_Tassel_strand_00.001",
+          "targets_before": 104,
+          "targets_after": 23,
+          "max_position_error_metres": 0.001699558138847351,
+          "max_normal_delta_error": 0.024304023385047915,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_11_Tassel_strand_01.001",
+          "targets_before": 104,
+          "targets_after": 23,
+          "max_position_error_metres": 0.001679376482963562,
+          "max_normal_delta_error": 0.02455592155456543,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_11_Tassel_strand_02.001",
+          "targets_before": 104,
+          "targets_after": 23,
+          "max_position_error_metres": 0.0016559998989105224,
+          "max_normal_delta_error": 0.024600560963153842,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_11_Tassel_strand_03.001",
+          "targets_before": 104,
+          "targets_after": 24,
+          "max_position_error_metres": 0.001624184012413025,
+          "max_normal_delta_error": 0.023379530012607577,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_11_Tassel_strand_04.001",
+          "targets_before": 104,
+          "targets_after": 23,
+          "max_position_error_metres": 0.0016833889484405519,
+          "max_normal_delta_error": 0.024626906216144565,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_11_Tassel_strand_05.001",
+          "targets_before": 104,
+          "targets_after": 23,
+          "max_position_error_metres": 0.001642452597618103,
+          "max_normal_delta_error": 0.0242290735244751,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_11_Tassel_strand_06.001",
+          "targets_before": 104,
+          "targets_after": 23,
+          "max_position_error_metres": 0.0016939054727554321,
+          "max_normal_delta_error": 0.024307338893413546,
+          "sample_count": 138,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_Graduate_original_face_hands_and_trousers.001",
+          "targets_before": 99,
+          "targets_after": 99,
+          "max_position_error_metres": 0.0,
+          "max_normal_delta_error": 0.0,
+          "sample_count": 138,
+          "maximum_active_targets": 1
+        },
+        {
+          "mesh": "EXPORT_TEMPLATE_Graduate_restored_arm_skin.001",
+          "targets_before": 99,
+          "targets_after": 0,
+          "max_position_error_metres": 1.5707968850620093e-07,
+          "max_normal_delta_error": 9.998948080465199e-05,
+          "sample_count": 138,
+          "maximum_active_targets": 0
+        }
+      ]
+    },
+    {
+      "source": "game\\assets\\character\\graduate_jump.glb",
+      "source_sha256": "785f53c1f26577d781f782656be620304f35fde0e1aa1e3174a7c28abb4cd489",
+      "output": "game\\assets\\character\\runtime\\graduate_jump.glb",
+      "output_sha256": "2918c3984094edcbe4a5e83c2854cc02b219ef3d99a05f24fa4f201df1b98fd5",
+      "source_bytes": 49957832,
+      "output_bytes": 40778928,
+      "position_tolerance_metres": 0.002,
+      "normal_delta_tolerance": 0.05,
+      "triangles": 6707,
+      "vertices": 13444,
+      "bone_tracks_and_times_exact": true,
+      "mesh_topology_attributes_materials_exact": true,
+      "targets_before": 1936,
+      "targets_after": 1179,
+      "meshes": [
+        {
+          "mesh": "Graduate gown | cloth-ready vertical loops.002",
+          "targets_before": 215,
+          "targets_after": 192,
+          "max_position_error_metres": 0.001102205276489258,
+          "max_normal_delta_error": 0.0347110241651535,
+          "sample_count": 220,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "02 | Bell sleeve L.002 | flexible fabric topology.003",
+          "targets_before": 215,
+          "targets_after": 124,
+          "max_position_error_metres": 0.0011162122488021851,
+          "max_normal_delta_error": 0.04179677069187165,
+          "sample_count": 220,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "02 | Bell sleeve R.002 | flexible fabric topology.003",
+          "targets_before": 215,
+          "targets_after": 116,
+          "max_position_error_metres": 0.0011855720281600953,
+          "max_normal_delta_error": 0.042432406544685365,
+          "sample_count": 220,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "03 | Blue and gold stole L.002",
+          "targets_before": 215,
+          "targets_after": 115,
+          "max_position_error_metres": 0.0015420169830322266,
+          "max_normal_delta_error": 0.04130918979644776,
+          "sample_count": 220,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "03 | Blue and gold stole R.002",
+          "targets_before": 215,
+          "targets_after": 164,
+          "max_position_error_metres": 0.0015406017303466798,
+          "max_normal_delta_error": 0.04244160354137421,
+          "sample_count": 220,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "04 | Stole woven bar L0.002",
+          "targets_before": 215,
+          "targets_after": 101,
+          "max_position_error_metres": 0.0014508455991744996,
+          "max_normal_delta_error": 0.04247927665710449,
+          "sample_count": 220,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "04 | Stole woven bar L1.002",
+          "targets_before": 215,
+          "targets_after": 104,
+          "max_position_error_metres": 0.0016183136701583862,
+          "max_normal_delta_error": 0.03905599117279053,
+          "sample_count": 220,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "04 | Stole woven bar R0.002",
+          "targets_before": 215,
+          "targets_after": 128,
+          "max_position_error_metres": 0.001531494140625,
+          "max_normal_delta_error": 0.042219182848930364,
+          "sample_count": 220,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "04 | Stole woven bar R1.002",
+          "targets_before": 215,
+          "targets_after": 134,
+          "max_position_error_metres": 0.00157007896900177,
+          "max_normal_delta_error": 0.04193520247936249,
+          "sample_count": 220,
+          "maximum_active_targets": 2
+        },
+        {
+          "mesh": "Cylinder.002",
+          "targets_before": 1,
+          "targets_after": 1,
+          "max_position_error_metres": 0.0,
+          "max_normal_delta_error": 0.0,
+          "sample_count": 220,
+          "maximum_active_targets": 1
+        }
+      ]
+    }
+  ]
+}

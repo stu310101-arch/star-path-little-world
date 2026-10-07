@@ -7,7 +7,8 @@ const IndoorPlayer = preload("res://scripts/indoor_player.gd")
 const Projector = preload("res://scripts/training_projector.gd")
 const RoomInteractions = preload("res://scripts/training_room_interactions.gd")
 const FurnitureActions = preload("res://scripts/training_room_props.gd")
-const ROOM_MODEL: String = "res://assets/training_room/wordking_training_room.glb"
+const ROOM_MODEL: String = "res://generated/training_room/light.scn"
+const DETAIL_CATALOG: String = "res://generated/training_room/detail_catalog.json"
 const ROOM_LAYOUT: String = "res://assets/training_room/layout.json"
 const FONT: Font = preload("res://assets/fonts/NotoSansTC.ttf")
 
@@ -32,21 +33,48 @@ var performance_enabled: bool = false
 var layout: Dictionary = {}
 var interactions: Node
 var furniture_actions: Node3D
+var graphics_settings: Node
+var low_quality: bool = true
+var detail_state: String = "idle"
+var detail_error: String = ""
+var detail_entries: Array = []
+var detail_nodes: Dictionary = {}
+var detail_index: int = 0
+var pending_mesh: Mesh
+var detail_label: Label
+var retry_button: Button
+var detail_clock: float = 0.0
+var max_detail_operation_ms: float = 0.0
+var entry_started_ms: int = 0
+var detail_ready_ms: int = 0
+var debug_mesh_nodes: Array[WeakRef] = []
 
 func set_shared_music(music_node: Node) -> void:
 	music = music_node
 
 func _ready() -> void:
 	name = "TrainingRoom"
+	entry_started_ms = Time.get_ticks_msec()
+	if graphics_settings == null:
+		graphics_settings = get_tree().get_first_node_in_group("graphics_settings")
+	if is_instance_valid(graphics_settings):
+		low_quality = bool(graphics_settings.call("is_low_quality"))
+		graphics_settings.connect("state_changed", _apply_quality)
 	if OS.has_feature("web"):
 		performance_enabled = bool(JavaScriptBridge.eval("new URLSearchParams(location.search).has('performance')"))
 	_setup_input()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_window().mouse_exited.connect(_finish_drag)
 	layout = JSON.parse_string(FileAccess.get_file_as_string(ROOM_LAYOUT)) as Dictionary
-	room_model = (load(ROOM_MODEL) as PackedScene).instantiate() as Node3D
+	room_model = (ResourceLoader.load(ROOM_MODEL, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene).instantiate() as Node3D
 	room_model.name = "RoomArt"
 	add_child(room_model)
+	# Cache stable node references before cabinet hinges reparent their meshes.
+	# Mesh replacement preserves the original node, transform and interaction ID.
+	for node: Node in room_model.find_children("*", "MeshInstance3D", true, false):
+		detail_nodes[str(room_model.get_path_to(node))] = node
+		if performance_enabled:
+			debug_mesh_nodes.append(weakref(node))
 	_build_collision()
 	_build_lighting()
 	var projection: Node3D = Projector.new() as Node3D
@@ -67,18 +95,122 @@ func _ready() -> void:
 	add_child(camera)
 	camera.make_current()
 	_build_hud()
+	_apply_quality()
+	_request_details()
 	interactions = RoomInteractions.new() as Node
 	add_child(interactions)
 	interactions.call("configure", self, player, layout, room_model)
 	furniture_actions = FurnitureActions.new() as Node3D
 	add_child(furniture_actions)
 	furniture_actions.call("configure", self, room_model, interactions, layout)
+	furniture_actions.set("low_quality", low_quality)
 	if is_instance_valid(music):
 		music.call("set_context", "wordking")
 		music.connect("state_changed", _refresh_music)
 		_refresh_music()
 	update_camera(0.0, true)
 	return_prompt.text = "正在準備角色…"
+
+func _apply_quality() -> void:
+	if is_instance_valid(graphics_settings):
+		low_quality = bool(graphics_settings.call("is_low_quality"))
+	else:
+		low_quality = str(get_viewport().get_meta("graphics_quality_profile", "low")) == "low"
+	var ceiling: SpotLight3D = get_node_or_null("DownwardCeilingLight") as SpotLight3D
+	if ceiling != null:
+		ceiling.shadow_enabled = not low_quality
+	if furniture_actions != null:
+		furniture_actions.set("low_quality", low_quality)
+
+func _request_details() -> void:
+	detail_error = ""
+	detail_state = "waiting"
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	if packs != null:
+		packs.call("request_resource", DETAIL_CATALOG, 200)
+
+func _retry_details() -> void:
+	var packs: Node = get_node_or_null("/root/WebPacks")
+	if packs != null:
+		packs.call("retry_failed")
+	pending_mesh = null
+	detail_entries.clear()
+	detail_index = 0
+	_request_details()
+	_refresh_detail_status()
+
+func _step_details() -> void:
+	if returning or detail_state in ["ready", "error"]:
+		return
+	var started: int = Time.get_ticks_usec()
+	if detail_state == "waiting":
+		var packs: Node = get_node_or_null("/root/WebPacks")
+		if packs != null:
+			detail_error = str(packs.call("resource_error", DETAIL_CATALOG))
+			if not detail_error.is_empty():
+				detail_state = "error"
+				return
+			if not bool(packs.call("is_resource_ready", DETAIL_CATALOG)):
+				return
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(DETAIL_CATALOG))
+		if not parsed is Dictionary or not (parsed as Dictionary).get("meshes", []) is Array:
+			detail_error = "室內細節清單無法讀取，可重試或返回。"
+			detail_state = "error"
+			return
+		detail_entries = (parsed as Dictionary).get("meshes", []) as Array
+		detail_state = "preparing"
+	elif pending_mesh != null:
+		var row: Dictionary = detail_entries[detail_index] as Dictionary
+		var node: MeshInstance3D = detail_nodes.get(str(row.node)) as MeshInstance3D
+		if not is_instance_valid(node):
+			detail_error = "室內模型節點不相符，可返回後重試。"
+			detail_state = "error"
+			pending_mesh = null
+			return
+		node.mesh = pending_mesh
+		pending_mesh = null
+		detail_index += 1
+	elif detail_index < detail_entries.size():
+		var row: Dictionary = detail_entries[detail_index] as Dictionary
+		pending_mesh = ResourceLoader.load(str(row.resource), "Mesh") as Mesh
+		if pending_mesh == null:
+			detail_error = "室內模型準備失敗，可重試或返回。"
+			detail_state = "error"
+	else:
+		detail_state = "ready"
+		detail_ready_ms = Time.get_ticks_msec() - entry_started_ms
+		detail_entries.clear()
+		detail_nodes.clear()
+		print("TRAINING_ROOM_DETAILS_READY elapsed_ms=", detail_ready_ms, " max_operation_ms=", max_detail_operation_ms)
+	max_detail_operation_ms = maxf(max_detail_operation_ms, float(Time.get_ticks_usec() - started) / 1000.0)
+
+func _refresh_detail_status() -> void:
+	if detail_label == null:
+		return
+	retry_button.visible = detail_state == "error"
+	match detail_state:
+		"ready":
+			detail_label.text = "室內細節已就緒"
+		"error":
+			detail_label.text = detail_error + "（簡易場景仍可使用）"
+		"preparing":
+			detail_label.text = "室內細節準備 %d / %d · 可自由移動或返回" % [detail_index, detail_entries.size()]
+		_:
+			var packs: Node = get_node_or_null("/root/WebPacks")
+			var progress: Dictionary = packs.call("get_resource_progress", DETAIL_CATALOG) as Dictionary if packs != null and packs.has_method("get_resource_progress") else {}
+			var phase: String = str(progress.get("phase", "queued"))
+			if phase in ["mounting", "verifying", "ready"]:
+				detail_label.text = "室內素材驗證與準備中 · 可自由移動或返回"
+			else:
+				detail_label.text = "室內細節下載 %.1f / %.1f MB · 可自由移動或返回" % [float(progress.get("received_bytes", 0)) / 1000000.0, float(progress.get("total_bytes", 0)) / 1000000.0]
+
+func _return_immediately() -> void:
+	if returning:
+		return
+	returning = true
+	if player != null:
+		player.set("controls_enabled", false)
+	request_return_to_world.emit()
 
 func _setup_input() -> void:
 	var keys: Dictionary = {"move_left": KEY_A, "move_right": KEY_D, "move_forward": KEY_W, "move_back": KEY_S, "run": KEY_SHIFT, "jump": KEY_SPACE, "interact": KEY_E}
@@ -245,6 +377,32 @@ func _build_hud() -> void:
 	music_button.pressed.connect(_toggle_music)
 	music_button.visible = is_instance_valid(music)
 	top.add_child(music_button)
+	var return_button: Button = Button.new()
+	return_button.name = "ReturnToWorld"
+	return_button.text = "返回世界"
+	return_button.add_theme_font_override("font", ui_font)
+	return_button.add_theme_font_size_override("font_size", 15)
+	return_button.add_theme_stylebox_override("normal", _panel(Color("edf1e9")))
+	return_button.add_theme_stylebox_override("hover", _panel(Color("efd7a5")))
+	return_button.add_theme_color_override("font_color", Color("203e46"))
+	return_button.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	return_button.pressed.connect(_return_immediately)
+	top.add_child(return_button)
+	var loading_row: HBoxContainer = HBoxContainer.new()
+	loading_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(loading_row)
+	detail_label = _label("正在載入室內細節…", 16, Color("f8eed7"))
+	detail_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	detail_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	loading_row.add_child(detail_label)
+	retry_button = Button.new()
+	retry_button.name = "RetryRoomDetails"
+	retry_button.text = "重試下載"
+	retry_button.add_theme_font_override("font", ui_font)
+	retry_button.add_theme_font_size_override("font_size", 16)
+	retry_button.visible = false
+	retry_button.pressed.connect(_retry_details)
+	loading_row.add_child(retry_button)
 	var spacer: Control = Control.new()
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -290,6 +448,15 @@ func can_player_jump() -> bool:
 func _unhandled_input(event: InputEvent) -> void:
 	if returning:
 		return
+	if event is InputEventKey and event.is_pressed() and not event.is_echo():
+		if event.keycode == KEY_R and detail_state == "error":
+			_retry_details()
+			get_viewport().set_input_as_handled()
+			return
+		if event.keycode == KEY_ESCAPE and detail_state != "ready" and (interactions == null or not bool(interactions.call("is_busy"))):
+			_return_immediately()
+			get_viewport().set_input_as_handled()
+			return
 	if not ready_for_play:
 		if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
 			returning = true
@@ -373,6 +540,11 @@ func update_camera(delta: float, snap: bool = false) -> void:
 func _process(delta: float) -> void:
 	if returning:
 		return
+	_step_details()
+	detail_clock += delta
+	if detail_clock >= .1:
+		detail_clock = 0.0
+		_refresh_detail_status()
 	if not ready_for_play:
 		player.call("step_prepare_visuals")
 		if not bool(player.call("visuals_ready")):
@@ -400,10 +572,39 @@ func _process(delta: float) -> void:
 		status_clock += delta
 		if status_clock > .25:
 			status_clock = 0.0
-			var state: Dictionary = {"ready": true, "near_exit": _can_return(), "player": [player.position.x, player.position.y, player.position.z], "fps": Engine.get_frames_per_second(), "device_count": 1, "display_sockets": 6}
+			var state: Dictionary = {"ready": true, "near_exit": _can_return(), "player": [player.position.x, player.position.y, player.position.z], "fps": Engine.get_frames_per_second(), "device_count": 1, "display_sockets": 6, "detail_state": detail_state, "detail_index": detail_index, "detail_ready_ms": detail_ready_ms, "detail_max_operation_ms": max_detail_operation_ms, "detail_error": detail_error, "low_quality": low_quality, "room_instance_id": get_instance_id(), "ticks_ms": Time.get_ticks_msec(), "buttons": _debug_buttons(), "mesh_contract": _debug_mesh_contract(), "nodes": Performance.get_monitor(Performance.OBJECT_NODE_COUNT), "resources": Performance.get_monitor(Performance.OBJECT_RESOURCE_COUNT)}
+			if is_instance_valid(graphics_settings):
+				state["graphics"] = graphics_settings.call("get_state")
 			JavaScriptBridge.eval("window.trainingRoomState = " + JSON.stringify(state) + ";")
 
+func _debug_buttons() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	for node: Node in ui_root.find_children("*", "Button", true, false):
+		var button: Button = node as Button
+		var center: Vector2 = button.get_global_rect().get_center() / viewport_size
+		result.append({"name": str(button.name), "text": button.text, "visible": button.is_visible_in_tree(), "center": [center.x, center.y]})
+	return result
+
+func _debug_mesh_contract() -> Dictionary:
+	# Opt-in QA telemetry uses weak references so it cannot retain room meshes.
+	var identities: PackedStringArray = []
+	var transforms: PackedStringArray = []
+	for reference: WeakRef in debug_mesh_nodes:
+		var node: Node3D = reference.get_ref() as Node3D
+		if node != null:
+			identities.append(str(node.get_instance_id()))
+			transforms.append(str(node.global_transform))
+	return {"count": identities.size(), "ids": str(identities).sha256_text(), "transforms": str(transforms).sha256_text()}
+
 func _exit_tree() -> void:
+	returning = true
+	pending_mesh = null
+	detail_entries.clear()
+	detail_nodes.clear()
+	debug_mesh_nodes.clear()
+	if is_instance_valid(graphics_settings) and graphics_settings.is_connected("state_changed", _apply_quality):
+		graphics_settings.disconnect("state_changed", _apply_quality)
 	if is_instance_valid(music) and music.is_connected("state_changed", _refresh_music):
 		music.disconnect("state_changed", _refresh_music)
 	if OS.has_feature("web") and (OS.is_debug_build() or performance_enabled):

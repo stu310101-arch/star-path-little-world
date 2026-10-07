@@ -114,8 +114,18 @@ class SplitPackTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "different Godot"):
             plan_pack(Pack((4, 7, 1), entries), inventory)
 
+    def test_full_indoor_dependency_cannot_leak_into_boot(self):
+        entries, inventory = self.fixture()
+        inventory["groups"]["training_room"] = inventory["groups"].pop("room")
+        inventory["prerequisites"]["training_room"] = inventory["prerequisites"].pop("room")
+        inventory["dependencies"]["res://world.scn"].append("res://room.scn")
+        with self.assertRaisesRegex(ValueError, "[Ii]ndoor|training_room"):
+            plan_pack(Pack((4, 7, 2), entries), inventory)
+
     def test_complete_split_records_identical_manifest_and_refuses_double_split(self):
         entries, inventory = self.fixture()
+        inventory["groups"]["training_room"] = inventory["groups"].pop("room")
+        inventory["prerequisites"]["training_room"] = inventory["prerequisites"].pop("room")
         source = self.write(entries)
         original_bytes = source.stat().st_size
         inventory_path = self.root / "dependencies.json"
@@ -128,6 +138,8 @@ class SplitPackTests(unittest.TestCase):
         boot = read_pack(web / "index.pck")
         self.assertEqual(bytes(boot.entries["data/web_packs.json"]), (web / "index.packs.json").read_bytes())
         manifest = json.loads((web / "index.packs.json").read_text())
+        self.assertFalse(manifest["packs"]["training_room"]["startup"])
+        self.assertTrue(manifest["packs"]["avatar"]["startup"])
         physical_paths = set(boot.entries)
         for row in manifest["packs"].values():
             path = web / row["url"]

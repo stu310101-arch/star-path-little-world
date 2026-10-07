@@ -195,6 +195,9 @@ def plan_pack(pack: Pack, inventory: dict) -> tuple[dict, dict, dict, dict]:
         raise ValueError("Invalid resource pack group identifier")
     graph = inventory["dependencies"]
     sources = {key: closure(roots, graph) for key, roots in groups.items()}
+    for source in groups.get("training_room", []):
+        if source in sources["boot"]:
+            raise ValueError(f"Full indoor resource leaked into boot dependency closure: {source}")
     source_entries = {source: exported_entries(source, pack.entries) for source in set().union(*sources.values())}
     group_entries = {key: set().union(*(source_entries[source] for source in resources))
                      for key, resources in sources.items()}
@@ -320,7 +323,8 @@ def split(source: Path, inventory_path: Path, output: Path, report_path: Path) -
         url = f"packs/{key}-{info['sha256'][:16]}.pck"
         temporary.replace(output / url)
         manifest["packs"][key] = {"url": url, "bytes": info["bytes"], "sha256": info["sha256"],
-                                  "dependencies": dependencies.get(key, [])}
+                                  "dependencies": dependencies.get(key, []),
+                                  "startup": key != "training_room"}
         details[key] = info
     encoded_manifest = (json.dumps(manifest, sort_keys=True, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     contents["boot"][MANIFEST_PATH] = encoded_manifest

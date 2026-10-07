@@ -97,6 +97,7 @@ func setup_fixture() -> void:
 	streaming.connect("chunk_added", func(_chunk: Node3D) -> void: loaded_signals += 1)
 	streaming.connect("chunk_removing", func(_chunk: Node3D) -> void: removed_signals += 1)
 	streaming.call("configure", world, catalog_path)
+	streaming.call("set_low_quality", false)
 	baseline_nodes = world.find_children("*", "", true, false).size()
 
 func advance(overview: bool, point: Vector3, steps: int, delta: float = .16, camera_distance: float = 177.6) -> void:
@@ -231,13 +232,64 @@ func run() -> void:
 	await advance(true, a, 26, .20)
 	check("Every loaded chunk receives one removal signal", loaded_signals == removed_signals, {"added":loaded_signals,"removed":removed_signals})
 	check("Saved actor state contains only scalars and no node/resource references", scalar_state(streaming.get("_actor_state")))
+	streaming.call("set_low_quality", true)
+	streaming.call("pin_position", a)
+	await advance(false, a, 8)
+	var low_detail: Node3D = actor()
+	check("Low quality keeps nearby scripted actors", low_detail != null)
+	if low_detail != null:
+		check("Low quality throttles nonessential animation without changing physics ticks", is_equal_approx(float(low_detail.get_node("Ocean").get("quality_update_interval")), .1) and is_equal_approx(float(low_detail.get_node("Traffic").get("quality_update_interval")), .1))
+	streaming.call("set_interior_active", true)
+	check("Entering low-profile interior disables all outdoor detail immediately", not bool(region("a").requested) and not bool(region("a").active) and streaming.get("_pending_scene") == null)
+	current_scene = null
+	root.remove_child(world)
+	for _step: int in range(8):
+		streaming.call("step_suspended_release")
+		await process_frame
+	check("Indoor suspension releases outdoor instances with bounded per-frame work", bool(streaming.call("is_interior_release_complete")) and world.find_children("*", "", true, false).size() == baseline_nodes)
+	root.add_child(world)
+	current_scene = world
+	streaming.call("set_interior_active", false)
+	streaming.call("pin_position", a)
+	await advance(false, a, 8)
+	check("Returning from interior reloads outdoor detail normally", bool(streaming.call("is_position_ready", a)))
+	await advance(true, a, 28, .20, 115.2)
+	check("Low-profile close panorama stays on optimized overview with no detail instances", int(streaming.call("metrics").loaded_chunks) == 0 and (region("a").overview as Node3D).visible)
+	check_understory_density()
 	await physics_frame
 	check_ground(true)
 	var result: Dictionary = {"checks":checks,"count":checks.size(),"failures":failures,"fixture":"real permanent collision bases; tiny binary detail catalog; deterministic scheduler time","bridge_samples":ground_samples.size()}
-	FileAccess.open(OUTPUT, FileAccess.WRITE).store_string(JSON.stringify(result,"\t"))
+	var report_path: String = OUTPUT
+	for argument: String in OS.get_cmdline_user_args():
+		if argument.begins_with("--output="):
+			report_path = argument.trim_prefix("--output=")
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(report_path.get_base_dir()))
+	FileAccess.open(report_path, FileAccess.WRITE).store_string(JSON.stringify(result,"\t"))
 	for path: String in fixture_paths:
 		DirAccess.remove_absolute(path)
 	print("STREAMING_RUNTIME_CHECKS ", JSON.stringify({"checks":checks.size(),"failures":failures,"bridge_samples":ground_samples.size()}))
 	world.queue_free()
 	await process_frame
 	quit(0 if failures == 0 else 1)
+
+func check_understory_density() -> void:
+	var plant: MultiMeshInstance3D = MultiMeshInstance3D.new()
+	plant.multimesh = MultiMesh.new()
+	plant.multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	plant.multimesh.mesh = BoxMesh.new()
+	plant.multimesh.instance_count = 100
+	var placements: Array[Transform3D] = []
+	for index: int in range(100):
+		placements.append(Transform3D(Basis.IDENTITY, Vector3(index, 0, 0)))
+		plant.multimesh.set_instance_transform(index, placements[index])
+	plant.set_meta("placements", placements)
+	plant.set_meta("aquatic_kind", "water_lily")
+	var holder: Node3D = Node3D.new()
+	holder.add_child(plant)
+	streaming.call("_apply_chunk_quality", holder)
+	check("Low-profile noncolliding understory keeps a deterministic 60% prefix", plant.multimesh.visible_instance_count == 60)
+	check("Understory optimization retains original instance data", plant.get_meta("placements") == placements)
+	streaming.call("set_low_quality", false)
+	streaming.call("_apply_chunk_quality", holder)
+	check("Standard quality restores authored instance visibility", plant.multimesh.visible_instance_count == -1)
+	holder.free()

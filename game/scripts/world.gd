@@ -684,13 +684,8 @@ func _continue_training_room() -> void:
 	if not paused or entry_station != "wordking":
 		preparing_room = false
 		return
-	var packs: Node = get_node_or_null("/root/WebPacks")
-	if packs != null:
-		if not bool(packs.call("all_resources_ready")):
-			return
-		packs.call("request_resource", TrainingTransition.ROOM_SCENE, 200)
-		if not bool(packs.call("is_resource_ready", TrainingTransition.ROOM_SCENE)):
-			return
+	# The boot bundle contains the safe lightweight room. Its detail pack is
+	# requested by that room only after entry, never by the outdoor startup gate.
 	preparing_room = false
 	hud.call("set_preparation", "", false)
 	var transition: Node = TrainingTransition.new()
@@ -708,7 +703,7 @@ func _update_preparation_status() -> void:
 	var startup_error: String = str(packs.call("startup_error")) if packs != null else ""
 	if bool(status.get("enabled", false)) and not complete:
 		var network_done: bool = int(status.network_received_bytes) >= int(status.total_bytes)
-		startup_message = ("全部資源已下載，正在準備…" if network_done else "遊戲資源下載 %.1f / %.1f MB" % [float(status.network_received_bytes)/1000000.0, float(status.total_bytes)/1000000.0])
+		startup_message = ("戶外資源已下載，正在準備…" if network_done else "戶外遊戲資源下載 %.1f / %.1f MB" % [float(status.network_received_bytes)/1000000.0, float(status.total_bytes)/1000000.0])
 		startup_message += "\n可返回總覽或切換分頁，下載會繼續"
 		hud.call("set_background_download", startup_message if startup_error.is_empty() else startup_error, not startup_error.is_empty())
 	else:

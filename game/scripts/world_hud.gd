@@ -27,6 +27,7 @@ var settings_button: Button
 var settings_overlay: Control
 var settings_panel: PanelContainer
 var settings_scroll: ScrollContainer
+var settings_viewport: Viewport
 var msaa_button: Button
 var frame_buttons: Array[Button] = []
 var settings_status: Label
@@ -36,6 +37,7 @@ var preparation_label: Label
 var preparation_retry: Button
 var background_download_label: Label
 var background_download_retry: Button
+var quality_buttons: Array[Button] = []
 var font: Font = preload("res://assets/fonts/NotoSansTC.ttf")
 var ink: Color = Color("203e46")
 
@@ -388,6 +390,24 @@ func _build_graphics_settings(screen: Control) -> void:
 	var detail: Label = label("即時套用，並記住這台裝置的選擇。", 14, Color("647b75"))
 	detail.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	content.add_child(detail)
+	var quality_row: HBoxContainer = HBoxContainer.new()
+	quality_row.add_theme_constant_override("separation", 8)
+	content.add_child(quality_row)
+	var quality_group: ButtonGroup = ButtonGroup.new()
+	for profile: String in ["low", "standard"]:
+		var choice: Button = button("低配／省記憶體" if profile == "low" else "一般畫質", true)
+		choice.name = "QualityLow" if profile == "low" else "QualityStandard"
+		choice.toggle_mode = true
+		choice.button_group = quality_group
+		choice.focus_mode = Control.FOCUS_ALL
+		choice.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		choice.set_meta("quality_profile", profile)
+		choice.pressed.connect(func() -> void: graphics_settings.call("set_quality_profile", profile))
+		quality_row.add_child(choice)
+		quality_buttons.append(choice)
+	var quality_help: Label = label("低配：3D 最高約 720p、較少遠景細節，預設 MSAA 關／30 FPS。文字維持清晰。一般：原解析度與較完整的遠景。", 14, Color("647b75"))
+	quality_help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	content.add_child(quality_help)
 	msaa_button = button("MSAA：開啟（2×）")
 	msaa_button.name = "MSAAToggle"
 	msaa_button.focus_mode = Control.FOCUS_ALL
@@ -420,7 +440,7 @@ func _build_graphics_settings(screen: Control) -> void:
 	settings_status = label("", 13, Color("647b75"))
 	settings_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	content.add_child(settings_status)
-	var reset: Button = button("恢復預設：MSAA 開／60 FPS")
+	var reset: Button = button("恢復預設：低配／MSAA 關／30 FPS")
 	reset.name = "RestoreGraphicsDefaults"
 	reset.add_theme_font_size_override("font_size", 14)
 	reset.focus_mode = Control.FOCUS_ALL
@@ -432,12 +452,14 @@ func _build_graphics_settings(screen: Control) -> void:
 	close_settings.pressed.connect(close_graphics_settings)
 	panel_content.add_child(close_settings)
 	graphics_settings.connect("state_changed", _refresh_graphics_settings)
-	get_viewport().size_changed.connect(_resize_graphics_settings)
+	settings_viewport = get_viewport()
+	settings_viewport.size_changed.connect(_resize_graphics_settings)
 	_resize_graphics_settings()
 	_refresh_graphics_settings()
 
 func _resize_graphics_settings() -> void:
-	var available: Vector2 = get_viewport().get_visible_rect().size
+	# The retained HUD is detached indoors, but its root viewport still resizes.
+	var available: Vector2 = settings_viewport.get_visible_rect().size
 	settings_panel.custom_minimum_size.x = minf(460.0, maxf(240.0, available.x - 32.0))
 	# Keep the close action outside the scroll area, even on short landscape
 	# viewports. The remaining height covers panel margins and the footer.
@@ -445,6 +467,8 @@ func _resize_graphics_settings() -> void:
 
 func _refresh_graphics_settings() -> void:
 	var state: Dictionary = graphics_settings.call("get_state") as Dictionary
+	for choice: Button in quality_buttons:
+		choice.set_pressed_no_signal(str(choice.get_meta("quality_profile")) == str(state.get("quality_profile", "low")))
 	var enabled: bool = bool(state.get("msaa_enabled", true))
 	msaa_button.set_pressed_no_signal(enabled)
 	msaa_button.text = "MSAA：開啟（2×）" if enabled else "MSAA：關閉"

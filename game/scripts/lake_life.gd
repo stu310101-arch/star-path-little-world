@@ -2,6 +2,8 @@ extends Node3D
 
 const Geo = preload("res://scripts/planet_geometry.gd")
 var elapsed: float = 0.0
+var quality_update_interval: float = 0.0
+var _quality_accumulator: float = 0.0
 var swimmers: Array[Node3D] = []
 
 func _ready() -> void:
@@ -12,7 +14,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	elapsed += delta
+	_quality_accumulator += delta
+	if _quality_accumulator < quality_update_interval:
+		return
 	update_life(elapsed)
+	_quality_accumulator = 0.0
 
 func update_life(time: float) -> void:
 	var up: Vector3 = get_meta("district_up",Vector3.UP)

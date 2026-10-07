@@ -6,14 +6,16 @@
   'use strict';
   function createBackgroundPacks(fetchImpl, memoryLimit = 128 * 1024 * 1024) {
     const jobs = new Map();
-    let base = null, active = null, reserved = 0, peak = 0, closed = false;
+    let base = null, active = null, reserved = 0, buffered = 0, peak = 0, closed = false;
     const now = () => performance.now();
     const view = job => job ? {
       id: job.id, state: job.state, received: job.received, expected: job.bytes,
       error: job.error, started: job.started, finished: job.finished,
     } : { state: 'missing', received: 0, expected: 0, error: '' };
     function dropBuffer(job) {
-      if (job.buffer) { reserved -= job.bytes; job.buffer = null; }
+      if (job.reserved) { reserved -= job.bytes; job.reserved = false; }
+      buffered -= job.buffered;
+      job.buffered = 0; job.chunks = []; job.head = 0;
     }
     async function download(job) {
       let reader;
@@ -31,7 +33,13 @@
           if (job.cancelled) return;
           if (done) break;
           if (job.received + value.byteLength > job.bytes) throw Error('下載內容超過預期大小，請重試。');
-          job.buffer.set(value, job.received);
+          // Retain streamed segments, not another full-pack allocation. Once
+          // Godot has written+hashed a segment, consume() drops its JS owner.
+          if (!value.byteLength) continue;
+          const bytes = value.byteLength === value.buffer.byteLength ? value : value.slice();
+          job.chunks.push({offset:job.received, bytes});
+          job.buffered += bytes.byteLength; buffered += bytes.byteLength;
+          peak = Math.max(peak, buffered);
           job.received += value.byteLength;
         }
         if (job.received !== job.bytes) throw Error('下載不完整，請重試。');
@@ -56,9 +64,7 @@
         .sort((a, b) => b.priority - a.priority);
       const job = pending[0];
       if (!job || reserved + job.bytes > memoryLimit) return;
-      try { job.buffer = new Uint8Array(job.bytes); }
-      catch { job.state = 'failed'; job.error = '暫存空間不足，請關閉其他遊戲分頁後重試。'; pump(); return; }
-      reserved += job.bytes; peak = Math.max(peak, reserved);
+      reserved += job.bytes; job.reserved = true;
       job.controller = new AbortController();
       job.state = 'downloading'; job.started = now(); active = job;
       void download(job);
@@ -76,7 +82,7 @@
           if (job.url !== url.href || job.bytes !== bytes) throw Error('Pack identity changed');
           job.priority = Math.max(job.priority, priority);
         } else {
-          job = { id, url: url.href, bytes, priority, state: 'queued', received: 0, error: '', buffer: null, started: 0, finished: 0 };
+          job = { id, url: url.href, bytes, priority, state: 'queued', received: 0, error: '', chunks:[], head:0, buffered:0, consumed:0, reserved:false, started:0, finished:0 };
           jobs.set(id, job);
         }
         pump();
@@ -84,9 +90,25 @@
       status(id) { return view(jobs.get(id)); },
       read(id, offset, count) {
         const job = jobs.get(id);
-        if (!job?.buffer || offset < 0 || count <= 0 || !Number.isSafeInteger(offset) || !Number.isSafeInteger(count))
+        if (!job || offset < job.consumed || count <= 0 || !Number.isSafeInteger(offset) || !Number.isSafeInteger(count))
           return new Uint8Array();
-        return job.buffer.subarray(offset, Math.min(job.received, offset + count));
+        for(let i=job.head;i<job.chunks.length;i++) {
+          const chunk=job.chunks[i], start=offset-chunk.offset;
+          if(start>=0 && start<chunk.bytes.byteLength)return chunk.bytes.subarray(start,Math.min(chunk.bytes.byteLength,start+count));
+        }
+        return new Uint8Array();
+      },
+      consume(id, offset) {
+        const job=jobs.get(id);
+        if(!job || !Number.isSafeInteger(offset) || offset<job.consumed || offset>job.received)throw Error('Invalid consumer offset');
+        job.consumed=offset;
+        while(job.head<job.chunks.length) {
+          const chunk=job.chunks[job.head];
+          if(chunk.offset+chunk.bytes.byteLength>offset)break;
+          buffered-=chunk.bytes.byteLength;job.buffered-=chunk.bytes.byteLength;
+          job.chunks[job.head++]=null;
+        }
+        if(job.head>=256) {job.chunks=job.chunks.slice(job.head);job.head=0;}
       },
       release(id) {
         const job = jobs.get(id);
@@ -96,7 +118,7 @@
         dropBuffer(job); jobs.delete(id); pump();
       },
       snapshot() {
-        return { transport: 'background_fetch', active: active?.id || '', buffered_bytes: reserved,
+        return { transport: 'background_fetch', active: active?.id || '', buffered_bytes: buffered, reserved_bytes:reserved,
           peak_buffered_bytes: peak, buffer_limit_bytes: memoryLimit, jobs: [...jobs.values()].map(view) };
       },
       snapshotJson() { return JSON.stringify(this.snapshot()); },

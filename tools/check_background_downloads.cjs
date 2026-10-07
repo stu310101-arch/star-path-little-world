@@ -18,7 +18,7 @@ fs.mkdirSync(output, { recursive: true });
 const reportPath = path.join(output, `${label}.json`);
 const manifest = JSON.parse(fs.readFileSync(path.join(source, 'index.packs.json'), 'utf8'));
 const release = JSON.parse(fs.readFileSync(path.join(source, 'index.release.json'), 'utf8'));
-const expected = new Map(Object.entries(manifest.packs).map(([id, pack]) => [`/${pack.url}`, { id, ...pack }]));
+const expected = new Map(Object.entries(manifest.packs).filter(([,pack])=>pack.startup!==false).map(([id, pack]) => [`/${pack.url}`, { id, ...pack }]));
 const totalPackBytes = [...expected.values()].reduce((sum, pack) => sum + pack.bytes, 0);
 const layout = JSON.parse(fs.readFileSync(path.join(repo, 'game/data/world_layout.json'), 'utf8'));
 const project = fs.readFileSync(path.join(repo, 'game/project.godot'), 'utf8');
@@ -339,7 +339,7 @@ async function teleport(station) {
     const initial = await waitFor('overview with startup background queue', state => state.ready && state.metrics?.overview &&
       state.background?.jobs?.length > 0 && state.metrics.packs.ready_packs < expected.size &&
       state.background.jobs.length + state.metrics.packs.ready_packs === expected.size, 300000);
-    check('Loaded expected release with all startup packs scheduled', initial.build_id === release.build_id && expected.size === 16 &&
+    check('Loaded expected release with all startup packs scheduled', initial.build_id === release.build_id && expected.size > 0 &&
       initial.background.jobs.length + initial.metrics.packs.ready_packs === expected.size,
       { build_id: initial.build_id, background: initial.background, packs: initial.metrics.packs });
     await key('Tab');

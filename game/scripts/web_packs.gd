@@ -7,7 +7,7 @@ const MANIFEST: String = "res://data/web_packs.json"
 const DOWNLOAD_BYTES_PER_FRAME: int = 4194304
 # A 2 ms budget limited the measured Web path to one 256 KiB chunk per
 # rendered frame, even after the entire network transfer had completed.
-# Initial play is gated on all packs; allow bounded 8 ms ingestion while
+# Initial play is gated on outdoor/startup packs; allow bounded 8 ms ingestion while
 # preserving overview input/rendering and the separate 4 MiB frame ceiling.
 const DOWNLOAD_WORK_BUDGET_USEC: int = 8000
 const READ_CHUNK_BYTES: int = 262144
@@ -42,6 +42,9 @@ var _received: int = 0
 var _mounted_bytes: int = 0
 var _all_requested: bool = false
 var _total_bytes: int = 0
+var _startup_bytes: int = 0
+var _startup_ids: Array[String] = []
+var _startup_notified: bool = false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -53,8 +56,15 @@ func _ready() -> void:
 func configure(manifest: Dictionary, base_url: String, directory: String) -> void:
 	_enabled = true
 	_packs = manifest.get("packs", {}) as Dictionary
-	for pack: Dictionary in _packs.values():
+	_total_bytes = 0
+	_startup_bytes = 0
+	_startup_ids.clear()
+	for id: String in _packs:
+		var pack: Dictionary = _packs[id]
 		_total_bytes += int(pack.bytes)
+		if bool(pack.get("startup", true)):
+			_startup_ids.append(id)
+			_startup_bytes += int(pack.bytes)
 	_resources = manifest.get("resources", {}) as Dictionary
 	_base_url = base_url
 	_directory = directory
@@ -75,7 +85,7 @@ func start_all_downloads() -> void:
 	if not _enabled or _all_requested:
 		return
 	_all_requested = true
-	for id: String in _packs:
+	for id: String in _startup_ids:
 		_request_pack(id, 20 if id == "avatar" else 0)
 
 func all_resources_ready() -> bool:
@@ -83,13 +93,28 @@ func all_resources_ready() -> bool:
 		return true
 	if not _all_requested:
 		return false
-	for id: String in _packs:
+	for id: String in _startup_ids:
 		if _states.get(id, "") != "ready":
 			return false
 	return true
 
 func startup_error() -> String:
-	return str(_errors.values()[0]) if not _errors.is_empty() else ""
+	for id: String in _startup_ids:
+		var message: String = _pack_error(id)
+		if not message.is_empty():
+			return message
+	return ""
+
+func get_resource_progress(path: String) -> Dictionary:
+	var id: String = str(_resources.get(path, ""))
+	if not _enabled or id.is_empty():
+		return {"phase":"ready", "received_bytes":0, "total_bytes":0, "ready":true, "error":""}
+	var phase: String = str(_states.get(id, "queued" if _queue.has(id) else "idle"))
+	var received: int = int(_packs[id].bytes) if phase in ["ready", "mounting"] else (_downloaded_bytes if _current == id else 0)
+	if _web_transport != null and phase not in ["ready", "mounting"]:
+		var status: JavaScriptObject = _web_transport.status(id)
+		received = int(status.received)
+	return {"phase":"error" if phase == "failed" else phase, "received_bytes":received, "total_bytes":int(_packs[id].bytes), "ready":phase == "ready", "error":_pack_error(id)}
 
 func _request_pack(id: String, priority: int) -> void:
 	# Mounting has already released its browser job. Reprioritizing it would
@@ -145,7 +170,8 @@ func _process(_delta: float) -> void:
 		_mounted_bytes += int(_packs[id].bytes)
 		_current = ""
 		pack_ready.emit(id)
-		if OS.has_feature("web") and all_resources_ready():
+		if OS.has_feature("web") and not _startup_notified and all_resources_ready():
+			_startup_notified = true
 			JavaScriptBridge.eval("window.planetAllResourcesReady = true; window.dispatchEvent(new Event('planet-content-ready'));")
 		return
 	if not _current.is_empty():
@@ -318,6 +344,7 @@ func _web_download_step() -> void:
 		_hashed_bytes += chunk.size()
 		_downloaded_bytes += chunk.size()
 		frame_bytes += chunk.size()
+		_web_transport.consume(_current, _downloaded_bytes)
 		if Time.get_ticks_usec() - started >= DOWNLOAD_WORK_BUDGET_USEC:
 			break
 	_max_download_frame_bytes = maxi(_max_download_frame_bytes, frame_bytes)
@@ -404,12 +431,16 @@ func get_status() -> Dictionary:
 	if _web_transport != null and Time.get_ticks_msec() - _web_status_ms >= 100:
 		_web_status = JSON.parse_string(str(_web_transport.snapshotJson())) as Dictionary
 		_web_status_ms = Time.get_ticks_msec()
-	var network_bytes: int = _received
+	var startup_received: int = 0
+	for id: String in _startup_ids:
+		if _states.get(id, "") in ["ready", "mounting"]:
+			startup_received += int(_packs[id].bytes)
+	var network_bytes: int = startup_received
 	if _web_transport != null:
 		for job: Dictionary in _web_status.get("jobs", []):
-			if not _states.get(str(job.id), "") in ["ready", "mounting"]:
+			if str(job.id) in _startup_ids and not _states.get(str(job.id), "") in ["ready", "mounting"]:
 				network_bytes += int(job.received)
 	else:
-		if _states.get(_current, "") == "downloading":
+		if _current in _startup_ids and _states.get(_current, "") == "downloading":
 			network_bytes += current_bytes
-	return {"enabled":_enabled, "current":_current, "state":_states.get(_current, "idle"), "downloaded_bytes":current_bytes, "expected_bytes":expected, "ready_packs":loaded, "queued_packs":_queue.size(), "received_bytes":_received, "mounted_bytes":_mounted_bytes, "errors":_errors.duplicate(), "transport":"background_fetch" if _web_transport != null else "http_client", "background":_web_status, "max_download_frame_bytes":_max_download_frame_bytes, "hashed_bytes":_hashed_bytes, "max_download_work_ms":_max_download_work_ms, "download_work_budget_ms":float(DOWNLOAD_WORK_BUDGET_USEC)/1000.0, "pack_timings":_completed.duplicate(true), "all_requested":_all_requested, "all_ready":all_resources_ready(), "total_packs":_packs.size(), "total_bytes":_total_bytes, "network_received_bytes":mini(network_bytes, _total_bytes)}
+	return {"enabled":_enabled, "current":_current, "state":_states.get(_current, "idle"), "downloaded_bytes":current_bytes, "expected_bytes":expected, "ready_packs":loaded, "queued_packs":_queue.size(), "received_bytes":_received, "mounted_bytes":_mounted_bytes, "errors":_errors.duplicate(), "transport":"background_fetch" if _web_transport != null else "http_client", "background":_web_status, "max_download_frame_bytes":_max_download_frame_bytes, "hashed_bytes":_hashed_bytes, "max_download_work_ms":_max_download_work_ms, "download_work_budget_ms":float(DOWNLOAD_WORK_BUDGET_USEC)/1000.0, "pack_timings":_completed.duplicate(true), "all_requested":_all_requested, "all_ready":all_resources_ready(), "total_packs":_packs.size(), "startup_packs":_startup_ids.size(), "all_pack_bytes":_total_bytes, "total_bytes":_startup_bytes, "network_received_bytes":mini(network_bytes, _startup_bytes)}

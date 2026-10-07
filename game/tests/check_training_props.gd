@@ -230,7 +230,19 @@ func check_inspection(id: String, painting: bool) -> void:
 	if pictures.size() == 1:
 		var picture: TextureRect = pictures[0] as TextureRect
 		if painting:
-			check("Painting viewer displays the actual Starry Night texture", picture.texture != null and picture.texture.resource_path.ends_with("starry_night.jpg"), picture.texture.resource_path if picture.texture else "missing")
+			var expected: Image = (load("res://assets/training_room/textures/starry_night.jpg") as Texture2D).get_image()
+			var actual: Image = picture.texture.get_image() if picture.texture != null else null
+			var image_error: float = 1.0
+			if actual != null and expected != null:
+				actual.resize(16, 16, Image.INTERPOLATE_LANCZOS)
+				expected.resize(16, 16, Image.INTERPOLATE_LANCZOS)
+				image_error = 0.0
+				for y: int in range(16):
+					for x: int in range(16):
+						var a: Color = actual.get_pixel(x, y)
+						var b: Color = expected.get_pixel(x, y)
+						image_error += (absf(a.r-b.r) + absf(a.g-b.g) + absf(a.b-b.b)) / 768.0
+			check("Painting viewer preserves Starry Night image content in light/detail resources", image_error < .035, image_error)
 		else:
 			var viewport: SubViewport = props.get("preview") as SubViewport
 			check(id + " has a rendered object inspection viewport", viewport != null and picture.texture is ViewportTexture)

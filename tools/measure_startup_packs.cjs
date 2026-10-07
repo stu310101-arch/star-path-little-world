@@ -5,16 +5,29 @@ const fs=require('node:fs'); const path=require('node:path');
 const url=process.argv[2], label=process.argv[3];
 const noGLTiming=process.argv.includes('--no-gl-timing');
 const waitAllPacks=process.argv.includes('--wait-all-packs');
+const persistentBrowser=process.argv.includes('--persistent-browser');
 if (!url || !label || !['localhost','127.0.0.1'].includes(new URL(url).hostname)) throw Error('localhost URL and label required');
 const out=path.resolve('deliverables/startup-packs');fs.mkdirSync(out,{recursive:true});
-const report={url,label,started:new Date().toISOString(),instrumentation:noGLTiming?'passive':'gl-api-wall',waitAllPacks,runs:[],errors:[],errorDetails:[]};
+const report={url,label,started:new Date().toISOString(),instrumentation:noGLTiming?'passive':'gl-api-wall',waitAllPacks,persistentBrowser,runs:[],errors:[],errorDetails:[]};
 let browser;
 const save=()=>fs.writeFileSync(path.join(out,`${label}.json`),JSON.stringify(report,null,2));
 const watchdog=setTimeout(async()=>{report.errors.push('8 minute watchdog');save();if(browser)await browser.close().catch(()=>{});process.exit(1);},480000);
 (async()=>{
- browser=await chromium.launch({channel:'chrome',headless:true});
- report.browser=browser.version(); report.viewport={width:1200,height:800};
- const context=await browser.newContext({viewport:report.viewport});
+ report.viewport={width:1200,height:800};
+ let context;
+ if(persistentBrowser){
+  // An isolated regular Chrome profile exercises ordinary disk HTTP caching.
+  // Incognito contexts may decline to retain large PCK/WASM responses. This is
+  // a QA fixture, not an application cache or the user's actual browser profile.
+  const parent=path.resolve('build/cache-test-profiles');fs.mkdirSync(parent,{recursive:true});
+  report.profilePath=fs.mkdtempSync(path.join(parent,'startup-'));
+  context=await chromium.launchPersistentContext(report.profilePath,{channel:'chrome',headless:true,viewport:report.viewport});
+  browser=context.browser();
+ }else{
+  browser=await chromium.launch({channel:'chrome',headless:true});
+  context=await browser.newContext({viewport:report.viewport});
+ }
+ report.browser=browser.version();
  const page=await context.newPage(); const cdp=await context.newCDPSession(page);
  await cdp.send('Network.enable'); let net=new Map();
  const heartbeat=setInterval(()=>{report.pendingNetwork=[...net.values()];save();},10000);heartbeat.unref();

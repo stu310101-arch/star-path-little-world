@@ -7,8 +7,9 @@ const path = require('node:path');
 
 const args = process.argv.slice(2);
 const crosswalkOnly = args.includes('--crosswalk-only');
+const settingsOnly = args.includes('--settings-only');
 const positional = args.filter(arg => !arg.startsWith('--'));
-if (args.some(arg => arg.startsWith('--') && arg !== '--crosswalk-only')) throw new Error('Unknown QA option');
+if (args.some(arg => arg.startsWith('--') && !['--crosswalk-only','--settings-only'].includes(arg))) throw new Error('Unknown QA option');
 const repo = path.resolve(__dirname, '..');
 const url = new URL(positional[0] || 'http://127.0.0.1:8947/build/web/index.html');
 if (!['localhost', '127.0.0.1', '[::1]'].includes(url.hostname)) {
@@ -35,7 +36,7 @@ fs.mkdirSync(out, { recursive: true });
 const reportPath = path.join(out, `${label}.json`);
 const report = {
   label, url: url.href, started: new Date().toISOString(), viewport: { width: 1200, height: 800 },
-  mode: crosswalkOnly ? 'crosswalk-only' : 'full-functional',
+  mode: settingsOnly ? 'settings-only' : crosswalkOnly ? 'crosswalk-only' : 'full-functional',
   checks: [], events: [], snapshots: [], errors: [], unmeasured: [],
   expected_release: {path:localReleasePath,build_id:localRelease.build_id,source_sha256:localRelease.source_sha256,pck:localRelease.files?.['index.pck']},
   godot_viewport: {...baseViewport,stretch_aspect:stretchAspect},
@@ -201,7 +202,10 @@ async function closeSettings() {
 
 async function settingsRoute() {
   await openSettings();
-  await graphicsChoice('RestoreGraphicsDefaults', g => g.msaa_enabled && g.applied_msaa === 1 && g.frame_limit === 60 && g.applied_max_fps === 60);
+  await graphicsChoice('RestoreGraphicsDefaults', g => g.quality_profile === 'low' && !g.msaa_enabled && g.applied_msaa === 0 && g.frame_limit === 30 && g.applied_max_fps === 30 && g.scaling_3d_scale <= 1);
+  await verifyRenderSize('low');
+  await graphicsChoice('QualityStandard', g => g.quality_profile === 'standard' && g.msaa_enabled && g.applied_msaa === 1 && g.frame_limit === 60 && g.scaling_3d_scale === 1);
+  await verifyRenderSize('standard');
   await graphicsChoice('MSAAToggle', g => !g.msaa_enabled && g.applied_msaa === 0);
   await graphicsChoice('MSAAToggle', g => g.msaa_enabled && g.applied_msaa === 1);
   for (const fps of [30, 60, 90]) await graphicsChoice(`FPS${fps}`, g => g.frame_limit === fps && g.applied_max_fps === fps);
@@ -212,9 +216,9 @@ async function settingsRoute() {
   await page.reload({ waitUntil: 'domcontentloaded', timeout: 180000 });
   await verifyRelease('persistence reload');
   const persisted = await waitWorld();
-  check('Web reload persists 90 FPS / MSAA off', persisted.metrics.graphics.frame_limit === 90 && !persisted.metrics.graphics.msaa_enabled, persisted.metrics.graphics);
+  check('Web reload persists standard / 90 FPS / MSAA off', persisted.metrics.graphics.quality_profile === 'standard' && persisted.metrics.graphics.frame_limit === 90 && !persisted.metrics.graphics.msaa_enabled, persisted.metrics.graphics);
   await openSettings();
-  await graphicsChoice('RestoreGraphicsDefaults', g => g.msaa_enabled && g.frame_limit === 60 && g.applied_msaa === 1 && g.applied_max_fps === 60);
+  await graphicsChoice('RestoreGraphicsDefaults', g => g.quality_profile === 'low' && !g.msaa_enabled && g.frame_limit === 30 && g.applied_msaa === 0 && g.applied_max_fps === 30);
   await closeSettings();
   await page.setViewportSize({ width: 390, height: 844 });
   await delay(2000);
@@ -225,6 +229,17 @@ async function settingsRoute() {
   await closeSettings();
   await page.setViewportSize(report.viewport);
   await delay(2000);
+  await verifyRenderSize('low after resize');
+}
+
+async function verifyRenderSize(label) {
+  await page.evaluate(() => window.__graphicsViewports.clear());
+  await delay(2000);
+  const evidence = await page.evaluate(() => ({graphics:window.planetPerformance?.graphics, sizes:[...window.__graphicsViewports]}));
+  const g = evidence.graphics, low = label.startsWith('low');
+  const has = size => evidence.sizes.some(value => value.split('x').every((v,i)=>Math.abs(Number(v)-size[i])<=1));
+  check('Actual WebGL 3D and UI buffers: ' + label, Boolean(g) && has(g.ui_pixels) && has(g.internal_3d_pixels) &&
+    (low ? g.scaling_3d_scale < 1 && g.internal_3d_pixels[1] <= 720 && g.ui_pixels[1] > 720 : g.scaling_3d_scale === 1), evidence);
 }
 
 async function destination(station) {
@@ -409,10 +424,17 @@ async function repetitionRoute() {
   try {
     save();
     console.log('START', label, url.href);
-    browserServer = await chromium.launchServer({channel:'chrome',headless:true,args:['--enable-unsafe-swiftshader']});
+    browserServer = await chromium.launchServer({channel:'chrome',headless:true});
     browser = await chromium.connect(browserServer.wsEndpoint());
     report.browser = browser.version();
     const context = await browser.newContext({viewport:report.viewport});
+    await context.addInitScript(() => {
+      window.__graphicsViewports = new Set();
+      for (const type of [window.WebGLRenderingContext, window.WebGL2RenderingContext]) {
+        const original = type?.prototype.viewport;
+        if (original) type.prototype.viewport = function(x,y,w,h) {window.__graphicsViewports.add(`${w}x${h}`);return original.call(this,x,y,w,h);};
+      }
+    });
     page = await context.newPage();
     page.setDefaultTimeout(30000);
     page.on('pageerror', error => {report.errors.push(String(error));save();});
@@ -428,10 +450,10 @@ async function repetitionRoute() {
     await screenshot('initial-overview');
     if (!crosswalkOnly) {
       await settingsRoute();
-      for (const station of stations) await stationRoute(station);
+      if (!settingsOnly) for (const station of stations) await stationRoute(station);
     }
-    await cameraAndWalkingRoute();
-    if (!crosswalkOnly) await repetitionRoute();
+    if (!settingsOnly) await cameraAndWalkingRoute();
+    if (!crosswalkOnly && !settingsOnly) await repetitionRoute();
   } catch (error) {
     report.errors.push(String(error.stack || error));
     if (page && !page.isClosed()) await screenshot('failure').catch(() => {});
@@ -447,8 +469,8 @@ async function repetitionRoute() {
           await waitFor('preparation or interaction cancelled for default restoration', state => !state.room && !state.metrics?.preparing_roam && !state.metrics?.player?.paused);
         }
         await openSettings();
-        await graphicsChoice('RestoreGraphicsDefaults', g => g.msaa_enabled && g.frame_limit === 60 && g.applied_msaa === 1 && g.applied_max_fps === 60);
-        check('QA restores original graphics defaults', true, (await snapshot()).metrics.graphics);
+        await graphicsChoice('RestoreGraphicsDefaults', g => g.quality_profile === 'low' && !g.msaa_enabled && g.frame_limit === 30 && g.applied_msaa === 0 && g.applied_max_fps === 30);
+        check('QA restores low graphics defaults', true, (await snapshot()).metrics.graphics);
       } catch (error) { report.errors.push(`Default restoration incomplete: ${error.message}`); }
     }
     report.finished = new Date().toISOString();

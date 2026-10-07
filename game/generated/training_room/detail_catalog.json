@@ -1,0 +1,614 @@
+{
+	"material_count": 25,
+	"meshes": [
+		{
+			"node": "BOOK_01/SM_BOOK_01_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_000.res"
+		},
+		{
+			"node": "BOOK_01/SM_BOOK_01_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_001.res"
+		},
+		{
+			"node": "BOOK_01/SM_BOOK_01_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_002.res"
+		},
+		{
+			"node": "BOOK_02/SM_BOOK_02_Soft_Teal_Upholstery",
+			"resource": "res://generated/training_room/detail/mesh_003.res"
+		},
+		{
+			"node": "BOOK_02/SM_BOOK_02_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_004.res"
+		},
+		{
+			"node": "BOOK_02/SM_BOOK_02_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_005.res"
+		},
+		{
+			"node": "BOOK_03/SM_BOOK_03_Oak_Edge",
+			"resource": "res://generated/training_room/detail/mesh_006.res"
+		},
+		{
+			"node": "BOOK_03/SM_BOOK_03_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_007.res"
+		},
+		{
+			"node": "BOOK_03/SM_BOOK_03_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_008.res"
+		},
+		{
+			"node": "BOOK_04/SM_BOOK_04_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_009.res"
+		},
+		{
+			"node": "BOOK_04/SM_BOOK_04_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_010.res"
+		},
+		{
+			"node": "BOOK_05/SM_BOOK_05_Soft_Teal_Upholstery",
+			"resource": "res://generated/training_room/detail/mesh_011.res"
+		},
+		{
+			"node": "BOOK_05/SM_BOOK_05_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_012.res"
+		},
+		{
+			"node": "BOOK_05/SM_BOOK_05_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_013.res"
+		},
+		{
+			"node": "BOOK_06/SM_BOOK_06_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_014.res"
+		},
+		{
+			"node": "BOOK_06/SM_BOOK_06_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_015.res"
+		},
+		{
+			"node": "BOOK_06/SM_BOOK_06_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_016.res"
+		},
+		{
+			"node": "BOOK_07/SM_BOOK_07_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_017.res"
+		},
+		{
+			"node": "BOOK_07/SM_BOOK_07_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_018.res"
+		},
+		{
+			"node": "BOOK_07/SM_BOOK_07_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_019.res"
+		},
+		{
+			"node": "BOOK_08/SM_BOOK_08_Oak_Edge",
+			"resource": "res://generated/training_room/detail/mesh_020.res"
+		},
+		{
+			"node": "BOOK_08/SM_BOOK_08_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_021.res"
+		},
+		{
+			"node": "BOOK_08/SM_BOOK_08_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_022.res"
+		},
+		{
+			"node": "BOOK_09/SM_BOOK_09_Soft_Teal_Upholstery",
+			"resource": "res://generated/training_room/detail/mesh_023.res"
+		},
+		{
+			"node": "BOOK_09/SM_BOOK_09_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_024.res"
+		},
+		{
+			"node": "BOOK_09/SM_BOOK_09_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_025.res"
+		},
+		{
+			"node": "BOOK_10/SM_BOOK_10_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_026.res"
+		},
+		{
+			"node": "BOOK_10/SM_BOOK_10_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_027.res"
+		},
+		{
+			"node": "BOOK_11/SM_BOOK_11_Soft_Teal_Upholstery",
+			"resource": "res://generated/training_room/detail/mesh_028.res"
+		},
+		{
+			"node": "BOOK_11/SM_BOOK_11_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_029.res"
+		},
+		{
+			"node": "BOOK_11/SM_BOOK_11_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_030.res"
+		},
+		{
+			"node": "BOOK_12/SM_BOOK_12_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_031.res"
+		},
+		{
+			"node": "BOOK_12/SM_BOOK_12_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_032.res"
+		},
+		{
+			"node": "BOOK_12/SM_BOOK_12_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_033.res"
+		},
+		{
+			"node": "BOOK_13/SM_BOOK_13_Oak_Edge",
+			"resource": "res://generated/training_room/detail/mesh_034.res"
+		},
+		{
+			"node": "BOOK_13/SM_BOOK_13_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_035.res"
+		},
+		{
+			"node": "BOOK_13/SM_BOOK_13_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_036.res"
+		},
+		{
+			"node": "CABINET_DOOR_01/SM_CABINET_DOOR_01_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_037.res"
+		},
+		{
+			"node": "CABINET_DOOR_01/SM_CABINET_DOOR_01_Display_Glass",
+			"resource": "res://generated/training_room/detail/mesh_038.res"
+		},
+		{
+			"node": "CABINET_DOOR_01/SM_CABINET_DOOR_01_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_039.res"
+		},
+		{
+			"node": "CABINET_DOOR_02/SM_CABINET_DOOR_02_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_040.res"
+		},
+		{
+			"node": "CABINET_DOOR_02/SM_CABINET_DOOR_02_Display_Glass",
+			"resource": "res://generated/training_room/detail/mesh_041.res"
+		},
+		{
+			"node": "CABINET_DOOR_02/SM_CABINET_DOOR_02_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_042.res"
+		},
+		{
+			"node": "CABINET_DOOR_03/SM_CABINET_DOOR_03_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_043.res"
+		},
+		{
+			"node": "CABINET_DOOR_03/SM_CABINET_DOOR_03_Display_Glass",
+			"resource": "res://generated/training_room/detail/mesh_044.res"
+		},
+		{
+			"node": "CABINET_DOOR_03/SM_CABINET_DOOR_03_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_045.res"
+		},
+		{
+			"node": "CABINET_DOOR_04/SM_CABINET_DOOR_04_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_046.res"
+		},
+		{
+			"node": "CABINET_DOOR_04/SM_CABINET_DOOR_04_Display_Glass",
+			"resource": "res://generated/training_room/detail/mesh_047.res"
+		},
+		{
+			"node": "CABINET_DOOR_04/SM_CABINET_DOOR_04_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_048.res"
+		},
+		{
+			"node": "CABINET_DOOR_05/SM_CABINET_DOOR_05_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_049.res"
+		},
+		{
+			"node": "CABINET_DOOR_05/SM_CABINET_DOOR_05_Display_Glass",
+			"resource": "res://generated/training_room/detail/mesh_050.res"
+		},
+		{
+			"node": "CABINET_DOOR_05/SM_CABINET_DOOR_05_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_051.res"
+		},
+		{
+			"node": "CABINET_DOOR_06/SM_CABINET_DOOR_06_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_052.res"
+		},
+		{
+			"node": "CABINET_DOOR_06/SM_CABINET_DOOR_06_Display_Glass",
+			"resource": "res://generated/training_room/detail/mesh_053.res"
+		},
+		{
+			"node": "CABINET_DOOR_06/SM_CABINET_DOOR_06_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_054.res"
+		},
+		{
+			"node": "DECOR_Botanical/SM_DECOR_Botanical_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_055.res"
+		},
+		{
+			"node": "DECOR_Botanical/SM_DECOR_Botanical_Honey_Oak",
+			"resource": "res://generated/training_room/detail/mesh_056.res"
+		},
+		{
+			"node": "DECOR_Botanical/SM_DECOR_Botanical_Oak_Edge",
+			"resource": "res://generated/training_room/detail/mesh_057.res"
+		},
+		{
+			"node": "DECOR_Botanical/SM_DECOR_Botanical_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_058.res"
+		},
+		{
+			"node": "DECOR_Botanical/SM_DECOR_Botanical_Soft_Teal_Upholstery",
+			"resource": "res://generated/training_room/detail/mesh_059.res"
+		},
+		{
+			"node": "DECOR_Botanical/SM_DECOR_Botanical_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_060.res"
+		},
+		{
+			"node": "DECOR_Botanical/SM_DECOR_Botanical_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_061.res"
+		},
+		{
+			"node": "DECOR_Console/SM_DECOR_Console_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_062.res"
+		},
+		{
+			"node": "DECOR_Console/SM_DECOR_Console_Honey_Oak",
+			"resource": "res://generated/training_room/detail/mesh_063.res"
+		},
+		{
+			"node": "DECOR_Console/SM_DECOR_Console_Oak_Edge",
+			"resource": "res://generated/training_room/detail/mesh_064.res"
+		},
+		{
+			"node": "DECOR_Console/SM_DECOR_Console_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_065.res"
+		},
+		{
+			"node": "DECOR_Console/SM_DECOR_Console_Soft_Teal_Upholstery",
+			"resource": "res://generated/training_room/detail/mesh_066.res"
+		},
+		{
+			"node": "DECOR_Console/SM_DECOR_Console_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_067.res"
+		},
+		{
+			"node": "DECOR_Console/SM_DECOR_Console_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_068.res"
+		},
+		{
+			"node": "LAMP_Reading/SM_LAMP_Reading_Cream_Lamp",
+			"resource": "res://generated/training_room/detail/mesh_069.res"
+		},
+		{
+			"node": "PAINTING_StarryNight/SM_PAINTING_StarryNight_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_070.res"
+		},
+		{
+			"node": "PAINTING_StarryNight/SM_PAINTING_StarryNight_Honey_Oak",
+			"resource": "res://generated/training_room/detail/mesh_071.res"
+		},
+		{
+			"node": "PAINTING_StarryNight/SM_PAINTING_StarryNight_Starry_Night_Canvas",
+			"resource": "res://generated/training_room/detail/mesh_072.res"
+		},
+		{
+			"node": "PAINTING_StarryNight/SM_PAINTING_StarryNight_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_073.res"
+		},
+		{
+			"node": "SCREEN_01/SM_SCREEN_01_Screen_Ink",
+			"resource": "res://generated/training_room/detail/mesh_074.res"
+		},
+		{
+			"node": "SCREEN_01/SM_SCREEN_01_Soft_Aqua_Light",
+			"resource": "res://generated/training_room/detail/mesh_075.res"
+		},
+		{
+			"node": "SCREEN_02/SM_SCREEN_02_Screen_Ink",
+			"resource": "res://generated/training_room/detail/mesh_076.res"
+		},
+		{
+			"node": "SCREEN_02/SM_SCREEN_02_Soft_Aqua_Light",
+			"resource": "res://generated/training_room/detail/mesh_077.res"
+		},
+		{
+			"node": "SCREEN_03/SM_SCREEN_03_Screen_Ink",
+			"resource": "res://generated/training_room/detail/mesh_078.res"
+		},
+		{
+			"node": "SCREEN_03/SM_SCREEN_03_Soft_Aqua_Light",
+			"resource": "res://generated/training_room/detail/mesh_079.res"
+		},
+		{
+			"node": "SM_Architecture_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_080.res"
+		},
+		{
+			"node": "SM_Architecture_Honey_Oak",
+			"resource": "res://generated/training_room/detail/mesh_081.res"
+		},
+		{
+			"node": "SM_Architecture_Limestone",
+			"resource": "res://generated/training_room/detail/mesh_082.res"
+		},
+		{
+			"node": "SM_Architecture_Limestone_Alternate",
+			"resource": "res://generated/training_room/detail/mesh_083.res"
+		},
+		{
+			"node": "SM_Architecture_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_084.res"
+		},
+		{
+			"node": "SM_Architecture_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_085.res"
+		},
+		{
+			"node": "SM_Backdrop_Honey_Oak",
+			"resource": "res://generated/training_room/detail/mesh_086.res"
+		},
+		{
+			"node": "SM_Backdrop_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_087.res"
+		},
+		{
+			"node": "SM_Backdrop_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_088.res"
+		},
+		{
+			"node": "SM_Backdrop_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_089.res"
+		},
+		{
+			"node": "SM_Device_Cream_Lamp",
+			"resource": "res://generated/training_room/detail/mesh_090.res"
+		},
+		{
+			"node": "SM_Device_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_091.res"
+		},
+		{
+			"node": "SM_Device_Hologram_Beam",
+			"resource": "res://generated/training_room/detail/mesh_092.res"
+		},
+		{
+			"node": "SM_Device_Hologram_Cyan",
+			"resource": "res://generated/training_room/detail/mesh_093.res"
+		},
+		{
+			"node": "SM_Device_Hologram_Glass",
+			"resource": "res://generated/training_room/detail/mesh_094.res"
+		},
+		{
+			"node": "SM_Device_Hologram_Grid",
+			"resource": "res://generated/training_room/detail/mesh_095.res"
+		},
+		{
+			"node": "SM_Device_Hologram_Type",
+			"resource": "res://generated/training_room/detail/mesh_096.res"
+		},
+		{
+			"node": "SM_Device_Projector_Blue_Inlay",
+			"resource": "res://generated/training_room/detail/mesh_097.res"
+		},
+		{
+			"node": "SM_Device_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_098.res"
+		},
+		{
+			"node": "SM_Display_Cream_Lamp",
+			"resource": "res://generated/training_room/detail/mesh_099.res"
+		},
+		{
+			"node": "SM_Display_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_100.res"
+		},
+		{
+			"node": "SM_Display_Honey_Oak",
+			"resource": "res://generated/training_room/detail/mesh_101.res"
+		},
+		{
+			"node": "SM_Display_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_102.res"
+		},
+		{
+			"node": "SM_Display_Soft_Aqua_Light",
+			"resource": "res://generated/training_room/detail/mesh_103.res"
+		},
+		{
+			"node": "SM_Display_Warm_Inlay",
+			"resource": "res://generated/training_room/detail/mesh_104.res"
+		},
+		{
+			"node": "SM_Display_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_105.res"
+		},
+		{
+			"node": "SM_Display_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_106.res"
+		},
+		{
+			"node": "SM_Enclosure_Cream_Lamp",
+			"resource": "res://generated/training_room/detail/mesh_107.res"
+		},
+		{
+			"node": "SM_Enclosure_Honey_Oak",
+			"resource": "res://generated/training_room/detail/mesh_108.res"
+		},
+		{
+			"node": "SM_Enclosure_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_109.res"
+		},
+		{
+			"node": "SM_Gaming_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_110.res"
+		},
+		{
+			"node": "SM_Gaming_Honey_Oak",
+			"resource": "res://generated/training_room/detail/mesh_111.res"
+		},
+		{
+			"node": "SM_Gaming_Oatmeal_Rug",
+			"resource": "res://generated/training_room/detail/mesh_112.res"
+		},
+		{
+			"node": "SM_Gaming_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_113.res"
+		},
+		{
+			"node": "SM_Gaming_Soft_Aqua_Light",
+			"resource": "res://generated/training_room/detail/mesh_114.res"
+		},
+		{
+			"node": "SM_Gaming_Soft_Teal_Upholstery",
+			"resource": "res://generated/training_room/detail/mesh_115.res"
+		},
+		{
+			"node": "SM_Gaming_Warm_Inlay",
+			"resource": "res://generated/training_room/detail/mesh_116.res"
+		},
+		{
+			"node": "SM_Gaming_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_117.res"
+		},
+		{
+			"node": "SM_Inlays_Cream_Lamp",
+			"resource": "res://generated/training_room/detail/mesh_118.res"
+		},
+		{
+			"node": "SM_Inlays_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_119.res"
+		},
+		{
+			"node": "SM_Inlays_Soft_Aqua_Light",
+			"resource": "res://generated/training_room/detail/mesh_120.res"
+		},
+		{
+			"node": "SM_Inlays_Warm_Inlay",
+			"resource": "res://generated/training_room/detail/mesh_121.res"
+		},
+		{
+			"node": "SM_Lounge_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_122.res"
+		},
+		{
+			"node": "SM_Lounge_Honey_Oak",
+			"resource": "res://generated/training_room/detail/mesh_123.res"
+		},
+		{
+			"node": "SM_Lounge_Oatmeal_Rug",
+			"resource": "res://generated/training_room/detail/mesh_124.res"
+		},
+		{
+			"node": "SM_Lounge_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_125.res"
+		},
+		{
+			"node": "SM_Lounge_Soft_Teal_Upholstery",
+			"resource": "res://generated/training_room/detail/mesh_126.res"
+		},
+		{
+			"node": "SM_Lounge_Warm_Inlay",
+			"resource": "res://generated/training_room/detail/mesh_127.res"
+		},
+		{
+			"node": "SM_Lounge_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_128.res"
+		},
+		{
+			"node": "SM_Lounge_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_129.res"
+		},
+		{
+			"node": "SM_Plants_Plant_Highlight",
+			"resource": "res://generated/training_room/detail/mesh_130.res"
+		},
+		{
+			"node": "SM_Plants_Plant_Sage",
+			"resource": "res://generated/training_room/detail/mesh_131.res"
+		},
+		{
+			"node": "SM_Plants_Pot_Soil",
+			"resource": "res://generated/training_room/detail/mesh_132.res"
+		},
+		{
+			"node": "SM_Plants_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_133.res"
+		},
+		{
+			"node": "SM_Plants_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_134.res"
+		},
+		{
+			"node": "SM_Portal_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_135.res"
+		},
+		{
+			"node": "SM_Portal_Hologram_Grid",
+			"resource": "res://generated/training_room/detail/mesh_136.res"
+		},
+		{
+			"node": "SM_Portal_Honey_Oak",
+			"resource": "res://generated/training_room/detail/mesh_137.res"
+		},
+		{
+			"node": "SM_Portal_Limestone",
+			"resource": "res://generated/training_room/detail/mesh_138.res"
+		},
+		{
+			"node": "SM_Portal_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_139.res"
+		},
+		{
+			"node": "SM_Portal_Soft_Aqua_Light",
+			"resource": "res://generated/training_room/detail/mesh_140.res"
+		},
+		{
+			"node": "SM_Portal_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_141.res"
+		},
+		{
+			"node": "SM_Woodwork_Cream_Lamp",
+			"resource": "res://generated/training_room/detail/mesh_142.res"
+		},
+		{
+			"node": "SM_Woodwork_Deep_Teal_Frame",
+			"resource": "res://generated/training_room/detail/mesh_143.res"
+		},
+		{
+			"node": "SM_Woodwork_Honey_Oak",
+			"resource": "res://generated/training_room/detail/mesh_144.res"
+		},
+		{
+			"node": "SM_Woodwork_Oak_Edge",
+			"resource": "res://generated/training_room/detail/mesh_145.res"
+		},
+		{
+			"node": "SM_Woodwork_Oatmeal_Rug",
+			"resource": "res://generated/training_room/detail/mesh_146.res"
+		},
+		{
+			"node": "SM_Woodwork_Sage_Fabric",
+			"resource": "res://generated/training_room/detail/mesh_147.res"
+		},
+		{
+			"node": "SM_Woodwork_Soft_Teal_Upholstery",
+			"resource": "res://generated/training_room/detail/mesh_148.res"
+		},
+		{
+			"node": "SM_Woodwork_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_149.res"
+		},
+		{
+			"node": "SM_Woodwork_WordKing_Champagne",
+			"resource": "res://generated/training_room/detail/mesh_150.res"
+		},
+		{
+			"node": "TEA_Cup/SM_TEA_Cup_Warm_Plaster",
+			"resource": "res://generated/training_room/detail/mesh_151.res"
+		}
+	],
+	"version": 1
+}

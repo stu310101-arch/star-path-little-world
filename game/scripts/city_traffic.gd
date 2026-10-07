@@ -2,6 +2,8 @@ extends Node3D
 
 const Geo = preload("res://scripts/planet_geometry.gd")
 var elapsed: float = 0.0
+var quality_update_interval: float = 0.0
+var _quality_accumulator: float = 0.0
 var radius: float = 36.0
 var route: PackedVector2Array = PackedVector2Array()
 var distances: PackedFloat32Array = PackedFloat32Array()
@@ -36,7 +38,11 @@ func sample_route(distance: float) -> Vector2:
 
 func _process(delta: float) -> void:
 	elapsed += delta
-	update_traffic(delta)
+	_quality_accumulator += delta
+	if _quality_accumulator < quality_update_interval:
+		return
+	update_traffic(_quality_accumulator)
+	_quality_accumulator = 0.0
 
 func update_traffic(delta: float) -> void:
 	if route.is_empty():

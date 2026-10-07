@@ -13,15 +13,17 @@ func _initialize() -> void:
 		push_error("Usage: --script res://tools/collect_web_pack_dependencies.gd -- output.json")
 		quit(2)
 		return
-	var boot: Array[String] = ["res://scenes/world.tscn", "res://generated/streaming/catalog.json"]
+	var boot: Array[String] = ["res://scenes/world.tscn", "res://generated/streaming/catalog.json", "res://scenes/training_room.tscn", "res://generated/training_room/light.scn", "res://assets/training_room/layout.json"]
 	_append_files("res://scripts", boot, ["gd"])
 	_append_files("res://data", boot, ["json"])
 	# The pack manifest is injected by the post-export splitter, never reused
 	# from a previous build in the source tree.
 	boot.erase("res://data/web_packs.json")
 	groups["boot"] = boot
-	groups["avatar"] = ["res://assets/character/graduate.glb", "res://assets/character/graduate_jump.glb", "res://assets/character/graduate_rest.glb"]
-	groups["training_room"] = ["res://scenes/training_room.tscn", "res://assets/training_room/wordking_training_room.glb", "res://assets/training_room/layout.json", "res://assets/training_room/textures/starry_night.jpg"]
+	groups["avatar"] = ["res://assets/character/runtime/graduate.glb", "res://assets/character/runtime/graduate_jump.glb", "res://assets/character/graduate_rest.glb"]
+	var interior: Array[String] = ["res://generated/training_room/detail_catalog.json"]
+	_append_files("res://generated/training_room/detail", interior, ["res"])
+	groups["training_room"] = interior
 	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://generated/streaming/catalog.json")) as Dictionary
 	for district: Dictionary in catalog.get("districts", []):
 		var paths: Array[String] = []

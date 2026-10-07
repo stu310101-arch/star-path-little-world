@@ -165,8 +165,28 @@ func run() -> void:
 	await process_frame
 	await check_mounting_retry()
 	await check_http_framing()
+	check_indoor_startup_partition()
 	print("WEB_PACK_CHECKS ", checks - failures.size(), "/", checks, " failures=", failures)
 	quit(0 if failures.is_empty() else 1)
+
+func check_indoor_startup_partition() -> void:
+	var loader: Loader = Loader.new()
+	root.add_child(loader)
+	loader.set_process(false)
+	var manifest: Dictionary = {"packs":{"outside":{"url":"outside.pck", "bytes":100, "dependencies":[]}, "training_room":{"url":"inside.pck", "bytes":200, "dependencies":["outside"], "startup":false}}, "resources":{"res://inside.res":"training_room"}}
+	loader.configure(manifest, "http://127.0.0.1:8947/", fixture_dir.path_join("partition"))
+	loader.start_all_downloads()
+	check(loader._queue.has("outside") and not loader._queue.has("training_room"), "startup excludes complete indoor pack")
+	loader._states["outside"] = "ready"
+	check(loader.all_resources_ready(), "unrequested indoor detail does not block roaming")
+	loader._errors["training_room"] = "fixture failure"
+	check(loader.startup_error().is_empty(), "indoor failure does not block outdoor play")
+	loader._errors.clear()
+	loader.request_resource("res://inside.res", 200)
+	check(loader._queue.has("training_room"), "indoor entry requests its complete pack")
+	check(int(loader.get_status().total_bytes) == 100 and int(loader.get_status().all_pack_bytes) == 300, "startup progress excludes on-demand bytes")
+	check(str(loader.get_resource_progress("res://inside.res").phase) == "queued", "indoor progress distinguishes queued phase")
+	loader.free()
 
 func check_mounting_retry() -> void:
 	var base: String = "res://pack_fixture/retry_base.txt"

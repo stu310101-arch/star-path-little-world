@@ -6,6 +6,13 @@ const SakuraRoutes = preload("res://scripts/sakura_routes.gd")
 const SEA: Color = Color("173f4b")
 const WATER: Color = Color("4a8990")
 const WALK: Color = Color("e9d4a7")
+
+class NavigationOverlay:
+	extends Control
+	var map: Control
+	func _draw() -> void:
+		map.call("_draw_navigation_on", self, map.get_theme_default_font())
+
 var world: Node3D
 var player: PlanetPlayer
 var radius: float = 48.0
@@ -22,12 +29,30 @@ var frame_ready: bool = false
 var refresh_clock: float = 0.0
 var location_label: Label
 var current_location: String = "附近地圖"
+var _navigation: NavigationOverlay
+var _quality_settings: Node
+var _last_map_size: Vector2 = Vector2.INF
+var _last_view_range: float = -1.0
+var _cartography_dirty: bool = true
+var _projected_lines: Dictionary = {}
+var _drawing_map: bool = false
+var _map_draws: int = 0
+var _skipped_refreshes: int = 0
+var _last_map_draw_ms: float = 0.0
+var _max_map_draw_ms: float = 0.0
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	clip_contents = true
 	player = world.get("player") as PlanetPlayer
 	radius = player.planet_radius
+	_quality_settings = get_tree().get_first_node_in_group("graphics_settings")
+	_navigation = NavigationOverlay.new()
+	_navigation.name = "NavigationOverlay"
+	_navigation.map = self
+	_navigation.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_navigation)
+	_navigation.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	build_cartography()
 	refresh()
 
@@ -139,6 +164,7 @@ func build_patch(row: Dictionary, index: int, up: Vector3) -> Dictionary:
 	return patch
 
 func build_cartography() -> void:
+	_cartography_dirty = true
 	patches.clear()
 	bridges.clear()
 	landmarks.clear()
@@ -196,7 +222,8 @@ func build_sakura_cartography() -> void:
 
 func _process(delta: float) -> void:
 	refresh_clock += delta
-	if refresh_clock >= .05 and is_visible_in_tree():
+	var interval: float = .10 if is_instance_valid(_quality_settings) and bool(_quality_settings.call("is_low_quality")) else .05
+	if refresh_clock >= interval and is_visible_in_tree():
 		refresh_clock = 0.0
 		refresh()
 
@@ -224,15 +251,33 @@ func direction_on_map(direction: Vector3) -> Vector2:
 	return Vector2(tangent.dot(map_right), -tangent.dot(map_forward)).normalized()
 
 func refresh() -> void:
-	update_map_frame(player.global_position.normalized())
+	var normal: Vector3 = player.global_position.normalized()
+	# Radial jumping and camera motion do not change the map projection. Keep
+	# its retained canvas commands until the surface position or map size changes.
+	var map_changed: bool = _cartography_dirty or not frame_ready or centre_up.distance_squared_to(normal) > 1e-12 or size != _last_map_size or view_range != _last_view_range
+	if map_changed:
+		update_map_frame(normal)
 	# The graduate faces model-local +Z. Camera heading alone is wrong
 	# while sidestepping or walking backwards, when VisualPivot turns.
 	var facing: Vector3 = player.visual.global_basis.z if player.visual != null else player.heading
-	arrow_heading_2d = direction_on_map(facing)
-	current_location = location_at(centre_up)
-	if location_label != null:
-		location_label.text = current_location
-	queue_redraw()
+	var arrow: Vector2 = direction_on_map(facing)
+	var arrow_changed: bool = not arrow.is_equal_approx(arrow_heading_2d)
+	arrow_heading_2d = arrow
+	if map_changed:
+		current_location = location_at(centre_up)
+		if location_label != null:
+			location_label.text = current_location
+		_last_map_size = size
+		_last_view_range = view_range
+		_cartography_dirty = false
+		queue_redraw()
+	else:
+		_skipped_refreshes += 1
+	if _navigation != null and (map_changed or arrow_changed):
+		_navigation.queue_redraw()
+
+func metrics() -> Dictionary:
+	return {"map_draws":_map_draws,"skipped_refreshes":_skipped_refreshes,"last_draw_ms":_last_map_draw_ms,"max_draw_ms":_max_map_draw_ms}
 
 func patch_contains_normal(patch: Dictionary,normal: Vector3) -> bool:
 	var up: Vector3 = patch.up as Vector3
@@ -284,9 +329,22 @@ func map_scale() -> float:
 	return minf(size.x, size.y) / (2.0 * view_range)
 
 func project_line(points: PackedVector3Array) -> PackedVector2Array:
+	# Within one redraw the same coast/water is used by both fill and outline.
+	# Packed array keys retain their original immutable data; the cache is cleared
+	# after this draw, never accumulated across camera positions or districts.
+	if _drawing_map and _projected_lines.has(points):
+		return _projected_lines[points] as PackedVector2Array
 	var result: PackedVector2Array = PackedVector2Array()
+	var centre: Vector2 = size * .5
+	var scale: float = map_scale()
 	for point: Vector3 in points:
-		result.append(project_point(point))
+		var cosine: float = clampf(centre_up.dot(point), -1.0, 1.0)
+		var tangent: Vector3 = point - centre_up * cosine
+		var distance: float = acos(cosine) * radius
+		var direction: Vector3 = tangent.normalized() if tangent.length_squared() > .0000001 else Vector3.ZERO
+		result.append(centre + Vector2(direction.dot(map_right), -direction.dot(map_forward)) * distance * scale)
+	if _drawing_map:
+		_projected_lines[points] = result
 	return result
 
 func clean_polygon(points: PackedVector2Array) -> PackedVector2Array:
@@ -374,6 +432,9 @@ func _draw() -> void:
 	draw_rect(Rect2(Vector2.ZERO, size), SEA)
 	if player == null:
 		return
+	var started: int = Time.get_ticks_usec()
+	_drawing_map = true
+	_projected_lines.clear()
 	var visible_patches: Array[Dictionary] = []
 	for patch: Dictionary in patches:
 		if centre_up.dot(patch.up as Vector3) < .35:
@@ -427,28 +488,37 @@ func _draw() -> void:
 		var text: String = str(landmark.number)
 		var text_width: float = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10).x
 		draw_string(font, at + Vector2(-text_width * .5, 3.5), text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, Color("163440"))
-	draw_navigation_overlay(font)
+	_drawing_map = false
+	_projected_lines.clear()
+	_map_draws += 1
+	_last_map_draw_ms = float(Time.get_ticks_usec() - started) / 1000.0
+	_max_map_draw_ms = maxf(_max_map_draw_ms, _last_map_draw_ms)
+	if _navigation == null:
+		draw_navigation_overlay(font)
 
 func draw_navigation_overlay(font: Font) -> void:
+	_draw_navigation_on(self, font)
+
+func _draw_navigation_on(target: Control, font: Font) -> void:
 	var centre: Vector2 = size * .5
 	var rotation_angle: float = arrow_heading_2d.angle() + PI * .5
 	var arrow: PackedVector2Array = PackedVector2Array()
 	for point: Vector2 in [Vector2(0, -9), Vector2(6.5, 7), Vector2(0, 3.5), Vector2(-6.5, 7)]:
 		arrow.append(centre + point.rotated(rotation_angle))
-	draw_circle(centre, 11, Color(.04, .12, .16, .92))
-	draw_arc(centre, 11, 0, TAU, 32, Color("fff0c4"), 1.0, true)
-	draw_colored_polygon(arrow, Color("ffe1a4"))
+	target.draw_circle(centre, 11, Color(.04, .12, .16, .92))
+	target.draw_arc(centre, 11, 0, TAU, 32, Color("fff0c4"), 1.0, true)
+	target.draw_colored_polygon(arrow, Color("ffe1a4"))
 	# This rose marks the transported district reference, not camera heading.
 	var compass: Vector2 = Vector2(size.x - 18, 21)
-	draw_circle(compass, 12, Color(.06, .19, .23, .88))
-	draw_line(compass + Vector2(-7, 0), compass + Vector2(7, 0), Color("93aba4"), 1, true)
-	draw_line(compass + Vector2(0, -8), compass + Vector2(0, 7), Color("93aba4"), 1, true)
-	draw_colored_polygon(PackedVector2Array([compass + Vector2(0, -9), compass + Vector2(-3, -2), compass + Vector2(3, -2)]), Color("efdcac"))
-	draw_string(font, Vector2(size.x - 38, 46), "定向", HORIZONTAL_ALIGNMENT_LEFT, 34, 10, Color("e1e5cf"))
+	target.draw_circle(compass, 12, Color(.06, .19, .23, .88))
+	target.draw_line(compass + Vector2(-7, 0), compass + Vector2(7, 0), Color("93aba4"), 1, true)
+	target.draw_line(compass + Vector2(0, -8), compass + Vector2(0, 7), Color("93aba4"), 1, true)
+	target.draw_colored_polygon(PackedVector2Array([compass + Vector2(0, -9), compass + Vector2(-3, -2), compass + Vector2(3, -2)]), Color("efdcac"))
+	target.draw_string(font, Vector2(size.x - 38, 46), "定向", HORIZONTAL_ALIGNMENT_LEFT, 34, 10, Color("e1e5cf"))
 	var scale_start: Vector2 = Vector2(10, size.y - 12)
 	var scale_width: float = 10 * map_scale()
-	draw_rect(Rect2(scale_start + Vector2(-4, -17), Vector2(scale_width + 9, 23)), Color(.06, .19, .23, .8))
-	draw_line(scale_start, scale_start + Vector2(scale_width, 0), Color("e6edda"), 1.4)
+	target.draw_rect(Rect2(scale_start + Vector2(-4, -17), Vector2(scale_width + 9, 23)), Color(.06, .19, .23, .8))
+	target.draw_line(scale_start, scale_start + Vector2(scale_width, 0), Color("e6edda"), 1.4)
 	for end: Vector2 in [scale_start, scale_start + Vector2(scale_width, 0)]:
-		draw_line(end + Vector2(0, -3), end + Vector2(0, 2), Color("e6edda"), 1.2)
-	draw_string(font, scale_start + Vector2(0, -5), "10 m", HORIZONTAL_ALIGNMENT_LEFT, -1, 10, Color("e6edda"))
+		target.draw_line(end + Vector2(0, -3), end + Vector2(0, 2), Color("e6edda"), 1.2)
+	target.draw_string(font, scale_start + Vector2(0, -5), "10 m", HORIZONTAL_ALIGNMENT_LEFT, -1, 10, Color("e6edda"))

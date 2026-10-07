@@ -14,8 +14,10 @@ const LAND_LOCOMOTION_BLEND: float = 0.18
 # Sample the authored flip against flight/contact; keep the landing cloth
 # running after the body has recovered and can already walk or jump again.
 const JUMP_AIR_DURATION: float = 0.72
-const WALK_MODEL: String = "res://assets/character/graduate.glb"
-const JUMP_MODEL: String = "res://assets/character/graduate_jump.glb"
+# Export copies retain the skeleton/topology and bounded cloth interpolation.
+# Both remain prepared: landing samples both rigs, and loading on jump hitches.
+const WALK_MODEL: String = "res://assets/character/runtime/graduate.glb"
+const JUMP_MODEL: String = "res://assets/character/runtime/graduate_jump.glb"
 var heading: Vector3 = Vector3.FORWARD
 var controls_enabled: bool = true
 var is_resting: bool = false
@@ -57,6 +59,10 @@ var jump_rig: Node3D
 var recovery_bones: Array[Vector2i] = []
 var recovery_clip: StringName = &""
 var recovery_clock: float = 0.0
+var _locomotion_meshes: Array[MeshInstance3D] = []
+var _jump_meshes: Array[MeshInstance3D] = []
+var _locomotion_clips: Dictionary = {}
+var _jump_clips: Dictionary = {}
 # The world drives one preparation step per frame after presenting its overview.
 # No GLB is touched by _ready(), including in exported Web packs.
 var _visual_stage: int = 0
@@ -137,6 +143,7 @@ func step_prepare_visuals() -> void:
 			locomotion_animator = locomotion_model.find_child("AnimationPlayer", true, false) as AnimationPlayer
 			if locomotion_animator != null:
 				locomotion_animator.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
+			_cache_animation_parts(locomotion_model, locomotion_animator, _locomotion_meshes, _locomotion_clips)
 			set_clip(&"Idle")
 			_visual_stage = 3
 		4:
@@ -150,6 +157,7 @@ func step_prepare_visuals() -> void:
 			jump_animator = jump_model.find_child("AnimationPlayer", true, false) as AnimationPlayer
 			if jump_animator != null:
 				jump_animator.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
+			_cache_animation_parts(jump_model, jump_animator, _jump_meshes, _jump_clips)
 			_visual_stage = 5
 		5:
 			locomotion_skeleton = find_skeleton(locomotion_model)
@@ -182,25 +190,32 @@ func find_skeleton(model: Node3D) -> Skeleton3D:
 		return node as Skeleton3D
 	return null
 
+func _cache_animation_parts(model: Node3D, animation_player: AnimationPlayer, meshes: Array[MeshInstance3D], clips: Dictionary) -> void:
+	meshes.clear()
+	clips.clear()
+	for node: Node in model.find_children("*", "MeshInstance3D", true, false):
+		var mesh_instance: MeshInstance3D = node as MeshInstance3D
+		if mesh_instance.get_blend_shape_count() > 0:
+			meshes.append(mesh_instance)
+	if animation_player != null:
+		for candidate: StringName in animation_player.get_animation_list():
+			clips[String(candidate).get_file().to_lower()] = candidate
+
 func set_clip(clip: StringName) -> void:
 	var use_jump_model: bool = clip in [&"JumpStart", &"JumpAir", &"JumpLand"] and jump_animator != null
 	animator = jump_animator if use_jump_model else locomotion_animator
 	if animator == null or active_clip == clip:
 		return
-	var resolved: StringName = &""
-	for candidate: StringName in animator.get_animation_list():
-		if String(candidate).get_file().to_lower() == String(clip).to_lower():
-			resolved = candidate
-			break
+	var clips: Dictionary = _jump_clips if use_jump_model else _locomotion_clips
+	var resolved: StringName = clips.get(String(clip).to_lower(), &"") as StringName
 	if resolved == &"":
 		return
 	locomotion_model.visible = not use_jump_model
 	if jump_model != null:
 		jump_model.visible = use_jump_model
 	# The imported animation samples bone and cloth tracks with one clock.
-	var animated_model: Node3D = jump_model if use_jump_model else locomotion_model
-	for node: Node in animated_model.find_children("*", "MeshInstance3D", true, false):
-		var mi: MeshInstance3D = node as MeshInstance3D
+	var animated_meshes: Array[MeshInstance3D] = _jump_meshes if use_jump_model else _locomotion_meshes
+	for mi: MeshInstance3D in animated_meshes:
 		for i: int in range(mi.get_blend_shape_count()):
 			mi.set_blend_shape_value(i, 0.0)
 	var preserve_recovery_phase: bool = active_clip == &"JumpLand" and not use_jump_model and recovery_clip == clip

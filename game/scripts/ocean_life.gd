@@ -1,6 +1,8 @@
 extends Node3D
 
 var elapsed: float = 0.0
+var quality_update_interval: float = 0.0
+var _quality_accumulator: float = 0.0
 var radius: float = 36.0
 
 func _ready() -> void:
@@ -9,7 +11,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	elapsed += delta
+	_quality_accumulator += delta
+	if _quality_accumulator < quality_update_interval:
+		return
 	update_life(elapsed)
+	_quality_accumulator = 0.0
 
 func update_life(time: float) -> void:
 	for child: Node in get_children():
