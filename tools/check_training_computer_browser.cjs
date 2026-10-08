@@ -34,7 +34,13 @@ async function finish(code) {
       const scale=Math.min(bounds.width/1440,bounds.height/900);
       const box={x:bounds.x+(bounds.width-1440*scale)/2,y:bounds.y+(bounds.height-900*scale)/2,width:1440*scale,height:900*scale};
       if(button) {await page.mouse.click(box.x+button.center[0]*box.width,box.y+button.center[1]*box.height);await page.waitForTimeout(600);return;}
-      await page.mouse.move(box.x+150*scale,box.y+650*scale);await page.mouse.wheel(0,180);await page.waitForTimeout(600);
+      // Download status can push this scroll panel downward on a cold network.
+      // Scroll over an actually visible destination, not a fixed screen point.
+      const visibleDestinations=buttons.filter(row=>row.visible&&/^\d{2}\s/.test(row.text));
+      const anchor=visibleDestinations[Math.floor(visibleDestinations.length/2)]?.center||[.15,.82];
+      const target=buttons.find(row=>expression.test(row.text));
+      await page.mouse.move(box.x+anchor[0]*box.width,box.y+anchor[1]*box.height);
+      await page.mouse.wheel(0,target&&target.center[1]<anchor[1]?-150:150);await page.waitForTimeout(800);
     }
     throw Error('Visible world button missing: '+expression);
   };
