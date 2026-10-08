@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "games": {
+    "go": "games/go/index.html"
+  },
+  "files": {
+    "index.training-games.js": {
+      "bytes": 8979,
+      "sha256": "8eef1ac3d08065bec7776fcfe5d8d6706740c0cbb9893ea2c9152eed3d1715ac"
+    },
+    "games/go/index.html": {
+      "bytes": 189689,
+      "sha256": "7433af10d4b776743ff3876ea9f13c77bd3bab8f7bca844a6dcd35f99929389f"
+    }
+  }
+}

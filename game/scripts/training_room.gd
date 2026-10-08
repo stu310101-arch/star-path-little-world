@@ -7,6 +7,7 @@ const IndoorPlayer = preload("res://scripts/indoor_player.gd")
 const Projector = preload("res://scripts/training_projector.gd")
 const RoomInteractions = preload("res://scripts/training_room_interactions.gd")
 const FurnitureActions = preload("res://scripts/training_room_props.gd")
+const ComputerGames = preload("res://scripts/training_computer_games.gd")
 const ROOM_MODEL: String = "res://generated/training_room/light.scn"
 const DETAIL_CATALOG: String = "res://generated/training_room/detail_catalog.json"
 const ROOM_LAYOUT: String = "res://assets/training_room/layout.json"
@@ -33,6 +34,8 @@ var performance_enabled: bool = false
 var layout: Dictionary = {}
 var interactions: Node
 var furniture_actions: Node3D
+var computer_games: Node3D
+var native_game_dialog: AcceptDialog
 var graphics_settings: Node
 var low_quality: bool = true
 var detail_state: String = "idle"
@@ -104,6 +107,9 @@ func _ready() -> void:
 	add_child(furniture_actions)
 	furniture_actions.call("configure", self, room_model, interactions, layout)
 	furniture_actions.set("low_quality", low_quality)
+	computer_games = ComputerGames.new() as Node3D
+	add_child(computer_games)
+	computer_games.call("configure", self, room_model, interactions, layout)
 	if is_instance_valid(music):
 		music.call("set_context", "wordking")
 		music.connect("state_changed", _refresh_music)
@@ -207,6 +213,7 @@ func _refresh_detail_status() -> void:
 func _return_immediately() -> void:
 	if returning:
 		return
+	close_computer_game()
 	returning = true
 	if player != null:
 		player.set("controls_enabled", false)
@@ -448,6 +455,9 @@ func can_player_jump() -> bool:
 func _unhandled_input(event: InputEvent) -> void:
 	if returning:
 		return
+	if computer_games != null and bool(computer_games.call("handle_input", event)):
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		if event.keycode == KEY_R and detail_state == "error":
 			_retry_details()
@@ -469,11 +479,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if is_instance_valid(music) and (event is InputEventKey or event is InputEventMouseButton):
 		music.call("unlock")
-	if event is InputEventKey and (event as InputEventKey).pressed and not event.is_echo() and (event as InputEventKey).physical_keycode == KEY_F:
-		if interactions != null and str(interactions.get("state")) == "seated" and furniture_actions != null:
-			if bool(furniture_actions.call("use_nearest_computer")):
-				get_viewport().set_input_as_handled()
-				return
 	if event.is_action_pressed("interact") and not event.is_echo():
 		if interactions != null and bool(interactions.call("interact")):
 			get_viewport().set_input_as_handled()
@@ -504,6 +509,78 @@ func _unhandled_input(event: InputEvent) -> void:
 func _finish_drag() -> void:
 	dragging_view = false
 	drag_button = MOUSE_BUTTON_NONE
+
+func _release_computer_inputs() -> void:
+	for action: StringName in [&"move_left", &"move_right", &"move_forward", &"move_back", &"run", &"jump", &"interact"]:
+		if InputMap.has_action(action):
+			Input.action_release(action)
+
+func open_computer_game(game: Dictionary) -> bool:
+	# A game can only be launched from the seat assigned by ComputerGames.
+	if returning or not ready_for_play or interactions == null or str(interactions.get("state")) != "seated":
+		return false
+	if str(game.get("id", "")) != "go" or str(game.get("url", "")) != "games/go/index.html":
+		return false
+	if computer_games == null or (computer_games.call("active_game") as Dictionary) != game:
+		return false
+	_finish_drag()
+	_release_computer_inputs()
+	if OS.has_feature("web"):
+		var bridge: JavaScriptObject = JavaScriptBridge.get_interface("LittleWorldComputerGames")
+		if bridge == null:
+			_computer_game_error("圍棋頁面尚未準備完成，請重新整理後再試。")
+			return false
+		return bool(bridge.open("go", "圍棋", "games/go/index.html"))
+	# Native Godot has no built-in HTML view. Export the identical standalone
+	# source to user storage, then let the system browser run its worker and UI.
+	var source: String = str(game.get("source", ""))
+	var payload: PackedByteArray = FileAccess.get_file_as_bytes(source)
+	if payload.is_empty():
+		_computer_game_error("找不到圍棋網頁，請重新安裝完整遊戲。")
+		return false
+	var directory: String = "user://computer_games/go"
+	if DirAccess.make_dir_recursive_absolute(directory) != OK:
+		_computer_game_error("無法準備圍棋網頁，請檢查儲存空間。")
+		return false
+	var destination: String = directory.path_join("index.html")
+	var output: FileAccess = FileAccess.open(destination, FileAccess.WRITE)
+	if output == null:
+		_computer_game_error("無法寫入圍棋網頁，請稍後再試。")
+		return false
+	output.store_buffer(payload)
+	output.close()
+	var file_url: String = "file:///" + ProjectSettings.globalize_path(destination).replace("\\", "/").uri_encode().replace("%2F", "/").replace("%3A", ":")
+	if OS.shell_open(file_url) != OK:
+		_computer_game_error("無法開啟瀏覽器，請確認已設定預設瀏覽器。")
+		return false
+	if native_game_dialog == null:
+		native_game_dialog = AcceptDialog.new()
+		native_game_dialog.title = "圍棋"
+		native_game_dialog.dialog_text = "圍棋已在瀏覽器開啟。\n回到遊戲後，按下方按鈕返回座位。"
+		native_game_dialog.ok_button_text = "返回座位"
+		native_game_dialog.add_theme_font_override("font", FONT)
+		native_game_dialog.confirmed.connect(close_computer_game)
+		native_game_dialog.canceled.connect(close_computer_game)
+		add_child(native_game_dialog)
+	native_game_dialog.popup_centered(Vector2i(460, 160))
+	return true
+
+func _computer_game_error(text_value: String) -> void:
+	interactions.set("message", text_value)
+	interactions.set("message_clock", 5.0)
+	return_prompt.text = text_value
+
+func close_computer_game() -> void:
+	_release_computer_inputs()
+	if OS.has_feature("web"):
+		var bridge: JavaScriptObject = JavaScriptBridge.get_interface("LittleWorldComputerGames")
+		if bridge != null:
+			bridge.close()
+	if native_game_dialog != null:
+		native_game_dialog.hide()
+	if computer_games != null:
+		computer_games.call("set_game_open", false)
+	_finish_drag()
 
 func update_camera(delta: float, snap: bool = false) -> void:
 	if player == null or camera == null:
@@ -540,6 +617,11 @@ func update_camera(delta: float, snap: bool = false) -> void:
 func _process(delta: float) -> void:
 	if returning:
 		return
+	if OS.has_feature("web") and computer_games != null and bool(computer_games.call("is_open")):
+		var bridge: JavaScriptObject = JavaScriptBridge.get_interface("LittleWorldComputerGames")
+		if bridge == null or not bool(bridge.isOpen()):
+			_release_computer_inputs()
+			computer_games.call("set_game_open", false)
 	_step_details()
 	detail_clock += delta
 	if detail_clock >= .1:
@@ -575,6 +657,11 @@ func _process(delta: float) -> void:
 			var state: Dictionary = {"ready": true, "near_exit": _can_return(), "player": [player.position.x, player.position.y, player.position.z], "fps": Engine.get_frames_per_second(), "device_count": 1, "display_sockets": 6, "detail_state": detail_state, "detail_index": detail_index, "detail_ready_ms": detail_ready_ms, "detail_max_operation_ms": max_detail_operation_ms, "detail_error": detail_error, "low_quality": low_quality, "room_instance_id": get_instance_id(), "ticks_ms": Time.get_ticks_msec(), "buttons": _debug_buttons(), "mesh_contract": _debug_mesh_contract(), "nodes": Performance.get_monitor(Performance.OBJECT_NODE_COUNT), "resources": Performance.get_monitor(Performance.OBJECT_RESOURCE_COUNT)}
 			if is_instance_valid(graphics_settings):
 				state["graphics"] = graphics_settings.call("get_state")
+			state["interaction_state"] = str(interactions.get("state"))
+			state["active_seat"] = str((interactions.get("active") as Dictionary).get("id", ""))
+			state["nearest_target"] = str((interactions.get("nearest") as Dictionary).get("id", ""))
+			state["prompt"] = return_prompt.text
+			state["computer_game_open"] = computer_games != null and bool(computer_games.call("is_open"))
 			JavaScriptBridge.eval("window.trainingRoomState = " + JSON.stringify(state) + ";")
 
 func _debug_buttons() -> Array[Dictionary]:
@@ -599,6 +686,10 @@ func _debug_mesh_contract() -> Dictionary:
 
 func _exit_tree() -> void:
 	returning = true
+	if OS.has_feature("web"):
+		var bridge: JavaScriptObject = JavaScriptBridge.get_interface("LittleWorldComputerGames")
+		if bridge != null:
+			bridge.destroy()
 	pending_mesh = null
 	detail_entries.clear()
 	detail_nodes.clear()

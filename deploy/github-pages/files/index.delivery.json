@@ -4,11 +4,11 @@
   "loader_sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba",
   "files": {
     "index.pck": {
-      "url": "index.boot.0f69427852bb63e6.pck.gz",
-      "bytes": 31930544,
-      "sha256": "7831962d4f8fa3ec4d082035f6e4a8f5615fa5e3942a1b5a7fe6f6ce29d2d5a2",
-      "compressed_bytes": 29090778,
-      "compressed_sha256": "0f69427852bb63e641c9eab5df8e0f384d510edc90902449a9e5c8ffddefc356"
+      "url": "index.boot.11eadbee378fa046.pck.gz",
+      "bytes": 31943224,
+      "sha256": "650c1292ef69f85da7db2ea2ecf73b35b8927945d97009bb3e2bcf8e8583e47b",
+      "compressed_bytes": 29102704,
+      "compressed_sha256": "11eadbee378fa046294dc7be250eb0d5ce1d888fe8ccddfd7f55370cd1be7c9b"
     },
     "index.wasm": {
       "url": "index.boot.a8767fcc27ac87dc.wasm.gz",

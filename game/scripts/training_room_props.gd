@@ -13,7 +13,6 @@ var cabinet_open: bool = false
 var projector_on: bool = true
 var lamp_on: bool = true
 var screens: Dictionary = {}
-var computer_positions: Dictionary = {}
 var lamp_meshes: Array[Node3D] = []
 var lamp_light: OmniLight3D
 var preview: SubViewport
@@ -33,8 +32,8 @@ func configure(host: Node3D, art: Node3D, interactions: Node, layout: Dictionary
 		if node == null:
 			continue
 		screens[id] = node
-		computer_positions[id] = _vec(row.get("position", row.get("approach", [0,0,0])) as Array)
-		_register(id, "開關電腦螢幕", _vec(row.get("approach", row.get("position", [0,0,0])) as Array), 1.25, "computer", row)
+		# Computer actions belong to their explicitly assigned chair. Keeping
+		# a second E target here would steal the nearby chair's sit action.
 	_build_doors(layout.get("cabinet_doors", []) as Array)
 	for row: Dictionary in layout.get("decor_targets", []):
 		var id: String = str(row.get("id", "decor_%d" % targets.size()))
@@ -87,21 +86,6 @@ func _build_doors(rows: Array) -> void:
 		# Both tiers open together; every bay offers the same cabinet action.
 		_register("cabinet_%02d" % door_pivots.size(), "開關展示櫃門", _vec(row.get("approach", [6,.04,-3.6]) as Array), 1.55, "cabinet", row)
 
-func use_nearest_computer() -> bool:
-	var player: Node3D = room.get("player") as Node3D
-	var best_id: String = ""
-	var distance: float = 2.4
-	for id: String in computer_positions:
-		var at: Vector3 = computer_positions[id] as Vector3
-		var candidate: float = Vector2(player.position.x-at.x,player.position.z-at.z).length()
-		if candidate < distance:
-			distance = candidate
-			best_id = id
-	if best_id.is_empty():
-		return false
-	_activate(best_id)
-	return true
-
 func _activate(id: String) -> void:
 	if not targets.has(id):
 		return
@@ -115,10 +99,6 @@ func _activate(id: String) -> void:
 			var effect: Node3D = room.get_node_or_null("WordKingProjection") as Node3D
 			if effect != null:
 				effect.visible = projector_on
-		"computer":
-			var monitor: Node3D = screens.get(id) as Node3D
-			if monitor != null:
-				monitor.visible = not monitor.visible
 		"cabinet":
 			if door_tween != null and door_tween.is_running():
 				return

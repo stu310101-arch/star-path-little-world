@@ -11,6 +11,7 @@ import subprocess
 
 from prepare_web_delivery import verify as verify_boot_delivery
 from prepare_web_delivery import verify_background_budget
+from package_training_games import verify as verify_training_games
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -38,7 +39,9 @@ def stamp(folder: Path) -> dict:
         if path.is_file() and path.suffix in (".gd", ".tscn", ".scn", ".json", ".res", ".glb")
     ] + [ROOT / "game/project.godot", ROOT / "game/export_presets.cfg", ROOT / "tools/split_web_packs.py",
          ROOT / "tools/prepare_web_delivery.py", ROOT / "tools/web_boot_delivery.js",
-         ROOT / "tools/web_background_packs.js"])
+         ROOT / "tools/web_background_packs.js", ROOT / "tools/package_training_games.py",
+         ROOT / "tools/training_computer_games.js"]
+        + [path for path in (ROOT / "game/web_games").rglob("*") if path.is_file()])
     source_hash = hashlib.sha256()
     for path in source_paths:
         source_hash.update(path.relative_to(ROOT).as_posix().encode())
@@ -54,6 +57,8 @@ def stamp(folder: Path) -> dict:
     names = ["index.html", "index.js", "index.wasm", "index.pck"]
     if (folder / "index.delivery.json").is_file():
         names.extend(verify_boot_delivery(folder))
+    if (folder / "index.training-games.json").is_file():
+        names.extend(verify_training_games(folder))
     pack_manifest = folder / "index.packs.json"
     if pack_manifest.is_file():
         verify_background_budget(folder)

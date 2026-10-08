@@ -52,6 +52,7 @@ var footer: Label
 var close_button: Button
 var message: String = ""
 var message_clock: float = 0.0
+var computer_game_open: bool = false
 
 func configure(room_node: Node3D, player_node: CharacterBody3D, room_layout: Dictionary, art: Node3D) -> void:
 	room = room_node
@@ -92,7 +93,7 @@ func is_busy() -> bool:
 	return state != &"idle"
 
 func camera_blocked() -> bool:
-	return state in [&"selecting", &"taking_book", &"reading", &"returning_book", &"inspection"]
+	return computer_game_open or state in [&"selecting", &"taking_book", &"reading", &"returning_book", &"inspection"]
 
 func _horizontal_distance(a: Vector3, b: Vector3) -> float:
 	return Vector2(a.x - b.x, a.z - b.z).length()
@@ -133,7 +134,15 @@ func _visible_target(target: Dictionary, at: Vector3) -> bool:
 func prompt() -> String:
 	match state:
 		&"sitting": return "正在坐下…"
-		&"seated": return "E  起身   ·   F 開關螢幕" if str(active.get("id", "")).contains("gaming") else "E  起身   ·   拖曳可環顧四周"
+		&"seated":
+			if computer_game_open:
+				return "正在遊玩 · 關閉網頁後回到座位"
+			if message_clock > 0:
+				return message
+			if active.has("computer_id"):
+				var game: Dictionary = active.get("computer_game", {}) as Dictionary
+				return "E  起身   ·   F / Enter  進入" + str(game.get("title", "")) if not game.is_empty() else "尚未安裝遊戲   ·   E  起身"
+			return "E  起身   ·   拖曳可環顧四周"
 		&"standing": return "正在起身…"
 		&"selecting": return "選擇一本書   ·   Esc 關閉"
 		&"taking_book": return "正在拿取書籍…"
@@ -148,6 +157,8 @@ func prompt() -> String:
 	return "E  坐下 · " + label_text if str(nearest.get("kind", "")) == "seat" else "E  " + label_text
 
 func interact() -> bool:
+	if computer_game_open:
+		return true
 	match state:
 		&"seated":
 			var safe: Dictionary = _safe_stand(active)
@@ -468,7 +479,7 @@ func _physics_process(delta: float) -> void:
 		_update_book()
 
 func _input(event: InputEvent) -> void:
-	if state == &"idle" or not event is InputEventKey or event.is_echo():
+	if computer_game_open or state == &"idle" or not event is InputEventKey or event.is_echo():
 		return
 	var key_event: InputEventKey = event as InputEventKey
 	if key_event.pressed and (key_event.physical_keycode == KEY_ESCAPE or key_event.keycode == KEY_ESCAPE):

@@ -2,17 +2,22 @@
   "format": 1,
   "game": "星途 · Little World",
   "pck": {
-    "bytes": 31930544,
-    "sha256": "7831962d4f8fa3ec4d082035f6e4a8f5615fa5e3942a1b5a7fe6f6ce29d2d5a2",
+    "bytes": 31943224,
+    "sha256": "650c1292ef69f85da7db2ea2ecf73b35b8927945d97009bb3e2bcf8e8583e47b",
     "parts": [
       {
         "name": "index.pck.part000",
-        "bytes": 31930544,
-        "sha256": "7831962d4f8fa3ec4d082035f6e4a8f5615fa5e3942a1b5a7fe6f6ce29d2d5a2"
+        "bytes": 31943224,
+        "sha256": "650c1292ef69f85da7db2ea2ecf73b35b8927945d97009bb3e2bcf8e8583e47b"
       }
     ]
   },
   "files": [
+    {
+      "path": "games/go/index.html",
+      "bytes": 189689,
+      "sha256": "7433af10d4b776743ff3876ea9f13c77bd3bab8f7bca844a6dcd35f99929389f"
+    },
     {
       "path": "index.audio.position.worklet.js",
       "bytes": 2973,
@@ -29,9 +34,9 @@
       "sha256": "4fced779f652380d6fc95b58c07e2a25299890e6a3af82ec2ef906eeab5bc9a1"
     },
     {
-      "path": "index.boot.0f69427852bb63e6.pck.gz",
-      "bytes": 29090778,
-      "sha256": "0f69427852bb63e641c9eab5df8e0f384d510edc90902449a9e5c8ffddefc356"
+      "path": "index.boot.11eadbee378fa046.pck.gz",
+      "bytes": 29102704,
+      "sha256": "11eadbee378fa046294dc7be250eb0d5ce1d888fe8ccddfd7f55370cd1be7c9b"
     },
     {
       "path": "index.boot.a8767fcc27ac87dc.wasm.gz",
@@ -46,12 +51,12 @@
     {
       "path": "index.delivery.json",
       "bytes": 786,
-      "sha256": "46d748fe5da5d5193e9d8ec6fefcbdc1fe177016da7a47e945162e39fcfb5514"
+      "sha256": "a8250279ba5fcdb653811cec77094decbe507611bc9052378dc0e7fe297c4801"
     },
     {
       "path": "index.html",
-      "bytes": 10163,
-      "sha256": "30d7bca4b1cf5b86b36e05121e114f9590cada07d7758e3def58e2ad08fa3c0b"
+      "bytes": 10213,
+      "sha256": "098a1b43c2ccf2faefa073f1349f8c810ba5bb1ba84f1cb32c751da43f8d9fae"
     },
     {
       "path": "index.js",
@@ -70,8 +75,18 @@
     },
     {
       "path": "index.release.json",
-      "bytes": 4394,
-      "sha256": "58b7c5c32de441919d44fd53dc00b9d81d77f5e7caeccfc6238547836a63d0fa"
+      "bytes": 4825,
+      "sha256": "eab496dde691a1548cd46967d43ee600a2d940b3a6ecdb2f3410487c751535e0"
+    },
+    {
+      "path": "index.training-games.js",
+      "bytes": 8979,
+      "sha256": "8eef1ac3d08065bec7776fcfe5d8d6706740c0cbb9893ea2c9152eed3d1715ac"
+    },
+    {
+      "path": "index.training-games.json",
+      "bytes": 372,
+      "sha256": "4079b6428de5647674320135c191735e461c1846de752adfdb7e52d94a6fb7f5"
     },
     {
       "path": "index.wasm",

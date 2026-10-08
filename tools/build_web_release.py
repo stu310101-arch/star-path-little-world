@@ -49,6 +49,7 @@ def main() -> None:
     isolated.mkdir(exist_ok=True)
     run("validate-packs", [args.godot, "--headless", "--audio-driver", "Dummy", "--path", str(isolated), "--main-pack", str(web / "index.pck"), "--script", str(ROOT / "game/tools/validate_web_packs.gd"), "--", str(web), str(inventory)])
     run("boot-delivery", [sys.executable, "tools/prepare_web_delivery.py", "--web-dir", str(web)])
+    run("training-games", [sys.executable, "tools/package_training_games.py", "--web-dir", str(web)])
     run("notices", [sys.executable, "tools/package_web_notices.py"])
     run("stamp", [sys.executable, "tools/stamp_web_release.py"])
     package = "build/local-web-package" if args.local_only else "deploy/github-pages"

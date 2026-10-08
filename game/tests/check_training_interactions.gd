@@ -108,13 +108,15 @@ func run() -> void:
 		check("Seated camera stays outside the character: " + str(seat.id), camera_gap > 1.3, camera_gap)
 		if str(seat.id).contains("gaming"):
 			var props: Node = room.get("furniture_actions") as Node
-			var screen_id: String = "computer_%02d" % int(str(seat.id).get_slice("_", 1))
+			var games: Node = room.get("computer_games") as Node
+			var assignment: Dictionary = (games.get("assignments") as Dictionary).get(str(seat.id), {}) as Dictionary
+			var screen_id: String = str(assignment.get("computer_id", ""))
 			var screen: Node3D = (props.get("screens") as Dictionary).get(screen_id) as Node3D
-			var screen_before: bool = screen.visible
-			await press(KEY_F)
-			check("Seated F toggles the matching monitor: " + str(seat.id), screen.visible != screen_before)
-			await press(KEY_F)
-			check("A second F restores the matching monitor: " + str(seat.id), screen.visible == screen_before)
+			check("Gaming chair keeps its explicitly assigned monitor visible: " + str(seat.id), screen != null and screen.visible, screen_id)
+			var installed: bool = not (assignment.get("game", {}) as Dictionary).is_empty()
+			check("Seated chair offers Enter only for its installed game: " + str(seat.id), (games.get("panel") as Control).visible and (games.get("enter_button") as Button).is_visible_in_tree() == installed)
+			# Actual F, Enter and click launch/return are covered in the dedicated
+			# computer fixture, where a browser cannot be launched accidentally.
 		await image("interaction-seat-" + str(seat.id))
 		if str(seat.id) == "gaming_1":
 			await image("interaction-seat-gaming_1-side", float(seat.facing) + PI / 2.0, 2.8)

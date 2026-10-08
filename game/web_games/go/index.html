@@ -1,0 +1,3460 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a1019">
+<meta name="description" content="NEON GO 星弈：每次開新局先設定模式、難度與棋盤大小，確認後才開始對弈。單檔離線圍棋。">
+<title>NEON GO 星弈 · 單機圍棋</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0a1019;
+  --surface: #111b28;
+  --raised: #182433;
+  --ink: #ecf2f9;
+  --muted: #9aaabd;
+  --line: #2b3a4b;
+  --accent: #65e4c7;
+  --danger: #ffc299;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", sans-serif;
+  --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; min-height: 100vh; color: var(--ink); font: 14px/1.6 var(--sans); background: radial-gradient(ellipse at 50% -250px, #17313c66, transparent 700px), var(--bg); }
+button, select, input { font: inherit; }
+button, select { color: inherit; }
+button { cursor: pointer; touch-action: manipulation; }
+button, select { -webkit-tap-highlight-color: transparent; transition: background .15s, border-color .15s, color .15s; }
+button:disabled { cursor: not-allowed; color: #778698; }
+button svg, summary svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+button:focus-visible, select:focus-visible, summary:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+[tabindex="-1"]:focus { outline: none; }
+::selection { background: #65e4c73b; color: #fff; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+.site-head { max-width: 984px; height: 68px; padding: 0 24px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid #2b3a4b99; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid #3e615e; border-radius: 8px; background: #152a2b; }
+.brand-mark svg { width: 19px; height: 19px; }
+.brand-name { font: 600 16px/1 var(--mono); letter-spacing: .5px; }
+.brand-name span { color: var(--accent); }
+.brand-chinese { color: var(--muted); font-size: 12px; margin-left: 2px; }
+.head-actions { display: flex; align-items: center; gap: 6px; }
+.quiet-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 38px; border: 1px solid transparent; border-radius: 7px; background: transparent; color: #b3c1d1; padding: 7px 10px; font-size: 12px; }
+.quiet-button:hover { color: var(--ink); background: var(--raised); }
+.quiet-button[aria-pressed="true"] { color: var(--accent); }
+.icon-button { width: 38px; height: 38px; padding: 9px; flex-shrink: 0; }
+main { max-width: 984px; margin: 0 auto; padding: 0 24px; }
+.setup-view { max-width: 556px; margin: 0 auto; padding: 28px 0 24px; }
+.setup-heading { margin-bottom: 22px; }
+.setup-heading h1 { font-size: 27px; font-weight: 650; line-height: 1.4; letter-spacing: .4px; margin: 0; }
+.setup-heading p { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
+.setup-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; box-shadow: 0 16px 40px #00000016; }
+.config-field { padding: 0; border: 0; margin: 0 0 18px; min-width: 0; }
+.config-field:last-of-type { margin-bottom: 0; }
+.field-label { padding: 0; color: #cdd9e6; font-size: 13px; font-weight: 600; line-height: 1.5; margin-bottom: 9px; }
+.option-group { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.option-group.three { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.choice { position: relative; display: flex; flex-direction: column; justify-content: center; min-width: 0; min-height: 64px; border: 1px solid #344357; border-radius: 8px; padding: 10px 12px; cursor: pointer; background: #15202f; transition: border-color .15s, background .15s; }
+.choice:hover { border-color: #698081; }
+.choice:has(input:checked) { background: #19322f; border-color: var(--accent); }
+.choice:has(input:checked)::after { content: ""; position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); top: 11px; right: 10px; }
+.choice:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+.choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.choice strong { font-size: 14px; font-weight: 600; line-height: 1.4; padding-right: 6px; }
+.choice small { color: var(--muted); font-size: 11px; line-height: 1.5; margin-top: 3px; }
+.choice:has(input:checked) small { color: #b0c9c4; }
+.size-choice strong { font-family: var(--mono); font-size: 16px; letter-spacing: -.3px; }
+.setup-note { margin: 18px 0 0; font-size: 11px; color: var(--muted); }
+.setup-eyebrow { color: var(--accent); font: 600 11px/1.6 var(--mono); letter-spacing: 1.6px; margin: 0 0 8px; }
+.setup-summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid var(--line); padding-top: 15px; margin-top: 17px; }
+.setup-summary span { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.setup-summary strong { text-align: right; font-weight: 600; color: #d9f9ee; font-size: 12px; }
+.setup-help { color: var(--muted); font-size: 11px; margin: 8px 0 0; text-align: center; }
+.primary { display: inline-flex; justify-content: center; align-items: center; gap: 9px; min-height: 44px; padding: 10px 16px; border: 1px solid var(--accent); border-radius: 8px; background: var(--accent); color: #092620; font-size: 13px; font-weight: 650; }
+.primary:hover:not(:disabled) { background: #8cf0d9; border-color: #8cf0d9; }
+.primary:disabled { color: #8ab7ae; background: #25453f; border-color: #365950; }
+.wide { width: 100%; }
+.start-button { margin-top: 18px; }
+.continue-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; padding: 14px 16px; border: 1px solid #355650; border-radius: 10px; background: #122523; }
+.continue-title { font-size: 12px; color: #c5e2db; font-weight: 500; }
+.continue-summary { color: #a1b7b1; font-size: 11px; margin: 3px 0 0; }
+.continue-button { display: inline-flex; align-items: center; justify-content: center; min-height: 38px; flex-shrink: 0; border: 1px solid #588c7f; background: transparent; border-radius: 7px; color: #b8f1e3; font-size: 12px; padding: 8px 12px; }
+.continue-button:hover { background: #204039; border-color: var(--accent); }
+.dialog-warning { border-left: 2px solid #b58a66; color: var(--danger); font-size: 12px; line-height: 1.7; padding-left: 10px; margin: 16px 0 0; }
+.game-view { padding-top: 23px; }
+.game-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+.game-heading h1 { margin: 0; font-size: 21px; font-weight: 600; line-height: 1.4; }
+.game-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 11px; color: var(--muted); margin-top: 5px; }
+.meta-divider { width: 3px; height: 3px; border-radius: 50%; background: #607086; }
+.secondary-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 13px; min-height: 40px; flex-shrink: 0; background: #162230; border: 1px solid #354456; border-radius: 8px; font-size: 12px; color: #d2dfed; }
+.secondary-button:hover { background: #223242; border-color: #6e8c95; }
+.game-layout { display: grid; grid-template-columns: minmax(0,1fr) 272px; gap: 24px; align-items: start; }
+.board-column { min-width: 0; }
+.board-frame { position: relative; background: #101c2c; border: 1px solid #374c61; border-radius: 12px; overflow: hidden; isolation: isolate; box-shadow: 0 12px 36px #00000026; }
+#board { display: block; width: 100%; aspect-ratio: 1; height: auto; }
+.board-input { position: absolute; display: grid; z-index: 1; }
+.board-row { display: grid; min-height: 0; }
+.point { position: relative; appearance: none; border: 0; background: transparent !important; border-radius: 50%; min-width: 0; min-height: 0; width: 100%; height: 100%; padding: 0; filter: none !important; outline-offset: -3px !important; }
+.point:focus-visible { outline: 2px solid var(--accent); }
+.point:disabled, .point[aria-disabled="true"] { opacity: 1; cursor: default; }
+.board-caption { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; color: var(--muted); font-size: 11px; }
+.shortcut-caption { color: #8194aa; }
+.sidebar { min-width: 0; }
+.control-panel { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 18px; }
+.player-list { display: grid; gap: 4px; }
+.player-card { display: flex; align-items: center; gap: 10px; padding: 12px 0; min-width: 0; }
+.player-card + .player-card { border-top: 1px solid #263648; }
+.stone-icon { width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; display: inline-block; }
+.stone-icon.black { background: radial-gradient(circle at 30% 25%,#485a71,#1a2636 58%,#0a111b); box-shadow: inset 0 0 0 1px #7895b277,0 2px 5px #0006; }
+.stone-icon.white { background: radial-gradient(circle at 30% 25%,#fff,#e6f2fc 52%,#aac3da); box-shadow: inset 0 0 0 1px #deefff,0 2px 5px #0004; }
+.player-details { flex: 1; min-width: 0; }
+.player-name { font-size: 14px; line-height: 1.4; font-weight: 600; display: flex; align-items: center; gap: 7px; }
+.current .player-name::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.player-role { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.capture-label { text-align: right; color: var(--muted); font-size: 10px; flex-shrink: 0; }
+.capture-number { color: #d2dfec; font: 500 18px/1.3 var(--mono); display: block; font-variant-numeric: tabular-nums; }
+.turn-banner { display: flex; align-items: flex-start; gap: 9px; min-height: 70px; margin-top: 14px; padding-top: 18px; border-top: 1px solid var(--line); }
+.turn-banner > div { flex: 1; min-width: 0; }
+.turn-light { flex-shrink: 0; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; margin-top: 9px; }
+.turn-title { font-size: 14px; font-weight: 600; line-height: 1.6; }
+.turn-subtitle { color: var(--muted); font-size: 11px; margin-top: 4px; line-height: 1.8; }
+.thinking .turn-light { animation: breathe 1.4s ease-in-out infinite; }
+.ai-progress { height: 3px; background: #2a3b4b; overflow: hidden; border-radius: 2px; margin-top: 10px; }
+.ai-progress span { display: block; width: 3%; height: 100%; background: var(--accent); transition: width .15s; }
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 16px; }
+.action-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 41px; border: 1px solid #3d4d60; border-radius: 7px; background: #1a2939; padding: 8px 12px; color: #d4e1f0; font-size: 12px; }
+.action-button:hover:not(:disabled) { background: #263b4e; border-color: #6a8895; }
+.action-button:disabled { background: #121d2a; border-color: #2a394a; color: #8190a2; }
+.utility-section, .journal { margin-top: 12px; border: 1px solid var(--line); border-radius: 9px; background: #101a26; }
+summary { display: flex; align-items: center; gap: 10px; list-style: none; cursor: pointer; padding: 13px 15px; font-size: 12px; font-weight: 500; color: #bdcddd; border-radius: 9px; user-select: none; }
+summary::-webkit-details-marker { display: none; }
+summary:hover { color: var(--ink); background: #182636; }
+summary > svg { margin-left: auto; width: 14px; height: 14px; color: var(--muted); }
+details[open] > summary > svg { transform: rotate(180deg); }
+.details-content { padding: 1px 15px 15px; }
+.ai-controls { padding-bottom: 14px; }
+.ai-control-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.ai-control-row label { font-size: 12px; color: #b4c4d6; }
+.ai-control-row select { min-width: 104px; max-width: 145px; background: #1a293a; border: 1px solid #43566a; border-radius: 6px; padding: 7px 10px; cursor: pointer; font-size: 12px; }
+select option { background: #182636; color: var(--ink); }
+.difficulty-hint { margin: 8px 0 0; font-size: 11px; line-height: 1.7; color: var(--muted); }
+.board-toolbar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.toolbar-button { border: 1px solid #3a4c60; border-radius: 6px; background: #172636; color: #b3c6d9; padding: 9px 6px; min-height: 36px; font-size: 11px; }
+.toolbar-button:hover:not(:disabled) { border-color: #6d9398; background: #213647; }
+.toolbar-button[aria-pressed="true"] { color: #b5f4e3; border-color: #56ac94; background: #1b3832; }
+.toolbar-button:disabled { opacity: .6; }
+.move-total { margin-left: auto; color: var(--muted); font: 11px var(--mono); }
+.journal summary > svg { margin-left: 0; }
+.empty-journal { font-size: 11px; color: var(--muted); }
+.move-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.move-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: #b0c1d3; }
+.move-index { font: 10px var(--mono); width: 24px; color: #8da0b8; }
+.small-stone { width: 9px; height: 9px; border-radius: 50%; border: 1px solid #96aec6; background: #142034; }
+.small-stone.white { background: #e5f0fb; border-color: #e5f0fb; }
+.move-coordinate { font: 11px var(--mono); }
+.move-detail { margin-left: auto; font-size: 10px; color: var(--muted); }
+.score-panel { padding: 17px; margin-top: 14px; border: 1px solid #3b5756; border-radius: 10px; background: #13232b; }
+.score-title { font-size: 17px; margin: 0 0 7px; font-weight: 600; }
+.score-guide { font-size: 11px; color: #aebfce; line-height: 1.8; margin: 0 0 12px; }
+.score-table { border-collapse: collapse; width: 100%; font-size: 11px; }
+.score-table th, .score-table td { text-align: right; padding: 5px 0; font-weight: 400; }
+.score-table th:first-child { text-align: left; color: #aebfce; }
+.score-table thead th { color: #c7d8e7; padding-bottom: 8px; }
+.score-table td { font-family: var(--mono); }
+.score-table .total-row { border-top: 1px solid #355054; }
+.score-table .total-row td { font: 500 21px/1.5 var(--mono); color: #c6efe3; }
+.score-result { border-radius: 6px; text-align: center; color: #bbf1df; background: #1c3b33; padding: 10px; margin-top: 12px; font-size: 13px; }
+.score-footnote { margin: 9px 0 0; font-size: 10px; color: #a3b9c6; }
+.score-buttons { display: grid; gap: 8px; margin-top: 15px; }
+.score-panel.preview .score-buttons { display: none; }
+.footer { display: flex; align-items: center; justify-content: space-between; gap: 14px; color: #8195ac; font-size: 10px; padding: 18px 0 24px; }
+.game-view + .footer { margin-top: 0; }
+.toast { position: fixed; left: 50%; bottom: 24px; z-index: 30; width: max-content; max-width: calc(100vw - 32px); transform: translate(-50%,12px); padding: 11px 16px; background: #1c3040f5; color: #e1f4ee; border: 1px solid #4d796e; border-radius: 8px; box-shadow: 0 8px 24px #0005; font-size: 12px; opacity: 0; pointer-events: none; transition: opacity .18s, transform .18s; }
+.toast.show { opacity: 1; transform: translate(-50%,0); }
+dialog { border: 1px solid #3c5165; border-radius: 14px; width: 510px; max-width: calc(100vw - 28px); max-height: calc(100dvh - 40px); padding: 0; background: var(--surface); color: var(--ink); overflow: auto; box-shadow: 0 24px 80px #0009; scrollbar-width: thin; }
+dialog::backdrop { background: #02070ed9; backdrop-filter: blur(4px); }
+.dialog-inner { padding: 26px; }
+.dialog-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.dialog-head h2 { margin: 0; font-size: 23px; font-weight: 600; }
+.dialog-head .icon-button { border: 1px solid var(--line); border-radius: 7px; color: #b3c5d8; background: #182636; }
+.dialog-desc { color: var(--muted); font-size: 12px; margin: 7px 0 20px; }
+.rule-list { counter-reset: rules; list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 17px; }
+.rule-list li { position: relative; padding-left: 26px; color: #b0c1d3; font-size: 12px; line-height: 1.9; }
+.rule-list li::before { counter-increment: rules; content: counter(rules); position: absolute; left: 0; top: 2px; color: var(--accent); font: 12px/1.9 var(--mono); }
+.rule-list strong { color: #e1ecf7; font-size: 13px; font-weight: 600; }
+.rule-list p { margin: 3px 0 0; }
+.keyboard-note, .ai-note { color: #acc1d3; font-size: 11px; line-height: 1.9; padding: 13px; background: #192637; border-radius: 8px; }
+.ai-note { margin-top: 12px; }
+.ai-note strong { color: #cee5db; font-weight: 600; }
+.ai-note p { margin: 5px 0 0; }
+kbd { font: 10px var(--mono); padding: 1px 4px; margin: 0 2px; border: 1px solid #506177; border-bottom-width: 2px; border-radius: 3px; background: #24364a; color: #deedfa; }
+.dialog-bottom { margin-top: 20px; display: flex; justify-content: flex-end; }
+noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d53; border-radius: 8px; color: #ffd1b8; }
+@keyframes breathe { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+@media (min-width: 741px) and (max-width: 900px) {
+  .game-layout { grid-template-columns: minmax(0,1fr) 244px; gap: 20px; }
+  .control-panel { padding: 15px; }
+  .shortcut-caption { display: none; }
+}
+@media (max-width: 740px) {
+  .site-head { max-width: 604px; height: 60px; padding: 0 20px; }
+  main { max-width: 604px; padding: 0 20px; }
+  .setup-view { padding: 25px 0 15px; }
+  .setup-heading h1 { font-size: 26px; }
+  .setup-card { padding: 22px; }
+  .game-view { padding-top: 20px; }
+  .game-heading { margin-bottom: 16px; }
+  .game-heading h1 { font-size: 20px; }
+  .game-layout { display: flex; flex-direction: column; align-items: stretch; gap: 14px; }
+  .game-layout > *, .control-panel > * { width: 100%; }
+  .sidebar, .control-panel { display: contents; }
+  .turn-banner { order: 0; margin: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); min-height: 62px; }
+  .turn-title { font-size: 14px; }
+  .turn-subtitle { margin-top: 2px; }
+  .board-column { order: 1; }
+  .actions { order: 2; margin: 0; }
+  .action-button { min-height: 44px; }
+  .player-list { order: 3; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+  .player-card { border: 1px solid var(--line); border-radius: 9px; background: var(--surface); padding: 12px; gap: 9px; }
+  .player-card + .player-card { border-top: 1px solid var(--line); }
+  .player-card.current { border-color: #4d8377; }
+  .player-name { font-size: 13px; }
+  .player-role { font-size: 11px; }
+  .stone-icon { width: 26px; height: 26px; }
+  .capture-number { font-size: 16px; }
+  .capture-label { font-size: 10px; }
+  .score-panel { order: 4; margin: 0; padding: 18px; }
+  .utility-section { order: 5; margin: 0; }
+  .journal { order: 6; margin: 0; }
+  .details-content { padding-top: 2px; }
+  .ai-control-row select { min-width: 140px; }
+  .board-toolbar { gap: 10px; }
+  .toolbar-button { min-height: 40px; font-size: 12px; }
+  .move-list { max-width: 350px; }
+  .board-caption { margin-top: 10px; font-size: 10px; }
+  .footer { padding-top: 20px; }
+}
+@media (max-width: 430px) {
+  .site-head, main { padding-left: 16px; padding-right: 16px; }
+  .brand-chinese { display: none; }
+  .quiet-button { padding: 7px 8px; }
+  .setup-heading { margin-bottom: 18px; }
+  .setup-heading h1 { font-size: 25px; }
+  .setup-card { padding: 18px; border-radius: 12px; }
+  .option-group { gap: 8px; }
+  .choice { padding: 10px; min-height: 62px; }
+  .choice strong { font-size: 13px; }
+  .choice small { font-size: 11px; }
+  .size-choice strong { font-size: 15px; }
+  .choice:has(input:checked)::after { width: 5px; height: 5px; top: 8px; right: 7px; }
+  .config-field { margin-bottom: 17px; }
+  .setup-note { font-size: 10px; }
+  .continue-card { padding: 12px; gap: 10px; flex-wrap: wrap; }
+  .continue-card > div { flex: 1 1 130px; }
+  .continue-button { flex: 0 1 auto; max-width: 100%; font-size: 11px; padding: 8px 10px; }
+  .game-meta { font-size: 10px; gap: 7px; }
+  .secondary-button { padding: 8px 10px; font-size: 11px; }
+  .player-card { padding: 11px 9px; gap: 7px; }
+  .player-role { font-size: 11px; }
+  .player-name { font-size: 13px; }
+  .stone-icon { width: 23px; height: 23px; }
+  .shortcut-caption { display: none; }
+  .dialog-inner { padding: 22px; }
+}
+</style>
+</head>
+<body>
+<header class="site-head">
+  <div class="brand" aria-label="星弈 NEON GO">
+    <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 2v20M16 2v20M2 8h20M2 16h20" stroke="#4b8076"/><circle cx="8" cy="8" r="4" fill="#65e4c7"/><circle cx="16" cy="16" r="4" fill="#e9f2f9"/></svg></span>
+    <span class="brand-name">NEON <span>GO</span></span><span class="brand-chinese">星弈</span>
+  </div>
+  <nav class="head-actions" aria-label="遊戲工具">
+    <button class="quiet-button" id="rules-btn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4 2c-1 .6-1.5 1-1.5 2M12 16h.01"/></svg>遊戲指南</button>
+    <button class="quiet-button icon-button" id="sound-btn" type="button" aria-label="關閉落子音效" aria-pressed="true" title="落子音效"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 5-5 4H3v6h3l5 4V5Z"/><path id="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg></button>
+  </nav>
+</header>
+<main>
+  <section id="setup-view" class="setup-view" aria-labelledby="setup-title">
+    <header class="setup-heading">
+      <p class="setup-eyebrow">NEW GAME / CONFIGURATION</p>
+      <h1 id="setup-title" tabindex="-1">新對局設定</h1>
+      <p id="setup-description">先選模式、AI 難度與棋盤大小，確認後才會開始。</p>
+    </header>
+    <div id="continue-card" class="continue-card" hidden>
+      <div><div class="continue-title">已保存的棋局</div><p id="continue-summary" class="continue-summary"></p></div>
+      <button id="continue-btn" class="continue-button" type="button">繼續上次對局</button>
+    </div>
+    <form id="new-form" class="setup-card" aria-label="開局配置">
+      <fieldset class="config-field">
+        <legend class="field-label">對局模式</legend>
+        <div class="option-group">
+          <label class="choice"><input type="radio" name="mode" value="ai" checked><strong>單人對戰</strong><small>你執黑，與 AI 對弈</small></label>
+          <label class="choice"><input type="radio" name="mode" value="local"><strong>同機雙人</strong><small>兩位玩家輪流落子</small></label>
+        </div>
+      </fieldset>
+      <fieldset id="new-difficulty" class="config-field">
+        <legend class="field-label">AI 難度</legend>
+        <div class="option-group three">
+          <label class="choice"><input type="radio" name="difficulty" value="easy"><strong>入門</strong><small>基本攻防</small></label>
+          <label class="choice"><input type="radio" name="difficulty" value="medium"><strong>進階</strong><small>攻防推演</small></label>
+          <label class="choice"><input type="radio" name="difficulty" value="hard" checked><strong>高手</strong><small>全盤推演</small></label>
+        </div>
+      </fieldset>
+      <fieldset class="config-field">
+        <legend class="field-label">棋盤大小</legend>
+        <div class="option-group three">
+          <label class="choice size-choice"><input type="radio" name="size" value="9" checked><strong>9×9</strong><small>輕鬆短局</small></label>
+          <label class="choice size-choice"><input type="radio" name="size" value="13"><strong>13×13</strong><small>中型棋盤</small></label>
+          <label class="choice size-choice"><input type="radio" name="size" value="19"><strong>19×19</strong><small>完整棋盤</small></label>
+        </div>
+      </fieldset>
+      <p class="setup-note">黑棋先行 · 白棋貼 6.5 點 · 可隨時悔棋</p>
+      <div class="setup-summary" aria-live="polite" aria-atomic="true"><span>本局配置</span><strong id="setup-summary-text">單人對戰 · 高手 AI · 9×9</strong></div>
+      <p id="new-warning" class="dialog-warning" hidden>開始新局會取代目前棋局。</p>
+      <button id="new-submit" class="primary wide start-button" type="submit">確認配置，開始對局<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+      <p class="setup-help">未按下開始前，不會建立或覆蓋棋局。</p>
+    </form>
+  </section>
+
+  <section id="game-view" class="game-view" aria-labelledby="board-title" hidden>
+    <header class="game-heading">
+      <div><h1 id="board-title" tabindex="-1">9 × 9 棋盤</h1><div class="game-meta"><span id="game-mode">單人 · 對戰 AI</span><span class="meta-divider" aria-hidden="true"></span><span>白貼 6.5 點</span></div></div>
+      <button id="new-btn" class="secondary-button" type="button" aria-label="新對局設定"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>新局設定</button>
+    </header>
+    <div class="game-layout">
+      <section class="board-column" aria-label="圍棋棋盤">
+        <div class="board-frame" id="board-frame">
+          <canvas id="board" width="760" height="760" aria-hidden="true"></canvas>
+          <div class="board-input" id="board-input" role="grid" aria-label="圍棋棋盤，使用方向鍵選點，Enter 落子" aria-describedby="board-help"></div>
+        </div>
+        <div class="board-caption"><span id="board-help">點擊交叉點落子</span><span class="shortcut-caption">方向鍵選點 · Enter 落子</span></div>
+      </section>
+      <aside class="sidebar" aria-label="對局資訊與操作">
+        <section class="control-panel" aria-label="回合與操作">
+          <div class="player-list">
+            <div class="player-card current" id="black-card"><span class="stone-icon black" aria-hidden="true"></span><div class="player-details"><div class="player-name">黑棋</div><div class="player-role" id="black-role">你 · 先手</div></div><div class="capture-label"><span class="capture-number" id="black-captures">0</span>提子</div></div>
+            <div class="player-card" id="white-card"><span class="stone-icon white" aria-hidden="true"></span><div class="player-details"><div class="player-name">白棋</div><div class="player-role" id="white-role">高手 AI</div></div><div class="capture-label"><span class="capture-number" id="white-captures">0</span>提子</div></div>
+          </div>
+          <div class="turn-banner" id="turn-banner" role="status" aria-live="polite"><span class="turn-light" aria-hidden="true"></span><div><div class="turn-title" id="turn-title">輪到你了，請執黑落子</div><div class="turn-subtitle" id="turn-subtitle">點擊交叉點，開始第一手。</div><div class="ai-progress" id="ai-progress" aria-hidden="true" hidden><span id="ai-progress-fill"></span></div></div></div>
+          <div class="actions" id="play-actions">
+            <button class="action-button" id="undo-btn" type="button" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 4 10l5 5M4 10h9a6 6 0 0 1 6 6v3"/></svg>悔棋</button>
+            <button class="action-button" id="pass-btn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>停一手</button>
+          </div>
+        </section>
+        <section class="score-panel" id="score-panel" aria-label="計分" hidden>
+          <h2 class="score-title" id="score-title">自動終局計分</h2><p class="score-guide" id="score-guide">雙方停著後，自動判斷兩方死子並結算。點選棋子可更正。</p>
+          <table class="score-table"><thead><tr><th scope="col">面積計分</th><th scope="col">黑棋</th><th scope="col">白棋</th></tr></thead><tbody><tr><th scope="row">盤上活子</th><td id="score-black-stones">0</td><td id="score-white-stones">0</td></tr><tr><th scope="row">所圍空地</th><td id="score-black-territory">0</td><td id="score-white-territory">0</td></tr><tr><th scope="row">判定死子（已扣除）</th><td id="score-black-dead">0</td><td id="score-white-dead">0</td></tr><tr><th scope="row">貼目</th><td>—</td><td>6.5</td></tr><tr class="total-row"><th scope="row">合計</th><td id="score-black-total">0</td><td id="score-white-total">6.5</td></tr></tbody></table>
+          <div class="score-result" id="score-result">白棋暫領先 6.5 點</div><p class="score-footnote" id="score-footnote">本局自動辨識雙方死子。死活未定的棋塊可點選調整。</p>
+          <div class="score-buttons"><button id="finish-btn" class="primary" type="button">重新自動判死</button><button id="resume-btn" class="action-button" type="button">返回對局</button></div>
+        </section>
+        <details id="game-options" class="utility-section">
+          <summary>對局選項<svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7 5 5 5-5"/></svg></summary>
+          <div class="details-content">
+            <div class="ai-controls" id="ai-controls"><div class="ai-control-row"><label for="difficulty-select">AI 難度</label><select id="difficulty-select" aria-describedby="difficulty-hint"><option value="easy">入門</option><option value="medium">進階</option><option value="hard" selected>高手</option></select></div><p id="difficulty-hint" class="difficulty-hint">全盤模擬與死活攻防，約 5 秒落子。</p></div>
+            <div class="board-toolbar" aria-label="棋盤顯示選項"><button id="numbers-btn" class="toolbar-button" type="button" aria-pressed="false">手數標記</button><button id="territory-btn" class="toolbar-button" type="button" aria-pressed="false">局面估算</button></div>
+          </div>
+        </details>
+        <details class="journal" id="journal">
+          <summary>最近落子<span class="move-total" id="move-total">第 000 手</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7 5 5 5-5"/></svg></summary>
+          <div class="details-content"><div class="empty-journal" id="empty-journal">落子後會顯示最近四手紀錄。</div><ol class="move-list" id="move-list" aria-label="最近四手棋譜"></ol></div>
+        </details>
+      </aside>
+    </div>
+  </section>
+  <footer class="footer"><span>完全離線 · 單檔圍棋</span><span id="save-note">開始後自動保存</span></footer>
+</main>
+<dialog id="rules-dialog" aria-labelledby="rules-title"><div class="dialog-inner"><div class="dialog-head"><h2 id="rules-title">遊戲指南</h2><button class="icon-button" type="button" data-close="rules-dialog" aria-label="關閉規則"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div><p class="dialog-desc">瞭解基本規則，開始你的第一局。</p><ol class="rule-list">
+  <li><strong>落子在交叉點</strong><p>黑棋先行，黑白輪流下一子。同色棋子沿上下左右相連成一塊，斜線相鄰不算相連。</p></li>
+  <li><strong>氣與提子</strong><p>棋子旁邊上下左右的空點叫「氣」。落子後，對方整塊棋若沒有氣，就會被提走。不可下在使自己無氣的位置；若能先提掉對方而獲得氣，則可以落子。</p></li>
+  <li><strong>棋局不可重複</strong><p>本遊戲採全局同形禁著：落子後不得重現本局曾出現的棋盤。停一手不受此限，悔棋則會退回對應歷史。</p></li>
+  <li><strong>結束對局與計分</strong><p>沒有想下的位置時可「停一手」。連續兩次停著後會自動判斷黑白死子、移除計分並公布勝負。點選整塊棋可修正死子並立即重算；若仍有爭議，可返回對局。</p></li>
+  <li><strong>以面積計勝負</strong><p>分數＝盤上活子＋只被己方包圍的空點；白棋另加 6.5 點。提子數不另外加分，共有空地不計。局面估算會先暫扣判出的死子；死活未定、劫爭與雙活需在結算時確認。</p></li>
+</ol><div class="keyboard-note"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> 選點，<kbd>Enter</kbd> 落子<br><kbd>U</kbd> 悔棋　<kbd>P</kbd> 停一手　<kbd>N</kbd> 新局　<kbd>?</kbd> 規則<br>人機模式悔棋會退回你落子之前。手機可用雙指放大棋盤。</div><div class="ai-note"><strong>選擇適合你的 AI 難度</strong><p>入門採單步判斷；進階推演多手攻防；高手結合全盤模擬、死活閱讀與征子攻防，每手思考約 5 秒；完全離線，不需下載模型。</p><p>在「對局選項」可切換 AI 難度、顯示手數或估算局面。AI 思考時也能悔棋或開新局。</p></div><div class="dialog-bottom"><button type="button" class="primary" data-close="rules-dialog">知道了</button></div></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<noscript>請啟用瀏覽器的 JavaScript，便可開始這局圍棋。</noscript>
+<script id="go-engine-code">
+/* Ink & Stone: a dependency-free Go engine.
+ * Board: flat row-major array, 0 empty / 1 black / 2 white.
+ * history: full state immediately BEFORE each accepted play/pass; no UI data.
+ * Scoring: Chinese-style area, komi added to White, mixed empty regions neutral.
+ * Repetition: positional superko; passes are exempt and undo removes their states.
+ */
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.GoEngine = api;
+})(typeof window !== 'undefined' ? window : globalThis, function () {
+  'use strict';
+  const EMPTY = 0, BLACK = 1, WHITE = 2;
+  const PHASES = new Set(['play', 'scoring', 'finished']);
+
+  class GoGame {
+    constructor({ size = 9, komi = 6.5 } = {}) {
+      if (!Number.isInteger(size) || size < 5 || size > 25) {
+        throw new RangeError('棋盤邊長須為 5 至 25 路。');
+      }
+      if (!Number.isFinite(komi) || Math.abs(komi) > 100) {
+        throw new RangeError('貼目須為有效數值。');
+      }
+      this.size = size;
+      this.komi = komi;
+      this.board = new Array(size * size).fill(EMPTY);
+      this.turn = BLACK;
+      this.captures = { 1: 0, 2: 0 };
+      this.history = [];
+      this.consecutivePasses = 0;
+      this.phase = 'play';
+      this.lastMove = null;
+      this.moveNumber = 0;
+      this.finalScore = null;
+      this._deadIndices = [];
+      this._adjacency = this.board.map((_, index) => {
+        const row = Math.floor(index / size), col = index % size;
+        const points = [];
+        if (row > 0) points.push(index - size);
+        if (col + 1 < size) points.push(index + 1);
+        if (row + 1 < size) points.push(index + size);
+        if (col > 0) points.push(index - 1);
+        return points;
+      });
+      const initialKey = this._key(this.board);
+      this._positions = [initialKey];
+      this._positionCounts = new Map([[initialKey, 1]]);
+    }
+
+    _key(board) { return board.join(''); }
+
+    neighbors(index) {
+      return Number.isInteger(index) && this._adjacency[index]
+        ? this._adjacency[index].slice() : [];
+    }
+
+    groupAt(index, board = this.board) {
+      if (!Number.isInteger(index) || index < 0 || index >= board.length || !board[index]) {
+        return { color: EMPTY, stones: [], liberties: [] };
+      }
+      const color = board[index], stones = [], liberties = new Set();
+      const seen = new Set([index]), stack = [index];
+      while (stack.length) {
+        const point = stack.pop();
+        stones.push(point);
+        for (const neighbor of this._adjacency[point]) {
+          if (!board[neighbor]) liberties.add(neighbor);
+          else if (board[neighbor] === color && !seen.has(neighbor)) {
+            seen.add(neighbor);
+            stack.push(neighbor);
+          }
+        }
+      }
+      return { color, stones, liberties: Array.from(liberties) };
+    }
+
+    _simulate(index, color = this.turn) {
+      if (!Number.isInteger(index) || index < 0 || index >= this.board.length) {
+        return { ok: false, error: '請在棋盤交叉點落子。' };
+      }
+      if (this.board[index]) return { ok: false, error: '此處已有棋子，請另擇一處。' };
+      const board = this.board.slice(), opponent = 3 - color;
+      const checked = new Set(), capturedIndices = [];
+      board[index] = color;
+      // Capture first: a move with no liberties before capture can still be legal.
+      for (const neighbor of this._adjacency[index]) {
+        if (board[neighbor] !== opponent || checked.has(neighbor)) continue;
+        const group = this.groupAt(neighbor, board);
+        for (const stone of group.stones) checked.add(stone);
+        if (!group.liberties.length) {
+          for (const stone of group.stones) {
+            board[stone] = EMPTY;
+            capturedIndices.push(stone);
+          }
+        }
+      }
+      const ownGroup = this.groupAt(index, board);
+      if (!ownGroup.liberties.length) {
+        return { ok: false, error: '此處落子後無氣，不能自殺。' };
+      }
+      const positionKey = this._key(board);
+      if (this._positionCounts.has(positionKey)) {
+        return { ok: false, error: '此手會重現先前盤面，請先到別處落子（全局同形禁著）。' };
+      }
+      return {
+        ok: true, board, captured: capturedIndices.length, capturedIndices,
+        group: ownGroup.stones, liberties: ownGroup.liberties, positionKey
+      };
+    }
+
+    isLegal(index) { return this.phase === 'play' && this._simulate(index).ok; }
+
+    _snapshot() {
+      return {
+        board: this.board.slice(), turn: this.turn,
+        captures: { 1: this.captures[1], 2: this.captures[2] },
+        consecutivePasses: this.consecutivePasses, phase: this.phase,
+        lastMove: this.lastMove, moveNumber: this.moveNumber
+      };
+    }
+
+    _recordPosition(key) {
+      this._positions.push(key);
+      this._positionCounts.set(key, (this._positionCounts.get(key) || 0) + 1);
+    }
+
+    _clearFinal() { this.finalScore = null; this._deadIndices = []; }
+
+    play(index) {
+      if (this.phase !== 'play') {
+        return { ok: false, error: '請先繼續對局，再行落子。' };
+      }
+      const move = this._simulate(index);
+      if (!move.ok) return move;
+      this.history.push(this._snapshot());
+      this.board = move.board;
+      this.captures[this.turn] += move.captured;
+      this.turn = 3 - this.turn;
+      this.lastMove = index;
+      this.moveNumber += 1;
+      this.consecutivePasses = 0;
+      this._clearFinal();
+      this._recordPosition(move.positionKey);
+      return { ok: true, captured: move.captured, capturedIndices: move.capturedIndices };
+    }
+
+    pass() {
+      if (this.phase !== 'play') {
+        return { ok: false, error: '請先繼續對局，再行停著。' };
+      }
+      this.history.push(this._snapshot());
+      this.turn = 3 - this.turn;
+      this.moveNumber += 1;
+      this.consecutivePasses += 1;
+      this._clearFinal();
+      if (this.consecutivePasses >= 2) this.phase = 'scoring';
+      this._recordPosition(this._key(this.board));
+      return { ok: true, captured: 0, scoring: this.phase === 'scoring' };
+    }
+
+    undo(steps = 1) {
+      if (!Number.isFinite(steps) || steps < 1 || !this.history.length) return false;
+      const count = Math.min(Math.floor(steps), this.history.length);
+      for (let i = 0; i < count; i += 1) {
+        const key = this._positions.pop();
+        const remaining = this._positionCounts.get(key) - 1;
+        if (remaining > 0) this._positionCounts.set(key, remaining);
+        else this._positionCounts.delete(key);
+        const snapshot = this.history.pop();
+        this.board = snapshot.board.slice();
+        this.turn = snapshot.turn;
+        this.captures = { 1: snapshot.captures[1], 2: snapshot.captures[2] };
+        this.consecutivePasses = snapshot.consecutivePasses;
+        this.phase = snapshot.phase;
+        this.lastMove = snapshot.lastMove;
+        this.moveNumber = snapshot.moveNumber;
+      }
+      this._clearFinal();
+      return true;
+    }
+
+    _expandDead(deadIndices = []) {
+      const dead = new Set();
+      if (!deadIndices || typeof deadIndices[Symbol.iterator] !== 'function') return [];
+      for (const index of deadIndices) {
+        if (!Number.isInteger(index) || index < 0 || index >= this.board.length ||
+            !this.board[index] || dead.has(index)) continue;
+        for (const stone of this.groupAt(index).stones) dead.add(stone);
+      }
+      return Array.from(dead).sort((a, b) => a - b);
+    }
+
+    _regions(board) {
+      const seen = new Uint8Array(board.length), regions = [];
+      for (let index = 0; index < board.length; index += 1) {
+        if (board[index] || seen[index]) continue;
+        const points = [], stack = [index], border = new Set();
+        seen[index] = 1;
+        while (stack.length) {
+          const point = stack.pop();
+          points.push(point);
+          for (const neighbor of this._adjacency[point]) {
+            if (board[neighbor]) border.add(board[neighbor]);
+            else if (!seen[neighbor]) {
+              seen[neighbor] = 1;
+              stack.push(neighbor);
+            }
+          }
+        }
+        regions.push({ points, owner: border.size === 1 ? border.values().next().value : EMPTY });
+      }
+      return regions;
+    }
+
+    estimate(deadIndices = []) {
+      const board = this.board.slice(), dead = this._expandDead(deadIndices);
+      for (const index of dead) board[index] = EMPTY;
+      const black = { stones: 0, territory: 0, total: 0 };
+      const white = { stones: 0, territory: 0, komi: this.komi, total: 0 };
+      const ownership = board.slice();
+      let neutral = 0;
+      for (const color of board) {
+        if (color === BLACK) black.stones += 1;
+        if (color === WHITE) white.stones += 1;
+      }
+      for (const region of this._regions(board)) {
+        if (region.owner === BLACK) black.territory += region.points.length;
+        else if (region.owner === WHITE) white.territory += region.points.length;
+        else neutral += region.points.length;
+        for (const point of region.points) ownership[point] = region.owner;
+      }
+      black.total = black.stones + black.territory;
+      white.total = white.stones + white.territory + this.komi;
+      const difference = black.total - white.total;
+      return {
+        black, white, neutral, ownership,
+        winner: difference > 0 ? BLACK : difference < 0 ? WHITE : EMPTY,
+        margin: Math.abs(difference), deadIndices: dead
+      };
+    }
+
+    finish(deadIndices = []) {
+      this._deadIndices = this._expandDead(deadIndices);
+      this.finalScore = this.estimate(this._deadIndices);
+      this.phase = 'finished';
+      return this.finalScore;
+    }
+
+    resume() {
+      this.phase = 'play';
+      this.consecutivePasses = 0;
+      this._clearFinal();
+      return { ok: true };
+    }
+
+    _isOwnEye(index, color) {
+      if (!this._adjacency[index].every(point => this.board[point] === color)) return false;
+      const row = Math.floor(index / this.size), col = index % this.size;
+      let hostile = 0, offBoard = 0;
+      for (const dr of [-1, 1]) for (const dc of [-1, 1]) {
+        const r = row + dr, c = col + dc;
+        if (r < 0 || c < 0 || r >= this.size || c >= this.size) offBoard += 1;
+        else if (this.board[r * this.size + c] !== color) hostile += 1;
+      }
+      return offBoard ? hostile === 0 : hostile <= 1;
+    }
+
+    // A small, local heuristic opponent. It is intentionally a casual player,
+    // not a full life-and-death solver or a ranked Go program.
+    suggestMove() {
+      if (this.phase !== 'play') return null;
+      const color = this.turn, opponent = 3 - color, n = this.size;
+      const groupId = new Int16Array(this.board.length).fill(-1), groups = [];
+      const stonePoints = [], ownPoints = [], enemyPoints = [];
+      for (let index = 0; index < this.board.length; index += 1) {
+        if (!this.board[index]) continue;
+        stonePoints.push(index);
+        (this.board[index] === color ? ownPoints : enemyPoints).push(index);
+        if (groupId[index] !== -1) continue;
+        const group = this.groupAt(index), id = groups.length;
+        groups.push(group);
+        for (const point of group.stones) groupId[point] = id;
+      }
+      const regionOwner = new Int8Array(this.board.length);
+      const regionSize = new Int16Array(this.board.length);
+      for (const region of this._regions(this.board)) for (const point of region.points) {
+        regionOwner[point] = region.owner;
+        regionSize[point] = region.points.length;
+      }
+      const distance = (a, b) => Math.abs(Math.floor(a / n) - Math.floor(b / n)) + Math.abs(a % n - b % n);
+      const offset = n >= 13 ? 3 : Math.min(2, Math.floor(n / 3));
+      const far = n - 1 - offset;
+      const stars = [offset * n + offset, offset * n + far, far * n + offset, far * n + far];
+      const opening = stonePoints.length < Math.max(7, n * 1.25);
+      let best = null, bestScore = -Infinity;
+      for (let index = 0; index < this.board.length; index += 1) {
+        if (this.board[index] || this._isOwnEye(index, color)) continue;
+        const move = this._simulate(index, color);
+        if (!move.ok) continue;
+        const adjacentGroups = new Set(this._adjacency[index].map(p => groupId[p]).filter(id => id >= 0));
+        let score = Math.random() * 2.4, tactical = move.captured > 0;
+        let friendly = 0, hostile = 0;
+        const rescued = new Set();
+        score += move.captured * 21 + (move.captured ? 13 : 0);
+        for (const id of adjacentGroups) {
+          const group = groups[id];
+          if (group.color === color) {
+            friendly += 1;
+            if (group.liberties.length === 1 && move.liberties.length >= 2) rescued.add(id);
+            else if (group.liberties.length === 2 && move.liberties.length >= 3) {
+              score += 8 + Math.min(group.stones.length, 6);
+              tactical = true;
+            }
+          } else {
+            hostile += 1;
+            if (group.liberties.length === 2) {
+              score += 11 + Math.min(group.stones.length, 8) * 2;
+              tactical = true;
+            } else if (group.liberties.length === 3) score += 3;
+          }
+        }
+        // Capturing can also save a group that does not touch the played point.
+        for (const captured of move.capturedIndices) for (const neighbor of this._adjacency[captured]) {
+          const id = groupId[neighbor];
+          if (id >= 0 && groups[id].color === color && groups[id].liberties.length === 1) rescued.add(id);
+        }
+        for (const id of rescued) {
+          score += 19 + Math.min(groups[id].stones.length, 10) * 7;
+          tactical = true;
+        }
+        if (friendly >= 2) score += (friendly - 1) * (hostile ? 8 : 2);
+        score += Math.min(move.liberties.length, 6) * 1.35;
+        if (move.liberties.length === 1) score -= 70 + Math.min(move.group.length, 12) * 7;
+        else if (move.liberties.length === 2 && !move.captured) score -= 7;
+
+        const row = Math.floor(index / n), col = index % n;
+        const edge = Math.min(row, col, n - 1 - row, n - 1 - col);
+        let nearest = n * 2, nearestOwn = n * 2, nearestEnemy = n * 2;
+        for (const point of stonePoints) nearest = Math.min(nearest, distance(index, point));
+        for (const point of ownPoints) nearestOwn = Math.min(nearestOwn, distance(index, point));
+        for (const point of enemyPoints) nearestEnemy = Math.min(nearestEnemy, distance(index, point));
+        if (opening && !tactical) {
+          const starDistance = Math.min(...stars.map(point => distance(index, point)));
+          score += Math.max(0, 13 - starDistance * 3);
+          score += Math.min(nearest, 5) * 1.8;
+          if (nearestOwn <= 2) score -= (3 - nearestOwn) * 8;
+          if (nearestEnemy === 1) score -= 7;
+          if (edge === 0) score -= 24;
+          else if (edge === 1) score -= 10;
+          else if (edge === 2 || edge === 3) score += 5;
+        } else {
+          if (edge === 0 && !tactical) score -= 6;
+          if (nearestOwn >= 2 && nearestOwn <= 4 && nearestEnemy >= 2 && nearestEnemy <= 4) score += 9;
+          if (nearestOwn === 1 && nearestEnemy > 3 && !tactical) score -= 7;
+          if (nearest >= 3) score += Math.min(nearest, 5);
+        }
+        // Filling settled friendly space gains no area. Tiny enemy enclosures
+        // are generally hopeless invasions; leave them for agreed dead marking.
+        if (ownPoints.length && enemyPoints.length && !tactical) {
+          if (regionOwner[index] === color) continue;
+          if (regionOwner[index] === opponent) {
+            if (regionSize[index] < 7) continue;
+            score -= 17;
+          }
+        }
+        if (score > bestScore) { bestScore = score; best = index; }
+      }
+      return bestScore > -8 ? best : null;
+    }
+
+    serialize() {
+      return {
+        version: 1, size: this.size, komi: this.komi,
+        ...this._snapshot(),
+        history: this.history.map(snapshot => ({
+          ...snapshot, board: snapshot.board.slice(), captures: { ...snapshot.captures }
+        })),
+        finalDeadIndices: this._deadIndices.slice()
+      };
+    }
+
+    static restore(input) {
+      const data = typeof input === 'string' ? JSON.parse(input) : input;
+      if (!data || data.version !== 1) throw new Error('棋譜格式無法辨識。');
+      const game = new GoGame({ size: data.size, komi: data.komi });
+      const count = game.board.length;
+      const validState = state => state &&
+        Array.isArray(state.board) && state.board.length === count &&
+        state.board.every(value => value === EMPTY || value === BLACK || value === WHITE) &&
+        (state.turn === BLACK || state.turn === WHITE) && PHASES.has(state.phase) &&
+        Number.isInteger(state.moveNumber) && state.moveNumber >= 0 && state.moveNumber <= 20000 &&
+        Number.isInteger(state.consecutivePasses) && state.consecutivePasses >= 0 && state.consecutivePasses <= 2 &&
+        (state.lastMove === null || Number.isInteger(state.lastMove) && state.lastMove >= 0 && state.lastMove < count) &&
+        state.captures && [BLACK, WHITE].every(color => Number.isInteger(state.captures[color]) && state.captures[color] >= 0);
+      if (!validState(data) || !Array.isArray(data.history) || data.history.length !== data.moveNumber ||
+          !data.history.every((snapshot, index) => validState(snapshot) && snapshot.moveNumber === index)) {
+        throw new Error('棋譜資料不完整，請另開新局。');
+      }
+      const copyState = state => ({
+        board: state.board.slice(), turn: state.turn, captures: { 1: state.captures[1], 2: state.captures[2] },
+        consecutivePasses: state.consecutivePasses, phase: state.phase,
+        lastMove: state.lastMove, moveNumber: state.moveNumber
+      });
+      Object.assign(game, copyState(data));
+      game.history = data.history.map(copyState);
+      // Every history entry is the board before one action, including passes;
+      // appending the current board reconstructs all actual positional states.
+      game._positions = [...game.history.map(snapshot => game._key(snapshot.board)), game._key(game.board)];
+      game._positionCounts = new Map();
+      for (const key of game._positions) game._positionCounts.set(key, (game._positionCounts.get(key) || 0) + 1);
+      game._deadIndices = game._expandDead(data.finalDeadIndices || []);
+      if (game.phase === 'finished') game.finalScore = game.estimate(game._deadIndices);
+      return game;
+    }
+  }
+
+  return Object.freeze({ GoGame, EMPTY, BLACK, WHITE });
+});
+
+</script>
+<script id="go-life-code">
+
+/* Local life-and-death analysis for the offline Go game.
+ * Original implementation: Benson's fixed point certifies unconditional life;
+ * a bounded, full-width local game reads closed pockets bounded by those chains.
+ * A cutoff, ko, open boundary, or unresolved capturing race is never called dead.
+ * No pattern database, network access, dependencies, or mutations of input data.
+ */
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.GoLife = api;
+})(typeof window !== 'undefined' ? window : globalThis, function () {
+  'use strict';
+  const topologyCache = new Map();
+  const UNKNOWN = 0, ALIVE = 1, DEAD = -1;
+  const clock = () => typeof performance !== 'undefined' ? performance.now() : Date.now();
+
+  function topology(size) {
+    if (topologyCache.has(size)) return topologyCache.get(size);
+    const adj = Array.from({ length: size * size }, (_, i) => {
+      const row = Math.floor(i / size), col = i % size, neighbors = [];
+      if (row) neighbors.push(i - size);
+      if (col + 1 < size) neighbors.push(i + 1);
+      if (row + 1 < size) neighbors.push(i + size);
+      if (col) neighbors.push(i - 1);
+      return neighbors;
+    });
+    topologyCache.set(size, adj);
+    return adj;
+  }
+
+  function graph(board, adj) {
+    const count = board.length, ids = new Int16Array(count).fill(-1), groups = [];
+    const marks = new Int32Array(count); let stamp = 0;
+    for (let i = 0; i < count; i++) {
+      if (!board[i] || ids[i] >= 0) continue;
+      const id = groups.length, color = board[i], stones = [], libs = [], stack = [i];
+      ids[i] = id; stamp++;
+      while (stack.length) {
+        const p = stack.pop(); stones.push(p);
+        for (const q of adj[p]) {
+          if (!board[q]) {
+            if (marks[q] !== stamp) { marks[q] = stamp; libs.push(q); }
+          } else if (board[q] === color && ids[q] < 0) {
+            ids[q] = id; stack.push(q);
+          }
+        }
+      }
+      groups.push({ id, color, stones, libs, status: 'unknown', reason: 'open',
+        eyeRegions: [], eyeCount: 0, enclosed: false, space: [], pocketSize: 0,
+        attackMoves: [], defenseMoves: [] });
+    }
+    const emptyIds = new Int16Array(count).fill(-1), regions = [];
+    for (let i = 0; i < count; i++) {
+      if (board[i] || emptyIds[i] >= 0) continue;
+      const id = regions.length, points = [], border = new Set(), stack = [i];
+      emptyIds[i] = id;
+      while (stack.length) {
+        const p = stack.pop(); points.push(p);
+        for (const q of adj[p]) {
+          if (board[q]) border.add(ids[q]);
+          else if (emptyIds[q] < 0) { emptyIds[q] = id; stack.push(q); }
+        }
+      }
+      const boundary = Array.from(border), first = boundary.length ? groups[boundary[0]].color : 0;
+      const owner = boundary.every(g => groups[g].color === first) ? first : 0;
+      const vitalFor = owner ? boundary.filter(g => points.every(p => adj[p].some(q => ids[q] === g))) : [];
+      regions.push({ id, points, boundary, owner, vitalFor, bensonSafe: false });
+      for (const g of vitalFor) groups[g].eyeRegions.push(points.slice());
+    }
+    for (const group of groups) group.eyeCount = group.eyeRegions.length;
+    return { ids, groups, regions, emptyIds };
+  }
+
+  // Reuse the already computed chains and empty regions from the AI's exact
+  // board inspection. Group/region indices are both generated in board order.
+  // Copy only mutable life-status fields; never modify the AI's analysis.
+  function graphFromInspection(adj, info) {
+    const groups = info.groups.map(group => ({
+      id: group.id, color: group.color, stones: group.stones, libs: group.libs,
+      status: 'unknown', reason: 'open', eyeRegions: [], eyeCount: 0,
+      enclosed: false, space: [], pocketSize: 0, attackMoves: [], defenseMoves: []
+    }));
+    const regions = info.regions.map((region, id) => {
+      const boundary = region.borderGroups;
+      const owner = region.owner;
+      const vitalFor = owner ? boundary.filter(g => region.points.every(p =>
+        adj[p].some(q => info.ids[q] === g))) : [];
+      for (const g of vitalFor) groups[g].eyeRegions.push(region.points.slice());
+      return { id, points: region.points, boundary, owner, vitalFor, bensonSafe: false };
+    });
+    for (const group of groups) group.eyeCount = group.eyeRegions.length;
+    return { ids: info.ids, groups, regions, emptyIds: info.regionIds };
+  }
+
+  function benson(data, count) {
+    const { groups, regions } = data;
+    const active = new Uint8Array(groups.length).fill(1);
+    const liveRegions = Uint8Array.from(regions, r => r.owner ? 1 : 0);
+    let changed = true;
+    while (changed) {
+      changed = false;
+      const eyes = new Uint16Array(groups.length);
+      for (const region of regions) if (liveRegions[region.id]) {
+        for (const id of region.vitalFor) if (active[id]) eyes[id]++;
+      }
+      for (const group of groups) if (active[group.id] && eyes[group.id] < 2) {
+        active[group.id] = 0; changed = true;
+      }
+      for (const region of regions) if (liveRegions[region.id] && region.boundary.some(id => !active[id])) {
+        liveRegions[region.id] = 0; changed = true;
+      }
+    }
+    const safeEmpty = new Uint8Array(count);
+    for (const group of groups) if (active[group.id]) {
+      group.status = 'alive'; group.reason = 'benson';
+    }
+    for (const region of regions) if (liveRegions[region.id] && region.vitalFor.some(id => active[id])) {
+      region.bensonSafe = true;
+      for (const point of region.points) safeEmpty[point] = region.owner;
+    }
+    return safeEmpty;
+  }
+
+  function hasRelevantHistory(board, domain, history) {
+    if (!history || history.length === 0 || history.size === 0) return false;
+    const inside = new Uint8Array(board.length);
+    for (const point of domain) inside[point] = 1;
+    for (const state of history) {
+      const previous = state && state.board ? state.board : state;
+      if (!previous || previous.length !== board.length) continue;
+      let sameOutside = true, changedInside = false;
+      for (let i = 0; i < board.length; i++) {
+        if (Number(previous[i]) === board[i]) continue;
+        if (!inside[i]) { sameOutside = false; break; }
+        changedInside = true;
+      }
+      // Repeated copies of the current board (passes) do not constrain any
+      // prospective local play. Only an actual earlier local arrangement can.
+      if (sameOutside && changedInside) return true;
+    }
+    return false;
+  }
+
+  function findPockets(board, adj, data, history) {
+    const { ids, groups, emptyIds } = data, pockets = [];
+    // Without an unconditionally alive opposing wall, no closed pocket can
+    // exist. Skip scanning the entire board in those overwhelmingly common
+    // opening/middle-game positions; the test is logically exact.
+    const wallsAlive = [false, false, false];
+    for (const group of groups) if (group.status === 'alive') wallsAlive[group.color] = true;
+    for (const color of [1, 2]) {
+      if (!wallsAlive[3 - color]) continue;
+      const seen = new Uint8Array(board.length);
+      const wall = p => board[p] === 3 - color && groups[ids[p]].status === 'alive';
+      for (const target of groups) {
+        if (target.color !== color || target.status === 'alive' || seen[target.stones[0]]) continue;
+        const points = [], space = [], inside = new Set(), boundary = new Set(), stack = [target.stones[0]];
+        seen[stack[0]] = 1;
+        while (stack.length) {
+          const p = stack.pop(); points.push(p);
+          if (board[p]) inside.add(ids[p]); else space.push(p);
+          for (const q of adj[p]) {
+            if (wall(q)) boundary.add(ids[q]);
+            else if (!seen[q]) { seen[q] = 1; stack.push(q); }
+          }
+        }
+        // This exact domain is deliberately narrow: only this defender chain,
+        // empty points, and an invincible enemy boundary. Shared liberties with
+        // other weak chains (including seki) cannot become an automatic verdict.
+        if (!boundary.size || inside.size !== 1 || !inside.has(target.id)) continue;
+        target.enclosed = true; target.space = space.slice(); target.pocketSize = points.length;
+        target.boundary = Array.from(boundary);
+        target.status = 'unknown'; target.reason = 'closed-pocket-unread';
+        const oneRegion = space.length > 0 && space.every(p => emptyIds[p] === emptyIds[space[0]]);
+        if (space.length <= 2 && oneRegion && !hasRelevantHistory(board, points, history)) {
+          // With one connected eye space of at most two points, this lone
+          // chain cannot acquire two eyes or capture any invincible wall.
+          target.status = 'dead'; target.reason = 'closed-single-eye';
+          target.reading = { attackFirst: 'dead', defendFirst: 'dead',
+            attackMoves: [], defenseMoves: [], complete: true, nodes: 0 };
+        }
+        pockets.push({ target, points, space, boundary: target.boundary });
+      }
+    }
+    return pockets;
+  }
+
+  function readPocket(initial, adj, data, pocket, options, limit, stats) {
+    const defender = pocket.target.color, attacker = 3 - defender;
+    const anchor = pocket.target.stones[0];
+    const domain = pocket.points, mask = new Uint8Array(initial.length), wall = new Uint8Array(initial.length);
+    for (const point of domain) mask[point] = 1;
+    for (const id of pocket.boundary) for (const point of data.groups[id].stones) wall[point] = 1;
+    const keyOf = board => { let key = ''; for (const point of domain) key += board[point]; return key; };
+    const rootKey = keyOf(initial), historic = new Set();
+    for (const state of options.history || []) {
+      const b = state && state.board ? state.board : state;
+      if (!b || b.length !== initial.length) continue;
+      let sameOutside = true;
+      for (let i = 0; i < initial.length; i++) if (!mask[i] && Number(b[i]) !== initial[i]) {
+        sameOutside = false; break;
+      }
+      if (sameOutside) historic.add(keyOf(b));
+    }
+    const depthLimit = Number.isInteger(options.maxDepth) ? Math.max(0, options.maxDepth) : 18;
+    const startNodes = stats.nodes;
+    let hitLimit = false;
+
+    function groupAt(board, start) {
+      const color = board[start], stones = [], libs = [], seen = new Uint8Array(board.length);
+      const libertySeen = new Uint8Array(board.length), stack = [start]; seen[start] = 1;
+      let invincible = false;
+      while (stack.length) {
+        const p = stack.pop(); stones.push(p);
+        if (wall[p]) invincible = true;
+        for (const q of adj[p]) {
+          if (!board[q]) {
+            if (!libertySeen[q]) { libertySeen[q] = 1; libs.push(q); }
+          } else if (board[q] === color && !seen[q]) { seen[q] = 1; stack.push(q); }
+        }
+      }
+      return { stones, libs, invincible };
+    }
+
+    function play(board, index, color) {
+      const next = board.slice(), checked = new Uint8Array(board.length), captured = [];
+      next[index] = color;
+      for (const q of adj[index]) {
+        if (next[q] !== 3 - color || checked[q] || wall[q]) continue;
+        const other = groupAt(next, q);
+        for (const stone of other.stones) checked[stone] = 1;
+        if (!other.libs.length) for (const stone of other.stones) {
+          next[stone] = 0; captured.push(stone);
+        }
+      }
+      const own = groupAt(next, index);
+      if (!own.libs.length) return null;
+      return { board: next, index, own, captured, key: keyOf(next) };
+    }
+
+    function twoEyes(board) {
+      // The public verdict belongs to the original chain. A newly played
+      // disconnected chain surviving after its sacrifice cannot certify the
+      // original stones alive, even if it establishes life in this same pocket.
+      if (board[anchor] !== defender) return false;
+      const examined = new Uint8Array(board.length);
+      let chains = 0;
+      for (const start of domain) {
+        if (board[start] !== defender || examined[start]) continue;
+        chains++;
+        const group = groupAt(board, start), inGroup = new Uint8Array(board.length), liberty = new Uint8Array(board.length);
+        for (const stone of group.stones) { inGroup[stone] = 1; examined[stone] = 1; }
+        for (const point of group.libs) liberty[point] = 1;
+        const seen = new Uint8Array(board.length); let eyes = 0;
+        for (const entry of group.libs) {
+          if (seen[entry]) continue;
+          const stack = [entry]; seen[entry] = 1; let vital = true;
+          while (stack.length) {
+            const p = stack.pop();
+            if (!mask[p] || !liberty[p]) vital = false;
+            for (const q of adj[p]) {
+              if (board[q]) { if (!inGroup[q]) vital = false; }
+              else if (!seen[q]) { seen[q] = 1; stack.push(q); }
+            }
+          }
+          if (vital && ++eyes >= 2 && inGroup[anchor]) return true;
+        }
+      }
+      // A stone at the vital center can share several eyes with the outer
+      // chain without being physically connected yet (for example a cross
+      // shaped five-point eye). The full fixed point proves these cooperating
+      // chains together; counting adjacent empty points cannot establish this.
+      if (chains > 1) {
+        const position = graph(board, adj);
+        benson(position, board.length);
+        const original = position.groups[position.ids[anchor]];
+        if (original && original.color === defender && original.status === 'alive') return true;
+      }
+      return false;
+    }
+
+    function capturedSafely(board, last) {
+      if (domain.some(p => board[p] === defender)) return false;
+      if (!last || last.own.invincible || last.own.libs.length > 1) return true;
+      // A capture which can be answered by a snapback or ko is not a death
+      // certificate. This check intentionally errs toward leaving stones on.
+      const reply = play(board, last.own.libs[0], defender);
+      if (reply && reply.captured.includes(last.index)) { stats.koUncertain++; return null; }
+      return true;
+    }
+
+    function exhausted(depth) {
+      if (depth <= 0 || stats.nodes >= limit.nodes || clock() >= limit.deadline) {
+        stats.cutoffs++; hitLimit = true; return true;
+      }
+      return false;
+    }
+
+    function solve(board, turn, depth, passes, path, last) {
+      stats.nodes++;
+      const captured = capturedSafely(board, last);
+      if (captured === true) return DEAD;
+      if (captured === null) return UNKNOWN;
+      // Stop on sacrifice while another defender chain remains. Otherwise a
+      // later replay at this coordinate could impersonate the original anchor.
+      if (board[anchor] !== defender) return UNKNOWN;
+      if (twoEyes(board)) return ALIVE;
+      if (passes >= 2) return UNKNOWN;
+      if (exhausted(depth)) return UNKNOWN;
+      const desired = turn === attacker ? DEAD : ALIVE;
+      let uncertain = false;
+      const candidates = [];
+      for (const index of domain) {
+        if (board[index]) continue;
+        const move = play(board, index, turn);
+        if (!move) continue;
+        if (path.has(move.key) || historic.has(move.key)) {
+          // Treat a locally repeating move as unresolved. An outside ko threat
+          // may change legality, so simply excluding this defense is unsound.
+          uncertain = true; stats.koUncertain++; continue;
+        }
+        let order = move.captured.length * 30;
+        for (const q of adj[index]) if (!board[q]) order += 3;
+        if (turn === defender && twoEyes(move.board)) order += 10000;
+        if (turn === attacker && !domain.some(p => move.board[p] === defender)) order += 10000;
+        candidates.push({ move, order });
+      }
+      candidates.sort((a, b) => b.order - a.order || a.move.index - b.move.index);
+      for (const { move } of candidates) {
+        path.add(move.key);
+        const result = solve(move.board, 3 - turn, depth - 1, 0, path, move);
+        path.delete(move.key);
+        if (result === desired) return desired;
+        if (result === UNKNOWN) uncertain = true;
+        if (stats.nodes >= limit.nodes || clock() >= limit.deadline) {
+          hitLimit = true; return UNKNOWN;
+        }
+      }
+      // Passing also represents moves elsewhere: no outside move can break
+      // this invincible wall, and all ko dependencies already remain unknown.
+      const pass = solve(board, 3 - turn, depth - 1, passes + 1, path, last);
+      if (pass === desired) return desired;
+      if (pass === UNKNOWN) uncertain = true;
+      return uncertain ? UNKNOWN : -desired;
+    }
+
+    function rootRead(turn) {
+      const path = new Set([rootKey]), desired = turn === attacker ? DEAD : ALIVE;
+      const moves = [];
+      let unknown = false, anyDesired = false;
+      if (exhausted(depthLimit)) return { value: UNKNOWN, moves, complete: false };
+      const candidates = [];
+      for (const index of pocket.space) {
+        const move = play(initial, index, turn);
+        if (!move) continue;
+        let order = move.captured.length * 30;
+        for (const q of adj[index]) if (!initial[q]) order += 3;
+        if (turn === defender && twoEyes(move.board)) order += 10000;
+        candidates.push({ move, order });
+      }
+      candidates.sort((a, b) => b.order - a.order || a.move.index - b.move.index);
+      for (const { move } of candidates) {
+        if (path.has(move.key) || historic.has(move.key)) { unknown = true; stats.koUncertain++; continue; }
+        if (stats.nodes >= limit.nodes || clock() >= limit.deadline) { unknown = true; hitLimit = true; break; }
+        path.add(move.key);
+        const result = solve(move.board, 3 - turn, depthLimit - 1, 0, path, move);
+        path.delete(move.key);
+        if (result === desired) { moves.push(move.index); anyDesired = true; }
+        if (result === UNKNOWN) unknown = true;
+      }
+      // On the defender's turn every legal defense AND passing must fail in
+      // order to call the original chain dead; a single successful defense
+      // suffices to show that the chain is not already dead.
+      const pass = (stats.nodes < limit.nodes && clock() < limit.deadline)
+        ? solve(initial, 3 - turn, depthLimit - 1, 1, path, null) : UNKNOWN;
+      if (pass === desired) anyDesired = true;
+      if (pass === UNKNOWN) unknown = true;
+      return { value: anyDesired ? desired : unknown ? UNKNOWN : -desired,
+        moves, complete: !unknown };
+    }
+
+    // Read the side to move first so a short AI budget can still find a vital
+    // point. Both turn orders must be resolved for an unconditional dead mark.
+    let attack, defend;
+    if (options.turn === defender) { defend = rootRead(defender); attack = rootRead(attacker); }
+    else { attack = rootRead(attacker); defend = rootRead(defender); }
+    const name = value => value === DEAD ? 'dead' : value === ALIVE ? 'alive' : 'unknown';
+    return { attackFirst: name(attack.value), defendFirst: name(defend.value),
+      attackMoves: attack.moves, defenseMoves: defend.moves,
+      complete: attack.value !== UNKNOWN && defend.value !== UNKNOWN,
+      nodes: stats.nodes - startNodes, cutoff: hitLimit };
+  }
+
+  function analyze(input, size, options = {}) {
+    const started = clock();
+    if (!Number.isInteger(size) || size < 2 || size > 25 || !input || input.length !== size * size) {
+      throw new RangeError('GoLife: invalid board dimensions');
+    }
+    const board = Uint8Array.from(input);
+    for (let i = 0; i < input.length; i++) if (input[i] !== 0 && input[i] !== 1 && input[i] !== 2) {
+      throw new TypeError('GoLife: board values must be 0, 1, or 2');
+    }
+    const adj = topology(size), data = options.inspection
+      ? graphFromInspection(adj, options.inspection) : graph(board, adj);
+    const safeEmpty = benson(data, board.length);
+    const stats = { nodes: 0, cutoffs: 0, koUncertain: 0, readGroups: 0, staticDead: 0, timeMs: 0 };
+    const pockets = findPockets(board, adj, data, options.history), moves = [];
+    const budgetMs = Number.isFinite(options.budgetMs) ? Math.max(0, options.budgetMs) : 80;
+    const maxNodes = Number.isFinite(options.maxNodes) ? Math.max(0, Math.floor(options.maxNodes)) : 12000;
+    const limit = { deadline: clock() + budgetMs, nodes: maxNodes };
+    const anchors = options.anchors && new Set(Array.from(options.anchors).filter(Number.isInteger));
+    pockets.sort((a, b) => a.space.length - b.space.length || b.target.stones.length - a.target.stones.length);
+    for (const pocket of pockets) {
+      const group = pocket.target;
+      if (group.status === 'dead') { stats.staticDead++; continue; }
+      if (!options.read || (anchors && !group.stones.some(p => anchors.has(p)))) continue;
+      if (!pocket.space.length || pocket.space.length > (options.maxSpace || 10) || pocket.points.length > (options.maxPocket || 64)) {
+        group.reason = 'closed-pocket-too-large'; continue;
+      }
+      if (stats.nodes >= maxNodes || clock() >= limit.deadline) { group.reason = 'reading-limit'; continue; }
+      stats.readGroups++;
+      group.reading = readPocket(board, adj, data, pocket, options, limit, stats);
+      const read = group.reading;
+      if (read.attackFirst === 'dead' && read.defendFirst === 'dead') {
+        group.status = 'dead'; group.reason = 'closed-pocket-capture';
+      } else if (read.attackFirst === 'alive') {
+        group.status = 'alive'; group.reason = 'closed-pocket-life';
+      } else if (read.attackFirst === 'dead' && read.defendFirst === 'alive') {
+        group.status = 'unsettled'; group.reason = 'first-move';
+        group.attackMoves = read.attackMoves.slice(); group.defenseMoves = read.defenseMoves.slice();
+        for (const index of group.attackMoves) moves.push({ index, color: 3 - group.color,
+          kind: 'attack', stones: group.stones.length, proof: true, groupId: group.id });
+        for (const index of group.defenseMoves) moves.push({ index, color: group.color,
+          kind: 'defend', stones: group.stones.length, proof: true, groupId: group.id });
+      } else { group.status = 'unknown'; group.reason = read.cutoff ? 'reading-limit' : 'reading-uncertain'; }
+    }
+    const deadIndices = [];
+    for (const group of data.groups) if (group.status === 'dead') deadIndices.push(...group.stones);
+    deadIndices.sort((a, b) => a - b);
+    stats.timeMs = clock() - started;
+    return { ids: data.ids, groups: data.groups, regions: data.regions, safeEmpty,
+      deadIndices, moves, stats };
+  }
+  // End-of-game adjudication: distinguish *certified* life/death from
+  // conservative geometric estimates.  Only completed local reads or tightly
+  // enclosed, small single-eye groups are auto-removed; unresolved seki/ko
+  // remains on the board and is reported separately for player review.
+  function adjudicate(input, size, options = {}) {
+    const board = Uint8Array.from(input), adj = topology(size);
+    const totalBudget = Number.isFinite(options.budgetMs) ? Math.max(0, options.budgetMs) : 230;
+    const localDeadline = clock() + totalBudget;
+    const result = analyze(board, size, {
+      read: true, budgetMs: totalBudget * 0.6,
+      maxNodes: options.maxNodes || 16000, maxDepth: options.maxDepth || 24,
+      history: options.history || [], turn: options.turn || 1,
+      maxSpace: 9, maxPocket: 65
+    });
+    const groups = result.groups;
+    const dead = new Set(result.deadIndices), assumed = [], unsettled = [];
+    const marked = new Set(groups.filter(g => g.status === 'dead').map(g => g.id));
+    const verifiedAlive = new Set(groups.filter(g => g.status === 'alive').map(g => g.id));
+    const trueEye = (at, color) => {
+      if (adj[at].some(p => board[p] !== color)) return false;
+      const row = (at / size) | 0, col = at % size;
+      let falseCorners = 0, corners = 0;
+      for (const dr of [-1, 1]) for (const dc of [-1, 1]) {
+        const r = row + dr, c = col + dc;
+        if (r < 0 || c < 0 || r >= size || c >= size) continue;
+        corners++;
+        if (board[r * size + c] !== color) falseCorners++;
+      }
+      return corners < 4 ? falseCorners === 0 : falseCorners <= 1;
+    };
+    // Re-evaluate the entire outside region when a chain has disappeared.
+    // We only classify a single defender chain within a compact pocket; if
+    // the chain can join other friends or shares a liberty with a weak enemy,
+    // the question is still unsettled and must not be decided by this shortcut.
+    for (const group of groups) {
+      if (marked.has(group.id) || verifiedAlive.has(group.id)) continue;
+      const color = group.color, other = 3 - color;
+      const visited = new Uint8Array(board.length), stack = [group.stones[0]];
+      const domain = [], space = [], friends = new Set(), enemies = new Set();
+      visited[stack[0]] = 1;
+      while (stack.length && domain.length <= 110) {
+        const point = stack.pop(); domain.push(point);
+        if (board[point] === color) friends.add(result.ids[point]);
+        else if (!board[point]) space.push(point);
+        for (const next of adj[point]) {
+          if (board[next] === other) enemies.add(result.ids[next]);
+          else if (!visited[next]) { visited[next] = 1; stack.push(next); }
+        }
+      }
+      // A flood exceeding this size can have outside routes to live; never
+      // treat an arbitrary open position as surrounded territory.
+      if (domain.length > 110 || friends.size !== 1 || !enemies.size || space.length > 8 || !space.length) {
+        unsettled.push(group.id); continue;
+      }
+      const boundary = [...enemies].map(id => groups[id]);
+      if (boundary.some(g => !g || marked.has(g.id) || g.libs.length <= 2)) {
+        unsettled.push(group.id); continue;
+      }
+      // A single eye region without enough space is a poor prospect, but
+      // genuine independent two eyes are never marked as dead.
+      const eyes = space.filter(point => trueEye(point, color));
+      if (eyes.length >= 2) { verifiedAlive.add(group.id); continue; }
+      // Tiny one-eye pockets are hopeless even when the outer wall lacks a
+      // formal Benson certificate. Larger (e.g. straight-three) shapes can
+      // live if the defender moves first; do not guess on shape alone.
+      const tinySingleEye = space.length <= 2;
+      let locallyDead = false, locallyAlive = false;
+      if (!tinySingleEye && totalBudget > 0 && clock() + 5 < localDeadline &&
+          domain.length <= 36 && boundary.every(g => g.libs.length >= 4 || g.status === 'alive')) {
+        const maxNodes = Math.min(3200, options.maxNodes || 3200);
+        const localLimit = { deadline: Math.min(localDeadline, clock() + 75), nodes: maxNodes };
+        const localStats = { nodes: 0, cutoffs: 0, koUncertain: 0 };
+        const pocket = { target: group, points: domain, space, boundary: [...enemies] };
+        const proof = readPocket(board, adj, { groups, ids: result.ids }, pocket,
+          { maxDepth: Math.min(22, options.maxDepth || 22), history: options.history || [],
+            turn: options.turn || 1 }, localLimit, localStats);
+        locallyDead = proof.attackFirst === 'dead' && proof.defendFirst === 'dead';
+        locallyAlive = proof.attackFirst === 'alive';
+      }
+      if (tinySingleEye || locallyDead) {
+        marked.add(group.id);
+        for (const point of group.stones) dead.add(point);
+        assumed.push({ color, stones: group.stones.slice(),
+          reason: locallyDead ? 'local-two-way-reading' : 'surrounded-single-eye' });
+      } else if (locallyAlive) verifiedAlive.add(group.id);
+      else unsettled.push(group.id);
+    }
+    const deadIndices = Array.from(dead).sort((a, b) => a - b);
+    const deadByColor = { 1: 0, 2: 0 };
+    for (const point of deadIndices) deadByColor[board[point]]++;
+    return {
+      ...result, deadIndices, deadByColor, assumed,
+      unsettledGroups: unsettled.length, certifiedDead: result.deadIndices.length,
+      uncertain: unsettled.length > 0, automatic: true
+    };
+  }
+
+  return { analyze, adjudicate, version: '2.0.0' };
+});
+</script>
+<script id="go-ai-code">
+
+/* 松風棋事 — offline, selective game-tree Go player.
+ *
+ * Three real algorithms/budgets, not artificial thinking delays:
+ *   easy   : noisy one-move shape/tactical policy;
+ *   medium : iterative-deepening negamax with alpha-beta pruning;
+ *   hard   : bounded tactical reading + progressively widened PUCT/RAVE
+ *            with rule-guided playouts; no neural nets or trained weights.
+ *
+ * A leaf evaluates BOTH players' living stones, liberties and territory.
+ * Benson life and conservative local attack/defense proofs inform move
+ * generation, search evaluation and endgame scoring; dead stones have no
+ * friendly influence and are removed before area is counted.
+ * Every opponent node maximizes that opponent's result. Captures/atari are
+ * extended beyond the nominal horizon; they are not just ordering bonuses.
+ * This is a compact classical opponent, not a neural-network Go program.
+ *
+ * All board changes are made on private typed arrays. 64-bit Zobrist hashes
+ * accelerate positional-superko checks, with exact board comparisons whenever
+ * a hash matches. Root moves additionally pass the canonical GoEngine check.
+ * The generator yields between nodes so the same code runs in a Blob worker
+ * or in short, interruptible main-thread slices without network dependencies.
+ */
+(function (root, factory) {
+  const engine = typeof module === 'object' && module.exports
+    ? require('./go-engine.js') : root.GoEngine;
+  const life = typeof module === 'object' && module.exports
+    ? require('./go-life.js') : root.GoLife;
+  const api = factory(engine, life);
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.GoAI = api;
+})(typeof window !== 'undefined' ? window : globalThis, function (GoEngine, GoLife) {
+  'use strict';
+
+  const clock = () => typeof performance !== 'undefined' && performance.now
+    ? performance.now() : Date.now();
+  const LIMITS = {
+    easy: { ms: 60, roots: 16, width: 5, deepWidth: 4, depth: 1, quiet: 0 },
+    medium: { ms: 550, roots: 13, width: 7, deepWidth: 5, depth: 5, quiet: 2 },
+    hard: { ms: 4700, roots: 26, width: 13, deepWidth: 8, depth: 9, quiet: 5 }
+  };
+  const geometryCache = new Map();
+
+  function randomSource(seed) {
+    let value = (Number.isFinite(seed) ? seed : 0x6d2b79f5) >>> 0;
+    return () => {
+      value += 0x6d2b79f5;
+      let x = value;
+      x = Math.imul(x ^ (x >>> 15), x | 1);
+      x ^= x + Math.imul(x ^ (x >>> 7), x | 61);
+      return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function geometry(size) {
+    if (geometryCache.has(size)) return geometryCache.get(size);
+    const count = size * size, adjacent = [], diagonals = [], edges = [];
+    const zobristA = new Uint32Array(count * 3), zobristB = new Uint32Array(count * 3);
+    const random = randomSource(0x531ecafe + size);
+    for (let i = 0; i < count; i += 1) {
+      const row = (i / size) | 0, col = i % size;
+      adjacent[i] = [];
+      if (row) adjacent[i].push(i - size);
+      if (col < size - 1) adjacent[i].push(i + 1);
+      if (row < size - 1) adjacent[i].push(i + size);
+      if (col) adjacent[i].push(i - 1);
+      diagonals[i] = [];
+      for (const dr of [-1, 1]) for (const dc of [-1, 1]) {
+        const r = row + dr, c = col + dc;
+        if (r >= 0 && c >= 0 && r < size && c < size) diagonals[i].push(r * size + c);
+      }
+      edges[i] = Math.min(row, col, size - 1 - row, size - 1 - col);
+      for (let color = 1; color <= 2; color += 1) {
+        zobristA[i * 3 + color] = (random() * 4294967296) >>> 0;
+        zobristB[i * 3 + color] = (random() * 4294967296) >>> 0;
+      }
+    }
+    const result = { size, count, adjacent, diagonals, edges, zobristA, zobristB };
+    geometryCache.set(size, result);
+    return result;
+  }
+
+  const sameBoard = (a, b) => {
+    for (let i = 0; i < a.length; i += 1) if (a[i] !== b[i]) return false;
+    return true;
+  };
+  const hashKey = (a, b) => `${a >>> 0}:${b >>> 0}`;
+
+  function boardHash(board, geo) {
+    let a = 0, b = 0;
+    for (let i = 0; i < board.length; i += 1) if (board[i]) {
+      a ^= geo.zobristA[i * 3 + board[i]];
+      b ^= geo.zobristB[i * 3 + board[i]];
+    }
+    return [a >>> 0, b >>> 0];
+  }
+
+  // Local certificates are reusable after a move elsewhere, provided every
+  // point in the pocket is unchanged and its enclosing chains remain Benson
+  // alive. A changed eye shape or weakened wall invalidates the certificate.
+  function rememberProof(board, group, status, moves, context, patternPoints) {
+    if (!group.enclosed || !group.stones.length || !Array.isArray(group.space)) return;
+    const points = patternPoints || [...group.stones, ...group.space];
+    const set = new Set(points), boundary = new Set();
+    for (const point of points) for (const next of context.geo.adjacent[point]) if (!set.has(next)) boundary.add(next);
+    if (!boundary.size || Array.from(boundary).some(point => board[point] !== 3 - group.color)) return;
+    const key = group.color + ':' + points.map(point => point + '=' + board[point]).join(',');
+    if (context.proofKeys.has(key)) return;
+    context.proofKeys.add(key);
+    const outside = [];
+    for (let point = 0; point < board.length; point++) if (!set.has(point)) outside.push(point);
+    context.proofs.push({ points, values: points.map(point => board[point]), boundary: Array.from(boundary),
+      outside, originalBoard: board.slice(), boardKey: board.join(''),
+      anchor: group.stones[0], color: group.color, status, moves: moves || [] });
+    context.proofVersion += 1;
+  }
+
+  function historyFor(state, context) {
+    if (state.lifeHistory) return state.lifeHistory;
+    const history = context.historyBoards.slice();
+    for (let ancestor = state.parent; ancestor; ancestor = ancestor.parent) history.push(ancestor.board);
+    state.lifeHistory = history;
+    return history;
+  }
+
+  function proofHistoryAllows(proof, state, context) {
+    const history = historyFor(state, context);
+    if (!history.length) return true;
+    const outsideChanged = proof.outside.some(point => state.board[point] !== proof.originalBoard[point]);
+    if (!context.initialBoardKeys) {
+      context.initialBoardKeys = new Set([...context.historyBoards, context.game.board].map(board => board.join('')));
+    }
+    for (const old of history) {
+      if (proof.outside.some(point => old[point] !== state.board[point])) continue;
+      // The current pocket itself is already in every local reader's path.
+      // Passes may repeat this board; an additional occurrence adds no ban.
+      if (proof.points.every((point, i) => old[point] === proof.values[i])) continue;
+      if (outsideChanged) return false;
+      const key = old.join('');
+      if (!context.initialBoardKeys.has(key) && key !== proof.boardKey) return false;
+    }
+    return true;
+  }
+
+  function lifeOf(state, context) {
+    if (context.level === 'easy' || !GoLife) return null;
+    if (state.life && state.lifeVersion === context.proofVersion) return state.life;
+    const key = hashKey(state.hashA, state.hashB);
+    let cached = context.lifeCache.get(key);
+    if (!cached || !sameBoard(cached.board, state.board)) {
+      cached = { board: state.board, data: GoLife.analyze(state.board, context.geo.size,
+        { read: false, inspection: inspect(state, context) }) };
+      if (context.lifeCache.size >= 512) context.lifeCache.delete(context.lifeCache.keys().next().value);
+      context.lifeCache.set(key, cached);
+    }
+    let base = cached.data;
+    if (base.deadIndices.length && (context.historyBoards.length || state.parent)) {
+      // Geometry is cacheable by board alone; a death certificate constrained
+      // by positional superko is not. Recheck only those rare static deaths.
+      base = GoLife.analyze(state.board, context.geo.size,
+        { read: false, history: historyFor(state, context), inspection: inspect(state, context) });
+    }
+    const groups = base.groups.map(group => ({ ...group })), moves = [...(base.moves || [])];
+    for (const proof of context.proofs) {
+      if (state.board[proof.anchor] !== proof.color) continue;
+      if (proof.points.some((point, i) => state.board[point] !== proof.values[i])) continue;
+      if (!proofHistoryAllows(proof, state, context)) continue;
+      if (proof.boundary.some(point => {
+        const group = base.groups[base.ids[point]];
+        return !group || group.color !== 3 - proof.color || group.status !== 'alive';
+      })) continue;
+      const group = groups[base.ids[proof.anchor]];
+      if (!group) continue;
+      group.status = proof.status; group.reason = 'local-proof'; group.enclosed = true;
+      group.space = proof.points.filter(point => !state.board[point]);
+      for (const move of proof.moves) if (!state.board[move.index]) moves.push({ ...move, groupId: group.id });
+    }
+    const result = { ...base, groups, moves,
+      deadIndices: groups.filter(group => group.status === 'dead').flatMap(group => group.stones) };
+    state.life = result; state.lifeVersion = context.proofVersion;
+    return result;
+  }
+
+  function groupLife(group, life) {
+    return life && life.groups[life.ids[group.stones[0]]];
+  }
+
+  function* prepareLife(root, context) {
+    const initial = lifeOf(root, context);
+    if (!initial) return;
+    const targets = initial.groups.filter(group => group.enclosed && group.status !== 'alive' && group.status !== 'dead')
+      .sort((a, b) => b.stones.length - a.stones.length);
+    const deadline = Math.min(context.deadline, context.started + context.budget * (context.level === 'hard' ? .16 : .12));
+    const records = [];
+    for (const group of targets) {
+      if (clock() + 2 >= deadline) break;
+      const analysis = GoLife.analyze(root.board, context.geo.size, {
+        read: true, anchors: [group.stones[0]], turn: root.turn,
+        budgetMs: Math.max(1, Math.min(24, deadline - clock())),
+        maxNodes: context.level === 'hard' ? 4500 : 1200, maxDepth: context.level === 'hard' ? 24 : 16,
+        history: context.historyBoards
+      });
+      context.stats.lifeNodes += analysis.stats && analysis.stats.nodes || 0;
+      context.stats.lifeReads += 1;
+      const solved = analysis.groups.find(candidate => candidate.stones.includes(group.stones[0]));
+      if (solved && solved.status !== 'unknown') {
+        const moves = analysis.moves.filter(move => move.groupId === solved.id && move.proof);
+        rememberProof(root.board, solved, solved.status, moves, context);
+        records.push({ group: solved, moves });
+      }
+      yield;
+    }
+    context.rootLifeRecords = records;
+    const final = lifeOf(root, context);
+    context.stats.lifeGroups = final.groups.reduce((counts, group) => {
+      counts[group.status] = (counts[group.status] || 0) + 1; return counts;
+    }, {});
+  }
+
+  // A proved eye-space result is also a meaningful root value. This keeps a
+  // limited full-board horizon from forgetting the local reader's completed
+  // attack/defense proof. The bonus is in point-sized units, not a fake delay.
+  function applyRootLife(roots, context) {
+    for (const candidate of roots) {
+      candidate.lifeBonus = 0;
+      for (const record of context.rootLifeRecords) {
+        const group = record.group;
+        if (group.status !== 'unsettled') continue;
+        const useful = record.moves.filter(move => move.color === context.game.turn && move.proof);
+        if (!useful.length) continue;
+        const matching = useful.find(move => move.index === candidate.index);
+        const value = Math.min(45, group.stones.length * .8 + group.space.length * .3);
+        if (matching) {
+          candidate.lifeBonus += value;
+          const points = [...group.stones, ...group.space];
+          rememberProof(candidate.state.board, group, matching.kind === 'defend' ? 'alive' : 'dead', [], context, points);
+        } else if (!group.stones.includes(candidate.index) && !group.space.includes(candidate.index)) {
+          candidate.lifeBonus -= value;
+        }
+      }
+    }
+  }
+
+  function ownEye(board, index, color, geo) {
+    for (const neighbor of geo.adjacent[index]) if (board[neighbor] !== color) return false;
+    let hostile = 0;
+    for (const diagonal of geo.diagonals[index]) if (board[diagonal] !== color) hostile += 1;
+    return geo.diagonals[index].length < 4 ? hostile === 0 : hostile <= 1;
+  }
+
+  // One linear flood-fill gives groups, distinct liberties, connected empty
+  // regions and eye points. The result is immutable and cached with the node.
+  function inspect(state, context) {
+    if (state.analysis) return state.analysis;
+    const { geo } = context, { count, adjacent } = geo, board = state.board;
+    const ids = new Int16Array(count).fill(-1), groups = [];
+    const libStamp = new Int32Array(count), stack = new Int16Array(count);
+    let occupied = 0, blackStones = 0, whiteStones = 0;
+    for (let point = 0; point < count; point += 1) {
+      if (!board[point]) continue;
+      occupied += 1;
+      if (board[point] === 1) blackStones += 1; else whiteStones += 1;
+      if (ids[point] >= 0) continue;
+      const id = groups.length, stamp = id + 1, color = board[point];
+      const stones = [], libs = [];
+      let length = 1;
+      stack[0] = point;
+      ids[point] = id;
+      while (length) {
+        const current = stack[--length];
+        stones.push(current);
+        for (const neighbor of adjacent[current]) {
+          if (!board[neighbor]) {
+            if (libStamp[neighbor] !== stamp) {
+              libStamp[neighbor] = stamp;
+              libs.push(neighbor);
+            }
+          } else if (board[neighbor] === color && ids[neighbor] < 0) {
+            ids[neighbor] = id;
+            stack[length++] = neighbor;
+          }
+        }
+      }
+      groups.push({ id, color, stones, libs, eyes: 0 });
+    }
+    const regionIds = new Int16Array(count).fill(-1), regions = [];
+    const trueEyes = new Uint8Array(count);
+    for (let point = 0; point < count; point += 1) {
+      if (board[point] || regionIds[point] >= 0) continue;
+      const id = regions.length, points = [], borderGroups = new Set();
+      let colors = 0, length = 1;
+      stack[0] = point;
+      regionIds[point] = id;
+      while (length) {
+        const current = stack[--length];
+        points.push(current);
+        for (const neighbor of adjacent[current]) {
+          if (board[neighbor]) {
+            colors |= board[neighbor];
+            borderGroups.add(ids[neighbor]);
+          } else if (regionIds[neighbor] < 0) {
+            regionIds[neighbor] = id;
+            stack[length++] = neighbor;
+          }
+        }
+      }
+      const owner = colors === 1 || colors === 2 ? colors : 0;
+      regions.push({ points, owner, borderGroups: Array.from(borderGroups) });
+      if (points.length === 1 && owner && ownEye(board, point, owner, geo)) {
+        trueEyes[point] = owner;
+        for (const groupId of borderGroups) groups[groupId].eyes += 1;
+      }
+    }
+    const sharedLiberties = new Map(), forkGroups = new Set(), forkRisk = [0, 0, 0];
+    for (const group of groups) if (group.libs.length === 2) {
+      for (const liberty of group.libs) {
+        const key = liberty * 3 + group.color;
+        if (!sharedLiberties.has(key)) sharedLiberties.set(key, []);
+        sharedLiberties.get(key).push(group);
+      }
+    }
+    for (const [key, threatened] of sharedLiberties) if (threatened.length >= 2) {
+      const point = (key / 3) | 0;
+      // If both groups share their OTHER liberty too, connecting there answers
+      // both ataris. Only distinct escape points create a genuine fork.
+      const escapePoints = new Set(threatened.map(group => group.libs[0] === point ? group.libs[1] : group.libs[0]));
+      if (escapePoints.size < 2) continue;
+      const defender = key % 3, attacker = 3 - defender;
+      const viableAttack = adjacent[point].some(neighbor => !board[neighbor] ||
+        board[neighbor] === attacker && groups[ids[neighbor]].libs.length > 1 ||
+        board[neighbor] === defender && groups[ids[neighbor]].libs.length === 1);
+      if (!viableAttack) continue;
+      const sizes = threatened.map(group => group.stones.length).sort((a, b) => b - a);
+      forkRisk[defender] = Math.max(forkRisk[defender], sizes.slice(1).reduce((sum, size) => sum + size, 0));
+      for (const group of threatened) forkGroups.add(group.id);
+    }
+    state.analysis = { ids, groups, regions, regionIds, trueEyes, occupied, blackStones, whiteStones, forkRisk, forkGroups };
+    return state.analysis;
+  }
+
+  function repeated(board, a, b, state, context) {
+    const historical = context.seen.get(hashKey(a, b));
+    if (historical && historical.some(previous => sameBoard(previous, board))) return true;
+    for (let node = state; node; node = node.parent) {
+      if (node.hashA === a && node.hashB === b && sameBoard(node.board, board)) return true;
+    }
+    return false;
+  }
+
+  // Group liberties before the play identify precisely which neighboring
+  // enemy groups are captured; only the new friendly group needs a new BFS.
+  function play(state, index, context) {
+    const { geo } = context, color = state.turn, enemy = 3 - color;
+    if (index === null) {
+      return { board: state.board, turn: enemy, last: null, passes: state.passes + 1,
+        hashA: state.hashA, hashB: state.hashB, parent: state, analysis: state.analysis,
+        move: { index: null, captured: 0, stones: [], libs: [] } };
+    }
+    if (state.board[index]) return null;
+    const info = inspect(state, context), board = state.board.slice();
+    const removed = [], checked = [];
+    let hashA = (state.hashA ^ geo.zobristA[index * 3 + color]) >>> 0;
+    let hashB = (state.hashB ^ geo.zobristB[index * 3 + color]) >>> 0;
+    board[index] = color;
+    for (const neighbor of geo.adjacent[index]) {
+      if (board[neighbor] !== enemy) continue;
+      const id = info.ids[neighbor];
+      if (checked.includes(id)) continue;
+      checked.push(id);
+      const group = info.groups[id];
+      if (group.libs.length !== 1) continue;
+      for (const stone of group.stones) {
+        board[stone] = 0;
+        removed.push(stone);
+        hashA = (hashA ^ geo.zobristA[stone * 3 + enemy]) >>> 0;
+        hashB = (hashB ^ geo.zobristB[stone * 3 + enemy]) >>> 0;
+      }
+    }
+    // Merge precomputed neighboring chains instead of flood-filling every
+    // stone in the new chain a second time. Newly freed captured intersections
+    // count as liberties only when they actually touch this merged chain.
+    // This produces the exact same stones and liberties as a BFS.
+    const stones = [index], libs = [], joined = [];
+    const libSeen = new Uint8Array(geo.count);
+    const addLib = point => {
+      if (point !== index && !libSeen[point]) { libSeen[point] = 1; libs.push(point); }
+    };
+    for (const neighbor of geo.adjacent[index]) {
+      if (!board[neighbor]) { addLib(neighbor); continue; }
+      if (board[neighbor] !== color) continue;
+      const id = info.ids[neighbor];
+      if (joined.includes(id)) continue;
+      joined.push(id);
+      const group = info.groups[id];
+      for (const stone of group.stones) stones.push(stone);
+      for (const liberty of group.libs) addLib(liberty);
+    }
+    for (const point of removed) {
+      for (const neighbor of geo.adjacent[point]) {
+        if (neighbor === index || (board[neighbor] === color && joined.includes(info.ids[neighbor]))) {
+          addLib(point); break;
+        }
+      }
+    }
+    if (!libs.length || repeated(board, hashA, hashB, state, context)) return null;
+    return { board, turn: enemy, last: index, passes: 0, hashA, hashB, parent: state,
+      move: { index, captured: removed.length, removed, stones, libs }, analysis: null };
+  }
+
+  function distanceFields(state, context) {
+    const { geo } = context, { count, adjacent } = geo;
+    // Reuse BFS buffers: distance fields are consumed synchronously inside
+    // candidates(), so no search node retains these temporary arrays.
+    const scratch = context.distanceScratch || (context.distanceScratch = {
+      fields: [null, new Int16Array(count), new Int16Array(count)],
+      queue: new Int16Array(count)
+    });
+    const { fields, queue } = scratch;
+    fields[1].fill(99); fields[2].fill(99);
+    for (let color = 1; color <= 2; color += 1) {
+      let start = 0, end = 0;
+      const distances = fields[color];
+      for (let i = 0; i < count; i += 1) if (state.board[i] === color) {
+        distances[i] = 0;
+        queue[end++] = i;
+      }
+      while (start < end) {
+        const point = queue[start++], next = distances[point] + 1;
+        for (const neighbor of adjacent[point]) if (next < distances[neighbor]) {
+          distances[neighbor] = next;
+          queue[end++] = neighbor;
+        }
+      }
+    }
+    return fields;
+  }
+
+  function candidates(state, context, tacticalOnly = false) {
+    const info = inspect(state, context), { geo } = context, color = state.turn, enemy = 3 - color;
+    const life = lifeOf(state, context), vital = new Map();
+    if (life) for (const move of life.moves) if (move.color === color && move.proof) {
+      vital.set(move.index, Math.max(vital.get(move.index) || 0, move.stones || 1));
+    }
+    const opening = info.occupied < Math.max(8, geo.size * 1.2);
+    const distances = tacticalOnly ? null : distanceFields(state, context);
+    const offset = geo.size >= 13 ? 3 : 2, far = geo.size - 1 - offset;
+    const stars = [offset * geo.size + offset, offset * geo.size + far,
+      far * geo.size + offset, far * geo.size + far];
+    const result = [];
+    // One stable-region test per connected empty region, not per candidate
+    // intersection. On 19x19 this avoids hundreds of repeated full-region scans.
+    const secureRegion = new Int8Array(info.regions.length).fill(-1);
+    for (let index = 0; index < geo.count; index += 1) {
+      if (state.board[index]) continue;
+      const adjacentIds = [], rescuedIds = new Set();
+      let rescue = 0, pressure = 0, friendly = 0, hostile = 0, capturedHint = 0, forkDefense = 0;
+      let urgent = false, attacking = false;
+      const lifeUrgency = vital.get(index) || 0;
+      let livingFriends = 0;
+      for (const point of geo.adjacent[index]) {
+        const id = info.ids[point];
+        if (id < 0 || adjacentIds.includes(id)) continue;
+        adjacentIds.push(id);
+        const group = info.groups[id];
+        const status = groupLife(group, life);
+        if (group.color === color) {
+          friendly += 1;
+          if (!status || status.status !== 'dead') livingFriends += 1;
+          if ((!status || status.status !== 'dead') && group.libs.length === 1) { urgent = true; rescuedIds.add(id); }
+          else if ((!status || !['alive', 'dead'].includes(status.status)) && group.libs.length === 2) pressure += 3 + Math.min(8, group.stones.length) * 0.65;
+        } else {
+          hostile += 1;
+          if (group.libs.length === 1) capturedHint += group.stones.length;
+          if ((!status || !['alive', 'dead'].includes(status.status)) && group.libs.length === 2) {
+            attacking = true;
+            pressure += 5 + Math.min(12, group.stones.length) * 1.55;
+          } else if ((!status || !['alive', 'dead'].includes(status.status)) && group.libs.length === 3) pressure += 1.6;
+        }
+      }
+      if (tacticalOnly && !urgent && !capturedHint && !attacking && !lifeUrgency) continue;
+      // True-eye filling is allowed if it captures; single-color large regions
+      // are deliberately not assumed settled territory in the opening.
+      if (ownEye(state.board, index, color, geo) && !capturedHint && !lifeUrgency) continue;
+      const child = play(state, index, context);
+      if (!child) continue;
+      const move = child.move;
+      for (const captured of move.removed) for (const neighbor of geo.adjacent[captured]) {
+        const id = info.ids[neighbor];
+        if (id >= 0 && info.groups[id].color === color && info.groups[id].libs.length === 1) {
+          const status = groupLife(info.groups[id], life);
+          if (!status || status.status !== 'dead') rescuedIds.add(id);
+        }
+      }
+      // Only award a rescue when the endangered chain actually has at least
+      // two liberties after this move (a capture may save a non-touching one).
+      if (rescuedIds.size) {
+        const after = inspect(child, context);
+        for (const id of rescuedIds) {
+          const group = info.groups[id];
+          const afterGroup = after.groups[after.ids[group.stones[0]]];
+          if (afterGroup && afterGroup.libs.length >= 2) rescue += group.stones.length;
+        }
+      }
+      if (info.forkRisk[color] && adjacentIds.some(id => info.forkGroups.has(id) && info.groups[id].color === color)) {
+        forkDefense = Math.max(0, info.forkRisk[color] - inspect(child, context).forkRisk[color]);
+      }
+      const tactical = !!(move.captured || rescue || attacking || forkDefense || lifeUrgency);
+      const region = info.regions[info.regionIds[index]];
+      const ownSpace = region && region.owner === color && region.points.length <= Math.max(10, geo.size * 1.7);
+      // A surrounded region is not automatically safe territory. Its vital
+      // points may be the only move that saves a group or kills its opponent.
+      const regionId = info.regionIds[index];
+      if (region && region.owner && secureRegion[regionId] === -1) {
+        secureRegion[regionId] = (life
+          ? region.points.every(point => life.safeEmpty[point] === region.owner)
+          : region.borderGroups.every(id => info.groups[id].eyes >= 2)) ? 1 : 0;
+      }
+      const secured = !!(region && region.owner && secureRegion[regionId] === 1);
+      if (ownSpace && secured && !tactical && info.blackStones && info.whiteStones) continue;
+      if (region && region.owner === enemy && region.points.length <= 6 && secured && !tactical) continue;
+      let order = move.captured * 15 + (move.captured ? 4 : 0) + rescue * 9 + (rescue ? 8 : 0) + pressure;
+      if (lifeUrgency) order += 26 + lifeUrgency * 11;
+      if (life) {
+        let alreadyDead = 0;
+        for (const point of move.removed) {
+          const group = life.groups[life.ids[point]];
+          if (group && group.status === 'dead') alreadyDead += 1;
+        }
+        if (!rescue) order -= alreadyDead * 14;
+        if (friendly && !livingFriends && !move.captured && !lifeUrgency) order -= 65;
+      }
+      if (forkDefense) order += forkDefense * 7 + 5;
+      order += Math.min(6, move.libs.length) * 1.15;
+      if (friendly >= 2) order += (friendly - 1) * (hostile ? 7 : 2.2);
+      if (move.libs.length === 1) order -= 45 + move.stones.length * 11;
+      else if (move.libs.length === 2 && !move.captured) order -= 7 + Math.min(10, move.stones.length) * 0.5;
+      // A throw-in may deliberately have one liberty. Read capture + recapture
+      // before demoting it: a legal snapback is a tactic, not bad self-atari.
+      let snapback = false;
+      if (context.level !== 'easy' && move.libs.length === 1 && attacking) {
+        const take = play(child, move.libs[0], context);
+        if (take && take.move.captured && !take.board[index]) {
+          const recapture = play(take, index, context);
+          if (recapture && recapture.move.captured > take.move.captured) {
+            snapback = true;
+            order += 65 + (recapture.move.captured - take.move.captured) * 13;
+          }
+        }
+      }
+      const edge = geo.edges[index];
+      if (!tacticalOnly) {
+        const ownDistance = distances[color][index], enemyDistance = distances[enemy][index];
+        const nearest = Math.min(ownDistance, enemyDistance);
+        if (opening && !tactical) {
+          const row = (index / geo.size) | 0, col = index % geo.size;
+          let starDistance = 99;
+          for (const star of stars) {
+            const delta = Math.abs(row - ((star / geo.size) | 0)) + Math.abs(col - star % geo.size);
+            starDistance = Math.min(starDistance, delta);
+          }
+          order += Math.max(0, 16 - starDistance * 3.1);
+          order += Math.min(nearest, 6) * 2;
+          if (ownDistance <= 2) order -= (3 - ownDistance) * 7;
+          if (enemyDistance === 1) order -= 7;
+          if (edge === 0) order -= 27;
+          else if (edge === 1) order -= 12;
+          else if (edge === 2 || edge === 3) order += 5;
+        } else {
+          if (!edge && !tactical) order -= 5;
+          if (ownDistance >= 2 && ownDistance <= 4 && enemyDistance >= 2 && enemyDistance <= 4) order += 8;
+          if (ownDistance === 1 && enemyDistance > 3 && !tactical) order -= 8;
+          if (nearest >= 3) order += Math.min(nearest, 5) * 1.2;
+          if (region && region.owner === enemy && !tactical) order -= 13;
+        }
+      }
+      // A deterministic tiny tie break is position/move-based, not dependent
+      // on traversal order, so restarting a time slice cannot change ordering.
+      const tie = (((Math.imul(index + 3, 1103515245) ^ state.hashA ^ context.seed) >>> 0) % 997) / 997;
+      order += tie * 0.12;
+      result.push({ index, state: child, order, rescue, captured: move.captured,
+        forcing: tactical, urgent: !!(rescue || move.captured || forkDefense || lifeUrgency), attack: attacking, snapback, lifeUrgency,
+        penalty: 0, prior: !tactical && opening ? order * 0.075 : Math.min(order, 120) * 0.016 });
+    }
+    result.sort((a, b) => b.order - a.order);
+    return result;
+  }
+
+  // First remove proved-dead stones, then count area or diffuse influence.
+  // A dead chain cannot block the opponent's territory or lend friendly
+  // influence merely because its stones have not yet been physically lifted.
+  function evaluate(state, context) {
+    if (state.value !== undefined && state.valueVersion === context.proofVersion) return state.value;
+    const { geo } = context, info = inspect(state, context), life = lifeOf(state, context);
+    let board = state.board, area = info, score = -context.komi;
+    if (life && life.deadIndices.length) {
+      board = board.slice();
+      for (const point of life.deadIndices) board[point] = 0;
+      area = inspect({ board, analysis: null }, context);
+    }
+    if (state.passes >= 2) {
+      if (GoLife && typeof GoLife.adjudicate === 'function') {
+        const verdict = GoLife.adjudicate(board, geo.size, {
+          budgetMs: 0, maxNodes: 0, maxDepth: 0,
+          history: historyFor(state, context), turn: state.turn
+        });
+        if (verdict.deadIndices.length) {
+          board = board.slice();
+          for (const point of verdict.deadIndices) board[point] = 0;
+          area = inspect({ board, analysis: null }, context);
+        }
+      }
+      score += area.blackStones - area.whiteStones;
+      for (const region of area.regions) if (region.owner) score += (region.owner === 1 ? 1 : -1) * region.points.length;
+      state.value = state.turn === 1 ? score : -score;
+      state.valueVersion = context.proofVersion;
+      return state.value;
+    }
+    // Static evaluation is synchronous: retain three typed buffers instead
+    // of allocating them for every PUCT/alpha-beta leaf.
+    const scratch = context.evalScratch || (context.evalScratch = {
+      sources: new Float32Array(geo.count), field: new Float32Array(geo.count),
+      next: new Float32Array(geo.count)
+    });
+    const sources = scratch.sources;
+    sources.fill(0);
+    const endgame = info.occupied / geo.count;
+    const stoneWeight = endgame > .68 ? 1.05 : 1.35;
+    for (const group of info.groups) {
+      const status = groupLife(group, life);
+      if (status && status.status === 'dead') continue;
+      const sign = group.color === 1 ? 1 : -1, count = group.stones.length, liberties = group.libs.length;
+      const eyes = status ? status.eyeCount : group.eyes;
+      let safety = 1, value = count * stoneWeight;
+      if (status ? status.status === 'alive' : eyes >= 2) {
+        value += Math.min(.9, count * .07);
+      } else if (status && status.status === 'unsettled') {
+        // A critical group lives or dies with the local initiative. Taking a
+        // large move elsewhere must not be valued as if that group stayed safe.
+        const canDefend = state.turn === group.color;
+        safety = canDefend ? .76 : .16;
+        value *= canDefend ? .84 : .18;
+      } else if (liberties === 1) {
+        const immediate = state.turn !== group.color;
+        value = Math.max(count * .04,
+          value - count * (immediate ? 1.25 : 1.0) - (immediate ? .55 : .3));
+        safety = immediate ? .12 : .5;
+      } else if (liberties === 2) {
+        value -= Math.min(count, 18) * .24 + .36;
+        safety = .68;
+      } else if (liberties === 3) {
+        value -= Math.min(count, 14) * .055;
+        safety = .9;
+      }
+      // Mere liberties inside one small eye space do not mean life. Leave
+      // unresolved positions uncertain rather than fabricating a death proof.
+      if (status && status.status === 'unknown' && status.enclosed && status.space.length <= 6) {
+        value *= .48; safety *= .45;
+      }
+      value += Math.min(liberties, 8) * Math.min(count, 6) * .035;
+      if (eyes === 1) value += .24;
+      score += sign * value;
+      for (const stone of group.stones) sources[stone] = sign * safety;
+    }
+    for (let color = 1; color <= 2; color += 1) {
+      const sign = color === 1 ? 1 : -1;
+      score -= sign * info.forkRisk[color] * (state.turn === color ? .65 : 1.8);
+      const ataris = info.groups.filter(group => {
+        const status = groupLife(group, life);
+        return group.color === color && group.libs.length === 1 && (!status || status.status !== 'dead');
+      });
+      if (state.turn === color && ataris.length >= 2) {
+        const escapes = new Map();
+        for (const group of ataris) escapes.set(group.libs[0], (escapes.get(group.libs[0]) || 0) + group.stones.length);
+        if (escapes.size >= 2) {
+          const endangered = Array.from(escapes.values()).sort((a, b) => b - a);
+          score -= sign * endangered.slice(1).reduce((sum, size) => sum + size, 0) * .9;
+        }
+      }
+    }
+    let field = scratch.field, next = scratch.next;
+    field.set(sources);
+    const iterations = geo.size <= 9 ? 6 : 5;
+    for (let iteration = 0; iteration < iterations; iteration += 1) {
+      for (let point = 0; point < geo.count; point += 1) {
+        if (board[point]) { next[point] = sources[point]; continue; }
+        let sum = 0;
+        for (const neighbor of geo.adjacent[point]) sum += field[neighbor];
+        next[point] = sum / geo.adjacent[point].length;
+      }
+      const swap = field; field = next; next = swap;
+    }
+    for (const region of area.regions) {
+      const bounded = region.owner && region.points.length <= Math.max(8, geo.size);
+      if (bounded) {
+        let confidence = 1;
+        for (const id of region.borderGroups) {
+          const group = area.groups[id];
+          const original = info.groups[info.ids[group.stones[0]]];
+          const status = original && groupLife(original, life);
+          if (status && status.status === 'alive') continue;
+          if (status && status.status === 'unsettled') confidence = Math.min(confidence, state.turn === group.color ? .62 : .18);
+          else if (group.libs.length === 1) confidence = Math.min(confidence, .25);
+          else if (group.libs.length === 2) confidence = Math.min(confidence, .72);
+          else if (status && status.enclosed && status.eyeCount < 2) confidence = Math.min(confidence, .45);
+        }
+        score += (region.owner === 1 ? 1 : -1) * region.points.length * confidence;
+      } else {
+        for (const point of region.points) score += field[point] * .95;
+      }
+    }
+    state.value = state.turn === 1 ? score : -score;
+    state.valueVersion = context.proofVersion;
+    return state.value;
+  }
+
+  // Conservative ladder proof: the attacker needs ONE successful attack;
+  // the defender needs ONE escape. >=3 liberties is treated as an escape,
+  // and a depth/node/time limit is "unknown", never a proven capture.
+  function ladderCaptured(state, anchor, defender, context, allowance) {
+    allowance.nodes += 1;
+    context.stats.ladderNodes += 1;
+    if (!state.board[anchor] || state.board[anchor] !== defender) return true;
+    const info = inspect(state, context), group = info.groups[info.ids[anchor]];
+    if (group.libs.length >= 3 || group.eyes >= 2) return false;
+    if (allowance.nodes > allowance.maxNodes || allowance.depth >= allowance.maxDepth || clock() >= allowance.deadline) return false;
+    const defending = state.turn === defender;
+    const points = new Set(group.libs);
+    if (defending) {
+      // Capturing or counter-atari of an adjacent attacking chain can break
+      // a ladder even when extending the chased chain cannot.
+      const seen = new Set();
+      for (const stone of group.stones) for (const neighbor of context.geo.adjacent[stone]) {
+        if (!state.board[neighbor] || state.board[neighbor] === defender) continue;
+        const id = info.ids[neighbor];
+        if (seen.has(id)) continue;
+        seen.add(id);
+        const adjacent = info.groups[id];
+        if (adjacent.libs.length <= 2) for (const liberty of adjacent.libs) points.add(liberty);
+      }
+    }
+    let legal = 0;
+    allowance.depth += 1;
+    for (const point of points) {
+      const child = play(state, point, context);
+      if (!child) continue;
+      legal += 1;
+      const captured = ladderCaptured(child, anchor, defender, context, allowance);
+      if (defending && !captured) { allowance.depth -= 1; return false; }
+      if (!defending && captured) { allowance.depth -= 1; return true; }
+    }
+    allowance.depth -= 1;
+    if (defending && !legal) {
+      // A ko can forbid an apparent capture even after the defender has no
+      // direct extension. Prove a legal capture rather than assuming it.
+      const passed = play(state, null, context);
+      return group.libs.some(point => {
+        const take = play(passed, point, context);
+        return take && take.board[anchor] !== defender;
+      });
+    }
+    return defending;
+  }
+
+  function rankWithHint(moves, state, context) {
+    const hint = context.hints.get(`${hashKey(state.hashA, state.hashB)}/${state.turn}`);
+    if (hint !== undefined) {
+      const index = moves.findIndex(move => move.index === hint);
+      if (index > 0) moves.unshift(moves.splice(index, 1)[0]);
+    }
+    return moves;
+  }
+
+  function* quiescence(state, alpha, beta, remaining, ply, context) {
+    if (context.level === 'hard' && clock() >= context.tacticalDeadline) {
+      context.tacticalAborted = true;
+      return evaluate(state, context);
+    }
+    context.stats.nodes += 1;
+    context.stats.quietNodes += 1;
+    context.stats.selectiveDepth = Math.max(context.stats.selectiveDepth, ply);
+    if ((context.stats.nodes & 7) === 0) yield;
+    const stand = evaluate(state, context);
+    if (!remaining || state.passes >= 2) return stand;
+    const life = lifeOf(state, context);
+    const ownAtari = inspect(state, context).groups.some(group => {
+      const status = groupLife(group, life);
+      return group.color === state.turn && group.libs.length === 1 && (!status || status.status !== 'dead');
+    }) || !!(life && life.moves.some(move => move.proof && move.color === state.turn && move.kind === 'defend'));
+    // A side with an endangered chain cannot silently "stand pat" and keep
+    // those stones. Tenuki is represented by a real pass and an opponent
+    // response; otherwise a quiescent leaf could overlook a forced capture.
+    if (!ownAtari && stand >= beta) return stand;
+    if (!ownAtari && stand > alpha) alpha = stand;
+    const moves = candidates(state, context, true);
+    const width = context.level === 'hard' ? 6 : 4;
+    let best = ownAtari ? -Infinity : stand;
+    const selected = moves.slice(0, width);
+    if (ownAtari) selected.push({ state: play(state, null, context), order: 0, captured: 0 });
+    for (const candidate of selected) {
+      if (candidate.order < -15 && !candidate.captured) continue;
+      const value = -(yield* quiescence(candidate.state, -beta, -alpha, remaining - 1, ply + 1, context));
+      if (context.tacticalAborted) return value;
+      if (value > best) best = value;
+      if (value > alpha) alpha = value;
+      if (alpha >= beta) break;
+    }
+    return best;
+  }
+
+  function* negamax(state, depth, alpha, beta, ply, context) {
+    if (context.level === 'hard' && clock() >= context.tacticalDeadline) {
+      context.tacticalAborted = true;
+      return evaluate(state, context);
+    }
+    if (depth <= 0) return yield* quiescence(state, alpha, beta, context.config.quiet, ply, context);
+    context.stats.nodes += 1;
+    context.stats.selectiveDepth = Math.max(context.stats.selectiveDepth, ply);
+    if ((context.stats.nodes & 7) === 0) yield;
+    if (state.passes >= 2) return evaluate(state, context);
+    let moves = candidates(state, context);
+    if (!moves.length) {
+      return -(yield* negamax(play(state, null, context), depth - 1, -beta, -alpha, ply + 1, context));
+    }
+    moves = rankWithHint(moves, state, context);
+    const width = ply <= 2 ? context.config.width : context.config.deepWidth;
+    moves = moves.slice(0, width);
+    // A pass is a real node, with a side change and exact terminal area after
+    // the second pass. Consider it late; never force irrelevant eye filling.
+    const occupied = inspect(state, context).occupied;
+    const life = lifeOf(state, context);
+    const vitalPending = life && life.moves.some(move => move.proof && move.color === state.turn);
+    if (!vitalPending && state.passes) {
+      // Finishing is sensible only when two passes would already win.
+      const terminal = play(state, null, context);
+      if (evaluate(terminal, context) < 0)
+        moves.push({ index: null, state: terminal, order: -5 });
+    }
+    let best = -Infinity, bestIndex = moves[0].index;
+    for (const move of moves) {
+      const value = -(yield* negamax(move.state, depth - 1, -beta, -alpha, ply + 1, context));
+      if (context.tacticalAborted) return value;
+      if (value > best) { best = value; bestIndex = move.index; }
+      if (value > alpha) alpha = value;
+      if (alpha >= beta) { context.stats.cutoffs += 1; break; }
+    }
+    context.hints.set(`${hashKey(state.hashA, state.hashB)}/${state.turn}`, bestIndex);
+    return best;
+  }
+
+  // Bounded, hand-written Go simulation policy. No learned patterns or weights.
+  // Only groups/liberties are read here: full region and life/death analysis is
+  // deliberately deferred to the caller's evaluation of the final position.
+  function hardRolloutGroups(state, context) {
+    if (state.rolloutGroups) return state.rolloutGroups;
+    const { count, adjacent } = context.geo, board = state.board;
+    const ids = new Int16Array(count).fill(-1), groups = [];
+    const marks = new Int16Array(count), stack = new Int16Array(count);
+    let occupied = 0;
+    for (let point = 0; point < count; point++) {
+      if (!board[point]) continue;
+      occupied++;
+      if (ids[point] >= 0) continue;
+      const id = groups.length, color = board[point], stamp = id + 1;
+      const stones = [], libs = [];
+      let length = 1;
+      stack[0] = point; ids[point] = id;
+      while (length) {
+        const stone = stack[--length];
+        stones.push(stone);
+        for (const neighbor of adjacent[stone]) {
+          if (!board[neighbor]) {
+            if (marks[neighbor] !== stamp) {
+              marks[neighbor] = stamp; libs.push(neighbor);
+            }
+          } else if (board[neighbor] === color && ids[neighbor] < 0) {
+            ids[neighbor] = id; stack[length++] = neighbor;
+          }
+        }
+      }
+      groups.push({ id, color, stones, libs });
+    }
+    return state.rolloutGroups = { ids, groups, occupied };
+  }
+
+  function hardRolloutPlay(state, index, context, info) {
+    const { geo } = context, color = state.turn, enemy = 3 - color;
+    if (index === null) {
+      return { board: state.board, turn: enemy, last: null, passes: state.passes + 1,
+        hashA: state.hashA, hashB: state.hashB, parent: state,
+        rolloutGroups: info, analysis: state.analysis,
+        move: { index: null, captured: 0, removed: [], stones: [], libs: [] } };
+    }
+    if (index < 0 || index >= geo.count || state.board[index]) return null;
+    info = info || hardRolloutGroups(state, context);
+    const board = state.board.slice(), removed = [], checked = [];
+    let hashA = (state.hashA ^ geo.zobristA[index * 3 + color]) >>> 0;
+    let hashB = (state.hashB ^ geo.zobristB[index * 3 + color]) >>> 0;
+    board[index] = color;
+    for (const neighbor of geo.adjacent[index]) {
+      if (board[neighbor] !== enemy) continue;
+      const id = info.ids[neighbor];
+      if (checked.includes(id)) continue;
+      checked.push(id);
+      const group = info.groups[id];
+      if (group.libs.length !== 1) continue;
+      for (const stone of group.stones) {
+        board[stone] = 0; removed.push(stone);
+        hashA = (hashA ^ geo.zobristA[stone * 3 + enemy]) >>> 0;
+        hashB = (hashB ^ geo.zobristB[stone * 3 + enemy]) >>> 0;
+      }
+    }
+    const stones = [index], libs = [], joined = [];
+    const libSeen = new Uint8Array(geo.count);
+    const addLib = point => {
+      if (point !== index && !libSeen[point]) { libSeen[point] = 1; libs.push(point); }
+    };
+    for (const neighbor of geo.adjacent[index]) {
+      if (!board[neighbor]) { addLib(neighbor); continue; }
+      if (board[neighbor] !== color) continue;
+      const id = info.ids[neighbor];
+      if (joined.includes(id)) continue;
+      joined.push(id);
+      const group = info.groups[id];
+      for (const stone of group.stones) stones.push(stone);
+      for (const liberty of group.libs) addLib(liberty);
+    }
+    for (const point of removed) for (const neighbor of geo.adjacent[point]) {
+      if (neighbor === index || board[neighbor] === color && joined.includes(info.ids[neighbor])) {
+        addLib(point); break;
+      }
+    }
+    // repeated() compares both 32-bit hashes AND exact boards, against game
+    // history and the complete tree/simulation parent chain. Passes bypass it.
+    if (!libs.length || repeated(board, hashA, hashB, state, context)) return null;
+    return { board, turn: enemy, last: index, passes: 0, hashA, hashB, parent: state,
+      move: { index, captured: removed.length, removed, stones, libs }, analysis: null };
+  }
+
+  function rolloutPolicy(state, context, maxPlies) {
+    const { geo } = context, random = context.random || Math.random;
+    const limit = Math.max(1, Math.min(48, maxPlies === undefined ? 24 : maxPlies | 0));
+    // A rollout must not monopolize a fallback main-thread search slice.
+    // Date/time checks happen once per ply and while rejecting illegal moves.
+    const stop = Math.min(context.deadline, clock() + 8);
+    const moves = [], weights = new Float64Array(geo.count), urgent = new Float64Array(geo.count);
+    let current = state, cutoff = false;
+    for (let ply = 0; ply < limit && current.passes < 2; ply++) {
+      if (clock() + .15 >= stop) { cutoff = true; break; }
+      const board = current.board, color = current.turn, enemy = 3 - color;
+      const info = hardRolloutGroups(current, context);
+      weights.fill(0); urgent.fill(0);
+      let total = 0, urgentTotal = 0;
+      for (let point = 0; point < geo.count; point++) {
+        if (board[point]) continue;
+        let friends = 0, enemies = 0, empty = 0;
+        for (const neighbor of geo.adjacent[point]) {
+          if (board[neighbor] === color) friends++;
+          else if (board[neighbor] === enemy) enemies++;
+          else empty++;
+        }
+        let weight = .18 + enemies * .26 + friends * .13;
+        if (friends && enemies) weight += .28; // contact, cuts, connections
+        if (!friends && !enemies) {
+          // Sparse openings prefer the third/fourth line, but keep every
+          // empty non-eye reachable instead of hard-coding opening moves.
+          weight += geo.edges[point] === 2 || geo.edges[point] === 3 ? .48 : .15;
+        }
+        if (!geo.edges[point] && empty >= 2) weight *= .42;
+        if (current.last !== null && current.last !== undefined) {
+          const dr = Math.abs(((point / geo.size) | 0) - ((current.last / geo.size) | 0));
+          const dc = Math.abs(point % geo.size - current.last % geo.size);
+          if (dr + dc <= 2) weight += .42;
+        }
+        weights[point] = weight;
+      }
+      for (const group of info.groups) {
+        if (group.libs.length === 1) {
+          const point = group.libs[0];
+          // Prefer saving or capturing substantial chains. Legality and
+          // whether an escape still leaves one liberty are checked below.
+          urgent[point] += (group.color === color ? 11 : 9) + 9 * Math.sqrt(group.stones.length);
+        } else if (group.libs.length === 2) {
+          const bonus = (group.color === enemy ? .8 : .55) * Math.min(4, Math.sqrt(group.stones.length));
+          for (const point of group.libs) weights[point] += bonus;
+        }
+      }
+      for (let point = 0; point < geo.count; point++) {
+        total += weights[point]; urgentTotal += urgent[point];
+      }
+      let next = null;
+      // Removing each rejected point bounds retries by the board size.
+      while (total > 1e-10) {
+        if (clock() + .1 >= stop) { cutoff = true; break; }
+        const tactical = urgentTotal > 1e-10 && random() < .88;
+        const choices = tactical ? urgent : weights;
+        let pick = random() * (tactical ? urgentTotal : total), index = -1;
+        for (let point = 0; point < geo.count; point++) {
+          if (!choices[point]) continue;
+          pick -= choices[point];
+          if (pick <= 0) { index = point; break; }
+        }
+        if (index < 0) break; // floating-point round-off only
+        total -= weights[index]; urgentTotal -= urgent[index];
+        weights[index] = 0; urgent[index] = 0;
+        const candidate = hardRolloutPlay(current, index, context, info);
+        if (!candidate) continue;
+        if (ownEye(board, index, color, geo) && !candidate.move.captured) continue;
+        // Avoid noncapturing self-atari in simulations. This is a policy
+        // filter only: tree search still considers legal sacrifices.
+        if (candidate.move.libs.length === 1 && !candidate.move.captured) continue;
+        next = candidate; break;
+      }
+      if (cutoff) break;
+      if (!next) next = hardRolloutPlay(current, null, context, info);
+      moves.push({ index: next.last, color });
+      current = next;
+    }
+    if (context.stats) {
+      context.stats.rolloutPlies = (context.stats.rolloutPlies || 0) + moves.length;
+      context.stats.rolloutCalls = (context.stats.rolloutCalls || 0) + 1;
+      context.stats.rolloutCutoffs = (context.stats.rolloutCutoffs || 0) + (cutoff ? 1 : 0);
+    }
+    return { state: current, moves, plies: moves.length, terminal: current.passes >= 2 };
+  }
+
+  // Model-free Monte Carlo search: tactical priors, progressively widened
+  // PUCT, color-correct AMAF/RAVE and rule-guided, bounded playouts. Values
+  // are heuristic utilities, never advertised as calibrated win probabilities.
+  function* globalTreeSearch(root, initial, context) {
+    const rootColor = root.turn, count = context.geo.count;
+    const scale = Math.max(7, context.geo.size * .8);
+    const utility = score => Math.tanh(score / scale);
+    const rootScore = state => {
+      // At a true two-pass terminal, count the board as it stands. Never
+      // turn an unproved heuristic dead-group guess into a solved outcome.
+      if (state.passes >= 2) {
+        const info = inspect(state, context);
+        let score = info.blackStones - info.whiteStones - context.komi;
+        for (const region of info.regions) if (region.owner)
+          score += (region.owner === 1 ? 1 : -1) * region.points.length;
+        return rootColor === 1 ? score : -score;
+      }
+      const score = evaluate(state, context);
+      return state.turn === rootColor ? score : -score;
+    };
+    const makeNode = (state, parent, proposal) => ({
+      state, parent, move: proposal ? proposal.index : null,
+      prior: proposal ? proposal.treePrior : 1,
+      proposal, depth: parent ? parent.depth + 1 : 0,
+      children: [], pending: null, next: 0, visits: 0, sum: 0,
+      amafN: null, amafQ: null, staticScore: undefined
+    });
+    const setProposals = (node, proposals) => {
+      if (!proposals.length && node.state.passes < 2)
+        proposals = [{ index: null, order: -8, penalty: 0, lifeBonus: 0 }];
+      const passIndex = proposals.findIndex(p => p.index === null);
+      if (passIndex > 1) {
+        proposals = proposals.slice();
+        proposals.splice(1, 0, proposals.splice(passIndex, 1)[0]);
+      }
+      const bestOrder = proposals.length ? proposals[0].order : 0;
+      const weights = proposals.map(p => Math.exp(Math.max(-5,
+        Math.min(0, ((p.order || 0) - bestOrder) / 24))));
+      const total = weights.reduce((a, b) => a + b, 0) || 1;
+      // Keep moves, not hundreds of unused child boards per node.
+      node.pending = proposals.map((p, i) => ({
+        index: p.index, order: p.order, value: p.raw,
+        lifeBonus: p.lifeBonus || 0, penalty: p.penalty || 0,
+        lifeUrgency: p.lifeUrgency || 0,
+        treePrior: .86 * weights[i] / total + .14 / proposals.length
+      }));
+      node.amafN = new Uint32Array(count);
+      node.amafQ = new Float32Array(count);
+    };
+    const widen = node => {
+      const width = Math.min(node.pending.length,
+        (node.depth ? 3 : 8) + Math.floor((node.depth ? 1.5 : 3) * Math.sqrt(node.visits + 1)));
+      while (node.children.length < width && node.next < node.pending.length) {
+        const p = node.pending[node.next++], state = play(node.state, p.index, context);
+        if (state) node.children.push(makeNode(state, node, p));
+      }
+    };
+    const rootNode = makeNode(root, null, null);
+    setProposals(rootNode, initial);
+    let iterations = 0, expanded = 1;
+    const maxPlies = context.geo.size <= 9 ? 24 : context.geo.size <= 13 ? 18 : 12;
+    const publish = () => {
+      const ranked = rootNode.children.slice().sort((a, b) => b.visits - a.visits || b.prior - a.prior);
+      if (ranked.length && ranked[0].visits) context.best = ranked[0].move;
+      context.stats.topMoves = ranked.slice(0, 5).map(n => ({
+        index: n.move, visits: n.visits,
+        value: Number((n.visits ? n.sum / n.visits : 0).toFixed(3)),
+        raveVisits: n.move === null ? 0 : rootNode.amafN[n.move]
+      }));
+      context.stats.rootExpanded = rootNode.children.length;
+      context.stats.treeNodes = expanded;
+    };
+    while (clock() < context.deadline - 5) {
+      let node = rootNode;
+      const path = [node], treeMoves = [];
+      while (node.state.passes < 2) {
+        if (!node.pending) {
+          if (node.visits < 2 || expanded >= 3000) break;
+          if (clock() + 6 >= context.deadline) break;
+          const proposals = candidates(node.state, context);
+          // Always represent a legal pass after the opponent passes. This
+          // lets the search compare ending the game with continuing it.
+          if (node.state.passes) proposals.push({ index: null, order: -10, penalty: 0, lifeBonus: 0 });
+          setProposals(node, proposals);
+          expanded += 1;
+        }
+        widen(node);
+        if (!node.children.length) break;
+        const sign = node.state.turn === rootColor ? 1 : -1;
+        const mean = node.visits ? sign * node.sum / node.visits : 0;
+        const sqrt = Math.sqrt(node.visits + 1);
+        let chosen = null, best = -Infinity;
+        for (const child of node.children) {
+          let q = child.visits ? sign * child.sum / child.visits : mean - .18;
+          if (!child.visits && child.state.passes >= 2)
+            q = sign * Math.sign(rootScore(child.state));
+          if (child.move !== null && node.amafN[child.move]) {
+            const n = node.amafN[child.move], v = child.visits;
+            const beta = .45 * n / (n + v + n * v / 160);
+            q = (1 - beta) * q + beta * sign * node.amafQ[child.move] / n;
+          }
+          // Completed tactical reading, including local life/ladder evidence,
+          // is a decaying root prior. Never add it again to sampled scores:
+          // the playout may already have captured or saved the same stones.
+          if (!node.depth && Number.isFinite(child.proposal.value)) {
+            const weight = 6 / (child.visits + 16);
+            q = q * (1 - weight) + utility(child.proposal.value) * weight;
+          }
+          const u = q + 1.65 * child.prior * sqrt / (1 + child.visits);
+          if (u > best) { best = u; chosen = child; }
+        }
+        treeMoves.push({ index: chosen.move, color: node.state.turn });
+        node = chosen; path.push(node);
+        if (!node.visits || node.depth >= 80) break;
+      }
+      if (clock() + 3 >= context.deadline) break;
+      if (node.staticScore === undefined) node.staticScore = rootScore(node.state);
+      const rollout = rolloutPolicy(node.state, context, maxPlies);
+      // Partial playouts stay explicitly labelled as cutoff evaluations.
+      const tailScore = rollout.plies ? rootScore(rollout.state) : node.staticScore;
+      const score = rollout.terminal ? tailScore : .65 * node.staticScore + .35 * tailScore;
+      const value = rollout.terminal ? Math.sign(tailScore) : utility(score);
+      const moves = treeMoves.concat(rollout.moves);
+      for (let p = 0; p < path.length; p++) {
+        const ancestor = path[p]; ancestor.visits++; ancestor.sum += value;
+        if (!ancestor.amafN) continue;
+        const seen = new Uint8Array(count);
+        for (let k = p; k < moves.length; k++) {
+          const move = moves[k];
+          if (move.index === null || seen[move.index]) continue;
+          seen[move.index] = 1;
+          if (move.color !== ancestor.state.turn) continue;
+          ancestor.amafN[move.index]++;
+          ancestor.amafQ[move.index] += value;
+          context.stats.raveUpdates++;
+        }
+      }
+      iterations++;
+      context.stats.nodes++;
+      context.stats.treeSimulations = iterations;
+      context.stats.rolloutMoves += rollout.plies;
+      if (rollout.terminal) context.stats.terminalRollouts++;
+      else context.stats.cutoffRollouts++;
+      context.stats.treeDepth = Math.max(context.stats.treeDepth || 0, node.depth);
+      if ((iterations & 7) === 0) publish();
+      // One playout per yield keeps main-thread fallback interruptible too.
+      yield;
+    }
+    publish();
+  }
+
+  function* search(context) {
+    const { game, geo, config } = context;
+    // Build superko history incrementally. No ownership of caller arrays is
+    // retained and no game state is played or undone by this implementation.
+    for (let i = 0; i < game.history.length; i += 1) {
+      const board = Uint8Array.from(game.history[i].board), hashes = boardHash(board, geo);
+      const key = hashKey(...hashes);
+      const existing = context.seen.get(key);
+      if (existing) existing.push(board); else context.seen.set(key, [board]);
+      if (i % 24 === 23) yield;
+    }
+    const board = Uint8Array.from(game.board), hashes = boardHash(board, geo);
+    const root = { board, turn: game.turn, last: game.lastMove, passes: game.consecutivePasses,
+      parent: null, analysis: null, hashA: hashes[0], hashB: hashes[1] };
+    context.root = root;
+    if (game.phase !== 'play') return;
+    yield* prepareLife(root, context);
+    let roots = candidates(root, context);
+    // The optimized simulator is still checked against the exact public game
+    // rules at the boundary, including imported/resumed historical ko states.
+    roots = roots.filter(candidate => game._simulate(candidate.index, game.turn).ok);
+    context.stats.candidates = roots.length;
+    context.best = roots.length ? roots[0].index : null;
+    yield;
+    if (!roots.length) { context.best = null; context.stats.depth = 0; return; }
+    if (context.level === 'easy') {
+      const random = randomSource(context.seed);
+      let best = -Infinity;
+      for (const candidate of roots) {
+        const value = candidate.order + (random() - 0.5) * 20;
+        if (value > best) { best = value; context.best = candidate.index; }
+      }
+      context.stats.nodes = roots.length;
+      context.stats.depth = 1;
+      context.stats.selectiveDepth = 1;
+      return;
+    }
+    applyRootLife(roots, context);
+    const fullRoots = context.level === 'hard' ? roots.slice() : null;
+    roots = roots.slice(0, config.roots);
+    context.best = roots[0].index;
+    context.stats.evaluation = -evaluate(roots[0].state, context);
+    yield;
+
+    if (context.level === 'hard') {
+      const deadline = Math.min(context.deadline, context.started + context.budget * 0.20);
+      const before = inspect(root, context);
+      const endangered = before.groups.filter(group => group.color === root.turn &&
+        group.libs.length <= 2 && group.eyes < 2);
+      const hunt = before.groups.filter(group => group.color !== root.turn &&
+        group.libs.length <= 3 && group.eyes < 2);
+      for (const candidate of roots) {
+        if (clock() + 3 >= deadline) break;
+        const moved = candidate.state.move;
+        const after = inspect(candidate.state, context);
+        const allowance = () => ({ nodes: 0, maxNodes: 90, depth: 0,
+          maxDepth: Math.min(42, geo.size * 3), deadline });
+        // Do not enter a forced ladder yourself, even when that move looks
+        // like a large enclosure according to a shallow territory evaluator.
+        if (moved.libs.length <= 2 && moved.stones.length >= 2 && moved.captured < moved.stones.length &&
+            ladderCaptured(candidate.state, candidate.index, root.turn, context, allowance())) {
+          candidate.penalty += Math.min(42, moved.stones.length * 2.6 + 1.2);
+        }
+        for (const group of endangered) {
+          if (clock() + 3 >= deadline) break;
+          const anchor = group.stones[0];
+          if (candidate.state.board[anchor] !== root.turn) continue;
+          const now = after.groups[after.ids[anchor]];
+          if (!now) continue;
+          if (now.libs.length >= 3) {
+            candidate.lifeBonus += Math.min(15, group.stones.length * 1.2);
+          } else if (ladderCaptured(candidate.state, anchor, root.turn, context, allowance())) {
+            candidate.penalty += Math.min(34, group.stones.length * 2.5 + 1.8);
+          }
+        }
+        for (const group of hunt) {
+          if (clock() + 3 >= deadline) break;
+          const anchor = group.stones[0];
+          if (candidate.state.board[anchor] !== 3 - root.turn) continue;
+          const now = after.groups[after.ids[anchor]];
+          if (now && now.libs.length <= 2 &&
+              ladderCaptured(candidate.state, anchor, 3 - root.turn, context, allowance())) {
+            candidate.lifeBonus += Math.min(28, group.stones.length * 1.65 + 1.5);
+          }
+        }
+        candidate.order += (candidate.lifeBonus - candidate.penalty) * 4;
+        yield;
+      }
+      roots.sort((a, b) => b.order - a.order);
+      context.best = roots[0].index;
+    }
+    const rootInfo = inspect(root, context);
+    const rootLife = lifeOf(root, context);
+    const vitalPending = rootLife && rootLife.moves.some(move => move.proof && move.color === root.turn);
+    if (!vitalPending && root.passes) {
+      const terminal = play(root, null, context);
+      // evaluate() is from the *next* mover's viewpoint after passing.
+      // Negative means the original player is ahead, so accept the win.
+      if (evaluate(terminal, context) < 0)
+        roots.push({ index: null, state: terminal, order: -7,
+          prior: -0.05, penalty: 0, lifeBonus: 0 });
+    }
+    // Only publish a complete iteration. A time limit cannot privilege the
+    // first root examined in an unfinished deeper search.
+    const tacticalUntil = context.level === 'hard'
+      ? context.started + context.budget * 0.38 : context.deadline;
+    context.tacticalDeadline = tacticalUntil;
+    context.tacticalAborted = false;
+    for (let depth = 1; depth <= config.depth; depth += 1) {
+      if (clock() + 4 >= tacticalUntil) break;
+      let completed = true;
+      let alpha = -Infinity, best = -Infinity, bestIndex = roots[0].index;
+      const ranked = [];
+      const maxAdjustment = Math.max(...roots.map(candidate => candidate.prior + candidate.lifeBonus - candidate.penalty));
+      for (let index = 0; index < roots.length; index += 1) {
+        if (clock() + 3 >= tacticalUntil) { completed = false; break; }
+        const candidate = roots[index];
+        const raw = -(yield* negamax(candidate.state, depth - 1, -Infinity, -alpha, 1, context));
+        const value = raw + candidate.prior + candidate.lifeBonus - candidate.penalty;
+        ranked.push({ ...candidate, value, raw });
+        if (value > best) { best = value; bestIndex = candidate.index; }
+        // Local proof values can exceed the small shape tie-break. The bound
+        // includes their true maximum so a valuable defense is never pruned
+        // using a raw-board bound from a differently adjusted root.
+        alpha = Math.max(alpha, best - maxAdjustment);
+        context.stats.rootProgress = (index + 1) / roots.length;
+        yield;
+      }
+      if (!completed || context.tacticalAborted) break;
+      ranked.sort((a, b) => b.value - a.value || b.order - a.order);
+      roots = ranked;
+      context.best = bestIndex;
+      context.stats.depth = depth;
+      context.stats.completedDepth = depth;
+      context.stats.evaluation = best;
+      context.stats.topMoves = ranked.slice(0, 5).map(move => ({ index: move.index, value: Math.round(move.value * 100) / 100 }));
+      context.stats.rootProgress = 1;
+      context.stats.principalVariation = [bestIndex];
+      yield;
+    }
+    if (context.level === 'hard' && clock() + 8 < context.deadline) {
+      // Merge completed tactical values into the full root candidate bank.
+      const tactical = new Map(roots.map(move => [move.index, move]));
+      const proposals = fullRoots.map(move => tactical.get(move.index) || move);
+      for (const move of roots) if (move.index === null) proposals.push(move);
+      proposals.sort((a, b) => b.order - a.order);
+      context.stats.tacticalElapsedMs = Math.round(clock() - context.started);
+      yield* globalTreeSearch(root, proposals, context);
+    }
+  }
+
+  function createSearch(gameOrSerialized, options = {}) {
+    if (!GoEngine || !GoEngine.GoGame) throw new Error('GoEngine must be loaded before GoAI.');
+    if (!GoLife || typeof GoLife.analyze !== 'function') throw new Error('GoLife must be loaded before GoAI.');
+    const level = Object.prototype.hasOwnProperty.call(LIMITS, options.level) ? options.level : 'medium';
+    const config = LIMITS[level];
+    const budget = Number.isFinite(options.budgetMs) ? Math.max(1, Math.min(30000, options.budgetMs)) : config.ms;
+    const source = gameOrSerialized && typeof gameOrSerialized.serialize === 'function'
+      ? gameOrSerialized.serialize() : gameOrSerialized;
+    const game = GoEngine.GoGame.restore(source);
+    const started = clock();
+    const seed = Number.isFinite(options.seed) ? options.seed >>> 0 : ((Date.now() ^ game.moveNumber * 997) >>> 0);
+    let fallback = null;
+    if (game.phase === 'play') {
+      for (let point = 0; point < game.board.length; point += 1) {
+        if (game.board[point] || game._isOwnEye(point, game.turn)) continue;
+        const move = game._simulate(point, game.turn);
+        if (move.ok && (move.liberties.length >= 2 || move.captured)) { fallback = point; break; }
+      }
+    }
+    const context = {
+      game, geo: geometry(game.size), komi: game.komi, config, level, seed, random: randomSource(seed),
+      budget, started, deadline: started + budget, seen: new Map(), hints: new Map(), best: fallback,
+      lifeCache: new Map(), proofs: [], proofKeys: new Set(), proofVersion: 0, rootLifeRecords: [],
+      historyBoards: game.history.map(before => before.board), initialBoardKeys: null,
+      stats: { level, algorithm: level === 'easy' ? 'single-ply policy' : level === 'hard' ? 'tactical reading + progressive PUCT/RAVE + rule-guided rollouts' : 'life/death reading + iterative alpha-beta',
+        simulations: 0, nodes: 0, depth: 0, completedDepth: 0, selectiveDepth: 0,
+        raveUpdates: 0, rolloutMoves: 0, terminalRollouts: 0, cutoffRollouts: 0,
+        elapsedMs: 0, quietNodes: 0, ladderNodes: 0, lifeNodes: 0, lifeReads: 0,
+        cutoffs: 0, candidates: 0, rootProgress: 0 }
+    };
+    const iterator = search(context);
+    let done = false;
+    const result = () => ({ done, index: context.best, stats: { ...context.stats,
+      simulations: context.stats.nodes, elapsedMs: Math.round(clock() - started) } });
+    return {
+      get done() { return done; },
+      step(sliceMs = 30) {
+        if (done) return result();
+        const slice = Number.isFinite(sliceMs) ? Math.max(1, Math.min(50, sliceMs)) : 30;
+        const end = Math.min(context.deadline, clock() + slice);
+        do {
+          const next = iterator.next();
+          if (next.done) { done = true; break; }
+        } while (clock() < end);
+        if (clock() >= context.deadline) done = true;
+        if (done && context.best !== null && !game._simulate(context.best, game.turn).ok) context.best = null;
+        return result();
+      },
+      result
+    };
+  }
+
+  function chooseMove(game, options = {}) {
+    const search = createSearch(game, options);
+    while (!search.done) search.step(50);
+    return search.result();
+  }
+
+  return Object.freeze({ createSearch, chooseMove, version: '7.0.0' });
+});
+</script>
+<script id="go-app-code">
+/* 星弈 · NEON GO · UI and offline application. No network requests or dependencies. */
+(() => {
+  'use strict';
+  const { GoGame } = window.GoEngine;
+  const $ = id => document.getElementById(id);
+  const STORAGE_KEY = 'songfeng-go-v1';
+  const LETTERS = 'ABCDEFGHJKLMNOPQRST';
+  const SIZE_NAMES = { 9: '9 × 9 棋盤', 13: '13 × 13 棋盤', 19: '19 × 19 棋盤' };
+  const AI_LEVELS = {
+    easy: { name: '入門', style: 'CORE', budgetMs: 60, hint: '單步評估，適合熟悉落子與提子。' },
+    medium: { name: '進階', style: 'VECTOR', budgetMs: 550, hint: '多手攻防搜尋，約半秒落子。' },
+    hard: { name: '高手', style: 'NEXUS', budgetMs: 4700, hint: '全盤模擬與死活攻防，充分利用約 5 秒的思考時間。' }
+  };
+  let game = new GoGame();
+  let settings = { mode: 'ai', difficulty: 'hard', sound: true, numbers: false, territory: false };
+  let dead = new Set(), actions = [], points = [], hover = -1, selected = 40;
+  let busy = false, aiTimer = null, epoch = 0, toastTimer = null;
+  let aiWorker = null, workerURL = null, aiProgress = null;
+  let lastScore = null, audioContext = null;
+  let areaAnalysis = null, scoringReview = null, displayDead = new Set();
+  // Configuration is the entry screen. A restored board stays untouched until
+  // the player explicitly continues it or submits a new configuration.
+  let setupActive = true, hasGame = false, enteredGame = false;
+  const canvas = $('board'), ctx = canvas.getContext('2d');
+
+  const coordinate = index => LETTERS[index % game.size] + (game.size - Math.floor(index / game.size));
+  const colorName = color => color === 1 ? '黑棋' : '白棋';
+  const numberText = number => Number.isInteger(number) ? String(number) : number.toFixed(1);
+  const dialogsOpen = () => setupActive || $('rules-dialog').open;
+  const isHumanTurn = () => hasGame && !dialogsOpen() && game.phase === 'play' && !busy && (settings.mode === 'local' || game.turn === 1);
+
+  // Rebuild the move journal from the same snapshots used by the rules engine.
+  // This keeps captures, passes and undo aligned without a second saved history.
+  function rebuildActions() {
+    actions = game.history.map((before, index) => {
+      const after = game.history[index + 1] || game;
+      const isPass = before.board.every((stone, i) => stone === after.board[i]);
+      return { index: isPass ? null : after.lastMove, color: before.turn, number: index + 1,
+        captured: after.captures[before.turn] - before.captures[before.turn] };
+    });
+  }
+
+  function loadGame() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (!data || data.version !== 1 || !data.settings || data.started === false) return;
+      const candidate = GoGame.restore(data.game);
+      if (![9, 13, 19].includes(candidate.size) || candidate.komi !== 6.5) return;
+      const candidateSettings = {
+        mode: data.settings.mode === 'local' ? 'local' : 'ai',
+        difficulty: Object.hasOwn(AI_LEVELS, data.settings.difficulty) ? data.settings.difficulty : 'hard',
+        sound: data.settings.sound !== false,
+        numbers: data.settings.numbers === true,
+        territory: data.settings.territory === true
+      };
+      const candidateDead = new Set(candidate.phase === 'finished' ? candidate.finalScore.deadIndices :
+        candidate.phase === 'scoring' ? candidate.estimate(Array.isArray(data.dead) ? data.dead : []).deadIndices : []);
+      game = candidate; settings = candidateSettings; dead = candidateDead;
+      rebuildActions();
+      selected = game.lastMove === null ? Math.floor(game.board.length / 2) : game.lastMove;
+      // Legacy saves did not have a started marker. Their validated board is
+      // still eligible for continuation, including an empty, configured game.
+      hasGame = true;
+      $('save-note').textContent = '已找到本機存檔';
+    } catch (_) {
+      // Private mode, unavailable file-origin storage or invalid saves must not
+      // stop the game. A fresh in-memory board remains usable.
+      $('save-note').textContent = '本機存檔未能讀取';
+    }
+  }
+
+  function saveGame() {
+    if (!hasGame || setupActive) return;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, started: true,
+        game: game.serialize(), settings, dead: Array.from(dead) }));
+      $('save-note').textContent = '本機自動保存';
+    } catch (_) {
+      $('save-note').textContent = '此瀏覽器無法保存棋局';
+    }
+  }
+
+  function clearAreaAnalysis() {
+    areaAnalysis = null; scoringReview = null;
+  }
+
+  // Dead-stone reading is bounded and cached for this exact game state. A
+  // preview never changes the player's adjudication or their saved dead set.
+  function analyzeArea() {
+    if (!window.GoLife || typeof window.GoLife.analyze !== 'function') return null;
+    const key = `${game.size}:${game.turn}:${game.moveNumber}:${game.board.join('')}`;
+    if (areaAnalysis && areaAnalysis.key === key) return areaAnalysis.result;
+    let result = null;
+    try {
+      const analysis = (window.GoLife.adjudicate || window.GoLife.analyze)(game.board, game.size, {
+        read: true, turn: game.turn, budgetMs: game.phase === 'play' ? 100 : 260,
+        maxNodes: game.phase === 'play' ? 4500 : 18000, maxDepth: 24,
+        history: game.history.map(state => state.board)
+      });
+      if (analysis && Array.isArray(analysis.deadIndices)) {
+        const candidates = analysis.deadIndices.filter(index => Number.isInteger(index) &&
+          index >= 0 && index < game.board.length && game.board[index]);
+        result = {
+          // The rules engine expands complete chains and owns the actual count.
+          deadIndices: game.estimate(candidates).deadIndices,
+          unresolved: Number.isInteger(analysis.unsettledGroups) ? analysis.unsettledGroups :
+            (Array.isArray(analysis.groups) ? analysis.groups.filter(group => group.status === 'unsettled').length : 0),
+          estimated: (analysis.assumed || []).length
+        };
+      }
+    } catch (_) { /* Manual adjudication remains available if reading fails. */ }
+    areaAnalysis = { key, result };
+    return result;
+  }
+
+  function suggestScoringDead() {
+    const analysis = analyzeArea();
+    if (!analysis) return;
+    dead = new Set(analysis.deadIndices);
+    scoringReview = { suggested: dead.size, unresolved: analysis.unresolved,
+      estimated: analysis.estimated || 0, edited: false };
+  }
+
+  function toast(message) {
+    clearTimeout(toastTimer);
+    $('toast').textContent = message;
+    $('toast').classList.add('show');
+    toastTimer = setTimeout(() => $('toast').classList.remove('show'), 2800);
+  }
+
+  function playSound(color, captured) {
+    if (!settings.sound) return;
+    try {
+      const AudioClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioClass) return;
+      if (!audioContext) audioContext = new AudioClass();
+      if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
+      const t = audioContext.currentTime;
+      const length = Math.floor(audioContext.sampleRate * .075);
+      const buffer = audioContext.createBuffer(1, length, audioContext.sampleRate);
+      const channel = buffer.getChannelData(0);
+      for (let i = 0; i < length; i++) channel[i] = (Math.random() * 2 - 1) * Math.exp(-i / (length * .12));
+      const noise = audioContext.createBufferSource();
+      const filter = audioContext.createBiquadFilter();
+      const gain = audioContext.createGain();
+      noise.buffer = buffer; filter.type = 'bandpass';
+      filter.frequency.value = color === 1 ? 1150 : 1470; filter.Q.value = .7;
+      gain.gain.value = .2;
+      noise.connect(filter); filter.connect(gain); gain.connect(audioContext.destination);
+      noise.start(t); noise.stop(t + .08);
+      const tone = audioContext.createOscillator(), envelope = audioContext.createGain();
+      tone.type = 'sine'; tone.frequency.setValueAtTime(color === 1 ? 620 : 790, t);
+      tone.frequency.exponentialRampToValueAtTime(230, t + .07);
+      envelope.gain.setValueAtTime(.13, t); envelope.gain.exponentialRampToValueAtTime(.001, t + .09);
+      tone.connect(envelope); envelope.connect(audioContext.destination); tone.start(t); tone.stop(t + .1);
+      if (captured > 0) {
+        const click = audioContext.createOscillator(), clickGain = audioContext.createGain();
+        click.frequency.value = 1350; clickGain.gain.setValueAtTime(.05, t + .105);
+        clickGain.gain.exponentialRampToValueAtTime(.001, t + .19);
+        click.connect(clickGain); clickGain.connect(audioContext.destination);
+        click.start(t + .105); click.stop(t + .2);
+      }
+    } catch (_) { /* Sound is optional; gameplay always continues. */ }
+  }
+
+  function buildBoardInputs() {
+    const n = game.size, edge = .082, step = (1 - 2 * edge) / (n - 1);
+    const grid = $('board-input');
+    grid.replaceChildren(); points = [];
+    grid.style.left = grid.style.top = ((edge - step / 2) * 100) + '%';
+    grid.style.width = grid.style.height = ((1 - 2 * edge + step) * 100) + '%';
+    grid.style.gridTemplateRows = `repeat(${n}, 1fr)`;
+    grid.setAttribute('aria-rowcount', n); grid.setAttribute('aria-colcount', n);
+    for (let row = 0; row < n; row++) {
+      const rowElement = document.createElement('div');
+      rowElement.className = 'board-row'; rowElement.setAttribute('role', 'row');
+      rowElement.style.gridTemplateColumns = `repeat(${n}, 1fr)`;
+      for (let col = 0; col < n; col++) {
+        const index = row * n + col, button = document.createElement('button');
+        button.type = 'button'; button.className = 'point'; button.dataset.index = index;
+        button.setAttribute('role', 'gridcell');
+        button.setAttribute('aria-rowindex', row + 1); button.setAttribute('aria-colindex', col + 1);
+        button.tabIndex = index === selected ? 0 : -1;
+        rowElement.appendChild(button); points.push(button);
+      }
+      grid.appendChild(rowElement);
+    }
+  }
+
+  function drawStone(x, y, radius, color, opacity = 1) {
+    ctx.save(); ctx.globalAlpha = opacity;
+    ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.shadowColor = color === 1 ? 'rgba(0, 4, 12, .65)' : 'rgba(116, 183, 255, .18)';
+    ctx.shadowBlur = radius * .28;
+    ctx.shadowOffsetX = 0; ctx.shadowOffsetY = radius * .12;
+    const gradient = ctx.createRadialGradient(x - radius * .34, y - radius * .4, radius * .04, x, y, radius);
+    if (color === 1) {
+      gradient.addColorStop(0, '#415369'); gradient.addColorStop(.3, '#253448');
+      gradient.addColorStop(.8, '#101724'); gradient.addColorStop(1, '#080e18');
+    } else {
+      gradient.addColorStop(0, '#ffffff'); gradient.addColorStop(.45, '#effaff');
+      gradient.addColorStop(.83, '#dceefa'); gradient.addColorStop(1, '#b0cde5');
+    }
+    ctx.fillStyle = gradient; ctx.fill(); ctx.shadowColor = 'transparent';
+    ctx.strokeStyle = color === 1 ? 'rgba(125, 175, 222, .72)' : 'rgba(230, 245, 255, .82)';
+    ctx.lineWidth = Math.max(.85, radius * .035); ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(x, y, radius * .88, Math.PI * 1.1, Math.PI * 1.72);
+    ctx.strokeStyle = color === 1 ? 'rgba(197, 225, 255, .13)' : 'rgba(255, 255, 255, .6)';
+    ctx.lineWidth = Math.max(.6, radius * .025); ctx.stroke(); ctx.restore();
+  }
+
+  function draw() {
+    const width = canvas.getBoundingClientRect().width;
+    if (!ctx || width <= 0) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 3);
+    const pixels = Math.round(width * dpr);
+    if (canvas.width !== pixels || canvas.height !== pixels) canvas.width = canvas.height = pixels;
+    ctx.setTransform(pixels / width, 0, 0, pixels / width, 0, 0);
+    ctx.clearRect(0, 0, width, width);
+    const boardGradient = ctx.createRadialGradient(width * .5, width * .42, 0, width * .5, width * .5, width * .72);
+    boardGradient.addColorStop(0, '#101c2c'); boardGradient.addColorStop(1, '#0c1523');
+    ctx.fillStyle = boardGradient; ctx.fillRect(0, 0, width, width);
+    const n = game.size, margin = width * .082, span = width - 2 * margin;
+    const gap = span / (n - 1), radius = gap * .445;
+    const xy = index => [margin + (index % n) * gap, margin + Math.floor(index / n) * gap];
+    ctx.strokeStyle = '#4e6c8b'; ctx.lineWidth = Math.max(.8, width / 950);
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const pos = margin + i * gap;
+      ctx.moveTo(margin, pos); ctx.lineTo(width - margin, pos);
+      ctx.moveTo(pos, margin); ctx.lineTo(pos, width - margin);
+    }
+    ctx.stroke();
+    ctx.strokeStyle = '#49617c'; ctx.lineWidth = Math.max(1, width / 750);
+    ctx.strokeRect(margin, margin, span, span);
+    const starOffset = n === 9 ? 2 : 3, center = (n - 1) / 2, starFar = n - 1 - starOffset;
+    let stars = [[starOffset, starOffset], [starOffset, starFar], [center, center], [starFar, starOffset], [starFar, starFar]];
+    if (n === 19) stars = [starOffset, center, starFar].flatMap(row => [starOffset, center, starFar].map(col => [row, col]));
+    ctx.fillStyle = '#65f4d2';
+    for (const [row, col] of stars) {
+      ctx.beginPath(); ctx.arc(margin + col * gap, margin + row * gap, Math.max(2, gap * .063), 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.fillStyle = '#8ba4bf'; ctx.font = `500 ${Math.max(8, Math.min(12, width * .02))}px ui-monospace, SFMono-Regular, Consolas, monospace`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (let i = 0; i < n; i++) {
+      const pos = margin + i * gap;
+      ctx.fillText(LETTERS[i], pos, margin * .41); ctx.fillText(LETTERS[i], pos, width - margin * .36);
+      ctx.fillText(String(n - i), margin * .36, pos); ctx.fillText(String(n - i), width - margin * .36, pos);
+    }
+    if (lastScore) {
+      for (let index = 0; index < game.board.length; index++) {
+        if (game.board[index] && !displayDead.has(index)) continue;
+        const owner = lastScore.ownership[index]; if (!owner) continue;
+        const [x, y] = xy(index), square = gap * .21;
+        ctx.fillStyle = owner === 1 ? 'rgba(16, 34, 61, .94)' : 'rgba(230, 245, 255, .92)';
+        ctx.fillRect(x - square / 2, y - square / 2, square, square);
+        ctx.strokeStyle = owner === 1 ? '#78b7ff' : '#b7d8f3'; ctx.lineWidth = .85;
+        ctx.strokeRect(x - square / 2, y - square / 2, square, square);
+      }
+    }
+    const stoneNumbers = new Map();
+    if (settings.numbers) for (const action of actions) if (action.index !== null) stoneNumbers.set(action.index, action.number);
+    for (let index = 0; index < game.board.length; index++) {
+      const color = game.board[index]; if (!color) continue;
+      const [x, y] = xy(index), isDead = displayDead.has(index);
+      drawStone(x, y, radius, color, isDead ? .32 : 1);
+      if (isDead) {
+        const k = radius * .32; ctx.strokeStyle = '#ff728e'; ctx.lineWidth = Math.max(1.5, radius * .095);
+        ctx.beginPath(); ctx.moveTo(x - k, y - k); ctx.lineTo(x + k, y + k); ctx.moveTo(x - k, y + k); ctx.lineTo(x + k, y - k); ctx.stroke();
+      } else if (settings.numbers && stoneNumbers.has(index)) {
+        const label = String(stoneNumbers.get(index));
+        ctx.fillStyle = index === game.lastMove ? (color === 1 ? '#65f4d2' : '#256da7') : color === 1 ? '#e6f5ff' : '#304d69';
+        ctx.font = `600 ${Math.max(7, radius * (label.length > 2 ? .68 : .85))}px ui-monospace, SFMono-Regular, Consolas, monospace`;
+        ctx.fillText(label, x, y + radius * .03);
+      } else if (index === game.lastMove) {
+        ctx.beginPath(); ctx.arc(x, y, radius * .2, 0, Math.PI * 2);
+        ctx.strokeStyle = color === 1 ? '#65f4d2' : '#256da7'; ctx.lineWidth = Math.max(1.5, radius * .075); ctx.stroke();
+      }
+    }
+    if (hover >= 0 && hover < game.board.length && !game.board[hover] && isHumanTurn()) {
+      const [x, y] = xy(hover); drawStone(x, y, radius, game.turn, .3);
+    }
+  }
+
+  function renderScore() {
+    const visible = game.phase !== 'play' || settings.territory;
+    $('score-panel').hidden = !visible; $('journal').hidden = visible;
+    const finished = game.phase === 'finished', preview = game.phase === 'play';
+    const analysis = visible && preview && !setupActive ? analyzeArea() : null;
+    const countedDead = preview ? (analysis ? analysis.deadIndices : []) : dead;
+    lastScore = visible ? (finished ? game.finalScore : game.estimate(countedDead)) : null;
+    displayDead = new Set(lastScore ? lastScore.deadIndices : []);
+    if (!visible) return;
+    $('score-panel').classList.toggle('preview', preview);
+    $('score-title').textContent = finished ? '對局結果' : preview ? '即時形勢評估' : '終局計分';
+    let guide = '點選整塊死子，標記或取消；確認後完成計分。';
+    if (finished) {
+      guide = '已自動判斷雙方死子、扣除死子後數空，並加上白棋貼目。點選整塊棋子可更正，勝負會立即重算。';
+      if (scoringReview && scoringReview.edited) guide = '已依你的死子修正重新計分。可繼續點棋子調整，或重新自動判定。';
+    }
+    else if (preview) guide = analysis ? '已暫扣判出的死子；死活未定、劫爭與共活仍須確認。' :
+      '依目前盤面暫估；收官後請確認死子。';
+    else if (scoringReview) {
+      guide = `${scoringReview.edited ? '已標記' : '已預標'} ${scoringReview.edited ? dead.size : scoringReview.suggested} 子，請確認；點選整塊棋可修正。`;
+      if (scoringReview.unresolved) guide += '仍有棋塊死活未定。';
+    }
+    $('score-guide').textContent = guide;
+    const deadCounts = { 1: 0, 2: 0 };
+    for (const point of displayDead) deadCounts[game.board[point]] += 1;
+    $('score-black-dead').textContent = deadCounts[1];
+    $('score-white-dead').textContent = deadCounts[2];
+    for (const color of ['black', 'white']) for (const part of ['stones', 'territory', 'total'])
+      $(`score-${color}-${part}`).textContent = numberText(lastScore[color][part]);
+    const result = lastScore.winner ? `${colorName(lastScore.winner)}${finished ? '勝' : '暫領先'} ${numberText(lastScore.margin)} 點` : '雙方和棋';
+    $('score-result').textContent = result;
+    $('score-footnote').textContent = `中立空點 ${lastScore.neutral} · 黑死子 ${deadCounts[1]} · 白死子 ${deadCounts[2]}。死子已由盤上活子扣除，提子數不另計；${scoringReview && scoringReview.unresolved ? '仍有未確定死活，請檢視棋盤' : '遇到劫爭、雙活仍可人工修正'}。`;
+    $('finish-btn').hidden = preview;
+    $('finish-btn').textContent = finished ? '重新自動判死' : '確認計分';
+    $('resume-btn').textContent = finished ? '繼續這局' : '返回對局';
+    $('score-panel').querySelector('.score-buttons').style.gridTemplateColumns = '';
+  }
+
+  function renderJournal() {
+    $('move-total').textContent = '第 ' + String(game.moveNumber).padStart(3, '0') + ' 手';
+    $('empty-journal').hidden = actions.length > 0;
+    const list = $('move-list'); list.replaceChildren();
+    for (const move of actions.slice(-4).reverse()) {
+      const li = document.createElement('li'); li.className = 'move-item';
+      const num = document.createElement('span'); num.className = 'move-index'; num.textContent = String(move.number).padStart(3, '0');
+      const dot = document.createElement('span'); dot.className = 'small-stone' + (move.color === 2 ? ' white' : ''); dot.setAttribute('aria-hidden', 'true');
+      const color = document.createElement('span'); color.textContent = colorName(move.color);
+      const pos = document.createElement('span'); pos.className = 'move-coordinate'; pos.textContent = move.index === null ? '停一手' : coordinate(move.index);
+      const detail = document.createElement('span'); detail.className = 'move-detail';
+      detail.textContent = move.captured > 0 ? `提 ${move.captured} 子` : move === actions[actions.length - 1] ? '最近一手' : '';
+      li.append(num, dot, color, pos, detail); list.appendChild(li);
+    }
+  }
+
+  function render() {
+    $('board-title').textContent = SIZE_NAMES[game.size];
+    $('game-mode').textContent = settings.mode === 'ai' ? '單人 · 對戰 AI' : '雙人 · 同機對戰';
+    $('black-role').textContent = settings.mode === 'ai' ? '你 · 先手' : '玩家 1 · 先手';
+    const difficulty = AI_LEVELS[settings.difficulty];
+    $('white-role').textContent = settings.mode === 'ai' ? `${difficulty.name} AI` : '玩家 2 · 後手';
+    $('ai-controls').hidden = settings.mode !== 'ai';
+    $('difficulty-select').value = settings.difficulty;
+    $('difficulty-hint').textContent = difficulty.hint;
+    $('black-captures').textContent = game.captures[1]; $('white-captures').textContent = game.captures[2];
+    $('black-card').classList.toggle('current', game.phase === 'play' && game.turn === 1);
+    $('white-card').classList.toggle('current', game.phase === 'play' && game.turn === 2);
+    $('turn-banner').classList.toggle('thinking', busy);
+    let title, subtitle;
+    if (game.phase === 'scoring') {
+      title = '雙方停著，請確認死子'; subtitle = '在棋盤上點選，再完成計分。';
+    } else if (game.phase === 'finished') {
+      title = game.finalScore.winner ? `自動計分：${colorName(game.finalScore.winner)}勝 ${numberText(game.finalScore.margin)} 點` : '自動計分：此局和棋';
+      subtitle = '已算雙方死子；可點棋盤棋塊修正結果。';
+    } else if (busy || (settings.mode === 'ai' && game.turn === 2)) {
+      title = 'AI 思考中';
+      subtitle = settings.difficulty === 'hard' ? '正在推演全盤攻防，約 5 秒落子。' : '正在選擇下一個落點。';
+    } else {
+      title = settings.mode === 'ai' ? '輪到你了，請執黑落子' : `輪到${colorName(game.turn)}，請落子`;
+      const last = actions[actions.length - 1];
+      subtitle = game.consecutivePasses === 1 ? '對方已停一手；你也停著即進入數子。' :
+        last && last.captured ? `上一手${colorName(last.color)}提走 ${last.captured} 子。` :
+        game.moveNumber === 0 ? '點擊棋盤交叉點，開始你的第一手。' : '觀察氣與連接，選擇下一個落點。';
+    }
+    $('turn-title').textContent = title; $('turn-subtitle').textContent = subtitle;
+    $('ai-progress').hidden = !busy;
+    $('ai-progress-fill').style.width = busy ? Math.min(96, Math.max(3, ((aiProgress && aiProgress.elapsedMs) || 0) / difficulty.budgetMs * 100)) + '%' : '0%';
+    $('undo-btn').disabled = !hasGame || dialogsOpen() || game.history.length === 0;
+    $('pass-btn').disabled = !isHumanTurn();
+    $('numbers-btn').setAttribute('aria-pressed', String(settings.numbers));
+    $('territory-btn').setAttribute('aria-pressed', String(settings.territory || game.phase !== 'play'));
+    $('territory-btn').disabled = game.phase !== 'play';
+    $('sound-btn').setAttribute('aria-pressed', String(settings.sound));
+    $('sound-btn').setAttribute('aria-label', settings.sound ? '關閉落子音效' : '開啟落子音效');
+    $('sound-waves').setAttribute('d', settings.sound ? 'M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14' : 'm16 9 5 6m-5 0 5-6');
+    $('board-help').textContent = game.phase === 'scoring' || game.phase === 'finished'
+      ? '點選整塊棋子，即時修正雙方死子與比分' : '點擊交叉點落子';
+    renderScore();
+    const boardDisabled = !hasGame || dialogsOpen() || (game.phase === 'play' && !isHumanTurn());
+    for (let i = 0; i < points.length; i++) {
+      const label = coordinate(i) + '，' + (game.board[i] ? colorName(game.board[i]) +
+        (displayDead.has(i) ? game.phase === 'play' ? '，暫判死子' : '，已標記死子' : '') : '空點');
+      // Keep the focused grid cell alive while the computer thinks. Native
+      // disabled buttons would drop keyboard focus after every human move.
+      points[i].setAttribute('aria-label', label);
+      points[i].setAttribute('aria-disabled', String(boardDisabled));
+      points[i].tabIndex = !setupActive && selected === i ? 0 : -1;
+    }
+    renderJournal(); draw();
+  }
+
+  function cancelAI() {
+    epoch += 1; clearTimeout(aiTimer); aiTimer = null; busy = false; aiProgress = null;
+    if (aiWorker) { aiWorker.terminate(); aiWorker = null; }
+  }
+
+  // The worker is built from the scripts already embedded in this HTML.
+  // Blob URLs remain local: no server, download, importScripts or network call.
+  function workerMain() {
+    self.onmessage = event => {
+      const { token, state, options } = event.data;
+      try {
+        const search = self.GoAI.createSearch(state, options);
+        let lastUpdate = 0;
+        const pump = () => {
+          try {
+            const result = search.step(32), now = Date.now();
+            if (result.done || now - lastUpdate > 140) {
+              self.postMessage({ token, type: result.done ? 'done' : 'progress', result });
+              lastUpdate = now;
+            }
+            if (!result.done) setTimeout(pump, 0);
+          } catch (error) { self.postMessage({ token, type: 'error', message: String(error && error.message || error) }); }
+        };
+        pump();
+      } catch (error) { self.postMessage({ token, type: 'error', message: String(error && error.message || error) }); }
+    };
+  }
+
+  function getWorkerURL() {
+    if (workerURL) return workerURL;
+    if (typeof Worker !== 'function' || typeof Blob !== 'function' || !window.URL || !URL.createObjectURL) return null;
+    const engineSource = $('go-engine-code'), lifeSource = $('go-life-code'), aiSource = $('go-ai-code');
+    if (!engineSource || !aiSource) return null;
+    workerURL = URL.createObjectURL(new Blob([
+      engineSource.textContent, '\n', lifeSource ? lifeSource.textContent : '', '\n',
+      aiSource.textContent, '\n(', workerMain.toString(), ')();'
+    ], { type: 'text/javascript' }));
+    return workerURL;
+  }
+
+  function scheduleAI() {
+    if (!hasGame || busy || aiTimer !== null || settings.mode !== 'ai' || game.phase !== 'play' || game.turn !== 2 || dialogsOpen()) return;
+    busy = true; hover = -1; aiProgress = null; const token = ++epoch; render();
+    const stillCurrent = () => hasGame && token === epoch && settings.mode === 'ai' && game.phase === 'play' && game.turn === 2 && !dialogsOpen();
+    const options = { level: settings.difficulty, budgetMs: AI_LEVELS[settings.difficulty].budgetMs };
+    let fallbackStarted = false;
+    const complete = result => {
+      if (!stillCurrent()) return;
+      if (aiWorker) { aiWorker.terminate(); aiWorker = null; }
+      aiTimer = null; busy = false; aiProgress = null;
+      let index = result.index;
+      // The official game engine is the final authority for positional superko.
+      // A search failure must not silently turn a perfectly legal move into pass.
+      if (index !== null && (!Number.isInteger(index) || !game.isLegal(index))) {
+        index = game.suggestMove();
+        toast('此手已重新檢查禁著，改走合法位置。');
+      }
+      makeMove(index, true);
+    };
+    const progress = result => {
+      if (!stillCurrent()) return;
+      aiProgress = result.stats || null;
+      render();
+    };
+    const startLocal = () => {
+      if (!stillCurrent() || fallbackStarted) return;
+      fallbackStarted = true;
+      if (aiWorker) { aiWorker.terminate(); aiWorker = null; }
+      let search;
+      const failed = () => {
+        if (!stillCurrent()) return;
+        toast('這次進階讀棋未能完成，先以基礎走法接續。');
+        complete({ index: game.suggestMove(), stats: null });
+      };
+      try { search = window.GoAI.createSearch(game.serialize(), options); } catch (_) { failed(); return; }
+      let lastUpdate = 0;
+      const pump = () => {
+        aiTimer = null;
+        if (!stillCurrent()) return;
+        try {
+          const result = search.step(20), now = Date.now();
+          if (result.done) { complete(result); return; }
+          if (now - lastUpdate > 140) { progress(result); lastUpdate = now; }
+          aiTimer = setTimeout(pump, 0);
+        } catch (_) { failed(); }
+      };
+      aiTimer = setTimeout(pump, 0);
+    };
+    aiTimer = setTimeout(() => {
+      aiTimer = null;
+      if (!stillCurrent()) return;
+      try {
+        const url = getWorkerURL();
+        if (!url) { startLocal(); return; }
+        aiWorker = new Worker(url);
+        aiWorker.onmessage = event => {
+          const data = event.data;
+          if (!data || data.token !== token || !stillCurrent()) return;
+          if (data.type === 'done') complete(data.result);
+          else if (data.type === 'progress') progress(data.result);
+          else if (data.type === 'error') startLocal();
+        };
+        aiWorker.onerror = event => { if (event.preventDefault) event.preventDefault(); startLocal(); };
+        aiWorker.postMessage({ token, state: game.serialize(), options });
+      } catch (_) { startLocal(); }
+    }, 100);
+  }
+
+  function makeMove(index, byAI = false) {
+    if (!hasGame || dialogsOpen() || game.phase !== 'play') return;
+    if (byAI ? settings.mode !== 'ai' || game.turn !== 2 : !isHumanTurn()) return;
+    const color = game.turn, result = index === null ? game.pass() : game.play(index);
+    if (!result.ok) { toast(result.error); return; }
+    actions.push({ index, color, number: game.moveNumber, captured: result.captured || 0 });
+    dead.clear(); clearAreaAnalysis(); hover = -1;
+    if (index !== null) {
+      if (!byAI) selected = index;
+      playSound(color, result.captured);
+    } else if (game.phase === 'play') toast(`${colorName(color)}停一手。`);
+    if (game.phase === 'scoring') {
+      suggestScoringDead();
+      game.finish(dead);
+      toast('雙方停著，已自動判斷黑白死子並完成計分。');
+    }
+    saveGame(); render(); scheduleAI();
+  }
+
+  function undo() {
+    if (!hasGame || dialogsOpen() || !game.history.length) return;
+    cancelAI();
+    const steps = settings.mode === 'ai' && game.turn === 1 && game.history.length >= 2 ? 2 : 1;
+    game.undo(steps); actions = actions.slice(0, game.moveNumber);
+    dead.clear(); clearAreaAnalysis(); settings.territory = false; hover = -1;
+    selected = game.lastMove === null ? Math.floor(game.board.length / 2) : game.lastMove;
+    saveGame(); render(); scheduleAI(); toast(settings.mode === 'ai' ? '已退回你落子之前。' : '已悔一手。');
+  }
+
+  function pointAction(index) {
+    if (!hasGame || dialogsOpen()) return;
+    if (game.phase === 'scoring' || game.phase === 'finished') {
+      if (!game.board[index]) { toast('請點選棋子，系統會重新計算空地。'); return; }
+      const group = game.groupAt(index).stones, remove = dead.has(index);
+      for (const point of group) remove ? dead.delete(point) : dead.add(point);
+      if (scoringReview) scoringReview.edited = true;
+      // End result is live-updated, without requiring another confirmation.
+      if (game.phase === 'finished') game.finish(dead);
+      saveGame(); render(); return;
+    }
+    if (game.phase === 'play') makeMove(index);
+  }
+
+  function openNewGame(focusTitle = true) {
+    cancelAI(); setupActive = true; hover = -1;
+    $('game-view').hidden = true;
+    $('setup-view').hidden = false;
+    $('setup-title').textContent = '新對局設定';
+    $('setup-description').textContent = hasGame
+      ? '先選模式、難度與棋盤大小；若不想覆蓋原局，可選擇繼續。'
+      : '先選模式、AI 難度與棋盤大小，確認後才會開始。';
+    $('continue-card').hidden = !hasGame;
+    if (hasGame) {
+      const mode = settings.mode === 'ai' ? `單人 · ${AI_LEVELS[settings.difficulty].name} AI` : '同機雙人';
+      const phase = game.phase === 'finished' ? '已完成' : game.phase === 'scoring' ? '待確認計分' : `第 ${game.moveNumber} 手`;
+      $('continue-summary').textContent = `${SIZE_NAMES[game.size]} · ${mode} · ${phase}`;
+      $('continue-btn').textContent = enteredGame ? '返回目前對局' : '繼續上次對局';
+    }
+    $('new-form').elements.mode.value = settings.mode;
+    $('new-form').elements.size.value = String(game.size);
+    $('new-form').elements.difficulty.value = settings.difficulty;
+    syncNewDifficulty();
+    $('new-warning').hidden = !hasGame || game.moveNumber === 0;
+    render();
+    if (focusTitle) {
+      if (typeof window.scrollTo === 'function') window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      $('setup-title').focus({ preventScroll: true });
+    }
+  }
+
+  function enterGame() {
+    if (!hasGame || $('rules-dialog').open) return;
+    setupActive = false; enteredGame = true;
+    // Older save versions could pause at the pre-confirmation scoring stage.
+    // Bring those to the same automatic result view as new games.
+    if (game.phase === 'scoring') { suggestScoringDead(); game.finish(dead); saveGame(); }
+    $('setup-view').hidden = true;
+    $('game-view').hidden = false;
+    // Unhide first so Canvas measures the actual board width. The follow-up
+    // frame also handles a layout/viewport change while configuration was open.
+    render();
+    if (typeof window.requestAnimationFrame === 'function') {
+      window.requestAnimationFrame(() => { if (!setupActive) draw(); });
+    }
+    if (typeof window.scrollTo === 'function') window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    $('board-title').focus({ preventScroll: true });
+    scheduleAI();
+  }
+
+  function openRules() {
+    cancelAI(); render(); if (!$('rules-dialog').open) $('rules-dialog').showModal();
+  }
+
+  function syncNewDifficulty() {
+    const config = readSetupConfig();
+    $('new-difficulty').hidden = config.mode !== 'ai';
+    $('new-difficulty').disabled = config.mode !== 'ai';
+    $('setup-summary-text').textContent = config.mode === 'ai'
+      ? `單人對戰 · ${AI_LEVELS[config.difficulty].name} AI · ${config.size}×${config.size}`
+      : `同機雙人 · ${config.size}×${config.size}`;
+  }
+
+  function readSetupConfig() {
+    const elements = $('new-form').elements;
+    const size = Number(elements.size.value);
+    return {
+      mode: elements.mode.value === 'local' ? 'local' : 'ai',
+      size: [9, 13, 19].includes(size) ? size : 9,
+      difficulty: Object.hasOwn(AI_LEVELS, elements.difficulty.value) ? elements.difficulty.value : 'hard'
+    };
+  }
+
+  $('board-input').addEventListener('click', event => {
+    if (!hasGame || dialogsOpen()) return;
+    const point = event.target.closest('.point');
+    if (point && point.getAttribute('aria-disabled') !== 'true') { selected = Number(point.dataset.index); pointAction(selected); }
+  });
+  $('board-input').addEventListener('pointermove', event => {
+    if (!hasGame || dialogsOpen() || event.pointerType === 'touch') return;
+    const point = event.target.closest('.point'), next = point ? Number(point.dataset.index) : -1;
+    if (hover !== next) { hover = next; draw(); }
+  });
+  $('board-input').addEventListener('pointerleave', () => { hover = -1; draw(); });
+  $('board-input').addEventListener('focusin', event => {
+    if (!hasGame || dialogsOpen()) return;
+    const point = event.target.closest('.point'); if (!point) return;
+    const next = Number(point.dataset.index);
+    if (points[selected]) points[selected].tabIndex = -1;
+    selected = next; point.tabIndex = 0;
+    if (point.matches(':focus-visible')) { hover = next; draw(); }
+  });
+  $('board-input').addEventListener('keydown', event => {
+    if (!hasGame || dialogsOpen()) return;
+    const n = game.size, row = Math.floor(selected / n), col = selected % n;
+    let next = selected;
+    if (event.key === 'ArrowLeft') next = row * n + Math.max(0, col - 1);
+    else if (event.key === 'ArrowRight') next = row * n + Math.min(n - 1, col + 1);
+    else if (event.key === 'ArrowUp') next = Math.max(0, row - 1) * n + col;
+    else if (event.key === 'ArrowDown') next = Math.min(n - 1, row + 1) * n + col;
+    else if (event.key === 'Home') next = event.ctrlKey ? 0 : row * n;
+    else if (event.key === 'End') next = event.ctrlKey ? n * n - 1 : row * n + n - 1;
+    else return;
+    event.preventDefault(); points[selected].tabIndex = -1; selected = next;
+    points[selected].tabIndex = 0; points[selected].focus(); hover = next; draw();
+  });
+  $('new-btn').addEventListener('click', openNewGame);
+  $('continue-btn').addEventListener('click', () => { if (setupActive) enterGame(); });
+  $('rules-btn').addEventListener('click', openRules);
+  $('undo-btn').addEventListener('click', undo);
+  $('pass-btn').addEventListener('click', () => makeMove(null));
+  $('difficulty-select').addEventListener('change', event => {
+    if (!hasGame || dialogsOpen()) return;
+    const level = event.target.value;
+    if (!Object.hasOwn(AI_LEVELS, level)) return;
+    cancelAI(); settings.difficulty = level;
+    saveGame(); render(); scheduleAI();
+    toast(`已切換為${AI_LEVELS[level].name} AI，棋局繼續。`);
+  });
+  $('new-form').addEventListener('change', syncNewDifficulty);
+  $('numbers-btn').addEventListener('click', () => {
+    if (!hasGame || dialogsOpen()) return;
+    settings.numbers = !settings.numbers; saveGame(); render();
+  });
+  $('territory-btn').addEventListener('click', () => {
+    if (!hasGame || dialogsOpen() || game.phase !== 'play') return;
+    settings.territory = !settings.territory; saveGame(); render();
+  });
+  $('sound-btn').addEventListener('click', () => { settings.sound = !settings.sound; saveGame(); render(); if (settings.sound) playSound(1, 0); });
+  $('finish-btn').addEventListener('click', () => {
+    if (!hasGame || dialogsOpen() || (game.phase !== 'scoring' && game.phase !== 'finished')) return;
+    cancelAI();
+    if (game.phase === 'finished') { clearAreaAnalysis(); suggestScoringDead(); }
+    game.finish(dead); saveGame(); render(); toast('已根據雙方死子重新計分。');
+  });
+  $('resume-btn').addEventListener('click', () => {
+    if (!hasGame || dialogsOpen() || game.phase === 'play') return;
+    cancelAI(); game.resume(); dead.clear(); clearAreaAnalysis(); settings.territory = false;
+    saveGame(); render(); scheduleAI(); toast('已返回對局，繼續落子。');
+  });
+  $('new-form').addEventListener('submit', event => {
+    event.preventDefault();
+    if (!setupActive || $('rules-dialog').open) return;
+    cancelAI();
+    const configuration = readSetupConfig();
+    settings.mode = configuration.mode;
+    settings.difficulty = configuration.difficulty;
+    settings.territory = false; game = new GoGame({ size: configuration.size });
+    actions = []; dead.clear(); clearAreaAnalysis(); hover = -1; selected = Math.floor(game.board.length / 2);
+    hasGame = true; buildBoardInputs(); enterGame(); saveGame();
+    toast(settings.mode === 'ai' ? '新對局已建立。你執黑，請先行。' : '新對局已建立。玩家 1 執黑先行。');
+  });
+  document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', () => $(button.dataset.close).close()));
+  for (const dialog of [$('rules-dialog')]) {
+    dialog.addEventListener('close', scheduleAI);
+    dialog.addEventListener('click', event => {
+      if (event.target !== dialog) return;
+      const box = dialog.getBoundingClientRect();
+      if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) dialog.close();
+    });
+  }
+  document.addEventListener('keydown', event => {
+    if (event.ctrlKey || event.metaKey || event.altKey || dialogsOpen() || /INPUT|SELECT|TEXTAREA/.test(event.target.tagName)) return;
+    const key = event.key.toLowerCase();
+    if (!['u', 'p', 'n', '?'].includes(key)) return;
+    event.preventDefault(); if (event.repeat) return;
+    if (key === 'u') undo(); else if (key === 'p') makeMove(null); else if (key === 'n') openNewGame(); else openRules();
+  });
+  window.addEventListener('pagehide', () => {
+    cancelAI(); saveGame();
+    if (workerURL) { URL.revokeObjectURL(workerURL); workerURL = null; }
+  });
+  window.addEventListener('pageshow', () => scheduleAI());
+  loadGame(); buildBoardInputs(); openNewGame(false);
+  if ('ResizeObserver' in window) new ResizeObserver(draw).observe($('board-frame'));
+  else window.addEventListener('resize', draw);
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "computers": [
+    {
+      "computer_id": "computer_01",
+      "seat_id": "gaming_1",
+      "game": {
+        "id": "go",
+        "title": "圍棋",
+        "url": "games/go/index.html",
+        "source": "res://web_games/go/index.html"
+      }
+    },
+    {"computer_id": "computer_02", "seat_id": "gaming_2", "game": {}},
+    {"computer_id": "computer_03", "seat_id": "gaming_3", "game": {}}
+  ]
+}

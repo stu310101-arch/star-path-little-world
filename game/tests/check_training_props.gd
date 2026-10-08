@@ -42,7 +42,7 @@ func run() -> void:
 	check("Three imported computer screen assemblies are interactive", (props.get("screens") as Dictionary).size() == 3, (props.get("screens") as Dictionary).keys())
 	check("Six imported cabinet doors have live hinge pivots", (props.get("door_pivots") as Array).size() == 6)
 	await check_projector()
-	await check_computers()
+	check_computers()
 	await check_cabinet()
 	await check_inspection("starry_night", true)
 	await check_lamp()
@@ -141,23 +141,18 @@ func check_projector() -> void:
 
 func check_computers() -> void:
 	var screens: Dictionary = props.get("screens") as Dictionary
+	var games: Node = room.get("computer_games") as Node
+	var assignments: Dictionary = games.get("assignments") as Dictionary
 	for id: String in screens:
-		if not await approach(id):
-			continue
 		var monitor: Node3D = screens[id] as Node3D
-		var initial: bool = monitor.visible
-		var other_states: Dictionary = {}
-		for other: String in screens:
-			other_states[other] = (screens[other] as Node3D).visible
-		await press(KEY_E)
-		check(id + " E toggles its imported monitor", monitor.visible != initial)
-		var independent: bool = true
-		for other: String in screens:
-			if other != id:
-				independent = independent and (screens[other] as Node3D).visible == bool(other_states[other])
-		check(id + " leaves the other computers unchanged", independent)
-		await press(KEY_E)
-		check(id + " second E restores the monitor", monitor.visible == initial)
+		var matching_seats: Array[String] = []
+		for seat_id: String in assignments:
+			if str((assignments[seat_id] as Dictionary).get("computer_id", "")) == id:
+				matching_seats.append(seat_id)
+		check(id + " has exactly one explicitly assigned chair", matching_seats.size() == 1, matching_seats)
+		check(id + " has no screen-toggle E target competing with the chair", target_for(id).is_empty())
+		check(id + " preserves its authored visible monitor", monitor.visible)
+	# Sit -> game -> return is exercised by check_training_computer_games.gd.
 
 func check_cabinet() -> void:
 	var pivots: Array = props.get("door_pivots") as Array

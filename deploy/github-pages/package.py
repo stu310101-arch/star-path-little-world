@@ -59,6 +59,7 @@ def prepare(source: Path, package: Path) -> None:
         + [source / "THIRD_PARTY_NOTICES.txt"]
         + list((source / "licenses").glob("*"))
         + list((source / "packs").glob("*.pck"))
+        + [path for path in (source / "games").rglob("*") if path.is_file()]
     )
     files: list[dict[str, object]] = []
     for path in paths:
