@@ -1,13 +1,13 @@
 {
-  "build_id": "packs-7bd866e6416621ee",
-  "created_utc": "2026-10-07T12:16:58.911335+00:00",
-  "source_base_commit": "1cc405c37675ee1999f23fd0b216615396316287",
-  "source_sha256": "7bd866e6416621eeebe332c9fe9fd921c9e95a4313901600535e7cd08049e225",
+  "build_id": "packs-cab63c5e75e76b93",
+  "created_utc": "2026-10-08T15:42:40.556204+00:00",
+  "source_base_commit": "c7016546e8e7fe12910184d3cd6b55875ada5c35",
+  "source_sha256": "cab63c5e75e76b937007e8a281addec3db6d0fdeb03fccdd6e468a8ad74c5716",
   "export": "Web release; Compatibility; single-threaded",
   "files": {
     "index.html": {
       "bytes": 10163,
-      "sha256": "9d60c0d4a9855a636339db8bffc8b1a46645fb368f42cc2270bf161576fda296"
+      "sha256": "30d7bca4b1cf5b86b36e05121e114f9590cada07d7758e3def58e2ad08fa3c0b"
     },
     "index.js": {
       "bytes": 279815,
@@ -18,12 +18,12 @@
       "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
     },
     "index.pck": {
-      "bytes": 31929600,
-      "sha256": "4430f4b2ed0fd8f09d186f46e9d03b225f03240bac6c2039da6e98f8a85ba2af"
+      "bytes": 31930544,
+      "sha256": "7831962d4f8fa3ec4d082035f6e4a8f5615fa5e3942a1b5a7fe6f6ce29d2d5a2"
     },
     "index.delivery.json": {
       "bytes": 786,
-      "sha256": "a5753f070f7a3d4296c2434546575d72e4d7cbbe68c8b77ee24916141571f21d"
+      "sha256": "46d748fe5da5d5193e9d8ec6fefcbdc1fe177016da7a47e945162e39fcfb5514"
     },
     "index.delivery.js": {
       "bytes": 10520,
@@ -33,9 +33,9 @@
       "bytes": 6644,
       "sha256": "4fced779f652380d6fc95b58c07e2a25299890e6a3af82ec2ef906eeab5bc9a1"
     },
-    "index.boot.4bc181243383bbef.pck.gz": {
-      "bytes": 29089813,
-      "sha256": "4bc181243383bbefd7fe16919c5da8cdcfb9e86dfd74e4c92a9295582ef26341"
+    "index.boot.0f69427852bb63e6.pck.gz": {
+      "bytes": 29090778,
+      "sha256": "0f69427852bb63e641c9eab5df8e0f384d510edc90902449a9e5c8ffddefc356"
     },
     "index.boot.a8767fcc27ac87dc.wasm.gz": {
       "bytes": 10114291,

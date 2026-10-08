@@ -42,7 +42,7 @@ func run() -> void:
 	var output: Mesh = reducer.call("reduce", source) as Mesh
 	var after: Array = output.surface_get_arrays(0)
 	check(output != source, "Many tiny disconnected leaves should get a far-only copy")
-	check((after[Mesh.ARRAY_INDEX] as PackedInt32Array).size() < (before[Mesh.ARRAY_INDEX] as PackedInt32Array).size() / 2, "Far canopy triangle count is substantially reduced")
+	check((after[Mesh.ARRAY_INDEX] as PackedInt32Array).size() < floori((before[Mesh.ARRAY_INDEX] as PackedInt32Array).size() / 2.0), "Far canopy triangle count is substantially reduced")
 	check(referenced_bounds(source).is_equal_approx(referenced_bounds(output)), "Six source canopy extrema must survive referenced geometry compaction")
 	check(before == source.surface_get_arrays(0), "Source geometry, colors and indices must remain untouched")
 	check(after[Mesh.ARRAY_VERTEX] == before[Mesh.ARRAY_VERTEX] and after[Mesh.ARRAY_COLOR] == before[Mesh.ARRAY_COLOR], "Selected leaves retain authored positions and colors")

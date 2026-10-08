@@ -405,7 +405,7 @@ func _build_graphics_settings(screen: Control) -> void:
 		choice.pressed.connect(func() -> void: graphics_settings.call("set_quality_profile", profile))
 		quality_row.add_child(choice)
 		quality_buttons.append(choice)
-	var quality_help: Label = label("低配：3D 最高約 720p、較少遠景細節，預設 MSAA 關／30 FPS。文字維持清晰。一般：原解析度與較完整的遠景。", 14, Color("647b75"))
+	var quality_help: Label = label("低配：大畫面降解析度、減少遠景、MSAA 關。一般：原解析度、MSAA 開。切換畫質保留幀率上限。", 14, Color("647b75"))
 	quality_help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	content.add_child(quality_help)
 	msaa_button = button("MSAA：開啟（2×）")

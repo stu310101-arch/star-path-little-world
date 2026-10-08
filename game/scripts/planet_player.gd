@@ -70,6 +70,13 @@ var _visual_error: String = ""
 var _visual_packed: PackedScene
 var _visual_operation_usec: int = 0
 var _visual_max_operation_usec: int = 0
+# Physics advances every clock; only the latest pose is needed for each draw.
+var _animation_pose_pending: bool = false
+var _animation_reset_pending: bool = false
+var _animation_sample_time: float = 0.0
+var animation_physics_updates: int = 0
+var animation_pose_samples: int = 0
+var animation_seek_calls: int = 0
 
 func _ready() -> void:
 	collision_layer = 4
@@ -90,6 +97,9 @@ func _ready() -> void:
 	visual.name = "VisualPivot"
 	add_child(visual)
 	visual.rotation.y = PI
+
+func _process(_delta: float) -> void:
+	sample_motion_animation()
 
 func begin_prepare_visuals() -> void:
 	if _visual_stage != 0 or not _visual_error.is_empty():
@@ -213,16 +223,12 @@ func set_clip(clip: StringName) -> void:
 	locomotion_model.visible = not use_jump_model
 	if jump_model != null:
 		jump_model.visible = use_jump_model
-	# The imported animation samples bone and cloth tracks with one clock.
-	var animated_meshes: Array[MeshInstance3D] = _jump_meshes if use_jump_model else _locomotion_meshes
-	for mi: MeshInstance3D in animated_meshes:
-		for i: int in range(mi.get_blend_shape_count()):
-			mi.set_blend_shape_value(i, 0.0)
 	var preserve_recovery_phase: bool = active_clip == &"JumpLand" and not use_jump_model and recovery_clip == clip
 	active_clip = clip
 	animation_clock = recovery_clock if preserve_recovery_phase else 0.0
 	animator.play(resolved)
-	animator.seek(animation_clock, true)
+	_animation_reset_pending = true
+	_queue_animation_pose(animation_clock)
 	if clip == &"JumpLand" or not use_jump_model:
 		recovery_clip = &""
 		recovery_clock = 0.0
@@ -272,6 +278,14 @@ func reset_jump_motion() -> void:
 	flip_progress = 0.0
 	recovery_clip = &""
 	recovery_clock = 0.0
+	# Discard a queued airborne/landing pose on teleport, rest, or entry reset.
+	_animation_pose_pending = false
+	animation_clock = 0.0
+	set_clip(&"Idle")
+	if animator != null:
+		# Repeated resets may find Idle already selected but not yet sampled.
+		_animation_reset_pending = true
+		_queue_animation_pose(0.0)
 	# Deliberately retain the physical key latch and monotonic launch counters.
 
 func _physics_process(delta: float) -> void:
@@ -409,6 +423,9 @@ func advance_flip(delta: float, support: Dictionary) -> void:
 	flip_progress = minf(1.0, flip_progress + (1.0 - flip_progress) * delta / remaining_time)
 
 func update_motion_animation(delta: float, actual_speed: float, running: bool) -> void:
+	# Do not skip physics deltas when several ticks precede a rendered frame.
+	# Updating tracks here would resample the same mesh multiple times per draw.
+	animation_physics_updates += 1
 	if jump_state == &"anticipation" or (jump_state == &"airborne" and jump_clock < JUMP_START_DURATION):
 		set_clip(&"JumpStart")
 	elif jump_state == &"airborne":
@@ -420,15 +437,41 @@ func update_motion_animation(delta: float, actual_speed: float, running: bool) -
 	if animator != null and animator.current_animation != &"":
 		var clip: Animation = animator.get_animation(animator.current_animation)
 		if active_clip == &"JumpStart":
-			animator.seek(minf(jump_clock, clip.length), true)
+			_queue_animation_pose(minf(jump_clock, clip.length))
 		elif active_clip == &"JumpAir":
-			animator.seek(flip_progress * clip.length, true)
+			_queue_animation_pose(flip_progress * clip.length)
 		elif active_clip == &"JumpLand":
-			animator.seek(minf(landing_clock, clip.length), true)
+			_queue_animation_pose(minf(landing_clock, clip.length))
 			advance_landing_locomotion(delta, actual_speed, running)
 		elif active_clip != &"Idle":
 			animation_clock += delta * clampf(actual_speed / (3.8 if running else 2.2), 0.0, 2.2)
-			animator.seek(fposmod(animation_clock, maxf(clip.length, 0.001)), true)
+			_queue_animation_pose(fposmod(animation_clock, maxf(clip.length, 0.001)))
+
+func _queue_animation_pose(sample_time: float) -> void:
+	_animation_sample_time = sample_time
+	_animation_pose_pending = true
+
+func sample_motion_animation() -> void:
+	# Also callable by pose-inspection fixtures whose node processing is disabled.
+	# Clip changes and physics ticks overwrite the pending time until this pass.
+	if not _animation_pose_pending or animator == null or animator.current_animation == &"":
+		return
+	_animation_pose_pending = false
+	if _animation_reset_pending:
+		var animated_meshes: Array[MeshInstance3D] = _jump_meshes if animator == jump_animator else _locomotion_meshes
+		for mi: MeshInstance3D in animated_meshes:
+			for index: int in range(mi.get_blend_shape_count()):
+				mi.set_blend_shape_value(index, 0.0)
+		_animation_reset_pending = false
+	# Bone and authored cloth tracks still use exactly the same sampled time.
+	_seek_animation_pose(animator, _animation_sample_time)
+	if active_clip == &"JumpLand":
+		_sample_landing_locomotion()
+	animation_pose_samples += 1
+
+func _seek_animation_pose(animation_player: AnimationPlayer, sample_time: float) -> void:
+	animation_player.seek(sample_time, true)
+	animation_seek_calls += 1
 
 func advance_landing_locomotion(delta: float, actual_speed: float, running: bool) -> void:
 	if landing_clock < LAND_LOCOMOTION_START or locomotion_animator == null or recovery_bones.is_empty():
@@ -446,7 +489,11 @@ func advance_landing_locomotion(delta: float, actual_speed: float, running: bool
 	var clip: Animation = locomotion_animator.get_animation(locomotion_animator.current_animation)
 	if desired != &"Idle":
 		recovery_clock = fposmod(recovery_clock + delta * clampf(actual_speed / (3.8 if running else 2.2), 0.0, 2.2), maxf(clip.length, 0.001))
-	locomotion_animator.seek(recovery_clock, true)
+
+func _sample_landing_locomotion() -> void:
+	if landing_clock < LAND_LOCOMOTION_START or locomotion_animator == null or recovery_bones.is_empty() or recovery_clip == &"":
+		return
+	_seek_animation_pose(locomotion_animator, recovery_clock)
 	var blend: float = smoothstep(LAND_LOCOMOTION_START, LAND_LOCOMOTION_START + LAND_LOCOMOTION_BLEND, landing_clock)
 	# Both assets retain the original skeleton/rest pose. Copy only body poses;
 	# JumpLand keeps sampling its own garment morphs for the entire settle.
@@ -513,7 +560,7 @@ func sample_entry(progress: float) -> void:
 		mat.set("transparency",BaseMaterial3D.TRANSPARENCY_ALPHA if fade > 0.001 else int(mat.get_meta("original_transparency")))
 		mat.albedo_color.a = 1.0-fade
 	if animator != null and active_clip == &"JumpDown":
-		animator.seek(minf(t*1.4,animator.get_animation(animator.current_animation).length),true)
+		_queue_animation_pose(minf(t*1.4,animator.get_animation(animator.current_animation).length))
 	visual.visible = t < 1.0
 
 func finish_entry() -> void:

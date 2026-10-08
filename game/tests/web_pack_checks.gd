@@ -63,14 +63,14 @@ class FramingServer extends Node:
 		var body: PackedByteArray = route.body
 		var code: int = int(route.get("code", 200))
 		if bool(route.get("chunked", false)):
-			var bytes: PackedByteArray = ("HTTP/1.1 %d Fixture\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n" % code).to_utf8_buffer()
+			var chunked_bytes: PackedByteArray = ("HTTP/1.1 %d Fixture\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n" % code).to_utf8_buffer()
 			for offset: int in range(0, body.size(), 4096):
 				var chunk: PackedByteArray = body.slice(offset, mini(offset + 4096, body.size()))
-				bytes.append_array(("%x\r\n" % chunk.size()).to_utf8_buffer())
-				bytes.append_array(chunk)
-				bytes.append_array("\r\n".to_utf8_buffer())
-			bytes.append_array("0\r\n\r\n".to_utf8_buffer())
-			return bytes
+				chunked_bytes.append_array(("%x\r\n" % chunk.size()).to_utf8_buffer())
+				chunked_bytes.append_array(chunk)
+				chunked_bytes.append_array("\r\n".to_utf8_buffer())
+			chunked_bytes.append_array("0\r\n\r\n".to_utf8_buffer())
+			return chunked_bytes
 		var bytes: PackedByteArray = ("HTTP/1.0 %d Fixture\r\nConnection: close\r\n\r\n" % code).to_utf8_buffer()
 		bytes.append_array(body)
 		return bytes

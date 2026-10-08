@@ -122,7 +122,7 @@ func sample(label: String) -> void:
 		"draw_calls": Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
 		"primitives": Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME),
 		"fps": Engine.get_frames_per_second(),
-		"frame_ms_median": frames[frames.size() / 2] if not frames.is_empty() else 0.0,
+		"frame_ms_median": frames[floori(frames.size() / 2.0)] if not frames.is_empty() else 0.0,
 		"frame_ms_p95": frames[mini(frames.size() - 1, int(frames.size() * .95))] if not frames.is_empty() else 0.0,
 		"frame_ms_max": frames.back() if not frames.is_empty() else 0.0,
 	}

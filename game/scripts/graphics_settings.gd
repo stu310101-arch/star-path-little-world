@@ -7,6 +7,9 @@ const DEFAULT_FRAME_LIMIT: int = 30
 const DEFAULT_MSAA_ENABLED: bool = false
 const DEFAULT_QUALITY: String = "low"
 const LOW_RENDER_SIZE: Vector2 = Vector2(1280.0, 720.0)
+# A small pixel reduction can cost more than it saves through the extra scaling
+# pass. Only enable scaling at 0.8 or below (at least 36% fewer 3D pixels).
+const LOW_SCALING_MAX_FACTOR: float = 0.8
 
 var settings_path: String = "user://graphics_settings.cfg"
 var msaa_enabled: bool = DEFAULT_MSAA_ENABLED
@@ -66,7 +69,8 @@ func _render_target_size() -> Vector2:
 static func low_render_scale(size: Vector2) -> float:
 	if size.x <= 0.0 or size.y <= 0.0:
 		return 1.0
-	return clampf(minf(LOW_RENDER_SIZE.x / size.x, LOW_RENDER_SIZE.y / size.y), 0.1, 1.0)
+	var target_scale: float = clampf(minf(LOW_RENDER_SIZE.x / size.x, LOW_RENDER_SIZE.y / size.y), 0.1, 1.0)
+	return target_scale if target_scale <= LOW_SCALING_MAX_FACTOR else 1.0
 
 func is_low_quality() -> bool:
 	return quality_profile == "low"
@@ -75,7 +79,8 @@ func set_quality_profile(value: String) -> void:
 	if value not in ["low", "standard"]:
 		return
 	quality_profile = value
-	frame_limit = 30 if is_low_quality() else 60
+	# Frame pacing is a separate user choice; a cheaper render preset must not
+	# silently reduce the selected cap while moving or turning the camera.
 	msaa_enabled = not is_low_quality()
 	_commit_settings()
 

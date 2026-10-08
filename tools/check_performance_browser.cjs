@@ -134,7 +134,9 @@ async function clickButton(selector, { scroll = false } = {}) {
     const button = visibleButton(state, selector);
     const box = await canvasBox();
     if (button && button.center.every(n => n >= 0 && n <= 1)) {
-      await page.mouse.click(box.x + button.center[0] * box.width, box.y + button.center[1] * box.height);
+      const point = {x:box.x + button.center[0] * box.width, y:box.y + button.center[1] * box.height};
+      report.events.push({type:'button-input', name:button.name, point, box, ui_pixels:state.metrics.graphics.ui_pixels, ticks_ms:state.metrics.ticks_ms});
+      await page.mouse.click(point.x, point.y);
       await waitFor('fresh button result', s => Boolean(s.metrics), 30000, state.metrics.ticks_ms);
       return button;
     }
@@ -204,11 +206,15 @@ async function settingsRoute() {
   await openSettings();
   await graphicsChoice('RestoreGraphicsDefaults', g => g.quality_profile === 'low' && !g.msaa_enabled && g.applied_msaa === 0 && g.frame_limit === 30 && g.applied_max_fps === 30 && g.scaling_3d_scale <= 1);
   await verifyRenderSize('low');
-  await graphicsChoice('QualityStandard', g => g.quality_profile === 'standard' && g.msaa_enabled && g.applied_msaa === 1 && g.frame_limit === 60 && g.scaling_3d_scale === 1);
+  await graphicsChoice('QualityStandard', g => g.quality_profile === 'standard' && g.msaa_enabled && g.applied_msaa === 1 && g.frame_limit === 30 && g.applied_max_fps === 30 && g.scaling_3d_scale === 1);
   await verifyRenderSize('standard');
   await graphicsChoice('MSAAToggle', g => !g.msaa_enabled && g.applied_msaa === 0);
   await graphicsChoice('MSAAToggle', g => g.msaa_enabled && g.applied_msaa === 1);
-  for (const fps of [30, 60, 90]) await graphicsChoice(`FPS${fps}`, g => g.frame_limit === fps && g.applied_max_fps === fps);
+  for (const fps of [30, 60, 90]) {
+    await graphicsChoice(`FPS${fps}`, g => g.frame_limit === fps && g.applied_max_fps === fps);
+    await graphicsChoice('QualityLow', g => g.quality_profile === 'low' && !g.msaa_enabled && g.applied_msaa === 0 && g.frame_limit === fps && g.applied_max_fps === fps);
+    await graphicsChoice('QualityStandard', g => g.quality_profile === 'standard' && g.msaa_enabled && g.applied_msaa === 1 && g.frame_limit === fps && g.applied_max_fps === fps);
+  }
   await graphicsChoice('MSAAToggle', g => !g.msaa_enabled && g.applied_msaa === 0);
   await screenshot('settings-90-msaa-off');
   await closeSettings();
@@ -221,7 +227,10 @@ async function settingsRoute() {
   await graphicsChoice('RestoreGraphicsDefaults', g => g.quality_profile === 'low' && !g.msaa_enabled && g.frame_limit === 30 && g.applied_msaa === 0 && g.applied_max_fps === 30);
   await closeSettings();
   await page.setViewportSize({ width: 390, height: 844 });
-  await delay(2000);
+  const resized = await waitFor('mobile viewport dimensions', s => s.metrics?.graphics?.ui_pixels?.[0] === 390 && Math.abs(s.metrics.graphics.ui_pixels[1]-244)<=1);
+  // Input coordinates depend on Godot's resized canvas/layout, not merely the
+  // browser resize completing. Require another fresh telemetry/layout pass.
+  await waitFor('mobile layout settled', s => s.metrics?.graphics?.ui_pixels?.[0] === 390, 45000, resized.metrics.ticks_ms+1000);
   await openSettings();
   const mobile = await snapshot();
   check('390 px viewport exposes settings toggle and fixed close action', Boolean(visibleButton(mobile, {name:'MSAAToggle'})) && Boolean(visibleButton(mobile, {name:'CloseGraphicsSettings'})), mobile.metrics.buttons);
@@ -230,16 +239,37 @@ async function settingsRoute() {
   await page.setViewportSize(report.viewport);
   await delay(2000);
   await verifyRenderSize('low after resize');
+  // Fixed expectations include the authored 16:10 keep-aspect canvas bars.
+  // Resizing must cross the scaling threshold and return to native pixels.
+  for (const [width, height, ui, scale] of [
+    // The renderer floors the 1228.8 px keep-aspect width to whole pixels.
+    [1366, 768, [1228, 768], 1],
+    [1920, 1080, [1728, 1080], 2/3],
+    [1600, 1000, [1600, 1000], .72],
+    [1280, 800, [1280, 800], 1],
+  ]) {
+    await page.setViewportSize({width, height});
+    await delay(2000);
+    await verifyRenderSize(`low ${width}x${height}`, {ui, scale});
+  }
+  await page.setViewportSize(report.viewport);
 }
 
-async function verifyRenderSize(label) {
+async function verifyRenderSize(label, fixedExpected = null) {
   await page.evaluate(() => window.__graphicsViewports.clear());
   await delay(2000);
   const evidence = await page.evaluate(() => ({graphics:window.planetPerformance?.graphics, sizes:[...window.__graphicsViewports]}));
   const g = evidence.graphics, low = label.startsWith('low');
   const has = size => evidence.sizes.some(value => value.split('x').every((v,i)=>Math.abs(Number(v)-size[i])<=1));
-  check('Actual WebGL 3D and UI buffers: ' + label, Boolean(g) && has(g.ui_pixels) && has(g.internal_3d_pixels) &&
-    (low ? g.scaling_3d_scale < 1 && g.internal_3d_pixels[1] <= 720 && g.ui_pixels[1] > 720 : g.scaling_3d_scale === 1), evidence);
+  const targetScale = g ? Math.min(1, 1280/g.ui_pixels[0], 720/g.ui_pixels[1]) : 1;
+  const expectedScale = fixedExpected?.scale ?? (low && targetScale <= .8 ? Math.max(.1,targetScale) : 1);
+  const expectedUi = fixedExpected?.ui ?? g?.ui_pixels;
+  const expected3d = expectedUi?.map(value => Math.trunc(value*expectedScale));
+  evidence.expected = {ui_pixels:expectedUi, internal_3d_pixels:expected3d, scaling_3d_scale:expectedScale};
+  check('Actual WebGL 3D and UI buffers: ' + label, Boolean(g) && has(expectedUi) && has(expected3d) &&
+    g.ui_pixels.every((value,index) => value === expectedUi[index]) &&
+    g.internal_3d_pixels.every((value,index) => Math.abs(value-expected3d[index])<=1) &&
+    Math.abs(g.scaling_3d_scale-expectedScale)<.00001, evidence);
 }
 
 async function destination(station) {

@@ -316,7 +316,9 @@ func reduced_mesh(mesh: Mesh) -> Mesh:
 			var candidate: PackedInt32Array = importer.get_surface_lod_indices(surface, level)
 			if candidate.size() >= maxi(18, int(count * .20)):
 				selected = candidate
-		arrays[Mesh.ARRAY_INDEX] = selected if not selected.is_empty() else null
+		arrays[Mesh.ARRAY_INDEX] = null
+		if not selected.is_empty():
+			arrays[Mesh.ARRAY_INDEX] = selected
 		result.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	mesh_cache[key] = result
 	return result

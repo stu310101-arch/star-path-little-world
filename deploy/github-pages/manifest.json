@@ -2,13 +2,13 @@
   "format": 1,
   "game": "星途 · Little World",
   "pck": {
-    "bytes": 31929600,
-    "sha256": "4430f4b2ed0fd8f09d186f46e9d03b225f03240bac6c2039da6e98f8a85ba2af",
+    "bytes": 31930544,
+    "sha256": "7831962d4f8fa3ec4d082035f6e4a8f5615fa5e3942a1b5a7fe6f6ce29d2d5a2",
     "parts": [
       {
         "name": "index.pck.part000",
-        "bytes": 31929600,
-        "sha256": "4430f4b2ed0fd8f09d186f46e9d03b225f03240bac6c2039da6e98f8a85ba2af"
+        "bytes": 31930544,
+        "sha256": "7831962d4f8fa3ec4d082035f6e4a8f5615fa5e3942a1b5a7fe6f6ce29d2d5a2"
       }
     ]
   },
@@ -29,9 +29,9 @@
       "sha256": "4fced779f652380d6fc95b58c07e2a25299890e6a3af82ec2ef906eeab5bc9a1"
     },
     {
-      "path": "index.boot.4bc181243383bbef.pck.gz",
-      "bytes": 29089813,
-      "sha256": "4bc181243383bbefd7fe16919c5da8cdcfb9e86dfd74e4c92a9295582ef26341"
+      "path": "index.boot.0f69427852bb63e6.pck.gz",
+      "bytes": 29090778,
+      "sha256": "0f69427852bb63e641c9eab5df8e0f384d510edc90902449a9e5c8ffddefc356"
     },
     {
       "path": "index.boot.a8767fcc27ac87dc.wasm.gz",
@@ -46,12 +46,12 @@
     {
       "path": "index.delivery.json",
       "bytes": 786,
-      "sha256": "a5753f070f7a3d4296c2434546575d72e4d7cbbe68c8b77ee24916141571f21d"
+      "sha256": "46d748fe5da5d5193e9d8ec6fefcbdc1fe177016da7a47e945162e39fcfb5514"
     },
     {
       "path": "index.html",
       "bytes": 10163,
-      "sha256": "9d60c0d4a9855a636339db8bffc8b1a46645fb368f42cc2270bf161576fda296"
+      "sha256": "30d7bca4b1cf5b86b36e05121e114f9590cada07d7758e3def58e2ad08fa3c0b"
     },
     {
       "path": "index.js",
@@ -71,7 +71,7 @@
     {
       "path": "index.release.json",
       "bytes": 4394,
-      "sha256": "fffe34a8c6ae3a81ec8a88e64a84b4bb5fb17e194d7d86a1938faae9582ed249"
+      "sha256": "58b7c5c32de441919d44fd53dc00b9d81d77f5e7caeccfc6238547836a63d0fa"
     },
     {
       "path": "index.wasm",

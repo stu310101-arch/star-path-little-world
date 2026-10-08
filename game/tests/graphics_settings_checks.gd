@@ -51,7 +51,21 @@ func run() -> void:
 	var test_path: String = "user://graphics_settings_test_%d.cfg" % Time.get_ticks_usec()
 	var settings: Node = new_settings(test_path)
 	check("Fresh settings use low profile, no MSAA, 30 FPS", settings.call("is_low_quality") and root.msaa_3d == Viewport.MSAA_DISABLED and Engine.max_fps == 30)
-	check("720p scale caps only large 3D buffers", is_equal_approx(SettingsScript.low_render_scale(Vector2(1920, 1080)), 2.0 / 3.0) and SettingsScript.low_render_scale(Vector2(640, 360)) == 1.0)
+	var scale_cases: Array[Dictionary] = [
+		{"size": Vector2(640, 360), "expected": 1.0},
+		{"size": Vector2(1280, 800), "expected": 1.0},
+		{"size": Vector2(1366, 768), "expected": 1.0},
+		{"size": Vector2(1599, 899), "expected": 1.0},
+		{"size": Vector2(1600, 900), "expected": 0.8},
+		{"size": Vector2(1601, 901), "expected": 720.0 / 901.0},
+		{"size": Vector2(1920, 1080), "expected": 2.0 / 3.0},
+		{"size": Vector2(0, 1080), "expected": 1.0},
+	]
+	for scale_case: Dictionary in scale_cases:
+		var render_size: Vector2 = scale_case.size as Vector2
+		var expected_scale: float = float(scale_case.expected)
+		var actual_scale: float = SettingsScript.low_render_scale(render_size)
+		check("Low profile scaling policy at %s" % str(render_size), is_equal_approx(actual_scale, expected_scale), {"expected": expected_scale, "actual": actual_scale})
 	# Keep the production canvas_items stretch enabled: the former fixture only
 	# used an unstretched root and missed the double-applied texture stretch.
 	root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
@@ -62,12 +76,20 @@ func run() -> void:
 	for repeat: int in range(3):
 		settings.call("apply_settings")
 	var physical_state: Dictionary = settings.call("get_state")
-	check("Stretched 1280x800 canvas keeps full UI and renders 3D at 1152x720", physical_state.ui_pixels == [1280, 800] and physical_state.internal_3d_pixels == [1152, 720] and is_equal_approx(root.scaling_3d_scale, .9), physical_state)
+	check("Stretched 1280x800 canvas keeps native 3D and UI instead of marginal scaling", physical_state.ui_pixels == [1280, 800] and physical_state.internal_3d_pixels == [1280, 800] and root.scaling_3d_scale == 1.0, physical_state)
 	settings.call("set_quality_profile", "standard")
-	check("Standard profile restores original 3D scale and AA defaults", root.scaling_3d_scale == 1.0 and root.msaa_3d == Viewport.MSAA_2X and Engine.max_fps == 60)
+	check("Standard profile restores original 3D scale and AA without raising the frame cap", root.scaling_3d_scale == 1.0 and root.msaa_3d == Viewport.MSAA_2X and Engine.max_fps == 30)
 	for limit: int in [30, 60, 90]:
 		settings.call("set_frame_limit", limit)
 		check("Frame limit applies %d without changing physics" % limit, Engine.max_fps == limit and Engine.physics_ticks_per_second == physics_ticks)
+		for profile: String in ["low", "standard"]:
+			settings.call("set_quality_profile", profile)
+			var switched: Dictionary = settings.call("get_state")
+			check("Switching to %s preserves selected %d FPS and physics" % [profile, limit], switched.quality_profile == profile and switched.frame_limit == limit and Engine.max_fps == limit and Engine.physics_ticks_per_second == physics_ticks, switched)
+			settings.free()
+			settings = new_settings(test_path)
+			var restored: Dictionary = settings.call("get_state")
+			check("Saved %s / %d FPS survives reconstruction with its AA preset" % [profile, limit], restored.quality_profile == profile and restored.frame_limit == limit and Engine.max_fps == limit and restored.msaa_enabled == (profile == "standard"), restored)
 	settings.call("set_msaa_enabled", false)
 	check("MSAA can be disabled on live viewport", root.msaa_3d == Viewport.MSAA_DISABLED)
 	settings.free()
@@ -139,6 +161,9 @@ func run() -> void:
 	check("30 FPS UI button applies its own value", Engine.max_fps == 30 and hud.frame_buttons[0].button_pressed and not hud.frame_buttons[2].button_pressed)
 	hud.frame_buttons[2].pressed.emit()
 	check("90 FPS UI button applies its own value", Engine.max_fps == 90 and hud.frame_buttons[2].button_pressed and not hud.frame_buttons[0].button_pressed)
+	for choice: Button in hud.quality_buttons:
+		choice.pressed.emit()
+		check("%s UI button retains selected 90 FPS" % choice.name, Engine.max_fps == 90 and hud.frame_buttons[2].button_pressed and not hud.frame_buttons[0].button_pressed and str(settings.get("quality_profile")) == str(choice.get_meta("quality_profile")))
 	hud.msaa_button.button_pressed = false
 	hud.msaa_button.pressed.emit()
 	check("MSAA UI toggle updates viewport and label", root.msaa_3d == Viewport.MSAA_DISABLED and hud.msaa_button.text == "MSAA：關閉")

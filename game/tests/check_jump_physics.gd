@@ -344,6 +344,10 @@ func local_point() -> Vector2:
 	return Vector2(normal.dot(axes.x),normal.dot(axes.z))*RADIUS/normal.dot(fixture_up)
 
 func snapshot(frame: int) -> Dictionary:
+	# This fixture inspects every physics step, including steps between rendered
+	# frames. Flush the pending visual pose before comparing bone positions.
+	# animation_sampling_checks separately verifies the production render cadence.
+	player.call("sample_motion_animation")
 	var animator: AnimationPlayer = player.get("animator") as AnimationPlayer
 	return {"frame":frame,"seconds":frame*DT,"height":player.global_position.length()-RADIUS-FLOOR_HEIGHT,"position":[player.position.x,player.position.y,player.position.z],"local_z":local_point().y,"radial_velocity":radial_velocity(),"grounded":player.is_on_floor(),"state":str(player.get("jump_state")),"clip":str(player.get("active_clip")),"animation_clock":float(player.get("animation_clock")),"animation_position":animator.current_animation_position if animator!=null else -1.0,"jump_count":int(player.get("jump_count")),"finite":player.global_transform.is_finite() and player.velocity.is_finite(),"pose":measure_pose(),"landing_clock":float(player.get("landing_clock")),"recovery_clock":float(player.get("recovery_clock")),"recovery_pose_error":recovery_pose_error(),"jump_model_visible":(player.get("jump_model") as Node3D).visible,"locomotion_model_visible":(player.get("locomotion_model") as Node3D).visible}
 

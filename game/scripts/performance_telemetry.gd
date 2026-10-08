@@ -59,6 +59,7 @@ func snapshot() -> Dictionary:
 			var center: Vector2 = point / viewport_size
 			buttons.append({"name": str(button.name), "text": button.text, "center": [center.x, center.y], "visible": not clipped})
 	var actor: Node3D = world.get("player") as Node3D
+	var heading: Vector3 = actor.get("heading") as Vector3
 	return {
 		"ticks_ms": Time.get_ticks_msec(),
 		"fps": Engine.get_frames_per_second(),
@@ -74,11 +75,12 @@ func snapshot() -> Dictionary:
 		"overview": world.get("overview"),
 		"preparing_roam": world.get("preparing_roam"),
 		"avatar": actor.call("get_visual_preparation_state"),
+		"animation": {"physics_updates": actor.get("animation_physics_updates"), "pose_samples": actor.get("animation_pose_samples"), "seek_calls": actor.get("animation_seek_calls")},
 		"packs": get_node("/root/WebPacks").call("get_status"),
 		"nearest_id": world.get("nearest_id"),
 		"settings_open": world.get("hud").call("is_settings_open"),
 		"destinations_open": (world.get("hud").get("destination_card") as Control).visible,
-		"player": {"position": [actor.position.x, actor.position.y, actor.position.z], "overview": world.get("overview"), "paused": world.get("paused"), "entering": world.get("entering")},
+		"player": {"position": [actor.position.x, actor.position.y, actor.position.z], "heading": [heading.x, heading.y, heading.z], "overview": world.get("overview"), "paused": world.get("paused"), "entering": world.get("entering")},
 		"buttons": buttons,
 		"streaming": world.get("streaming").call("metrics"),
 		"minimap": world.get("hud").get("minimap").call("metrics"),

@@ -336,13 +336,13 @@ func project_line(points: PackedVector3Array) -> PackedVector2Array:
 		return _projected_lines[points] as PackedVector2Array
 	var result: PackedVector2Array = PackedVector2Array()
 	var centre: Vector2 = size * .5
-	var scale: float = map_scale()
+	var projection_scale: float = map_scale()
 	for point: Vector3 in points:
 		var cosine: float = clampf(centre_up.dot(point), -1.0, 1.0)
 		var tangent: Vector3 = point - centre_up * cosine
 		var distance: float = acos(cosine) * radius
 		var direction: Vector3 = tangent.normalized() if tangent.length_squared() > .0000001 else Vector3.ZERO
-		result.append(centre + Vector2(direction.dot(map_right), -direction.dot(map_forward)) * distance * scale)
+		result.append(centre + Vector2(direction.dot(map_right), -direction.dot(map_forward)) * distance * projection_scale)
 	if _drawing_map:
 		_projected_lines[points] = result
 	return result
