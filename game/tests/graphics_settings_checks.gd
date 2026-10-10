@@ -82,7 +82,7 @@ func run() -> void:
 	for limit: int in [30, 60, 90]:
 		settings.call("set_frame_limit", limit)
 		check("Frame limit applies %d without changing physics" % limit, Engine.max_fps == limit and Engine.physics_ticks_per_second == physics_ticks)
-		for profile: String in ["low", "standard"]:
+		for profile: String in ["mobile", "low", "standard"]:
 			settings.call("set_quality_profile", profile)
 			var switched: Dictionary = settings.call("get_state")
 			check("Switching to %s preserves selected %d FPS and physics" % [profile, limit], switched.quality_profile == profile and switched.frame_limit == limit and Engine.max_fps == limit and Engine.physics_ticks_per_second == physics_ticks, switched)

@@ -317,6 +317,7 @@ def split(source: Path, inventory_path: Path, output: Path, report_path: Path) -
             raise ValueError("Previous manifest has an unsafe pack path; refusing cleanup")
     manifest = {"version": 1, "packs": {}, "resources": dict(sorted(resources.items()))}
     details = {}
+    startup = pack_dependency_closure("avatar", dependencies, set(contents)) | {"avatar"} if "avatar" in contents else set()
     for key in sorted(set(contents) - {"boot"}):
         temporary = packs_dir / f"{key}.pck.tmp"
         info = write_pack(temporary, contents[key], pack.engine)
@@ -324,7 +325,7 @@ def split(source: Path, inventory_path: Path, output: Path, report_path: Path) -
         temporary.replace(output / url)
         manifest["packs"][key] = {"url": url, "bytes": info["bytes"], "sha256": info["sha256"],
                                   "dependencies": dependencies.get(key, []),
-                                  "startup": key != "training_room"}
+                                  "startup": key in startup}
         details[key] = info
     encoded_manifest = (json.dumps(manifest, sort_keys=True, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     contents["boot"][MANIFEST_PATH] = encoded_manifest

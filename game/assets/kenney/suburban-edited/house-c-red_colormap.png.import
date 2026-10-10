@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dt6nmvecb0hj6"
 path.s3tc="res://.godot/imported/house-c-red_colormap.png-b166c95ade161aaa277bf3aca7515609.s3tc.ctex"
+path.etc2="res://.godot/imported/house-c-red_colormap.png-b166c95ade161aaa277bf3aca7515609.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/kenney/suburban-edited/house-c-red_colormap.png"
-dest_files=["res://.godot/imported/house-c-red_colormap.png-b166c95ade161aaa277bf3aca7515609.s3tc.ctex"]
+dest_files=["res://.godot/imported/house-c-red_colormap.png-b166c95ade161aaa277bf3aca7515609.s3tc.ctex", "res://.godot/imported/house-c-red_colormap.png-b166c95ade161aaa277bf3aca7515609.etc2.ctex"]
 
 [params]
 

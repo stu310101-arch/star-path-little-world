@@ -394,9 +394,9 @@ func _build_graphics_settings(screen: Control) -> void:
 	quality_row.add_theme_constant_override("separation", 8)
 	content.add_child(quality_row)
 	var quality_group: ButtonGroup = ButtonGroup.new()
-	for profile: String in ["low", "standard"]:
-		var choice: Button = button("低配／省記憶體" if profile == "low" else "一般畫質", true)
-		choice.name = "QualityLow" if profile == "low" else "QualityStandard"
+	for profile: String in ["mobile", "low", "standard"]:
+		var choice: Button = button({"mobile":"手機省電", "low":"低配", "standard":"一般"}[profile], true)
+		choice.name = {"mobile":"QualityMobile", "low":"QualityLow", "standard":"QualityStandard"}[profile]
 		choice.toggle_mode = true
 		choice.button_group = quality_group
 		choice.focus_mode = Control.FOCUS_ALL
@@ -405,7 +405,7 @@ func _build_graphics_settings(screen: Control) -> void:
 		choice.pressed.connect(func() -> void: graphics_settings.call("set_quality_profile", profile))
 		quality_row.add_child(choice)
 		quality_buttons.append(choice)
-	var quality_help: Label = label("低配：大畫面降解析度、減少遠景、MSAA 關。一般：原解析度、MSAA 開。切換畫質保留幀率上限。", 14, Color("647b75"))
+	var quality_help: Label = label("手機省電：3D 最高 540p。低配：降低大畫面解析度、減少遠景。一般：原解析度。文字維持清晰，切換畫質保留幀率上限。", 14, Color("647b75"))
 	quality_help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	content.add_child(quality_help)
 	msaa_button = button("MSAA：開啟（2×）")

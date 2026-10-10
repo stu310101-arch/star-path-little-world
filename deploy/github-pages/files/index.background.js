@@ -1,14 +1,16 @@
-/* Page-lifetime downloads. Fetch reads continue without Godot/requestAnimationFrame.
- * No Worker, Service Worker, persistent storage or background-sync permission.
- * A discarded/frozen page is outside this lifetime; the UI must not promise more.
+/* Page-lifetime downloads, optionally backed by the versioned browser cache.
+ * Mobile streams wait for consumption at their high-water mark; background
+ * tabs can be paused by the browser and cannot promise download completion.
  */
 (function (scope) {
   'use strict';
-  function createBackgroundPacks(fetchImpl, memoryLimit = 128 * 1024 * 1024, concurrency = 2) {
+  function createBackgroundPacks(fetchImpl, memoryLimit = 128 * 1024 * 1024, concurrency = 2, highWater = Infinity) {
     if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 4) throw Error('Invalid download concurrency');
+    if (!(highWater > 0)) throw Error('Invalid streaming buffer limit');
     const jobs = new Map();
     const active = new Set();
-    let base = null, delivery = {}, reserved = 0, buffered = 0, peak = 0, closed = false;
+    let base = null, delivery = {}, reserved = 0, buffered = 0, peak = 0, maxChunk = 0, closed = false;
+    const wakeReaders = () => {for (const job of active) {job.wake?.(); job.wake = null;}};
     const now = () => performance.now();
     const view = job => job ? {
       id: job.id, state: job.state, received: job.received, expected: job.bytes,
@@ -18,6 +20,8 @@
       if (job.reserved) { reserved -= job.bytes; job.reserved = false; }
       buffered -= job.buffered;
       job.buffered = 0; job.chunks = []; job.head = 0;
+      job.wake?.(); job.wake = null;
+      wakeReaders();
     }
     async function download(job) {
       let reader;
@@ -41,7 +45,15 @@
         if (response.url && new URL(response.url).origin !== base.origin) throw Error('下載網址已變更，請重新整理。');
         if (!response.body) throw Error('伺服器沒有回應內容，請重試。');
         reader = (decoder ? response.body.pipeThrough(decoder) : response.body).getReader();
+        job.controller.signal.addEventListener('abort', () => {job.wake?.(); job.wake = null;}, {once:true});
         for (;;) {
+          // Mobile Safari must not accumulate a complete second decoded pack
+          // while Godot is busy/hidden. consume() resumes this bounded stream.
+          while (buffered >= highWater && !job.cancelled && !job.controller.signal.aborted) {
+            await new Promise(resolve => { job.wake = resolve; });
+          }
+          if (job.cancelled) return;
+          if (job.controller.signal.aborted) throw new DOMException('Aborted', 'AbortError');
           // The next read is scheduled by network completion, never a game frame.
           const { value, done } = await reader.read();
           if (job.cancelled) return;
@@ -50,6 +62,7 @@
           // Retain streamed segments, not another full-pack allocation. Once
           // Godot has written+hashed a segment, consume() drops its JS owner.
           if (!value.byteLength) continue;
+          maxChunk = Math.max(maxChunk, value.byteLength);
           const bytes = value.byteLength === value.buffer.byteLength ? value : value.slice();
           job.chunks.push({offset:job.received, bytes});
           job.buffered += bytes.byteLength; buffered += bytes.byteLength;
@@ -119,6 +132,12 @@
         pump();
       },
       status(id) { return view(jobs.get(id)); },
+      invalidate(id) {
+        const job = jobs.get(id);
+        if (!job) return;
+        for (const url of [job.url, job.delivery].filter(Boolean))
+          scope.navigator?.serviceWorker?.controller?.postMessage({type:'little-world-invalidate', url});
+      },
       read(id, offset, count) {
         const job = jobs.get(id);
         if (!job || offset < job.consumed || count <= 0 || !Number.isSafeInteger(offset) || !Number.isSafeInteger(count))
@@ -140,6 +159,7 @@
           job.chunks[job.head++]=null;
         }
         if(job.head>=256) {job.chunks=job.chunks.slice(job.head);job.head=0;}
+        if(buffered < highWater) wakeReaders();
       },
       release(id) {
         const job = jobs.get(id);
@@ -150,12 +170,17 @@
       },
       snapshot() {
         return { transport: 'background_fetch', active: active.values().next().value?.id || '', active_count:active.size, concurrency, buffered_bytes: buffered, reserved_bytes:reserved,
-          peak_buffered_bytes: peak, buffer_limit_bytes: memoryLimit, jobs: [...jobs.values()].map(view) };
+          peak_buffered_bytes: peak, max_chunk_bytes: maxChunk, buffer_limit_bytes: memoryLimit, stream_high_water_bytes: Number.isFinite(highWater) ? highWater : null, jobs: [...jobs.values()].map(view) };
       },
       snapshotJson() { return JSON.stringify(this.snapshot()); },
       close() { closed = true; for (const id of [...jobs.keys()]) this.release(id); },
     };
   }
   if (typeof module !== 'undefined' && module.exports) module.exports = { createBackgroundPacks };
-  else scope.LittleWorldBackgroundPacks = createBackgroundPacks(scope.fetch.bind(scope));
+  else {
+    const mobile = /Android|iPhone|iPad|iPod/.test(scope.navigator?.userAgent || '') || (scope.navigator?.platform === 'MacIntel' && scope.navigator.maxTouchPoints > 1);
+    scope.LittleWorldBackgroundPacks = mobile
+      ? createBackgroundPacks(scope.fetch.bind(scope), 64 * 1024 * 1024, 1, 2 * 1024 * 1024)
+      : createBackgroundPacks(scope.fetch.bind(scope));
+  }
 })(globalThis);

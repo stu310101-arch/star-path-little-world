@@ -168,6 +168,7 @@
         }});
       } catch (error) {
         row.fallbackReason = String(error.message || error);
+        env.navigator?.serviceWorker?.controller?.postMessage({type:'little-world-invalidate', url:entry.compressed});
         setPhase(row, 'fallback');
         controller.abort();
         if (reader) await reader.cancel().catch(() => {});

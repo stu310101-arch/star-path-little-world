@@ -2,13 +2,13 @@
   "format": 1,
   "game": "星途 · Little World",
   "pck": {
-    "bytes": 28567688,
-    "sha256": "2cc109ffd8de5fdc99292d3c4727a58cc709ae148aff3507cd928fd4f93131c8",
+    "bytes": 21745048,
+    "sha256": "25bdc74407531b8b0c3017ba23664efffb971e0358cd42c7d288c9e894c640c2",
     "parts": [
       {
         "name": "index.pck.part000",
-        "bytes": 28567688,
-        "sha256": "2cc109ffd8de5fdc99292d3c4727a58cc709ae148aff3507cd928fd4f93131c8"
+        "bytes": 21745048,
+        "sha256": "25bdc74407531b8b0c3017ba23664efffb971e0358cd42c7d288c9e894c640c2"
       }
     ]
   },
@@ -30,43 +30,48 @@
     },
     {
       "path": "index.background.js",
-      "bytes": 8575,
-      "sha256": "a428496ba8222aedb4f71c76e390a4042688f1418e031fc58842ce041c9269e7"
+      "bytes": 10172,
+      "sha256": "93d20d3bc6b32e3e1c396d51f8e978a02a1ddcddded85942bae87bc0058b69ff"
     },
     {
-      "path": "index.boot.1344f5cac54b49d4.pck.gz",
-      "bytes": 25770632,
-      "sha256": "1344f5cac54b49d47e7390f87bb5d71f90e78eabf33056ee7b12a01ae0f83c3b"
+      "path": "index.boot.988eb15e18685c28.wasm.gz",
+      "bytes": 8742725,
+      "sha256": "988eb15e18685c28c5916a5c9d4624d5a62c99782be6ff94a0398a7c5a1d416d"
     },
     {
-      "path": "index.boot.a8767fcc27ac87dc.wasm.gz",
-      "bytes": 10114291,
-      "sha256": "a8767fcc27ac87dc3d13f63f87e7dc36f698bbeb0a1712d0cba0b93b56b66b7e"
+      "path": "index.boot.bf8c7c09d5c0ff04.pck.gz",
+      "bytes": 18836535,
+      "sha256": "bf8c7c09d5c0ff04d517b73b1428e1a376798e5d679de3bcc1bef05f6a4c0e99"
     },
     {
       "path": "index.delivery.js",
-      "bytes": 10724,
-      "sha256": "65a260fb884328d03c20574ce2a14a2e2f4059d80b7a944539c2f1f27f4d8ffb"
+      "bytes": 10844,
+      "sha256": "7b2a0422b54375043c4122f3d02c86145867df1da1b9d97b258f4053bf6924b0"
     },
     {
       "path": "index.delivery.json",
-      "bytes": 2467,
-      "sha256": "f063b0a73472a1a3b0121e3f95d55f8cc68c0251fd699f4e136f6113e41e25f7"
+      "bytes": 2466,
+      "sha256": "090a989e9d22b7193f5ddc8ba7c242a9c20fbf18d5263ea3344af8d2cb225db5"
     },
     {
       "path": "index.html",
-      "bytes": 11654,
-      "sha256": "0f461b3153677e29f220e8a69934db756e39eeaf143f0fc486268b15101f477b"
+      "bytes": 12153,
+      "sha256": "8b216f733e3ed21099c3368f54d8ec9bf09374dfbe28a8ac836cd180af3ffc6d"
     },
     {
       "path": "index.js",
-      "bytes": 279812,
-      "sha256": "6afbd556a1489bae7e420da209e2bec42baa295b31cb9aba2f6094bacb7fc34d"
+      "bytes": 244383,
+      "sha256": "5236637c559971aed2ae09405c6df2a1cdfd72c4514fcccaf883a061f0dea1bd"
     },
     {
       "path": "index.packs.json",
-      "bytes": 24385,
-      "sha256": "8239d34cd0f7acb79c760eb8e53469af3edea9d98d8aa059448e3f76c6163334"
+      "bytes": 24710,
+      "sha256": "820c083bf03bc4b246f5322f00dc866e916b7f91a0b5dcb006694dc4f51b028a"
+    },
+    {
+      "path": "index.platform.js",
+      "bytes": 2091,
+      "sha256": "3e5b17a28a275bb07b4429aecfac9d63470b2f77f23bc7780d4f0b00db3da784"
     },
     {
       "path": "index.png",
@@ -75,8 +80,18 @@
     },
     {
       "path": "index.release.json",
-      "bytes": 5489,
-      "sha256": "6a0bf3079b5d812b92df7154b8bed001ccb40f93a90e8ff93e8d14696c7059b2"
+      "bytes": 13270,
+      "sha256": "3219c28caaca0774e355a0499471193280aa1de9321ed9ec669077eeadd55d68"
+    },
+    {
+      "path": "index.service-worker.js",
+      "bytes": 17473,
+      "sha256": "64de850c96c265ecb29d55f3aad3e776c4c70be90fa9457c49e82e7a7b7f8d9a"
+    },
+    {
+      "path": "index.touch.js",
+      "bytes": 4668,
+      "sha256": "e8d38e6e0f7aa9b1f7147f5ac2001a5523e5b23bfc17d10704aae1f3a9324104"
     },
     {
       "path": "index.training-games.js",
@@ -90,8 +105,8 @@
     },
     {
       "path": "index.wasm",
-      "bytes": 39514754,
-      "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
+      "bytes": 34245266,
+      "sha256": "b61da97eda9698cac9d15e336af449feb5c613e68133c117eece312af836b336"
     },
     {
       "path": "licenses/Godot-Copyright-Information.json",
@@ -164,9 +179,284 @@
       "sha256": "0b80c76981409db1b09c86bf413d81b17fc59e0254b13799f41dfe110b3c160d"
     },
     {
-      "path": "packs/avatar-f7d852af01da9807.pck",
-      "bytes": 36805020,
-      "sha256": "f7d852af01da9807f59487d25fce53e17876230765b81d8c29f8d45e2a4db52b"
+      "path": "mobile/games/go/index.html",
+      "bytes": 193149,
+      "sha256": "94fcf7f629d9ecfb65bf5750ce3b73571137aacfef600190795035d8ad5bda46"
+    },
+    {
+      "path": "mobile/index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "mobile/index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "mobile/index.background.js",
+      "bytes": 10172,
+      "sha256": "93d20d3bc6b32e3e1c396d51f8e978a02a1ddcddded85942bae87bc0058b69ff"
+    },
+    {
+      "path": "mobile/index.boot.988eb15e18685c28.wasm.gz",
+      "bytes": 8742725,
+      "sha256": "988eb15e18685c28c5916a5c9d4624d5a62c99782be6ff94a0398a7c5a1d416d"
+    },
+    {
+      "path": "mobile/index.boot.c0777ca341006ef9.pck.gz",
+      "bytes": 18920844,
+      "sha256": "c0777ca341006ef97c8f613591005c7b421850c71c29a95fd641bffaf6ee1fca"
+    },
+    {
+      "path": "mobile/index.delivery.js",
+      "bytes": 10844,
+      "sha256": "7b2a0422b54375043c4122f3d02c86145867df1da1b9d97b258f4053bf6924b0"
+    },
+    {
+      "path": "mobile/index.delivery.json",
+      "bytes": 2466,
+      "sha256": "0d66bf37f8eff302adb700b1790b7708c06534b98dbe8db4790841f261dc24b9"
+    },
+    {
+      "path": "mobile/index.html",
+      "bytes": 12153,
+      "sha256": "037c8d7f03c63549ea9b8316ef9361dfca2b762d60c2dd5af39c0e7d69eff7a5"
+    },
+    {
+      "path": "mobile/index.js",
+      "bytes": 244383,
+      "sha256": "5236637c559971aed2ae09405c6df2a1cdfd72c4514fcccaf883a061f0dea1bd"
+    },
+    {
+      "path": "mobile/index.packs.json",
+      "bytes": 24710,
+      "sha256": "baf8667d71b5cbbc7f54c1bfbce523c9344998285790a56df7729d3c87d3f884"
+    },
+    {
+      "path": "mobile/index.pck",
+      "bytes": 21745096,
+      "sha256": "30e54e1cf4c38620912c503811e626938dba4091aa1f095a48a38b67b356e1c4"
+    },
+    {
+      "path": "mobile/index.platform.js",
+      "bytes": 2091,
+      "sha256": "3e5b17a28a275bb07b4429aecfac9d63470b2f77f23bc7780d4f0b00db3da784"
+    },
+    {
+      "path": "mobile/index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "mobile/index.release.json",
+      "bytes": 6352,
+      "sha256": "f1dd6285ccca6bab86cef77d1cf82c0256c5ac82b5ed9cff6559d2728b037b67"
+    },
+    {
+      "path": "mobile/index.touch.js",
+      "bytes": 4668,
+      "sha256": "e8d38e6e0f7aa9b1f7147f5ac2001a5523e5b23bfc17d10704aae1f3a9324104"
+    },
+    {
+      "path": "mobile/index.training-games.js",
+      "bytes": 9168,
+      "sha256": "939e2b9b6bc0127c2e9083c7f9bc351e1671c0e0f92815b37607aa83ddb6a49d"
+    },
+    {
+      "path": "mobile/index.training-games.json",
+      "bytes": 372,
+      "sha256": "bb71806a66cb431e2e04ce660228237ec23a681802b6f4cd1e00c6d7f6c4dd58"
+    },
+    {
+      "path": "mobile/index.wasm",
+      "bytes": 34245266,
+      "sha256": "b61da97eda9698cac9d15e336af449feb5c613e68133c117eece312af836b336"
+    },
+    {
+      "path": "mobile/licenses/Godot-Copyright-Information.json",
+      "bytes": 33699,
+      "sha256": "f61103e8891fd07f5145ad41bba2c97fcc2fc82fd0b6cc0b4b6964a3c845046c"
+    },
+    {
+      "path": "mobile/licenses/Godot-Engine-MIT.txt",
+      "bytes": 1169,
+      "sha256": "0cc27400b8da8c06bb35350422c14715647cd2632c138921fd49caa6610a1ef6"
+    },
+    {
+      "path": "mobile/licenses/Godot-Third-Party-Licenses.txt",
+      "bytes": 79588,
+      "sha256": "279c71d5485be6e9a4a207349b6f62a5dbd485402de562eea9b9297a595ae934"
+    },
+    {
+      "path": "mobile/licenses/Kenney-3D-Road-Tiles-CC0.txt",
+      "bytes": 511,
+      "sha256": "ce73128708a9086bdcca3d1b7f70d1e90cdcade82413f8257875c0ccc1b50eb4"
+    },
+    {
+      "path": "mobile/licenses/Kenney-Car-Kit-CC0.txt",
+      "bytes": 696,
+      "sha256": "c33b7f6453d134deae7b1b8493717d9ccfa754c25ab97f6de89b88f8fda19b00"
+    },
+    {
+      "path": "mobile/licenses/Kenney-City-Kit-Commercial-CC0.txt",
+      "bytes": 708,
+      "sha256": "c38cee408d022e57e44e49f1cd655c2fe0dc881a07b881276b795215cdc0de69"
+    },
+    {
+      "path": "mobile/licenses/Kenney-City-Kit-Suburban-CC0.txt",
+      "bytes": 706,
+      "sha256": "d778fa769a89a7d9f167bc337fdf8fc2144e47d9abb0c35eb6ad897c0ee24d0a"
+    },
+    {
+      "path": "mobile/licenses/Kenney-Modular-Buildings-CC0.txt",
+      "bytes": 720,
+      "sha256": "84002607f647b608c2861d8413bd9136a36d4063d74bf1af79347e3a012abeb5"
+    },
+    {
+      "path": "mobile/licenses/Kenney-Watercraft-Kit-CC0.txt",
+      "bytes": 717,
+      "sha256": "f5f520f81277128fb422aebe334d2f08e6d8e5f7face6008885d8ff920253724"
+    },
+    {
+      "path": "mobile/licenses/manifest.json",
+      "bytes": 4520,
+      "sha256": "4aec1c13114962aaac383adc7c202fbde304a0629f41a696a0be6b56cb0de0d8"
+    },
+    {
+      "path": "mobile/licenses/Noto-Sans-TC-OFL.txt",
+      "bytes": 4481,
+      "sha256": "e35ffdebb2225b49814c31889cbb3ce69cb3509e6a9f431edaba5e1a6de8cd15"
+    },
+    {
+      "path": "mobile/licenses/Quaternius-Animated-Fish-CC0.txt",
+      "bytes": 361,
+      "sha256": "2832c27ece15255677c5a6d7437ed05d6a2f49ccb73d867ab13d2be3f93e84e2"
+    },
+    {
+      "path": "mobile/licenses/Quaternius-Character-CC0.txt",
+      "bytes": 364,
+      "sha256": "83d8959f9fc56353ed571fbe2dc52e4bcd64508e2399501cd45ac2ce3df0bf8c"
+    },
+    {
+      "path": "mobile/licenses/Van-Gogh-Starry-Night-Public-Domain.txt",
+      "bytes": 581,
+      "sha256": "0b80c76981409db1b09c86bf413d81b17fc59e0254b13799f41dfe110b3c160d"
+    },
+    {
+      "path": "mobile/packs/avatar-841b35f5232c4819.pck",
+      "bytes": 28895404,
+      "sha256": "841b35f5232c4819114298486f00e83b58e15b8351666f62811cbb9ead70852a"
+    },
+    {
+      "path": "mobile/packs/district_admissions-f2b0e3e6a06dcb4f.pck",
+      "bytes": 3271236,
+      "sha256": "f2b0e3e6a06dcb4fb8b9c064473a9d46d64b497eeaed0e66ac4ff30280563a85"
+    },
+    {
+      "path": "mobile/packs/district_counseling-374486d980eecfda.pck",
+      "bytes": 3136932,
+      "sha256": "374486d980eecfda60f991bd1ece944048cee60dceae41e33c3a1931e91fb682"
+    },
+    {
+      "path": "mobile/packs/district_life-a2e4719f92f9ef97.pck",
+      "bytes": 3025796,
+      "sha256": "a2e4719f92f9ef97cc0ca59df04573ae383754d0f6966b0f9c29f86cda7bdd2f"
+    },
+    {
+      "path": "mobile/packs/district_ocean-d53c179be6ad72d8.pck",
+      "bytes": 607976,
+      "sha256": "d53c179be6ad72d80e72928daad53647494f9fed288cf912100a59e4b2152509"
+    },
+    {
+      "path": "mobile/packs/district_recommendations-ac828d60191874a0.pck",
+      "bytes": 2558684,
+      "sha256": "ac828d60191874a0a2cfada62c20ebd52b74a3f80992d9b23d64e20566a077f9"
+    },
+    {
+      "path": "mobile/packs/district_sakura-ca8583c247a7ff0e.pck",
+      "bytes": 4557664,
+      "sha256": "ca8583c247a7ff0ebd6ea77ed42a8da0ec1ed53577b8c278ffba35a07ca5d855"
+    },
+    {
+      "path": "mobile/packs/district_universities-6fd372a6f991ca01.pck",
+      "bytes": 3218916,
+      "sha256": "6fd372a6f991ca0175ad723f7b9824bed14ac758539329cf0168a5008a521f80"
+    },
+    {
+      "path": "mobile/packs/district_wordking-1d33d712a3b9e5f7.pck",
+      "bytes": 3132892,
+      "sha256": "1d33d712a3b9e5f7ff3f42c596d9fc52502192edeb2b0cd4f7f2f78d587f3e29"
+    },
+    {
+      "path": "mobile/packs/font_fallback-068377ef2c181594.pck",
+      "bytes": 7162000,
+      "sha256": "068377ef2c1815940636ba53b4d6d4d0a495c301a20543d31eb837669fce3bf6"
+    },
+    {
+      "path": "mobile/packs/music_admissions-2ce1c35030bcc9fb.pck",
+      "bytes": 1728528,
+      "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0"
+    },
+    {
+      "path": "mobile/packs/music_admissions.bf3a2f162b42a7e9.pck.gz",
+      "bytes": 1632058,
+      "sha256": "bf3a2f162b42a7e98236b0626c34c771443bf056d25cf6f27f9ae85e4396eb76"
+    },
+    {
+      "path": "mobile/packs/music_counseling-f3b97506778458ba.pck",
+      "bytes": 1443824,
+      "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4"
+    },
+    {
+      "path": "mobile/packs/music_counseling.e5d73e7398b6b1ca.pck.gz",
+      "bytes": 1313973,
+      "sha256": "e5d73e7398b6b1ca6d1e25eb77d5876828b8f495d8a33afe65d4f2529af9b694"
+    },
+    {
+      "path": "mobile/packs/music_recommendations-66382088fcc4b843.pck",
+      "bytes": 2195960,
+      "sha256": "66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8"
+    },
+    {
+      "path": "mobile/packs/music_wordking-a45c153d522c439d.pck",
+      "bytes": 2315480,
+      "sha256": "a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995"
+    },
+    {
+      "path": "mobile/packs/music_world-e1a7f96b4f7f8400.pck",
+      "bytes": 1351376,
+      "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf"
+    },
+    {
+      "path": "mobile/packs/music_world.263480b842ed0ad7.pck.gz",
+      "bytes": 1268648,
+      "sha256": "263480b842ed0ad7ce595cb7519d64a78e054199f8d01d3ed7eccd2daf61ee6b"
+    },
+    {
+      "path": "mobile/packs/shared-608808bfeef5842e.pck",
+      "bytes": 176296,
+      "sha256": "608808bfeef5842e2c6156a7658fbf78384712d39153fb959005ad0064d787ab"
+    },
+    {
+      "path": "mobile/packs/shared.b9da3b9b4687699f.pck.gz",
+      "bytes": 17242,
+      "sha256": "b9da3b9b4687699fd2a611e687062b821e3c0f93fb63aa9cad9c462dbe95a0c2"
+    },
+    {
+      "path": "mobile/packs/training_room-ec2ee514cca4cdec.pck",
+      "bytes": 4781456,
+      "sha256": "ec2ee514cca4cdecef5dc1e6f1a09466dd365048f98b5335835520a16d6405c1"
+    },
+    {
+      "path": "mobile/THIRD_PARTY_NOTICES.txt",
+      "bytes": 4610,
+      "sha256": "9a90178133835e752f9a3afab605574eaac190905a50d4ef4a6c5ae29722f63f"
+    },
+    {
+      "path": "packs/avatar-841b35f5232c4819.pck",
+      "bytes": 28895404,
+      "sha256": "841b35f5232c4819114298486f00e83b58e15b8351666f62811cbb9ead70852a"
     },
     {
       "path": "packs/district_admissions-f2b0e3e6a06dcb4f.pck",
@@ -209,6 +499,11 @@
       "sha256": "1d33d712a3b9e5f7ff3f42c596d9fc52502192edeb2b0cd4f7f2f78d587f3e29"
     },
     {
+      "path": "packs/font_fallback-068377ef2c181594.pck",
+      "bytes": 7162000,
+      "sha256": "068377ef2c1815940636ba53b4d6d4d0a495c301a20543d31eb837669fce3bf6"
+    },
+    {
       "path": "packs/music_admissions-2ce1c35030bcc9fb.pck",
       "bytes": 1728528,
       "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0"
@@ -249,14 +544,14 @@
       "sha256": "263480b842ed0ad7ce595cb7519d64a78e054199f8d01d3ed7eccd2daf61ee6b"
     },
     {
-      "path": "packs/shared-5bb25679f1a69211.pck",
-      "bytes": 176280,
-      "sha256": "5bb25679f1a69211ccdedecac948f9c0ef6e33773f7654a5a884748a23cf6923"
+      "path": "packs/shared-1851495d90c79d46.pck",
+      "bytes": 176296,
+      "sha256": "1851495d90c79d461971476fa2c6dec127db71c88459f127b16ceec5171925ec"
     },
     {
-      "path": "packs/shared.eb191485dfbfa97e.pck.gz",
-      "bytes": 14786,
-      "sha256": "eb191485dfbfa97e39e992f6c6b3dcab346a762de879b14a89f2a347bab93e44"
+      "path": "packs/shared.06f7da4a8e59478b.pck.gz",
+      "bytes": 13882,
+      "sha256": "06f7da4a8e59478b1c6805d32102d8d81815657ef9d3db3329bc086e87f1135b"
     },
     {
       "path": "packs/training_room-ec2ee514cca4cdec.pck",

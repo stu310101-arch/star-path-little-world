@@ -8,6 +8,7 @@ const DEFAULT_WEB_FRAME_LIMIT: int = 60
 const DEFAULT_MSAA_ENABLED: bool = false
 const DEFAULT_QUALITY: String = "low"
 const LOW_RENDER_SIZE: Vector2 = Vector2(1280.0, 720.0)
+const MOBILE_RENDER_SIZE: Vector2 = Vector2(960.0, 540.0)
 # A small pixel reduction can cost more than it saves through the extra scaling
 # pass. Only enable scaling at 0.8 or below (at least 36% fewer 3D pixels).
 const LOW_SCALING_MAX_FACTOR: float = 0.8
@@ -40,7 +41,7 @@ func load_settings() -> void:
 	# Migrate old AA/FPS-only files once to the newly requested safe preset.
 	# They are not evidence that the user selected the new standard profile.
 	var stored_profile: Variant = settings.get_value("graphics", "quality_profile", "")
-	if not stored_profile is String or stored_profile not in ["low", "standard"]:
+	if not stored_profile is String or stored_profile not in ["mobile", "low", "standard"]:
 		return
 	quality_profile = stored_profile
 	var stored_msaa: Variant = settings.get_value("graphics", "msaa_enabled", DEFAULT_MSAA_ENABLED)
@@ -57,7 +58,7 @@ func apply_settings() -> void:
 	viewport.msaa_3d = Viewport.MSAA_2X if msaa_enabled else Viewport.MSAA_DISABLED
 	viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
 	var render_size: Vector2 = _render_target_size()
-	viewport.scaling_3d_scale = low_render_scale(render_size) if is_low_quality() else 1.0
+	viewport.scaling_3d_scale = minf(1.0, minf(MOBILE_RENDER_SIZE.x / maxf(render_size.x, 1.0), MOBILE_RENDER_SIZE.y / maxf(render_size.y, 1.0))) if quality_profile == "mobile" else (low_render_scale(render_size) if is_low_quality() else 1.0)
 	viewport.set_meta("graphics_quality_profile", quality_profile)
 	Engine.max_fps = frame_limit
 
@@ -74,10 +75,10 @@ static func low_render_scale(size: Vector2) -> float:
 	return target_scale if target_scale <= LOW_SCALING_MAX_FACTOR else 1.0
 
 func is_low_quality() -> bool:
-	return quality_profile == "low"
+	return quality_profile in ["mobile", "low"]
 
 func set_quality_profile(value: String) -> void:
-	if value not in ["low", "standard"]:
+	if value not in ["mobile", "low", "standard"]:
 		return
 	quality_profile = value
 	# Frame pacing is a separate user choice; a cheaper render preset must not

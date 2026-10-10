@@ -46,7 +46,7 @@ class BootDeliveryBuildTests(unittest.TestCase):
         target.write_text(json.dumps(manifest), encoding="utf-8")
         self.assertEqual(verify_background_budget(self.root), 4000)
         self.build()
-        self.assertIn("if (pack.startup === false) continue;", (self.root / "index.html").read_text(encoding="utf-8"))
+        self.assertNotIn("transport.enqueue(", (self.root / "index.html").read_text(encoding="utf-8"))
         manifest["packs"]["outside"]["dependencies"] = ["training_room"]
         target.write_text(json.dumps(manifest), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "on-demand"):

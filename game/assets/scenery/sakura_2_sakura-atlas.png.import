@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dedn2wh1r40hl"
 path.s3tc="res://.godot/imported/sakura_2_sakura-atlas.png-7983a0385b1258dc4051ad9e2c015625.s3tc.ctex"
+path.etc2="res://.godot/imported/sakura_2_sakura-atlas.png-7983a0385b1258dc4051ad9e2c015625.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/scenery/sakura_2_sakura-atlas.png"
-dest_files=["res://.godot/imported/sakura_2_sakura-atlas.png-7983a0385b1258dc4051ad9e2c015625.s3tc.ctex"]
+dest_files=["res://.godot/imported/sakura_2_sakura-atlas.png-7983a0385b1258dc4051ad9e2c015625.s3tc.ctex", "res://.godot/imported/sakura_2_sakura-atlas.png-7983a0385b1258dc4051ad9e2c015625.etc2.ctex"]
 
 [params]
 

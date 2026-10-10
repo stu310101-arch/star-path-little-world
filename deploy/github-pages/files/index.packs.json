@@ -1,11 +1,11 @@
 {
   "packs": {
     "avatar": {
-      "bytes": 36805020,
+      "bytes": 28895404,
       "dependencies": [],
-      "sha256": "f7d852af01da9807f59487d25fce53e17876230765b81d8c29f8d45e2a4db52b",
+      "sha256": "841b35f5232c4819114298486f00e83b58e15b8351666f62811cbb9ead70852a",
       "startup": true,
-      "url": "packs/avatar-f7d852af01da9807.pck"
+      "url": "packs/avatar-841b35f5232c4819.pck"
     },
     "district_admissions": {
       "bytes": 3271236,
@@ -13,7 +13,7 @@
         "shared"
       ],
       "sha256": "f2b0e3e6a06dcb4fb8b9c064473a9d46d64b497eeaed0e66ac4ff30280563a85",
-      "startup": true,
+      "startup": false,
       "url": "packs/district_admissions-f2b0e3e6a06dcb4f.pck"
     },
     "district_counseling": {
@@ -22,7 +22,7 @@
         "shared"
       ],
       "sha256": "374486d980eecfda60f991bd1ece944048cee60dceae41e33c3a1931e91fb682",
-      "startup": true,
+      "startup": false,
       "url": "packs/district_counseling-374486d980eecfda.pck"
     },
     "district_life": {
@@ -31,7 +31,7 @@
         "shared"
       ],
       "sha256": "a2e4719f92f9ef97cc0ca59df04573ae383754d0f6966b0f9c29f86cda7bdd2f",
-      "startup": true,
+      "startup": false,
       "url": "packs/district_life-a2e4719f92f9ef97.pck"
     },
     "district_ocean": {
@@ -40,7 +40,7 @@
         "shared"
       ],
       "sha256": "d53c179be6ad72d80e72928daad53647494f9fed288cf912100a59e4b2152509",
-      "startup": true,
+      "startup": false,
       "url": "packs/district_ocean-d53c179be6ad72d8.pck"
     },
     "district_recommendations": {
@@ -49,7 +49,7 @@
         "shared"
       ],
       "sha256": "ac828d60191874a0a2cfada62c20ebd52b74a3f80992d9b23d64e20566a077f9",
-      "startup": true,
+      "startup": false,
       "url": "packs/district_recommendations-ac828d60191874a0.pck"
     },
     "district_sakura": {
@@ -58,7 +58,7 @@
         "shared"
       ],
       "sha256": "ca8583c247a7ff0ebd6ea77ed42a8da0ec1ed53577b8c278ffba35a07ca5d855",
-      "startup": true,
+      "startup": false,
       "url": "packs/district_sakura-ca8583c247a7ff0e.pck"
     },
     "district_universities": {
@@ -67,7 +67,7 @@
         "shared"
       ],
       "sha256": "6fd372a6f991ca0175ad723f7b9824bed14ac758539329cf0168a5008a521f80",
-      "startup": true,
+      "startup": false,
       "url": "packs/district_universities-6fd372a6f991ca01.pck"
     },
     "district_wordking": {
@@ -76,50 +76,57 @@
         "shared"
       ],
       "sha256": "1d33d712a3b9e5f7ff3f42c596d9fc52502192edeb2b0cd4f7f2f78d587f3e29",
-      "startup": true,
+      "startup": false,
       "url": "packs/district_wordking-1d33d712a3b9e5f7.pck"
+    },
+    "font_fallback": {
+      "bytes": 7162000,
+      "dependencies": [],
+      "sha256": "068377ef2c1815940636ba53b4d6d4d0a495c301a20543d31eb837669fce3bf6",
+      "startup": false,
+      "url": "packs/font_fallback-068377ef2c181594.pck"
     },
     "music_admissions": {
       "bytes": 1728528,
       "dependencies": [],
       "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0",
-      "startup": true,
+      "startup": false,
       "url": "packs/music_admissions-2ce1c35030bcc9fb.pck"
     },
     "music_counseling": {
       "bytes": 1443824,
       "dependencies": [],
       "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4",
-      "startup": true,
+      "startup": false,
       "url": "packs/music_counseling-f3b97506778458ba.pck"
     },
     "music_recommendations": {
       "bytes": 2195960,
       "dependencies": [],
       "sha256": "66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8",
-      "startup": true,
+      "startup": false,
       "url": "packs/music_recommendations-66382088fcc4b843.pck"
     },
     "music_wordking": {
       "bytes": 2315480,
       "dependencies": [],
       "sha256": "a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995",
-      "startup": true,
+      "startup": false,
       "url": "packs/music_wordking-a45c153d522c439d.pck"
     },
     "music_world": {
       "bytes": 1351376,
       "dependencies": [],
       "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf",
-      "startup": true,
+      "startup": false,
       "url": "packs/music_world-e1a7f96b4f7f8400.pck"
     },
     "shared": {
-      "bytes": 176280,
+      "bytes": 176296,
       "dependencies": [],
-      "sha256": "5bb25679f1a69211ccdedecac948f9c0ef6e33773f7654a5a884748a23cf6923",
-      "startup": true,
-      "url": "packs/shared-5bb25679f1a69211.pck"
+      "sha256": "1851495d90c79d461971476fa2c6dec127db71c88459f127b16ceec5171925ec",
+      "startup": false,
+      "url": "packs/shared-1851495d90c79d46.pck"
     },
     "training_room": {
       "bytes": 4781456,
@@ -140,6 +147,7 @@
     "res://assets/character/graduate_rest.glb": "avatar",
     "res://assets/character/runtime_web/graduate.glb": "avatar",
     "res://assets/character/runtime_web/graduate_jump.glb": "avatar",
+    "res://assets/fonts/web/NotoSansTC-full.ttf": "font_fallback",
     "res://assets/scenery/sakura_petal_sakura-atlas.png": "shared",
     "res://assets/urban/Textures/colormap.png": "shared",
     "res://generated/streaming/admissions_000.scn": "district_admissions",

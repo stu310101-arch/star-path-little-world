@@ -56,6 +56,7 @@ func set_shared_music(music_node: Node) -> void:
 	music = music_node
 
 func _ready() -> void:
+	add_to_group("touch_camera")
 	name = "TrainingRoom"
 	entry_started_ms = Time.get_ticks_msec()
 	if graphics_settings == null:
@@ -116,6 +117,15 @@ func _ready() -> void:
 		_refresh_music()
 	update_camera(0.0, true)
 	return_prompt.text = "正在準備角色…"
+
+func touch_look(relative: Vector2) -> void:
+	if not ready_for_play or returning or (computer_games != null and bool(computer_games.call("is_open"))):
+		return
+	if interactions != null and bool(interactions.call("camera_blocked")):
+		return
+	camera_yaw -= relative.x * .005
+	camera_pitch = clampf(camera_pitch + relative.y * .004, -.08, .64)
+	player.call("rotate_heading", -relative.x * .005)
 
 func _apply_quality() -> void:
 	if is_instance_valid(graphics_settings):

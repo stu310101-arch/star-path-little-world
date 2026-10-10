@@ -2,8 +2,9 @@
 
 Web-only export copies. All meshes must share the same skin, parent and identity
 transform. LINEAR cloth channels must share key times within each clip. Their
-evaluated poses are combined into one synchronized pair of active blend shapes,
-so batching does not multiply the active deformation passes. No decimation,
+evaluated poses use at most two synchronized active blend shapes per material.
+Bounded cloth-only rounding improves storage; base attributes remain exact.
+No decimation,
 material conversion, animation resampling or bone-track changes are permitted.
 """
 from __future__ import annotations
@@ -24,6 +25,8 @@ from prune_gameplay_jump_morph_noise import GLB, compact, sha
 ROOT = Path(__file__).resolve().parents[1]
 DTYPES = {5121: "u1", 5123: "<u2", 5125: "<u4", 5126: "<f4"}
 COMPONENTS = {"SCALAR": 1, "VEC2": 2, "VEC3": 3, "VEC4": 4, "MAT4": 16}
+POSITION_GRID = 16384.0
+NORMAL_GRID = 4096.0
 
 
 def array(src, index):
@@ -57,9 +60,6 @@ def derive(source, target):
         parent_set.add(parents[ni]); skin_set.add(node["skin"])
     assert len(parent_set) == len(skin_set) == len(doc["skins"]) == 1
     # Leave original node indices/names intact for every skeletal channel.
-    node_index = len(doc["nodes"])
-    doc["nodes"].append({"name": "WebGraduateBatched", "mesh": 0, "skin": next(iter(skin_set))})
-    doc["nodes"][next(iter(parent_set))]["children"].append(node_index)
     for ni in mesh_nodes.values():
         for key in ("mesh", "skin", "weights"):
             doc["nodes"][ni].pop(key, None)
@@ -137,18 +137,51 @@ def derive(source, target):
                 start += frames
         pose_blocks.append(block)
 
-    # Identical/zero poses share storage exactly, without an error threshold.
-    unique, samples, hashes = [], [], {}
-    for i in range(total_samples):
-        if not any(np.any(block[i]) for block in pose_blocks):
-            samples.append(-1)
-            continue
-        key = hashlib.sha256(b"".join(block[i].tobytes() for block in pose_blocks)).digest()
-        if key not in hashes:
-            hashes[key] = len(unique); unique.append(i)
-        samples.append(hashes[key])
-    primitives = []
-    for surface, ((material, group), block) in enumerate(zip(groups.items(), pose_blocks)):
+    # Bound cloth-only storage rounding to < 0.020 mm at the authored uniform
+    # character scale. Base vertices, triangles, weights, bones and key times
+    # remain exact. LINEAR interpolation cannot exceed the endpoint bound.
+    quantized_blocks = []
+    max_position_error = 0.0
+    max_normal_error = 0.0
+    for block in pose_blocks:
+        rounded = block.copy()
+        rounded[:, :, :3] = np.rint(block[:, :, :3] * POSITION_GRID) / POSITION_GRID
+        rounded[:, :, 3:] = np.rint(block[:, :, 3:] * NORMAL_GRID) / NORMAL_GRID
+        max_position_error = max(max_position_error, float(np.linalg.norm(rounded[:, :, :3] - block[:, :, :3], axis=2).max()) * (1.75 / 4.8))
+        max_normal_error = max(max_normal_error, float(np.linalg.norm(rounded[:, :, 3:] - block[:, :, 3:], axis=2).max()))
+        assert max_position_error < 0.000020 and max_normal_error < 0.000212
+        quantized_blocks.append(rounded)
+    # Each material keeps only its own distinct poses. glTF requires all
+    # surfaces of a mesh to have the same morph count; separate material meshes
+    # avoid allocating every clothing frame for static or rarely moving parts.
+    # Surface/draw counts, authored key times and at most two active poses stay
+    # unchanged. Deduplication after bounded rounding uses exact byte equality.
+    doc["meshes"] = []
+    material_poses = []
+    for animation in doc["animations"]:
+        old_samplers = animation["samplers"]
+        animation["channels"] = [c for c in animation["channels"] if c["target"]["path"] != "weights"]
+        animation["samplers"] = []
+        for channel in animation["channels"]:
+            sampler = old_samplers[channel["sampler"]]
+            channel["sampler"] = len(animation["samplers"])
+            animation["samplers"].append(sampler)
+    for surface, ((material, group), block) in enumerate(zip(groups.items(), quantized_blocks)):
+        unique, samples, hashes = [], [], {}
+        for i in range(total_samples):
+            if not np.any(block[i]):
+                samples.append(-1)
+                continue
+            key = hashlib.sha256(block[i].tobytes()).digest()
+            if key not in hashes:
+                hashes[key] = len(unique)
+                unique.append(i)
+            samples.append(hashes[key])
+        material_poses.append({"unique": unique, "samples": samples})
+        node_index = len(doc["nodes"])
+        name = f"WebGraduateMaterial{material:02d}"
+        doc["nodes"].append({"name": name, "mesh": surface, "skin": next(iter(skin_set))})
+        doc["nodes"][next(iter(parent_set))]["children"].append(node_index)
         attributes, indices = {}, []
         semantics = {key for r in group["parts"] for key in src.doc["meshes"][r["mesh"]]["primitives"][r["primitive"]]["attributes"]}
         for semantic in sorted(semantics):
@@ -162,27 +195,24 @@ def derive(source, target):
             indices.append(array(src, primitive["indices"]).astype(np.uint32) + row["offset"])
             row["surface"] = surface
         targets = [{"POSITION": add(block[i, :, :3], "VEC3"), "NORMAL": add(block[i, :, 3:], "VEC3")} for i in unique]
-        primitives.append({"attributes": attributes, "indices": add(np.concatenate(indices), component=5125), "material": material, "targets": targets})
-    doc["meshes"] = [{"name": "WebGraduateBatched", "primitives": primitives, "weights": [0.] * len(unique),
-                      "extras": {"targetNames": [f"pose_{i:03d}" for i in range(len(unique))]}}]
-    start = 0
-    for clip in clips:
-        animation = doc["animations"][clip["index"]]
-        old_samplers = animation["samplers"]
-        animation["channels"] = [c for c in animation["channels"] if c["target"]["path"] != "weights"]
-        animation["samplers"] = []
-        for channel in animation["channels"]:
-            sampler = old_samplers[channel["sampler"]]
-            channel["sampler"] = len(animation["samplers"])
-            animation["samplers"].append(sampler)
-        weights = np.zeros((len(clip["times"]), len(unique)), dtype=np.float32)
-        for key in range(len(weights)):
-            pose = samples[start + key]
-            if pose >= 0:
-                weights[key, pose] = 1
-        animation["channels"].append({"sampler": len(animation["samplers"]), "target": {"node": node_index, "path": "weights"}})
-        animation["samplers"].append({"input": add(clip["times"]), "output": add(weights), "interpolation": "LINEAR"})
-        start += len(clip["times"])
+        primitive = {"attributes": attributes, "indices": add(np.concatenate(indices), component=5125), "material": material}
+        mesh = {"name": name, "primitives": [primitive]}
+        if unique:
+            primitive["targets"] = targets
+            mesh.update(weights=[0.] * len(unique), extras={"targetNames": [f"pose_{i:03d}" for i in range(len(unique))]})
+        doc["meshes"].append(mesh)
+        start = 0
+        for clip in clips:
+            if unique:
+                animation = doc["animations"][clip["index"]]
+                weights = np.zeros((len(clip["times"]), len(unique)), dtype=np.float32)
+                for key in range(len(weights)):
+                    pose = samples[start + key]
+                    if pose >= 0:
+                        weights[key, pose] = 1
+                animation["channels"].append({"sampler": len(animation["samplers"]), "target": {"node": node_index, "path": "weights"}})
+                animation["samplers"].append({"input": add(clip["times"]), "output": add(weights), "interpolation": "LINEAR"})
+            start += len(clip["times"])
 
     target.parent.mkdir(parents=True, exist_ok=True)
     compact(doc, src, additions, target)
@@ -193,7 +223,7 @@ def derive(source, target):
     assert np.array_equal(array(out, out.doc["skins"][0]["inverseBindMatrices"]), array(src, src.doc["skins"][0]["inverseBindMatrices"]))
     for row in mapping:
         before = src.doc["meshes"][row["mesh"]]["primitives"][row["primitive"]]
-        after = out.doc["meshes"][0]["primitives"][row["surface"]]
+        after = out.doc["meshes"][row["surface"]]["primitives"][0]
         for semantic, index in before["attributes"].items():
             assert np.array_equal(array(src, index), array(out, after["attributes"][semantic])[row["offset"]:row["offset"] + row["vertices"]])
     for material, group in groups.items():
@@ -201,7 +231,7 @@ def derive(source, target):
         for row in group["parts"]:
             primitive = src.doc["meshes"][row["mesh"]]["primitives"][row["primitive"]]
             index_parts.append(array(src, primitive["indices"]).astype(np.uint32) + row["offset"])
-        after = out.doc["meshes"][0]["primitives"][group["parts"][0]["surface"]]
+        after = out.doc["meshes"][group["parts"][0]["surface"]]["primitives"][0]
         assert after["material"] == material
         assert np.array_equal(np.concatenate(index_parts), array(out, after["indices"]))
     for before, after in zip(src.doc["animations"], out.doc["animations"]):
@@ -214,9 +244,9 @@ def derive(source, target):
             assert bs.get("interpolation", "LINEAR") == ass.get("interpolation", "LINEAR")
             for field in ("input", "output"):
                 assert np.array_equal(array(src, bs[field]), array(out, ass[field]))
-    for surface, block in enumerate(pose_blocks):
-        targets = out.doc["meshes"][0]["primitives"][surface]["targets"]
-        for source_sample, pose in enumerate(samples):
+    for surface, block in enumerate(quantized_blocks):
+        targets = out.doc["meshes"][surface]["primitives"][0].get("targets", [])
+        for source_sample, pose in enumerate(material_poses[surface]["samples"]):
             if pose < 0:
                 assert not np.any(block[source_sample])
             else:
@@ -233,9 +263,10 @@ def derive(source, target):
     report = {"source": source.relative_to(ROOT).as_posix(), "source_sha256": source_hash,
               "output": target.relative_to(ROOT).as_posix(), "output_sha256": sha(target),
               "source_bytes": source.stat().st_size, "output_bytes": target.stat().st_size,
-              "surfaces_before": len(mapping), "surfaces_after": len(groups), "shared_poses": len(unique),
+              "surfaces_before": len(mapping), "surfaces_after": len(groups), "shared_poses": [len(p["unique"]) for p in material_poses],
+              "max_cloth_position_error_metres": max_position_error, "max_cloth_normal_error": max_normal_error,
               "clips": [{"name": c["name"], "keys": len(c["times"])} for c in clips],
-              "source_to_output": mapping, "validated": "Exact base attributes, triangles, material values, bone channels/times, skin bind matrices and float32 evaluated cloth key poses. LINEAR curves retain original times; intermediate poses are their same interpolation (subject to floating point rounding). Actual imported/rendered validation is separate."}
+              "source_to_output": mapping, "validated": "Exact base attributes, triangles, materials, bone channels/times and bind matrices. Every evaluated cloth key checked against a <0.020 mm position / 0.000212 normal-vector rounding bound, with original LINEAR key times. Serialized poses exactly match those verified arrays. Actual imported/rendered validation is separate."}
     out.close(); src.close()
     assert sha(source) == source_hash
     return report

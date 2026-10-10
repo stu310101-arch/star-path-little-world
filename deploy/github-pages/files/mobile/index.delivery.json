@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "engine_version": "4.7.2",
+  "loader_sha256": "5236637c559971aed2ae09405c6df2a1cdfd72c4514fcccaf883a061f0dea1bd",
+  "files": {
+    "index.pck": {
+      "url": "index.boot.c0777ca341006ef9.pck.gz",
+      "bytes": 21745096,
+      "sha256": "30e54e1cf4c38620912c503811e626938dba4091aa1f095a48a38b67b356e1c4",
+      "compressed_bytes": 18920844,
+      "compressed_sha256": "c0777ca341006ef97c8f613591005c7b421850c71c29a95fd641bffaf6ee1fca"
+    },
+    "index.wasm": {
+      "url": "index.boot.988eb15e18685c28.wasm.gz",
+      "bytes": 34245266,
+      "sha256": "b61da97eda9698cac9d15e336af449feb5c613e68133c117eece312af836b336",
+      "compressed_bytes": 8742725,
+      "compressed_sha256": "988eb15e18685c28c5916a5c9d4624d5a62c99782be6ff94a0398a7c5a1d416d"
+    }
+  },
+  "packs": {
+    "music_admissions": {
+      "encoding": "gzip",
+      "original_url": "packs/music_admissions-2ce1c35030bcc9fb.pck",
+      "url": "packs/music_admissions.bf3a2f162b42a7e9.pck.gz",
+      "bytes": 1728528,
+      "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0",
+      "compressed_bytes": 1632058,
+      "compressed_sha256": "bf3a2f162b42a7e98236b0626c34c771443bf056d25cf6f27f9ae85e4396eb76"
+    },
+    "music_counseling": {
+      "encoding": "gzip",
+      "original_url": "packs/music_counseling-f3b97506778458ba.pck",
+      "url": "packs/music_counseling.e5d73e7398b6b1ca.pck.gz",
+      "bytes": 1443824,
+      "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4",
+      "compressed_bytes": 1313973,
+      "compressed_sha256": "e5d73e7398b6b1ca6d1e25eb77d5876828b8f495d8a33afe65d4f2529af9b694"
+    },
+    "music_world": {
+      "encoding": "gzip",
+      "original_url": "packs/music_world-e1a7f96b4f7f8400.pck",
+      "url": "packs/music_world.263480b842ed0ad7.pck.gz",
+      "bytes": 1351376,
+      "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf",
+      "compressed_bytes": 1268648,
+      "compressed_sha256": "263480b842ed0ad7ce595cb7519d64a78e054199f8d01d3ed7eccd2daf61ee6b"
+    },
+    "shared": {
+      "encoding": "gzip",
+      "original_url": "packs/shared-608808bfeef5842e.pck",
+      "url": "packs/shared.b9da3b9b4687699f.pck.gz",
+      "bytes": 176296,
+      "sha256": "608808bfeef5842e2c6156a7658fbf78384712d39153fb959005ad0064d787ab",
+      "compressed_bytes": 17242,
+      "compressed_sha256": "b9da3b9b4687699fd2a611e687062b821e3c0f93fb63aa9cad9c462dbe95a0c2"
+    }
+  }
+}

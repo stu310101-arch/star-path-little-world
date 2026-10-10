@@ -78,7 +78,10 @@ func compare(filename: String, clips: Array) -> void:
 	verify(old_anim.get_animation_list() == new_anim.get_animation_list(), filename + " animation names")
 	verify(old_skeleton.get_bone_count() == new_skeleton.get_bone_count(), filename + " bone count")
 	var new_meshes: Array[Node] = optimized.find_children("*", "MeshInstance3D", true, false)
-	verify(new_meshes.size() == 1, filename + " single batched mesh")
+	var surfaces: int = 0
+	for node: Node in new_meshes:
+		surfaces += (node as MeshInstance3D).mesh.get_surface_count()
+	verify(surfaces == 11, filename + " preserves eleven material surfaces")
 	for clip: String in clips:
 		for model: Node3D in [old, optimized]:
 			for node: Node in model.find_children("*", "MeshInstance3D", true, false):

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqm8006863vry"
 path.s3tc="res://.godot/imported/liner_colormap.png-af30e0f3145fead01cedde5f7671301f.s3tc.ctex"
+path.etc2="res://.godot/imported/liner_colormap.png-af30e0f3145fead01cedde5f7671301f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/scenery/liner_colormap.png"
-dest_files=["res://.godot/imported/liner_colormap.png-af30e0f3145fead01cedde5f7671301f.s3tc.ctex"]
+dest_files=["res://.godot/imported/liner_colormap.png-af30e0f3145fead01cedde5f7671301f.s3tc.ctex", "res://.godot/imported/liner_colormap.png-af30e0f3145fead01cedde5f7671301f.etc2.ctex"]
 
 [params]
 

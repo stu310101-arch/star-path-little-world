@@ -17,6 +17,8 @@ import struct
 ROOT = Path(__file__).resolve().parents[1]
 LOADER_SHA256 = "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
 OPTIMIZED_LOADER_SHA256 = "6afbd556a1489bae7e420da209e2bec42baa295b31cb9aba2f6094bacb7fc34d"
+CUSTOM_LOADER_SHA256 = "d7bbd4f19ae28e38ab88ed1976e622a025f93c55dac902ed2341df887931a626"
+CUSTOM_OPTIMIZED_LOADER_SHA256 = "5236637c559971aed2ae09405c6df2a1cdfd72c4514fcccaf883a061f0dea1bd"
 MANIFEST = "index.delivery.json"
 SCRIPT = "index.delivery.js"
 BACKGROUND_SCRIPT = "index.background.js"
@@ -56,10 +58,11 @@ def prepare(folder: Path, expected_loader_sha256: str = LOADER_SHA256) -> dict:
     loader_hash = digest(loader)
     allowed = {expected_loader_sha256}
     if expected_loader_sha256 == LOADER_SHA256:
-        allowed.add(OPTIMIZED_LOADER_SHA256)
+        allowed.update([OPTIMIZED_LOADER_SHA256, CUSTOM_LOADER_SHA256, CUSTOM_OPTIMIZED_LOADER_SHA256])
     if loader_hash not in allowed:
         raise ValueError("Unknown Web loader; review the boot adapter for this Godot/template version")
-    if expected_loader_sha256 == LOADER_SHA256 and loader_hash == LOADER_SHA256:
+    if expected_loader_sha256 == LOADER_SHA256 and loader_hash in [LOADER_SHA256, CUSTOM_LOADER_SHA256]:
+        target_hash = OPTIMIZED_LOADER_SHA256 if loader_hash == LOADER_SHA256 else CUSTOM_OPTIMIZED_LOADER_SHA256
         # Only the pinned Emscripten presentation helper changes. isEnabled is
         # the Boolean capability query; getParameter routes through a slower
         # generic synchronous query in Chromium. Preserve scissor restoration.
@@ -67,7 +70,7 @@ def prepare(folder: Path, expected_loader_sha256: str = LOADER_SHA256) -> dict:
         assert loader.count(old) == 1
         loader = loader.replace(old, b"var prevScissorTest=gl.isEnabled(3089);")
         loader_hash = digest(loader)
-        assert loader_hash == OPTIMIZED_LOADER_SHA256
+        assert loader_hash == target_hash
     with (folder / "index.pck").open("rb") as stream:
         header = stream.read(20)
     if len(header) != 20 or struct.unpack("<5I", header) != (0x43504447, 4, 4, 7, 2):
@@ -149,10 +152,8 @@ def prepare(folder: Path, expected_loader_sha256: str = LOADER_SHA256) -> dict:
                  + "function startLittleWorldBackgroundDownloads() {\n"
                  + "  const transport = window.LittleWorldBackgroundPacks;\n"
                  + "  transport.configure(new URL('.', location.href).href, LITTLE_WORLD_BOOT_DELIVERY.packs);\n"
-                 + "  for (const [id, pack] of Object.entries(LITTLE_WORLD_BACKGROUND_PACKS.packs)) {\n"
-                 + "    if (pack.startup === false) continue;\n"
-                 + "    transport.enqueue(id, pack.url, pack.bytes, id === 'avatar' ? 20 : 0);\n"
-                 + "  }\n}\n"
+                 + "  // Godot requests dependencies first after boot; this avoids overlapping\n"
+                 + "  // WASM/PCK initialization with decoded avatar buffers on mobile.\n}\n"
                  + CONFIG_END + "\n")
     html = html[:match.end()] + injection + html[match.end():]
     # All validation above completes before replacing release files.

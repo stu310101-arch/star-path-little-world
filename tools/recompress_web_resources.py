@@ -6,7 +6,7 @@ import shutil
 import subprocess
 import tempfile
 
-from split_web_packs import read_pack, write_pack
+from split_web_packs import read_pack, write_pack, exported_entries
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -16,6 +16,12 @@ def recompress(source, node):
     if pack.engine != (4, 7, 2):
         raise ValueError("Review RSCC format before changing Godot version")
     entries = dict(pack.entries)
+    original = exported_entries("res://assets/fonts/NotoSansTC.ttf", entries)
+    subset = exported_entries("res://assets/fonts/web/LittleWorldTC.ttf", entries)
+    original_font = [name for name in original if name.endswith(".fontdata")]
+    subset_font = [name for name in subset if name.endswith(".fontdata")]
+    assert len(original_font) == len(subset_font) == 1
+    entries[original_font[0]] = entries[subset_font[0]]
     with tempfile.TemporaryDirectory(prefix="web-resource-blocks-", dir=ROOT / "build") as temporary:
         folder = Path(temporary)
         selected = []

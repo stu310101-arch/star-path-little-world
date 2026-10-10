@@ -77,6 +77,7 @@ def prepare(source: Path, package: Path) -> None:
         + list((source / "packs").glob("*.pck"))
         + list((source / "packs").glob("*.pck.gz"))
         + [path for path in (source / "games").rglob("*") if path.is_file()]
+        + [path for path in (source / "mobile").rglob("*") if path.is_file()]
     )
     files: list[dict[str, object]] = []
     for path in paths:

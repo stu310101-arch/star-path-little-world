@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwwm0eh350j2p"
 path.s3tc="res://.godot/imported/fishing_boat_colormap.png-26b8cef14e94358b01e6b93b8f28119f.s3tc.ctex"
+path.etc2="res://.godot/imported/fishing_boat_colormap.png-26b8cef14e94358b01e6b93b8f28119f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/scenery/fishing_boat_colormap.png"
-dest_files=["res://.godot/imported/fishing_boat_colormap.png-26b8cef14e94358b01e6b93b8f28119f.s3tc.ctex"]
+dest_files=["res://.godot/imported/fishing_boat_colormap.png-26b8cef14e94358b01e6b93b8f28119f.s3tc.ctex", "res://.godot/imported/fishing_boat_colormap.png-26b8cef14e94358b01e6b93b8f28119f.etc2.ctex"]
 
 [params]
 

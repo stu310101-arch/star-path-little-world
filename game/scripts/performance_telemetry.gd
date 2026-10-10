@@ -80,7 +80,7 @@ func snapshot() -> Dictionary:
 		"nearest_id": world.get("nearest_id"),
 		"settings_open": world.get("hud").call("is_settings_open"),
 		"destinations_open": (world.get("hud").get("destination_card") as Control).visible,
-		"player": {"position": [actor.position.x, actor.position.y, actor.position.z], "heading": [heading.x, heading.y, heading.z], "overview": world.get("overview"), "paused": world.get("paused"), "entering": world.get("entering")},
+		"player": {"position": [actor.position.x, actor.position.y, actor.position.z], "heading": [heading.x, heading.y, heading.z], "overview": world.get("overview"), "paused": world.get("paused"), "entering": world.get("entering"), "jump_count": actor.get("jump_count"), "landing_count": actor.get("landing_count")},
 		"buttons": buttons,
 		"streaming": world.get("streaming").call("metrics"),
 		"minimap": world.get("hud").get("minimap").call("metrics"),

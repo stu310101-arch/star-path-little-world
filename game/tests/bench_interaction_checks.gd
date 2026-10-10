@@ -250,7 +250,7 @@ func check_station_entry() -> void:
 	check("Existing station E remains available at arrival",str(world.get("nearest_id"))=="counseling")
 	press_e()
 	await tick(2)
-	check("E still enters the intended station instead of a distant bench",bool(world.get("entering")) and player.entering and player.active_clip==&"JumpDown" and str(benches.get("state"))=="idle")
+	check("E still enters the intended station instead of a distant bench",bool(world.get("entering")) and player.entering and player.active_clip==&"JumpDown" and str(benches.get("state"))=="idle", {"world_entering":world.get("entering"), "player_entering":player.entering, "clip":str(player.active_clip), "bench_state":str(benches.get("state")), "entry_elapsed":world.get("entry_elapsed")})
 	await tick(100)
 	check("Station entry emits exactly the original destination request",portal_requests==["counseling"],portal_requests)
 	world.call("resume_world",{})
@@ -294,6 +294,9 @@ func press_e(echo: bool = false) -> void:
 	event.pressed = true
 	event.echo = echo
 	Input.parse_input_event(event)
+	# Headless runs may execute several physics ticks before their next render
+	# input flush. Dispatch this synthetic key before asserting a two-tick state.
+	Input.flush_buffered_events()
 
 func wait_state(expected: String,max_frames: int = 125) -> void:
 	for frame: int in range(max_frames):

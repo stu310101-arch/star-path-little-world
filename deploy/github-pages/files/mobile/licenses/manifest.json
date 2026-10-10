@@ -1,0 +1,117 @@
+{
+  "web_export": {
+    "pack_version": 4,
+    "engine_version": [
+      4,
+      7,
+      2
+    ],
+    "embedded_resource_families": {
+      "modular_buildings": true,
+      "road_tiles": true,
+      "font_OFL_already_in_pck": false
+    }
+  },
+  "licenses": [
+    {
+      "family": "Vincent van Gogh - The Starry Night (1889)",
+      "source_file": "game/assets/training_room/textures/ATTRIBUTION.md",
+      "delivered_file": "licenses/Van-Gogh-Starry-Night-Public-Domain.txt",
+      "sha256": "0b80c76981409db1b09c86bf413d81b17fc59e0254b13799f41dfe110b3c160d",
+      "copy_verified": true
+    },
+    {
+      "family": "Kenney City Kit Suburban 2.0",
+      "source_file": "game/assets/kenney/suburban/License.txt",
+      "delivered_file": "licenses/Kenney-City-Kit-Suburban-CC0.txt",
+      "sha256": "d778fa769a89a7d9f167bc337fdf8fc2144e47d9abb0c35eb6ad897c0ee24d0a",
+      "copy_verified": true
+    },
+    {
+      "family": "Kenney City Kit Commercial 2.1",
+      "source_file": "game/assets/kenney/commercial/License.txt",
+      "delivered_file": "licenses/Kenney-City-Kit-Commercial-CC0.txt",
+      "sha256": "c38cee408d022e57e44e49f1cd655c2fe0dc881a07b881276b795215cdc0de69",
+      "copy_verified": true
+    },
+    {
+      "family": "Kenney Modular Buildings 2.1",
+      "source_file": "game/assets/kenney/modular/License.txt",
+      "delivered_file": "licenses/Kenney-Modular-Buildings-CC0.txt",
+      "sha256": "84002607f647b608c2861d8413bd9136a36d4063d74bf1af79347e3a012abeb5",
+      "copy_verified": true
+    },
+    {
+      "family": "Kenney 3D Road Tiles",
+      "source_file": "game/assets/kenney/roads/License.txt",
+      "delivered_file": "licenses/Kenney-3D-Road-Tiles-CC0.txt",
+      "sha256": "ce73128708a9086bdcca3d1b7f70d1e90cdcade82413f8257875c0ccc1b50eb4",
+      "copy_verified": true
+    },
+    {
+      "family": "Kenney Car Kit 3.1",
+      "source_file": "game/assets/urban/License.txt",
+      "delivered_file": "licenses/Kenney-Car-Kit-CC0.txt",
+      "sha256": "c33b7f6453d134deae7b1b8493717d9ccfa754c25ab97f6de89b88f8fda19b00",
+      "copy_verified": true
+    },
+    {
+      "family": "Kenney Watercraft Kit 2.1",
+      "source_file": "game/assets/scenery/Kenney-CC0.txt",
+      "delivered_file": "licenses/Kenney-Watercraft-Kit-CC0.txt",
+      "sha256": "f5f520f81277128fb422aebe334d2f08e6d8e5f7face6008885d8ff920253724",
+      "copy_verified": true
+    },
+    {
+      "family": "Quaternius base character",
+      "source_file": "game/assets/character/License.txt",
+      "delivered_file": "licenses/Quaternius-Character-CC0.txt",
+      "sha256": "83d8959f9fc56353ed571fbe2dc52e4bcd64508e2399501cd45ac2ce3df0bf8c",
+      "copy_verified": true
+    },
+    {
+      "family": "Quaternius Animated Fish",
+      "source_file": "game/assets/scenery/Quaternius-CC0.txt",
+      "delivered_file": "licenses/Quaternius-Animated-Fish-CC0.txt",
+      "sha256": "2832c27ece15255677c5a6d7437ed05d6a2f49ccb73d867ab13d2be3f93e84e2",
+      "copy_verified": true
+    },
+    {
+      "family": "Noto Sans TC",
+      "source_file": "game/assets/fonts/OFL.txt",
+      "delivered_file": "licenses/Noto-Sans-TC-OFL.txt",
+      "sha256": "e35ffdebb2225b49814c31889cbb3ce69cb3509e6a9f431edaba5e1a6de8cd15",
+      "copy_verified": true
+    },
+    {
+      "family": "Godot engine",
+      "source": "Engine metadata API for matching exported engine version",
+      "delivered_file": "licenses/Godot-Engine-MIT.txt",
+      "sha256": "0cc27400b8da8c06bb35350422c14715647cd2632c138921fd49caa6610a1ef6"
+    },
+    {
+      "family": "Godot engine",
+      "source": "Engine metadata API for matching exported engine version",
+      "delivered_file": "licenses/Godot-Third-Party-Licenses.txt",
+      "sha256": "279c71d5485be6e9a4a207349b6f62a5dbd485402de562eea9b9297a595ae934"
+    },
+    {
+      "family": "Godot engine",
+      "source": "Engine metadata API for matching exported engine version",
+      "delivered_file": "licenses/Godot-Copyright-Information.json",
+      "sha256": "f61103e8891fd07f5145ad41bba2c97fcc2fc82fd0b6cc0b4b6964a3c845046c"
+    }
+  ],
+  "godot_engine_version": {
+    "build": "official",
+    "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "hex": 263938,
+    "major": 4,
+    "minor": 7,
+    "patch": 2,
+    "status": "stable",
+    "string": "4.7.2-stable (official)",
+    "timestamp": 0
+  },
+  "notice_sha256": "9a90178133835e752f9a3afab605574eaac190905a50d4ef4a6c5ae29722f63f"
+}

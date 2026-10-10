@@ -19,6 +19,7 @@ const LOW_ACTIVE_DISTANCE: float = 27.0
 const LOW_UNLOAD_DISTANCE: float = 45.0
 const LOW_ANIMATION_INTERVAL: float = .10
 const LOW_UNDERSTORY_FRACTION: int = 60
+const PREFETCH_MARGIN: float = 12.0
 const ANIMATED_SCRIPTS: Array[String] = ["res://scripts/lake_life.gd", "res://scripts/ocean_life.gd", "res://scripts/city_traffic.gd"]
 var _world: Node3D
 var _regions: Dictionary = {}
@@ -193,6 +194,7 @@ func _refresh_context(player_position: Vector3, camera_position: Vector3, _targe
 	if _clock < _pin_until:
 		pinned = _required_ids(_pin_position)
 	var required: Array[String] = []
+	var packs: Node = get_node_or_null("/root/WebPacks")
 	if not _overview:
 		required = _required_ids(focus)
 	for id: String in _regions:
@@ -200,6 +202,12 @@ func _refresh_context(player_position: Vector3, camera_position: Vector3, _targe
 		var distance: float = focus.distance_to(region.center as Vector3)
 		var pin: bool = pinned.has(id)
 		var eligible: bool = not _overview or close_overview
+		# Fetch nearby districts before their existing detail activation boundary.
+		# Colliders stay in the permanent boot world, so slow/offline downloads
+		# cannot remove ground or allow passage through authored obstacles.
+		if packs != null and eligible and distance < load_distance + PREFETCH_MARGIN:
+			for chunk: Dictionary in region.chunks:
+				packs.call("request_resource", str(chunk.path), -20 - int(distance))
 		var wanted: bool = pin or (eligible and (distance < load_distance or required.has(id)))
 		region.requested = wanted
 		if wanted:

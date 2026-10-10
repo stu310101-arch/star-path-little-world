@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddfslnbwf33ta"
 path.s3tc="res://.godot/imported/variation-b.png-82e1973a69bd9a40b2be348914f2f51f.s3tc.ctex"
+path.etc2="res://.godot/imported/variation-b.png-82e1973a69bd9a40b2be348914f2f51f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/kenney/suburban/Models/Textures/variation-b.png"
-dest_files=["res://.godot/imported/variation-b.png-82e1973a69bd9a40b2be348914f2f51f.s3tc.ctex"]
+dest_files=["res://.godot/imported/variation-b.png-82e1973a69bd9a40b2be348914f2f51f.s3tc.ctex", "res://.godot/imported/variation-b.png-82e1973a69bd9a40b2be348914f2f51f.etc2.ctex"]
 
 [params]
 

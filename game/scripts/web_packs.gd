@@ -1,5 +1,5 @@
 extends Node
-## Page-lifetime resource packs. No Service Worker, Cache Storage or IDB files.
+## Verified page-lifetime packs; the browser optionally caches their transfers.
 signal pack_ready(id: String)
 signal pack_failed(id: String, message: String)
 
@@ -7,7 +7,7 @@ const MANIFEST: String = "res://data/web_packs.json"
 const DOWNLOAD_BYTES_PER_FRAME: int = 4194304
 # A 2 ms budget limited the measured Web path to one 256 KiB chunk per
 # rendered frame, even after the entire network transfer had completed.
-# Initial play is gated on outdoor/startup packs; allow bounded 8 ms ingestion while
+# Entry is gated on the avatar and target district; allow bounded 8 ms ingestion while
 # preserving overview input/rendering and the separate 4 MiB frame ceiling.
 const DOWNLOAD_WORK_BUDGET_USEC: int = 8000
 const READ_CHUNK_BYTES: int = 262144
@@ -156,6 +156,21 @@ func retry_failed() -> void:
 			_request_pack(id, 100)
 	_errors.clear()
 
+func retry_resource(path: String) -> void:
+	var id: String = str(_resources.get(path, ""))
+	_retry_pack(id)
+
+func _retry_pack(id: String) -> void:
+	if not _packs.has(id):
+		return
+	for dependency: String in _packs[id].get("dependencies", []):
+		_retry_pack(dependency)
+	if _errors.has(id):
+		_errors.erase(id)
+		_states.erase(id)
+		_web_requested.erase(id)
+		_request_pack(id, 100)
+
 func _process(_delta: float) -> void:
 	if not _enabled:
 		return
@@ -180,6 +195,13 @@ func _process(_delta: float) -> void:
 	var selected: String = ""
 	var priority: int = -2147483648
 	for id: String in _queue:
+		# Select a started browser job before reserving its MEMFS file. Otherwise
+		# a newly reprioritized queued pack can wait on a bounded stream which
+		# only Godot can drain, deadlocking mobile backpressure.
+		if _web_transport != null:
+			var browser_state: String = str(_web_transport.status(id).state)
+			if browser_state not in ["downloading", "downloaded", "failed"]:
+				continue
 		var dependencies_ready: bool = true
 		for dependency: String in _packs[id].get("dependencies", []):
 			dependencies_ready = dependencies_ready and _states.get(dependency, "") == "ready"
@@ -407,6 +429,7 @@ func _fail(message: String) -> void:
 	_states[id] = "failed"
 	_errors[id] = message
 	if _web_transport != null:
+		_web_transport.invalidate(id)
 		_web_transport.release(id)
 		_web_requested.erase(id)
 	DirAccess.remove_absolute(_local_path(id))

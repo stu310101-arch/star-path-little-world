@@ -43,13 +43,16 @@ def stamp(folder: Path) -> dict:
          ROOT / "tools/training_computer_games.js", ROOT / "tools/build_web_avatar.py",
          ROOT / "tools/recompress_web_resources.py", ROOT / "tools/recompress_web_resources.cjs",
          ROOT / "tools/build_web_release.py", ROOT / "deploy/github-pages/package.py"]
+        + [ROOT / "tools" / name for name in ("build_web_font.py", "build_web_template.py", "prepare_web_platform.py", "web_platform.js", "web_service_worker.js", "web_touch.js")]
+        + [ROOT / "game/assets/fonts/NotoSansTC.ttf", ROOT / "game/assets/fonts/web/LittleWorldTC.ttf"]
+        + [ROOT / "tools/templates/little-world-web-4.7.2.zip"]
         + [path for path in (ROOT / "game/web_games").rglob("*") if path.is_file()])
     source_hash = hashlib.sha256()
     for path in source_paths:
         source_hash.update(path.relative_to(ROOT).as_posix().encode())
         # Git normalizes source text line endings; binary scene bytes remain
         # exact. Keep the source ID stable across Windows and Linux checkouts.
-        payload = path.read_bytes() if path.suffix in (".scn", ".res", ".glb") else path.read_text(encoding="utf-8").encode("utf-8")
+        payload = path.read_bytes() if path.suffix in (".scn", ".res", ".glb", ".ttf", ".zip") else path.read_text(encoding="utf-8").encode("utf-8")
         source_hash.update(hashlib.sha256(payload).digest())
     build_id = "packs-" + source_hash.hexdigest()[:16]
     marker = f'<meta name="little-world-build" content="{build_id}">'
@@ -57,6 +60,10 @@ def stamp(folder: Path) -> dict:
     html = html.replace("</head>", marker + "\n\t</head>")
     html_path.write_text(html, encoding="utf-8", newline="\n")
     names = ["index.html", "index.js", "index.wasm", "index.pck"]
+    names.extend(path.name for path in folder.glob('index.audio*.js'))
+    names.extend(path.name for path in folder.glob('index*.png'))
+    if (folder / "index.platform.js").is_file():
+        names.extend(["index.platform.js", "index.touch.js"])
     if (folder / "index.delivery.json").is_file():
         names.extend(verify_boot_delivery(folder))
     if (folder / "index.training-games.json").is_file():
@@ -72,6 +79,15 @@ def stamp(folder: Path) -> dict:
             if not target.is_relative_to(folder.resolve()) or target.stat().st_size != pack["bytes"] or digest(target) != pack["sha256"]:
                 raise ValueError(f"Deferred pack does not match manifest: {name}")
             names.append(name)
+    mobile_stamp = folder / "mobile/index.release.json"
+    if mobile_stamp.exists():
+        mobile = json.loads(mobile_stamp.read_text(encoding="utf-8"))
+        for name, item in mobile["files"].items():
+            path = folder / "mobile" / name
+            if path.stat().st_size != item["bytes"] or digest(path) != item["sha256"]:
+                raise ValueError("Mobile release differs from its stamp: " + name)
+        names.extend("mobile/" + name for name in mobile["files"])
+        names.append("mobile/index.release.json")
     files = {name: {"bytes": (folder / name).stat().st_size, "sha256": digest(folder / name)} for name in names}
     info = {
         "build_id": build_id,

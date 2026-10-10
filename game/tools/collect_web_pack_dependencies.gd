@@ -21,6 +21,7 @@ func _initialize() -> void:
 	boot.erase("res://data/web_packs.json")
 	groups["boot"] = boot
 	groups["avatar"] = ["res://assets/character/runtime_web/graduate.glb", "res://assets/character/runtime_web/graduate_jump.glb", "res://assets/character/graduate_rest.glb"]
+	groups["font_fallback"] = ["res://assets/fonts/web/NotoSansTC-full.ttf"]
 	var interior: Array[String] = ["res://generated/training_room/detail_catalog.json"]
 	_append_files("res://generated/training_room/detail", interior, ["res"])
 	groups["training_room"] = interior

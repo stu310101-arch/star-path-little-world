@@ -57,6 +57,7 @@ var startup_frames: int = 0
 var preparation_status_clock: float = 0.0
 
 func _ready() -> void:
+	add_to_group("touch_camera")
 	layout = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
 	orbit_distance = float(layout.radius) * 3.7
 	setup_input()
@@ -471,6 +472,18 @@ func begin_view_drag(button_index: MouseButton) -> void:
 	dragging_view = true
 	get_viewport().set_input_as_handled()
 
+func touch_look(relative: Vector2) -> void:
+	if paused or entering or preparing_roam or preparing_room or hud.call("is_settings_open"):
+		return
+	if music != null:
+		music.call("unlock")
+	if overview:
+		orbit_yaw -= relative.x * 0.005
+		orbit_pitch += relative.y * 0.003
+	else:
+		player.rotate_heading(-relative.x * 0.005)
+		near_pitch = clampf(near_pitch + relative.y * 0.003, .08, 1.42)
+
 func finish_view_drag() -> void:
 	if not dragging_view:
 		return
@@ -703,8 +716,8 @@ func _update_preparation_status() -> void:
 	var startup_error: String = str(packs.call("startup_error")) if packs != null else ""
 	if bool(status.get("enabled", false)) and not complete:
 		var network_done: bool = int(status.network_received_bytes) >= int(status.total_bytes)
-		startup_message = ("戶外資源已下載，正在準備…" if network_done else "戶外遊戲資源下載 %.1f / %.1f MB" % [float(status.network_received_bytes)/1000000.0, float(status.total_bytes)/1000000.0])
-		startup_message += "\n可返回總覽或切換分頁，下載會繼續"
+		startup_message = ("啟動資源已下載，正在準備…" if network_done else "啟動資源下載 %.1f / %.1f MB" % [float(status.network_received_bytes)/1000000.0, float(status.total_bytes)/1000000.0])
+		startup_message += "\n可返回總覽；背景分頁可能暫停準備"
 		hud.call("set_background_download", startup_message if startup_error.is_empty() else startup_error, not startup_error.is_empty())
 	else:
 		hud.call("set_background_download", "")

@@ -3,12 +3,26 @@
     "source": "game/assets/character/runtime/graduate.glb",
     "source_sha256": "28c4f7d1b9fc1f04203538cb4ffbeaa763e6bfc7d05a58f2c10ac5f3aa700b24",
     "output": "game/assets/character/runtime_web/graduate.glb",
-    "output_sha256": "83146cb0abec9b22029efb4e1483c2e86c62a4fbeee1739744946b2cbf415d1a",
+    "output_sha256": "48f659c2a0fe470498ac4378d39e238f8919418e00f070feb4f24abb0bb6d3b3",
     "source_bytes": 42021116,
-    "output_bytes": 59951140,
+    "output_bytes": 51008192,
     "surfaces_before": 39,
     "surfaces_after": 11,
-    "shared_poses": 133,
+    "shared_poses": [
+      133,
+      133,
+      133,
+      133,
+      133,
+      0,
+      90,
+      1,
+      98,
+      17,
+      0
+    ],
+    "max_cloth_position_error_metres": 1.9151332442864564e-05,
+    "max_cloth_normal_error": 0.00020958103414159268,
     "clips": [
       {
         "name": "Walk",
@@ -341,18 +355,32 @@
         "surface": 7
       }
     ],
-    "validated": "Exact base attributes, triangles, material values, bone channels/times, skin bind matrices and float32 evaluated cloth key poses. LINEAR curves retain original times; intermediate poses are their same interpolation (subject to floating point rounding). Actual imported/rendered validation is separate."
+    "validated": "Exact base attributes, triangles, materials, bone channels/times and bind matrices. Every evaluated cloth key checked against a <0.020 mm position / 0.000212 normal-vector rounding bound, with original LINEAR key times. Serialized poses exactly match those verified arrays. Actual imported/rendered validation is separate."
   },
   {
     "source": "game/assets/character/runtime/graduate_jump.glb",
     "source_sha256": "2918c3984094edcbe4a5e83c2854cc02b219ef3d99a05f24fa4f201df1b98fd5",
     "output": "game/assets/character/runtime_web/graduate_jump.glb",
-    "output_sha256": "68ad412fd485dc010f9b9eaff9e765cf3022c4b99e234245bf968721bdaef7ea",
+    "output_sha256": "fc69e839ea2f08da1cbe4032697fc528fe1bef0a9eeebc3242213521a4035b91",
     "source_bytes": 40778928,
-    "output_bytes": 71862460,
+    "output_bytes": 54188172,
     "surfaces_before": 39,
     "surfaces_after": 11,
-    "shared_poses": 215,
+    "shared_poses": [
+      215,
+      215,
+      215,
+      215,
+      215,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "max_cloth_position_error_metres": 1.920290344514797e-05,
+    "max_cloth_normal_error": 0.0002101418940583244,
     "clips": [
       {
         "name": "JumpStart",
@@ -681,6 +709,6 @@
         "surface": 7
       }
     ],
-    "validated": "Exact base attributes, triangles, material values, bone channels/times, skin bind matrices and float32 evaluated cloth key poses. LINEAR curves retain original times; intermediate poses are their same interpolation (subject to floating point rounding). Actual imported/rendered validation is separate."
+    "validated": "Exact base attributes, triangles, materials, bone channels/times and bind matrices. Every evaluated cloth key checked against a <0.020 mm position / 0.000212 normal-vector rounding bound, with original LINEAR key times. Serialized poses exactly match those verified arrays. Actual imported/rendered validation is separate."
   }
 ]

@@ -18,6 +18,8 @@ run/max_fps=30
 [autoload]
 
 WebPacks="*res://scripts/web_packs.gd"
+WebFont="*res://scripts/web_font.gd"
+WebTouch="*res://scripts/web_touch.gd"
 
 [display]
 
@@ -31,10 +33,15 @@ window/stretch/mode="canvas_items"
 
 theme/default_font_multichannel_signed_distance_field=true
 
+[physics]
+
+2d/physics_engine.web="Dummy"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 limits/opengl/max_renderable_lights=8
 limits/opengl/max_lights_per_object=4
 environment/defaults/default_clear_color=Color(0.035, 0.1, 0.14, 1)

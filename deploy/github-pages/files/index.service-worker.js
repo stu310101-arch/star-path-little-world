@@ -1,0 +1,129 @@
+const RELEASE = {"build_id":"packs-0fc0108bad8a3346","files":{"index.html":{"bytes":12153,"sha256":"8b216f733e3ed21099c3368f54d8ec9bf09374dfbe28a8ac836cd180af3ffc6d"},"index.js":{"bytes":244383,"sha256":"5236637c559971aed2ae09405c6df2a1cdfd72c4514fcccaf883a061f0dea1bd"},"index.wasm":{"bytes":34245266,"sha256":"b61da97eda9698cac9d15e336af449feb5c613e68133c117eece312af836b336"},"index.pck":{"bytes":21745048,"sha256":"25bdc74407531b8b0c3017ba23664efffb971e0358cd42c7d288c9e894c640c2"},"index.audio.position.worklet.js":{"bytes":2973,"sha256":"be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"},"index.audio.worklet.js":{"bytes":7298,"sha256":"5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"},"index.png":{"bytes":21443,"sha256":"3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"},"index.platform.js":{"bytes":2091,"sha256":"3e5b17a28a275bb07b4429aecfac9d63470b2f77f23bc7780d4f0b00db3da784"},"index.touch.js":{"bytes":4668,"sha256":"e8d38e6e0f7aa9b1f7147f5ac2001a5523e5b23bfc17d10704aae1f3a9324104"},"index.delivery.json":{"bytes":2466,"sha256":"090a989e9d22b7193f5ddc8ba7c242a9c20fbf18d5263ea3344af8d2cb225db5"},"index.delivery.js":{"bytes":10844,"sha256":"7b2a0422b54375043c4122f3d02c86145867df1da1b9d97b258f4053bf6924b0"},"index.background.js":{"bytes":10172,"sha256":"93d20d3bc6b32e3e1c396d51f8e978a02a1ddcddded85942bae87bc0058b69ff"},"index.boot.bf8c7c09d5c0ff04.pck.gz":{"bytes":18836535,"sha256":"bf8c7c09d5c0ff04d517b73b1428e1a376798e5d679de3bcc1bef05f6a4c0e99"},"index.boot.988eb15e18685c28.wasm.gz":{"bytes":8742725,"sha256":"988eb15e18685c28c5916a5c9d4624d5a62c99782be6ff94a0398a7c5a1d416d"},"packs/music_admissions.bf3a2f162b42a7e9.pck.gz":{"bytes":1632058,"sha256":"bf3a2f162b42a7e98236b0626c34c771443bf056d25cf6f27f9ae85e4396eb76"},"packs/music_counseling.e5d73e7398b6b1ca.pck.gz":{"bytes":1313973,"sha256":"e5d73e7398b6b1ca6d1e25eb77d5876828b8f495d8a33afe65d4f2529af9b694"},"packs/music_world.263480b842ed0ad7.pck.gz":{"bytes":1268648,"sha256":"263480b842ed0ad7ce595cb7519d64a78e054199f8d01d3ed7eccd2daf61ee6b"},"packs/shared.06f7da4a8e59478b.pck.gz":{"bytes":13882,"sha256":"06f7da4a8e59478b1c6805d32102d8d81815657ef9d3db3329bc086e87f1135b"},"index.training-games.json":{"bytes":372,"sha256":"bb71806a66cb431e2e04ce660228237ec23a681802b6f4cd1e00c6d7f6c4dd58"},"index.training-games.js":{"bytes":9168,"sha256":"939e2b9b6bc0127c2e9083c7f9bc351e1671c0e0f92815b37607aa83ddb6a49d"},"games/go/index.html":{"bytes":193149,"sha256":"94fcf7f629d9ecfb65bf5750ce3b73571137aacfef600190795035d8ad5bda46"},"index.packs.json":{"bytes":24710,"sha256":"820c083bf03bc4b246f5322f00dc866e916b7f91a0b5dcb006694dc4f51b028a"},"packs/avatar-841b35f5232c4819.pck":{"bytes":28895404,"sha256":"841b35f5232c4819114298486f00e83b58e15b8351666f62811cbb9ead70852a"},"packs/district_admissions-f2b0e3e6a06dcb4f.pck":{"bytes":3271236,"sha256":"f2b0e3e6a06dcb4fb8b9c064473a9d46d64b497eeaed0e66ac4ff30280563a85"},"packs/district_counseling-374486d980eecfda.pck":{"bytes":3136932,"sha256":"374486d980eecfda60f991bd1ece944048cee60dceae41e33c3a1931e91fb682"},"packs/district_life-a2e4719f92f9ef97.pck":{"bytes":3025796,"sha256":"a2e4719f92f9ef97cc0ca59df04573ae383754d0f6966b0f9c29f86cda7bdd2f"},"packs/district_ocean-d53c179be6ad72d8.pck":{"bytes":607976,"sha256":"d53c179be6ad72d80e72928daad53647494f9fed288cf912100a59e4b2152509"},"packs/district_recommendations-ac828d60191874a0.pck":{"bytes":2558684,"sha256":"ac828d60191874a0a2cfada62c20ebd52b74a3f80992d9b23d64e20566a077f9"},"packs/district_sakura-ca8583c247a7ff0e.pck":{"bytes":4557664,"sha256":"ca8583c247a7ff0ebd6ea77ed42a8da0ec1ed53577b8c278ffba35a07ca5d855"},"packs/district_universities-6fd372a6f991ca01.pck":{"bytes":3218916,"sha256":"6fd372a6f991ca0175ad723f7b9824bed14ac758539329cf0168a5008a521f80"},"packs/district_wordking-1d33d712a3b9e5f7.pck":{"bytes":3132892,"sha256":"1d33d712a3b9e5f7ff3f42c596d9fc52502192edeb2b0cd4f7f2f78d587f3e29"},"packs/font_fallback-068377ef2c181594.pck":{"bytes":7162000,"sha256":"068377ef2c1815940636ba53b4d6d4d0a495c301a20543d31eb837669fce3bf6"},"packs/music_admissions-2ce1c35030bcc9fb.pck":{"bytes":1728528,"sha256":"2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0"},"packs/music_counseling-f3b97506778458ba.pck":{"bytes":1443824,"sha256":"f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4"},"packs/music_recommendations-66382088fcc4b843.pck":{"bytes":2195960,"sha256":"66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8"},"packs/music_wordking-a45c153d522c439d.pck":{"bytes":2315480,"sha256":"a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995"},"packs/music_world-e1a7f96b4f7f8400.pck":{"bytes":1351376,"sha256":"e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf"},"packs/shared-1851495d90c79d46.pck":{"bytes":176296,"sha256":"1851495d90c79d461971476fa2c6dec127db71c88459f127b16ceec5171925ec"},"packs/training_room-ec2ee514cca4cdec.pck":{"bytes":4781456,"sha256":"ec2ee514cca4cdecef5dc1e6f1a09466dd365048f98b5335835520a16d6405c1"},"mobile/index.html":{"bytes":12153,"sha256":"037c8d7f03c63549ea9b8316ef9361dfca2b762d60c2dd5af39c0e7d69eff7a5"},"mobile/index.js":{"bytes":244383,"sha256":"5236637c559971aed2ae09405c6df2a1cdfd72c4514fcccaf883a061f0dea1bd"},"mobile/index.wasm":{"bytes":34245266,"sha256":"b61da97eda9698cac9d15e336af449feb5c613e68133c117eece312af836b336"},"mobile/index.pck":{"bytes":21745096,"sha256":"30e54e1cf4c38620912c503811e626938dba4091aa1f095a48a38b67b356e1c4"},"mobile/index.audio.position.worklet.js":{"bytes":2973,"sha256":"be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"},"mobile/index.audio.worklet.js":{"bytes":7298,"sha256":"5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"},"mobile/index.png":{"bytes":21443,"sha256":"3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"},"mobile/index.platform.js":{"bytes":2091,"sha256":"3e5b17a28a275bb07b4429aecfac9d63470b2f77f23bc7780d4f0b00db3da784"},"mobile/index.touch.js":{"bytes":4668,"sha256":"e8d38e6e0f7aa9b1f7147f5ac2001a5523e5b23bfc17d10704aae1f3a9324104"},"mobile/index.delivery.json":{"bytes":2466,"sha256":"0d66bf37f8eff302adb700b1790b7708c06534b98dbe8db4790841f261dc24b9"},"mobile/index.delivery.js":{"bytes":10844,"sha256":"7b2a0422b54375043c4122f3d02c86145867df1da1b9d97b258f4053bf6924b0"},"mobile/index.background.js":{"bytes":10172,"sha256":"93d20d3bc6b32e3e1c396d51f8e978a02a1ddcddded85942bae87bc0058b69ff"},"mobile/index.boot.c0777ca341006ef9.pck.gz":{"bytes":18920844,"sha256":"c0777ca341006ef97c8f613591005c7b421850c71c29a95fd641bffaf6ee1fca"},"mobile/index.boot.988eb15e18685c28.wasm.gz":{"bytes":8742725,"sha256":"988eb15e18685c28c5916a5c9d4624d5a62c99782be6ff94a0398a7c5a1d416d"},"mobile/packs/music_admissions.bf3a2f162b42a7e9.pck.gz":{"bytes":1632058,"sha256":"bf3a2f162b42a7e98236b0626c34c771443bf056d25cf6f27f9ae85e4396eb76"},"mobile/packs/music_counseling.e5d73e7398b6b1ca.pck.gz":{"bytes":1313973,"sha256":"e5d73e7398b6b1ca6d1e25eb77d5876828b8f495d8a33afe65d4f2529af9b694"},"mobile/packs/music_world.263480b842ed0ad7.pck.gz":{"bytes":1268648,"sha256":"263480b842ed0ad7ce595cb7519d64a78e054199f8d01d3ed7eccd2daf61ee6b"},"mobile/packs/shared.b9da3b9b4687699f.pck.gz":{"bytes":17242,"sha256":"b9da3b9b4687699fd2a611e687062b821e3c0f93fb63aa9cad9c462dbe95a0c2"},"mobile/index.training-games.json":{"bytes":372,"sha256":"bb71806a66cb431e2e04ce660228237ec23a681802b6f4cd1e00c6d7f6c4dd58"},"mobile/index.training-games.js":{"bytes":9168,"sha256":"939e2b9b6bc0127c2e9083c7f9bc351e1671c0e0f92815b37607aa83ddb6a49d"},"mobile/games/go/index.html":{"bytes":193149,"sha256":"94fcf7f629d9ecfb65bf5750ce3b73571137aacfef600190795035d8ad5bda46"},"mobile/index.packs.json":{"bytes":24710,"sha256":"baf8667d71b5cbbc7f54c1bfbce523c9344998285790a56df7729d3c87d3f884"},"mobile/packs/avatar-841b35f5232c4819.pck":{"bytes":28895404,"sha256":"841b35f5232c4819114298486f00e83b58e15b8351666f62811cbb9ead70852a"},"mobile/packs/district_admissions-f2b0e3e6a06dcb4f.pck":{"bytes":3271236,"sha256":"f2b0e3e6a06dcb4fb8b9c064473a9d46d64b497eeaed0e66ac4ff30280563a85"},"mobile/packs/district_counseling-374486d980eecfda.pck":{"bytes":3136932,"sha256":"374486d980eecfda60f991bd1ece944048cee60dceae41e33c3a1931e91fb682"},"mobile/packs/district_life-a2e4719f92f9ef97.pck":{"bytes":3025796,"sha256":"a2e4719f92f9ef97cc0ca59df04573ae383754d0f6966b0f9c29f86cda7bdd2f"},"mobile/packs/district_ocean-d53c179be6ad72d8.pck":{"bytes":607976,"sha256":"d53c179be6ad72d80e72928daad53647494f9fed288cf912100a59e4b2152509"},"mobile/packs/district_recommendations-ac828d60191874a0.pck":{"bytes":2558684,"sha256":"ac828d60191874a0a2cfada62c20ebd52b74a3f80992d9b23d64e20566a077f9"},"mobile/packs/district_sakura-ca8583c247a7ff0e.pck":{"bytes":4557664,"sha256":"ca8583c247a7ff0ebd6ea77ed42a8da0ec1ed53577b8c278ffba35a07ca5d855"},"mobile/packs/district_universities-6fd372a6f991ca01.pck":{"bytes":3218916,"sha256":"6fd372a6f991ca0175ad723f7b9824bed14ac758539329cf0168a5008a521f80"},"mobile/packs/district_wordking-1d33d712a3b9e5f7.pck":{"bytes":3132892,"sha256":"1d33d712a3b9e5f7ff3f42c596d9fc52502192edeb2b0cd4f7f2f78d587f3e29"},"mobile/packs/font_fallback-068377ef2c181594.pck":{"bytes":7162000,"sha256":"068377ef2c1815940636ba53b4d6d4d0a495c301a20543d31eb837669fce3bf6"},"mobile/packs/music_admissions-2ce1c35030bcc9fb.pck":{"bytes":1728528,"sha256":"2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0"},"mobile/packs/music_counseling-f3b97506778458ba.pck":{"bytes":1443824,"sha256":"f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4"},"mobile/packs/music_recommendations-66382088fcc4b843.pck":{"bytes":2195960,"sha256":"66382088fcc4b8430b4b1dafbf713faa34b308ce2009846cb5996f2d805d46a8"},"mobile/packs/music_wordking-a45c153d522c439d.pck":{"bytes":2315480,"sha256":"a45c153d522c439d02ab16f251c9efdb0e2518ee7c37019b129a89b89e926995"},"mobile/packs/music_world-e1a7f96b4f7f8400.pck":{"bytes":1351376,"sha256":"e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf"},"mobile/packs/shared-608808bfeef5842e.pck":{"bytes":176296,"sha256":"608808bfeef5842e2c6156a7658fbf78384712d39153fb959005ad0064d787ab"},"mobile/packs/training_room-ec2ee514cca4cdec.pck":{"bytes":4781456,"sha256":"ec2ee514cca4cdecef5dc1e6f1a09466dd365048f98b5335835520a16d6405c1"},"mobile/index.release.json":{"bytes":6352,"sha256":"f1dd6285ccca6bab86cef77d1cf82c0256c5ac82b5ed9cff6559d2728b037b67"}},"shell":["index.html","index.js","index.audio.position.worklet.js","index.audio.worklet.js","index.platform.js","index.touch.js","index.delivery.json","index.delivery.js","index.background.js","index.training-games.json","index.training-games.js","index.packs.json","mobile/index.html","mobile/index.js","mobile/index.audio.position.worklet.js","mobile/index.audio.worklet.js","mobile/index.platform.js","mobile/index.touch.js","mobile/index.delivery.json","mobile/index.delivery.js","mobile/index.background.js","mobile/index.training-games.json","mobile/index.training-games.js","mobile/index.packs.json","mobile/index.release.json"]};
+/* Generated configuration is prepended by prepare_web_platform.py.
+ * Cache only this release's allowlisted files, with content-addressed keys.
+ * Both consumers must pull before another network chunk is read: ordinary
+ * Response.clone()/tee() could buffer an entire pack behind a paused game.
+ */
+'use strict';
+function boundedTee(body) {
+  const reader = body.getReader();
+  const controllers = [], demand = [false, false], cancelled = [false, false];
+  let busy = false;
+  async function pump() {
+    if (busy || !demand.every((value, i) => value || cancelled[i])) return;
+    if (cancelled.every(Boolean)) { await reader.cancel().catch(() => {}); return; }
+    busy = true;
+    try {
+      const item = await reader.read();
+      for (let i = 0; i < 2; i++) if (!cancelled[i]) {
+        demand[i] = false;
+        if (item.done) controllers[i].close();
+        else controllers[i].enqueue(item.value);
+      }
+    } catch (error) {
+      for (let i = 0; i < 2; i++) if (!cancelled[i]) controllers[i].error(error);
+      cancelled.fill(true);
+    } finally { busy = false; }
+  }
+  const branches = [0, 1].map(i => new ReadableStream({
+    start(controller) { controllers[i] = controller; },
+    pull() { demand[i] = true; return pump(); },
+    cancel() { cancelled[i] = true; void pump(); },
+  }, {highWaterMark: 0}));
+  // Cache.put may reject before reading (quota/private mode). The game must
+  // continue even when the browser retains the failed response's stream lock.
+  branches.stopStorage = () => {cancelled[1] = true; void pump();};
+  return branches;
+}
+if (typeof module !== 'undefined') module.exports = {boundedTee};
+else {
+  const scopeURL = new URL(self.registration.scope);
+  const cachePrefix = 'little-world-' + encodeURIComponent(scopeURL.pathname) + '-';
+  const cacheName = cachePrefix + RELEASE.build_id;
+  const cacheKey = file => new URL('__content/' + file.sha256, scopeURL).href;
+  const digest = async bytes => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), v => v.toString(16).padStart(2, '0')).join('');
+  const shell = RELEASE.shell;
+  const shellKeys = new Set(shell.map(name => cacheKey(RELEASE.files[name])));
+  const byKey = new Map(Object.values(RELEASE.files).map(file => [cacheKey(file), file.bytes]));
+  let maintenance = Promise.resolve();
+  const pendingWrites = new Map();
+  function trim(cache) {
+    maintenance = maintenance.catch(() => {}).then(async () => {
+      const keys = await cache.keys();
+      let bytes = keys.reduce((sum, key) => sum + (byKey.get(key.url) || 0), 0);
+      for (const key of keys) {
+        if (bytes <= 128 * 1024 * 1024) break;
+        if (shellKeys.has(key.url)) continue;
+        await cache.delete(key);
+        bytes -= byKey.get(key.url) || 0;
+      }
+    });
+    return maintenance;
+  }
+  self.addEventListener('install', event => {
+    event.waitUntil((async () => {
+      const cache = await caches.open(cacheName);
+      // All small shell files are verified before the worker can activate.
+      // A deployment in flight never creates a mixed offline shell.
+      for (const name of shell) {
+        const response = await fetch(new URL(name, scopeURL), {cache:'reload'});
+        if (!response.ok) throw Error('Shell HTTP ' + response.status);
+        const bytes = await response.arrayBuffer();
+        const file = RELEASE.files[name];
+        if (bytes.byteLength !== file.bytes || await digest(bytes) !== file.sha256) throw Error('Shell changed during deployment');
+        await cache.put(cacheKey(file), new Response(bytes, {headers:response.headers}));
+      }
+    })());
+    // Updates wait for existing clients to close; no mid-game skipWaiting.
+  });
+  self.addEventListener('activate', event => event.waitUntil((async () => {
+    for (const name of await caches.keys()) if (name.startsWith(cachePrefix) && name !== cacheName) await caches.delete(name);
+    await self.clients.claim();
+  })()));
+  self.addEventListener('message', event => {
+    if (event.data?.type !== 'little-world-invalidate') return;
+    const url = new URL(event.data.url, scopeURL);
+    if (url.origin !== scopeURL.origin || !url.pathname.startsWith(scopeURL.pathname)) return;
+    const name = decodeURIComponent(url.pathname.slice(scopeURL.pathname.length));
+    const file = RELEASE.files[name];
+    if (file) event.waitUntil((async () => {
+      const key = cacheKey(file);
+      // A consumer can finish hashing before Cache.put finishes its disk write.
+      // Delete after that write, so a corrupt response cannot reappear on retry.
+      await pendingWrites.get(key);
+      return (await caches.open(cacheName)).delete(key);
+    })());
+  });
+  self.addEventListener('fetch', event => {
+    const url = new URL(event.request.url);
+    if (event.request.method !== 'GET' || url.origin !== scopeURL.origin || !url.pathname.startsWith(scopeURL.pathname)) return;
+    let name = decodeURIComponent(url.pathname.slice(scopeURL.pathname.length));
+    if (!name || name.endsWith('/')) name += 'index.html';
+    const file = RELEASE.files[name];
+    if (!file) return;
+    // HTML/JS/JSON are network-first: online visits see the current deployment
+    // even while an older worker waits for its remaining tabs to close.
+    const immutable = /(?:[.-][a-f0-9]{16}\.)/.test(name);
+    event.respondWith((async () => {
+      let cache;
+      try {cache = await caches.open(cacheName);} catch {return fetch(event.request);}
+      if (immutable && event.request.cache !== 'reload') {
+        const saved = await cache.match(cacheKey(file));
+        if (saved) return saved;
+      }
+      let response;
+      try {response = await fetch(event.request);} catch {
+        return await cache.match(cacheKey(file)) || new Response('Offline: this area has not been downloaded.', {status:503});
+      }
+      if (!response.ok || !response.body || !immutable) return response;
+      const branches = boundedTee(response.body);
+      const [game, storage] = branches;
+      const options = {status:response.status, statusText:response.statusText, headers:response.headers};
+      const key = cacheKey(file);
+      const write = cache.put(key, new Response(storage, options)).then(() => trim(cache)).catch(() => branches.stopStorage());
+      pendingWrites.set(key, write);
+      event.waitUntil(write.finally(() => {if (pendingWrites.get(key) === write) pendingWrites.delete(key);}));
+      return new Response(game, options);
+    })());
+  });
+}

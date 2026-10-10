@@ -143,7 +143,7 @@ async function clickButton(selector, { scroll = false } = {}) {
     if (!scroll) { await delay(1000); continue; }
     const target = (state.metrics?.buttons || []).find(b => matches(b, selector));
     const visibleRows = (state.metrics?.buttons || []).filter(b => b.visible && /^\d{2}\s/.test(b.text));
-    const anchor = visibleRows[Math.floor(visibleRows.length / 2)]?.center || [0.13, 0.76];
+    const anchor = state.metrics?.settings_open ? [0.5, 0.5] : (visibleRows[Math.floor(visibleRows.length / 2)]?.center || [0.13, 0.76]);
     const direction = target && target.center[1] < anchor[1] ? -1 : 1;
     await page.mouse.move(box.x + box.width * anchor[0], box.y + box.height * anchor[1]);
     await page.mouse.wheel(0, direction * 180);
@@ -196,7 +196,7 @@ async function openSettings() {
 
 async function graphicsChoice(name, predicate) {
   graphicsTouched = true;
-  await clickButton({ name });
+  await clickButton({ name }, {scroll:true});
   const s = await waitFor(name, s => predicate(s.metrics?.graphics || {}));
   check(name, true, s.metrics.graphics);
 }

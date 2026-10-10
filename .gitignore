@@ -4,6 +4,7 @@
 **/__pycache__/
 *.pyc
 /build/
+/game/assets/fonts/web/
 /_site/
 /deliverables/
 /assets/
