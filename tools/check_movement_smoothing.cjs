@@ -134,7 +134,9 @@ const {chromium} = require('playwright');
 const args = process.argv.slice(2);
 const positional = args.filter(value => !value.startsWith('--'));
 const options = Object.fromEntries(args.filter(value => value.startsWith('--')).map(value => value.slice(2).split('=')));
-if (Object.keys(options).some(key => !['profile', 'repeats', 'duration', 'visual-smoke', 'scale-diagnostic-only'].includes(key))) throw Error('Unknown option');
+if (Object.keys(options).some(key => !['profile', 'repeats', 'duration', 'viewport', 'visual-smoke', 'scale-diagnostic-only'].includes(key))) throw Error('Unknown option');
+const dimensions = (options.viewport || '1280x800').match(/^(\d+)x(\d+)$/);
+if (!dimensions || dimensions.slice(1).some(value => Number(value) < 320 || Number(value) > 3840)) throw Error('Viewport must be WIDTHxHEIGHT within 320..3840');
 const visualSmokeRequested = Object.hasOwn(options, 'visual-smoke');
 const scaleDiagnostic = Object.hasOwn(options, 'scale-diagnostic-only');
 if (!positional[0]) throw Error('Expected localhost URL and optional report label/release manifest');
@@ -159,7 +161,7 @@ if (!baseWidth || !baseHeight || stretchAspect !== 'keep') throw Error('Input ma
 fs.mkdirSync(out, {recursive:true});
 const reportFile = path.join(out, `${label}.json`);
 const expectedRelease = positional[2] ? JSON.parse(fs.readFileSync(path.resolve(repo, positional[2]), 'utf8')) : null;
-const report = {label, url:url.href, started:new Date().toISOString(), viewport:{width:1280,height:800},
+const report = {label, url:url.href, started:new Date().toISOString(), viewport:{width:Number(dimensions[1]),height:Number(dimensions[2])},
   duration_ms:duration, repeats, visual_smoke_requested:visualSmokeRequested, scale_diagnostic_only:scaleDiagnostic,
   profile_order:[], phases:[], checks:[], errors:[], requests:[],
   expected_release:expectedRelease, requested_graphics:{frame_limit:60, msaa_enabled:false},
@@ -171,7 +173,7 @@ const report = {label, url:url.href, started:new Date().toISOString(), viewport:
 if (scaleDiagnostic) {
   report.scale_diagnostic = {purpose:'Same low profile and internal 3D pixels, with and without render scaling.',
     internal_pixels:[1152,720], aspect_ratio:1.6, workloads:['standing','turn'],
-    conditions:[{name:'low-scaled',viewport:{width:1280,height:800},expected_scale:.9},
+    conditions:[{name:'low-scaled',viewport:{width:Number(dimensions[1]),height:Number(dimensions[2])},expected_scale:.9},
       {name:'low-native720',viewport:{width:1152,height:720},expected_scale:1}],
     limitation:'UI and final render target sizes also differ. This is suggestive evidence for the extra scaling/copy path, not an isolated GPU pass benchmark.'};
 }
@@ -287,6 +289,9 @@ async function setProfile(profile) {
   await click('CloseGraphicsSettings');
 }
 async function resetRoad() {
+  // Newly completed downloads remove the preparation panel and shift controls.
+  // Wait for settled/fresh telemetry before using its on-screen coordinates.
+  await settled();
   if (!(await state()).metrics.destinations_open) await click(null, /選擇目的地/);
   await click(null, new RegExp('^\\d{2}\\s+' + station.label));
   await until('counseling arrival', value => roaming(value) && value.metrics.nearest_id === 'counseling');

@@ -1,83 +1,83 @@
 {
   "packs": {
     "avatar": {
-      "bytes": 38410516,
+      "bytes": 36805020,
       "dependencies": [],
-      "sha256": "d3f7a4c17497192815afd895b541627a895edfe4f3c268afb39c4ad5cdc31ef2",
+      "sha256": "f7d852af01da9807f59487d25fce53e17876230765b81d8c29f8d45e2a4db52b",
       "startup": true,
-      "url": "packs/avatar-d3f7a4c174971928.pck"
+      "url": "packs/avatar-f7d852af01da9807.pck"
     },
     "district_admissions": {
-      "bytes": 3614420,
+      "bytes": 3271236,
       "dependencies": [
         "shared"
       ],
-      "sha256": "028e464055eed17fb1f37013d3fe5be8ef8a05605628536e1b82cd0a68d914f4",
+      "sha256": "f2b0e3e6a06dcb4fb8b9c064473a9d46d64b497eeaed0e66ac4ff30280563a85",
       "startup": true,
-      "url": "packs/district_admissions-028e464055eed17f.pck"
+      "url": "packs/district_admissions-f2b0e3e6a06dcb4f.pck"
     },
     "district_counseling": {
-      "bytes": 3465044,
+      "bytes": 3136932,
       "dependencies": [
         "shared"
       ],
-      "sha256": "0d62cf059dda0ea8fe08c6e76ff67e5e232002c6e8f9b633ec3282952b456709",
+      "sha256": "374486d980eecfda60f991bd1ece944048cee60dceae41e33c3a1931e91fb682",
       "startup": true,
-      "url": "packs/district_counseling-0d62cf059dda0ea8.pck"
+      "url": "packs/district_counseling-374486d980eecfda.pck"
     },
     "district_life": {
-      "bytes": 3356052,
+      "bytes": 3025796,
       "dependencies": [
         "shared"
       ],
-      "sha256": "6f88c55a79f981d3292dbdbb3bccb26b911c1c3d45a4d1d95c346df756889aeb",
+      "sha256": "a2e4719f92f9ef97cc0ca59df04573ae383754d0f6966b0f9c29f86cda7bdd2f",
       "startup": true,
-      "url": "packs/district_life-6f88c55a79f981d3.pck"
+      "url": "packs/district_life-a2e4719f92f9ef97.pck"
     },
     "district_ocean": {
-      "bytes": 729544,
+      "bytes": 607976,
       "dependencies": [
         "shared"
       ],
-      "sha256": "a9abcf46a26462ad91ac5af8885ae5db545cc0ea260b49d64e69dc36dbcd7e62",
+      "sha256": "d53c179be6ad72d80e72928daad53647494f9fed288cf912100a59e4b2152509",
       "startup": true,
-      "url": "packs/district_ocean-a9abcf46a26462ad.pck"
+      "url": "packs/district_ocean-d53c179be6ad72d8.pck"
     },
     "district_recommendations": {
-      "bytes": 2888620,
+      "bytes": 2558684,
       "dependencies": [
         "shared"
       ],
-      "sha256": "07a9543c325c90acc36a2c802f13ed47331253e5dd5c8f1798cf902818d69f15",
+      "sha256": "ac828d60191874a0a2cfada62c20ebd52b74a3f80992d9b23d64e20566a077f9",
       "startup": true,
-      "url": "packs/district_recommendations-07a9543c325c90ac.pck"
+      "url": "packs/district_recommendations-ac828d60191874a0.pck"
     },
     "district_sakura": {
-      "bytes": 4921072,
+      "bytes": 4557664,
       "dependencies": [
         "shared"
       ],
-      "sha256": "fa424a9e15829ed2603dc4aebbaa58d7eadc0650c47856869e9c09e1ef672119",
+      "sha256": "ca8583c247a7ff0ebd6ea77ed42a8da0ec1ed53577b8c278ffba35a07ca5d855",
       "startup": true,
-      "url": "packs/district_sakura-fa424a9e15829ed2.pck"
+      "url": "packs/district_sakura-ca8583c247a7ff0e.pck"
     },
     "district_universities": {
-      "bytes": 3564404,
+      "bytes": 3218916,
       "dependencies": [
         "shared"
       ],
-      "sha256": "f34ea6a9dd4457cdd74134bcda1c80c6459b92f3915665720f2bb1b5ed22cf02",
+      "sha256": "6fd372a6f991ca0175ad723f7b9824bed14ac758539329cf0168a5008a521f80",
       "startup": true,
-      "url": "packs/district_universities-f34ea6a9dd4457cd.pck"
+      "url": "packs/district_universities-6fd372a6f991ca01.pck"
     },
     "district_wordking": {
-      "bytes": 3527100,
+      "bytes": 3132892,
       "dependencies": [
         "shared"
       ],
-      "sha256": "ccdad9055c65f558ed7169bf4de649f8c1ef429f616e68ca9de80e56d6ddbdce",
+      "sha256": "1d33d712a3b9e5f7ff3f42c596d9fc52502192edeb2b0cd4f7f2f78d587f3e29",
       "startup": true,
-      "url": "packs/district_wordking-ccdad9055c65f558.pck"
+      "url": "packs/district_wordking-1d33d712a3b9e5f7.pck"
     },
     "music_admissions": {
       "bytes": 1728528,
@@ -115,20 +115,20 @@
       "url": "packs/music_world-e1a7f96b4f7f8400.pck"
     },
     "shared": {
-      "bytes": 176264,
+      "bytes": 176280,
       "dependencies": [],
-      "sha256": "4b7143129f228685e51f78030a171343c09b5aaaa3b39b0ee3631daf5d7bbe81",
+      "sha256": "5bb25679f1a69211ccdedecac948f9c0ef6e33773f7654a5a884748a23cf6923",
       "startup": true,
-      "url": "packs/shared-4b7143129f228685.pck"
+      "url": "packs/shared-5bb25679f1a69211.pck"
     },
     "training_room": {
-      "bytes": 4863392,
+      "bytes": 4781456,
       "dependencies": [
         "avatar"
       ],
-      "sha256": "2921631c6807839af5543d1f9acae12515d9b59490484b112bd0ca112aed0e45",
+      "sha256": "ec2ee514cca4cdecef5dc1e6f1a09466dd365048f98b5335835520a16d6405c1",
       "startup": false,
-      "url": "packs/training_room-2921631c6807839a.pck"
+      "url": "packs/training_room-ec2ee514cca4cdec.pck"
     }
   },
   "resources": {
@@ -138,8 +138,8 @@
     "res://assets/audio/music/Training_Pulse_120s_Loop.ogg": "music_wordking",
     "res://assets/audio/music/Warm_Window_120s_Loop.ogg": "music_counseling",
     "res://assets/character/graduate_rest.glb": "avatar",
-    "res://assets/character/runtime/graduate.glb": "avatar",
-    "res://assets/character/runtime/graduate_jump.glb": "avatar",
+    "res://assets/character/runtime_web/graduate.glb": "avatar",
+    "res://assets/character/runtime_web/graduate_jump.glb": "avatar",
     "res://assets/scenery/sakura_petal_sakura-atlas.png": "shared",
     "res://assets/urban/Textures/colormap.png": "shared",
     "res://generated/streaming/admissions_000.scn": "district_admissions",

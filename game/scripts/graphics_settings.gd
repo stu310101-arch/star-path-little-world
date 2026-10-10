@@ -4,6 +4,7 @@ signal state_changed
 
 const FRAME_LIMITS: Array[int] = [30, 60, 90]
 const DEFAULT_FRAME_LIMIT: int = 30
+const DEFAULT_WEB_FRAME_LIMIT: int = 60
 const DEFAULT_MSAA_ENABLED: bool = false
 const DEFAULT_QUALITY: String = "low"
 const LOW_RENDER_SIZE: Vector2 = Vector2(1280.0, 720.0)
@@ -27,7 +28,7 @@ func _ready() -> void:
 
 func load_settings() -> void:
 	msaa_enabled = DEFAULT_MSAA_ENABLED
-	frame_limit = DEFAULT_FRAME_LIMIT
+	frame_limit = DEFAULT_WEB_FRAME_LIMIT if OS.has_feature("web") else DEFAULT_FRAME_LIMIT
 	quality_profile = DEFAULT_QUALITY
 	settings_error = OK
 	if not FileAccess.file_exists(settings_path):
@@ -43,7 +44,7 @@ func load_settings() -> void:
 		return
 	quality_profile = stored_profile
 	var stored_msaa: Variant = settings.get_value("graphics", "msaa_enabled", DEFAULT_MSAA_ENABLED)
-	var stored_limit: Variant = settings.get_value("graphics", "frame_limit", DEFAULT_FRAME_LIMIT)
+	var stored_limit: Variant = settings.get_value("graphics", "frame_limit", frame_limit)
 	if stored_msaa is bool:
 		msaa_enabled = stored_msaa
 	if stored_limit is int and stored_limit in FRAME_LIMITS:
@@ -99,7 +100,7 @@ func set_frame_limit(value: int) -> void:
 func restore_defaults() -> void:
 	quality_profile = DEFAULT_QUALITY
 	msaa_enabled = DEFAULT_MSAA_ENABLED
-	frame_limit = DEFAULT_FRAME_LIMIT
+	frame_limit = DEFAULT_WEB_FRAME_LIMIT if OS.has_feature("web") else DEFAULT_FRAME_LIMIT
 	_commit_settings()
 
 func _commit_settings() -> void:

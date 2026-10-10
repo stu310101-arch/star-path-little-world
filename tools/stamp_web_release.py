@@ -34,13 +34,15 @@ def stamp(folder: Path) -> dict:
     if config.get("experimentalVK", False) or config.get("gdextensionLibs", []):
         raise ValueError("Unexpected export variant")
     source_paths = sorted([
-        path for subdir in ("scripts", "scenes", "generated/streaming", "generated/training_room", "assets/character/runtime", "data", "tools")
+        path for subdir in ("scripts", "scenes", "generated/streaming", "generated/training_room", "assets/character/runtime", "assets/character/runtime_web", "data", "tools")
         for path in (ROOT / "game" / subdir).rglob("*")
         if path.is_file() and path.suffix in (".gd", ".tscn", ".scn", ".json", ".res", ".glb")
     ] + [ROOT / "game/project.godot", ROOT / "game/export_presets.cfg", ROOT / "tools/split_web_packs.py",
          ROOT / "tools/prepare_web_delivery.py", ROOT / "tools/web_boot_delivery.js",
          ROOT / "tools/web_background_packs.js", ROOT / "tools/package_training_games.py",
-         ROOT / "tools/training_computer_games.js"]
+         ROOT / "tools/training_computer_games.js", ROOT / "tools/build_web_avatar.py",
+         ROOT / "tools/recompress_web_resources.py", ROOT / "tools/recompress_web_resources.cjs",
+         ROOT / "tools/build_web_release.py", ROOT / "deploy/github-pages/package.py"]
         + [path for path in (ROOT / "game/web_games").rglob("*") if path.is_file()])
     source_hash = hashlib.sha256()
     for path in source_paths:

@@ -1,8 +1,8 @@
-"""Add optional application-gzip boot delivery without modifying Godot's loader.
+"""Add optional gzip delivery and the pinned Godot 4.7.2 presentation fix.
 
 Run after splitting the PCK and before stamping/packaging. Originals remain as
-fallbacks. Browser gzip decompression validates its footer and decoded SHA-256;
-it adds decode/hash work and buffers a complete file before Godot consumes it.
+fallbacks. Boot files are fully decoded and verified before engine startup;
+deferred packs stream decoded bytes through the existing Godot SHA-256 check.
 """
 from __future__ import annotations
 
@@ -16,6 +16,7 @@ import struct
 
 ROOT = Path(__file__).resolve().parents[1]
 LOADER_SHA256 = "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+OPTIMIZED_LOADER_SHA256 = "6afbd556a1489bae7e420da209e2bec42baa295b31cb9aba2f6094bacb7fc34d"
 MANIFEST = "index.delivery.json"
 SCRIPT = "index.delivery.js"
 BACKGROUND_SCRIPT = "index.background.js"
@@ -51,9 +52,22 @@ def verify_background_budget(folder: Path) -> int:
 def prepare(folder: Path, expected_loader_sha256: str = LOADER_SHA256) -> dict:
     folder = folder.resolve()
     verify_background_budget(folder)
-    loader_hash = digest((folder / "index.js").read_bytes())
-    if loader_hash != expected_loader_sha256:
+    loader = (folder / "index.js").read_bytes()
+    loader_hash = digest(loader)
+    allowed = {expected_loader_sha256}
+    if expected_loader_sha256 == LOADER_SHA256:
+        allowed.add(OPTIMIZED_LOADER_SHA256)
+    if loader_hash not in allowed:
         raise ValueError("Unknown Web loader; review the boot adapter for this Godot/template version")
+    if expected_loader_sha256 == LOADER_SHA256 and loader_hash == LOADER_SHA256:
+        # Only the pinned Emscripten presentation helper changes. isEnabled is
+        # the Boolean capability query; getParameter routes through a slower
+        # generic synchronous query in Chromium. Preserve scissor restoration.
+        old = b"var prevScissorTest=gl.getParameter(3089);"
+        assert loader.count(old) == 1
+        loader = loader.replace(old, b"var prevScissorTest=gl.isEnabled(3089);")
+        loader_hash = digest(loader)
+        assert loader_hash == OPTIMIZED_LOADER_SHA256
     with (folder / "index.pck").open("rb") as stream:
         header = stream.read(20)
     if len(header) != 20 or struct.unpack("<5I", header) != (0x43504447, 4, 4, 7, 2):
@@ -70,8 +84,8 @@ def prepare(folder: Path, expected_loader_sha256: str = LOADER_SHA256) -> dict:
         raise ValueError("Boot delivery expects the reviewed single-threaded Web export")
     previous_path = folder / MANIFEST
     previous = json.loads(previous_path.read_text(encoding="utf-8")) if previous_path.exists() else {}
-    old_urls = {row["url"] for row in previous.get("files", {}).values()}
-    if any(not re.fullmatch(r"index\.boot\.[a-f0-9]{16}\.(pck|wasm)\.gz", name) for name in old_urls):
+    old_urls = {row["url"] for section in ("files", "packs") for row in previous.get(section, {}).values()}
+    if any(not re.fullmatch(r"(?:index\.boot\.[a-f0-9]{16}\.(?:pck|wasm)|packs/[a-z0-9_]+\.[a-f0-9]{16}\.pck)\.gz", name) for name in old_urls):
         raise ValueError("Unsafe previous gzip path; refusing cleanup")
     manifest = {"version": 1, "engine_version": "4.7.2", "loader_sha256": loader_hash, "files": {}}
     pack_manifest = json.loads((folder / "index.packs.json").read_text(encoding="utf-8"))
@@ -87,6 +101,25 @@ def prepare(folder: Path, expected_loader_sha256: str = LOADER_SHA256) -> dict:
         outputs[url] = compressed
         manifest["files"][name] = {"url": url, "bytes": len(original), "sha256": digest(original),
                                    "compressed_bytes": len(compressed), "compressed_sha256": sha}
+    manifest["packs"] = {}
+    for pack_id, pack in pack_manifest["packs"].items():
+        if not re.fullmatch(r"[a-z0-9_]+", pack_id):
+            raise ValueError("Unsafe pack id")
+        source = (folder / pack["url"]).resolve()
+        if not source.is_relative_to(folder):
+            raise ValueError("Pack path escapes export")
+        original = source.read_bytes()
+        if len(original) != pack["bytes"] or ("sha256" in pack and digest(original) != pack["sha256"]):
+            raise ValueError("Deferred pack differs from manifest")
+        compressed = gzip.compress(original, compresslevel=6, mtime=0)
+        if len(compressed) >= len(original) * 0.95:
+            continue  # Already-compressed audio does not benefit from another layer.
+        sha = digest(compressed)
+        url = f"packs/{pack_id}.{sha[:16]}.pck.gz"
+        outputs[url] = compressed
+        manifest["packs"][pack_id] = {"encoding": "gzip", "original_url": pack["url"], "url": url,
+                                     "bytes": len(original), "sha256": digest(original),
+                                     "compressed_bytes": len(compressed), "compressed_sha256": sha}
     html = re.sub(r"\n?" + re.escape(CONFIG_START) + r".*?" + re.escape(CONFIG_END) + r"\n?", "\n", html, flags=re.S)
     html = re.sub(r"[\t ]*startLittleWorldBackgroundDownloads\(\);\n?", "", html)
     for call in ("LITTLE_WORLD_BOOT_STATUS.engineProgress(current, total);",
@@ -115,7 +148,7 @@ def prepare(folder: Path, expected_loader_sha256: str = LOADER_SHA256) -> dict:
                  + "const LITTLE_WORLD_BACKGROUND_PACKS = " + json.dumps(background_manifest, separators=(",", ":")) + ";\n"
                  + "function startLittleWorldBackgroundDownloads() {\n"
                  + "  const transport = window.LittleWorldBackgroundPacks;\n"
-                 + "  transport.configure(new URL('.', location.href).href);\n"
+                 + "  transport.configure(new URL('.', location.href).href, LITTLE_WORLD_BOOT_DELIVERY.packs);\n"
                  + "  for (const [id, pack] of Object.entries(LITTLE_WORLD_BACKGROUND_PACKS.packs)) {\n"
                  + "    if (pack.startup === false) continue;\n"
                  + "    transport.enqueue(id, pack.url, pack.bytes, id === 'avatar' ? 20 : 0);\n"
@@ -125,6 +158,7 @@ def prepare(folder: Path, expected_loader_sha256: str = LOADER_SHA256) -> dict:
     # All validation above completes before replacing release files.
     for name, payload in outputs.items():
         (folder / name).write_bytes(payload)
+    (folder / "index.js").write_bytes(loader)
     (folder / SCRIPT).write_bytes((ROOT / "tools/web_boot_delivery.js").read_bytes())
     (folder / BACKGROUND_SCRIPT).write_bytes((ROOT / "tools/web_background_packs.js").read_bytes())
     previous_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n")
@@ -173,6 +207,20 @@ def verify(folder: Path) -> list[str]:
             raise ValueError(f"Original boot file differs: {name}")
         if len(compressed) != item["compressed_bytes"] or digest(compressed) != item["compressed_sha256"] or gzip.decompress(compressed) != original:
             raise ValueError(f"Compressed boot file differs: {url}")
+        names.append(url)
+    for pack_id, item in manifest.get("packs", {}).items():
+        pack = pack_manifest["packs"].get(pack_id)
+        if not pack or item.get("encoding") != "gzip" or item.get("original_url") != pack["url"]:
+            raise ValueError("Unknown compressed pack")
+        url = item["url"]
+        if not re.fullmatch(r"packs/[a-z0-9_]+\.[a-f0-9]{16}\.pck\.gz", url):
+            raise ValueError("Unsafe compressed pack URL")
+        original = (folder / pack["url"]).read_bytes()
+        compressed = (folder / url).read_bytes()
+        if len(original) != pack["bytes"] or len(original) != item["bytes"] or digest(original) != item["sha256"]:
+            raise ValueError("Original deferred pack differs")
+        if len(compressed) != item["compressed_bytes"] or digest(compressed) != item["compressed_sha256"] or gzip.decompress(compressed) != original:
+            raise ValueError("Compressed deferred pack differs")
         names.append(url)
     return names
 

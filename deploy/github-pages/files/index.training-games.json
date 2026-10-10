@@ -5,12 +5,12 @@
   },
   "files": {
     "index.training-games.js": {
-      "bytes": 8979,
-      "sha256": "8eef1ac3d08065bec7776fcfe5d8d6706740c0cbb9893ea2c9152eed3d1715ac"
+      "bytes": 9168,
+      "sha256": "939e2b9b6bc0127c2e9083c7f9bc351e1671c0e0f92815b37607aa83ddb6a49d"
     },
     "games/go/index.html": {
-      "bytes": 189689,
-      "sha256": "7433af10d4b776743ff3876ea9f13c77bd3bab8f7bca844a6dcd35f99929389f"
+      "bytes": 193149,
+      "sha256": "94fcf7f629d9ecfb65bf5750ce3b73571137aacfef600190795035d8ad5bda46"
     }
   }
 }

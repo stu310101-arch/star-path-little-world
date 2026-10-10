@@ -1,0 +1,686 @@
+[
+  {
+    "source": "game/assets/character/runtime/graduate.glb",
+    "source_sha256": "28c4f7d1b9fc1f04203538cb4ffbeaa763e6bfc7d05a58f2c10ac5f3aa700b24",
+    "output": "game/assets/character/runtime_web/graduate.glb",
+    "output_sha256": "83146cb0abec9b22029efb4e1483c2e86c62a4fbeee1739744946b2cbf415d1a",
+    "source_bytes": 42021116,
+    "output_bytes": 59951140,
+    "surfaces_before": 39,
+    "surfaces_after": 11,
+    "shared_poses": 133,
+    "clips": [
+      {
+        "name": "Walk",
+        "keys": 37
+      },
+      {
+        "name": "Run",
+        "keys": 25
+      },
+      {
+        "name": "JumpDown",
+        "keys": 73
+      },
+      {
+        "name": "Idle",
+        "keys": 2
+      }
+    ],
+    "source_to_output": [
+      {
+        "mesh": 0,
+        "primitive": 0,
+        "material": 0,
+        "offset": 0,
+        "vertices": 4860,
+        "surface": 0
+      },
+      {
+        "mesh": 0,
+        "primitive": 1,
+        "material": 1,
+        "offset": 0,
+        "vertices": 2460,
+        "surface": 1
+      },
+      {
+        "mesh": 0,
+        "primitive": 2,
+        "material": 2,
+        "offset": 0,
+        "vertices": 2400,
+        "surface": 2
+      },
+      {
+        "mesh": 1,
+        "primitive": 0,
+        "material": 0,
+        "offset": 4860,
+        "vertices": 906,
+        "surface": 0
+      },
+      {
+        "mesh": 1,
+        "primitive": 1,
+        "material": 1,
+        "offset": 2460,
+        "vertices": 384,
+        "surface": 1
+      },
+      {
+        "mesh": 1,
+        "primitive": 2,
+        "material": 2,
+        "offset": 2400,
+        "vertices": 128,
+        "surface": 2
+      },
+      {
+        "mesh": 2,
+        "primitive": 0,
+        "material": 0,
+        "offset": 5766,
+        "vertices": 906,
+        "surface": 0
+      },
+      {
+        "mesh": 2,
+        "primitive": 1,
+        "material": 1,
+        "offset": 2844,
+        "vertices": 384,
+        "surface": 1
+      },
+      {
+        "mesh": 2,
+        "primitive": 2,
+        "material": 2,
+        "offset": 2528,
+        "vertices": 128,
+        "surface": 2
+      },
+      {
+        "mesh": 3,
+        "primitive": 0,
+        "material": 3,
+        "offset": 0,
+        "vertices": 82,
+        "surface": 3
+      },
+      {
+        "mesh": 3,
+        "primitive": 1,
+        "material": 4,
+        "offset": 0,
+        "vertices": 244,
+        "surface": 4
+      },
+      {
+        "mesh": 4,
+        "primitive": 0,
+        "material": 3,
+        "offset": 82,
+        "vertices": 82,
+        "surface": 3
+      },
+      {
+        "mesh": 4,
+        "primitive": 1,
+        "material": 4,
+        "offset": 244,
+        "vertices": 244,
+        "surface": 4
+      },
+      {
+        "mesh": 5,
+        "primitive": 0,
+        "material": 3,
+        "offset": 164,
+        "vertices": 104,
+        "surface": 3
+      },
+      {
+        "mesh": 5,
+        "primitive": 1,
+        "material": 4,
+        "offset": 488,
+        "vertices": 304,
+        "surface": 4
+      },
+      {
+        "mesh": 6,
+        "primitive": 0,
+        "material": 4,
+        "offset": 792,
+        "vertices": 4,
+        "surface": 4
+      },
+      {
+        "mesh": 7,
+        "primitive": 0,
+        "material": 4,
+        "offset": 796,
+        "vertices": 4,
+        "surface": 4
+      },
+      {
+        "mesh": 8,
+        "primitive": 0,
+        "material": 4,
+        "offset": 800,
+        "vertices": 4,
+        "surface": 4
+      },
+      {
+        "mesh": 9,
+        "primitive": 0,
+        "material": 4,
+        "offset": 804,
+        "vertices": 4,
+        "surface": 4
+      },
+      {
+        "mesh": 10,
+        "primitive": 0,
+        "material": 5,
+        "offset": 0,
+        "vertices": 24,
+        "surface": 5
+      },
+      {
+        "mesh": 11,
+        "primitive": 0,
+        "material": 5,
+        "offset": 24,
+        "vertices": 24,
+        "surface": 5
+      },
+      {
+        "mesh": 12,
+        "primitive": 0,
+        "material": 5,
+        "offset": 48,
+        "vertices": 30,
+        "surface": 5
+      },
+      {
+        "mesh": 13,
+        "primitive": 0,
+        "material": 0,
+        "offset": 6672,
+        "vertices": 352,
+        "surface": 0
+      },
+      {
+        "mesh": 14,
+        "primitive": 0,
+        "material": 0,
+        "offset": 7024,
+        "vertices": 96,
+        "surface": 0
+      },
+      {
+        "mesh": 15,
+        "primitive": 0,
+        "material": 4,
+        "offset": 808,
+        "vertices": 72,
+        "surface": 4
+      },
+      {
+        "mesh": 16,
+        "primitive": 0,
+        "material": 4,
+        "offset": 880,
+        "vertices": 132,
+        "surface": 4
+      },
+      {
+        "mesh": 17,
+        "primitive": 0,
+        "material": 4,
+        "offset": 1012,
+        "vertices": 48,
+        "surface": 4
+      },
+      {
+        "mesh": 18,
+        "primitive": 0,
+        "material": 6,
+        "offset": 0,
+        "vertices": 50,
+        "surface": 6
+      },
+      {
+        "mesh": 19,
+        "primitive": 0,
+        "material": 4,
+        "offset": 1060,
+        "vertices": 50,
+        "surface": 4
+      },
+      {
+        "mesh": 20,
+        "primitive": 0,
+        "material": 4,
+        "offset": 1110,
+        "vertices": 50,
+        "surface": 4
+      },
+      {
+        "mesh": 21,
+        "primitive": 0,
+        "material": 6,
+        "offset": 50,
+        "vertices": 50,
+        "surface": 6
+      },
+      {
+        "mesh": 22,
+        "primitive": 0,
+        "material": 4,
+        "offset": 1160,
+        "vertices": 50,
+        "surface": 4
+      },
+      {
+        "mesh": 23,
+        "primitive": 0,
+        "material": 4,
+        "offset": 1210,
+        "vertices": 50,
+        "surface": 4
+      },
+      {
+        "mesh": 24,
+        "primitive": 0,
+        "material": 6,
+        "offset": 100,
+        "vertices": 50,
+        "surface": 6
+      },
+      {
+        "mesh": 25,
+        "primitive": 0,
+        "material": 7,
+        "offset": 0,
+        "vertices": 1350,
+        "surface": 7
+      },
+      {
+        "mesh": 25,
+        "primitive": 1,
+        "material": 8,
+        "offset": 0,
+        "vertices": 736,
+        "surface": 8
+      },
+      {
+        "mesh": 25,
+        "primitive": 2,
+        "material": 9,
+        "offset": 0,
+        "vertices": 458,
+        "surface": 9
+      },
+      {
+        "mesh": 25,
+        "primitive": 3,
+        "material": 10,
+        "offset": 0,
+        "vertices": 516,
+        "surface": 10
+      },
+      {
+        "mesh": 26,
+        "primitive": 0,
+        "material": 7,
+        "offset": 1350,
+        "vertices": 250,
+        "surface": 7
+      }
+    ],
+    "validated": "Exact base attributes, triangles, material values, bone channels/times, skin bind matrices and float32 evaluated cloth key poses. LINEAR curves retain original times; intermediate poses are their same interpolation (subject to floating point rounding). Actual imported/rendered validation is separate."
+  },
+  {
+    "source": "game/assets/character/runtime/graduate_jump.glb",
+    "source_sha256": "2918c3984094edcbe4a5e83c2854cc02b219ef3d99a05f24fa4f201df1b98fd5",
+    "output": "game/assets/character/runtime_web/graduate_jump.glb",
+    "output_sha256": "68ad412fd485dc010f9b9eaff9e765cf3022c4b99e234245bf968721bdaef7ea",
+    "source_bytes": 40778928,
+    "output_bytes": 71862460,
+    "surfaces_before": 39,
+    "surfaces_after": 11,
+    "shared_poses": 215,
+    "clips": [
+      {
+        "name": "JumpStart",
+        "keys": 25
+      },
+      {
+        "name": "JumpAir",
+        "keys": 73
+      },
+      {
+        "name": "JumpLand",
+        "keys": 121
+      }
+    ],
+    "source_to_output": [
+      {
+        "mesh": 0,
+        "primitive": 0,
+        "material": 0,
+        "offset": 0,
+        "vertices": 3456,
+        "surface": 0
+      },
+      {
+        "mesh": 0,
+        "primitive": 1,
+        "material": 1,
+        "offset": 0,
+        "vertices": 1728,
+        "surface": 1
+      },
+      {
+        "mesh": 0,
+        "primitive": 2,
+        "material": 2,
+        "offset": 0,
+        "vertices": 1728,
+        "surface": 2
+      },
+      {
+        "mesh": 1,
+        "primitive": 0,
+        "material": 0,
+        "offset": 3456,
+        "vertices": 453,
+        "surface": 0
+      },
+      {
+        "mesh": 1,
+        "primitive": 1,
+        "material": 1,
+        "offset": 1728,
+        "vertices": 192,
+        "surface": 1
+      },
+      {
+        "mesh": 1,
+        "primitive": 2,
+        "material": 2,
+        "offset": 1728,
+        "vertices": 64,
+        "surface": 2
+      },
+      {
+        "mesh": 2,
+        "primitive": 0,
+        "material": 0,
+        "offset": 3909,
+        "vertices": 453,
+        "surface": 0
+      },
+      {
+        "mesh": 2,
+        "primitive": 1,
+        "material": 1,
+        "offset": 1920,
+        "vertices": 192,
+        "surface": 1
+      },
+      {
+        "mesh": 2,
+        "primitive": 2,
+        "material": 2,
+        "offset": 1792,
+        "vertices": 64,
+        "surface": 2
+      },
+      {
+        "mesh": 3,
+        "primitive": 0,
+        "material": 3,
+        "offset": 0,
+        "vertices": 55,
+        "surface": 3
+      },
+      {
+        "mesh": 3,
+        "primitive": 1,
+        "material": 4,
+        "offset": 0,
+        "vertices": 114,
+        "surface": 4
+      },
+      {
+        "mesh": 4,
+        "primitive": 0,
+        "material": 3,
+        "offset": 55,
+        "vertices": 57,
+        "surface": 3
+      },
+      {
+        "mesh": 4,
+        "primitive": 1,
+        "material": 4,
+        "offset": 114,
+        "vertices": 114,
+        "surface": 4
+      },
+      {
+        "mesh": 5,
+        "primitive": 0,
+        "material": 3,
+        "offset": 112,
+        "vertices": 72,
+        "surface": 3
+      },
+      {
+        "mesh": 5,
+        "primitive": 1,
+        "material": 4,
+        "offset": 228,
+        "vertices": 144,
+        "surface": 4
+      },
+      {
+        "mesh": 6,
+        "primitive": 0,
+        "material": 4,
+        "offset": 372,
+        "vertices": 4,
+        "surface": 4
+      },
+      {
+        "mesh": 7,
+        "primitive": 0,
+        "material": 4,
+        "offset": 376,
+        "vertices": 4,
+        "surface": 4
+      },
+      {
+        "mesh": 8,
+        "primitive": 0,
+        "material": 4,
+        "offset": 380,
+        "vertices": 4,
+        "surface": 4
+      },
+      {
+        "mesh": 9,
+        "primitive": 0,
+        "material": 4,
+        "offset": 384,
+        "vertices": 4,
+        "surface": 4
+      },
+      {
+        "mesh": 10,
+        "primitive": 0,
+        "material": 5,
+        "offset": 0,
+        "vertices": 6,
+        "surface": 5
+      },
+      {
+        "mesh": 11,
+        "primitive": 0,
+        "material": 5,
+        "offset": 6,
+        "vertices": 6,
+        "surface": 5
+      },
+      {
+        "mesh": 12,
+        "primitive": 0,
+        "material": 5,
+        "offset": 12,
+        "vertices": 7,
+        "surface": 5
+      },
+      {
+        "mesh": 13,
+        "primitive": 0,
+        "material": 0,
+        "offset": 4362,
+        "vertices": 515,
+        "surface": 0
+      },
+      {
+        "mesh": 14,
+        "primitive": 0,
+        "material": 0,
+        "offset": 4877,
+        "vertices": 96,
+        "surface": 0
+      },
+      {
+        "mesh": 15,
+        "primitive": 0,
+        "material": 4,
+        "offset": 388,
+        "vertices": 72,
+        "surface": 4
+      },
+      {
+        "mesh": 16,
+        "primitive": 0,
+        "material": 4,
+        "offset": 460,
+        "vertices": 132,
+        "surface": 4
+      },
+      {
+        "mesh": 17,
+        "primitive": 0,
+        "material": 4,
+        "offset": 592,
+        "vertices": 48,
+        "surface": 4
+      },
+      {
+        "mesh": 18,
+        "primitive": 0,
+        "material": 6,
+        "offset": 0,
+        "vertices": 50,
+        "surface": 6
+      },
+      {
+        "mesh": 19,
+        "primitive": 0,
+        "material": 4,
+        "offset": 640,
+        "vertices": 50,
+        "surface": 4
+      },
+      {
+        "mesh": 20,
+        "primitive": 0,
+        "material": 4,
+        "offset": 690,
+        "vertices": 50,
+        "surface": 4
+      },
+      {
+        "mesh": 21,
+        "primitive": 0,
+        "material": 6,
+        "offset": 50,
+        "vertices": 50,
+        "surface": 6
+      },
+      {
+        "mesh": 22,
+        "primitive": 0,
+        "material": 4,
+        "offset": 740,
+        "vertices": 50,
+        "surface": 4
+      },
+      {
+        "mesh": 23,
+        "primitive": 0,
+        "material": 4,
+        "offset": 790,
+        "vertices": 50,
+        "surface": 4
+      },
+      {
+        "mesh": 24,
+        "primitive": 0,
+        "material": 6,
+        "offset": 100,
+        "vertices": 50,
+        "surface": 6
+      },
+      {
+        "mesh": 25,
+        "primitive": 0,
+        "material": 7,
+        "offset": 0,
+        "vertices": 1350,
+        "surface": 7
+      },
+      {
+        "mesh": 25,
+        "primitive": 1,
+        "material": 8,
+        "offset": 0,
+        "vertices": 736,
+        "surface": 8
+      },
+      {
+        "mesh": 25,
+        "primitive": 2,
+        "material": 9,
+        "offset": 0,
+        "vertices": 458,
+        "surface": 9
+      },
+      {
+        "mesh": 25,
+        "primitive": 3,
+        "material": 10,
+        "offset": 0,
+        "vertices": 516,
+        "surface": 10
+      },
+      {
+        "mesh": 26,
+        "primitive": 0,
+        "material": 7,
+        "offset": 1350,
+        "vertices": 250,
+        "surface": 7
+      }
+    ],
+    "validated": "Exact base attributes, triangles, material values, bone channels/times, skin bind matrices and float32 evaluated cloth key poses. LINEAR curves retain original times; intermediate poses are their same interpolation (subject to floating point rounding). Actual imported/rendered validation is separate."
+  }
+]

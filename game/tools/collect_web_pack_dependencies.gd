@@ -20,7 +20,7 @@ func _initialize() -> void:
 	# from a previous build in the source tree.
 	boot.erase("res://data/web_packs.json")
 	groups["boot"] = boot
-	groups["avatar"] = ["res://assets/character/runtime/graduate.glb", "res://assets/character/runtime/graduate_jump.glb", "res://assets/character/graduate_rest.glb"]
+	groups["avatar"] = ["res://assets/character/runtime_web/graduate.glb", "res://assets/character/runtime_web/graduate_jump.glb", "res://assets/character/graduate_rest.glb"]
 	var interior: Array[String] = ["res://generated/training_room/detail_catalog.json"]
 	_append_files("res://generated/training_room/detail", interior, ["res"])
 	groups["training_room"] = interior
@@ -68,6 +68,10 @@ func _check_dynamic_literals(boot: Array[String]) -> void:
 			continue
 		for match_value: RegExMatch in pattern.search_all(FileAccess.get_file_as_string(path)):
 			var referenced: String = match_value.get_string(1)
+			# These two literals are selected only by the native branch. Web has
+			# separately classified copies and deliberately excludes native meshes.
+			if path == "res://scripts/planet_player.gd" and referenced in ["res://assets/character/runtime/graduate.glb", "res://assets/character/runtime/graduate_jump.glb"]:
+				continue
 			if referenced == "res://data/web_packs.json" or referenced.begins_with("res://../deliverables/"):
 				continue
 			if not graph.has(referenced):

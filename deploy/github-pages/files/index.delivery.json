@@ -1,14 +1,14 @@
 {
   "version": 1,
   "engine_version": "4.7.2",
-  "loader_sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba",
+  "loader_sha256": "6afbd556a1489bae7e420da209e2bec42baa295b31cb9aba2f6094bacb7fc34d",
   "files": {
     "index.pck": {
-      "url": "index.boot.11eadbee378fa046.pck.gz",
-      "bytes": 31943224,
-      "sha256": "650c1292ef69f85da7db2ea2ecf73b35b8927945d97009bb3e2bcf8e8583e47b",
-      "compressed_bytes": 29102704,
-      "compressed_sha256": "11eadbee378fa046294dc7be250eb0d5ce1d888fe8ccddfd7f55370cd1be7c9b"
+      "url": "index.boot.1344f5cac54b49d4.pck.gz",
+      "bytes": 28567688,
+      "sha256": "2cc109ffd8de5fdc99292d3c4727a58cc709ae148aff3507cd928fd4f93131c8",
+      "compressed_bytes": 25770632,
+      "compressed_sha256": "1344f5cac54b49d47e7390f87bb5d71f90e78eabf33056ee7b12a01ae0f83c3b"
     },
     "index.wasm": {
       "url": "index.boot.a8767fcc27ac87dc.wasm.gz",
@@ -16,6 +16,44 @@
       "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
       "compressed_bytes": 10114291,
       "compressed_sha256": "a8767fcc27ac87dc3d13f63f87e7dc36f698bbeb0a1712d0cba0b93b56b66b7e"
+    }
+  },
+  "packs": {
+    "music_admissions": {
+      "encoding": "gzip",
+      "original_url": "packs/music_admissions-2ce1c35030bcc9fb.pck",
+      "url": "packs/music_admissions.bf3a2f162b42a7e9.pck.gz",
+      "bytes": 1728528,
+      "sha256": "2ce1c35030bcc9fb9e2486472faa19a88ec2b15c05cd5697a5ebaeee1894ede0",
+      "compressed_bytes": 1632058,
+      "compressed_sha256": "bf3a2f162b42a7e98236b0626c34c771443bf056d25cf6f27f9ae85e4396eb76"
+    },
+    "music_counseling": {
+      "encoding": "gzip",
+      "original_url": "packs/music_counseling-f3b97506778458ba.pck",
+      "url": "packs/music_counseling.e5d73e7398b6b1ca.pck.gz",
+      "bytes": 1443824,
+      "sha256": "f3b97506778458ba6a229a7fe8d1d889f2309042fa6923656e3ae63b68adcab4",
+      "compressed_bytes": 1313973,
+      "compressed_sha256": "e5d73e7398b6b1ca6d1e25eb77d5876828b8f495d8a33afe65d4f2529af9b694"
+    },
+    "music_world": {
+      "encoding": "gzip",
+      "original_url": "packs/music_world-e1a7f96b4f7f8400.pck",
+      "url": "packs/music_world.263480b842ed0ad7.pck.gz",
+      "bytes": 1351376,
+      "sha256": "e1a7f96b4f7f84003dbe92e4724e1905e85aa39928cdd0524b3a7d3d02da9adf",
+      "compressed_bytes": 1268648,
+      "compressed_sha256": "263480b842ed0ad7ce595cb7519d64a78e054199f8d01d3ed7eccd2daf61ee6b"
+    },
+    "shared": {
+      "encoding": "gzip",
+      "original_url": "packs/shared-5bb25679f1a69211.pck",
+      "url": "packs/shared.eb191485dfbfa97e.pck.gz",
+      "bytes": 176280,
+      "sha256": "5bb25679f1a69211ccdedecac948f9c0ef6e33773f7654a5a884748a23cf6923",
+      "compressed_bytes": 14786,
+      "compressed_sha256": "eb191485dfbfa97e39e992f6c6b3dcab346a762de879b14a89f2a347bab93e44"
     }
   }
 }

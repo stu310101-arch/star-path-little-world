@@ -18,6 +18,12 @@ const JUMP_AIR_DURATION: float = 0.72
 # Both remain prepared: landing samples both rigs, and loading on jump hitches.
 const WALK_MODEL: String = "res://assets/character/runtime/graduate.glb"
 const JUMP_MODEL: String = "res://assets/character/runtime/graduate_jump.glb"
+const WEB_WALK_MODEL: String = "res://assets/character/runtime_web/graduate.glb"
+const WEB_JUMP_MODEL: String = "res://assets/character/runtime_web/graduate_jump.glb"
+# Same material values, skin and animation times; Web batches synchronized cloth
+# poses into fewer surfaces. Native retains its existing resource path.
+var _walk_model_path: String = WEB_WALK_MODEL if OS.has_feature("web") else WALK_MODEL
+var _jump_model_path: String = WEB_JUMP_MODEL if OS.has_feature("web") else JUMP_MODEL
 var heading: Vector3 = Vector3.FORWARD
 var controls_enabled: bool = true
 var is_resting: bool = false
@@ -107,8 +113,8 @@ func begin_prepare_visuals() -> void:
 	_visual_stage = 1
 	var packs: Node = get_node_or_null("/root/WebPacks")
 	if packs != null:
-		packs.call("request_resource", WALK_MODEL, 20)
-		packs.call("request_resource", JUMP_MODEL, 20)
+		packs.call("request_resource", _walk_model_path, 20)
+		packs.call("request_resource", _jump_model_path, 20)
 
 func visuals_ready() -> bool:
 	return _visual_stage == 6
@@ -127,7 +133,7 @@ func step_prepare_visuals() -> void:
 	var started: int = Time.get_ticks_usec()
 	match _visual_stage:
 		1, 3:
-			var resource_path: String = WALK_MODEL if _visual_stage == 1 else JUMP_MODEL
+			var resource_path: String = _walk_model_path if _visual_stage == 1 else _jump_model_path
 			var packs: Node = get_node_or_null("/root/WebPacks")
 			if packs != null:
 				var pack_error: String = str(packs.call("resource_error", resource_path))
@@ -190,8 +196,8 @@ func retry_prepare_visuals() -> void:
 		_visual_stage -= 1
 	var packs: Node = get_node_or_null("/root/WebPacks")
 	if packs != null:
-		packs.call("request_resource", WALK_MODEL, 20)
-		packs.call("request_resource", JUMP_MODEL, 20)
+		packs.call("request_resource", _walk_model_path, 20)
+		packs.call("request_resource", _jump_model_path, 20)
 	if _visual_stage == 0:
 		begin_prepare_visuals()
 

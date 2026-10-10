@@ -21,7 +21,7 @@ function responseChunks(values, options = {}) {
   }});
   return new Response(body, {status:options.status || 200});
 }
-function fixture(t, limit = 128) {
+function fixture(t, limit = 128, concurrency = 1) {
   const routes = new Map(), calls = [], held = new Map();
   const fetch = async (url, options) => {
     const name = new URL(url).pathname.split('/').pop();
@@ -37,7 +37,7 @@ function fixture(t, limit = 128) {
     }
     return typeof route === 'function' ? route() : responseChunks(route || [[1,2,3,4]]);
   };
-  const api=createBackgroundPacks(fetch,limit);
+  const api=createBackgroundPacks(fetch,limit,concurrency);
   api.configure('http://localhost/game/');
   t.after(()=>api.close());
   return {api,routes,calls,held};
@@ -48,6 +48,72 @@ function readRange(api,id,offset,count) {
   while(bytes.length<count){const part=api.read(id,offset+bytes.length,count-bytes.length);if(!part.length)break;bytes.push(...part);}
   return bytes;
 }
+
+test('two parallel streams retain priority and the decoded memory ceiling', async t => {
+  const f=fixture(t,12,2);
+  for(const name of ['a','b','c','d'])f.routes.set(name+'.pck','hold');
+  for(const [name,priority] of [['a',0],['b',0],['c',1],['d',10]])f.api.enqueue(name,'packs/'+name+'.pck',4,priority);
+  assert.deepEqual(f.calls.map(c=>c.name),['a.pck','b.pck']);
+  assert.equal(f.api.snapshot().active_count,2);
+  f.held.get('a.pck').push([1,2,3,4]);f.held.get('a.pck').finish();
+  await until(()=>f.held.has('d.pck'));
+  assert.equal(f.api.snapshot().reserved_bytes,12);
+  f.held.get('b.pck').push([1,2,3,4]);f.held.get('b.pck').finish();
+  await until(()=>f.api.status('b').state==='downloaded');
+  assert.equal(f.api.status('c').state,'queued');
+  f.api.release('a');
+  await until(()=>f.held.has('c.pck'));
+  assert.deepEqual(f.calls.map(c=>c.name),['a.pck','b.pck','d.pck','c.pck']);
+  assert.ok(f.api.snapshot().reserved_bytes<=12);
+  f.api.close();
+  await until(()=>f.api.snapshot().active_count===0);
+  assert.equal(f.api.snapshot().reserved_bytes,0);
+  assert.equal(f.api.snapshot().buffered_bytes,0);
+});
+
+function compressedManifest() {
+  return {all:{encoding:'gzip',original_url:'packs/all.pck',url:'packs/all.gz',bytes:4}};
+}
+test('gzip streams produce byte-identical decoded content within the existing budget', async t => {
+  const f=fixture(t,4,2);
+  const zipped=require('node:zlib').gzipSync(Uint8Array.from([1,2,3,4]));
+  f.routes.set('all.gz',()=>new Response(zipped));
+  f.api.configure('http://localhost/game/',compressedManifest());
+  f.api.configure('http://localhost/game/'); // Godot configuration preserves delivery metadata.
+  f.api.enqueue('all','packs/all.pck',4,20);
+  await until(()=>f.api.status('all').state==='downloaded');
+  assert.deepEqual(readRange(f.api,'all',0,4),[1,2,3,4]);
+  assert.deepEqual(f.calls.map(c=>c.name),['all.gz']);
+  assert.equal(f.api.snapshot().peak_buffered_bytes,4);
+});
+test('missing compressed CDN file falls back before exposing any bytes', async t => {
+  const f=fixture(t);
+  f.routes.set('all.gz',()=>new Response('missing',{status:404}));
+  f.api.configure('http://localhost/game/',compressedManifest());
+  f.api.enqueue('all','packs/all.pck',4,20);
+  await until(()=>f.api.status('all').state==='downloaded');
+  assert.deepEqual(f.calls.map(c=>c.name),['all.gz','all.pck']);
+  assert.deepEqual(readRange(f.api,'all',0,4),[1,2,3,4]);
+});
+test('unsupported gzip decoder selects the original file', async t => {
+  const f=fixture(t), saved=globalThis.DecompressionStream;
+  globalThis.DecompressionStream=undefined;
+  try {
+    f.api.configure('http://localhost/game/',compressedManifest());
+    f.api.enqueue('all','packs/all.pck',4,20);
+    await until(()=>f.api.status('all').state==='downloaded');
+    assert.deepEqual(f.calls.map(c=>c.name),['all.pck']);
+  } finally {globalThis.DecompressionStream=saved;}
+});
+test('corrupt gzip fails without mounting content and releases all reservations', async t => {
+  const f=fixture(t);
+  f.routes.set('all.gz',()=>new Response(Uint8Array.from([1,2,3,4])));
+  f.api.configure('http://localhost/game/',compressedManifest());
+  f.api.enqueue('all','packs/all.pck',4,20);
+  await until(()=>f.api.status('all').state==='failed');
+  assert.equal(f.api.snapshot().buffered_bytes,0);
+  assert.equal(f.api.snapshot().reserved_bytes,0);
+});
 
 test('network drains every chunk to EOF without RAF or game-frame polling', async t => {
   const f=fixture(t);

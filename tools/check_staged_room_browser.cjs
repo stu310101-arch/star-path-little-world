@@ -180,11 +180,17 @@ async function resizeRoom(stage, viewport) {
     closeSize(graphics.ui_pixels, uiSize) && glSizes.some(size => closeSize(size, uiSize)),
     {viewport, canvas_backing_pixels: backing, expected_ui_pixels: uiSize, graphics, gl: after.gl});
   const internal = graphics.internal_3d_pixels;
-  check('Room actually renders low 3D at approximately 720p after resize: ' + stage,
-    graphics.quality_profile === 'low' && graphics.scaling_3d_scale < 1 && Array.isArray(internal) &&
-    internal[0] <= 1281 && Math.abs(internal[1] - 720) <= 1 &&
-    glSizes.some(size => closeSize(size, internal)) && !closeSize(internal, uiSize),
-    {viewport, graphics, gl: after.gl});
+  // Existing low-profile policy avoids a scaling pass when the reduction is
+  // smaller than 20% per axis. The two actual fixture windows straddle it.
+  const expected = {
+    '1440x900': {scale:.8, pixels:[1152,720]},
+    '1200x800': {scale:1, pixels:[1200,750]},
+  }[`${viewport.width}x${viewport.height}`];
+  if (!expected) throw Error('Add an explicit expected size for this resize fixture');
+  check('Room actually renders the expected low 3D buffer after resize: ' + stage,
+    graphics.quality_profile === 'low' && Math.abs(graphics.scaling_3d_scale-expected.scale)<.00001 &&
+    closeSize(internal, expected.pixels) && glSizes.some(size => closeSize(size, expected.pixels)),
+    {viewport, expected, graphics, gl: after.gl});
   await screenshot('resize-' + stage);
 }
 const roaming = s => !s.room && s.metrics?.avatar?.ready && !s.metrics.preparing_roam && s.metrics.player &&

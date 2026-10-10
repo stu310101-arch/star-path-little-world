@@ -440,7 +440,8 @@ func _build_graphics_settings(screen: Control) -> void:
 	settings_status = label("", 13, Color("647b75"))
 	settings_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	content.add_child(settings_status)
-	var reset: Button = button("恢復預設：低配／MSAA 關／30 FPS")
+	var default_fps: int = GraphicsSettingsScript.DEFAULT_WEB_FRAME_LIMIT if OS.has_feature("web") else GraphicsSettingsScript.DEFAULT_FRAME_LIMIT
+	var reset: Button = button("恢復預設：低配／MSAA 關／%d FPS" % default_fps)
 	reset.name = "RestoreGraphicsDefaults"
 	reset.add_theme_font_size_override("font_size", 14)
 	reset.focus_mode = Control.FOCUS_ALL

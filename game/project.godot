@@ -35,7 +35,6 @@ theme/default_font_multichannel_signed_distance_field=true
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-anti_aliasing/quality/msaa_3d=0
-limits/opengl/max_lights_per_object=4
 limits/opengl/max_renderable_lights=8
+limits/opengl/max_lights_per_object=4
 environment/defaults/default_clear_color=Color(0.035, 0.1, 0.14, 1)

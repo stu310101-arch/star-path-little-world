@@ -32,12 +32,28 @@ def safe_relative(value: str) -> Path:
     return relative
 
 
+def verify_release_files(folder: Path) -> set[str]:
+    """The release stamp is authoritative, including optional compressed packs."""
+    stamp = folder / "index.release.json"
+    if not stamp.exists():
+        return set()  # Tiny fixtures and older packages have no release stamp.
+    files = json.loads(stamp.read_text(encoding="utf-8"))["files"]
+    for name, item in files.items():
+        target = (folder / safe_relative(name)).resolve()
+        if not target.is_relative_to(folder.resolve()):
+            raise ValueError(f"Release path escapes site: {name}")
+        if not target.is_file() or target.stat().st_size != item["bytes"] or digest(target) != item["sha256"]:
+            raise RuntimeError(f"Release stamp file missing or changed: {name}")
+    return set(files)
+
+
 def prepare(source: Path, package: Path) -> None:
     source = source.resolve()
     package = package.resolve()
     pck = source / "index.pck"
     if not pck.is_file() or not (source / "index.html").is_file():
         raise FileNotFoundError("Export Godot Web before packaging it")
+    stamped_files = verify_release_files(source)
     previous_path = package / "manifest.json"
     previous = json.loads(previous_path.read_text(encoding="utf-8")) if previous_path.is_file() else {}
     (package / "parts").mkdir(parents=True, exist_ok=True)
@@ -59,6 +75,7 @@ def prepare(source: Path, package: Path) -> None:
         + [source / "THIRD_PARTY_NOTICES.txt"]
         + list((source / "licenses").glob("*"))
         + list((source / "packs").glob("*.pck"))
+        + list((source / "packs").glob("*.pck.gz"))
         + [path for path in (source / "games").rglob("*") if path.is_file()]
     )
     files: list[dict[str, object]] = []
@@ -70,6 +87,10 @@ def prepare(source: Path, package: Path) -> None:
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(path, dest)
         files.append({"path": relative.as_posix(), "bytes": path.stat().st_size, "sha256": digest(path)})
+
+    omitted = stamped_files - {"index.pck"} - {item["path"] for item in files}
+    if omitted:
+        raise RuntimeError(f"Packaging omitted stamped files: {sorted(omitted)}")
 
     manifest = {
         "format": 1,
@@ -121,6 +142,7 @@ def assemble(package: Path, output: Path) -> None:
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, dest)
     (output / ".nojekyll").touch()
+    verify_release_files(output)
     print(f"Verified Pages site: {pck.stat().st_size} byte PCK, {len(manifest['files'])} other files")
 
 

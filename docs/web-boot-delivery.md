@@ -1,6 +1,6 @@
 # 可回復的 Web 啟動壓縮傳輸（2026-10-07）
 
-`tools/prepare_web_delivery.py` 在正常 Godot 匯出及 PCK 分包後，額外建立 gzip 版啟動 PCK／WASM。原始 `index.pck`、`index.wasm` 保留；Godot 的 JS 與 WASM 完全不改。`index.delivery.json` 記錄原始及壓縮 bytes／SHA-256，HTML 內有相同 manifest，發布 stamp 會驗證两者及 gzip 解碼結果。Pages 打包仍由現有 `index.*` 規則收錄所有檔案。
+`tools/prepare_web_delivery.py` 在正常 Godot 匯出及 PCK 分包後，額外建立 gzip 版啟動 PCK／WASM。原始 `index.pck`、`index.wasm` 保留。2026-10-10 起另對固定版本 JS loader 的單一 scissor 布林查詢做等價替換；WASM 不變。`index.delivery.json` 記錄原始及壓縮 bytes／SHA-256，HTML 內有相同 manifest，發布 stamp 會驗證两者及 gzip 解碼結果。Pages 打包會收錄啟動檔與有收益的內容包 gzip 檔。最新量測與修改細節見 [網頁優化報告](web-optimization.md)。
 
 這是應用程式讀取 `.gz` 檔再解壓，伺服器不必設定 `Content-Encoding`，不使用 Service Worker、Cache Storage、IndexedDB 或其他新增持久快取。支援 gzip `DecompressionStream` 及 WebCrypto 的瀏覽器才使用此路徑；不支援則照原方式載入。
 
@@ -26,7 +26,7 @@
 
 另外複製的 `index.background.js` 是內容包的分頁生命週期傳輸工具，其實作位於 `tools/web_background_packs.js`；與兩個 gzip 啟動檔分開驗證。Godot 在前景幀中把已收到的內容包 bytes 寫入預先配置的 Web MEMFS 檔案，增量驗證，收齊並驗證後才掛載。每區塊最多 256 KiB、每幀最多 4 MiB，區塊後檢查 8 ms 軟性預算，允許單區塊超時；這與 gzip 啟動檔的解碼輸出陣列是兩種不同的暫存，皆不構成跨重新整理的快取。
 
-依最新操作需求，全部延後包會在 HTML 通過瀏覽器功能檢查後、`engine.startGame()` 之前排入下載，不必等世界第一幀。HTML 內的包 metadata 必須與 `index.packs.json` 相同，後續 Godot 重複提出請求不會重抓已排程的包。建置與 stamp 必須確認其 bytes 總和不超過 128 MiB，讓隱藏分頁在沒有 Godot 消耗畫面幀時也能收完。若未來增加內容超過上限，建置會停止；必須重新評估暫存與排程，不能靜默造成等待。
+啟動所需的延後包會在 HTML 通過瀏覽器功能檢查後、`engine.startGame()` 之前排入下載，不必等世界第一幀；標示 `startup: false` 的室內包仍按需載入。HTML 內的包 metadata 必須與 `index.packs.json` 相同，後續 Godot 重複提出請求不會重抓已排程的包。建置與 stamp 必須確認啟動包 bytes 總和不超過 128 MiB，讓隱藏分頁在沒有 Godot 消耗畫面幀時也能收完。2026-10-10 起最多同時下載兩包，按解壓後大小預留同一個 128 MiB 上限；有超過 5% 壓縮收益時才建立選用 gzip 版本。若未來增加內容超過上限，建置會停止；必須重新評估暫存與排程，不能靜默造成等待。
 
 `tools/measure_startup_packs.cjs --no-gl-timing` 使用事件及 Resource Timing，不包裝 WebGL／WASM API。另加 `--wait-all-packs` 才等待 `planetAllResourcesReady`，並記錄 `planet-content-ready` 的 `contentReady` 時間；預設仍在首次畫面回呼後兩秒取樣，供舊量測對照。全景出現與全部資源準備完成是不同時間點。
 

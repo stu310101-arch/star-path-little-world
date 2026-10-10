@@ -167,7 +167,11 @@ async function hold(keys, ms) {
 }
 
 async function waitWorld() {
-  return waitFor('world ready with opt-in telemetry', s => s.ready && s.metrics?.buttons?.length && s.metrics?.player && !s.room, 300000);
+  const ready = await waitFor('world ready with opt-in telemetry and startup packs', s => s.ready &&
+    s.metrics?.buttons?.length && s.metrics?.player && s.metrics?.packs?.all_ready && !s.room, 300000);
+  // Download completion removes a status panel and moves these buttons. Read
+  // two fresh layout samples before clicking their real screen coordinates.
+  return waitFor('startup UI layout settled', s => s.metrics?.packs?.all_ready && !s.room, 30000, ready.metrics.ticks_ms + 1000);
 }
 
 async function verifyRelease(phase) {
@@ -204,9 +208,9 @@ async function closeSettings() {
 
 async function settingsRoute() {
   await openSettings();
-  await graphicsChoice('RestoreGraphicsDefaults', g => g.quality_profile === 'low' && !g.msaa_enabled && g.applied_msaa === 0 && g.frame_limit === 30 && g.applied_max_fps === 30 && g.scaling_3d_scale <= 1);
+  await graphicsChoice('RestoreGraphicsDefaults', g => g.quality_profile === 'low' && !g.msaa_enabled && g.applied_msaa === 0 && g.frame_limit === 60 && g.applied_max_fps === 60 && g.scaling_3d_scale <= 1);
   await verifyRenderSize('low');
-  await graphicsChoice('QualityStandard', g => g.quality_profile === 'standard' && g.msaa_enabled && g.applied_msaa === 1 && g.frame_limit === 30 && g.applied_max_fps === 30 && g.scaling_3d_scale === 1);
+  await graphicsChoice('QualityStandard', g => g.quality_profile === 'standard' && g.msaa_enabled && g.applied_msaa === 1 && g.frame_limit === 60 && g.applied_max_fps === 60 && g.scaling_3d_scale === 1);
   await verifyRenderSize('standard');
   await graphicsChoice('MSAAToggle', g => !g.msaa_enabled && g.applied_msaa === 0);
   await graphicsChoice('MSAAToggle', g => g.msaa_enabled && g.applied_msaa === 1);
@@ -224,7 +228,7 @@ async function settingsRoute() {
   const persisted = await waitWorld();
   check('Web reload persists standard / 90 FPS / MSAA off', persisted.metrics.graphics.quality_profile === 'standard' && persisted.metrics.graphics.frame_limit === 90 && !persisted.metrics.graphics.msaa_enabled, persisted.metrics.graphics);
   await openSettings();
-  await graphicsChoice('RestoreGraphicsDefaults', g => g.quality_profile === 'low' && !g.msaa_enabled && g.frame_limit === 30 && g.applied_msaa === 0 && g.applied_max_fps === 30);
+  await graphicsChoice('RestoreGraphicsDefaults', g => g.quality_profile === 'low' && !g.msaa_enabled && g.frame_limit === 60 && g.applied_msaa === 0 && g.applied_max_fps === 60);
   await closeSettings();
   await page.setViewportSize({ width: 390, height: 844 });
   const resized = await waitFor('mobile viewport dimensions', s => s.metrics?.graphics?.ui_pixels?.[0] === 390 && Math.abs(s.metrics.graphics.ui_pixels[1]-244)<=1);
@@ -499,7 +503,7 @@ async function repetitionRoute() {
           await waitFor('preparation or interaction cancelled for default restoration', state => !state.room && !state.metrics?.preparing_roam && !state.metrics?.player?.paused);
         }
         await openSettings();
-        await graphicsChoice('RestoreGraphicsDefaults', g => g.quality_profile === 'low' && !g.msaa_enabled && g.frame_limit === 30 && g.applied_msaa === 0 && g.applied_max_fps === 30);
+        await graphicsChoice('RestoreGraphicsDefaults', g => g.quality_profile === 'low' && !g.msaa_enabled && g.frame_limit === 60 && g.applied_msaa === 0 && g.applied_max_fps === 60);
         check('QA restores low graphics defaults', true, (await snapshot()).metrics.graphics);
       } catch (error) { report.errors.push(`Default restoration incomplete: ${error.message}`); }
     }
