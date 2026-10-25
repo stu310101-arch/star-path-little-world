@@ -1,6 +1,6 @@
 # 選校研究所：推薦、收藏與比較
 
-本輪於 2026-10-25 製作本機候選。推薦依據來自已選用的完成量表或使用者自行選擇的學類，以及明確選定的一份已存成績。主候選固定為 115 學年度；113、114 年只在詳細資料作歷史對照。這是興趣方向與歷史一階門檻的整理工具，沒有計算錄取機率，也沒有將報告分數重新解釋為心理適配百分比。
+本輪 r3 已於 2026-10-25 發布至 [Cloudflare 正式站](https://star-path-little-world.star-path-little-world.workers.dev/)。推薦依據來自已選用的完成量表或使用者自行選擇的學類，以及明確選定的一份已存成績。主候選固定為 115 學年度；113、114 年只在詳細資料作歷史對照。這是興趣方向與歷史一階門檻的整理工具，沒有計算錄取機率，也沒有將報告分數重新解釋為心理適配百分比。
 
 ## 操作與分工
 
@@ -43,7 +43,7 @@
 - `InterestRepository.getActiveCompletedSnapshot()` 在交易中讀選用紀錄的 `content/complete`，回傳完成內容的名稱、revision 與 selectionRevision。較新草稿不會污染推薦輸入。原 `getActiveCompleted()` 介面維持相容。
 - 成績只使用選定的一次已存紀錄，不平均不同考試、不取多次最高分、不把未填變成 0。未選方向的空白 manual 快照回傳 0 筆推薦及提示，仍可查看收藏詳情以進行比較。
 - 設定位於 `users/{uid}/recommendationSettings/main`，校系收藏位於 `users/{uid}/recommendationFavorites/{year}_{code}`，與大學館學校收藏分開。每次寫入有 revision，並以 requestId 建立不可改寫的 mutation receipt；相同重試不重複寫入，重用編號但更改內容會失敗。取消收藏保留 tombstone revision，避免遲到重試復活已取消項目。
-- Firestore 規則限制本人存取、列表上限與版本關係；host 再驗證每個 manual 列與校系身份。新規則本輪只在本機 emulator 驗證，尚未部署正式 Firebase。
+- Firestore 規則限制本人存取、列表上限與版本關係；host 再驗證每個 manual 列與校系身份。新規則先在本機 emulator 驗證，再於正式網站發布前以 rules-only 部署到 `star-path-75457`；索引沒有變動。
 
 ## 已完成的技術驗證
 
@@ -63,13 +63,21 @@
 
 第三版整合驗證已完成原生帳號操作 **31 項**、原生面板與協定 **53 項**、bridge **17 項**，以及瀏覽器帳號準備 **20 項**與跨端回讀 **6 項**。座位／工作台與大學館往返 **29 項**、完整／低階星儀資產與動態 **28 項**通過。帳號測試僅使用本機 emulator 合成資料；證據留在 `deliverables/recommendations/` 與 `deliverables/recommendation-room/`，測試帳密及私有 session 不推送。
 
-原生候選位於 `build/windows-recommendation-20261025-r3`，Web 候選位於 `build/cloudflare-recommendation-20261025-r3`。最終 Web 原始版本為 `packs-5d46d01076303192`，封裝版本為 `cf-a5ad2b01262d5612`。本輪推回可重建的整合遊戲來源，包含帳號、大學館、室內與資源包等既有前置，不覆蓋正式網站或正式 Firebase。
+原生候選位於 `build/windows-recommendation-20261025-r3`，Web 發布包位於 `build/cloudflare-recommendation-20261025-r3`。最終 Web 原始版本為 `packs-5d46d01076303192`，封裝版本為 `cf-a5ad2b01262d5612`。可重建來源已推回 GitHub，包含帳號、大學館、室內與資源包等既有前置；正式網站使用同一份已驗證的 r3 發布包。
 
 - r3 完整／低階房間各 **104 項**原生檢查通過：五個座位、三張工作椅的 F 使用／關閉保持坐姿／E 起身、17 條直達路線、鏡頭與碰撞。兩版模型分別 98,212／31,168 三角面，共用相同 layout；低階貼圖最長邊 256。
 - 最終 Web **34 項**通過：桌面完整包、390×844 低階手機模擬、正常登入、進房才載入對應模型、三種排序、每頁 20 筆的上一頁／下一頁、三校系比較及返回戶外。無瀏覽器、Godot 腳本或 shader 錯誤；已查看實際遊戲畫面。這不是實體手機、Safari、熱降頻或完整純觸控驗證。
-- Windows 建包來源與實際封裝內容的 SHA 核對成功。Web 全低階資源隔離檢查通過，Cloudflare 九個超過單檔上限的檔案已由真實本機 HTTP 分塊重組並逐一核對 SHA；沒有執行 deploy。
+- Windows 建包來源與實際封裝內容的 SHA 核對成功。Web 全低階資源隔離檢查通過，Cloudflare 九個超過單檔上限的檔案已由真實本機 HTTP 分塊重組並逐一核對 SHA。
 - 建包驗證 Python **20 項**、分包 Python **22 項**及交付封裝 Python **9 項**通過。詳盡本機證據位於 `deliverables/recommendation-room/`，可公開追溯的摘要見 [recommendation-validation-20261025.json](recommendation-validation-20261025.json)。
 
 交付預演使用 `python tools/package_recommendation_delivery.py --dry-run`，預設讀取上述 r3 候選目錄。候選檔案須與 release manifest 的清單、SHA-256、大小一致；網站的來源清單須對應 `integrations/admissions/source-manifest.json` 的工作目錄 bytes。移除 `--dry-run` 才會在全新 `build/recommendation-delivery-20261025` 建立三個 ZIP，並寫入內容清單、provenance 與 ZIP 雜湊。既有輸出不會覆寫。
 
-Windows 本機候選以 `Start-Local-Candidate.ps1` 明確連到本機帳號 host，尚未部署的推薦通道不能由直接啟動 EXE 的正式帳號 host 使用。先依 snapshot README 還原並建置 admissions-site，再從該目錄執行 `npx firebase emulators:start --only auth,firestore --project demo-starpath-tests`；另一個終端從主專案執行 `python tools/serve_recommendation_candidate.py --web build/cloudflare-recommendation-20261025-r3/site`。啟動器會核對 localhost 的 Auth 9099、Firestore 8080 及 demo 專案。合成測試帳密、私有 session、模擬器資料與測試紀錄都不列入交付包。
+Windows 的 `Start-Local-Candidate.ps1` 用於本機模擬器測試；直接啟動 EXE 使用正式帳號 host，推薦通道已隨本次 Cloudflare 發布上線。本機測試先依 snapshot README 還原並建置 admissions-site，再從該目錄執行 `npx firebase emulators:start --only auth,firestore --project demo-starpath-tests`；另一個終端從主專案執行 `python tools/serve_recommendation_candidate.py --web build/cloudflare-recommendation-20261025-r3/site`。啟動器會核對 localhost 的 Auth 9099、Firestore 8080 及 demo 專案。合成測試帳密、私有 session、模擬器資料與測試紀錄都不列入交付包。
+
+## 正式 Cloudflare 發布
+
+2026-10-25 將同一份 r3 發布包上傳至既有 Worker `star-path-little-world`，Cloudflare version 為 `440e4776-8bde-4446-b397-34e2ad8e4bea`。保留 `ASSETS`、`NATIVE_AUTH`、`NATIVE_AUTH_LIMITS`、`native-auth-v1` 及既有簽章 secret。發布前版本 `793bba73-4627-481f-b6b3-f50305ff4528`／`cf-c915bee8bee26338` 保留於先前封存，沒有執行回退。
+
+正式 Firestore 僅增加 57 行推薦規則，既有規則與索引維持原內容。讀回 ruleset `0b3893be-c68e-40a1-9502-ee6ef5daa9d4` 與本機逐 byte 一致，SHA-256 為 `c5cdacb00dd6b4e4ba5611d82795f3f8521cfd053ca9062ae8fe623bfd3cdef4`。
+
+正式驗證 14 項通過：已發布登入頁、橋接與隱藏 host、正式成績讀取／推薦查詢、設定寫入回讀、收藏新增／取消及重試不復活。只使用一個新建合成帳號，未寄驗證信；其 Firestore 子樹與 Auth 帳號已刪除並確認不存在。外層是隔離測試頁，不能當成正式遊戲畫布或實體手機驗收。公開檔案核對及此項證據位於 `deliverables/recommendation-room/public-deployment.json`、`production-rules.json`、`production-smoke.json`，發布紀錄封存於 `build/releases/20261025-cf-a5ad2b01262d5612/`。

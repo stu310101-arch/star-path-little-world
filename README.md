@@ -1,14 +1,14 @@
 # 星途 · 3D 球型世界
 
-2026-10-25 已整合「星圖羅盤探索室」推薦功能與 r3 可坐工作台、動態天文儀。此版本已完成 Windows／Web 候選驗證，正式服務尚未發布；本機啟動、資產及完整檢查見 [選校推薦室說明](docs/recommendation-room.md)。
+2026-10-25 已將「星圖羅盤探索室」推薦功能與 r3 可坐工作台、動態天文儀發布至 Cloudflare 正式站。正式版為 `cf-a5ad2b01262d5612`；啟動、資產、部署及驗證紀錄見 [選校推薦室說明](docs/recommendation-room.md)。
 
-**[直接遊玩瀏覽器版本](https://stu310101-arch.github.io/star-path-little-world/)**。首次進入需下載遊戲資源，請等候 Godot 載入完成。
+**[直接遊玩 Cloudflare 正式版](https://star-path-little-world.star-path-little-world.workers.dev/)**。首次進入需下載遊戲資源，請等候 Godot 載入完成。
 
 可編輯原始專案位於 **game/project.godot**，使用 Godot 4.7.2 開啟後按 F5。
 
-GitHub Pages 的瀏覽器版本由 `.github/workflows/deploy-pages.yml` 發布；可重建的 Web 發布包及更新方法見 [GitHub Pages release](deploy/github-pages/README.md)。
+正式網站使用 Cloudflare Workers 與 Static Assets，同包提供遊戲、帳號網站與 Windows 登入服務。GitHub 儲存庫保存可重建來源；舊 GitHub Pages 發行流程仍保留於 [GitHub Pages release](deploy/github-pages/README.md)。
 
-本機的 `deliverables/` 畫面與檢查紀錄沒有包含在公開儲存庫；可玩的網站以 GitHub Pages 版本為準。
+本機的 `deliverables/` 畫面與詳細檢查紀錄沒有包含在公開儲存庫；公開驗證摘要保存在 `docs/`，正式遊戲入口為上方 Cloudflare 網址。
 
 練功區已接入可探索室內：靠近世界中的入口圓台按 E 進入，在室內入口傳送門按 E 返回原位置。單字王是其中一台裝置。[練功區整合說明](art/TrainingRoom/GAME_INTEGRATION.md)
 

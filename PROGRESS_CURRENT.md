@@ -1,9 +1,12 @@
-# 選校推薦室 — 2026-10-25（r3 候選已驗證）
+# 選校推薦室 — 2026-10-25（r3 已發布至 Cloudflare）
+
+正式版 `cf-a5ad2b01262d5612`，Cloudflare version `440e4776-8bde-4446-b397-34e2ad8e4bea`。入口：https://star-path-little-world.star-path-little-world.workers.dev/ 。
 
 - 完成以完成版量表與一份成績推薦 115 年 64 校／2,206 校系，含三種排序、原因、歷年回測、每頁 20 筆、三校系比較、帳號設定／收藏及大學館往返。
 - 房間採不同造型的三台與五個可坐座位；電腦前方文件已移到後櫃，坐下 F 使用工作台、E 起身。天文儀兩環與星體沿不同軸速運轉，可暫停並尊重減少動態效果。
 - 完整／低階房間 104＋104、實際原生帳號 31、原生協定／UI 53、Web bridge 17、最終桌面／手機模擬 Web 34 項通過；手機尚非實機驗證。
-- Windows／Web r3 候選及可編輯資產留在 `build/recommendation-delivery-20261025/`；來源提交包含必要的帳號、大學館與資源包前置，沒有發布正式網站／Firebase。
+- Windows／Web r3 候選及可編輯資產留在 `build/recommendation-delivery-20261025/`；來源提交包含必要的帳號、大學館與資源包前置。正式 Firestore 僅新增推薦規則，索引未變動；既有登入 Worker 與兩個 Durable Object 綁定保留。
+- 已發布的帳號頁、推薦 host 與正式 Firestore 共 14 項操作檢查通過，合成帳號與其資料已完整清理。正式規則讀回 SHA 與本機一致；發布封存位於 `build/releases/20261025-cf-a5ad2b01262d5612/`。
 - 操作、建置與驗證：[推薦室說明](docs/recommendation-room.md)。
 
 ---

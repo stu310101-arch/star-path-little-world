@@ -1,7 +1,7 @@
 {
   "date": "2026-10-25",
   "candidate": "recommendation-room-r3",
-  "production_deployed": false,
+  "production_deployed": true,
   "web_build_id": "packs-5d46d01076303192",
   "web_packaged_build_id": "cf-a5ad2b01262d5612",
   "checks": {
@@ -37,7 +37,7 @@
     "Desktop native and exported Web canvas normal input",
     "Chrome Pixel 7 emulation, not physical-phone verification",
     "Full and low assets requested only after room entry",
-    "No production website or Firebase deployment"
+    "The same r3 candidate was subsequently deployed to Cloudflare and Firebase rules; production host smoke uses one cleaned-up disposable account."
   ],
   "evidence_directories": [
     "deliverables/recommendation-room/",
@@ -46,5 +46,15 @@
   "candidate_directories": [
     "build/windows-recommendation-20261025-r3",
     "build/cloudflare-recommendation-20261025-r3"
-  ]
+  ],
+  "production": {
+    "url": "https://star-path-little-world.star-path-little-world.workers.dev/",
+    "cloudflare_version_id": "440e4776-8bde-4446-b397-34e2ad8e4bea",
+    "public_files_verified": 30,
+    "live_rules_sha256": "c5cdacb00dd6b4e4ba5611d82795f3f8521cfd053ca9062ae8fe623bfd3cdef4",
+    "live_rules_exact_match": true,
+    "recommendation_smoke_checks": 14,
+    "test_data_cleaned": true,
+    "scope": "Actual published account page, bridge and hidden recommendation host with production Firestore. Browser outer page is an isolated harness, not the game canvas. One disposable example.invalid user; no verification email; credentials only in memory."
+  }
 }
