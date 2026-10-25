@@ -11,8 +11,15 @@ const DOWNLOAD_BYTES_PER_FRAME: int = 4194304
 # preserving overview input/rendering and the separate 4 MiB frame ceiling.
 const DOWNLOAD_WORK_BUDGET_USEC: int = 8000
 const READ_CHUNK_BYTES: int = 262144
+const MOBILE_PLAY_WORK_USEC: int = 2000
+const MOBILE_PLAY_FRAME_BYTES: int = 524288
+const MOBILE_PLAY_CHUNK_BYTES: int = 65536
 const DOWNLOAD_TIMEOUT_MS: int = 600000
 var _packs: Dictionary = {}
+var _profiles: Dictionary = {}
+var _shared_on_demand: Array = []
+var _native_source: FileAccess
+var _native_directory: String = ""
 var _resources: Dictionary = {}
 var _states: Dictionary = {}
 var _queue: Dictionary = {}
@@ -45,17 +52,28 @@ var _total_bytes: int = 0
 var _startup_bytes: int = 0
 var _startup_ids: Array[String] = []
 var _startup_notified: bool = false
+var _mobile_web: bool = false
+var _work_budget_usec: int = DOWNLOAD_WORK_BUDGET_USEC
+var _frame_byte_budget: int = DOWNLOAD_BYTES_PER_FRAME
+var _read_chunk_bytes: int = READ_CHUNK_BYTES
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	if not OS.has_feature("web") or not FileAccess.file_exists(MANIFEST):
+	if not FileAccess.file_exists(MANIFEST):
 		return
+	_mobile_web = preload("res://scripts/graphics_settings.gd").is_mobile_web()
 	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(MANIFEST)) as Dictionary
-	configure(manifest, str(JavaScriptBridge.eval("new URL('.', location.href).href")), "/tmp/little-world-packs")
+	if OS.has_feature("web"):
+		configure(manifest, str(JavaScriptBridge.eval("new URL('.', location.href).href")), "/tmp/little-world-packs")
+	else:
+		_native_directory = OS.get_executable_path().get_base_dir()
+		configure(manifest, "", ProjectSettings.globalize_path("user://resource-packs"))
 
 func configure(manifest: Dictionary, base_url: String, directory: String) -> void:
 	_enabled = true
 	_packs = manifest.get("packs", {}) as Dictionary
+	_profiles = manifest.get("profiles", {}) as Dictionary
+	_shared_on_demand = manifest.get("shared_on_demand", []) as Array
 	_total_bytes = 0
 	_startup_bytes = 0
 	_startup_ids.clear()
@@ -87,6 +105,56 @@ func start_all_downloads() -> void:
 	_all_requested = true
 	for id: String in _startup_ids:
 		_request_pack(id, 20 if id == "avatar" else 0)
+
+func select_profile(profile: String) -> void:
+	if not _enabled or not _profiles.has(profile):
+		return
+	_startup_ids.assign(_profiles[profile])
+	_startup_bytes = 0
+	for id: String in _startup_ids:
+		_startup_bytes += int(_packs[id].bytes)
+	_all_requested = false
+
+func request_profile(profile: String) -> void:
+	for id: String in _profiles.get(profile, []):
+		_request_pack(id, 80)
+
+func profile_progress(profile: String) -> Dictionary:
+	var total: int = 0
+	var received: int = 0
+	var ready: bool = true
+	var error: String = ""
+	for id: String in _profiles.get(profile, []):
+		total += int(_packs[id].bytes)
+		if _states.get(id, "") == "ready":
+			received += int(_packs[id].bytes)
+		else:
+			ready = false
+			if id == _current:
+				received += _downloaded_bytes
+		if not _pack_error(id).is_empty():
+			error = _pack_error(id)
+	return {"ready":ready,"received_bytes":received,"total_bytes":total,"error":error}
+
+func profile_cached(profile: String) -> bool:
+	if not _enabled:
+		return true
+	if OS.has_feature("web"):
+		return bool(JavaScriptBridge.eval("window.LittleWorldResourceStore?.cached('%s') === true" % profile))
+	for id: String in _profiles.get(profile, []):
+		var file: FileAccess = FileAccess.open(_local_path(id), FileAccess.READ)
+		if file == null or file.get_length() != int(_packs[id].bytes):
+			return false
+	return _profiles.has(profile)
+
+func delete_cached_profile(profile: String, keep: String) -> void:
+	if OS.has_feature("web"):
+		return # Browser deletion is coordinated with the service worker.
+	var keep_ids: Array = _profiles.get(keep, [])
+	for id: String in _profiles.get(profile, []):
+		if id not in keep_ids and id not in _shared_on_demand:
+			DirAccess.remove_absolute(_local_path(id))
+			_states.erase(id)
 
 func all_resources_ready() -> bool:
 	if not _enabled:
@@ -129,7 +197,7 @@ func _request_pack(id: String, priority: int) -> void:
 	# is suspended in another tab; scene creation still uses foreground frames.
 	if _web_transport != null and (not _web_requested.has(id) or priority > int(_web_requested[id])):
 		_web_requested[id] = priority
-		_web_transport.enqueue(id, str(_packs[id].url), int(_packs[id].bytes), priority)
+		_web_transport.enqueue(id, str(_packs[id].url), int(_packs[id].bytes), priority, JSON.stringify(_packs[id].get("dependencies", [])))
 
 func is_resource_ready(path: String) -> bool:
 	return not _enabled or not _resources.has(path) or _states.get(str(_resources[path]), "") == "ready"
@@ -181,6 +249,8 @@ func _process(_delta: float) -> void:
 			return
 		var id: String = _current
 		_states[id] = "ready"
+		if _web_transport != null:
+			_web_transport.markReady(id)
 		_completed[id]["ready_ms"] = Time.get_ticks_msec()
 		_mounted_bytes += int(_packs[id].bytes)
 		_current = ""
@@ -190,6 +260,7 @@ func _process(_delta: float) -> void:
 			JavaScriptBridge.eval("window.planetAllResourcesReady = true; window.dispatchEvent(new Event('planet-content-ready'));")
 		return
 	if not _current.is_empty():
+		_update_work_budget()
 		_download_step()
 		return
 	var selected: String = ""
@@ -222,7 +293,20 @@ func _begin_download(url: String) -> void:
 	# Own the file rather than HTTPRequest.download_file: in Godot 4.7.2 its
 	# unknown-length EOF success path deletes that file before request_completed.
 	# Web HTTPClient reports length=-1 even when Content-Length is present.
+	if not _native_directory.is_empty():
+		var path: String = _local_path(_current)
+		if FileAccess.file_exists(path) and FileAccess.get_sha256(path) == str(_packs[_current].sha256):
+			_states[_current] = "mounting"
+			_completed[_current] = {"cache_hit":true}
+			_received += int(_packs[_current].bytes)
+			_mount_pending = true
+			return
 	if not _open_download_file():
+		return
+	if not _native_directory.is_empty():
+		_native_source = FileAccess.open(_native_directory.path_join(str(_packs[_current].url)), FileAccess.READ)
+		if _native_source == null:
+			_fail("找不到資源包檔案，請保留遊戲旁的 packs 資料夾。")
 		return
 	if _web_transport != null:
 		return
@@ -268,6 +352,15 @@ func _preallocate_download_file() -> bool:
 	return true
 
 func _download_step() -> void:
+	if _native_source != null:
+		var chunk: PackedByteArray = _native_source.get_buffer(DOWNLOAD_BYTES_PER_FRAME)
+		_download_file.store_buffer(chunk)
+		_hasher.update(chunk)
+		_hashed_bytes += chunk.size()
+		_downloaded_bytes += chunk.size()
+		if _native_source.eof_reached() or _native_source.get_position() == _native_source.get_length():
+			_finish_download()
+		return
 	if _web_transport != null:
 		_web_download_step()
 		return
@@ -315,7 +408,7 @@ func _download_step() -> void:
 		return
 	var frame_bytes: int = 0
 	var work_started: int = Time.get_ticks_usec()
-	while _client.get_status() == HTTPClient.STATUS_BODY and frame_bytes < DOWNLOAD_BYTES_PER_FRAME:
+	while _client.get_status() == HTTPClient.STATUS_BODY and frame_bytes < _frame_byte_budget:
 		var chunk: PackedByteArray = _client.read_response_body_chunk()
 		if chunk.is_empty():
 			break
@@ -333,7 +426,7 @@ func _download_step() -> void:
 		_hashed_bytes += chunk.size()
 		_downloaded_bytes += chunk.size()
 		frame_bytes += chunk.size()
-		if Time.get_ticks_usec() - work_started >= DOWNLOAD_WORK_BUDGET_USEC:
+		if Time.get_ticks_usec() - work_started >= _work_budget_usec:
 			break
 	_max_download_frame_bytes = maxi(_max_download_frame_bytes, frame_bytes)
 	_max_download_work_ms = maxf(_max_download_work_ms, float(Time.get_ticks_usec() - work_started) / 1000.0)
@@ -342,6 +435,19 @@ func _download_step() -> void:
 		_finish_download()
 	elif status == HTTPClient.STATUS_CONNECTION_ERROR:
 		_fail("下載連線中斷，請重試。")
+
+func _update_work_budget() -> void:
+	# Keep startup ingestion fast, but yield early to rendering/input when a
+	# phone is already walking through a district that streams more content.
+	var gameplay: bool = false
+	if _mobile_web and get_tree().current_scene != null:
+		var player: Node = get_tree().current_scene.get("player") as Node
+		gameplay = is_instance_valid(player) and bool(player.get("controls_enabled"))
+	_work_budget_usec = MOBILE_PLAY_WORK_USEC if gameplay else DOWNLOAD_WORK_BUDGET_USEC
+	_frame_byte_budget = MOBILE_PLAY_FRAME_BYTES if gameplay else DOWNLOAD_BYTES_PER_FRAME
+	_read_chunk_bytes = MOBILE_PLAY_CHUNK_BYTES if gameplay else READ_CHUNK_BYTES
+	if _client != null and _client.read_chunk_size != _read_chunk_bytes:
+		_client.read_chunk_size = _read_chunk_bytes
 
 func _web_download_step() -> void:
 	var status: JavaScriptObject = _web_transport.status(_current)
@@ -353,8 +459,8 @@ func _web_download_step() -> void:
 	var started: int = Time.get_ticks_usec()
 	var frame_bytes: int = 0
 	var available: int = int(status.received)
-	while _downloaded_bytes < available and frame_bytes < DOWNLOAD_BYTES_PER_FRAME:
-		var buffer: JavaScriptObject = _web_transport.read(_current, _downloaded_bytes, READ_CHUNK_BYTES)
+	while _downloaded_bytes < available and frame_bytes < _frame_byte_budget:
+		var buffer: JavaScriptObject = _web_transport.read(_current, _downloaded_bytes, _read_chunk_bytes)
 		var chunk: PackedByteArray = JavaScriptBridge.js_buffer_to_packed_byte_array(buffer)
 		if chunk.is_empty():
 			break
@@ -367,7 +473,7 @@ func _web_download_step() -> void:
 		_downloaded_bytes += chunk.size()
 		frame_bytes += chunk.size()
 		_web_transport.consume(_current, _downloaded_bytes)
-		if Time.get_ticks_usec() - started >= DOWNLOAD_WORK_BUDGET_USEC:
+		if Time.get_ticks_usec() - started >= _work_budget_usec:
 			break
 	_max_download_frame_bytes = maxi(_max_download_frame_bytes, frame_bytes)
 	_max_download_work_ms = maxf(_max_download_work_ms, float(Time.get_ticks_usec() - started) / 1000.0)
@@ -411,6 +517,9 @@ func _finish_download() -> void:
 	_mount_pending = true
 
 func _close_network() -> void:
+	if _native_source != null:
+		_native_source.close()
+		_native_source = null
 	if _client != null:
 		_client.close()
 	if _download_file != null:
@@ -444,16 +553,12 @@ func _exit_tree() -> void:
 	if not _current.is_empty():
 		DirAccess.remove_absolute(_local_path(_current))
 
-func get_status() -> Dictionary:
-	var loaded: int = 0
-	for state: String in _states.values():
-		if state == "ready":
-			loaded += 1
-	var current_bytes: int = _downloaded_bytes if not _current.is_empty() else 0
-	var expected: int = int(_packs[_current].bytes) if not _current.is_empty() else 0
+func _refresh_background_status() -> void:
 	if _web_transport != null and Time.get_ticks_msec() - _web_status_ms >= 100:
 		_web_status = JSON.parse_string(str(_web_transport.snapshotJson())) as Dictionary
 		_web_status_ms = Time.get_ticks_msec()
+
+func _startup_network_bytes() -> int:
 	var startup_received: int = 0
 	for id: String in _startup_ids:
 		if _states.get(id, "") in ["ready", "mounting"]:
@@ -465,5 +570,26 @@ func get_status() -> Dictionary:
 				network_bytes += int(job.received)
 	else:
 		if _current in _startup_ids and _states.get(_current, "") == "downloading":
-			network_bytes += current_bytes
-	return {"enabled":_enabled, "current":_current, "state":_states.get(_current, "idle"), "downloaded_bytes":current_bytes, "expected_bytes":expected, "ready_packs":loaded, "queued_packs":_queue.size(), "received_bytes":_received, "mounted_bytes":_mounted_bytes, "errors":_errors.duplicate(), "transport":"background_fetch" if _web_transport != null else "http_client", "background":_web_status, "max_download_frame_bytes":_max_download_frame_bytes, "hashed_bytes":_hashed_bytes, "max_download_work_ms":_max_download_work_ms, "download_work_budget_ms":float(DOWNLOAD_WORK_BUDGET_USEC)/1000.0, "pack_timings":_completed.duplicate(true), "all_requested":_all_requested, "all_ready":all_resources_ready(), "total_packs":_packs.size(), "startup_packs":_startup_ids.size(), "all_pack_bytes":_total_bytes, "total_bytes":_startup_bytes, "network_received_bytes":mini(network_bytes, _startup_bytes)}
+			network_bytes += _downloaded_bytes
+	return mini(network_bytes, _startup_bytes)
+
+func get_startup_status() -> Dictionary:
+	# The ordinary HUD polls progress, not diagnostics. Once outdoor startup
+	# is ready, avoid crossing Wasm/JS and copying completed-pack histories ten
+	# times per second. On-demand rooms keep their own get_resource_progress.
+	var complete: bool = all_resources_ready()
+	if not complete:
+		_refresh_background_status()
+	return {"enabled":_enabled, "all_ready":complete, "total_bytes":_startup_bytes,
+		"network_received_bytes":_startup_bytes if complete else _startup_network_bytes()}
+
+func get_status() -> Dictionary:
+	var loaded: int = 0
+	for state: String in _states.values():
+		if state == "ready":
+			loaded += 1
+	var current_bytes: int = _downloaded_bytes if not _current.is_empty() else 0
+	var expected: int = int(_packs[_current].bytes) if not _current.is_empty() else 0
+	_refresh_background_status()
+	var network_bytes: int = _startup_network_bytes()
+	return {"enabled":_enabled, "current":_current, "state":_states.get(_current, "idle"), "downloaded_bytes":current_bytes, "expected_bytes":expected, "ready_packs":loaded, "queued_packs":_queue.size(), "received_bytes":_received, "mounted_bytes":_mounted_bytes, "errors":_errors.duplicate(), "transport":"background_fetch" if _web_transport != null else "http_client", "background":_web_status, "max_download_frame_bytes":_max_download_frame_bytes, "hashed_bytes":_hashed_bytes, "max_download_work_ms":_max_download_work_ms, "download_work_budget_ms":float(_work_budget_usec)/1000.0, "download_frame_byte_budget":_frame_byte_budget, "download_chunk_bytes":_read_chunk_bytes, "pack_timings":_completed.duplicate(true), "all_requested":_all_requested, "all_ready":all_resources_ready(), "total_packs":_packs.size(), "startup_packs":_startup_ids.size(), "all_pack_bytes":_total_bytes, "total_bytes":_startup_bytes, "network_received_bytes":mini(network_bytes, _startup_bytes)}

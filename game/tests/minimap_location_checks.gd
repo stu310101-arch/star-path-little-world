@@ -6,6 +6,7 @@ const Routes = preload("res://scripts/world_routes.gd")
 const Sakura = preload("res://scripts/sakura_routes.gd")
 var failures: int = 0
 var checks: Array[Dictionary] = []
+var radius: float
 
 func check(title: String,passed: bool,detail: String = "") -> void:
 	checks.append({"name":title,"passed":passed,"detail":detail})
@@ -13,10 +14,17 @@ func check(title: String,passed: bool,detail: String = "") -> void:
 		failures += 1
 
 func normal_at(up: Vector3,point: Vector2) -> Vector3:
-	return Geo.surface(up,point,48.0).normalized()
+	return Geo.surface(up,point,radius).normalized()
 
 func _initialize() -> void:
 	var minimap: Control = Minimap.new() as Control
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
+	# District coordinates are authored at the original radius; the actual
+	# world expands that geometry in build_cartography(). Match that contract
+	# when this isolated fixture constructs patches without a scene.
+	radius = float(layout.get("authoring_radius", layout.radius))
+	minimap.set("radius", float(layout.radius))
+	minimap.set("authoring_radius", radius)
 	minimap.size = Vector2(224,180)
 	var districts: Array = JSON.parse_string(FileAccess.get_file_as_string("res://data/districts.json")) as Array
 	var directions: Array[Vector3] = Routes.directions()
@@ -50,10 +58,11 @@ func _initialize() -> void:
 	for point: Vector2 in Sakura.island_outline():
 		sakura_edges_match = sakura_edges_match and str(minimap.call("location_at",normal_at(Sakura.grove_up(),point*.96))) == "櫻花林"
 	check("All actual Sakura edge samples remain Sakura",sakura_edges_match)
-	check("Sakura bridge town landing stays in counseling",str(minimap.call("location_at",Sakura.town_endpoint(48.0))) == str(districts[0].theme))
+	check("Sakura bridge town landing stays in counseling",str(minimap.call("location_at",Sakura.town_endpoint(radius))) == str(districts[0].theme))
 	for edge: Vector2i in Routes.bridge_edges():
-		var start: String = str(minimap.call("location_at",directions[edge.x].slerp(directions[edge.y],Routes.bridge_limits().x)))
-		var finish: String = str(minimap.call("location_at",directions[edge.x].slerp(directions[edge.y],Routes.bridge_limits().y)))
+		var endpoints: Array[Vector3] = Routes.bridge_endpoints(edge, radius)
+		var start: String = str(minimap.call("location_at",endpoints[0]))
+		var finish: String = str(minimap.call("location_at",endpoints[1]))
 		var middle: String = str(minimap.call("location_at",directions[edge.x].slerp(directions[edge.y],.5)))
 		check("Bridge labels follow its two real shores "+str(edge),start == str(districts[edge.x].theme) and finish == str(districts[edge.y].theme) and middle in [str(districts[edge.x].theme),str(districts[edge.y].theme)],start+" / "+middle+" / "+finish)
 	minimap.call("update_map_frame",life_visit)

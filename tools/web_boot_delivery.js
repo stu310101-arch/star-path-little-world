@@ -44,7 +44,10 @@
         setText(phase, downloading ? '正在下載啟動檔…' : '正在驗證啟動檔…');
         const received = files.reduce((sum, file) => sum + file.decodedBytes, 0);
         const expected = files.reduce((sum, file) => sum + file.expectedBytes, 0);
-        setText(detail, `已解壓 ${(received / 1000000).toFixed(1)} / ${(expected / 1000000).toFixed(1)} MB`);
+        const downloadingParts = files.filter(file => file.downloadTotalBytes > 0 && file.phase === 'downloading');
+        const downloadText = downloadingParts.length
+          ? `分段下載 ${(downloadingParts.reduce((sum, file) => sum + file.downloadedBytes, 0) / 1000000).toFixed(1)} / ${(downloadingParts.reduce((sum, file) => sum + file.downloadTotalBytes, 0) / 1000000).toFixed(1)} MB；` : '';
+        setText(detail, downloadText + `已解壓 ${(received / 1000000).toFixed(1)} / ${(expected / 1000000).toFixed(1)} MB`);
         // Decoded bytes, explicitly labelled above; not compressed wire bytes.
         // Stop owning the bar when buffers are handed to the original loader.
         if (progress.max !== expected) progress.max = expected;
@@ -131,7 +134,20 @@
         // A stalled optional compressed route must not wait forever before the
         // ordinary loader can retry. Slow downloads which progress can continue.
         armIdleTimeout();
-        const response = await originalFetch.call(env, entry.compressed, {signal: controller.signal});
+        const response = await originalFetch.call(env, entry.compressed, {
+          signal: controller.signal,
+          // Native fetch ignores this private option. Static-host chunk
+          // delivery invokes it for each received network segment, before
+          // its whole-file verification permits a Response to be returned.
+          onLittleWorldDownloadProgress(progress) {
+            if (controller.signal.aborted || !Number.isSafeInteger(progress?.loaded) ||
+                progress.loaded <= 0 || progress.loaded > item.compressed_bytes ||
+                progress.total !== item.compressed_bytes) return;
+            row.downloadedBytes = progress.loaded;
+            row.downloadTotalBytes = progress.total;
+            armIdleTimeout();
+          },
+        });
         if (!response.ok || !response.body) throw new Error('gzip HTTP ' + response.status);
         armIdleTimeout();
         bytes = new Uint8Array(item.bytes);

@@ -28,6 +28,7 @@ class TrainingGamePackageTests(unittest.TestCase):
         self.assertEqual((self.folder / "games/go/index.html").read_bytes(), (SOURCE / "go/index.html").read_bytes())
         self.assertEqual((self.folder / SCRIPT).read_bytes(), ADAPTER.read_bytes())
         self.assertEqual(set(verify(self.folder)), {MANIFEST, SCRIPT, "games/go/index.html"})
+        self.assertFalse((self.folder / "games/native_go.html").exists())
 
     def test_tampering_or_missing_script_fails_verification(self):
         package(self.folder)

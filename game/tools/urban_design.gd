@@ -43,11 +43,13 @@ func build(owner_builder: SceneTree, parent: Node3D, district_index: int) -> voi
 		var front: Vector2 = p+forward*float(row.get("front",2.8))
 		var lane: Vector2 = nearest_walk(front)
 		walk(front,lane,1.4,"BuildingForecourt")
-		# Every building has an address, a front path and a street-facing entrance.
-		var address: Node3D = anchor(front+Vector2(-forward.y,forward.x)*1.25)
-		builder.call("prefab_asset",address,"planter",Vector3.ZERO,.48)
-		if p.y<0 and absf(p.x)<10:
-			builder.call("flowers",address,Vector3(0,.48,0),Color(str(info.accent)))
+		# Civic entrances use the dedicated arrival court. A second generic
+		# doorstep planter formerly overlapped their portal and approach lane.
+		if str(row.get("role", "")) != "civic":
+			var address: Node3D = anchor(front+Vector2(-forward.y,forward.x)*1.25)
+			builder.call("prefab_asset",address,"planter",Vector3.ZERO,.48)
+			if p.y<0 and absf(p.x)<10:
+				builder.call("flowers",address,Vector3(0,.48,0),Color(str(info.accent)))
 	var civic: Vector2 = v2(info.civic)
 	walk(civic-Vector2(0,2.5),civic+Vector2(0,1.6),3.5,"CivicPlaza")
 	Civic.build(builder,district,up,radius,info)
@@ -115,7 +117,10 @@ func traffic() -> void:
 		route_points.append(v2(point))
 	node.set_meta("route_points",route_points)
 	district.add_child(node)
-	var models: Array[String] = ["sedan","hatchback-sports","suv"]
+	var models: Array[String] = ["sedan","hatchback","suv"]
+	var wheel_radii: Dictionary = {"sedan":.325,"hatchback":.315,"suv":.355}
+	var wheelbases: Dictionary = {"sedan":2.8,"hatchback":2.5,"suv":2.78}
+	var tracks: Dictionary = {"sedan":1.674,"hatchback":1.644,"suv":1.744}
 	for i: int in range(3):
 		var body: Node3D = Node3D.new()
 		body.name = "Car_"+str(i)
@@ -123,13 +128,18 @@ func traffic() -> void:
 		body.set_meta("progress",float(i)*35.0+float(index)*4.0)
 		body.set_meta("speed",1.65)
 		node.add_child(body)
-		var visual: Node3D = (load("res://assets/urban/"+models[(index+i)%3]+".glb") as PackedScene).instantiate() as Node3D
+		var model: String = models[(index+i)%3]
+		var visual: Node3D = (load("res://assets/vehicles/"+model+".glb") as PackedScene).instantiate() as Node3D
 		var box: AABB = builder.call("bounds",visual) as AABB
-		var scale_factor: float = 2.25/maxf(box.size.x,box.size.z)
 		body.add_child(visual)
-		visual.scale=Vector3.ONE*scale_factor
-		visual.position=-Vector3(box.get_center().x,box.position.y,box.get_center().z)*scale_factor
-		builder.call("tint_model",visual)
+		# These original assets are authored in meters, with Godot +Z forward.
+		# Retain their metallic paint/glass instead of the legacy toy-size tint.
+		visual.position=-Vector3(box.get_center().x,box.position.y,box.get_center().z)
+		body.set_meta("vehicle_model",model)
+		body.set_meta("vehicle_length",box.size.z)
+		body.set_meta("wheel_radius",wheel_radii[model])
+		body.set_meta("wheelbase",wheelbases[model])
+		body.set_meta("track",tracks[model])
 
 func nearest_walk(p: Vector2) -> Vector2:
 	var edges: Array=[]

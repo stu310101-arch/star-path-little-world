@@ -12,8 +12,29 @@ import subprocess
 from prepare_web_delivery import verify as verify_boot_delivery
 from prepare_web_delivery import verify_background_budget
 from package_training_games import verify as verify_training_games
+from package_account_bridge import verify as verify_account_bridge
 
 ROOT = Path(__file__).resolve().parents[1]
+COUNSELING_TEXTURES = ("apricot_base", "fabric_normal", "fabric_rough", "joinery_base", "joinery_normal", "joinery_rough",
+                       "linen_base", "oak_base", "oak_normal", "oak_rough", "sage_base")
+
+
+def counseling_source_paths(root: Path = ROOT) -> list[Path]:
+    folder = root / "game/assets/counseling_room"
+    return [folder / name for name in ("counseling_room.glb", "counseling_room.glb.import", "layout.json", "import_materials.gd", "import_materials.gd.uid")] + [
+        folder / "textures" / f"{name}.png{suffix}" for name in COUNSELING_TEXTURES for suffix in ("", ".import")
+    ]
+
+
+def source_digest(paths: list[Path], root: Path = ROOT) -> str:
+    source_hash = hashlib.sha256()
+    for path in paths:
+        source_hash.update(path.relative_to(root).as_posix().encode())
+        # Git normalizes source text line endings; binary scene bytes remain
+        # exact. Keep the source ID stable across Windows and Linux checkouts.
+        payload = path.read_bytes() if path.suffix in (".scn", ".res", ".glb", ".ttf", ".zip", ".png") else path.read_text(encoding="utf-8").encode("utf-8")
+        source_hash.update(hashlib.sha256(payload).digest())
+    return source_hash.hexdigest()
 
 
 def digest(file: Path) -> str:
@@ -34,27 +55,26 @@ def stamp(folder: Path) -> dict:
     if config.get("experimentalVK", False) or config.get("gdextensionLibs", []):
         raise ValueError("Unexpected export variant")
     source_paths = sorted([
-        path for subdir in ("scripts", "scenes", "generated/streaming", "generated/training_room", "assets/character/runtime", "assets/character/runtime_web", "data", "tools")
+        path for subdir in ("scripts", "scenes", "generated/streaming", "generated/low", "generated/training_room", "assets/university_hall", "assets/admissions_room", "assets/discussion_garden", "assets/character/runtime", "assets/character/runtime_web", "data", "tools")
         for path in (ROOT / "game" / subdir).rglob("*")
         if path.is_file() and path.suffix in (".gd", ".tscn", ".scn", ".json", ".res", ".glb")
     ] + [ROOT / "game/project.godot", ROOT / "game/export_presets.cfg", ROOT / "tools/split_web_packs.py",
          ROOT / "tools/prepare_web_delivery.py", ROOT / "tools/web_boot_delivery.js",
          ROOT / "tools/web_background_packs.js", ROOT / "tools/package_training_games.py",
          ROOT / "tools/training_computer_games.js", ROOT / "tools/build_web_avatar.py",
+         ROOT / "tools/package_account_bridge.py", ROOT / "tools/web_account_bridge.js",
          ROOT / "tools/recompress_web_resources.py", ROOT / "tools/recompress_web_resources.cjs",
          ROOT / "tools/build_web_release.py", ROOT / "deploy/github-pages/package.py"]
-        + [ROOT / "tools" / name for name in ("build_web_font.py", "build_web_template.py", "prepare_web_platform.py", "web_platform.js", "web_service_worker.js", "web_touch.js")]
+        + [ROOT / "tools" / name for name in ("build_web_font.py", "build_web_template.py", "prepare_web_platform.py", "web_platform.js", "web_resource_profile.js", "web_service_worker.js", "web_touch.js")]
         + [ROOT / "game/assets/fonts/NotoSansTC.ttf", ROOT / "game/assets/fonts/web/LittleWorldTC.ttf"]
+        + [path for path in (ROOT / "game/assets/university_hall/textures").rglob("*.png") if path.is_file()]
+        + counseling_source_paths()
+        + [path for path in (ROOT / "game/assets/recommendation_room").rglob("*") if path.is_file() and path.suffix in (".glb", ".json", ".png", ".gd", ".import")]
+        + [ROOT / "tools/build_recommendation_room.py"]
         + [ROOT / "tools/templates/little-world-web-4.7.2.zip"]
         + [path for path in (ROOT / "game/web_games").rglob("*") if path.is_file()])
-    source_hash = hashlib.sha256()
-    for path in source_paths:
-        source_hash.update(path.relative_to(ROOT).as_posix().encode())
-        # Git normalizes source text line endings; binary scene bytes remain
-        # exact. Keep the source ID stable across Windows and Linux checkouts.
-        payload = path.read_bytes() if path.suffix in (".scn", ".res", ".glb", ".ttf", ".zip") else path.read_text(encoding="utf-8").encode("utf-8")
-        source_hash.update(hashlib.sha256(payload).digest())
-    build_id = "packs-" + source_hash.hexdigest()[:16]
+    source_hash = source_digest(source_paths)
+    build_id = "packs-" + source_hash[:16]
     marker = f'<meta name="little-world-build" content="{build_id}">'
     html = re.sub(r'<meta name="little-world-build"[^>]*>\n?', '', html)
     html = html.replace("</head>", marker + "\n\t</head>")
@@ -63,11 +83,15 @@ def stamp(folder: Path) -> dict:
     names.extend(path.name for path in folder.glob('index.audio*.js'))
     names.extend(path.name for path in folder.glob('index*.png'))
     if (folder / "index.platform.js").is_file():
-        names.extend(["index.platform.js", "index.touch.js"])
+        names.extend(["index.platform.js", "index.resources.js", "index.touch.js"])
+    if (folder / "index.webmanifest").is_file():
+        names.append("index.webmanifest")
     if (folder / "index.delivery.json").is_file():
         names.extend(verify_boot_delivery(folder))
     if (folder / "index.training-games.json").is_file():
         names.extend(verify_training_games(folder))
+    if (folder / "index.account.json").is_file():
+        names.extend(verify_account_bridge(folder))
     pack_manifest = folder / "index.packs.json"
     if pack_manifest.is_file():
         verify_background_budget(folder)
@@ -93,7 +117,7 @@ def stamp(folder: Path) -> dict:
         "build_id": build_id,
         "created_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
         "source_base_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-        "source_sha256": source_hash.hexdigest(),
+        "source_sha256": source_hash,
         "export": "Web release; Compatibility; single-threaded",
         "files": files,
     }

@@ -1,0 +1,242 @@
+{
+  "sedan": {
+    "triangles": 25596,
+    "dimensions_blender_xyz": [
+      2.3599997758865356,
+      4.744736671447754,
+      1.4522426128387451
+    ],
+    "meshes": [
+      {
+        "mesh": "SM_sedan_wheel_rear_right",
+        "triangles": 2676,
+        "materials": 3
+      },
+      {
+        "mesh": "SM_sedan_body",
+        "triangles": 14892,
+        "materials": 9
+      },
+      {
+        "mesh": "SM_sedan_wheel_front_left",
+        "triangles": 2676,
+        "materials": 3
+      },
+      {
+        "mesh": "SM_sedan_wheel_rear_left",
+        "triangles": 2676,
+        "materials": 3
+      },
+      {
+        "mesh": "SM_sedan_wheel_front_right",
+        "triangles": 2676,
+        "materials": 3
+      }
+    ],
+    "forward": "Godot +Z",
+    "ground_origin": "tire contact",
+    "meters": true,
+    "lod1": {
+      "triangles": 12798,
+      "dimensions_blender_xyz": [
+        2.3599997758865356,
+        4.7444024085998535,
+        1.4531266391277313
+      ],
+      "meshes": [
+        {
+          "mesh": "SM_sedan_LOD1_wheel_rear_right",
+          "triangles": 1338,
+          "materials": 3
+        },
+        {
+          "mesh": "SM_sedan_LOD1_body",
+          "triangles": 7446,
+          "materials": 9
+        },
+        {
+          "mesh": "SM_sedan_LOD1_wheel_front_left",
+          "triangles": 1338,
+          "materials": 3
+        },
+        {
+          "mesh": "SM_sedan_LOD1_wheel_rear_left",
+          "triangles": 1338,
+          "materials": 3
+        },
+        {
+          "mesh": "SM_sedan_LOD1_wheel_front_right",
+          "triangles": 1338,
+          "materials": 3
+        }
+      ],
+      "forward": "Godot +Z",
+      "ground_origin": "tire contact",
+      "meters": true
+    },
+    "wheel_radius": 0.325,
+    "wheelbase": 2.8,
+    "track": 1.6740000000000002
+  },
+  "hatchback": {
+    "triangles": 25824,
+    "dimensions_blender_xyz": [
+      2.329999804496765,
+      4.2047364711761475,
+      1.512451022863388
+    ],
+    "meshes": [
+      {
+        "mesh": "SM_hatchback_body",
+        "triangles": 14960,
+        "materials": 9
+      },
+      {
+        "mesh": "SM_hatchback_wheel_front_left",
+        "triangles": 2716,
+        "materials": 3
+      },
+      {
+        "mesh": "SM_hatchback_wheel_rear_left",
+        "triangles": 2716,
+        "materials": 3
+      },
+      {
+        "mesh": "SM_hatchback_wheel_front_right",
+        "triangles": 2716,
+        "materials": 3
+      },
+      {
+        "mesh": "SM_hatchback_wheel_rear_right",
+        "triangles": 2716,
+        "materials": 3
+      }
+    ],
+    "forward": "Godot +Z",
+    "ground_origin": "tire contact",
+    "meters": true,
+    "lod1": {
+      "triangles": 12912,
+      "dimensions_blender_xyz": [
+        2.329999804496765,
+        4.204365253448486,
+        1.5127803981304169
+      ],
+      "meshes": [
+        {
+          "mesh": "SM_hatchback_LOD1_body",
+          "triangles": 7480,
+          "materials": 9
+        },
+        {
+          "mesh": "SM_hatchback_LOD1_wheel_front_left",
+          "triangles": 1358,
+          "materials": 3
+        },
+        {
+          "mesh": "SM_hatchback_LOD1_wheel_rear_left",
+          "triangles": 1358,
+          "materials": 3
+        },
+        {
+          "mesh": "SM_hatchback_LOD1_wheel_front_right",
+          "triangles": 1358,
+          "materials": 3
+        },
+        {
+          "mesh": "SM_hatchback_LOD1_wheel_rear_right",
+          "triangles": 1358,
+          "materials": 3
+        }
+      ],
+      "forward": "Godot +Z",
+      "ground_origin": "tire contact",
+      "meters": true
+    },
+    "wheel_radius": 0.315,
+    "wheelbase": 2.5,
+    "track": 1.6440000000000001
+  },
+  "suv": {
+    "triangles": 25734,
+    "dimensions_blender_xyz": [
+      2.4299999475479126,
+      4.724714756011963,
+      1.7591159045696259
+    ],
+    "meshes": [
+      {
+        "mesh": "SM_suv_wheel_rear_left",
+        "triangles": 2716,
+        "materials": 3
+      },
+      {
+        "mesh": "SM_suv_wheel_front_left",
+        "triangles": 2716,
+        "materials": 3
+      },
+      {
+        "mesh": "SM_suv_body",
+        "triangles": 14870,
+        "materials": 9
+      },
+      {
+        "mesh": "SM_suv_wheel_rear_right",
+        "triangles": 2716,
+        "materials": 3
+      },
+      {
+        "mesh": "SM_suv_wheel_front_right",
+        "triangles": 2716,
+        "materials": 3
+      }
+    ],
+    "forward": "Godot +Z",
+    "ground_origin": "tire contact",
+    "meters": true,
+    "lod1": {
+      "triangles": 12866,
+      "dimensions_blender_xyz": [
+        2.4299999475479126,
+        4.72440242767334,
+        1.7591159045696259
+      ],
+      "meshes": [
+        {
+          "mesh": "SM_suv_LOD1_wheel_rear_left",
+          "triangles": 1358,
+          "materials": 3
+        },
+        {
+          "mesh": "SM_suv_LOD1_wheel_front_left",
+          "triangles": 1358,
+          "materials": 3
+        },
+        {
+          "mesh": "SM_suv_LOD1_body",
+          "triangles": 7434,
+          "materials": 9
+        },
+        {
+          "mesh": "SM_suv_LOD1_wheel_rear_right",
+          "triangles": 1358,
+          "materials": 3
+        },
+        {
+          "mesh": "SM_suv_LOD1_wheel_front_right",
+          "triangles": 1358,
+          "materials": 3
+        }
+      ],
+      "forward": "Godot +Z",
+      "ground_origin": "tire contact",
+      "meters": true
+    },
+    "wheel_radius": 0.355,
+    "wheelbase": 2.78,
+    "track": 1.744
+  },
+  "total_lod0_triangles": 77154,
+  "authorship": "Original procedural topology and editable live modifiers. No vendor car meshes.",
+  "shader_policy": "glTF metallic-roughness; opaque dark reflective glass, no Blender-only shader nodes."
+}

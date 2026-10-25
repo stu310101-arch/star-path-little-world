@@ -3,7 +3,7 @@
 const {chromium}=require('playwright');
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const root=path.resolve('_site'),out=path.resolve('deliverables/mobile-web');fs.mkdirSync(out,{recursive:true});
-const report={checks:[],errors:[],requests:[],console:[],scope:'Chromium mobile input emulation; not real Safari hardware'};
+const report={checks:[],errors:[],requests:[],console:[],scope:'Chromium mobile input emulation with SwiftShader; functional checks only, not real Safari hardware or a performance benchmark',build_id:JSON.parse(fs.readFileSync(path.join(root,'index.release.json'),'utf8')).build_id};
 let browser,page,server,failDistrict=true,offline=false;
 const check=(name,value)=>{assert.ok(value,name);report.checks.push(name);console.log('PASS',name);};
 const pause=ms=>new Promise(r=>setTimeout(r,ms));
@@ -32,12 +32,14 @@ async function playable(){await page.waitForFunction(()=>{const s=window.planetP
   await new Promise(r=>server.listen(0,'127.0.0.1',r));
   const base='http://127.0.0.1:'+server.address().port+'/';report.url=base;
   browser=await chromium.launch({channel:'chrome',headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+  report.browser=browser.version();
   const context=await browser.newContext({viewport:{width:844,height:390},deviceScaleFactor:1,isMobile:true,hasTouch:true,userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1'});
   page=await context.newPage();page.on('pageerror',e=>report.errors.push(String(e)));
   page.on('console',m=>{if(['warning','error'].includes(m.type()))report.console.push(m.text());if(/SCRIPT ERROR|Parse Error|SHADER ERROR|RuntimeError|unreachable/.test(m.text()))report.errors.push(m.text());});
   await page.goto(base+'?performance',{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.planetWorldReady&&window.planetPerformance?.packs?.all_ready,null,{timeout:240000});
   check('Phone selects the separate mobile texture export',new URL(page.url()).pathname==='/mobile/index.html');
+  check('A new phone starts with bounded adaptive clarity at 30 FPS',(await state()).graphics.quality_profile==='balanced'&&(await state()).graphics.frame_limit===30&&!(await state()).graphics.msaa_enabled);
   check('Mobile redirect never downloads desktop WASM or packs',!report.requests.some(r=>/^\/(index\.boot\.|packs\/)/.test(r.path)));
   check('Mobile uses one stream and a 2 MiB high-water limit',(await state()).packs.background.concurrency===1&&(await state()).packs.background.stream_high_water_bytes===2097152);
   check('Far districts, interior and full fallback font stay deferred',!report.requests.some(r=>/district_life|training_room-|font_fallback-/.test(r.path)));
@@ -66,8 +68,20 @@ async function playable(){await page.waitForFunction(()=>{const s=window.planetP
   await page.locator('[data-action="jump"]').tap();await pause(3500);
   const jumpAfter=(await state()).player;
   check('Touch jump launches once and lands',jumpAfter.jump_count===jumpBefore.jump_count+1&&jumpAfter.landing_count===jumpBefore.landing_count+1&&Math.hypot(...jumpAfter.position)>=47);
-  await button(/畫面設定/);await button(/^手機省電$/);
-  check('540p option applies without changing selected frame cap',(await state()).graphics.quality_profile==='mobile'&&(await state()).graphics.internal_3d_pixels[1]<=540&&(await state()).graphics.frame_limit===60);
+  // Headless Chrome keeps both tabs visible/focused even after bringToFront.
+  // Exercise the real JS -> Godot event callback without claiming tab lifecycle
+  // behavior of a real iPhone; true background/resume remains a device gate.
+  report.background_scope='Synthetic window blur/focus events verify browser callback wiring; real mobile app suspension is unmeasured.';
+  await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await pause(1500);
+  check('Browser blur callback invalidates old foreground frame samples',(await state()).frame_sample_valid===false);
+  await page.evaluate(()=>window.dispatchEvent(new Event('focus')));
+  await page.waitForFunction(()=>window.planetPerformance?.frame_sample_valid===true,null,{timeout:30000});
+  check('Browser focus callback starts fresh foreground timing',(await state()).frame_ms_max<1000);
+  const selectedFrameCap=(await state()).graphics.frame_limit;
+  await button(/遊戲設定/);await button(/^手機清晰$/);
+  check("Adaptive phone clarity keeps the chosen cap and safe detail policy",(await state()).graphics.quality_profile==="balanced"&&(await state()).graphics.frame_limit===selectedFrameCap&&(await state()).streaming.low_quality);
+  await button(/^手機省電$/);
+  check('540p option applies without changing selected frame cap',(await state()).graphics.quality_profile==='mobile'&&(await state()).graphics.internal_3d_pixels[1]<=540&&(await state()).graphics.frame_limit===selectedFrameCap);
   await button(/^完成$/);
   report.first_play_state=await state();
   const transport=report.first_play_state.packs.background;
@@ -81,6 +95,26 @@ async function playable(){await page.waitForFunction(()=>{const s=window.planetP
   await button(/開始漫遊/);await playable();
   check('Previously played starting area reopens offline',!report.requests.slice(beforeOffline).some(r=>r.status===200));
   check('Phone graphics preference survives reload',(await state()).graphics.quality_profile==='mobile');
+  report.phone_final_state=await state();
+  await context.close();
+  offline=false;
+  const ipad=await browser.newContext({viewport:{width:1024,height:768},deviceScaleFactor:1,hasTouch:true,userAgent:'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15'});
+  await ipad.addInitScript(()=>{
+    Object.defineProperty(navigator,'platform',{get:()=> 'MacIntel'});
+    // Playwright's hasTouch defaults to one point; a real iPad is multitouch.
+    Object.defineProperty(navigator,'maxTouchPoints',{get:()=>5});
+  });
+  const tablet=await ipad.newPage();tablet.on('pageerror',e=>report.errors.push(String(e)));
+  page=tablet;
+  tablet.on('console',m=>{if(/SCRIPT ERROR|Parse Error|SHADER ERROR|RuntimeError|INVALID_ENUM|INVALID_OPERATION/.test(m.text()))report.errors.push(m.text());});
+  // Exercise the desktop texture fallback, so the web_mobile export feature
+  // cannot hide a regression in desktop-style iPad user-agent recognition.
+  await tablet.goto(base+'?performance&renderer=desktop',{waitUntil:'domcontentloaded'});
+  await tablet.waitForFunction(()=>window.planetPerformance?.graphics,null,{timeout:240000});
+  const tabletGraphics=await tablet.evaluate(()=>window.planetPerformance.graphics);
+  report.ipad_environment=await tablet.evaluate(()=>({platform:navigator.platform,maxTouchPoints:navigator.maxTouchPoints,userAgent:navigator.userAgent,graphics:window.planetPerformance.graphics}));
+  check('iPad desktop UA keeps mobile clarity and 30 FPS even with desktop textures',!new URL(tablet.url()).pathname.includes('/mobile/')&&tabletGraphics.mobile_web&&tabletGraphics.quality_profile==='balanced'&&tabletGraphics.frame_limit===30&&!tabletGraphics.msaa_enabled);
+  await ipad.close();
   check('No engine script, shader, texture or browser exceptions',report.errors.length===0&&!report.console.some(x=>/INVALID_ENUM|INVALID_OPERATION/.test(x)));
   report.passed=true;
 })().catch(async e=>{report.errors.push(String(e.stack||e));console.error(e);if(page){report.last_state=await state().catch(()=>null);await page.screenshot({path:path.join(out,'mobile-failure.png')}).catch(()=>{});}process.exitCode=1;}).finally(async()=>{

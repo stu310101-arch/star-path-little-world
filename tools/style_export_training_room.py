@@ -338,6 +338,8 @@ def zone(o):
 
 for o in list(scene.objects):
     if o.type not in {'MESH','CURVE','FONT'}:continue
+    if o.name == 'DISPLAY | reserve caption':
+        omitted.append(o.name);continue
     if any(c.name.startswith('12') for c in o.users_collection):continue
     if 'Soft_carpet_pile' in o.name:
         omitted.append(o.name);continue

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>圍棋 · 練功區</title>
+<style>
+*{box-sizing:border-box}html,body{height:100%;margin:0;background:#0a1019;color:#ecf2f9;font:16px/1.5 system-ui,"Microsoft JhengHei",sans-serif}
+body{display:flex;flex-direction:column}header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;background:#111b28;border-bottom:1px solid #2b3a4b}
+h1{font-size:19px;margin:0}button{padding:9px 16px;border:1px solid #527984;border-radius:8px;background:#203a45;color:inherit;font:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid #65e4c7;outline-offset:2px}iframe{border:0;width:100%;flex:1;min-height:0;background:#0a1019}[hidden]{display:none!important}
+#status{margin:auto;padding:24px;text-align:center}#status p{max-width:34em}small{color:#9aaabd;font-size:12px;font-weight:normal;margin-left:12px}
+</style>
+<header><h1>圍棋<small>NEON GO 星弈</small></h1><button id="back" type="button">返回練功區（Esc）</button></header>
+<div id="status" role="status"><p id="message">正在載入圍棋…</p><button id="retry" type="button" hidden>重新載入</button></div>
+<iframe id="game" title="圍棋" hidden></iframe>
+<script>
+(() => {
+  'use strict';
+  const frame = document.getElementById('game'), status = document.getElementById('status');
+  const back = document.getElementById('back'), retry = document.getElementById('retry');
+  const send = type => window.ipc?.postMessage(JSON.stringify({type}));
+  let timer;
+  function close() { send('close'); }
+  function escape(event) {
+    if (event.key !== 'Escape') return;
+    event.preventDefault(); event.stopImmediatePropagation();
+    // Close on release, so the same Escape cannot act on the room underneath.
+    if (event.type === 'keyup') close();
+  }
+  function fail() {
+    clearTimeout(timer); frame.hidden = true; status.hidden = false; retry.hidden = false;
+    document.getElementById('message').textContent = '圍棋無法載入，請重新載入，或返回練功區後再試。';
+    send('load_failed');
+  }
+  function load() {
+    clearTimeout(timer); retry.hidden = true; status.hidden = false; frame.hidden = true;
+    document.getElementById('message').textContent = '正在載入圍棋…';
+    timer = setTimeout(fail, 20000);
+    frame.src = './go/index.html';
+  }
+  back.addEventListener('click', close); retry.addEventListener('click', load);
+  document.addEventListener('keydown', escape, true); document.addEventListener('keyup', escape, true);
+  frame.addEventListener('load', () => {
+    try {
+      const child = frame.contentWindow;
+      if (child.location.href === 'about:blank') return;
+      if (!child.document.getElementById('board-input') || !child.document.getElementById('new-submit')) return fail();
+      child.document.addEventListener('keydown', escape, true);
+      child.document.addEventListener('keyup', escape, true);
+      clearTimeout(timer); status.hidden = true; frame.hidden = false;
+      frame.focus(); send('ready');
+    } catch (_) { fail(); }
+  });
+  frame.addEventListener('error', fail);
+  send('host_ready'); load();
+})();
+</script>
+</html>

@@ -5,6 +5,7 @@ const TREE_KINDS: Array[String] = ["alder","birch","willow","pine"]
 const RAY_OFFSET: float = .30
 
 var _world_id: int = 0
+var subject_scale: float = 1.0
 var _batches: Dictionary = {}
 var _node_batches: Dictionary = {}
 var _regions: Dictionary = {}
@@ -36,12 +37,12 @@ func update(world: Node3D,camera: Camera3D,aim: Vector3) -> void:
 	var started: int = Time.get_ticks_usec()
 	_refresh_regions()
 	var eye: Vector3 = camera.global_position
-	_offsets[1] = camera.global_basis.x.normalized()*RAY_OFFSET
+	_offsets[1] = camera.global_basis.x.normalized()*RAY_OFFSET*subject_scale
 	_offsets[2] = -_offsets[1]
-	_offsets[3] = camera.global_basis.y.normalized()*RAY_OFFSET
+	_offsets[3] = camera.global_basis.y.normalized()*RAY_OFFSET*subject_scale
 	_offsets[4] = -_offsets[3]
 	_next_hidden.clear()
-	var candidates: Array[int] = _grid.call("query",eye,aim,RAY_OFFSET)
+	var candidates: Array[int] = _grid.call("query",eye,aim,RAY_OFFSET*subject_scale)
 	candidate_count = 0
 	for id: int in candidates:
 		var tree: Dictionary = _trees[id]

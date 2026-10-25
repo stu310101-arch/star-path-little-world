@@ -8,9 +8,13 @@ const Projector = preload("res://scripts/training_projector.gd")
 const RoomInteractions = preload("res://scripts/training_room_interactions.gd")
 const FurnitureActions = preload("res://scripts/training_room_props.gd")
 const ComputerGames = preload("res://scripts/training_computer_games.gd")
-const ROOM_MODEL: String = "res://generated/training_room/light.scn"
+const NativeComputerGame = preload("res://scripts/native_computer_game.gd")
+const WORDKING_URL: String = "https://stu310101-arch.github.io/wordking/?page=home"
+const CharacterDisplay = preload("res://scripts/training_character_display.gd")
+var room_model_path: String = "res://generated/training_room/light.scn"
 const DETAIL_CATALOG: String = "res://generated/training_room/detail_catalog.json"
-const ROOM_LAYOUT: String = "res://assets/training_room/layout.json"
+var room_layout_path: String = "res://assets/training_room/layout.json"
+const WORLD_SCENE: String = "res://scenes/world.tscn"
 const FONT: Font = preload("res://assets/fonts/NotoSansTC.ttf")
 
 var player: CharacterBody3D
@@ -19,10 +23,13 @@ var music: Node
 var room_model: Node3D
 var ready_for_play: bool = false
 var returning: bool = false
+var return_error: String = ""
 var exit_point: Vector3 = Vector3(0, .04, 8.48)
 var camera_yaw: float = 0.0
 var camera_pitch: float = .30
 var camera_distance: float = 4.2
+var _follow_aim: Vector3 = Vector3.ZERO
+var _follow_aim_ready: bool = false
 var dragging_view: bool = false
 var drag_button: MouseButton = MOUSE_BUTTON_NONE
 var return_prompt: Label
@@ -35,7 +42,9 @@ var layout: Dictionary = {}
 var interactions: Node
 var furniture_actions: Node3D
 var computer_games: Node3D
-var native_game_dialog: AcceptDialog
+var character_display: Node3D
+var native_computer_game: Node
+var wordking_launch_ms: int = -1000
 var graphics_settings: Node
 var low_quality: bool = true
 var detail_state: String = "idle"
@@ -51,11 +60,16 @@ var max_detail_operation_ms: float = 0.0
 var entry_started_ms: int = 0
 var detail_ready_ms: int = 0
 var debug_mesh_nodes: Array[WeakRef] = []
+var shared_game_snapshot: Dictionary = {}
+var shared_game_account: Node
 
 func set_shared_music(music_node: Node) -> void:
 	music = music_node
 
 func _ready() -> void:
+	if get_node("/root/ResourceProfile").call("is_low"):
+		room_model_path = "res://generated/low/training/room.scn"
+		room_layout_path = "res://generated/low/training/layout.json"
 	add_to_group("touch_camera")
 	name = "TrainingRoom"
 	entry_started_ms = Time.get_ticks_msec()
@@ -69,10 +83,14 @@ func _ready() -> void:
 	_setup_input()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_window().mouse_exited.connect(_finish_drag)
-	layout = JSON.parse_string(FileAccess.get_file_as_string(ROOM_LAYOUT)) as Dictionary
-	room_model = (ResourceLoader.load(ROOM_MODEL, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene).instantiate() as Node3D
+	layout = JSON.parse_string(FileAccess.get_file_as_string(room_layout_path)) as Dictionary
+	room_model = (ResourceLoader.load(room_model_path, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene).instantiate() as Node3D
 	room_model.name = "RoomArt"
 	add_child(room_model)
+	var display_socket: Node3D = room_model.find_child("SOCKET_Genshin_181", true, false) as Node3D
+	if display_socket != null and not get_node("/root/ResourceProfile").call("is_low"):
+		character_display = CharacterDisplay.new() as Node3D
+		display_socket.add_child(character_display)
 	# Cache stable node references before cabinet hinges reparent their meshes.
 	# Mesh replacement preserves the original node, transform and interaction ID.
 	for node: Node in room_model.find_children("*", "MeshInstance3D", true, false):
@@ -87,6 +105,7 @@ func _ready() -> void:
 	player = IndoorPlayer.new() as CharacterBody3D
 	player.name = "Player"
 	add_child(player)
+	player.call("enable_render_interpolation")
 	player.set("controls_enabled", false)
 	player.process_mode = Node.PROCESS_MODE_DISABLED
 	player.call("begin_prepare_visuals")
@@ -131,7 +150,9 @@ func _apply_quality() -> void:
 	if is_instance_valid(graphics_settings):
 		low_quality = bool(graphics_settings.call("is_low_quality"))
 	else:
-		low_quality = str(get_viewport().get_meta("graphics_quality_profile", "low")) == "low"
+		low_quality = str(get_viewport().get_meta("graphics_quality_profile", "low")) in ["mobile", "balanced", "low"]
+	if is_instance_valid(graphics_settings) and graphics_settings.has_method("is_constrained_runtime"):
+		low_quality = low_quality or bool(graphics_settings.call("is_constrained_runtime"))
 	var ceiling: SpotLight3D = get_node_or_null("DownwardCeilingLight") as SpotLight3D
 	if ceiling != null:
 		ceiling.shadow_enabled = not low_quality
@@ -139,6 +160,10 @@ func _apply_quality() -> void:
 		furniture_actions.set("low_quality", low_quality)
 
 func _request_details() -> void:
+	if get_node("/root/ResourceProfile").call("is_low"):
+		detail_state = "ready"
+		detail_nodes.clear()
+		return
 	detail_error = ""
 	detail_state = "waiting"
 	var packs: Node = get_node_or_null("/root/WebPacks")
@@ -149,6 +174,8 @@ func _retry_details() -> void:
 	var packs: Node = get_node_or_null("/root/WebPacks")
 	if packs != null:
 		packs.call("retry_failed")
+	if character_display != null:
+		character_display.call("retry")
 	pending_mesh = null
 	detail_entries.clear()
 	detail_index = 0
@@ -224,10 +251,27 @@ func _return_immediately() -> void:
 	if returning:
 		return
 	close_computer_game()
+	_finish_drag()
+	return_error = ""
 	returning = true
 	if player != null:
 		player.set("controls_enabled", false)
-	request_return_to_world.emit()
+	if request_return_to_world.get_connections().is_empty():
+		# Running this scene directly has no suspended world or transition owner.
+		# Defer the scene swap until the button/input callback has finished.
+		_return_to_main_scene.call_deferred()
+	else:
+		request_return_to_world.emit()
+
+func _return_to_main_scene() -> void:
+	var error: Error = get_tree().change_scene_to_file(WORLD_SCENE)
+	if error != OK:
+		# A failed scene load must leave the room playable and the button retryable.
+		returning = false
+		if player != null:
+			player.set("controls_enabled", ready_for_play)
+		return_error = "主世界載入失敗，請再按返回重試。"
+		push_error("Unable to return to the main world: " + error_string(error))
 
 func _setup_input() -> void:
 	var keys: Dictionary = {"move_left": KEY_A, "move_right": KEY_D, "move_forward": KEY_W, "move_back": KEY_S, "run": KEY_SHIFT, "jump": KEY_SPACE, "interact": KEY_E}
@@ -479,8 +523,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 	if not ready_for_play:
 		if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
-			returning = true
-			request_return_to_world.emit()
+			_return_immediately()
 		elif event is InputEventKey and event.is_pressed() and event.keycode == KEY_R:
 			var packs: Node = get_node_or_null("/root/WebPacks")
 			if packs != null:
@@ -494,10 +537,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 		if _can_return():
-			returning = true
-			player.set("controls_enabled", false)
 			get_viewport().set_input_as_handled()
-			request_return_to_world.emit()
+			_return_immediately()
 		return
 	if interactions != null and bool(interactions.call("camera_blocked")):
 		_finish_drag()
@@ -535,45 +576,78 @@ func open_computer_game(game: Dictionary) -> bool:
 		return false
 	_finish_drag()
 	_release_computer_inputs()
-	if OS.has_feature("web"):
-		var bridge: JavaScriptObject = JavaScriptBridge.get_interface("LittleWorldComputerGames")
-		if bridge == null:
-			_computer_game_error("圍棋頁面尚未準備完成，請重新整理後再試。")
-			return false
-		return bool(bridge.open("go", "圍棋", "games/go/index.html"))
-	# Native Godot has no built-in HTML view. Export the identical standalone
-	# source to user storage, then let the system browser run its worker and UI.
-	var source: String = str(game.get("source", ""))
-	var payload: PackedByteArray = FileAccess.get_file_as_bytes(source)
-	if payload.is_empty():
-		_computer_game_error("找不到圍棋網頁，請重新安裝完整遊戲。")
+	return _open_shared_game("go")
+
+func _open_shared_game(view: String) -> bool:
+	if not shared_game_snapshot.is_empty():
 		return false
-	var directory: String = "user://computer_games/go"
-	if DirAccess.make_dir_recursive_absolute(directory) != OK:
-		_computer_game_error("無法準備圍棋網頁，請檢查儲存空間。")
+	shared_game_account = get_node_or_null("/root/StarPathAccount")
+	if shared_game_account == null or not bool((shared_game_account.get("user") as Dictionary).get("profileReady",false)):
+		_computer_game_error("請先登入星途並完成身分設定。")
 		return false
-	var destination: String = directory.path_join("index.html")
-	var output: FileAccess = FileAccess.open(destination, FileAccess.WRITE)
-	if output == null:
-		_computer_game_error("無法寫入圍棋網頁，請稍後再試。")
+	shared_game_snapshot = {"controls":player.get("controls_enabled"),"process":player.process_mode,"transform":player.global_transform,"heading":player.get("heading"),"camera":camera.global_transform,"hud":ui_root.visible}
+	if not shared_game_account.is_connected("closed",_shared_game_closed):
+		shared_game_account.connect("closed",_shared_game_closed)
+	player.set("controls_enabled",false)
+	player.velocity = Vector3.ZERO
+	player.process_mode = Node.PROCESS_MODE_DISABLED
+	ui_root.hide()
+	computer_games.call("set_game_open",true)
+	get_node("/root/WebTouch").call("reset_input")
+	if not bool(shared_game_account.call("open_view",view)):
+		_shared_game_closed()
+		_computer_game_error("星途遊戲頁尚未準備完成，請稍後重試。")
 		return false
-	output.store_buffer(payload)
-	output.close()
-	var file_url: String = "file:///" + ProjectSettings.globalize_path(destination).replace("\\", "/").uri_encode().replace("%2F", "/").replace("%3A", ":")
-	if OS.shell_open(file_url) != OK:
-		_computer_game_error("無法開啟瀏覽器，請確認已設定預設瀏覽器。")
-		return false
-	if native_game_dialog == null:
-		native_game_dialog = AcceptDialog.new()
-		native_game_dialog.title = "圍棋"
-		native_game_dialog.dialog_text = "圍棋已在瀏覽器開啟。\n回到遊戲後，按下方按鈕返回座位。"
-		native_game_dialog.ok_button_text = "返回座位"
-		native_game_dialog.add_theme_font_override("font", FONT)
-		native_game_dialog.confirmed.connect(close_computer_game)
-		native_game_dialog.canceled.connect(close_computer_game)
-		add_child(native_game_dialog)
-	native_game_dialog.popup_centered(Vector2i(460, 160))
 	return true
+
+func _shared_game_closed() -> void:
+	if shared_game_snapshot.is_empty() or not is_instance_valid(player):
+		return
+	_release_computer_inputs()
+	get_node("/root/WebTouch").call("reset_input")
+	player.global_transform = shared_game_snapshot.transform
+	player.set("heading",shared_game_snapshot.heading)
+	player.set("controls_enabled",shared_game_snapshot.controls)
+	player.process_mode = shared_game_snapshot.process
+	player.call("reset_render_interpolation")
+	camera.global_transform = shared_game_snapshot.camera
+	ui_root.visible = shared_game_snapshot.hud
+	shared_game_snapshot.clear()
+	computer_games.call("set_game_open",false)
+	_finish_drag()
+
+func _native_game_closed() -> void:
+	_release_computer_inputs()
+	_finish_drag()
+	if computer_games != null:
+		computer_games.call("set_game_open", false)
+
+func open_wordking() -> bool:
+	if returning or not ready_for_play or interactions == null or bool(interactions.call("is_busy")):
+		return false
+	interactions.call("refresh_nearest")
+	if str((interactions.get("nearest") as Dictionary).get("id", "")) != "wordking_website":
+		return false
+	if Time.get_ticks_msec() - wordking_launch_ms < 1000:
+		return false
+	_finish_drag()
+	_release_computer_inputs()
+	if not _open_shared_game("wordking"):
+		return false
+	wordking_launch_ms = Time.get_ticks_msec()
+	interactions.set("message", "星途單字王使用目前共用帳號，關閉即可繼續探索。")
+	interactions.set("message_clock", 5.0)
+	return true
+
+func _open_external_url(url: String) -> Error:
+	# A single handoff boundary keeps a future embedded WordKing view separate
+	# from furniture interaction, without implementing account integration now.
+	if url != WORDKING_URL:
+		return ERR_INVALID_PARAMETER
+	if OS.has_feature("web"):
+		var opened: bool = bool(JavaScriptBridge.eval("(() => { const tab = window.open(" + JSON.stringify(url) + ", '_blank'); if (!tab) return false; tab.opener = null; return true; })()"))
+		return OK if opened else ERR_CANT_OPEN
+	return OS.shell_open(url)
 
 func _computer_game_error(text_value: String) -> void:
 	interactions.set("message", text_value)
@@ -582,20 +656,24 @@ func _computer_game_error(text_value: String) -> void:
 
 func close_computer_game() -> void:
 	_release_computer_inputs()
+	if not shared_game_snapshot.is_empty() and is_instance_valid(shared_game_account):
+		shared_game_account.call("close_view")
+		_shared_game_closed()
 	if OS.has_feature("web"):
 		var bridge: JavaScriptObject = JavaScriptBridge.get_interface("LittleWorldComputerGames")
 		if bridge != null:
 			bridge.close()
-	if native_game_dialog != null:
-		native_game_dialog.hide()
+	if native_computer_game != null:
+		native_computer_game.call("close_game")
 	if computer_games != null:
 		computer_games.call("set_game_open", false)
 	_finish_drag()
 
 func update_camera(delta: float, snap: bool = false) -> void:
-	if player == null or camera == null:
+	if player == null or camera == null or not shared_game_snapshot.is_empty():
 		return
-	var aim: Vector3 = player.global_position + Vector3.UP * 1.12
+	var render_frame: Transform3D = player.call("get_render_transform")
+	var aim: Vector3 = render_frame.origin + Vector3.UP * 1.12
 	var offset: Vector3 = Vector3(sin(camera_yaw) * cos(camera_pitch), sin(camera_pitch), cos(camera_yaw) * cos(camera_pitch)) * camera_distance
 	var desired: Vector3 = aim + offset
 	desired.y = clampf(desired.y, .40, 3.15)
@@ -620,12 +698,25 @@ func update_camera(delta: float, snap: bool = false) -> void:
 	# Clamp the lens inside the enclosure even before physics has synced.
 	desired.x = clampf(desired.x, -9.75, 9.75)
 	desired.z = clampf(desired.z, -8.75, 8.85)
-	camera.global_position = desired if snap else camera.global_position.lerp(desired, 1.0 - exp(-delta * 12.0))
+	# Follow the same displayed position as the avatar. Only orbit/obstruction
+	# changes are smoothed; lagging translation while aiming at the new position
+	# otherwise makes a flat floor appear to rock at mismatched frame rates.
+	var follow_position: Vector3 = camera.global_position
+	if _follow_aim_ready and not snap:
+		follow_position += aim - _follow_aim
+	camera.global_position = desired if snap else follow_position.lerp(desired, 1.0 - exp(-delta * 12.0))
+	camera.position.x = clampf(camera.position.x, -9.75, 9.75)
+	camera.position.y = clampf(camera.position.y, .40, 3.15)
+	camera.position.z = clampf(camera.position.z, -8.75, 8.85)
+	_follow_aim = aim
+	_follow_aim_ready = true
 	if camera.global_position.distance_squared_to(aim) > .002:
 		camera.look_at(aim, Vector3.UP)
 
 func _process(delta: float) -> void:
 	if returning:
+		return
+	if not shared_game_snapshot.is_empty():
 		return
 	if OS.has_feature("web") and computer_games != null and bool(computer_games.call("is_open")):
 		var bridge: JavaScriptObject = JavaScriptBridge.get_interface("LittleWorldComputerGames")
@@ -657,6 +748,8 @@ func _process(delta: float) -> void:
 	update_camera(delta)
 	var action_prompt: String = str(interactions.call("prompt")) if interactions != null else ""
 	return_prompt.text = action_prompt if not action_prompt.is_empty() else ("E  返回 3D 世界" if _can_return() else "靠近家具可互動 · 入口可返回世界")
+	if not return_error.is_empty():
+		return_prompt.text = return_error
 	if player.position.y < -3.0:
 		player.call("place_at", Vector3(0, .09, 6.2), Vector3.FORWARD)
 		camera_yaw = 0.0
@@ -696,6 +789,8 @@ func _debug_mesh_contract() -> Dictionary:
 
 func _exit_tree() -> void:
 	returning = true
+	if is_instance_valid(native_computer_game):
+		native_computer_game.call("destroy")
 	if OS.has_feature("web"):
 		var bridge: JavaScriptObject = JavaScriptBridge.get_interface("LittleWorldComputerGames")
 		if bridge != null:

@@ -52,7 +52,7 @@ static func build(builder: SceneTree, globe: Node3D) -> void:
 	report["sakura_design"] = "authored blossom garden: accessible loop, open bridge arrival, two recessed scenic seating terraces"
 	report["sakura_layout_version"] = Plan.LAYOUT_VERSION
 	grove.set_meta("authored_tree_count",placements.size())
-	grove.set_meta("arrival_view","open south bank; central crown clear of the bridge exit camera")
+	grove.set_meta("arrival_view","open shore landing; central crown clear of the bridge exit camera")
 	grove.set_meta("seating_access","Bench fronts face the garden loop; open 2.75 m paved mouths; short outer corner guards")
 
 static func garden_anchor(parent: Node3D,up: Vector3,point: Vector2,radius: float,height: float) -> Node3D:

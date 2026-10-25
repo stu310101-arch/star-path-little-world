@@ -220,6 +220,16 @@ func check_detached_collision() -> void:
 	region.add_child(building)
 	mesh(building, "Foundation", Vector3.ZERO)
 	mesh(building, "Roof", Vector3(0, 2, 0))
+	var original_architecture: MeshInstance3D = mesh(building, "PreservedFacade", Vector3.ZERO)
+	original_architecture.set_meta("world_architecture_source_preserved", true)
+	original_architecture.set_meta("camera_visual_group", "fixture/original_facade")
+	original_architecture.visible = false
+	var original_furniture: Node3D = Node3D.new()
+	original_furniture.set_meta("street_furniture_source_preserved", true)
+	original_furniture.set_meta("camera_visual_group", "fixture/original_furniture")
+	original_furniture.visible = false
+	building.add_child(original_furniture)
+	var original_furniture_mesh: MeshInstance3D = mesh(original_furniture, "Foundation", Vector3.ZERO)
 	var body: StaticBody3D = StaticBody3D.new()
 	body.collision_layer = 8
 	body.collision_mask = 0
@@ -234,6 +244,8 @@ func check_detached_collision() -> void:
 	var controller: RefCounted = Obstruction.new()
 	controller.call("update", world, camera, aim, .1)
 	check((controller.get("faded") as Dictionary).size() == 2, "Permanent detached collision maps back to the complete streamed visual silhouette")
+	var mesh_groups: Dictionary = controller.get("_mesh_groups") as Dictionary
+	check(not mesh_groups.has(original_architecture.get_instance_id()) and not mesh_groups.has(original_furniture_mesh.get_instance_id()), "Preserved architecture and furniture sources never enter camera fade groups")
 	region.visible = false
 	controller.call("force_update")
 	controller.call("update", world, camera, aim, .3)
@@ -241,6 +253,7 @@ func check_detached_collision() -> void:
 	controller.call("unregister_region", region)
 	check((controller.get("_group_keys") as Dictionary).is_empty(), "Unloading removes stable collision-to-visual mappings")
 	controller.call("reset")
+	check(not original_architecture.visible and not original_furniture.visible and original_furniture_mesh.get_surface_override_material(0) == null, "Camera fade restoration never reveals or modifies hidden preserved source models")
 	region.free()
 	body.free()
 	var standalone_region: Node3D = Node3D.new()

@@ -1,6 +1,7 @@
 extends SceneTree
 
 const Geo = preload("res://scripts/planet_geometry.gd")
+const OutdoorScale = preload("res://scripts/outdoor_scale.gd")
 const Sakura = preload("res://tools/sakura_garden.gd")
 const Ecology = preload("res://tools/ecology_world.gd")
 const Urban = preload("res://tools/urban_design.gd")
@@ -19,7 +20,7 @@ func _initialize() -> void:
 	call_deferred("build")
 
 func build() -> void:
-	layout = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
+	layout = OutdoorScale.authoring_layout(JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary)
 	districts = JSON.parse_string(FileAccess.get_file_as_string("res://data/districts.json")) as Array
 	radius = float(layout.radius)
 	if OS.get_cmdline_user_args().has("--districts-only"):
@@ -39,11 +40,7 @@ func build() -> void:
 	var globe: Node3D = Node3D.new()
 	globe.name = "Globe"
 	root.add_child(globe)
-	var ocean: SphereMesh = SphereMesh.new()
-	ocean.radius = radius
-	ocean.height = radius * 2.0
-	ocean.radial_segments = 128
-	ocean.rings = 64
+	var ocean: ArrayMesh = preload("res://tools/coastal_ocean.gd").build(radius)
 	var ocean_material: ShaderMaterial = ShaderMaterial.new()
 	ocean_material.shader = load("res://shaders/ocean.gdshader") as Shader
 	Geo.mesh_node(globe, "Ocean", ocean, ocean_material)
@@ -57,6 +54,7 @@ func build() -> void:
 	shape.shape = sphere
 	body.add_child(shape)
 	Ecology.build(self,globe)
+	preload("res://tools/world_trail_signs.gd").build(self,globe)
 	report["aquatic_habitats"] = preload("res://tools/water_ecology.gd").apply(globe,layout,districts)
 	Infrastructure.bridges(globe,radius)
 	build_sakura_and_sea(globe)
@@ -69,7 +67,7 @@ func build() -> void:
 	preload("res://tools/streaming_world_builder.gd").new().build()
 	var file: FileAccess = FileAccess.open("res://generated/build_report.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "\t"))
-	print("WORLD_BUILD_OK: globe, district, six stations and curved road collisions")
+	print("WORLD_BUILD_OK: coastal districts, six stations and shared ground collisions")
 	quit()
 
 func refine_lighting() -> void:
@@ -92,7 +90,8 @@ func vec(value: Array) -> Vector3:
 	return Vector3(float(value[0]), float(value[1]), float(value[2]))
 
 func scenery_asset(parent: Node3D, file_name: String) -> Node3D:
-	var instance: Node3D = (load("res://assets/scenery/"+file_name+".glb") as PackedScene).instantiate() as Node3D
+	var asset_folder: String = "vessels" if file_name in ["liner","fishing_boat","tugboat"] else "scenery"
+	var instance: Node3D = (load("res://assets/"+asset_folder+"/"+file_name+".glb") as PackedScene).instantiate() as Node3D
 	instance.name = file_name
 	parent.add_child(instance)
 	if file_name.begins_with("sakura_"):
@@ -110,44 +109,35 @@ func scenery_asset(parent: Node3D, file_name: String) -> Node3D:
 
 func build_sakura_and_sea(globe: Node3D) -> void:
 	Sakura.build(self,globe)
-	var up: Vector3 = Vector3(0.75,1.0,0.85).normalized()
+	var up: Vector3 = preload("res://scripts/sakura_routes.gd").grove_up()
 	var life: Node3D = Node3D.new()
 	life.name = "OceanLife"
 	life.set_script(load("res://scripts/ocean_life.gd"))
 	life.set_meta("radius",radius)
 	globe.add_child(life)
 	var index: int = 0
-	for x: float in [-1.0,1.0]:
-		for y: float in [-1.0,1.0]:
-			for z: float in [-1.0,1.0]:
-				if x > 0 and y > 0 and z > 0:
-					continue
-				var centre: Vector3 = Vector3(x,y,z).normalized()
-				var name_list: Array[String] = ["liner","fishing_boat","tugboat"]
-				var boat: Node3D = scenery_asset(life,name_list[index%3])
-				boat.set_meta("centre",centre)
-				boat.set_meta("kind","boat")
-				boat.set_meta("phase",float(index)*0.9)
-				boat.set_meta("travel",1.2 if index%3==1 else 3.2)
-				boat.transform = Transform3D(Geo.frame(centre),centre*(radius+0.1))
-				var fish_centre: Vector3 = (centre*radius+Geo.frame(centre).x*5.0).normalized()
-				for fish_index: int in range(4):
-					var fish: Node3D = scenery_asset(life,"fish_"+str(1+fish_index%2))
-					fish.set_meta("centre",fish_centre)
-					fish.set_meta("kind","fish")
-					fish.set_meta("phase",float(index)*0.8-float(fish_index)*0.18)
-					fish.set_meta("lane",float(fish_index)*0.55)
-					fish.position = fish_centre*(radius-0.5)
-				var ring: TorusMesh = TorusMesh.new()
-				ring.inner_radius = 0.72
-				ring.outer_radius = 0.75
-				ring.rings = 24
-				ring.ring_segments = 4
-				var ripple: MeshInstance3D = Geo.mesh_node(life,"Wake",ring,Geo.material(Color("a6d4cc")))
-				ripple.set_meta("centre",fish_centre)
-				ripple.set_meta("kind","ripple")
-				ripple.set_meta("phase",float(index)*0.8)
-				index += 1
+	# Reserve the (+,+,+) sea gap for Sakura; boats use the other seven gaps.
+	var offshore: Array[Vector3] = [Vector3(1,-1,-1),Vector3(1,1,-1),Vector3(-1,1,1),Vector3(-1,1,-1),Vector3(1,-1,1),Vector3(-1,-1,1),Vector3(-1,-1,-1)]
+	for point: Vector3 in offshore:
+		var centre: Vector3 = point.normalized()
+		# Full-sized ocean liners no longer fit between the close island shores.
+		var name_list: Array[String] = ["tugboat","fishing_boat","tugboat"]
+		var boat: Node3D = scenery_asset(life,name_list[index%3])
+		boat.set_meta("centre",centre)
+		boat.set_meta("kind","boat")
+		boat.set_meta("phase",float(index)*0.9)
+		var travel: float = 35.0 if index%3==1 else 110.0 if index%3==0 else 65.0
+		boat.set_meta("travel",minf(travel*radius/600.0,2.5))
+		boat.transform = Transform3D(Geo.frame(centre),centre*(radius+0.1))
+		var fish_centre: Vector3 = (centre*radius+Geo.frame(centre).x*2.5).normalized()
+		for fish_index: int in range(4):
+			var fish: Node3D = scenery_asset(life,"fish_"+str(1+fish_index%2))
+			fish.set_meta("centre",fish_centre)
+			fish.set_meta("kind","fish")
+			fish.set_meta("phase",float(index)*0.8-float(fish_index)*0.18)
+			fish.set_meta("lane",float(fish_index)*0.55)
+			fish.position = fish_centre*(radius-0.5)
+		index += 1
 	Sakura.petals(self,life,up)
 	report["boats"] = 7
 	report["fish"] = 28
@@ -521,6 +511,7 @@ func subdivide(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, depth: int) 
 			st.add_vertex(project_road(p))
 
 func build_stations() -> void:
+	report["station_arrivals"] = []
 	var stations: Node3D = Node3D.new()
 	stations.name = "Stations"
 	root.add_child(stations)
@@ -536,7 +527,7 @@ func build_stations() -> void:
 		station.set_meta("station_id", row.id)
 		station.set_meta("label", row.label)
 		stations.add_child(station)
-		station.transform = Transform3D(Geo.frame(normal), normal * (radius + 0.18))
+		station.transform = Transform3D(Basis(Quaternion(up, normal)) * Geo.frame(up), normal * (radius + 0.18))
 		var disk: CylinderMesh = CylinderMesh.new()
 		disk.top_radius = 1.25
 		disk.bottom_radius = 1.35
@@ -559,12 +550,14 @@ func build_stations() -> void:
 		label.font = font
 		label.font_size = 40
 		label.pixel_size = 0.006
-		label.position.y = 2.8
+		label.position.y = 2.7
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		label.modulate = Color("fff4da")
 		label.outline_modulate = Color("24494e")
 		label.outline_size = 10
 		station.add_child(label)
+		var arrival: Dictionary = preload("res://tools/world_station_arrivals.gd").build(station, up, radius, districts[i], row, i + 1, font)
+		report.station_arrivals.append(arrival)
 		report.stations.append({"id":row.id, "position":[station.position.x,station.position.y,station.position.z]})
 	Geo.save_scene(stations, "res://generated/stations.tscn")
 	stations.queue_free()

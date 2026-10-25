@@ -2,19 +2,33 @@ extends RefCounted
 
 # All reduction happens in this offline tool. Runtime only reads the small
 # binary chunks and never loads the canonical full district/globe scenes.
-const OUTPUT: String = "res://generated/streaming/"
+var output_directory: String = "res://generated/streaming/"
+var low_builder: Object
+var base_only: bool = false
+var low_runtime_actors: Array[Node3D] = []
 const CHUNK_NODES: int = 80
 const CHUNK_TRIANGLES: int = 45000
 const Geo = preload("res://scripts/planet_geometry.gd")
+const OutdoorScale = preload("res://scripts/outdoor_scale.gd")
+const ArtDirection = preload("res://scripts/world_art_direction.gd")
+const ExportCleanup = preload("res://tools/streaming_export_cleanup.gd")
+var art_direction: RefCounted = ArtDirection.new()
+var export_cleanup: RefCounted = ExportCleanup.new()
 const MaterialPool = preload("res://tools/streaming_material_pool.gd")
 const OverviewMaterialNormalizer = preload("res://tools/overview_material_normalizer.gd")
 const OverviewFoliageLOD = preload("res://tools/overview_foliage_lod.gd")
 const OverviewColorBatcher = preload("res://tools/overview_color_batcher.gd")
+const MobileMeshLOD = preload("res://tools/mobile_mesh_lod_builder.gd")
+const MobileOverviewTiles = preload("res://tools/mobile_overview_tiles.gd")
 var material_pool: RefCounted = MaterialPool.new()
 var overview_materials: RefCounted = OverviewMaterialNormalizer.new()
 var overview_foliage: RefCounted = OverviewFoliageLOD.new()
 var overview_colors: RefCounted = OverviewColorBatcher.new()
+var mobile_meshes: RefCounted = MobileMeshLOD.new()
+var mobile_tiles: RefCounted = MobileOverviewTiles.new()
 var radius: float = 48.0
+var physical_radius: float = 48.0
+var outdoor_scale: float = 1.0
 var entries: Dictionary = {}
 var details: Dictionary = {}
 var overview_batches: Dictionary = {}
@@ -31,15 +45,23 @@ var layout: Dictionary = {}
 var build_failed: bool = false
 
 func build() -> bool:
-	DirAccess.make_dir_recursive_absolute(OUTPUT)
+	DirAccess.make_dir_recursive_absolute(output_directory)
+	# The HUD needs real footprints even while every detail chunk is unloaded.
+	# Bake alongside streaming so art changes cannot leave stale map geometry.
+	if not base_only and not preload("res://tools/minimap_geometry_builder.gd").new().build():
+		return false
 	var old_paths: Array[String] = []
-	if FileAccess.file_exists(OUTPUT + "catalog.json"):
-		var previous: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(OUTPUT + "catalog.json")) as Dictionary
+	if FileAccess.file_exists(output_directory + "catalog.json"):
+		var previous: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output_directory + "catalog.json")) as Dictionary
 		for row: Dictionary in previous.get("districts", []):
 			for chunk: Dictionary in row.chunks:
 				old_paths.append(str(chunk.path))
-	layout = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
+	var raw_layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
+	layout = OutdoorScale.authoring_layout(raw_layout)
+	physical_radius = OutdoorScale.physical_radius(raw_layout)
+	outdoor_scale = OutdoorScale.factor(raw_layout)
 	radius = float(layout.radius)
+	assert(is_equal_approx(radius * outdoor_scale, physical_radius), "Outdoor scale and radii must agree")
 	var neighborhood: Node3D = Node3D.new()
 	neighborhood.name = "Neighborhood"
 	var globe: Node3D = Node3D.new()
@@ -48,6 +70,9 @@ func build() -> bool:
 		var id: String = str(station.id)
 		new_entry(id, array_vector(station.normal) * radius)
 		var source: Node3D = (load("res://generated/districts/" + id + ".tscn") as PackedScene).instantiate() as Node3D
+		if low_builder != null:
+			low_builder.call("prune", source)
+		art_direction.call("apply",source)
 		stamp_visual_keys(source, id)
 		extract_collisions(source, neighborhood, Transform3D.IDENTITY, id)
 		for child: Node in source.get_children():
@@ -59,6 +84,9 @@ func build() -> bool:
 		overview_colors.call("clear_geometry_cache")
 		print("STREAMING_DISTRICT_BUILT ", id, " chunks=", (entries[id].chunks as Array).size(), " overview_triangles=", entries[id].overview_triangles)
 	var full_globe: Node3D = (load("res://generated/globe.tscn") as PackedScene).instantiate() as Node3D
+	if low_builder != null:
+		low_builder.call("prune", full_globe)
+	art_direction.call("apply",full_globe)
 	stamp_visual_keys(full_globe, "globe")
 	extract_collisions(full_globe, globe, Transform3D.IDENTITY, "Globe")
 	for child: Node in full_globe.get_children():
@@ -83,7 +111,7 @@ func build() -> bool:
 				collect_unit(group, node_transform(child), str(tree_groups[key].id))
 				group.free()
 		elif child.name == "SakuraGrove":
-			new_entry("sakura", Vector3(.75, 1.0, .85).normalized() * radius)
+			new_entry("sakura", preload("res://scripts/sakura_routes.gd").grove_up() * radius)
 			for item: Node in child.get_children():
 				collect_unit(item, node_transform(child), "sakura")
 		elif child.name == "OceanLife":
@@ -112,17 +140,26 @@ func build() -> bool:
 			overview_materials.call("normalize_scene", copy)
 			globe.add_child(copy)
 	full_globe.free()
+	for actor: Node3D in low_runtime_actors:
+		globe.add_child(actor)
+	low_runtime_actors.clear()
 	for id: String in entries:
 		var target: Node3D = neighborhood if not id.begins_with("ocean_") and id != "sakura" else globe
 		make_overview(id, target)
 		write_chunks(id)
-	save_scene(neighborhood, OUTPUT + "neighborhood_base.scn")
-	save_scene(globe, OUTPUT + "globe_base.scn")
+	OutdoorScale.apply_to_children(neighborhood, outdoor_scale)
+	OutdoorScale.apply_to_children(globe, outdoor_scale)
+	save_scene(neighborhood, output_directory + "neighborhood_base.scn")
+	save_scene(globe, output_directory + "globe_base.scn")
 	# Keep the editable/canonical station scene intact, including its labels,
 	# interaction metadata and collisions. Only the startup visual copy changes.
 	var stations: Node3D = (load("res://generated/stations.tscn") as PackedScene).instantiate() as Node3D
+	if low_builder != null:
+		low_builder.call("prune", stations)
+	art_direction.call("apply",stations)
 	overview_materials.call("normalize_scene", stations)
-	save_scene(stations, OUTPUT + "stations_base.scn")
+	OutdoorScale.apply_to_children(stations, outdoor_scale)
+	save_scene(stations, output_directory + "stations_base.scn")
 	stations.free()
 	neighborhood.free()
 	globe.free()
@@ -136,15 +173,17 @@ func build() -> bool:
 			max_triangles = maxi(max_triangles, int(chunk.triangles))
 			max_bytes = maxi(max_bytes, int(chunk.bytes))
 			chunk_count += 1
-	var catalog: Dictionary = {"version":1,"radius":radius,"districts":entries.values(),"build":{"overview_input_triangles":source_triangles,"overview_triangles":overview_triangles,"overview_vertices":overview_vertices,"protected_surface_meshes":protected_surface_meshes,"permanent_collision_bodies":collision_count,"chunk_count":chunk_count,"chunk_target_nodes":CHUNK_NODES,"chunk_target_triangles":CHUNK_TRIANGLES,"max_chunk_nodes":max_nodes,"max_chunk_mesh_triangles":max_triangles,"max_chunk_bytes":max_bytes,"material_optimization":material_pool.call("statistics")}}
+	var catalog: Dictionary = {"version":2,"radius":physical_radius,"authoring_radius":radius,"outdoor_scale":outdoor_scale,"districts":entries.values(),"build":{"overview_input_triangles":source_triangles,"overview_triangles":overview_triangles,"overview_vertices":overview_vertices,"protected_surface_meshes":protected_surface_meshes,"permanent_collision_bodies":collision_count,"chunk_count":chunk_count,"chunk_target_nodes":CHUNK_NODES,"chunk_target_triangles":CHUNK_TRIANGLES,"max_chunk_nodes":max_nodes,"max_chunk_mesh_triangles":max_triangles,"max_chunk_bytes":max_bytes,"material_optimization":material_pool.call("statistics"),"authoring_source_cleanup":export_cleanup.call("statistics")}}
 	catalog.build["overview_shader_normalization"] = overview_materials.call("statistics")
 	catalog.build["overview_foliage_lod"] = overview_foliage.call("statistics")
 	catalog.build["overview_color_batching"] = overview_colors.call("statistics")
 	catalog.build["overview_meshes"] = overview_meshes
 	catalog.build["protected_surface_triangles"] = protected_surface_triangles
+	catalog.build["mobile_render_lod"] = mobile_meshes.call("statistics")
+	catalog.build["mobile_overview_tiles"] = mobile_tiles.call("statistics")
 	if build_failed:
 		return false
-	var catalog_path: String = OUTPUT + "catalog.json"
+	var catalog_path: String = output_directory + "catalog.json"
 	var catalog_temporary: String = temporary_path(catalog_path)
 	var catalog_file: FileAccess = FileAccess.open(catalog_temporary, FileAccess.WRITE)
 	if catalog_file == null:
@@ -159,13 +198,14 @@ func build() -> bool:
 		for chunk: Dictionary in row.chunks:
 			live_paths.append(str(chunk.path))
 	for path: String in old_paths:
-		if path.begins_with(OUTPUT) and path.ends_with(".scn") and not live_paths.has(path):
+		if path.begins_with(output_directory) and path.ends_with(".scn") and not live_paths.has(path):
 			DirAccess.remove_absolute(path)
 	print("STREAMING_BUILD_OK ", JSON.stringify(catalog.build))
 	return true
 
 func new_entry(id: String, center: Vector3) -> void:
-	entries[id] = {"id":id,"center":[center.x,center.y,center.z],"chunks":[],"detail_nodes":0,"overview_triangles":0}
+	var physical_center: Vector3 = center * outdoor_scale
+	entries[id] = {"id":id,"center":[physical_center.x,physical_center.y,physical_center.z],"chunks":[],"detail_nodes":0,"overview_triangles":0}
 	details[id] = []
 	overview_batches[id] = {}
 
@@ -177,10 +217,10 @@ func node_transform(node: Node) -> Transform3D:
 
 func nearest_station(point: Vector3) -> String:
 	var nearest: String = "counseling"
-	var best: float = -INF
+	var best: float = INF
 	for row: Dictionary in layout.stations:
-		var score: float = point.normalized().dot(array_vector(row.normal))
-		if score > best:
+		var score: float = point.distance_squared_to(array_vector(row.normal).normalized() * radius)
+		if score < best:
 			best = score
 			nearest = str(row.id)
 	return nearest
@@ -248,20 +288,75 @@ func strip_collisions(node: Node) -> void:
 func collect_unit(node: Node, parent_transform: Transform3D, id: String, actor: bool = false) -> void:
 	if node is CollisionObject3D or node is CollisionShape3D:
 		return
+	if export_cleanup.call("is_authoring_only", node):
+		export_cleanup.call("record_removed", node)
+		return
+	if node.get_script()!=null and node.get_script().resource_path=="res://scripts/city_traffic.gd" and node.get_child_count()>1:
+		# True-size vehicle meshes are streamed one per bounded operation.
+		# Their runtime fleet group preserves cross-car following distances.
+		var car_index: int = 0
+		for car: Node in node.get_children():
+			var fleet: Node3D = Node3D.new()
+			fleet.name = "CityTraffic" if car_index==0 else "CityTraffic_%d"%car_index
+			fleet.set_script(node.get_script())
+			fleet.transform = node_transform(node)
+			for key: StringName in node.get_meta_list():
+				fleet.set_meta(key,node.get_meta(key))
+			fleet.add_child(car.duplicate(7))
+			collect_unit(fleet,parent_transform,id,true)
+			fleet.free()
+			car_index += 1
+		return
+	if not actor and node is Node3D and not node is VisualInstance3D and node.get_script()==null and node.get_child_count()>1 and unit_triangles(node)>CHUNK_TRIANGLES:
+		# Long static structures can exceed one operation even when each authored
+		# mesh is bounded. Partition their children without touching geometry,
+		# materials, world transforms, collision extraction, or visual keys.
+		# The first part keeps the original name for metadata-based route lookups.
+		var parts: Array[Node3D] = []
+		var part: Node3D
+		var part_triangles: int = 0
+		for child: Node in node.get_children():
+			if child is CollisionObject3D or child is CollisionShape3D:
+				continue
+			var child_triangles: int = unit_triangles(child)
+			if part==null or (part.get_child_count()>0 and part_triangles+child_triangles>CHUNK_TRIANGLES):
+				part = Node3D.new()
+				part.name = str(node.name) if parts.is_empty() else str(node.name)+"_Part_"+str(parts.size())
+				part.transform = node_transform(node)
+				part.visible = (node as Node3D).visible
+				for key: StringName in node.get_meta_list():
+					part.set_meta(key,node.get_meta(key))
+				parts.append(part)
+				part_triangles = 0
+			part.add_child(child.duplicate(7))
+			part_triangles += child_triangles
+		for bounded: Node3D in parts:
+			collect_unit(bounded,parent_transform,id,false)
+			bounded.free()
+		return
 	var copy: Node3D = node.duplicate(7) as Node3D
 	if copy == null:
 		return
 	copy.transform = parent_transform * node_transform(node)
 	strip_collisions(copy)
+	export_cleanup.call("prune_copy", copy)
 	if copy.get_child_count() == 0 and not copy is VisualInstance3D:
 		copy.free()
 		return
 	copy.set_meta("streaming_unit", true)
+	if base_only and copy.get_script() != null and copy.get_script().resource_path == "res://scripts/lake_life.gd":
+		low_runtime_actors.append(copy)
+		return
 	if not actor:
 		collect_overview(copy, Transform3D.IDENTITY, id)
-	(details[id] as Array).append(copy)
+	if base_only:
+		copy.free()
+	else:
+		(details[id] as Array).append(copy)
 
 func collect_overview(node: Node, parent_transform: Transform3D, id: String) -> void:
+	if node is Node3D and not (node as Node3D).visible:
+		return
 	var transform: Transform3D = parent_transform * node_transform(node)
 	# Swimming animals, particles and readable text only matter nearby.
 	if node.get_script() != null and node.get_script().resource_path in ["res://scripts/lake_life.gd", "res://scripts/ocean_life.gd", "res://scripts/city_traffic.gd"]:
@@ -415,6 +510,7 @@ func make_overview(id: String, target: Node3D) -> void:
 		tool.index()
 		visual.mesh = tool.commit()
 		overview_materials.call("normalize_visual", visual)
+		mobile_tiles.call("prepare",visual)
 		baked_triangles += triangle_count(visual.mesh, 0)
 		overview_vertices += (visual.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX] as PackedVector3Array).size()
 		visual.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
@@ -464,7 +560,9 @@ func write_chunk(id: String, chunk: Node3D, nodes: int, triangles: int) -> void:
 	chunk.name = "Detail_" + id + "_" + str(index)
 	chunk.set_meta("streaming_district", id)
 	chunk.set_meta("camera_region", true)
-	var path: String = OUTPUT + id + "_%03d.scn" % index
+	mobile_meshes.call("prepare",chunk,self)
+	OutdoorScale.apply_to_root(chunk, outdoor_scale)
+	var path: String = output_directory + id + "_%03d.scn" % index
 	save_scene(chunk, path)
 	(entries[id].chunks as Array).append({"path":path,"nodes":nodes,"triangles":triangles,"bytes":FileAccess.get_file_as_bytes(path).size()})
 	entries[id].detail_nodes += nodes
@@ -500,7 +598,7 @@ func publish_generated(temporary: String, path: String) -> bool:
 		return true
 	var output: Array = []
 	var python: String = "python" if OS.has_feature("windows") else "python3"
-	var arguments: PackedStringArray = PackedStringArray([ProjectSettings.globalize_path("res://../tools/atomic_replace_generated.py"), ProjectSettings.globalize_path(temporary), ProjectSettings.globalize_path(path), ProjectSettings.globalize_path(OUTPUT)])
+	var arguments: PackedStringArray = PackedStringArray([ProjectSettings.globalize_path("res://../tools/atomic_replace_generated.py"), ProjectSettings.globalize_path(temporary), ProjectSettings.globalize_path(path), ProjectSettings.globalize_path(output_directory)])
 	var result: int = OS.execute(python, arguments, output, true, false)
 	if result != 0:
 		push_error("Cannot publish generated file after bounded retries: %s. Preserved staged file: %s. %s" % [path, temporary, str(output)])

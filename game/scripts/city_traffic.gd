@@ -10,6 +10,8 @@ var distances: PackedFloat32Array = PackedFloat32Array()
 var route_length: float = 0.0
 
 func _ready() -> void:
+	for car: Node in get_children():
+		car.add_to_group("road_vehicle")
 	radius = float(get_meta("radius",36.0))
 	var vertices: PackedVector2Array = get_meta("route_points",PackedVector2Array([Vector2(-14,-15),Vector2(14,-15),Vector2(14,15),Vector2(-14,15)])) as PackedVector2Array
 	# Rounded lane follows this district's actual road polygon.
@@ -52,21 +54,28 @@ func update_traffic(delta: float) -> void:
 		var car: Node3D = child as Node3D
 		var up: Vector3 = car.get_meta("district_up") as Vector3
 		var progress: float = float(car.get_meta("progress",0.0))
-		var next: Vector2 = sample_route(progress+2.0)
+		var length: float = float(car.get_meta("vehicle_length",2.25))
+		var next: Vector2 = sample_route(progress+maxf(2.0,length*.5+.7))
 		var ahead: Vector3 = Geo.surface(up,next,radius+.40)
-		var blocked: bool = player != null and player.position.distance_to(ahead)<1.75
-		for other: Node in get_children():
+		var blocked: bool = player != null and player.global_position.distance_to(to_global(ahead))<1.75
+		for other: Node in get_tree().get_nodes_in_group("road_vehicle"):
 			if other == car:
 				continue
+			if (other.get_meta("district_up") as Vector3).dot(up)<.999:
+				continue
 			var gap: float = fposmod(float(other.get_meta("progress",0.0))-progress,route_length)
-			blocked = blocked or (gap>0.0 and gap<4.2)
+			var other_length: float = float(other.get_meta("vehicle_length",2.25))
+			blocked = blocked or (gap>0.0 and gap<maxf(4.2,(length+other_length)*.5+1.0))
 		if not blocked:
 			progress += delta*float(car.get_meta("speed",1.6))
 			for wheel: Node in car.find_children("wheel-*","Node3D",true,false):
-				if str(wheel.name) != "wheel-back":
-					(wheel as Node3D).rotate_x(delta*float(car.get_meta("speed",1.6))/.29)
+				(wheel as Node3D).rotate_x(delta*float(car.get_meta("speed",1.6))/float(car.get_meta("wheel_radius",.29)))
 		car.set_meta("progress",progress)
 		var p: Vector2 = sample_route(progress)
 		var n: Vector3 = Geo.surface(up,p,radius).normalized()
 		var forward: Vector3 = (Geo.surface(up,sample_route(progress+.15),radius)-n*radius).slide(n).normalized()
-		car.transform = Transform3D(Basis(n.cross(forward).normalized(),n,forward),n*(radius+.30))
+		# Place the four tire contacts on the curved asphalt, not 15 mm above it.
+		var half_axle: float = float(car.get_meta("wheelbase",0.0))*.5
+		var half_track: float = float(car.get_meta("track",0.0))*.5
+		var contact_sag: float = (half_axle*half_axle+half_track*half_track)/(2.0*radius)
+		car.transform = Transform3D(Basis(n.cross(forward).normalized(),n,forward),n*(radius+.285-contact_sag))

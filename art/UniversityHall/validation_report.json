@@ -1,0 +1,131 @@
+{
+  "revision": "2026-10-11-r3.1-library",
+  "stage": "complete",
+  "blender": "5.2.2 LTS",
+  "assets": {
+    "atrium": {
+      "triangles": 286892,
+      "source_parts": 6190,
+      "materials": 13,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UVs; floor is a unique single-surface atlas",
+      "bytes": 41278356
+    },
+    "booth": {
+      "triangles": 5848,
+      "source_parts": 76,
+      "materials": 8,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 16423380
+    },
+    "gallery": {
+      "triangles": 306549,
+      "source_parts": 7270,
+      "materials": 13,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UVs; floor is a unique single-surface atlas",
+      "bytes": 43126876
+    },
+    "theme_urban": {
+      "triangles": 18396,
+      "source_parts": 181,
+      "materials": 6,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11864016
+    },
+    "theme_woodland": {
+      "triangles": 17208,
+      "source_parts": 170,
+      "materials": 6,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11780880
+    },
+    "theme_hills": {
+      "triangles": 12456,
+      "source_parts": 126,
+      "materials": 6,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11448224
+    },
+    "theme_coast": {
+      "triangles": 8644,
+      "source_parts": 91,
+      "materials": 6,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11175216
+    },
+    "theme_arts": {
+      "triangles": 7788,
+      "source_parts": 85,
+      "materials": 6,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11112360
+    },
+    "theme_workshop": {
+      "triangles": 13536,
+      "source_parts": 136,
+      "materials": 7,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11524052
+    },
+    "feature_palm": {
+      "triangles": 692,
+      "source_parts": 29,
+      "materials": 2,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 1982364
+    },
+    "feature_dairy": {
+      "triangles": 524,
+      "source_parts": 5,
+      "materials": 3,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 3587028
+    },
+    "feature_book": {
+      "triangles": 648,
+      "source_parts": 6,
+      "materials": 4,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 12518780
+    },
+    "feature_tea": {
+      "triangles": 536,
+      "source_parts": 4,
+      "materials": 3,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 3589332
+    }
+  },
+  "total_triangles": 679717,
+  "total_bytes": 191410864,
+  "verification": "GLB structure and imported Godot PBR/normal/shared-texture audit passed. Both imported floors have 4 vertices, 2 triangles and no LOD. Moving-camera visual check is handled by the integration task.",
+  "godot_material_verification": {
+    "asset_count": 13,
+    "canonical_textures": 30,
+    "failures": [],
+    "floors": {
+      "atrium": {
+        "lods": {},
+        "triangles": 2,
+        "vertices": 4
+      },
+      "gallery": {
+        "lods": {},
+        "triangles": 2,
+        "vertices": 4
+      }
+    }
+  }
+}

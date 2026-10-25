@@ -18,6 +18,12 @@ def digest(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
+def web_sources(source: Path) -> list[Path]:
+    # Native WRY owns its own toolbar/IPC host; the Web build uses ADAPTER.
+    return sorted(path for path in source.rglob("*")
+                  if path.is_file() and path.relative_to(source).as_posix() != "native_go.html")
+
+
 def package(folder: Path, source: Path = SOURCE, adapter: Path = ADAPTER) -> dict:
     folder = folder.resolve()
     source = source.resolve()
@@ -29,7 +35,7 @@ def package(folder: Path, source: Path = SOURCE, adapter: Path = ADAPTER) -> dic
         raise ValueError("Unknown HTML loader anchor")
     if not (source / "go/index.html").is_file():
         raise FileNotFoundError("Missing training-room Go source")
-    paths = sorted(path for path in source.rglob("*") if path.is_file())
+    paths = web_sources(source)
     outputs = {SCRIPT: adapter.read_bytes()}
     for path in paths:
         if not path.resolve().is_relative_to(source):
@@ -55,7 +61,7 @@ def verify(folder: Path, source: Path = SOURCE, adapter: Path = ADAPTER) -> list
     manifest = json.loads((folder / MANIFEST).read_text(encoding="utf-8"))
     expected = {SCRIPT: adapter.read_bytes()}
     expected.update({"games/" + path.relative_to(source).as_posix(): path.read_bytes()
-                     for path in sorted(source.rglob("*")) if path.is_file()})
+                     for path in web_sources(source)})
     if manifest.get("version") != 1 or manifest.get("games") != {"go": "games/go/index.html"} or set(manifest.get("files", {})) != set(expected):
         raise ValueError("Training-game manifest differs from source inventory")
     html = (folder / "index.html").read_text(encoding="utf-8")

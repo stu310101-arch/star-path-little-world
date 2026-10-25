@@ -1,0 +1,12 @@
+{
+  "asset": "exhibit_kit.glb",
+  "revision": "2026-10-11-r4-modular-exhibits",
+  "root_children": 44,
+  "triangles": 259392,
+  "bytes": 34601868,
+  "material_count": 24,
+  "embedded_images": 24,
+  "errors": [],
+  "passed": true,
+  "scope": "Raw GLB names, transforms, UVs, normals, finite vertices, floor-rooted bounds, canonical import hook. Actual Godot screenshots remain the visual acceptance evidence."
+}

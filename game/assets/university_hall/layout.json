@@ -1,0 +1,1805 @@
+{
+  "coordinates": "Godot metres, +Y up, +Z forward; floor top y=0",
+  "atrium": {
+    "floor_size": [
+      32,
+      0.3,
+      26
+    ],
+    "floor_center": [
+      0,
+      -0.15,
+      0
+    ],
+    "portal_centers": [
+      [
+        -12,
+        0,
+        -9
+      ],
+      [
+        -6,
+        0,
+        -9
+      ],
+      [
+        0,
+        0,
+        -9
+      ],
+      [
+        6,
+        0,
+        -9
+      ],
+      [
+        12,
+        0,
+        -9
+      ]
+    ],
+    "portal_clear_width": 3.65,
+    "portal_sign_y": 4.18,
+    "exit": [
+      0,
+      0,
+      11
+    ],
+    "map": [
+      0,
+      0.89,
+      0
+    ],
+    "obstacles": [
+      {
+        "name": "map",
+        "center": [
+          0,
+          0.445,
+          0
+        ],
+        "size": [
+          2.8,
+          0.89,
+          2.15
+        ]
+      },
+      {
+        "name": "reading_bench",
+        "center": [
+          -7,
+          0.55,
+          4.8
+        ],
+        "size": [
+          3.05,
+          1.1,
+          0.75
+        ]
+      },
+      {
+        "name": "reading_cabinet",
+        "center": [
+          -12,
+          0.51,
+          -3.5
+        ],
+        "size": [
+          1.3,
+          1.02,
+          3.45
+        ]
+      },
+      {
+        "name": "reading_cabinet",
+        "center": [
+          -12,
+          0.51,
+          3.5
+        ],
+        "size": [
+          1.3,
+          1.02,
+          3.45
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          -15.1,
+          1.84,
+          -8
+        ],
+        "size": [
+          0.95,
+          3.68,
+          5.12
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          -15.1,
+          1.84,
+          -2
+        ],
+        "size": [
+          0.95,
+          3.68,
+          5.12
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          -15.1,
+          1.84,
+          4
+        ],
+        "size": [
+          0.95,
+          3.68,
+          5.12
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          -15.1,
+          1.84,
+          10
+        ],
+        "size": [
+          0.95,
+          3.68,
+          5.12
+        ]
+      },
+      {
+        "name": "walnut_column",
+        "center": [
+          -14.65,
+          2.3,
+          -10
+        ],
+        "size": [
+          0.57,
+          4.6,
+          0.57
+        ]
+      },
+      {
+        "name": "walnut_column",
+        "center": [
+          -14.65,
+          2.3,
+          -5
+        ],
+        "size": [
+          0.57,
+          4.6,
+          0.57
+        ]
+      },
+      {
+        "name": "walnut_column",
+        "center": [
+          -14.65,
+          2.3,
+          0
+        ],
+        "size": [
+          0.57,
+          4.6,
+          0.57
+        ]
+      },
+      {
+        "name": "walnut_column",
+        "center": [
+          -14.65,
+          2.3,
+          5
+        ],
+        "size": [
+          0.57,
+          4.6,
+          0.57
+        ]
+      },
+      {
+        "name": "walnut_column",
+        "center": [
+          -14.65,
+          2.3,
+          10
+        ],
+        "size": [
+          0.57,
+          4.6,
+          0.57
+        ]
+      },
+      {
+        "name": "reading_bench",
+        "center": [
+          7,
+          0.55,
+          4.8
+        ],
+        "size": [
+          3.05,
+          1.1,
+          0.75
+        ]
+      },
+      {
+        "name": "reading_cabinet",
+        "center": [
+          12,
+          0.51,
+          -3.5
+        ],
+        "size": [
+          1.3,
+          1.02,
+          3.45
+        ]
+      },
+      {
+        "name": "reading_cabinet",
+        "center": [
+          12,
+          0.51,
+          3.5
+        ],
+        "size": [
+          1.3,
+          1.02,
+          3.45
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          15.1,
+          1.84,
+          -8
+        ],
+        "size": [
+          0.95,
+          3.68,
+          5.12
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          15.1,
+          1.84,
+          -2
+        ],
+        "size": [
+          0.95,
+          3.68,
+          5.12
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          15.1,
+          1.84,
+          4
+        ],
+        "size": [
+          0.95,
+          3.68,
+          5.12
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          15.1,
+          1.84,
+          10
+        ],
+        "size": [
+          0.95,
+          3.68,
+          5.12
+        ]
+      },
+      {
+        "name": "walnut_column",
+        "center": [
+          14.65,
+          2.3,
+          -10
+        ],
+        "size": [
+          0.57,
+          4.6,
+          0.57
+        ]
+      },
+      {
+        "name": "walnut_column",
+        "center": [
+          14.65,
+          2.3,
+          -5
+        ],
+        "size": [
+          0.57,
+          4.6,
+          0.57
+        ]
+      },
+      {
+        "name": "walnut_column",
+        "center": [
+          14.65,
+          2.3,
+          0
+        ],
+        "size": [
+          0.57,
+          4.6,
+          0.57
+        ]
+      },
+      {
+        "name": "walnut_column",
+        "center": [
+          14.65,
+          2.3,
+          5
+        ],
+        "size": [
+          0.57,
+          4.6,
+          0.57
+        ]
+      },
+      {
+        "name": "walnut_column",
+        "center": [
+          14.65,
+          2.3,
+          10
+        ],
+        "size": [
+          0.57,
+          4.6,
+          0.57
+        ]
+      },
+      {
+        "name": "back_bookcase",
+        "center": [
+          -9,
+          1.8,
+          -12.2
+        ],
+        "size": [
+          2.64,
+          3.6,
+          0.95
+        ]
+      },
+      {
+        "name": "back_bookcase",
+        "center": [
+          -3,
+          1.8,
+          -12.2
+        ],
+        "size": [
+          2.64,
+          3.6,
+          0.95
+        ]
+      },
+      {
+        "name": "back_bookcase",
+        "center": [
+          3,
+          1.8,
+          -12.2
+        ],
+        "size": [
+          2.64,
+          3.6,
+          0.95
+        ]
+      },
+      {
+        "name": "back_bookcase",
+        "center": [
+          9,
+          1.8,
+          -12.2
+        ],
+        "size": [
+          2.64,
+          3.6,
+          0.95
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          -13.965,
+          1.1,
+          -9
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          -10.035,
+          1.1,
+          -9
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door",
+        "center": [
+          -12,
+          1.25,
+          -9.28
+        ],
+        "size": [
+          3.65,
+          2.5,
+          0.12
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          -7.965,
+          1.1,
+          -9
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          -4.035,
+          1.1,
+          -9
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door",
+        "center": [
+          -6,
+          1.25,
+          -9.28
+        ],
+        "size": [
+          3.65,
+          2.5,
+          0.12
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          -1.965,
+          1.1,
+          -9
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          1.965,
+          1.1,
+          -9
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door",
+        "center": [
+          0,
+          1.25,
+          -9.28
+        ],
+        "size": [
+          3.65,
+          2.5,
+          0.12
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          4.035,
+          1.1,
+          -9
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          7.965,
+          1.1,
+          -9
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door",
+        "center": [
+          6,
+          1.25,
+          -9.28
+        ],
+        "size": [
+          3.65,
+          2.5,
+          0.12
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          10.035,
+          1.1,
+          -9
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          13.965,
+          1.1,
+          -9
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door",
+        "center": [
+          12,
+          1.25,
+          -9.28
+        ],
+        "size": [
+          3.65,
+          2.5,
+          0.12
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          -1.965,
+          1.1,
+          11
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          1.965,
+          1.1,
+          11
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door",
+        "center": [
+          0,
+          1.25,
+          11.280000000000001
+        ],
+        "size": [
+          3.65,
+          2.5,
+          0.12
+        ]
+      },
+      {
+        "name": "entrance_bookcase",
+        "center": [
+          -8,
+          1.8,
+          12.18
+        ],
+        "size": [
+          7.05,
+          3.6,
+          0.95
+        ]
+      },
+      {
+        "name": "entrance_bookcase",
+        "center": [
+          8,
+          1.8,
+          12.18
+        ],
+        "size": [
+          7.05,
+          3.6,
+          0.95
+        ]
+      }
+    ],
+    "lights": [
+      {
+        "position": [
+          -12,
+          1.55,
+          3.5
+        ],
+        "color": "#ffd7a0",
+        "energy": 2.0,
+        "range": 8.5
+      },
+      {
+        "position": [
+          12,
+          1.55,
+          3.5
+        ],
+        "color": "#ffd7a0",
+        "energy": 2.0,
+        "range": 8.5
+      },
+      {
+        "position": [
+          0,
+          5.4,
+          -4.5
+        ],
+        "color": "#ffdbad",
+        "energy": 3.0,
+        "range": 10.5
+      },
+      {
+        "position": [
+          0,
+          5.4,
+          4.5
+        ],
+        "color": "#ffdbad",
+        "energy": 3.0,
+        "range": 10.5
+      }
+    ]
+  },
+  "gallery": {
+    "floor_size": [
+      30,
+      0.3,
+      38
+    ],
+    "floor_center": [
+      0,
+      -0.15,
+      0
+    ],
+    "booth_centers": [
+      [
+        -9,
+        0,
+        -12
+      ],
+      [
+        -9,
+        0,
+        -4
+      ],
+      [
+        -9,
+        0,
+        4
+      ],
+      [
+        -9,
+        0,
+        12
+      ],
+      [
+        9,
+        0,
+        -12
+      ],
+      [
+        9,
+        0,
+        -4
+      ],
+      [
+        9,
+        0,
+        4
+      ],
+      [
+        9,
+        0,
+        12
+      ]
+    ],
+    "aisle_clear_width": 8,
+    "portal_sign_y": 4.28,
+    "obstacles": [
+      {
+        "name": "side_bookcase",
+        "center": [
+          -14.2,
+          1.825,
+          -14
+        ],
+        "size": [
+          0.95,
+          3.65,
+          6.15
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          -14.2,
+          1.825,
+          -7
+        ],
+        "size": [
+          0.95,
+          3.65,
+          6.15
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          -14.2,
+          1.825,
+          0
+        ],
+        "size": [
+          0.95,
+          3.65,
+          6.15
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          -14.2,
+          1.825,
+          7
+        ],
+        "size": [
+          0.95,
+          3.65,
+          6.15
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          -14.2,
+          1.825,
+          14
+        ],
+        "size": [
+          0.95,
+          3.65,
+          6.15
+        ]
+      },
+      {
+        "name": "walnut_pier",
+        "center": [
+          -13.1,
+          2.3,
+          -17
+        ],
+        "size": [
+          0.5,
+          4.6,
+          0.5
+        ]
+      },
+      {
+        "name": "walnut_pier",
+        "center": [
+          -13.1,
+          2.3,
+          -9
+        ],
+        "size": [
+          0.5,
+          4.6,
+          0.5
+        ]
+      },
+      {
+        "name": "walnut_pier",
+        "center": [
+          -13.1,
+          2.3,
+          -1
+        ],
+        "size": [
+          0.5,
+          4.6,
+          0.5
+        ]
+      },
+      {
+        "name": "walnut_pier",
+        "center": [
+          -13.1,
+          2.3,
+          7
+        ],
+        "size": [
+          0.5,
+          4.6,
+          0.5
+        ]
+      },
+      {
+        "name": "walnut_pier",
+        "center": [
+          -13.1,
+          2.3,
+          15
+        ],
+        "size": [
+          0.5,
+          4.6,
+          0.5
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          14.2,
+          1.825,
+          -14
+        ],
+        "size": [
+          0.95,
+          3.65,
+          6.15
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          14.2,
+          1.825,
+          -7
+        ],
+        "size": [
+          0.95,
+          3.65,
+          6.15
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          14.2,
+          1.825,
+          0
+        ],
+        "size": [
+          0.95,
+          3.65,
+          6.15
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          14.2,
+          1.825,
+          7
+        ],
+        "size": [
+          0.95,
+          3.65,
+          6.15
+        ]
+      },
+      {
+        "name": "side_bookcase",
+        "center": [
+          14.2,
+          1.825,
+          14
+        ],
+        "size": [
+          0.95,
+          3.65,
+          6.15
+        ]
+      },
+      {
+        "name": "walnut_pier",
+        "center": [
+          13.1,
+          2.3,
+          -17
+        ],
+        "size": [
+          0.5,
+          4.6,
+          0.5
+        ]
+      },
+      {
+        "name": "walnut_pier",
+        "center": [
+          13.1,
+          2.3,
+          -9
+        ],
+        "size": [
+          0.5,
+          4.6,
+          0.5
+        ]
+      },
+      {
+        "name": "walnut_pier",
+        "center": [
+          13.1,
+          2.3,
+          -1
+        ],
+        "size": [
+          0.5,
+          4.6,
+          0.5
+        ]
+      },
+      {
+        "name": "walnut_pier",
+        "center": [
+          13.1,
+          2.3,
+          7
+        ],
+        "size": [
+          0.5,
+          4.6,
+          0.5
+        ]
+      },
+      {
+        "name": "walnut_pier",
+        "center": [
+          13.1,
+          2.3,
+          15
+        ],
+        "size": [
+          0.5,
+          4.6,
+          0.5
+        ]
+      },
+      {
+        "name": "back_bookcase",
+        "center": [
+          -11,
+          1.875,
+          -18.15
+        ],
+        "size": [
+          5.25,
+          3.75,
+          0.95
+        ]
+      },
+      {
+        "name": "back_bookcase",
+        "center": [
+          0,
+          1.875,
+          -18.15
+        ],
+        "size": [
+          5.25,
+          3.75,
+          0.95
+        ]
+      },
+      {
+        "name": "back_bookcase",
+        "center": [
+          11,
+          1.875,
+          -18.15
+        ],
+        "size": [
+          5.25,
+          3.75,
+          0.95
+        ]
+      },
+      {
+        "name": "reading_console",
+        "center": [
+          -3.8,
+          0.4,
+          -17.8
+        ],
+        "size": [
+          0.75,
+          0.8,
+          0.55
+        ]
+      },
+      {
+        "name": "reading_console",
+        "center": [
+          3.8,
+          0.4,
+          -17.8
+        ],
+        "size": [
+          0.75,
+          0.8,
+          0.55
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          -8.965,
+          1.1,
+          -16
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          -5.035,
+          1.1,
+          -16
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door",
+        "center": [
+          -7,
+          1.25,
+          -16.28
+        ],
+        "size": [
+          3.65,
+          2.5,
+          0.12
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          5.035,
+          1.1,
+          -16
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          8.965,
+          1.1,
+          -16
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door",
+        "center": [
+          7,
+          1.25,
+          -16.28
+        ],
+        "size": [
+          3.65,
+          2.5,
+          0.12
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          -1.965,
+          1.1,
+          17.8
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door_pier",
+        "center": [
+          1.965,
+          1.1,
+          17.8
+        ],
+        "size": [
+          0.5,
+          2.2,
+          0.67
+        ]
+      },
+      {
+        "name": "archive_door",
+        "center": [
+          0,
+          1.25,
+          18.08
+        ],
+        "size": [
+          3.65,
+          2.5,
+          0.12
+        ]
+      },
+      {
+        "name": "entrance_bookcase",
+        "center": [
+          -8,
+          1.8,
+          18.18
+        ],
+        "size": [
+          7.05,
+          3.6,
+          0.95
+        ]
+      },
+      {
+        "name": "entrance_bookcase",
+        "center": [
+          8,
+          1.8,
+          18.18
+        ],
+        "size": [
+          7.05,
+          3.6,
+          0.95
+        ]
+      }
+    ],
+    "lights": [
+      {
+        "position": [
+          -3.8,
+          1.35,
+          -17.8
+        ],
+        "color": "#ffd7a0",
+        "energy": 2.0,
+        "range": 8.5
+      },
+      {
+        "position": [
+          3.8,
+          1.35,
+          -17.8
+        ],
+        "color": "#ffd7a0",
+        "energy": 2.0,
+        "range": 8.5
+      }
+    ]
+  },
+  "booth": {
+    "front": "+Z",
+    "table_top_y": 0.85,
+    "diorama_origin_y": 0.88,
+    "title_center": [
+      0,
+      2.65,
+      -1.29
+    ],
+    "title_size": [
+      4.6,
+      0.43
+    ],
+    "collision_center": [
+      0,
+      0.425,
+      0
+    ],
+    "collision_size": [
+      5.6,
+      0.85,
+      2.6
+    ],
+    "back_collision_center": [
+      0,
+      1.5,
+      -1.35
+    ],
+    "back_collision_size": [
+      5.3,
+      3,
+      0.15
+    ],
+    "interaction_props": [
+      [
+        -2,
+        0.95,
+        1.16
+      ],
+      [
+        -1,
+        0.95,
+        1.16
+      ],
+      [
+        0,
+        0.95,
+        1.16
+      ],
+      [
+        1,
+        0.95,
+        1.16
+      ],
+      [
+        2,
+        0.95,
+        1.16
+      ]
+    ],
+    "interact_points": [
+      [
+        -2,
+        0,
+        2.05
+      ],
+      [
+        -1,
+        0,
+        2.05
+      ],
+      [
+        0,
+        0,
+        2.05
+      ],
+      [
+        1,
+        0,
+        2.05
+      ],
+      [
+        2,
+        0,
+        2.05
+      ]
+    ],
+    "display_collision_center": [
+      0,
+      1.43,
+      -0.2
+    ],
+    "display_collision_size": [
+      4.96,
+      1.08,
+      1.84
+    ]
+  },
+  "style": "classical_academic_library",
+  "ceiling_height": 10.3,
+  "floor_geometry": "One horizontal surface per room; tile joints, inlays and compass are atlas texels. No coincident underfloor, tile, border, or medallion meshes. Only floor has import LOD removed.",
+  "display_variants": {
+    "long_table": {
+      "boxes": [
+        {
+          "name": "reading_rail",
+          "center": [
+            0,
+            0.425,
+            1.035
+          ],
+          "size": [
+            5.6,
+            0.85,
+            0.58
+          ]
+        },
+        {
+          "name": "display_table",
+          "center": [
+            0,
+            0.425,
+            -0.2
+          ],
+          "size": [
+            5.4,
+            0.85,
+            2.06
+          ]
+        },
+        {
+          "name": "title_support",
+          "center": [
+            0,
+            2.54,
+            -1.35
+          ],
+          "size": [
+            5.25,
+            0.77,
+            0.16
+          ]
+        }
+      ],
+      "model": "display_long_table",
+      "diorama_origin": [
+        0,
+        0.88,
+        -0.15
+      ]
+    },
+    "corner_cabinet": {
+      "boxes": [
+        {
+          "name": "reading_rail",
+          "center": [
+            0,
+            0.425,
+            1.035
+          ],
+          "size": [
+            5.6,
+            0.85,
+            0.58
+          ]
+        },
+        {
+          "name": "left_wing",
+          "center": [
+            -2.5,
+            1.47,
+            -0.55
+          ],
+          "size": [
+            0.35,
+            2.94,
+            1.7
+          ]
+        },
+        {
+          "name": "display_table",
+          "center": [
+            0,
+            0.425,
+            -0.2
+          ],
+          "size": [
+            5.4,
+            0.85,
+            2.06
+          ]
+        },
+        {
+          "name": "title_support",
+          "center": [
+            0,
+            2.54,
+            -1.35
+          ],
+          "size": [
+            5.25,
+            0.77,
+            0.16
+          ]
+        }
+      ],
+      "model": "display_corner_cabinet",
+      "diorama_origin": [
+        0,
+        0.88,
+        -0.15
+      ]
+    },
+    "stepped_case": {
+      "boxes": [
+        {
+          "name": "reading_rail",
+          "center": [
+            0,
+            0.425,
+            1.035
+          ],
+          "size": [
+            5.6,
+            0.85,
+            0.58
+          ]
+        },
+        {
+          "name": "partial_case",
+          "center": [
+            -1.325,
+            1.54,
+            -0.3
+          ],
+          "size": [
+            2.32,
+            1.33,
+            1.49
+          ]
+        },
+        {
+          "name": "display_table",
+          "center": [
+            0,
+            0.425,
+            -0.2
+          ],
+          "size": [
+            5.4,
+            0.85,
+            2.06
+          ]
+        },
+        {
+          "name": "title_support",
+          "center": [
+            0,
+            2.54,
+            -1.35
+          ],
+          "size": [
+            5.25,
+            0.77,
+            0.16
+          ]
+        }
+      ],
+      "model": "display_stepped_case",
+      "diorama_origin": [
+        0,
+        0.88,
+        -0.15
+      ]
+    },
+    "island_case": {
+      "boxes": [
+        {
+          "name": "reading_rail",
+          "center": [
+            0,
+            0.425,
+            1.035
+          ],
+          "size": [
+            5.6,
+            0.85,
+            0.58
+          ]
+        },
+        {
+          "name": "display_table",
+          "center": [
+            0,
+            0.425,
+            -0.2
+          ],
+          "size": [
+            5.4,
+            0.85,
+            2.06
+          ]
+        },
+        {
+          "name": "title_support",
+          "center": [
+            0,
+            2.54,
+            -1.35
+          ],
+          "size": [
+            5.25,
+            0.77,
+            0.16
+          ]
+        }
+      ],
+      "model": "display_island_case",
+      "diorama_origin": [
+        0,
+        0.88,
+        -0.15
+      ]
+    },
+    "open_stage": {
+      "boxes": [
+        {
+          "name": "reading_rail",
+          "center": [
+            0,
+            0.425,
+            1.035
+          ],
+          "size": [
+            5.6,
+            0.85,
+            0.58
+          ]
+        },
+        {
+          "name": "display_table",
+          "center": [
+            0,
+            0.425,
+            -0.2
+          ],
+          "size": [
+            5.4,
+            0.85,
+            2.06
+          ]
+        },
+        {
+          "name": "title_support",
+          "center": [
+            0,
+            2.54,
+            -1.35
+          ],
+          "size": [
+            5.25,
+            0.77,
+            0.16
+          ]
+        }
+      ],
+      "model": "display_open_stage",
+      "diorama_origin": [
+        0,
+        0.88,
+        -0.15
+      ]
+    },
+    "twin_pedestal": {
+      "boxes": [
+        {
+          "name": "reading_rail",
+          "center": [
+            0,
+            0.425,
+            1.035
+          ],
+          "size": [
+            5.6,
+            0.85,
+            0.58
+          ]
+        },
+        {
+          "name": "display_table",
+          "center": [
+            0,
+            0.425,
+            -0.2
+          ],
+          "size": [
+            5.4,
+            0.85,
+            2.06
+          ]
+        },
+        {
+          "name": "title_support",
+          "center": [
+            0,
+            2.54,
+            -1.35
+          ],
+          "size": [
+            5.25,
+            0.77,
+            0.16
+          ]
+        }
+      ],
+      "model": "display_twin_pedestal",
+      "diorama_origin": [
+        0,
+        0.88,
+        -0.15
+      ]
+    },
+    "workbench": {
+      "boxes": [
+        {
+          "name": "reading_rail",
+          "center": [
+            0,
+            0.425,
+            1.035
+          ],
+          "size": [
+            5.6,
+            0.85,
+            0.58
+          ]
+        },
+        {
+          "name": "display_table",
+          "center": [
+            0,
+            0.425,
+            -0.2
+          ],
+          "size": [
+            5.4,
+            0.85,
+            2.06
+          ]
+        },
+        {
+          "name": "title_support",
+          "center": [
+            0,
+            2.54,
+            -1.35
+          ],
+          "size": [
+            5.25,
+            0.77,
+            0.16
+          ]
+        }
+      ],
+      "model": "display_workbench",
+      "diorama_origin": [
+        0,
+        0.88,
+        -0.15
+      ]
+    },
+    "arc_cabinet": {
+      "boxes": [
+        {
+          "name": "reading_rail",
+          "center": [
+            0,
+            0.425,
+            1.035
+          ],
+          "size": [
+            5.6,
+            0.85,
+            0.58
+          ]
+        },
+        {
+          "name": "display_table",
+          "center": [
+            0,
+            0.425,
+            -0.2
+          ],
+          "size": [
+            5.4,
+            0.85,
+            2.06
+          ]
+        },
+        {
+          "name": "title_support",
+          "center": [
+            0,
+            2.54,
+            -1.35
+          ],
+          "size": [
+            5.25,
+            0.77,
+            0.16
+          ]
+        }
+      ],
+      "model": "display_arc_cabinet",
+      "diorama_origin": [
+        0,
+        0.88,
+        -0.15
+      ]
+    }
+  },
+  "exhibit_kit": "exhibit_kit.glb"
+}

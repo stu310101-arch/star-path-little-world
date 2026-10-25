@@ -1,0 +1,1283 @@
+{
+  "revision": "counseling-studio-r8",
+  "blender": "5.2.2 LTS",
+  "triangles": 155532,
+  "budget": 180000,
+  "zones": {
+    "StudioArchitecture": {
+      "triangles": 28368,
+      "source_parts": 200,
+      "materials": 9,
+      "nonmanifold_edges": 0
+    },
+    "GradeOneAssessment": {
+      "triangles": 23748,
+      "source_parts": 194,
+      "materials": 17,
+      "nonmanifold_edges": 0
+    },
+    "GradeThreeAssessment": {
+      "triangles": 19548,
+      "source_parts": 137,
+      "materials": 18,
+      "nonmanifold_edges": 0
+    },
+    "SharedQuietSeating": {
+      "triangles": 12764,
+      "source_parts": 59,
+      "materials": 10,
+      "nonmanifold_edges": 0
+    },
+    "HighOneWoodChair": {
+      "triangles": 2078,
+      "source_parts": 18,
+      "materials": 1,
+      "nonmanifold_edges": 0
+    },
+    "HighThreeWoodChair": {
+      "triangles": 2078,
+      "source_parts": 18,
+      "materials": 1,
+      "nonmanifold_edges": 0
+    },
+    "OriginalDecor": {
+      "triangles": 46248,
+      "source_parts": 365,
+      "materials": 27,
+      "nonmanifold_edges": 0
+    },
+    "OutsideGarden": {
+      "triangles": 20700,
+      "source_parts": 179,
+      "materials": 8,
+      "nonmanifold_edges": 0
+    }
+  },
+  "materials": 40,
+  "bytes": 36000148,
+  "issues": [],
+  "source": "CounselingRoom.blend",
+  "texture_source": "Poly Haven wood_floor + wood_table_001 2K, ambientCG Fabric060 1K; CC0; recolored runtime maps with originals retained",
+  "uv": "Metre-scale planar per-face UV, oak grain oriented to longest edge. Intentional repeating UV for shared surfaces.",
+  "runtime_acceptance": "r8 furniture revision. Brief engine review is recorded separately under deliverables/counseling-room/r8; this report only describes authored geometry.",
+  "export_cleanup": {
+    "path": "game/assets/counseling_room/counseling_room.glb",
+    "source_sha256": "ac6ded5bbb2aafd5efdf1421c2c7508fa7dc03a4ebf789d0e85f6f646c20c234",
+    "output_sha256": "f5ad08bc7c5649012fabcb0212a6594e0665a52db30656893d0c69e3127fc8b0",
+    "triangles_before": 155532,
+    "triangles_after": 155532,
+    "backface_culled_materials": [
+      "MAT_Counseling_paint_sage",
+      "MAT_Counseling_joinery",
+      "MAT_Counseling_brass",
+      "MAT_Counseling_dark",
+      "MAT_Counseling_device",
+      "MAT_Counseling_ui_pale",
+      "MAT_Counseling_ui_accent",
+      "MAT_Counseling_paper",
+      "MAT_Counseling_paper_edge",
+      "MAT_Counseling_pottery",
+      "MAT_Counseling_ink",
+      "MAT_Counseling_light",
+      "MAT_Counseling_paint_clay",
+      "MAT_Counseling_tea",
+      "MAT_Counseling_tulip_coral",
+      "MAT_Counseling_tulip_coral_inner",
+      "MAT_Counseling_tulip_ivory",
+      "MAT_Counseling_tulip_ivory_inner",
+      "MAT_Counseling_tulip_midrib",
+      "MAT_Counseling_soil",
+      "MAT_Counseling_bark",
+      "MAT_Counseling_sage",
+      "MAT_Counseling_apricot",
+      "MAT_Counseling_stone",
+      "MAT_Counseling_oak"
+    ],
+    "surfaces": [
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 0,
+        "material": "MAT_Counseling_paint_sage",
+        "before": 432,
+        "after": 432,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 1,
+        "material": "MAT_Counseling_joinery",
+        "before": 1592,
+        "after": 1592,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 2,
+        "material": "MAT_Counseling_brass",
+        "before": 1208,
+        "after": 1208,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 3,
+        "material": "MAT_Counseling_dark",
+        "before": 1384,
+        "after": 1384,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 4,
+        "material": "MAT_Counseling_device",
+        "before": 428,
+        "after": 428,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 5,
+        "material": "MAT_Counseling_screen",
+        "before": 756,
+        "after": 756,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "excluded_material"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 6,
+        "material": "MAT_Counseling_ui_pale",
+        "before": 660,
+        "after": 660,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 7,
+        "material": "MAT_Counseling_ui_accent",
+        "before": 108,
+        "after": 108,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 8,
+        "material": "MAT_Counseling_cover_sage",
+        "before": 3612,
+        "after": 3612,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 9,
+        "material": "MAT_Counseling_paper",
+        "before": 2004,
+        "after": 2004,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 10,
+        "material": "MAT_Counseling_paper_edge",
+        "before": 204,
+        "after": 204,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 11,
+        "material": "MAT_Counseling_cream",
+        "before": 216,
+        "after": 216,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 12,
+        "material": "MAT_Counseling_cover_clay",
+        "before": 1976,
+        "after": 1976,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 13,
+        "material": "MAT_Counseling_cover_taupe",
+        "before": 1548,
+        "after": 1548,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 14,
+        "material": "MAT_Counseling_pottery",
+        "before": 1752,
+        "after": 1752,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 15,
+        "material": "MAT_Counseling_ink",
+        "before": 5760,
+        "after": 5760,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeOneAssessment",
+        "surface": 16,
+        "material": "MAT_Counseling_light",
+        "before": 108,
+        "after": 108,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 0,
+        "material": "MAT_Counseling_paint_clay",
+        "before": 324,
+        "after": 324,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 1,
+        "material": "MAT_Counseling_joinery",
+        "before": 1804,
+        "after": 1804,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 2,
+        "material": "MAT_Counseling_cream",
+        "before": 432,
+        "after": 432,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 3,
+        "material": "MAT_Counseling_brass",
+        "before": 968,
+        "after": 968,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 4,
+        "material": "MAT_Counseling_dark",
+        "before": 1384,
+        "after": 1384,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 5,
+        "material": "MAT_Counseling_device",
+        "before": 428,
+        "after": 428,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 6,
+        "material": "MAT_Counseling_screen",
+        "before": 756,
+        "after": 756,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "excluded_material"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 7,
+        "material": "MAT_Counseling_ui_pale",
+        "before": 660,
+        "after": 660,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 8,
+        "material": "MAT_Counseling_ui_accent",
+        "before": 108,
+        "after": 108,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 9,
+        "material": "MAT_Counseling_cover_clay",
+        "before": 1032,
+        "after": 1032,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 10,
+        "material": "MAT_Counseling_paper",
+        "before": 984,
+        "after": 984,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 11,
+        "material": "MAT_Counseling_paper_edge",
+        "before": 168,
+        "after": 168,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 12,
+        "material": "MAT_Counseling_cover_taupe",
+        "before": 1548,
+        "after": 1548,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 13,
+        "material": "MAT_Counseling_cover_sage",
+        "before": 2472,
+        "after": 2472,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 14,
+        "material": "MAT_Counseling_ink",
+        "before": 5312,
+        "after": 5312,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 15,
+        "material": "MAT_Counseling_pottery",
+        "before": 968,
+        "after": 968,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 16,
+        "material": "MAT_Counseling_tea",
+        "before": 92,
+        "after": 92,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_GradeThreeAssessment",
+        "surface": 17,
+        "material": "MAT_Counseling_light",
+        "before": 108,
+        "after": 108,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_HighOneWoodChair",
+        "surface": 0,
+        "material": "MAT_Counseling_joinery",
+        "before": 2078,
+        "after": 2078,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_HighThreeWoodChair",
+        "surface": 0,
+        "material": "MAT_Counseling_joinery",
+        "before": 2078,
+        "after": 2078,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 0,
+        "material": "MAT_Counseling_paint_sage",
+        "before": 216,
+        "after": 216,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 1,
+        "material": "MAT_Counseling_joinery",
+        "before": 1296,
+        "after": 1296,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 2,
+        "material": "MAT_Counseling_brass",
+        "before": 768,
+        "after": 768,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 3,
+        "material": "MAT_Counseling_cover_taupe",
+        "before": 4120,
+        "after": 4120,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "open_or_nonmanifold_or_inconsistent"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 4,
+        "material": "MAT_Counseling_cover_clay",
+        "before": 4120,
+        "after": 4120,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "open_or_nonmanifold_or_inconsistent"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 5,
+        "material": "MAT_Counseling_paper",
+        "before": 3144,
+        "after": 3144,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 6,
+        "material": "MAT_Counseling_paper_edge",
+        "before": 192,
+        "after": 192,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 7,
+        "material": "MAT_Counseling_cover_sage",
+        "before": 5648,
+        "after": 5648,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "open_or_nonmanifold_or_inconsistent"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 8,
+        "material": "MAT_Counseling_cream",
+        "before": 108,
+        "after": 108,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 9,
+        "material": "MAT_Counseling_ink",
+        "before": 5312,
+        "after": 5312,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 10,
+        "material": "MAT_Counseling_tulip_vase_glaze",
+        "before": 1476,
+        "after": 1476,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "open_or_nonmanifold_or_inconsistent"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 11,
+        "material": "MAT_Counseling_tulip_vase_foot",
+        "before": 252,
+        "after": 252,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "open_or_nonmanifold_or_inconsistent"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 12,
+        "material": "MAT_Counseling_tulip_leaf",
+        "before": 1864,
+        "after": 1864,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "excluded_material"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 13,
+        "material": "MAT_Counseling_tulip_coral",
+        "before": 1920,
+        "after": 1920,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 14,
+        "material": "MAT_Counseling_tulip_coral_inner",
+        "before": 1920,
+        "after": 1920,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 15,
+        "material": "MAT_Counseling_tulip_ivory",
+        "before": 960,
+        "after": 960,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 16,
+        "material": "MAT_Counseling_tulip_ivory_inner",
+        "before": 960,
+        "after": 960,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 17,
+        "material": "MAT_Counseling_tulip_midrib",
+        "before": 608,
+        "after": 608,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 18,
+        "material": "MAT_Counseling_pottery",
+        "before": 2628,
+        "after": 2628,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 19,
+        "material": "MAT_Counseling_soil",
+        "before": 372,
+        "after": 372,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 20,
+        "material": "MAT_Counseling_bark",
+        "before": 504,
+        "after": 504,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 21,
+        "material": "MAT_Counseling_foliage_light",
+        "before": 2736,
+        "after": 2736,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "excluded_material"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 22,
+        "material": "MAT_Counseling_foliage_vein",
+        "before": 1152,
+        "after": 1152,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "excluded_material"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 23,
+        "material": "MAT_Counseling_foliage",
+        "before": 2736,
+        "after": 2736,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "excluded_material"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 24,
+        "material": "MAT_Counseling_linen",
+        "before": 380,
+        "after": 380,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 25,
+        "material": "MAT_Counseling_sage",
+        "before": 792,
+        "after": 792,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OriginalDecor",
+        "surface": 26,
+        "material": "MAT_Counseling_apricot",
+        "before": 64,
+        "after": 64,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OutsideGarden",
+        "surface": 0,
+        "material": "MAT_Counseling_leaf_dark",
+        "before": 12,
+        "after": 12,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "excluded_material"
+      },
+      {
+        "node": "SM_Counseling_OutsideGarden",
+        "surface": 1,
+        "material": "MAT_Counseling_stone",
+        "before": 432,
+        "after": 432,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OutsideGarden",
+        "surface": 2,
+        "material": "MAT_Counseling_pottery",
+        "before": 5256,
+        "after": 5256,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OutsideGarden",
+        "surface": 3,
+        "material": "MAT_Counseling_soil",
+        "before": 744,
+        "after": 744,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OutsideGarden",
+        "surface": 4,
+        "material": "MAT_Counseling_bark",
+        "before": 1008,
+        "after": 1008,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_OutsideGarden",
+        "surface": 5,
+        "material": "MAT_Counseling_foliage_light",
+        "before": 5472,
+        "after": 5472,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "excluded_material"
+      },
+      {
+        "node": "SM_Counseling_OutsideGarden",
+        "surface": 6,
+        "material": "MAT_Counseling_foliage_vein",
+        "before": 2304,
+        "after": 2304,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "excluded_material"
+      },
+      {
+        "node": "SM_Counseling_OutsideGarden",
+        "surface": 7,
+        "material": "MAT_Counseling_foliage",
+        "before": 5472,
+        "after": 5472,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "excluded_material"
+      },
+      {
+        "node": "SM_Counseling_SharedQuietSeating",
+        "surface": 0,
+        "material": "MAT_Counseling_joinery",
+        "before": 824,
+        "after": 824,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_SharedQuietSeating",
+        "surface": 1,
+        "material": "MAT_Counseling_sage",
+        "before": 3056,
+        "after": 3056,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_SharedQuietSeating",
+        "surface": 2,
+        "material": "MAT_Counseling_apricot",
+        "before": 2092,
+        "after": 2092,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_SharedQuietSeating",
+        "surface": 3,
+        "material": "MAT_Counseling_linen",
+        "before": 5108,
+        "after": 5108,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "open_or_nonmanifold_or_inconsistent"
+      },
+      {
+        "node": "SM_Counseling_SharedQuietSeating",
+        "surface": 4,
+        "material": "MAT_Counseling_cover_sage",
+        "before": 516,
+        "after": 516,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_SharedQuietSeating",
+        "surface": 5,
+        "material": "MAT_Counseling_paper",
+        "before": 132,
+        "after": 132,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_SharedQuietSeating",
+        "surface": 6,
+        "material": "MAT_Counseling_paper_edge",
+        "before": 36,
+        "after": 36,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_SharedQuietSeating",
+        "surface": 7,
+        "material": "MAT_Counseling_brass",
+        "before": 336,
+        "after": 336,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_SharedQuietSeating",
+        "surface": 8,
+        "material": "MAT_Counseling_cream",
+        "before": 224,
+        "after": 224,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "open_or_nonmanifold_or_inconsistent"
+      },
+      {
+        "node": "SM_Counseling_SharedQuietSeating",
+        "surface": 9,
+        "material": "MAT_Counseling_light",
+        "before": 440,
+        "after": 440,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_StudioArchitecture",
+        "surface": 0,
+        "material": "MAT_Counseling_oak",
+        "before": 108,
+        "after": 108,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_StudioArchitecture",
+        "surface": 1,
+        "material": "MAT_Counseling_plaster",
+        "before": 3324,
+        "after": 3324,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "open_or_nonmanifold_or_inconsistent"
+      },
+      {
+        "node": "SM_Counseling_StudioArchitecture",
+        "surface": 2,
+        "material": "MAT_Counseling_cream",
+        "before": 6804,
+        "after": 6804,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_StudioArchitecture",
+        "surface": 3,
+        "material": "MAT_Counseling_joinery",
+        "before": 4104,
+        "after": 4104,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_StudioArchitecture",
+        "surface": 4,
+        "material": "MAT_Counseling_glass",
+        "before": 324,
+        "after": 324,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "excluded_material"
+      },
+      {
+        "node": "SM_Counseling_StudioArchitecture",
+        "surface": 5,
+        "material": "MAT_Counseling_brass",
+        "before": 120,
+        "after": 120,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_StudioArchitecture",
+        "surface": 6,
+        "material": "MAT_Counseling_linen",
+        "before": 12632,
+        "after": 12632,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_StudioArchitecture",
+        "surface": 7,
+        "material": "MAT_Counseling_sage",
+        "before": 476,
+        "after": 476,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      },
+      {
+        "node": "SM_Counseling_StudioArchitecture",
+        "surface": 8,
+        "material": "MAT_Counseling_apricot",
+        "before": 476,
+        "after": 476,
+        "removed": {
+          "degenerate": 0,
+          "duplicate": 0,
+          "buried": 0
+        },
+        "cull_reason": "closed_outward"
+      }
+    ],
+    "written": true
+  }
+}

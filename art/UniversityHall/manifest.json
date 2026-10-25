@@ -1,0 +1,127 @@
+{
+  "title": "典雅大學圖書館",
+  "revision": "2026-10-11-r3.1-library",
+  "stage": "complete",
+  "source": "UniversityHall_Library.blend",
+  "style": "Real-scale walnut academic library, two-storey bookcases, honed stone inlays, brass rails, textured leather volumes, warm task lights. No faceted plants or colourful toy scenery.",
+  "textures": {
+    "source": "Original deterministic mathematical PNG bakes: walnut grain, stone mottling, leather pores, paper fibres",
+    "size": 1024,
+    "maps": [
+      "sRGB base colour",
+      "non-colour roughness",
+      "tangent normal +Y"
+    ],
+    "uv": "Physical-scale planar projection; intentional tiling at construction seams",
+    "license": "Project-authored, no external assets",
+    "floor_atlas": "Two 2048px base colour atlases plus constant 256px normal/roughness maps, on two-triangle floors; all maps mipmapped."
+  },
+  "stats": {
+    "atrium": {
+      "triangles": 286892,
+      "source_parts": 6190,
+      "materials": 13,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UVs; floor is a unique single-surface atlas",
+      "bytes": 41278356
+    },
+    "booth": {
+      "triangles": 5848,
+      "source_parts": 76,
+      "materials": 8,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 16423380
+    },
+    "gallery": {
+      "triangles": 306549,
+      "source_parts": 7270,
+      "materials": 13,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UVs; floor is a unique single-surface atlas",
+      "bytes": 43126876
+    },
+    "theme_urban": {
+      "triangles": 18396,
+      "source_parts": 181,
+      "materials": 6,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11864016
+    },
+    "theme_woodland": {
+      "triangles": 17208,
+      "source_parts": 170,
+      "materials": 6,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11780880
+    },
+    "theme_hills": {
+      "triangles": 12456,
+      "source_parts": 126,
+      "materials": 6,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11448224
+    },
+    "theme_coast": {
+      "triangles": 8644,
+      "source_parts": 91,
+      "materials": 6,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11175216
+    },
+    "theme_arts": {
+      "triangles": 7788,
+      "source_parts": 85,
+      "materials": 6,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11112360
+    },
+    "theme_workshop": {
+      "triangles": 13536,
+      "source_parts": 136,
+      "materials": 7,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 11524052
+    },
+    "feature_palm": {
+      "triangles": 692,
+      "source_parts": 29,
+      "materials": 2,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 1982364
+    },
+    "feature_dairy": {
+      "triangles": 524,
+      "source_parts": 5,
+      "materials": 3,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 3587028
+    },
+    "feature_book": {
+      "triangles": 648,
+      "source_parts": 6,
+      "materials": 4,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 12518780
+    },
+    "feature_tea": {
+      "triangles": 536,
+      "source_parts": 4,
+      "materials": 3,
+      "textures": "PBR base colour, normal and roughness",
+      "uv": "Material-scale planar UV mapping at construction seams; intentional repeats",
+      "bytes": 3589332
+    }
+  },
+  "runtime_note": "No COLOR_0 required; PBR image maps carry appearance. Import helper must preserve albedo/roughness/normal maps.",
+  "surface_correction": "Removed overlapping Foundation/Subfloor/tile/inlay/medallion geometry; separate no-LOD floor surface. Positive-Z end walls/bookcases complete both rooms; return-door geometry faces the interior."
+}

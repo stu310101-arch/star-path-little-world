@@ -7,6 +7,7 @@ extends RefCounted
 const KEEP_FRACTION: float = .22
 const MIN_COMPONENTS: int = 32
 const MAX_COMPONENT_TRIANGLES: int = 32
+var keep_fraction: float = KEEP_FRACTION
 var cache: Dictionary = {}
 var components_before: int = 0
 var components_after: int = 0
@@ -115,7 +116,7 @@ func _select_components(vertices: PackedVector3Array, indices: PackedInt32Array)
 	for leaf: Dictionary in leaves:
 		var point: Vector3 = leaf.center as Vector3
 		var bucket: int = absi(hash(Vector3i((point * 4096.0).round()))) % 10000
-		if bucket < int(KEEP_FRACTION * 10000.0):
+		if bucket < int(keep_fraction * 10000.0):
 			kept[int(leaf.id)] = true
 	var result: PackedInt32Array = PackedInt32Array()
 	var leaf_count: int = 0
@@ -130,4 +131,4 @@ func _select_components(vertices: PackedVector3Array, indices: PackedInt32Array)
 	return result
 
 func statistics() -> Dictionary:
-	return {"meshes_reduced":meshes_reduced,"leaf_components_before":components_before,"leaf_components_after":components_after,"keep_fraction":KEEP_FRACTION,"original_bounds_preserved":true}
+	return {"meshes_reduced":meshes_reduced,"leaf_components_before":components_before,"leaf_components_after":components_after,"keep_fraction":keep_fraction,"original_bounds_preserved":true}

@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 2,
+  "revision": "counseling-studio-r8",
+  "date": "2026-10-24",
+  "recordedAt": "2026-10-24T10:10:57.009911+00:00",
+  "status": "brief_native_review_passed_ready_for_packaging",
+  "quality": "Sole full-detail room; original 2K floor and joinery maps, 1K fabric",
+  "dimensions_m": [
+    10.8,
+    3.5,
+    8.6
+  ],
+  "assessment_areas": [
+    "high1",
+    "high3"
+  ],
+  "triangles": 155556,
+  "triangle_budget": 180000,
+  "materials": 40,
+  "spatial_meshes": [
+    "StudioArchitecture",
+    "GradeOneAssessment",
+    "GradeThreeAssessment",
+    "SharedQuietSeating",
+    "HighOneWoodChair",
+    "HighThreeWoodChair",
+    "OriginalDecor",
+    "OutsideGarden"
+  ],
+  "collider_count": 17,
+  "camera_only_collider_count": 1,
+  "seat_count": 4,
+  "movable_wood_chairs": 2,
+  "seated_movement_speed_mps": 2.6,
+  "canonical_texture_count": 11,
+  "completed": {
+    "editable_blender_source": true,
+    "normal_godot_editor_import": true,
+    "geometry_issues": [],
+    "nonmanifold_edges": 0,
+    "native_visual_capture_count": 11,
+    "native_renderer": "Godot 4.7.2 GL Compatibility",
+    "rendered_images_reviewed": true
+  },
+  "brief_native_evidence": [
+    {
+      "path": "deliverables/counseling-room/r8/direct-routes.json",
+      "checks": 23,
+      "failures": 0
+    },
+    {
+      "path": "deliverables/counseling-room/r8/material-dependencies.json",
+      "checks": null,
+      "failures": 0
+    },
+    {
+      "path": "deliverables/counseling-room/r8/native-brief-checks.json",
+      "checks": 51,
+      "failures": 0
+    }
+  ],
+  "full_account_browser_suite": {
+    "performed": false,
+    "reason": "No account/form changes; user requested brief furniture and operation review."
+  },
+  "final_performance": {
+    "performed": false,
+    "reason": "No extended performance run requested or claimed."
+  },
+  "screenshots": [
+    {
+      "path": "deliverables/counseling-room/r8/entrance.png",
+      "scope": "Native r8 engine capture; camera details in brief test report"
+    },
+    {
+      "path": "deliverables/counseling-room/r8/interest_high1-form.png",
+      "scope": "Native r8 engine capture; camera details in brief test report"
+    },
+    {
+      "path": "deliverables/counseling-room/r8/interest_high1-seated.png",
+      "scope": "Native r8 engine capture; camera details in brief test report"
+    },
+    {
+      "path": "deliverables/counseling-room/r8/interest_high3-form.png",
+      "scope": "Native r8 engine capture; camera details in brief test report"
+    },
+    {
+      "path": "deliverables/counseling-room/r8/interest_high3-seated.png",
+      "scope": "Native r8 engine capture; camera details in brief test report"
+    },
+    {
+      "path": "deliverables/counseling-room/r8/sofa-table-floor.png",
+      "scope": "Native r8 engine capture; camera details in brief test report"
+    },
+    {
+      "path": "deliverables/counseling-room/r8/studio-overview.png",
+      "scope": "Native r8 engine capture; camera details in brief test report"
+    },
+    {
+      "path": "deliverables/counseling-room/r8/window_sofa_0-corner.png",
+      "scope": "Native r8 engine capture; camera details in brief test report"
+    },
+    {
+      "path": "deliverables/counseling-room/r8/window_sofa_0-seated.png",
+      "scope": "Native r8 engine capture; camera details in brief test report"
+    },
+    {
+      "path": "deliverables/counseling-room/r8/window_sofa_1-corner.png",
+      "scope": "Native r8 engine capture; camera details in brief test report"
+    },
+    {
+      "path": "deliverables/counseling-room/r8/window_sofa_1-seated.png",
+      "scope": "Native r8 engine capture; camera details in brief test report"
+    }
+  ],
+  "previous_release": {
+    "revision": "counseling-studio-r6",
+    "archive": "build/counseling-delivery-20261024-r6",
+    "preserved": true
+  },
+  "previous_design": {
+    "revision": "counseling-studio-r7",
+    "evidence": "deliverables/counseling-room/r7",
+    "source_backup": "build/counseling-room-r7-before-r8",
+    "preserved": true
+  },
+  "files": {
+    "art/CounselingRoom/CounselingRoom.blend": {
+      "bytes": 26997500,
+      "sha256": "b0f56e4c6590421421a7710b9e8a5bf5ccd12522518dc28f3435d30ef28e160c"
+    },
+    "art/CounselingRoom/README.md": {
+      "bytes": 5696,
+      "sha256": "e44a0be472e18390a68fb885f5da522f475a00b7c8fe699224954a8cb3aaa7a3"
+    },
+    "art/CounselingRoom/SOURCE_NOTES.md": {
+      "bytes": 5926,
+      "sha256": "03bf6786515ce76a411f4091badbba12daee58ccd449465d0e624d12e18a2b11"
+    },
+    "art/CounselingRoom/export-report.json": {
+      "bytes": 34454,
+      "sha256": "57078b0f734df35fa55a22eebdb48536a7e2583bcca5f0c26b3bdd50bdf0a216"
+    },
+    "art/CounselingRoom/prepare_textures.py": {
+      "bytes": 4571,
+      "sha256": "43f2542f6f940a2459531859e2a61189b5ae690a519e877e0f830ab3b143cc7c"
+    },
+    "art/CounselingRoom/source-verification-2k.json": {
+      "bytes": 3051,
+      "sha256": "64fc619e40252721b07a271fb945655e290c4d01e8019b163883cba134e4dc9c"
+    },
+    "art/CounselingRoom/sources.json": {
+      "bytes": 3331,
+      "sha256": "a2a698d5fd7873827eca2a88874ad4a71f83abb2715727b37d1c328caab7d3c5"
+    },
+    "art/CounselingRoom/sources/Fabric060_1K-JPG.zip": {
+      "bytes": 8646092,
+      "sha256": "4928f08c91e48fa61bb2d0d1fd4195a7bb21feefe2466120356cc0c912ae0f6a"
+    },
+    "art/CounselingRoom/sources/Fabric060_1K-JPG_Color.jpg": {
+      "bytes": 1008477,
+      "sha256": "bbff47f177a8e46fcc95795ba331c0d3918d4c375a885955001e947b60e0f502"
+    },
+    "art/CounselingRoom/sources/Fabric060_1K-JPG_NormalGL.jpg": {
+      "bytes": 2048722,
+      "sha256": "c62d9498d2615490eeef23cf47df3fe01b3750d65f32c0eee30c6f6af98ea7ae"
+    },
+    "art/CounselingRoom/sources/Fabric060_1K-JPG_Roughness.jpg": {
+      "bytes": 698217,
+      "sha256": "588bb738c6edbe84aa4c5fc09384a8c279379eb27dee1c913d8fb80ec72014ad"
+    },
+    "art/CounselingRoom/sources/wood_floor_diff_1k.jpg": {
+      "bytes": 734493,
+      "sha256": "2a1c07687b6dbb214c4b9213739c6d92d425f1f0fc8ab3ac157f105d78240789"
+    },
+    "art/CounselingRoom/sources/wood_floor_diff_2k.jpg": {
+      "bytes": 2983667,
+      "sha256": "7c3ff1164c8dd0758ef2c048e9a266d28174120de01052ec40e6ca486177345c"
+    },
+    "art/CounselingRoom/sources/wood_floor_nor_gl_1k.jpg": {
+      "bytes": 423303,
+      "sha256": "452247f0d0d1b7fc7f8324ff3b6ed60bcc6de1405f4284eeb8d9bce90d4939c2"
+    },
+    "art/CounselingRoom/sources/wood_floor_nor_gl_2k.jpg": {
+      "bytes": 1863576,
+      "sha256": "eff2e4db46bab930dc05997faf5085157eec4fd652cdfc6cd01fa11edd56ef10"
+    },
+    "art/CounselingRoom/sources/wood_floor_rough_1k.jpg": {
+      "bytes": 527754,
+      "sha256": "061f1e1293251b2d28c76e3fac1ea9452b0e8648bb8f9b3728e09db386166e5c"
+    },
+    "art/CounselingRoom/sources/wood_floor_rough_2k.jpg": {
+      "bytes": 2267559,
+      "sha256": "297eda0d75f2020cc541dbf242e1f5fd058053249567f49a4506fc2c5b1a172b"
+    },
+    "art/CounselingRoom/sources/wood_table_001_diff_2k.jpg": {
+      "bytes": 924532,
+      "sha256": "63ae5cd186197b40f18bc020fe2b652bb08df4d9fc6240c6cbf8a7e3bc32c096"
+    },
+    "art/CounselingRoom/sources/wood_table_001_nor_gl_2k.jpg": {
+      "bytes": 385020,
+      "sha256": "d56f02c911391267ddc6adc92e8a5bc29b9803196e8d57ad5b9702e6c842dc28"
+    },
+    "art/CounselingRoom/sources/wood_table_001_rough_2k.jpg": {
+      "bytes": 963377,
+      "sha256": "c788876d80e4d96598590631f8de92447fb1b0ba1265a812514ee717d270ac3e"
+    },
+    "game/assets/counseling_room/counseling_room.glb": {
+      "bytes": 36008128,
+      "sha256": "2a66f710c70d16c8a9e3b5c57a8f2b64352306683d747061f53f38015f59ff78"
+    },
+    "game/assets/counseling_room/counseling_room.glb.import": {
+      "bytes": 1230,
+      "sha256": "3f61145926a8d5f76417f0eb4a000bbad291e1135acc5e4c75dc1aff70655254"
+    },
+    "game/assets/counseling_room/import_materials.gd": {
+      "bytes": 1523,
+      "sha256": "3ad2978e038ad737d157dada5f2c9dcbbbc4547b4abc553cbd5d50312f884477"
+    },
+    "game/assets/counseling_room/import_materials.gd.uid": {
+      "bytes": 20,
+      "sha256": "6222500c0dfe71b405046c79df417e92b85db7614095efb36b479ee5478ff005"
+    },
+    "game/assets/counseling_room/layout.json": {
+      "bytes": 8239,
+      "sha256": "227fbc23e97fbd00ca52d14dc41d4f052eda38e77d237403ebf63c4827f9a637"
+    },
+    "game/assets/counseling_room/textures/apricot_base.png": {
+      "bytes": 563226,
+      "sha256": "41eef4d68709ebd6032de2eb4a22b4e3618bbb2ba059c164f71d732b734dc94e"
+    },
+    "game/assets/counseling_room/textures/apricot_base.png.import": {
+      "bytes": 1211,
+      "sha256": "b600d1de2c787d89414945d3c0f419585e1c76813d06da4c7f0aaffca7de4311"
+    },
+    "game/assets/counseling_room/textures/fabric_normal.png": {
+      "bytes": 2583316,
+      "sha256": "0e1e9c569731871e666ab0e98e56362aa1f42ecb13c788efb801afe940f6145c"
+    },
+    "game/assets/counseling_room/textures/fabric_normal.png.import": {
+      "bytes": 1216,
+      "sha256": "669698b2031854ab202e644d51dc30c35e311ae472e521ef6b0a2404577ff5ec"
+    },
+    "game/assets/counseling_room/textures/fabric_rough.png": {
+      "bytes": 931635,
+      "sha256": "c082a9c5c9fc13ea63f1269834af493a3f150e0bce524e534a86f5ecf54a20ed"
+    },
+    "game/assets/counseling_room/textures/fabric_rough.png.import": {
+      "bytes": 1212,
+      "sha256": "8256fe5c9cd5618a42a9a8b7552c495a9da1677836f952be4faaeb03699ee8e6"
+    },
+    "game/assets/counseling_room/textures/joinery_base.png": {
+      "bytes": 3579545,
+      "sha256": "5b8f46f638c7b8824e20d5f2e1dfc1418f86189ea0dd608268f3e63be736ffa2"
+    },
+    "game/assets/counseling_room/textures/joinery_base.png.import": {
+      "bytes": 972,
+      "sha256": "233392646ff0802109fdcca10151c484bf46b439e6fb3831dc3c26048a16f528"
+    },
+    "game/assets/counseling_room/textures/joinery_normal.png": {
+      "bytes": 2382187,
+      "sha256": "3562b7d8627c2a2dca1dc7c3bd5272ce05b467d116a8a476f72c911c266b48dd"
+    },
+    "game/assets/counseling_room/textures/joinery_normal.png.import": {
+      "bytes": 977,
+      "sha256": "548181e9226af40c472ccc57a2667e9c06a1cf0b1efc2dd023fe63a8700941fe"
+    },
+    "game/assets/counseling_room/textures/joinery_rough.png": {
+      "bytes": 3068763,
+      "sha256": "141df71a7eb808e360b91c6d81017a67eacf4db0ca5e6a8a138d40498c00d90c"
+    },
+    "game/assets/counseling_room/textures/joinery_rough.png.import": {
+      "bytes": 975,
+      "sha256": "53d0cac8e6eaf592c65d58e1120e9e17e8a06435fa670a6ea9f3170901aeb4b7"
+    },
+    "game/assets/counseling_room/textures/linen_base.png": {
+      "bytes": 601244,
+      "sha256": "a0b0d16a21d487d04ff84640042fcf764dbad54e44d40d18de867ad5371e19d9"
+    },
+    "game/assets/counseling_room/textures/linen_base.png.import": {
+      "bytes": 1202,
+      "sha256": "e21d852a1dd49d2e3ee726269fe1b6d448afb9e0f1316f2f57316d534d9ee3e3"
+    },
+    "game/assets/counseling_room/textures/oak_base.png": {
+      "bytes": 4113521,
+      "sha256": "319d7f2f92aa1947e7450b10af0700e10a641444f2ea33141fb0ff6b3a877995"
+    },
+    "game/assets/counseling_room/textures/oak_base.png.import": {
+      "bytes": 1192,
+      "sha256": "ab445b56470b5e6479ac61677fa715b57fce6df09ecef08254d6e247da63a00d"
+    },
+    "game/assets/counseling_room/textures/oak_normal.png": {
+      "bytes": 4308088,
+      "sha256": "61a598b33843567dbb6a80da541291da6664675960092a6bcf1a89d5bec9c9e1"
+    },
+    "game/assets/counseling_room/textures/oak_normal.png.import": {
+      "bytes": 1201,
+      "sha256": "986a06423def028affa0ba24d92a117ef2572fd926cd8a8c44473a39aafe3964"
+    },
+    "game/assets/counseling_room/textures/oak_rough.png": {
+      "bytes": 2929714,
+      "sha256": "456dc47d8e5fa3cf4c1c3ca556ac1fb7c4357039355ec2eb388d49b8162188aa"
+    },
+    "game/assets/counseling_room/textures/oak_rough.png.import": {
+      "bytes": 1197,
+      "sha256": "122d692f7dfc73c789cb64436cf13c0da58feceeb90e20b3ce0e65db6be75fbe"
+    },
+    "game/assets/counseling_room/textures/sage_base.png": {
+      "bytes": 586628,
+      "sha256": "2fb579700f66bf1fd070d6600bdfabaf00731bbd4574f3f55e730b54f365d5a1"
+    },
+    "game/assets/counseling_room/textures/sage_base.png.import": {
+      "bytes": 1197,
+      "sha256": "89ea26454f455016bc3451f6043e9b261a4e0ef4064381b0e56612b8567800e2"
+    },
+    "game/scenes/counseling_room.tscn": {
+      "bytes": 183,
+      "sha256": "95d0ff18be9166e6602f463b083e3963bb7224aa70cde3b6d4b3e381e3711818"
+    },
+    "game/scripts/admissions_furniture_interaction.gd": {
+      "bytes": 18096,
+      "sha256": "36aaa6185dc9d692c23c69fba529cdae726a5c2079bf246a110fdd496ed511e4"
+    },
+    "game/scripts/counseling_room.gd": {
+      "bytes": 33958,
+      "sha256": "3f92ae2d176830f17e25aee2b390e23fb2297adc9e3552ec3dd7791472cb00fa"
+    },
+    "tools/audit_indoor_geometry.py": {
+      "bytes": 10768,
+      "sha256": "f70ef245bf241eff2a1636f902ee2de47b3dc7d0a9a6e5ce2ae0fe5c2347a4b5"
+    },
+    "tools/build_counseling_room.py": {
+      "bytes": 50018,
+      "sha256": "bdf488ffb06193d8f04ed7338ba2bd0cd773742d140c406c9dad580ed26e5010"
+    },
+    "tools/counseling_botanicals.py": {
+      "bytes": 16861,
+      "sha256": "7b80403b75b5cdad45da2493777a0a43141dda45923354975888722aef543d72"
+    },
+    "tools/counseling_soft_furnishings.py": {
+      "bytes": 9684,
+      "sha256": "59e0eaf9457b5123d7a8f0cb7307204cec07a6992b58af84e3c7f962e75c0336"
+    },
+    "tools/counseling_wood_chair.py": {
+      "bytes": 6173,
+      "sha256": "dd95a3cd1e15433366dce0aa09c992d8769687c9fa4778d8c052961339c3ad95"
+    },
+    "tools/optimize_indoor_geometry.py": {
+      "bytes": 12162,
+      "sha256": "803d30c803191790379490c4f9e1bb6face0720a851177b5db0aac2f0cfbfbad"
+    },
+    "deliverables/counseling-room/r8/entrance.png": {
+      "bytes": 1169100,
+      "sha256": "676d30b80d9af7aabccfaf8b8f3171c8716bc293cae3b475dddd7e6861367820"
+    },
+    "deliverables/counseling-room/r8/interest_high1-form.png": {
+      "bytes": 313163,
+      "sha256": "91fde1be460568bf1f0c714143d1520f83af68ddc77ff6b901dddc3064c570a4"
+    },
+    "deliverables/counseling-room/r8/interest_high1-seated.png": {
+      "bytes": 1164386,
+      "sha256": "f71929a1c3e8f3e98f31713c08d9571b6f0a6a358707f682055ba2c0ed212ec4"
+    },
+    "deliverables/counseling-room/r8/interest_high3-form.png": {
+      "bytes": 333032,
+      "sha256": "e810698743d05fa0f21367fd1cfa849f84a94537c226cc4bf10244027c03b40c"
+    },
+    "deliverables/counseling-room/r8/interest_high3-seated.png": {
+      "bytes": 1049593,
+      "sha256": "4168e405724f6956b8c19a4cb3ceeb9559890f62abc21546007f5b74cdb2b90a"
+    },
+    "deliverables/counseling-room/r8/sofa-table-floor.png": {
+      "bytes": 1098428,
+      "sha256": "18dc7c046dbba54a625b8bb22b4f82e9e8d9efba4639ce829d84752cfd2fe057"
+    },
+    "deliverables/counseling-room/r8/studio-overview.png": {
+      "bytes": 1073890,
+      "sha256": "6e49e46b522c041cab89ffd73a463894a55a2bef51f3bc32651232f7f2c23e69"
+    },
+    "deliverables/counseling-room/r8/window_sofa_0-corner.png": {
+      "bytes": 1106648,
+      "sha256": "408ec7fbc91f1698a40f44b20b96248595e6f2aef8035dfb48e7a2708b46ac62"
+    },
+    "deliverables/counseling-room/r8/window_sofa_0-seated.png": {
+      "bytes": 916206,
+      "sha256": "c9b4443948b9e9c0e5f8f9099d989fe01ebf56528d04896757343db66bdafd51"
+    },
+    "deliverables/counseling-room/r8/window_sofa_1-corner.png": {
+      "bytes": 1054251,
+      "sha256": "2e480200aa9af20e0161426e097b1d2dd827c6d62fad25dc35c9e3976b4c16a6"
+    },
+    "deliverables/counseling-room/r8/window_sofa_1-seated.png": {
+      "bytes": 908839,
+      "sha256": "77c48dad80939c3564141dd3f9999ce2256cfe200bedf16db2afbe21e58c3954"
+    }
+  }
+}

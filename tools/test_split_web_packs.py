@@ -126,6 +126,10 @@ class SplitPackTests(unittest.TestCase):
         entries, inventory = self.fixture()
         inventory["groups"]["training_room"] = inventory["groups"].pop("room")
         inventory["prerequisites"]["training_room"] = inventory["prerequisites"].pop("room")
+        entries["atrium.scn"] = b"university atrium"
+        inventory["groups"]["university_hall"] = ["res://atrium.scn"]
+        inventory["dependencies"]["res://atrium.scn"] = ["res://code.gdc"]
+        inventory["prerequisites"]["university_hall"] = ["avatar"]
         source = self.write(entries)
         original_bytes = source.stat().st_size
         inventory_path = self.root / "dependencies.json"
@@ -139,6 +143,9 @@ class SplitPackTests(unittest.TestCase):
         self.assertEqual(bytes(boot.entries["data/web_packs.json"]), (web / "index.packs.json").read_bytes())
         manifest = json.loads((web / "index.packs.json").read_text())
         self.assertFalse(manifest["packs"]["training_room"]["startup"])
+        self.assertFalse(manifest["packs"]["university_hall"]["startup"])
+        self.assertEqual(manifest["resources"]["res://atrium.scn"], "university_hall")
+        self.assertNotIn("atrium.scn", boot.entries)
         self.assertTrue(manifest["packs"]["avatar"]["startup"])
         physical_paths = set(boot.entries)
         for row in manifest["packs"].values():
@@ -150,6 +157,192 @@ class SplitPackTests(unittest.TestCase):
             physical_paths.update(data.entries)
         with self.assertRaisesRegex(ValueError, "already split"):
             split(web / "index.pck", inventory_path, web, self.root / "report2.json")
+
+    def test_university_mesh_dependency_cannot_leak_into_boot(self):
+        entries, inventory = self.fixture()
+        inventory["groups"]["university_hall"] = inventory["groups"].pop("room")
+        inventory["prerequisites"]["university_hall"] = inventory["prerequisites"].pop("room")
+        inventory["dependencies"]["res://world.scn"].append("res://room.scn")
+        with self.assertRaisesRegex(ValueError, "university_hall"):
+            plan_pack(Pack((4, 7, 2), entries), inventory)
+
+    def test_recommendation_variants_are_optional_and_never_cross_load_geometry(self):
+        entries, inventory = self.fixture()
+        inventory["profiles"] = {"full":["avatar"], "low":["avatar"]}
+        inventory["shared_on_demand"] = ["recommendation_room", "recommendation_low"]
+        for key in inventory["shared_on_demand"]:
+            source = "res://" + key + ".scn"
+            entries[key + ".scn"] = key.encode()
+            inventory["groups"][key] = [source]
+            inventory["dependencies"][source] = ["res://code.gdc"]
+        contents, deps, resources, _ = plan_pack(Pack((4,7,2),entries),inventory)
+        low = pack_dependency_closure("recommendation_low",deps,set(contents))
+        self.assertNotIn("recommendation_room",low)
+        self.assertNotIn("recommendation_room.scn",contents["boot"])
+        self.assertNotIn("recommendation_low.scn",contents["boot"])
+        self.assertEqual(resources["res://recommendation_low.scn"],"recommendation_low")
+        inventory["dependencies"]["res://world.scn"].append("res://recommendation_low.scn")
+        with self.assertRaisesRegex(ValueError,"recommendation_low"):
+            plan_pack(Pack((4,7,2),entries),inventory)
+
+    def test_admissions_model_and_layout_are_deferred_together(self):
+        entries, inventory = self.fixture()
+        model = "res://assets/admissions_room/admissions_studio.glb"
+        layout = "res://assets/admissions_room/layout.json"
+        payload = ".godot/imported/admissions_studio.glb-test.scn"
+        entries[model.removeprefix("res://") + ".import"] = f'[remap]\npath="res://{payload}"\n'.encode()
+        entries[payload] = b"authored studio mesh and embedded materials"
+        entries[layout.removeprefix("res://")] = b'{"schemaVersion":1,"stations":[]}'
+        inventory["groups"]["admissions_room"] = [model, layout]
+        inventory["prerequisites"]["admissions_room"] = ["avatar"]
+        inventory["dependencies"].update({model: [], layout: []})
+        contents, deps, resources, _ = plan_pack(Pack((4, 7, 2), entries), inventory)
+        self.assertEqual(resources[model], "admissions_room")
+        self.assertEqual(resources[layout], "admissions_room")
+        self.assertEqual(deps["admissions_room"], ["avatar"])
+        self.assertIn(payload, contents["admissions_room"])
+        self.assertNotIn(payload, contents["boot"])
+        inventory["dependencies"]["res://world.scn"].append(model)
+        with self.assertRaisesRegex(ValueError, "admissions_room"):
+            plan_pack(Pack((4, 7, 2), entries), inventory)
+
+    def test_university_kit_keeps_shared_palette_deferred_and_omits_legacy_art(self):
+        entries, inventory = self.fixture()
+        prefix = "assets/university_hall/"
+        roots = []
+        palette = prefix + "textures/Walnut_base.png"
+        palette_import = palette + ".import"
+        palette_payload = ".godot/imported/Walnut_base.png-test.ctex"
+        entries[palette_import] = f'[remap]\npath="res://{palette_payload}"\n'.encode()
+        entries[palette_payload] = b"canonical university palette"
+        inventory["dependencies"]["res://" + palette] = []
+        for model in ("atrium", "gallery", "exhibit_kit", "feature_book"):
+            source = prefix + model + ".glb"
+            imported = ".godot/imported/" + model + ".glb-test.scn"
+            entries[source + ".import"] = f'[remap]\npath="res://{imported}"\n'.encode()
+            entries[imported] = (model + " mesh data").encode()
+            roots.append("res://" + source)
+            inventory["dependencies"]["res://" + source] = ["res://" + palette]
+        entries[prefix + "layout.json"] = b'{"collision": []}'
+        roots.append("res://" + prefix + "layout.json")
+        inventory["dependencies"][roots[-1]] = []
+        legacy = {prefix + "booth.glb.import", ".godot/imported/booth.glb-test.scn",
+                  prefix + "theme_urban.glb.import", ".godot/imported/theme_urban.glb-test.scn",
+                  prefix + "exhibit_kit_Walnut.png.import", ".godot/imported/exhibit_kit_Walnut.png-test.ctex"}
+        entries.update({name: ("unused " + name).encode() for name in legacy})
+        inventory["groups"]["university_hall"] = roots
+        inventory["prerequisites"]["university_hall"] = ["avatar"]
+
+        contents, deps, resources, report = plan_pack(Pack((4, 7, 2), entries), inventory)
+        self.assertEqual(deps["university_hall"], ["avatar"])
+        self.assertTrue(all(resources[path] == "university_hall" for path in roots))
+        self.assertIn(palette_payload, contents["university_hall"])
+        self.assertIn(palette_import, contents["university_hall"])
+        self.assertEqual(sum(palette_payload in pack for pack in contents.values()), 1)
+        self.assertFalse(set(contents["boot"]).intersection(contents["university_hall"]))
+        shipped = set().union(*(set(pack) for pack in contents.values()))
+        self.assertFalse(legacy.intersection(shipped))
+        self.assertTrue(legacy.issubset({row["path"] for row in report["omitted_entries"]}))
+
+    def test_single_full_counseling_room_is_deferred_for_both_profiles(self):
+        entries, inventory = self.fixture()
+        model = "res://assets/counseling_room/counseling_room.glb"
+        layout = "res://assets/counseling_room/layout.json"
+        payload = ".godot/imported/counseling_room-fixture.scn"
+        entries[model.removeprefix("res://") + ".import"] = f'[remap]\npath="res://{payload}"\n'.encode()
+        entries[payload] = b"one complete counseling room"
+        entries[layout.removeprefix("res://")] = b'{"schemaVersion":1}'
+        inventory["groups"]["counseling_room"] = [model, layout]
+        inventory["profiles"] = {"full": ["avatar", "room"], "low": ["avatar"]}
+        inventory["shared_on_demand"] = ["counseling_room"]
+        inventory["dependencies"].update({model: [], layout: []})
+        contents, dependencies, resources, _ = plan_pack(Pack((4, 7, 2), entries), inventory)
+        self.assertEqual(resources[model], "counseling_room")
+        self.assertIn(payload, contents["counseling_room"])
+        self.assertNotIn(payload, contents["boot"])
+        self.assertNotIn("counseling_room_low", contents)
+        for roots in inventory["profiles"].values():
+            installed = set().union(*(pack_dependency_closure(key, dependencies, set(contents)) for key in roots))
+            self.assertNotIn("counseling_room", installed)
+        source = self.write(entries)
+        inventory_path = self.root / "dependencies.json"
+        inventory_path.write_text(json.dumps(inventory), encoding="utf-8")
+        web = self.root / "web"
+        web.mkdir()
+        (web / "index.html").write_text('const GODOT_CONFIG = {"fileSizes":{"index.pck":100}};\n', encoding="utf-8")
+        split(source, inventory_path, web, self.root / "report.json")
+        manifest = json.loads((web / "index.packs.json").read_text())
+        self.assertEqual(manifest["shared_on_demand"], ["counseling_room"])
+        self.assertFalse(manifest["packs"]["counseling_room"]["startup"])
+        inventory["dependencies"]["res://world.scn"].append(model)
+        with self.assertRaisesRegex(ValueError, "counseling_room"):
+            plan_pack(Pack((4, 7, 2), entries), inventory)
+
+    def test_optional_shared_room_cannot_reenter_installation_directly_or_by_dependency(self):
+        entries, inventory = self.fixture()
+        inventory["shared_on_demand"] = ["room"]
+        inventory["profiles"] = {"full": ["avatar"], "low": ["avatar"]}
+        contents, dependencies, _, _ = plan_pack(Pack((4, 7, 2), entries), inventory)
+        self.assertIn("shared", contents)
+        self.assertIn("shared", dependencies["room"])
+        inventory["profiles"]["full"].append("room")
+        with self.assertRaisesRegex(ValueError, "cannot be installed"):
+            plan_pack(Pack((4, 7, 2), entries), inventory)
+        inventory["profiles"]["full"].remove("room")
+        inventory["dependencies"]["res://avatar.scn"].append("res://room.scn")
+        with self.assertRaisesRegex(ValueError, "on-demand resource leaked"):
+            plan_pack(Pack((4, 7, 2), entries), inventory)
+
+    def garden_fixture(self):
+        entries, inventory = self.fixture()
+        prefix = "res://assets/discussion_garden/"
+        texture = prefix + "shared_textures/paper.png"
+        entries[texture.removeprefix("res://")] = b"shared exact paper pixels"
+        inventory["dependencies"][texture] = []
+        for name in ("garden", "garden_low", "message_device"):
+            source = prefix + name + ".glb"
+            payload = f".godot/imported/{name}-fixture.scn"
+            entries[source.removeprefix("res://") + ".import"] = f'[remap]\npath="res://{payload}"\n'.encode()
+            entries[payload] = (name + " unique geometry").encode()
+            inventory["dependencies"][source] = [texture]
+        layout = prefix + "layout.json"
+        entries[layout.removeprefix("res://")] = b'{"zones":[]}'
+        inventory["dependencies"][layout] = []
+        inventory["groups"].update({"discussion_common": [prefix + "message_device.glb", layout],
+                                    "discussion_garden": [prefix + "garden.glb"],
+                                    "discussion_garden_low": [prefix + "garden_low.glb"]})
+        inventory["prerequisites"].update({"discussion_common": ["avatar"],
+                                           "discussion_garden": ["avatar", "discussion_common"],
+                                           "discussion_garden_low": ["avatar", "discussion_common"]})
+        return entries, inventory, prefix
+
+    def test_minimum_garden_loads_common_devices_and_texture_without_standard_geometry(self):
+        entries, inventory, prefix = self.garden_fixture()
+        contents, deps, resources, report = plan_pack(Pack((4, 7, 2), entries), inventory)
+        low = pack_dependency_closure("discussion_garden_low", deps, set(contents))
+        self.assertIn("discussion_common", low)
+        self.assertIn("avatar", low)
+        self.assertIn("shared", low)
+        self.assertNotIn("discussion_garden", low)
+        self.assertEqual(resources[prefix + "garden_low.glb"], "discussion_garden_low")
+        self.assertEqual(resources[prefix + "garden.glb"], "discussion_garden")
+        available = set().union(*(set(contents[key]) for key in low))
+        self.assertIn(".godot/imported/message_device-fixture.scn", available)
+        self.assertIn("assets/discussion_garden/shared_textures/paper.png", available)
+        self.assertNotIn(".godot/imported/garden-fixture.scn", available)
+
+    def test_minimum_garden_and_common_assets_cannot_leak_into_boot(self):
+        for path in ("garden_low.glb", "message_device.glb", "layout.json"):
+            entries, inventory, prefix = self.garden_fixture()
+            inventory["dependencies"]["res://world.scn"].append(prefix + path)
+            with self.assertRaisesRegex(ValueError, "discussion_"):
+                plan_pack(Pack((4, 7, 2), entries), inventory)
+
+    def test_minimum_garden_cannot_pull_standard_geometry_through_shared_dependency(self):
+        entries, inventory, prefix = self.garden_fixture()
+        inventory["dependencies"][prefix + "garden_low.glb"].append(prefix + "garden.glb")
+        with self.assertRaisesRegex(ValueError, "Standard garden geometry leaked"):
+            plan_pack(Pack((4, 7, 2), entries), inventory)
 
 
 if __name__ == "__main__":

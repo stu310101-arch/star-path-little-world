@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": 1,
+  "assessments": [
+    {"id":"interest","stageCode":"high1","stageLabel":"高一","title":"興趣量表","sections":["riasec"]},
+    {"id":"department-exploration","stageCode":"high3","stageLabel":"高三","title":"學系探索量表","sections":["knowledge","bestFits","suitableFits"]}
+  ],
+  "riasec": [{"id":"R","label":"實用型 R"},{"id":"I","label":"研究型 I"},{"id":"A","label":"藝術型 A"},{"id":"S","label":"社會型 S"},{"id":"E","label":"企業型 E"},{"id":"C","label":"事務型 C"}],
+  "knowledge": [
+    {"id":"k01","label":"數學"},{"id":"k02","label":"資訊電子"},{"id":"k03","label":"通訊電信"},{"id":"k04","label":"工程科技"},{"id":"k05","label":"機械"},{"id":"k06","label":"建築營造"},{"id":"k07","label":"物理"},{"id":"k08","label":"化學"},{"id":"k09","label":"生命科學"},{"id":"k10","label":"醫學"},{"id":"k11","label":"心理學"},{"id":"k12","label":"生資食科"},{"id":"k13","label":"地球環境"},{"id":"k14","label":"藝術"},{"id":"k15","label":"設計"},{"id":"k16","label":"傳播媒體"},{"id":"k17","label":"外國語文"},{"id":"k18","label":"語文文學"},{"id":"k19","label":"哲學宗教"},{"id":"k20","label":"歷史文化"},{"id":"k21","label":"社會人類"},{"id":"k22","label":"治療諮商"},{"id":"k23","label":"教育訓練"},{"id":"k24","label":"法律政治"},{"id":"k25","label":"行政"},{"id":"k26","label":"人力資源"},{"id":"k27","label":"顧客服務"},{"id":"k28","label":"管理"},{"id":"k29","label":"銷售行銷"},{"id":"k30","label":"經濟會計"},{"id":"k31","label":"生產作業"},{"id":"k32","label":"公共安全"},{"id":"k33","label":"交通運輸"}
+  ],
+  "groups": [
+    {"id":"information","label":"資訊學群"},{"id":"engineering","label":"工程學群"},{"id":"math-chemistry","label":"數理化學群"},{"id":"health-medicine","label":"醫藥衛生學群"},{"id":"life-science","label":"生命科學學群"},{"id":"bio-resources","label":"生物資源學群"},{"id":"earth-environment","label":"地球環境學群"},{"id":"architecture-design","label":"建築設計學群"},{"id":"arts","label":"藝術學群"},{"id":"social-psychology","label":"社會心理學群"},{"id":"mass-communication","label":"大眾傳播學群"},{"id":"foreign-languages","label":"外語學群"},{"id":"literature-history-philosophy","label":"文史哲學群"},{"id":"education","label":"教育學群"},{"id":"law-politics","label":"法政學群"},{"id":"management","label":"管理學群"},{"id":"finance-economics","label":"財經學群"},{"id":"recreation-sports","label":"遊憩運動學群"}
+  ]
+}

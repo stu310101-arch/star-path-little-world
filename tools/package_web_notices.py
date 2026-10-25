@@ -15,6 +15,8 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = [
+    ("Counseling room materials", "art/CounselingRoom/SOURCE_NOTES.md", "Counseling-Room-Materials-CC0.txt", "Poly Haven Wood Floor and ambientCG Fabric060, recolored for the warm counseling room; source and license records included.", "https://polyhaven.com/license ; https://docs.ambientcg.com/license/"),
+    ("Poly Haven world surfaces", "game/assets/world_materials/LICENSE.txt", "Poly-Haven-World-Surfaces-CC0.txt", "Photographic grass, soil, stone and timber maps; asset URLs and verified source hashes are in assets/world_materials/manifest.json.", "https://polyhaven.com/license"),
     ("Vincent van Gogh - The Starry Night (1889)", "game/assets/training_room/textures/ATTRIBUTION.md", "Van-Gogh-Starry-Night-Public-Domain.txt", "Public-domain painting reproduction used on the training-room wall and in its painting viewer.", "https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"),
     ("Kenney City Kit Suburban 2.0", "game/assets/kenney/suburban/License.txt", "Kenney-City-Kit-Suburban-CC0.txt", "Kenney; user-supplied source pack. Red-roof houses are project modifications.", "https://kenney.nl"),
     ("Kenney City Kit Commercial 2.1", "game/assets/kenney/commercial/License.txt", "Kenney-City-Kit-Commercial-CC0.txt", "Commercial buildings; original archive assets/source/urban/kenney-city-commercial.zip.", "https://kenney.nl/assets/city-kit-commercial"),

@@ -3,15 +3,20 @@ extends RefCounted
 # The rest asset is a small independent cache of the delivered Idle character.
 # Its corrective lap/hem shapes cannot overwrite the walk or front-flip cloth.
 const REST_MODEL: String = "res://assets/character/graduate_rest.glb"
+const SMALL_REST_MODEL: String = "res://assets/character/graduate_rest_small.glb"
 const POSE_STEPS: int = 12
 var model: Node3D
 var walking_model: Node3D
 var meshes: Array[MeshInstance3D] = []
 var current_amount: float = 0.0
 
-func configure(visual: Node3D, locomotion_model: Node3D) -> void:
+func configure(visual: Node3D, locomotion_model: Node3D, seat_scale: float = 1.0, avatar_scale: float = 1.0) -> void:
 	walking_model = locomotion_model
-	model = (load(REST_MODEL) as PackedScene).instantiate() as Node3D
+	# VisualPivot already applies avatar_scale. Matching .4 seats and avatars
+	# therefore use the original pose once; only a relatively low seat needs IK.
+	var asset: String = SMALL_REST_MODEL if seat_scale / maxf(avatar_scale, .001) < .75 else REST_MODEL
+	model = (load(asset) as PackedScene).instantiate() as Node3D
+	model.set_meta("seat_pose_asset", asset)
 	model.name = "BenchRestModel"
 	visual.add_child(model)
 	model.visible = false

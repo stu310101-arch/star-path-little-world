@@ -3,6 +3,7 @@ extends SceneTree
 const Ecology = preload("res://tools/ecology_world.gd")
 const Geo = preload("res://scripts/planet_geometry.gd")
 const Routes = preload("res://scripts/world_routes.gd")
+const Landforms = preload("res://tools/world_landforms.gd")
 
 var checks: int = 0
 var failures: int = 0
@@ -48,12 +49,19 @@ func run() -> void:
 	check(int(ecology.get("tree_count"))==expected_trees,"Authored trees were omitted or duplicated")
 	check(int(ecology.get("plant_count"))==expected_understory,"Authored understory was omitted or duplicated")
 	check(container.get_child_count()==expected_trees,"One solid trunk proxy is required per authored tree")
+	var height_fields: Array[RefCounted]=[]
+	for i: int in range(districts.size()):
+		var field: RefCounted=Landforms.new()
+		field.call("configure",districts[i],i,48.0,Routes.directions()[i])
+		height_fields.append(field)
 	for body: Node3D in container.get_children():
 		check(body.has_meta("planting_group") and not str(body.get_meta("planting_group")).is_empty(),"Trunk is missing its group provenance")
 		var up: Vector3=Routes.directions()[int(body.get_meta("district_index"))]
 		var point: Vector2=body.get_meta("local_position") as Vector2
-		var expected: Vector3=Geo.surface(up,point,48.0).normalized()*48.16
-		check(body.position.distance_to(expected)<.0001,"Tree was moved from its authored spherical anchor")
+		var field: RefCounted=height_fields[int(body.get_meta("district_index"))]
+		var ground_height: float=float(field.call("height_at",point)) if float(field.call("dry_distance",point))>=0.0 else .16
+		var expected: Vector3=Geo.surface(up,point,48.0).normalized()*(48.0+ground_height-.005)
+		check(body.position.distance_to(expected)<.0001,"Tree moved from its authored direction or shared terrain height")
 		check((body as StaticBody3D).collision_layer==8,"Tree proxy must remain on obstacle layer 8")
 	var source: String=FileAccess.get_file_as_string("res://tools/ecology_world.gd")
 	var vegetation_source: String=source.get_slice("func vegetation",1).get_slice("func place",0)

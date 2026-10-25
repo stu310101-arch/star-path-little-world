@@ -13,6 +13,8 @@ func check(title: String, passed: bool, detail: String = "") -> void:
 
 func _initialize() -> void:
 	var minimap: Control = Minimap.new() as Control
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
+	minimap.set("radius", float(layout.radius))
 	minimap.size = Vector2(224, 180)
 	var ecology: RefCounted = Ecology.new() as RefCounted
 	var districts: Array = JSON.parse_string(FileAccess.get_file_as_string("res://data/districts.json")) as Array

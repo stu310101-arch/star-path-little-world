@@ -1,0 +1,68 @@
+{
+  "downloaded": "2026-10-24",
+  "assets": [
+    {
+      "asset": "Poly Haven Wood Floor",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_diff_2k.jpg",
+      "file": "wood_floor_diff_2k.jpg",
+      "sha256": "7c3ff1164c8dd0758ef2c048e9a266d28174120de01052ec40e6ca486177345c",
+      "license": "CC0-1.0",
+      "author": "Dimitrios Savva"
+    },
+    {
+      "asset": "Poly Haven Wood Floor",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_rough_2k.jpg",
+      "file": "wood_floor_rough_2k.jpg",
+      "sha256": "297eda0d75f2020cc541dbf242e1f5fd058053249567f49a4506fc2c5b1a172b",
+      "license": "CC0-1.0",
+      "author": "Dimitrios Savva"
+    },
+    {
+      "asset": "Poly Haven Wood Floor",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_nor_gl_2k.jpg",
+      "file": "wood_floor_nor_gl_2k.jpg",
+      "sha256": "eff2e4db46bab930dc05997faf5085157eec4fd652cdfc6cd01fa11edd56ef10",
+      "license": "CC0-1.0",
+      "author": "Dimitrios Savva"
+    },
+    {
+      "asset": "ambientCG Fabric 060",
+      "url": "https://acg-download.struffelproductions.com/file/ambientCG-Web/download/Fabric060_v6pQ2xeI/Fabric060_1K-JPG.zip",
+      "file": "Fabric060_1K-JPG.zip",
+      "sha256": "4928f08c91e48fa61bb2d0d1fd4195a7bb21feefe2466120356cc0c912ae0f6a",
+      "license": "CC0-1.0",
+      "author": "ambientCG"
+    },
+    {
+      "asset": "Poly Haven Wood Table 001",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_table_001/wood_table_001_diff_2k.jpg",
+      "file": "wood_table_001_diff_2k.jpg",
+      "sha256": "63ae5cd186197b40f18bc020fe2b652bb08df4d9fc6240c6cbf8a7e3bc32c096",
+      "md5_verified": "a36483628b915dabf82961ab2a62a85c",
+      "bytes": 924532,
+      "license": "CC0-1.0",
+      "author": "Dimitrios Savva (photography), Rico Cilliers (processing)"
+    },
+    {
+      "asset": "Poly Haven Wood Table 001",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_table_001/wood_table_001_rough_2k.jpg",
+      "file": "wood_table_001_rough_2k.jpg",
+      "sha256": "c788876d80e4d96598590631f8de92447fb1b0ba1265a812514ee717d270ac3e",
+      "md5_verified": "a291ec6bc35b9827175cdd1592c62e03",
+      "bytes": 963377,
+      "license": "CC0-1.0",
+      "author": "Dimitrios Savva (photography), Rico Cilliers (processing)"
+    },
+    {
+      "asset": "Poly Haven Wood Table 001",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_table_001/wood_table_001_nor_gl_2k.jpg",
+      "file": "wood_table_001_nor_gl_2k.jpg",
+      "sha256": "d56f02c911391267ddc6adc92e8a5bc29b9803196e8d57ad5b9702e6c842dc28",
+      "md5_verified": "50dbc9fe086df00f6bce819eae6091d1",
+      "bytes": 385020,
+      "license": "CC0-1.0",
+      "author": "Dimitrios Savva (photography), Rico Cilliers (processing)"
+    }
+  ],
+  "modifications": "Runtime floor wood lightened and contrast reduced. Separate Wood Table 001 furniture wood is recolored warm honey while preserving source grain, normal and roughness. Fabric colorized sage, apricot, linen; original source maps preserved. Both wood map sets 2048x2048 from native 2K sources; fabric maps 1024x1024. No image upscaling."
+}

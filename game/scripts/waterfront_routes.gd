@@ -1,6 +1,7 @@
 extends RefCounted
 
 const Geo = preload("res://scripts/planet_geometry.gd")
+const Biomes = preload("res://scripts/biome_geography.gd")
 const WIDTH: float = 2.2
 const HEIGHT: float = .26
 const SAMPLE_LENGTH: float = .28
@@ -10,7 +11,7 @@ static func v2(value: Array) -> Vector2:
 	return Vector2(float(value[0]),float(value[1]))
 
 static func water_distance(point: Vector2, data: Dictionary) -> float:
-	var distance: float = INF
+	var distance: float = Biomes.water_distance(point,data)
 	for water: Dictionary in data.water:
 		if str(water.kind) == "lake":
 			var size: Vector2 = v2(water.size)

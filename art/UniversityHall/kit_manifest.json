@@ -1,0 +1,728 @@
+{
+  "title": "大學館",
+  "revision": "2026-10-11-r4-modular-exhibits",
+  "source": "UniversityHall_ExhibitKit.blend",
+  "module_count": 44,
+  "module_keys": [
+    "display_long_table",
+    "display_corner_cabinet",
+    "display_stepped_case",
+    "display_island_case",
+    "display_open_stage",
+    "display_twin_pedestal",
+    "display_workbench",
+    "display_arc_cabinet",
+    "component_palm_avenue",
+    "component_tree_grove",
+    "component_lake",
+    "component_river",
+    "component_coast",
+    "component_hill",
+    "component_terrace",
+    "component_lawn",
+    "component_farm_plots",
+    "component_bridge",
+    "component_academic_block",
+    "component_historic_hall",
+    "component_chapel",
+    "component_library",
+    "component_gallery",
+    "component_stage",
+    "component_hospital",
+    "component_laboratory",
+    "component_workshop",
+    "component_hangar",
+    "component_track",
+    "component_market",
+    "component_station",
+    "component_food_stall",
+    "component_robot_cell",
+    "component_digital_hub",
+    "component_dormitory",
+    "component_museum",
+    "component_ship",
+    "component_tea_pavilion",
+    "component_sculpture",
+    "component_fashion_studio",
+    "component_thu_chapel",
+    "component_ntu_bell",
+    "component_dairy_stall",
+    "component_3d_printer"
+  ],
+  "modules": {
+    "display_long_table": {
+      "bounds_min": [
+        -2.8,
+        0.0,
+        -1.3875
+      ],
+      "bounds_max": [
+        2.8,
+        2.93,
+        1.3775
+      ],
+      "triangles": 5416,
+      "materials": 9,
+      "source_parts": 80
+    },
+    "display_corner_cabinet": {
+      "bounds_min": [
+        -2.8,
+        0.0,
+        -1.4
+      ],
+      "bounds_max": [
+        2.8,
+        2.94,
+        1.3775
+      ],
+      "triangles": 7192,
+      "materials": 9,
+      "source_parts": 96
+    },
+    "display_stepped_case": {
+      "bounds_min": [
+        -2.8,
+        0.0,
+        -1.435
+      ],
+      "bounds_max": [
+        2.8,
+        2.92,
+        1.3775
+      ],
+      "triangles": 5320,
+      "materials": 11,
+      "source_parts": 80
+    },
+    "display_island_case": {
+      "bounds_min": [
+        -2.8,
+        -0.00378,
+        -1.3875
+      ],
+      "bounds_max": [
+        2.8,
+        2.94378,
+        1.3775
+      ],
+      "triangles": 5812,
+      "materials": 10,
+      "source_parts": 77
+    },
+    "display_open_stage": {
+      "bounds_min": [
+        -2.8,
+        0.0,
+        -1.66
+      ],
+      "bounds_max": [
+        2.8,
+        3.7,
+        1.3775
+      ],
+      "triangles": 5684,
+      "materials": 10,
+      "source_parts": 79
+    },
+    "display_twin_pedestal": {
+      "bounds_min": [
+        -2.8,
+        0.0,
+        -1.3875
+      ],
+      "bounds_max": [
+        2.8,
+        2.94,
+        1.3775
+      ],
+      "triangles": 7468,
+      "materials": 9,
+      "source_parts": 99
+    },
+    "display_workbench": {
+      "bounds_min": [
+        -2.8,
+        -0.01267,
+        -1.42
+      ],
+      "bounds_max": [
+        2.8,
+        2.98,
+        1.3775
+      ],
+      "triangles": 5560,
+      "materials": 10,
+      "source_parts": 84
+    },
+    "display_arc_cabinet": {
+      "bounds_min": [
+        -2.8,
+        0.0,
+        -1.47
+      ],
+      "bounds_max": [
+        2.8,
+        3.205,
+        1.3775
+      ],
+      "triangles": 8436,
+      "materials": 10,
+      "source_parts": 139
+    },
+    "component_palm_avenue": {
+      "bounds_min": [
+        -0.6,
+        0.0,
+        -0.2
+      ],
+      "bounds_max": [
+        0.6,
+        0.78826,
+        0.2
+      ],
+      "triangles": 23520,
+      "materials": 8,
+      "source_parts": 2428
+    },
+    "component_tree_grove": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.67444,
+        0.25
+      ],
+      "triangles": 3204,
+      "materials": 5,
+      "source_parts": 39
+    },
+    "component_lake": {
+      "bounds_min": [
+        -0.45728,
+        0.0,
+        -0.27711
+      ],
+      "bounds_max": [
+        0.45728,
+        0.10941,
+        0.27711
+      ],
+      "triangles": 2806,
+      "materials": 7,
+      "source_parts": 141
+    },
+    "component_river": {
+      "bounds_min": [
+        -0.6,
+        0.0,
+        -0.2
+      ],
+      "bounds_max": [
+        0.6,
+        0.10319,
+        0.2
+      ],
+      "triangles": 2304,
+      "materials": 4,
+      "source_parts": 193
+    },
+    "component_coast": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.3
+      ],
+      "bounds_max": [
+        0.5,
+        0.1795,
+        0.3
+      ],
+      "triangles": 3261,
+      "materials": 7,
+      "source_parts": 43
+    },
+    "component_hill": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.3
+      ],
+      "bounds_max": [
+        0.5,
+        0.60144,
+        0.3
+      ],
+      "triangles": 7180,
+      "materials": 5,
+      "source_parts": 104
+    },
+    "component_terrace": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.3
+      ],
+      "bounds_max": [
+        0.5,
+        0.51306,
+        0.3
+      ],
+      "triangles": 8274,
+      "materials": 5,
+      "source_parts": 126
+    },
+    "component_lawn": {
+      "bounds_min": [
+        -0.45339,
+        0.0,
+        -0.26974
+      ],
+      "bounds_max": [
+        0.45339,
+        0.0212,
+        0.26974
+      ],
+      "triangles": 1472,
+      "materials": 3,
+      "source_parts": 66
+    },
+    "component_farm_plots": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.3
+      ],
+      "bounds_max": [
+        0.5,
+        0.21,
+        0.3
+      ],
+      "triangles": 1236,
+      "materials": 7,
+      "source_parts": 55
+    },
+    "component_bridge": {
+      "bounds_min": [
+        -0.4975,
+        0.0,
+        -0.188
+      ],
+      "bounds_max": [
+        0.4975,
+        0.3665,
+        0.188
+      ],
+      "triangles": 6216,
+      "materials": 5,
+      "source_parts": 148
+    },
+    "component_academic_block": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.697,
+        0.25
+      ],
+      "triangles": 10600,
+      "materials": 7,
+      "source_parts": 366
+    },
+    "component_historic_hall": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.605,
+        0.25
+      ],
+      "triangles": 6988,
+      "materials": 8,
+      "source_parts": 219
+    },
+    "component_chapel": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        1.03,
+        0.25
+      ],
+      "triangles": 3232,
+      "materials": 8,
+      "source_parts": 81
+    },
+    "component_library": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.957,
+        0.25
+      ],
+      "triangles": 13164,
+      "materials": 7,
+      "source_parts": 447
+    },
+    "component_gallery": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.475,
+        0.25
+      ],
+      "triangles": 3108,
+      "materials": 8,
+      "source_parts": 72
+    },
+    "component_stage": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.698,
+        0.25
+      ],
+      "triangles": 2592,
+      "materials": 6,
+      "source_parts": 368
+    },
+    "component_hospital": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.997,
+        0.25
+      ],
+      "triangles": 15672,
+      "materials": 8,
+      "source_parts": 556
+    },
+    "component_laboratory": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.764,
+        0.25
+      ],
+      "triangles": 8988,
+      "materials": 7,
+      "source_parts": 284
+    },
+    "component_workshop": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.51826,
+        0.25
+      ],
+      "triangles": 2512,
+      "materials": 9,
+      "source_parts": 58
+    },
+    "component_hangar": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.519,
+        0.25
+      ],
+      "triangles": 1800,
+      "materials": 5,
+      "source_parts": 15
+    },
+    "component_track": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.175,
+        0.25
+      ],
+      "triangles": 1828,
+      "materials": 4,
+      "source_parts": 67
+    },
+    "component_market": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.457,
+        0.25
+      ],
+      "triangles": 9900,
+      "materials": 8,
+      "source_parts": 282
+    },
+    "component_station": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.49,
+        0.25
+      ],
+      "triangles": 948,
+      "materials": 6,
+      "source_parts": 15
+    },
+    "component_food_stall": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.6675,
+        0.25
+      ],
+      "triangles": 1428,
+      "materials": 7,
+      "source_parts": 19
+    },
+    "component_robot_cell": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.72,
+        0.25
+      ],
+      "triangles": 1268,
+      "materials": 5,
+      "source_parts": 19
+    },
+    "component_digital_hub": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.837,
+        0.25
+      ],
+      "triangles": 6896,
+      "materials": 6,
+      "source_parts": 213
+    },
+    "component_dormitory": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.787,
+        0.25
+      ],
+      "triangles": 13676,
+      "materials": 8,
+      "source_parts": 456
+    },
+    "component_museum": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.695,
+        0.25
+      ],
+      "triangles": 1312,
+      "materials": 5,
+      "source_parts": 16
+    },
+    "component_ship": {
+      "bounds_min": [
+        -0.47349,
+        0.0,
+        -0.15799
+      ],
+      "bounds_max": [
+        0.47349,
+        0.6125,
+        0.15799
+      ],
+      "triangles": 2102,
+      "materials": 8,
+      "source_parts": 68
+    },
+    "component_tea_pavilion": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.78,
+        0.25
+      ],
+      "triangles": 988,
+      "materials": 4,
+      "source_parts": 16
+    },
+    "component_sculpture": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.752,
+        0.25
+      ],
+      "triangles": 1588,
+      "materials": 4,
+      "source_parts": 13
+    },
+    "component_fashion_studio": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.82141,
+        0.25
+      ],
+      "triangles": 880,
+      "materials": 6,
+      "source_parts": 16
+    },
+    "component_thu_chapel": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        1.008,
+        0.25
+      ],
+      "triangles": 7961,
+      "materials": 6,
+      "source_parts": 215
+    },
+    "component_ntu_bell": {
+      "bounds_min": [
+        -0.43,
+        0.0,
+        -0.23
+      ],
+      "bounds_max": [
+        0.43,
+        0.95804,
+        0.23
+      ],
+      "triangles": 7084,
+      "materials": 6,
+      "source_parts": 174
+    },
+    "component_dairy_stall": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.68127,
+        0.25
+      ],
+      "triangles": 11312,
+      "materials": 10,
+      "source_parts": 104
+    },
+    "component_3d_printer": {
+      "bounds_min": [
+        -0.5,
+        0.0,
+        -0.25
+      ],
+      "bounds_max": [
+        0.5,
+        0.9465,
+        0.25
+      ],
+      "triangles": 11204,
+      "materials": 10,
+      "source_parts": 72
+    }
+  },
+  "display_variants": [
+    "long_table",
+    "corner_cabinet",
+    "stepped_case",
+    "island_case",
+    "open_stage",
+    "twin_pedestal",
+    "workbench",
+    "arc_cabinet"
+  ],
+  "canonical_material_prefix": "MAT_University_Library_",
+  "triangles_total": 259392,
+  "glb_bytes": 34601868,
+  "provenance": "Original authored physical-scale architectural models. Individual university selection and compositions are explicitly tied to provided document excerpts; no seeded school variants."
+}

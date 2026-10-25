@@ -2,6 +2,14 @@ extends SceneTree
 
 const StartupFixture: Script = preload("res://tests/startup_fixture.gd")
 
+class FixtureRoom:
+	extends "res://scripts/training_room.gd"
+	var website_launches: Array[String] = []
+	var browser_result: Error = OK
+	func _open_external_url(url: String) -> Error:
+		website_launches.append(url)
+		return browser_result
+
 # Real E/keyboard events enter through the room router. Positioning chooses a
 # supported, unobstructed starting point; no target action is invoked directly.
 const OUTPUT: String = "res://../deliverables/training-room/"
@@ -30,7 +38,7 @@ func run() -> void:
 		quit(1)
 		return
 	root.size = Vector2i(1280, 800)
-	room = (load("res://scenes/training_room.tscn") as PackedScene).instantiate() as Node3D
+	room = FixtureRoom.new()
 	root.add_child(room)
 	current_scene = room
 	check("Indoor preparation completes before interaction checks", await StartupFixture.wait_room(room, self))
@@ -40,8 +48,8 @@ func run() -> void:
 	await tick(20)
 	check("Room has a grounded actual graduate player", player.is_on_floor())
 	check("Three imported computer screen assemblies are interactive", (props.get("screens") as Dictionary).size() == 3, (props.get("screens") as Dictionary).keys())
-	check("Six imported cabinet doors have live hinge pivots", (props.get("door_pivots") as Array).size() == 6)
-	await check_projector()
+	check("Cabinet has no opening pivots", (props.get("door_pivots") as Array).is_empty())
+	await check_wordking()
 	check_computers()
 	await check_cabinet()
 	await check_inspection("starry_night", true)
@@ -123,21 +131,25 @@ func approach(id: String) -> bool:
 	check(id + " can be reached from a clear grounded position", false, {"anchor":str(anchor),"nearest":router.get("nearest")})
 	return false
 
-func check_projector() -> void:
-	if not await approach("projector"):
+func check_wordking() -> void:
+	check("WordKing cannot launch away from its device", not bool(room.call("open_wordking")))
+	if not await approach("wordking_website"):
 		return
-	var initial: bool = bool(props.get("projector_on"))
 	await press(KEY_E)
-	check("E toggles projector power", bool(props.get("projector_on")) != initial)
+	check("Device E opens exact WordKing home URL once", room.get("website_launches") == ["https://stu310101-arch.github.io/wordking/?page=home"], room.get("website_launches"))
+	check("Website handoff leaves room playable", str(router.get("state")) == "idle" and bool(player.get("controls_enabled")))
 	var optics: Node3D = room.get_node_or_null("WordKingProjection") as Node3D
-	check("Projector optics follow actual power state", optics != null and optics.visible == bool(props.get("projector_on")))
-	var hologram_parts: Array[Node] = (room.get("room_model") as Node).find_children("SM_Device_Hologram*", "MeshInstance3D", true, false)
-	var synchronized: bool = not hologram_parts.is_empty()
-	for part: Node in hologram_parts:
-		synchronized = synchronized and (part as Node3D).visible == bool(props.get("projector_on"))
-	check("Imported holographic display follows projector power", synchronized, hologram_parts.size())
+	check("WordKing display remains illuminated", optics != null and optics.visible and bool(props.get("projector_on")))
 	await press(KEY_E)
-	check("Second E restores projector power", bool(props.get("projector_on")) == initial)
+	check("Rapid repeated E does not spawn duplicate browser tabs", (room.get("website_launches") as Array).size() == 1)
+	room.set("wordking_launch_ms", -1000)
+	room.set("browser_result", ERR_CANT_OPEN)
+	await press(KEY_E)
+	check("Browser launch failure is shown with retry guidance", str(router.call("prompt")).contains("無法開啟單字王") and str(router.get("state")) == "idle")
+	room.set("browser_result", OK)
+	await press(KEY_E)
+	check("Failed browser launch can be retried immediately", (room.get("website_launches") as Array).size() == 3 and str(router.call("prompt")).contains("已在瀏覽器開啟"))
+	router.set("message_clock", 0.0)
 
 func check_computers() -> void:
 	var screens: Dictionary = props.get("screens") as Dictionary
@@ -155,32 +167,20 @@ func check_computers() -> void:
 	# Sit -> game -> return is exercised by check_training_computer_games.gd.
 
 func check_cabinet() -> void:
-	var pivots: Array = props.get("door_pivots") as Array
-	if pivots.size() != 6 or not await approach("cabinet_01"):
-		return
-	var closed: Array[Transform3D] = []
-	for pivot: Node3D in pivots:
-		closed.append((pivot.get_child(0) as Node3D).global_transform)
+	check("Cabinet has no E interaction target", target_for("cabinet_01").is_empty())
+	var doors: Array[Node] = room.find_children("CABINET_DOOR_*", "Node3D", true, false)
+	check("All six closed cabinet doors remain", doors.size() == 6)
+	var transforms: Array[Transform3D] = []
+	for door: Node3D in doors:
+		transforms.append(door.global_transform)
+	player.call("place_at", Vector3(6.62817, .09, -3.13802), Vector3.RIGHT)
+	await tick(10)
 	await press(KEY_E)
 	await tick(52)
-	var moved: int = 0
-	for index: int in range(pivots.size()):
-		var pivot: Node3D = pivots[index] as Node3D
-		if not (pivot.get_child(0) as Node3D).global_transform.is_equal_approx(closed[index]):
-			moved += 1
-	check("One E smoothly opens all six authored cabinet doors", moved == 6 and bool(props.get("cabinet_open")), moved)
-	await take("props-cabinet-open")
-	await press(KEY_E)
-	await tick(52)
-	var restored: bool = not bool(props.get("cabinet_open"))
-	for index: int in range(pivots.size()):
-		restored = restored and ((pivots[index] as Node3D).get_child(0) as Node3D).global_transform.is_equal_approx(closed[index])
-	check("Second E closes every door at the original hinge alignment", restored)
-	var sockets: Array[Node] = room.find_children("SOCKET_Genshin_*", "Node3D", true, false)
-	var empty: bool = sockets.size() == 6
-	for socket: Node in sockets:
-		empty = empty and socket.get_child_count() == 0
-	check("Cabinet keeps all six future character positions empty", empty)
+	var unchanged: bool = not bool(props.get("cabinet_open"))
+	for index: int in range(doors.size()):
+		unchanged = unchanged and (doors[index] as Node3D).global_transform.is_equal_approx(transforms[index])
+	check("E near the cabinet leaves all doors closed", unchanged)
 
 func check_lamp() -> void:
 	if not await approach("reading_lamp"):

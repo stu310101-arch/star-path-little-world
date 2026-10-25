@@ -1,0 +1,47 @@
+{
+  "source": "C:\\Users\\admin\\Documents\\工程課3D遊戲\\source-assets\\原神3D模型_含武器_20261010_194055\\Furina-Holding-Splendor.blend",
+  "height_m": 1.12,
+  "scale": 0.5202715341953084,
+  "pose": "Supplied right-hand Splendor pose, evaluated without changes",
+  "bounds_m": [
+    0.6242866516113281,
+    0.4987115263938904,
+    1.1200000047683716
+  ],
+  "materials": 5,
+  "meshes": [
+    {
+      "name": "SM_Furina_Display",
+      "triangles": 33542,
+      "uv_layers": 1
+    },
+    {
+      "name": "SM_Splendor",
+      "triangles": 3618,
+      "uv_layers": 2
+    }
+  ],
+  "textures": [
+    {
+      "name": "颜.png",
+      "packed": true
+    },
+    {
+      "name": "髮.png",
+      "packed": true
+    },
+    {
+      "name": "髮2.png",
+      "packed": true
+    },
+    {
+      "name": "体.png",
+      "packed": true
+    },
+    {
+      "name": "SplendorOfTranquilWaters-BaseColor",
+      "packed": true
+    }
+  ],
+  "optimization": "Static evaluated mesh; no runtime skeleton; identical material slots merged. Godot generates mesh LODs. Source face, fingers, UVs and sword detail retained."
+}

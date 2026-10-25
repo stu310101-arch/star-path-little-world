@@ -21,7 +21,7 @@ function responseChunks(values, options = {}) {
   }});
   return new Response(body, {status:options.status || 200});
 }
-function fixture(t, limit = 128, concurrency = 1) {
+function fixture(t, limit = 128, concurrency = 1, highWater = Infinity) {
   const routes = new Map(), calls = [], held = new Map();
   const fetch = async (url, options) => {
     const name = new URL(url).pathname.split('/').pop();
@@ -37,7 +37,7 @@ function fixture(t, limit = 128, concurrency = 1) {
     }
     return typeof route === 'function' ? route() : responseChunks(route || [[1,2,3,4]]);
   };
-  const api=createBackgroundPacks(fetch,limit,concurrency);
+  const api=createBackgroundPacks(fetch,limit,concurrency,highWater);
   api.configure('http://localhost/game/');
   t.after(()=>api.close());
   return {api,routes,calls,held};
@@ -214,6 +214,124 @@ test('failed earlier job cannot prevent remaining queued downloads',async t=>{
   await until(()=>f.api.status('good').state==='downloaded');
   assert.equal(f.api.status('bad').state,'failed');
   assert.equal(f.api.snapshot().buffered_bytes,4);
+});
+
+async function drainStream(api, id, expected) {
+  const output = [];
+  let offset = 0;
+  await until(() => {
+    const part = api.read(id, offset, 65536);
+    if (part.length) {
+      output.push(Buffer.from(part));
+      offset += part.length;
+      api.consume(id, offset);
+    }
+    assert.notEqual(api.status(id).state, 'failed');
+    return api.status(id).state === 'downloaded' && offset === expected;
+  }, 'bounded stream ' + id);
+  return Buffer.concat(output);
+}
+
+test('failed dependency retry cannot deadlock behind a mobile bounded dependent stream',async t=>{
+  const bytes = 3 * 1024 * 1024, highWater = 2 * 1024 * 1024;
+  const f = fixture(t, 8 * 1024 * 1024, 1, highWater);
+  const payload = Buffer.alloc(bytes, 37);
+  const stream = () => new Response(new ReadableStream({
+    start() {this.offset=0;},
+    pull(controller) {
+      if(this.offset === bytes) controller.close();
+      else {controller.enqueue(payload.subarray(this.offset,this.offset+65536));this.offset+=65536;}
+    }
+  }, {highWaterMark:0}));
+  f.routes.set('shared.pck',()=>new Response('temporary',{status:503}));
+  f.routes.set('district.pck',stream);
+  f.api.enqueue('shared','packs/shared.pck',bytes,1);
+  f.api.enqueue('district','packs/district.pck',bytes,0,'["shared"]');
+  await until(()=>f.api.status('shared').state==='failed');
+  for(let i=0;i<5;i++)await turn();
+  assert.equal(f.api.status('district').state,'queued');
+  assert.equal(f.api.snapshot().active_count,0);
+  assert.equal(f.api.snapshot().reserved_bytes,0);
+  f.api.release('shared');
+  f.routes.set('shared.pck',stream);
+  f.api.enqueue('shared','packs/shared.pck',bytes,100);
+  await until(()=>f.api.status('shared').received===highWater);
+  assert.equal(f.api.status('district').state,'queued');
+  assert.deepEqual(await drainStream(f.api,'shared',bytes),payload);
+  f.api.release('shared');
+  await turn();
+  assert.equal(f.api.status('district').state,'queued','download/release alone cannot bypass Godot SHA and mount checks');
+  f.api.markReady('shared');
+  assert.deepEqual(await drainStream(f.api,'district',bytes),payload);
+  assert.deepEqual(f.calls.map(call=>call.name),['shared.pck','shared.pck','district.pck']);
+  assert.ok(f.api.snapshot().peak_buffered_bytes<=highWater);
+});
+
+test('verification or mount rejection keeps dependents queued through explicit retry',async t=>{
+  const f=fixture(t,32,1,4);
+  f.api.enqueue('base','packs/base.pck',4,1);
+  f.api.enqueue('child','packs/child.pck',4,100,'["base"]');
+  for (let attempt=0;attempt<3;attempt++) {
+    await drainStream(f.api,'base',4);
+    f.api.release('base');
+    await turn();
+    assert.equal(f.api.status('child').state,'queued');
+    if(attempt<2)f.api.enqueue('base','packs/base.pck',4,101);
+  }
+  f.api.markReady('base');
+  assert.deepEqual([...await drainStream(f.api,'child',4)],[1,2,3,4]);
+  assert.deepEqual(f.calls.map(call=>call.name),['base.pck','base.pck','base.pck','child.pck']);
+});
+
+test('dependency acknowledgements preserve ready priority and independent startup progress',async t=>{
+  const f=fixture(t,32,1,4);
+  f.routes.set('base.pck',()=>new Response('temporary',{status:503}));
+  f.api.enqueue('base','packs/base.pck',4,1);
+  f.api.enqueue('low','packs/low.pck',4,0,'["base"]');
+  f.api.enqueue('high','packs/high.pck',4,50,'["base"]');
+  f.api.enqueue('avatar','packs/avatar.pck',4,20);
+  await until(()=>f.api.status('base').state==='failed');
+  await drainStream(f.api,'avatar',4);
+  f.api.release('avatar');f.api.markReady('avatar');
+  assert.equal(f.api.status('high').state,'queued');
+  f.api.release('base');f.routes.set('base.pck',[[1,2,3,4]]);
+  f.api.enqueue('base','packs/base.pck',4,100);
+  await drainStream(f.api,'base',4);f.api.release('base');f.api.markReady('base');
+  await drainStream(f.api,'high',4);f.api.release('high');f.api.markReady('high');
+  await drainStream(f.api,'low',4);
+  assert.deepEqual(f.calls.map(call=>call.name),['base.pck','avatar.pck','base.pck','high.pck','low.pck']);
+});
+
+test('dependency identity is immutable and each prerequisite must be acknowledged',async t=>{
+  const f=fixture(t);
+  f.api.enqueue('child','packs/child.pck',4,1,'["a","b"]');
+  f.api.enqueue('child','packs/child.pck',4,10,'["b","a"]');
+  assert.throws(()=>f.api.enqueue('child','packs/child.pck',4,20,'["a"]'),/identity changed/);
+  for(const dependencies of ['{}','["child"]','[null]','[""]'])
+    assert.throws(()=>f.api.enqueue('child','packs/child.pck',4,1,dependencies),/dependencies/);
+  f.api.markReady('a');
+  await turn();assert.equal(f.calls.length,0);
+  f.api.markReady('b');
+  await until(()=>f.api.status('child').state==='downloaded');
+  assert.equal(f.calls.length,1);
+});
+
+test('browser phone, coarse tablet and explicit mobile profiles share bounded streaming',()=>{
+  const vm=require('node:vm'), fs=require('node:fs');
+  const source=fs.readFileSync(require.resolve('./web_background_packs.js'),'utf8');
+  for (const profile of [
+    {navigator:{userAgent:'iPhone',maxTouchPoints:5}},
+    {navigator:{userAgent:'Windows',maxTouchPoints:10},matchMedia:()=>({matches:true})},
+    {navigator:{userAgent:'Desktop',maxTouchPoints:0},LittleWorldMobileMode:true},
+    {navigator:{userAgent:'Desktop',platform:'MacIntel',maxTouchPoints:5}},
+  ]) {
+    const context=vm.createContext({fetch(){},...profile});vm.runInContext(source,context);
+    const state=context.LittleWorldBackgroundPacks.snapshot();
+    assert.equal(state.concurrency,1);assert.equal(state.stream_high_water_bytes,2097152);
+  }
+  const desktop=vm.createContext({fetch(){},navigator:{userAgent:'Desktop',maxTouchPoints:0}});
+  vm.runInContext(source,desktop);
+  assert.equal(desktop.LittleWorldBackgroundPacks.snapshot().concurrency,2);
 });
 
 test('releasing active download aborts it and advances queue without stale writes',async t=>{

@@ -11,8 +11,25 @@ const SakuraPlan = preload("res://scripts/sakura_routes.gd")
 const MusicScript = preload("res://scripts/world_music.gd")
 const BenchScript = preload("res://scripts/bench_interaction.gd")
 const TrainingTransition = preload("res://scripts/training_room_transition.gd")
+const IndoorTransition = preload("res://scripts/indoor_transition.gd")
+const AccountSession = preload("res://scripts/account_session.gd")
+const UNIVERSITY_SCENE: String = "res://scenes/university_hall.tscn"
+const ADMISSIONS_SCENE: String = "res://scenes/admissions_room.tscn"
+const COUNSELING_SCENE: String = "res://scenes/counseling_room.tscn"
+const RECOMMENDATION_SCENE: String = "res://scenes/recommendation_room.tscn"
+const INTERIOR_SCENES: Dictionary = {"counseling": COUNSELING_SCENE, "wordking": TrainingTransition.ROOM_SCENE, "universities": UNIVERSITY_SCENE, "admissions": ADMISSIONS_SCENE, "recommendations":RECOMMENDATION_SCENE, "life":"res://scenes/discussion_garden.tscn"}
 const DistrictStreaming = preload("res://scripts/district_streaming.gd")
 const PerformanceTelemetry = preload("res://scripts/performance_telemetry.gd")
+const OVERVIEW_DISTANCE: float = 3.7
+const OVERVIEW_MIN_DISTANCE: float = 2.4
+const OVERVIEW_MAX_DISTANCE: float = 5.0
+const OVERVIEW_MIN_PITCH: float = -1.48
+const OVERVIEW_MAX_PITCH: float = 1.48
+const OVERVIEW_NEAR: float = .075
+const ROAM_NEAR: float = .1
+const NEARBY_INTERVAL: float = .1
+const MUSIC_REGION_INTERVAL: float = .2
+var art_direction: RefCounted
 var streaming: Node
 var performance_telemetry: Node
 var benches: Node
@@ -20,6 +37,8 @@ var music: Node
 var music_context: String = "world"
 var music_candidate: String = "world"
 var music_candidate_clock: float = 0.0
+var music_region_clock: float = 0.0
+var nearby_clock: float = NEARBY_INTERVAL
 var layout: Dictionary
 var player: PlanetPlayer
 var camera: Camera3D
@@ -27,8 +46,8 @@ var hud: CanvasLayer
 var overview: bool = true
 var paused: bool = false
 var orbit_yaw: float = 0.45
-var orbit_pitch: float = 0.63
-var orbit_distance: float = 89.0
+var orbit_pitch: float = .45
+var orbit_distance: float = 88.8
 var near_distance: float = 7.0
 var near_pitch: float = 0.58
 var dragging_view: bool = false
@@ -55,32 +74,67 @@ var preparing_room: bool = false
 var startup_presented: bool = false
 var startup_frames: int = 0
 var preparation_status_clock: float = 0.0
+var mobile_quality: bool = false
+var graphics_settings: Node
+var account: Node
+var account_view_open: bool = false
+var account_previous_controls: bool = false
+var account_previous_paused: bool = false
+var account_from_station: bool = false
 
 func _ready() -> void:
+	# Layout, streamed details, permanent collision and cartography share one
+	# world coordinate system. Orbit the camera, never the generated containers.
+	for container_name: String in ["Globe", "Neighborhood", "Stations"]:
+		(get_node(container_name) as Node3D).transform = Transform3D.IDENTITY
+	var low_resources: bool = get_node("/root/ResourceProfile").call("is_low")
+	art_direction = load("res://scripts/low_world_art.gd" if low_resources else "res://scripts/world_art_direction.gd").new()
+	art_direction.call("configure",self)
 	add_to_group("touch_camera")
 	layout = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
-	orbit_distance = float(layout.radius) * 3.7
+	orbit_distance = float(layout.radius)*OVERVIEW_DISTANCE
 	setup_input()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_window().mouse_exited.connect(finish_view_drag)
 	player = PlayerScript.new() as PlanetPlayer
 	player.name = "Player"
 	player.planet_radius = float(layout.radius)
+	player.avatar_scale = float(layout.get("outdoor_scale",1.0))
+	# Speeds are authored in character metres, just like stride length. Keeping
+	# 3.8 physical m/s on a 0.4 avatar had silently made walking 2.5x faster.
+	# Shorter travel comes from the planet layout, never a speed multiplier.
+	player.walk_speed = float(layout.get("outdoor_walk_speed",3.8)) * player.avatar_scale
+	player.run_speed = float(layout.get("outdoor_run_speed",6.4)) * player.avatar_scale
 	add_child(player)
-	player.teleport(Geo.surface(Vector3.UP, Vector2(0, 3), float(layout.radius)).normalized(), float(layout.radius) + 0.6)
+	player.enable_render_interpolation()
+	near_distance *= player.avatar_scale
+	camera_obstruction.call("set_subject_scale",player.avatar_scale)
+	player.teleport(authored_normal(Vector3.UP,Vector2(0,3)), float(layout.radius) + 0.6 * player.avatar_scale)
 	camera = Camera3D.new()
 	camera.name = "WorldCamera"
 	camera.fov = 42.0
-	camera.far = float(layout.radius) * 7.0
-	camera.near = 0.08
+	# Clipping is measured from the camera, not the world's coordinate origin.
+	camera.far = maxf(1000.0,float(layout.radius)*6.0)
+	update_camera_clipping()
 	add_child(camera)
 	camera.make_current()
 	music = MusicScript.new()
 	music.name = "WorldMusic"
 	add_child(music)
+	account = get_tree().root.get_node_or_null("StarPathAccount")
+	if account == null:
+		account = AccountSession.new()
+		account.name = "StarPathAccount"
+		# Keep the host alive when indoor_transition temporarily detaches world.
+		get_tree().root.add_child.call_deferred(account)
+	account.connect("closed", _account_closed)
 	hud = HudScript.new() as CanvasLayer
 	hud.set("world", self)
 	add_child(hud)
+	graphics_settings = get_tree().get_first_node_in_group("graphics_settings")
+	if graphics_settings != null:
+		graphics_settings.connect("state_changed", _apply_mobile_quality)
+		_apply_mobile_quality()
 	benches = BenchScript.new()
 	benches.name = "BenchInteraction"
 	add_child(benches)
@@ -107,6 +161,9 @@ func _ready() -> void:
 		if review_hash.begins_with("#review-"):
 			setup_review_camera(review_hash)
 
+func authored_normal(up: Vector3, point: Vector2) -> Vector3:
+	return Geo.surface(up,point,float(layout.get("authoring_radius",layout.radius))).normalized()
+
 func setup_review_camera(hash_value: String) -> void:
 	var parts: PackedStringArray=hash_value.split("-")
 	if parts.size()!=3 or not parts[2].is_valid_int():
@@ -129,7 +186,7 @@ func setup_review_camera(hash_value: String) -> void:
 	var aim: Vector3=up*(radius+.7)
 	if parts[1]=="ecology":
 		var row: Dictionary=data[index]
-		var at: Vector3=Geo.surface(up,Vector2(row.visit[0],row.visit[1]),radius+.3)
+		var at: Vector3=authored_normal(up,Vector2(row.visit[0],row.visit[1]))*(radius+.3)
 		up=at.normalized()
 		axes=Geo.frame(up)
 		eye=at+up*7.5+axes.x*6+axes.z*9
@@ -157,7 +214,7 @@ func setup_bench_review(index: int) -> void:
 	if safe.is_empty():
 		return
 	var point: Vector3 = safe.point
-	player.teleport(point.normalized(), point.length() + .15)
+	player.teleport(point.normalized(), point.length() + .15 * player.avatar_scale)
 	player.heading = (seat.global_position - point).slide(point.normalized()).normalized()
 	player.visual.rotation.y = PI
 	paused = false
@@ -166,7 +223,7 @@ func setup_bench_review(index: int) -> void:
 	hud.visible = true
 	hud.call("close_panel")
 	(hud.get("destination_card") as Control).visible = false
-	near_distance = 7.0
+	near_distance = 7.0 * player.avatar_scale
 	near_pitch = .46
 	camera.fov = 42.0
 	set_overview(false)
@@ -190,10 +247,10 @@ func setup_water_review(index: int, hide_habitat: bool) -> void:
 	var normal: Array=layout.stations[index].normal
 	var district_up: Vector3=Vector3(normal[0],normal[1],normal[2])
 	var radius: float=float(layout.radius)
-	var arrival: Vector3=Geo.surface(district_up,Vector2(point[0],point[1]),radius).normalized()
-	var aim: Vector3=Geo.surface(district_up,Vector2(target[0],target[1]),radius)
+	var arrival: Vector3=authored_normal(district_up,Vector2(point[0],point[1]))
+	var aim: Vector3=authored_normal(district_up,Vector2(target[0],target[1]))*radius
 	player.finish_entry()
-	player.teleport(arrival,radius+.65)
+	player.teleport(arrival,radius+.65 * player.avatar_scale)
 	var direction: Vector3=(aim-player.global_position).slide(arrival)
 	if direction.length_squared()>.0001:
 		player.heading=direction.normalized()
@@ -203,7 +260,7 @@ func setup_water_review(index: int, hide_habitat: bool) -> void:
 	capture_focus=null
 	hud.visible=true
 	hud.call("close_panel")
-	near_distance=7.0
+	near_distance=7.0 * player.avatar_scale
 	near_pitch=clampf(float(review.get("pitch", .45)),.08,1.42)
 	camera.fov=42.0
 	camera_obstruction.call("force_update")
@@ -251,27 +308,28 @@ func _process(delta: float) -> void:
 			preparing_roam = false
 			set_overview(false)
 	if preparing_room:
-		_continue_training_room.call_deferred()
+		_continue_indoor_room.call_deferred()
 	preparation_status_clock += delta
 	if preparation_status_clock >= 0.1:
 		preparation_status_clock = 0.0
 		_update_preparation_status()
-	refresh_music_context(delta)
+	refresh_music_region(delta)
 	if entering:
 		entry_elapsed += delta
 		player.sample_entry(entry_elapsed/1.4)
 		if entry_elapsed >= 1.4:
 			entering = false
 			request_open_station.emit(entry_station,entry_return)
-			if entry_station == "wordking":
-				open_training_room.call_deferred()
+			if INTERIOR_SCENES.has(entry_station):
+				open_indoor_room.call_deferred()
 			else:
 				hud.call("show_station",entry_station)
 	if not review_mode:
 		update_camera(delta)
+	art_direction.call("update",player.global_position.normalized(),overview)
 	streaming.call("update_context", overview, player.global_position, camera.global_position, camera_aim, delta)
 	if not overview:
-		update_nearest()
+		refresh_nearby(delta)
 	hud.call("update_status", overview, nearest_label, player.global_position.length())
 	if OS.has_feature("web") and OS.is_debug_build():
 		web_status_clock += delta
@@ -295,8 +353,18 @@ func _process(delta: float) -> void:
 			var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 			var button_centre: Vector2 = (destination_button.global_position+destination_button.size*.5)/viewport_size
 			status["minimap_location"] = str(map_control.get("current_location"))
+			status["planet_radius"] = player.planet_radius
+			status["walk_speed"] = player.walk_speed
+			status["run_speed"] = player.run_speed
+			status["avatar_scale"] = player.avatar_scale
+			status["full_map_open"] = bool(hud.call("is_full_map_open"))
+			var minimap_centre: Vector2 = (map_control.global_position + map_control.size * .5) / viewport_size
+			status["minimap_button"] = [minimap_centre.x, minimap_centre.y]
+			var map_close: Button = hud.get("full_map_close") as Button
+			var close_centre: Vector2 = (map_close.global_position + map_close.size * .5) / viewport_size
+			status["full_map_close"] = [close_centre.x, close_centre.y]
 			var globe: Node3D = get_node("Globe") as Node3D
-			var globe_center: Vector2 = camera.unproject_position(globe.global_position)/viewport_size
+			var globe_center: Vector2 = camera.unproject_position(overview_center())/viewport_size
 			status["globe_screen_center"] = [globe_center.x,globe_center.y]
 			status["globe_origin"] = [globe.global_position.x,globe.global_position.y,globe.global_position.z]
 			status["globe_basis"] = [globe.global_basis.x.x,globe.global_basis.x.y,globe.global_basis.x.z,globe.global_basis.y.x,globe.global_basis.y.y,globe.global_basis.y.z,globe.global_basis.z.x,globe.global_basis.z.y,globe.global_basis.z.z]
@@ -341,7 +409,7 @@ func _process(delta: float) -> void:
 				if capture_stage % 2 == 1:
 					var index: int = floori(float(capture_stage - 1) * 0.5)
 					teleport_to(str(layout.stations[index].id))
-					near_distance = 9.0
+					near_distance = 9.0 * player.avatar_scale
 				else:
 					var index: int = floori(float(capture_stage - 2) * 0.5)
 					capture(str(layout.stations[index].id))
@@ -353,7 +421,7 @@ func _process(delta: float) -> void:
 				capture("overview-back")
 			elif capture_stage == 15:
 				visit_sakura()
-				near_distance = 10.0
+				near_distance = 10.0 * player.avatar_scale
 			elif capture_stage == 16:
 				capture("sakura")
 			elif capture_stage == 17:
@@ -371,7 +439,7 @@ func _process(delta: float) -> void:
 			elif capture_stage == 21:
 				capture_focus = null
 				teleport_to("counseling")
-				near_distance = 12.0
+				near_distance = 12.0 * player.avatar_scale
 				near_pitch = .8
 			elif capture_stage == 22:
 				capture("city-street")
@@ -403,7 +471,7 @@ func _process(delta: float) -> void:
 	elif OS.get_cmdline_user_args().has("--capture-garden"):
 		if capture_stage == 0 and elapsed > 3.0:
 			visit_sakura()
-			near_distance = 10.0
+			near_distance = 10.0 * player.avatar_scale
 			capture_stage = 1
 		elif capture_stage == 1 and elapsed > 6.0:
 			capture("sakura")
@@ -421,8 +489,8 @@ func focus_sakura_bridge() -> void:
 	capture_focus = Node3D.new()
 	capture_focus.name = "BridgeReview"
 	add_child(capture_focus)
-	var grove_up: Vector3 = Vector3(.75,1,.85).normalized()
-	var bridge_up: Vector3 = Vector3.UP.slerp(grove_up,.80)
+	var grove_up: Vector3 = SakuraPlan.grove_up()
+	var bridge_up: Vector3 = SakuraPlan.bridge_start().slerp(SakuraPlan.bridge_finish(),.5)
 	var forward: Vector3 = (grove_up-bridge_up).slide(bridge_up).normalized()
 	capture_focus.transform = Transform3D(Basis(bridge_up.cross(-forward).normalized(),bridge_up,-forward),bridge_up*(float(layout.radius)+.3))
 	first_camera = true
@@ -434,7 +502,29 @@ func capture(label: String) -> void:
 	get_viewport().get_texture().get_image().save_png(path)
 	print("CAPTURE ", path)
 
+func overview_center() -> Vector3:
+	return Vector3.ZERO
+
+func _apply_mobile_quality() -> void:
+	var next_mobile_quality: bool = bool(graphics_settings.call("is_mobile_performance_profile"))
+	if next_mobile_quality != mobile_quality:
+		# Restore and release cached fade materials before the quality profile
+		# replaces shared materials; a later fade must use the new profile.
+		camera_obstruction.call("reset")
+		camera_obstruction.call("set_active", not overview and not review_mode and not is_instance_valid(capture_focus))
+	mobile_quality = next_mobile_quality
+	art_direction.call("set_mobile_quality", mobile_quality)
+	update_camera_clipping()
+
+func update_camera_clipping() -> void:
+	# Distant millimeter-separated paving needs a tighter depth range. Every
+	# allowed overview position is outside the entire planet; close views keep
+	# their near plane at 10 cm so the avatar and nearby props remain visible.
+	camera.near = maxf(5.0,float(layout.radius)*OVERVIEW_NEAR) if overview and not is_instance_valid(capture_focus) else ROAM_NEAR * player.avatar_scale
+	camera.far = 160.0 if mobile_quality and not overview else maxf(1000.0,float(layout.radius)*6.0)
+
 func update_camera(delta: float) -> void:
+	update_camera_clipping()
 	if is_instance_valid(capture_focus):
 		var up: Vector3 = capture_focus.global_position.normalized()
 		var aim: Vector3 = capture_focus.global_position+up*.6
@@ -445,18 +535,20 @@ func update_camera(delta: float) -> void:
 		camera.global_transform = Transform3D(Basis.IDENTITY,eye).looking_at(aim,up)
 		camera_obstruction.call("set_active", false)
 	elif overview:
-		# Interpolating camera positions cuts a chord through the orbit, causing
-		# involuntary zoom. Build the camera from its orientation and fixed radius.
-		# The rotated up vector also allows a complete turn through either pole.
+		# Orbit the complete planet; all six directions remain connected.
+		# Orbit the complete globe using its configured physical radius.
+		orbit_pitch = clampf(orbit_pitch, OVERVIEW_MIN_PITCH, OVERVIEW_MAX_PITCH)
+		orbit_distance = clampf(orbit_distance, float(layout.radius)*OVERVIEW_MIN_DISTANCE, float(layout.radius)*OVERVIEW_MAX_DISTANCE)
 		var orbit_basis: Basis = Basis(Vector3.UP,orbit_yaw)*Basis(Vector3.RIGHT,-orbit_pitch)
-		camera_aim = Vector3.ZERO
-		camera.global_transform = Transform3D(orbit_basis,orbit_basis.z*orbit_distance)
+		camera_aim = overview_center()
+		camera.global_transform = Transform3D(orbit_basis,camera_aim+orbit_basis.z*orbit_distance)
 		camera_obstruction.call("set_active", false)
 	else:
 		camera_obstruction.call("set_active", true)
-		var up: Vector3 = player.global_position.normalized()
-		camera_aim = player.global_position+up*1.0
-		var offset: Vector3 = -player.heading*cos(near_pitch)+up*sin(near_pitch)
+		var render_frame: Transform3D = player.get_render_transform()
+		var up: Vector3 = render_frame.origin.normalized()
+		camera_aim = render_frame.origin+up*player.avatar_scale
+		var offset: Vector3 = -player.get_render_heading(up)*cos(near_pitch)+up*sin(near_pitch)
 		var eye: Vector3 = camera_aim+offset*near_distance
 		camera.global_transform = Transform3D(Basis.IDENTITY,eye).looking_at(camera_aim,up)
 		camera_obstruction.call("update",self,camera,camera_aim,delta)
@@ -479,7 +571,7 @@ func touch_look(relative: Vector2) -> void:
 		music.call("unlock")
 	if overview:
 		orbit_yaw -= relative.x * 0.005
-		orbit_pitch += relative.y * 0.003
+		orbit_pitch = clampf(orbit_pitch + relative.y * .003, OVERVIEW_MIN_PITCH, OVERVIEW_MAX_PITCH)
 	else:
 		player.rotate_heading(-relative.x * 0.005)
 		near_pitch = clampf(near_pitch + relative.y * 0.003, .08, 1.42)
@@ -522,13 +614,18 @@ func _input(event: InputEvent) -> void:
 			return
 		if overview:
 			orbit_yaw -= motion.relative.x * 0.005
-			orbit_pitch += motion.relative.y * 0.003
+			orbit_pitch = clampf(orbit_pitch + motion.relative.y * .003, OVERVIEW_MIN_PITCH, OVERVIEW_MAX_PITCH)
 		else:
 			player.rotate_heading(-motion.relative.x * 0.005)
 			near_pitch = clampf(near_pitch + motion.relative.y * 0.003, .08, 1.42)
 		get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if account_view_open:
+		if event.is_action_pressed("ui_cancel"):
+			account.call("close_view")
+		get_viewport().set_input_as_handled()
+		return
 	if hud != null and bool(hud.call("is_settings_open")):
 		return
 	if preparing_roam or preparing_room:
@@ -561,9 +658,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 			var change: float = -1.0 if mouse.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0
 			if overview:
-				orbit_distance = clampf(orbit_distance + change * 5.0, float(layout.radius) * 2.4, float(layout.radius) * 5.0)
+				orbit_distance = clampf(orbit_distance + change * float(layout.radius)*.1, float(layout.radius)*OVERVIEW_MIN_DISTANCE, float(layout.radius)*OVERVIEW_MAX_DISTANCE)
 			else:
-				near_distance = clampf(near_distance + change * 0.6, 4.0, 12.0)
+				near_distance = clampf(near_distance + change * 0.6 * player.avatar_scale, 4.0 * player.avatar_scale, 12.0 * player.avatar_scale)
 
 func _all_downloads_ready() -> bool:
 	var packs: Node = get_node_or_null("/root/WebPacks")
@@ -587,7 +684,9 @@ func set_overview(enabled: bool) -> void:
 	finish_view_drag()
 	player.cancel_jump_input()
 	overview = enabled
+	update_camera_clipping()
 	player.process_mode = Node.PROCESS_MODE_DISABLED if overview else Node.PROCESS_MODE_INHERIT
+	player.reset_render_interpolation()
 	camera_obstruction.call("set_active", not overview)
 	camera_obstruction.call("force_update")
 	if not overview:
@@ -606,9 +705,10 @@ func teleport_to(station_id: String) -> void:
 	var station: Node3D = get_node_or_null("Stations/" + station_id) as Node3D
 	if station == null:
 		return
-	var up: Vector3 = station.position.normalized()
-	var arrival: Vector3 = Geo.surface(up, Vector2(0, 2.5), float(layout.radius)).normalized()
-	player.teleport(arrival, float(layout.radius) + 0.65)
+	var arrival_marker: Marker3D = station.get_node_or_null("Arrival") as Marker3D
+	var arrival_point: Vector3 = arrival_marker.global_position if arrival_marker != null else station.global_position + station.global_basis.orthonormalized().z * 2.5 * player.avatar_scale
+	var arrival: Vector3 = arrival_point.normalized()
+	player.teleport(arrival, arrival_point.length() if arrival_marker != null else float(layout.radius) + 0.65 * player.avatar_scale)
 	# Face the destination even where the tangent frame changes near a pole.
 	player.heading = (station.global_position - player.global_position).slide(arrival).normalized()
 	player.global_basis = Basis(player.heading.cross(arrival).normalized(),arrival,-player.heading)
@@ -617,26 +717,38 @@ func teleport_to(station_id: String) -> void:
 	set_overview(false)
 
 func visit_sakura() -> void:
+	if get_node("/root/ResourceProfile").call("is_low"):
+		return
 	if entering:
 		return
 	player.finish_entry()
 	var up: Vector3 = SakuraPlan.grove_up()
-	var arrival: Vector3 = Geo.surface(up,SakuraPlan.entry_offset(float(layout.radius))*.7,float(layout.radius)).normalized()
-	player.teleport(arrival,float(layout.radius)+0.6)
+	var arrival: Vector3 = authored_normal(up,SakuraPlan.entry_offset()*.7)
+	player.teleport(arrival,float(layout.radius)+0.6 * player.avatar_scale)
 	player.heading = (up-arrival).slide(arrival).normalized()
 	paused = false
 	hud.call("close_panel")
 	set_overview(false)
 
+func refresh_nearby(delta: float) -> void:
+	nearby_clock += delta
+	if nearby_clock >= NEARBY_INTERVAL:
+		nearby_clock = fmod(nearby_clock, NEARBY_INTERVAL)
+		update_nearest()
+
 func update_nearest() -> void:
 	nearest_id = ""
 	nearest_label = ""
-	var distance: float = 3.2
+	var distance: float = 3.2 * player.avatar_scale
 	for station: Node in $Stations.get_children():
 		var node: Node3D = station as Node3D
 		var marker_visible: bool = not (paused and str(node.name) == entry_station)
 		(node.get_node("StationLabel") as Label3D).visible = marker_visible
-		(node.get_node("Beacon") as MeshInstance3D).visible = marker_visible
+		var reverse_label := node.get_node_or_null("StationLabelReverse") as Label3D
+		if reverse_label != null:
+			reverse_label.visible = marker_visible
+		var beacon := node.get_node("Beacon") as MeshInstance3D
+		beacon.visible = marker_visible and not beacon.has_meta("street_furniture_source_preserved")
 		var d: float = player.global_position.distance_to(node.global_position)
 		if d < distance:
 			distance = d
@@ -673,7 +785,7 @@ func open_station(station_id: String) -> void:
 	entry_elapsed = 0.0
 	pause_world()
 	var direction: Vector3 = player.heading
-	player.teleport(station.position.normalized(),float(layout.radius)+0.32)
+	player.teleport(station.global_position.normalized(),float(layout.radius)+0.32 * player.avatar_scale)
 	player.heading = direction.slide(player.position.normalized()).normalized()
 	player.global_basis = Basis(player.heading.cross(player.up_direction).normalized(),player.up_direction,-player.heading)
 	player.begin_entry()
@@ -686,31 +798,85 @@ func pause_world() -> void:
 	paused = true
 	player.controls_enabled = false
 
+func open_account(view: String = "account") -> bool:
+	if view not in ["query", "general", "special", "apcs", "scores", "account"] or entering or preparing_roam or preparing_room:
+		return false
+	if account_view_open:
+		return bool(account.call("open_view", view))
+	hud.call("close_compact_menu")
+	if hud.call("is_full_map_open") or hud.call("is_settings_open") or (paused and entry_station != "admissions"):
+		return false
+	account_previous_controls = player.controls_enabled
+	account_previous_paused = paused
+	account_from_station = paused and entry_station == "admissions"
+	account_view_open = true
+	pause_world()
+	_release_account_inputs()
+	hud.call("close_panel")
+	hud.call("set_account_modal", true)
+	if not bool(account.call("open_view", view)):
+		_account_closed()
+		hud.call("show_account_error", str(account.get("last_error")))
+		return false
+	return true
+
+func _release_account_inputs() -> void:
+	finish_view_drag()
+	player.cancel_jump_input()
+	player.velocity = Vector3.ZERO
+	for action: StringName in [&"move_left", &"move_right", &"move_forward", &"move_back", &"run", &"jump", &"interact"]:
+		if InputMap.has_action(action):
+			Input.action_release(action)
+
+func _account_closed() -> void:
+	if not account_view_open:
+		return
+	account_view_open = false
+	_release_account_inputs()
+	hud.call("set_account_modal", false)
+	if account_from_station:
+		resume_world(entry_return)
+	else:
+		paused = account_previous_paused
+		player.controls_enabled = account_previous_controls and not paused and not overview and not player.is_resting
+	account_from_station = false
+	get_viewport().gui_release_focus()
+
 func open_training_room() -> void:
 	if not paused or entry_station != "wordking":
+		return
+	open_indoor_room()
+
+func open_indoor_room() -> void:
+	if not paused or not INTERIOR_SCENES.has(entry_station):
 		return
 	preparing_room = true
 
 func _continue_training_room() -> void:
+	_continue_indoor_room()
+
+func _continue_indoor_room() -> void:
 	if not preparing_room:
 		return
-	if not paused or entry_station != "wordking":
+	if not paused or not INTERIOR_SCENES.has(entry_station):
 		preparing_room = false
 		return
-	# The boot bundle contains the safe lightweight room. Its detail pack is
-	# requested by that room only after entry, never by the outdoor startup gate.
+	# Boot contains lightweight interior scenes; the rooms request their model
+	# packs after entry, outside the outdoor startup gate.
 	preparing_room = false
 	hud.call("set_preparation", "", false)
-	var transition: Node = TrainingTransition.new()
-	transition.name = "TrainingRoomTransition"
+	var transition: Node = IndoorTransition.new()
+	transition.name = "TrainingRoomTransition" if entry_station == "wordking" else "IndoorTransition"
 	get_tree().root.add_child(transition)
-	if not bool(transition.call("open_from_world", self, entry_return)):
+	if not bool(transition.call("open_from_world", self, entry_return, str(INTERIOR_SCENES[entry_station]), entry_station)):
+		var message: String = str(transition.get("last_error"))
 		transition.queue_free()
 		resume_world(entry_return)
+		hud.call("set_preparation", message, true)
 
 func _update_preparation_status() -> void:
 	var packs: Node = get_node_or_null("/root/WebPacks")
-	var status: Dictionary = packs.call("get_status") as Dictionary if packs != null else {}
+	var status: Dictionary = packs.call("get_startup_status") as Dictionary if packs != null else {}
 	var complete: bool = bool(status.get("all_ready", true))
 	var startup_message: String = ""
 	var startup_error: String = str(packs.call("startup_error")) if packs != null else ""
@@ -724,15 +890,16 @@ func _update_preparation_status() -> void:
 	if not preparing_roam and not preparing_room:
 		hud.call("set_preparation", "", false)
 		return
-	var message: String = "正在準備訓練室…" if preparing_room else "正在準備角色與目的地…"
+	var room_label: String = "興趣輔導室" if entry_station == "counseling" else "落點分析室" if entry_station == "admissions" else "選校研究所" if entry_station == "recommendations" else "大學館" if entry_station == "universities" else "校園生活誌" if entry_station == "life" else "訓練室"
+	var message: String = "正在準備" + room_label + "…" if preparing_room else "正在準備角色與目的地…"
 	var error: String = player.visuals_error() if preparing_roam else ""
 	if error.is_empty() and preparing_roam:
 		error = str(streaming.call("position_error", player.global_position))
 	if packs != null:
 		if error.is_empty():
 			error = str(packs.call("startup_error"))
-		if preparing_room and error.is_empty():
-			error = str(packs.call("resource_error", TrainingTransition.ROOM_SCENE))
+		if preparing_room and error.is_empty() and INTERIOR_SCENES.has(entry_station):
+			error = str(packs.call("resource_error", str(INTERIOR_SCENES[entry_station])))
 		if not complete:
 			message = startup_message
 		elif preparing_roam:
@@ -787,6 +954,15 @@ func desired_music_context() -> String:
 	var map_control: Control = hud.get("minimap") as Control
 	return str(map_control.call("station_at", player.global_position.normalized())) if map_control != null else "world"
 
+func refresh_music_region(delta: float) -> void:
+	# Region polygons do not need a fresh containment search for every draw.
+	music_region_clock += delta
+	if music_region_clock >= MUSIC_REGION_INTERVAL:
+		var remainder: float = fmod(music_region_clock, MUSIC_REGION_INTERVAL)
+		var elapsed_region_time: float = music_region_clock - remainder
+		music_region_clock = remainder
+		refresh_music_context(elapsed_region_time)
+
 func refresh_music_context(delta: float, immediate: bool = false) -> void:
 	if music == null:
 		return
@@ -811,12 +987,13 @@ func visit_ecology(index: int) -> void:
 	var up: Vector3=Vector3(normal[0],normal[1],normal[2])
 	var offset: Vector2=Vector2(row.visit[0],row.visit[1])
 	player.finish_entry()
-	player.teleport(Geo.surface(up,offset,float(layout.radius)).normalized(),float(layout.radius)+.65)
+	player.teleport(authored_normal(up,offset),float(layout.radius)+.65 * player.avatar_scale)
 	paused=false
 	hud.call("close_panel")
 	set_overview(false)
 
 func _on_detail_added(detail: Node) -> void:
+	art_direction.call("apply",detail)
 	camera_obstruction.call("register_region", detail)
 
 func _on_detail_removing(detail: Node) -> void:

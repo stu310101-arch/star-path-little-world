@@ -2,6 +2,7 @@ extends SceneTree
 
 const Minimap = preload("res://scripts/world_minimap.gd")
 const Routes = preload("res://scripts/world_routes.gd")
+const Geo = preload("res://scripts/planet_geometry.gd")
 
 func contains_point(point: Vector2, polygon: PackedVector2Array) -> bool:
 	# Independent horizontal-ray coverage oracle. Geometry2D's long diagonal
@@ -18,6 +19,9 @@ func contains_point(point: Vector2, polygon: PackedVector2Array) -> bool:
 
 func _initialize() -> void:
 	var minimap: Control = Minimap.new() as Control
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
+	var radius: float = float(layout.radius)
+	minimap.set("radius", radius)
 	minimap.size = Vector2(224, 180)
 	var data: Array = JSON.parse_string(FileAccess.get_file_as_string("res://data/districts.json")) as Array
 	var patches: Array[Dictionary] = []
@@ -29,12 +33,13 @@ func _initialize() -> void:
 	for edge: Vector2i in Routes.bridge_edges():
 		for step: int in range(41):
 			samples.append(directions[edge.x].slerp(directions[edge.y], float(step) / 40.0))
-	for i: int in range(160):
-		var y: float = 1.0 - 2.0 * (float(i) + .5) / 160.0
-		var theta: float = float(i) * 2.3999632297
-		samples.append(Vector3(sqrt(1.0 - y * y) * cos(theta), y, sqrt(1.0 - y * y) * sin(theta)))
+	# Cover the inhabited archipelago and shore approaches at the current scale.
+	for patch: Dictionary in patches:
+		for x: float in [-36.0, -18.0, 0.0, 18.0, 36.0]:
+			for z: float in [-36.0, -18.0, 0.0, 18.0, 36.0]:
+				samples.append(Geo.surface(patch.up as Vector3, Vector2(x,z), radius).normalized())
 	if OS.get_cmdline_user_args().has("--focused"):
-		samples.assign([Vector3.DOWN.slerp(Vector3.RIGHT, .525)])
+		samples.assign([directions[0].slerp(directions[1], .525)])
 	var raw_failures: int = 0
 	var clipped_failures: int = 0
 	var coverage_failures: int = 0

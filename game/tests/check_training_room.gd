@@ -101,10 +101,11 @@ func check_assets() -> void:
 	var sockets: Array[Node] = room.find_children("SOCKET_Genshin_*","Node3D",true,false)
 	check("Exactly one authored training device is installed",device_anchors.size() == 1,device_anchors.size())
 	check("Six future Genshin display positions are present",sockets.size() == 6,sockets.size())
-	var empty_sockets: bool = true
+	var occupied_sockets: int = 0
 	for socket: Node in sockets:
-		empty_sockets = empty_sockets and socket.get_child_count() == 0
-	check("Every character display position remains empty",empty_sockets)
+		if socket.get_child_count() > 0:
+			occupied_sockets += 1
+	check("Furina occupies one cabinet socket; five remain available", occupied_sockets == 1, occupied_sockets)
 	var meshes: Array[Node] = room.find_children("*","MeshInstance3D",true,false)
 	var material_ids: Dictionary = {}
 	var missing_materials: int = 0
@@ -233,11 +234,20 @@ func check_return_and_reentry() -> void:
 	check("The same station can be entered a second time",is_instance_valid(room))
 	if room != null:
 		indoor = room.get("player") as CharacterBody3D
-		indoor.call("place_at",Vector3(0,.09,7.2),Vector3.BACK)
+		indoor.call("place_at",Vector3(3,.09,3),Vector3.FORWARD)
 		await tick(10)
-		await press(KEY_E)
+		var button: Button = room.find_child("ReturnToWorld", true, false) as Button
+		for down: bool in [true, false]:
+			var event: InputEventMouseButton = InputEventMouseButton.new()
+			event.button_index = MOUSE_BUTTON_LEFT
+			event.position = button.get_global_rect().get_center()
+			event.global_position = event.position
+			event.pressed = down
+			root.push_input(event, true)
 		await wait_for_room(false)
-		check("Repeated entry and return leaves no duplicate room",find_room() == null)
+		await tick(3)
+		check("HUD return away from portal restores the same world",find_room() == null and current_scene == world and world.get_instance_id() == saved_world_id and not bool(world.get("paused")))
+		check("HUD return restores player controls",bool(world_player.get("controls_enabled")))
 
 func capsule_hits(point: Vector3) -> Array[Dictionary]:
 	var capsule: CapsuleShape3D = CapsuleShape3D.new()

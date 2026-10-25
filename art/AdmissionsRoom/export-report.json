@@ -1,0 +1,85 @@
+{
+  "revision": "advising-studio-r1",
+  "blender": "5.2.2 LTS",
+  "triangles": 111744,
+  "budget": 180000,
+  "zones": {
+    "Architecture": {
+      "triangles": 34916,
+      "source_parts": 191,
+      "materials": 8,
+      "nonmanifold_edges": 0
+    },
+    "General": {
+      "triangles": 19884,
+      "source_parts": 145,
+      "materials": 13,
+      "nonmanifold_edges": 0
+    },
+    "Special": {
+      "triangles": 18292,
+      "source_parts": 143,
+      "materials": 14,
+      "nonmanifold_edges": 0
+    },
+    "APCS": {
+      "triangles": 25048,
+      "source_parts": 146,
+      "materials": 12,
+      "nonmanifold_edges": 0
+    },
+    "Passport": {
+      "triangles": 6952,
+      "source_parts": 58,
+      "materials": 10,
+      "nonmanifold_edges": 0
+    },
+    "Lounge": {
+      "triangles": 4472,
+      "source_parts": 46,
+      "materials": 10,
+      "nonmanifold_edges": 0
+    },
+    "Exterior": {
+      "triangles": 2180,
+      "source_parts": 79,
+      "materials": 4,
+      "nonmanifold_edges": 0
+    }
+  },
+  "materials": 20,
+  "bytes": 12378252,
+  "issues": [],
+  "source": "AdmissionsStudio.blend",
+  "texture_source": "Project-authored university hall textures, shared palette",
+  "uv": "Metre-scale planar per-face UV, walnut grain oriented to longest edge. Intentional repeating UV for shared surfaces.",
+  "runtime_acceptance": "Verified in actual Godot room renderer; see runtime_validation for scope and evidence.",
+  "runtime_validation": {
+    "renderer": "Godot 4.7.2 Compatibility / AMD Radeon RX 5700 XT",
+    "room": {
+      "script": "game/tests/check_admissions_room.gd",
+      "checks": 61,
+      "failures": 0,
+      "report": "deliverables/admissions-room/checks.json"
+    },
+    "walk": {
+      "script": "game/tests/check_admissions_walk.gd",
+      "checks": 64,
+      "failures": 0,
+      "frames": 825,
+      "travelled_m": 39.9818865451962,
+      "lens_overlap_frames": 0,
+      "report": "deliverables/admissions-room/studio-walk/report.json"
+    },
+    "seats": {
+      "script": "game/tests/admissions_seat_integration_checks.gd",
+      "checks": 86,
+      "failures": 0,
+      "seats": 8,
+      "captures": "deliverables/admissions-room/seats/",
+      "source": "Station integration agent verified renderer run"
+    },
+    "visual_review": "Actual entry, five workbench approaches and eight seated views reviewed; window-shadow acne and tight rear-wall framing corrected.",
+    "limitations": "Native narrow viewports validate layout only; actual browser/mobile/native auth release checks are tracked separately."
+  }
+}

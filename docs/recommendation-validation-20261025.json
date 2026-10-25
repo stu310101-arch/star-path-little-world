@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-25",
+  "candidate": "recommendation-room-r3",
+  "production_deployed": false,
+  "web_build_id": "packs-5d46d01076303192",
+  "web_packaged_build_id": "cf-a5ad2b01262d5612",
+  "checks": {
+    "room_full": 104,
+    "room_low": 104,
+    "seated_hall_roundtrip": 29,
+    "orrery_full_low": 28,
+    "web_canvas": 34,
+    "http_chunk_reconstruction": 9,
+    "native_account_e2e": 31,
+    "native_protocol_ui": 53,
+    "web_account_bridge": 17,
+    "browser_account_prepare": 20,
+    "browser_after_native": 6,
+    "firestore_emulator": 11,
+    "recommendation_engine": 18,
+    "windows_build_regression": 20,
+    "pack_split_regression": 22,
+    "delivery_package_regression": 9
+  },
+  "passed": true,
+  "art": {
+    "full_triangles": 98212,
+    "low_triangles": 31168,
+    "materials": 13,
+    "low_texture_max": 256,
+    "seats": 5,
+    "workbench_seats": 3
+  },
+  "scope": [
+    "115 academic year, 64 schools, 2206 programs",
+    "Synthetic accounts only in local Auth/Firestore emulators",
+    "Desktop native and exported Web canvas normal input",
+    "Chrome Pixel 7 emulation, not physical-phone verification",
+    "Full and low assets requested only after room entry",
+    "No production website or Firebase deployment"
+  ],
+  "evidence_directories": [
+    "deliverables/recommendation-room/",
+    "deliverables/recommendations/"
+  ],
+  "candidate_directories": [
+    "build/windows-recommendation-20261025-r3",
+    "build/cloudflare-recommendation-20261025-r3"
+  ]
+}

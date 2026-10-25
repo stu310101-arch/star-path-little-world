@@ -2,24 +2,52 @@ extends RefCounted
 
 const Geo = preload("res://scripts/planet_geometry.gd")
 const WIDTH: float = 2.4
-const LAYOUT_VERSION: int = 4
+const LAYOUT_VERSION: int = 9
+
+static func authoring_radius() -> float:
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
+	return float(layout.get("authoring_radius",layout.radius))
+
+static func world_radius() -> float:
+	return float((JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary).radius)
+
+static func grove_offset() -> Vector2:
+	# The three-way sea gap leaves room for the full-sized blossom garden.
+	return Vector2.ONE*authoring_radius()
 
 static func grove_up() -> Vector3:
-	return Vector3(.75,1.0,.85).normalized()
+	return Geo.surface(Vector3.UP,grove_offset(),authoring_radius()).normalized()
 
 static func bridge_start() -> Vector3:
-	return Vector3.UP.slerp(grove_up(),.70)
+	var radius: float = authoring_radius()
+	var town: Vector3 = town_endpoint(radius)
+	var grove: Vector3 = grove_up()
+	var info: Dictionary = (JSON.parse_string(FileAccess.get_file_as_string("res://data/districts.json")) as Array)[0]
+	var low: float = 0.0
+	var high: float = 1.0
+	for _i: int in range(24):
+		var middle: float = (low+high)*.5
+		var n: Vector3 = town.slerp(grove,middle)
+		var p: Vector2 = preload("res://scripts/world_routes.gd").local_point(n,Vector3.UP,radius)
+		if preload("res://scripts/biome_geography.gd").coast_distance(p,info,0) > .5: low = middle
+		else: high = middle
+	return town.slerp(grove,low).normalized()
 
 static func bridge_finish() -> Vector3:
-	return Vector3.UP.slerp(grove_up(),.90)
+	var town: Vector3 = town_endpoint(authoring_radius())
+	var grove: Vector3 = grove_up()
+	var length: float = town.angle_to(grove)*authoring_radius()
+	return town.slerp(grove,1.0-6.0/length).normalized()
 
-static func town_endpoint(radius: float = 48.0) -> Vector3:
+static func town_endpoint(radius: float = -1.0) -> Vector3:
+	if radius < 0.0: radius = authoring_radius()
 	return Geo.surface(Vector3.UP,Vector2(10,17.4),radius).normalized()
 
 static func garden_endpoint() -> Vector3:
 	return grove_up()
 
-static func entry_offset(radius: float = 48.0) -> Vector2:
+static func entry_offset(radius: float = -1.0) -> Vector2:
+	if radius < 0.0: radius = authoring_radius()
 	var up: Vector3 = grove_up()
 	var axes: Basis = Geo.frame(up)
 	var normal: Vector3 = bridge_finish()
@@ -40,7 +68,8 @@ static func island_outline() -> PackedVector2Array:
 	# A hand-shaped bank follows the two overlooks and the northern blossom lawn.
 	return rounded_outline([Vector2(-8.6,-3.6),Vector2(-4.5,-7.6),Vector2(1.8,-7.7),Vector2(7.0,-5.2),Vector2(9.0,0.0),Vector2(7.2,5.8),Vector2(1.0,8.2),Vector2(-5.9,7.1),Vector2(-9.0,2.0)],16)
 
-static func paths(radius: float = 48.0) -> Array:
+static func paths(radius: float = -1.0) -> Array:
+	if radius < 0.0: radius = authoring_radius()
 	var entry: Vector2 = entry_offset(radius)
 	var ring: PackedVector2Array = rounded_outline([Vector2(0,0),Vector2(3,0),Vector2(4.8,2.2),Vector2(3.6,4.8),Vector2(0,5.5),Vector2(-3.6,4.8),Vector2(-4.8,2.2),Vector2(-3,0)],8)
 	var loop: Array = []
@@ -76,7 +105,8 @@ static func seats() -> Array[Dictionary]:
 	# seat fronts, standing space and garden loop form one direct approach.
 	return [{"id":"EastViewBench","position":Vector2(7.65,2.15),"yaw":PI*.5,"approach":Vector2(6.55,2.15)},{"id":"WestViewBench","position":Vector2(-7.65,2.15),"yaw":-PI*.5,"approach":Vector2(-6.55,2.15)}]
 
-static func lights(radius: float = 48.0) -> Array[Vector2]:
+static func lights(radius: float = -1.0) -> Array[Vector2]:
+	if radius < 0.0: radius = authoring_radius()
 	var entry: Vector2 = entry_offset(radius)
 	var along: Vector2 = -entry.normalized()
 	var side: Vector2 = Vector2(-along.y,along.x)

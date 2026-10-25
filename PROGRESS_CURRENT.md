@@ -1,3 +1,219 @@
+# 選校推薦室 — 2026-10-25（r3 候選已驗證）
+
+- 完成以完成版量表與一份成績推薦 115 年 64 校／2,206 校系，含三種排序、原因、歷年回測、每頁 20 筆、三校系比較、帳號設定／收藏及大學館往返。
+- 房間採不同造型的三台與五個可坐座位；電腦前方文件已移到後櫃，坐下 F 使用工作台、E 起身。天文儀兩環與星體沿不同軸速運轉，可暫停並尊重減少動態效果。
+- 完整／低階房間 104＋104、實際原生帳號 31、原生協定／UI 53、Web bridge 17、最終桌面／手機模擬 Web 34 項通過；手機尚非實機驗證。
+- Windows／Web r3 候選及可編輯資產留在 `build/recommendation-delivery-20261025/`；來源提交包含必要的帳號、大學館與資源包前置，沒有發布正式網站／Firebase。
+- 操作、建置與驗證：[推薦室說明](docs/recommendation-room.md)。
+
+---
+
+# 輔導室重疊面修正 — 2026-10-25（已發布）
+
+正式版 `cf-c915bee8bee26338`，Cloudflare version `793bba73-4627-481f-b6b3-f50305ff4528`。
+
+- 已修正轉角桌、畫框、書刊架、書封、窗框、窗台與線板共平面接合；東側畫作移至背板前方。完全重複面 144 → 0。
+- 高／低階原生遊戲簡短檢查 16 項全數通過，已查看 6 張實際畫面；4 座位及 17 碰撞代理保留。
+- 只更新正式版桌面／手機 Web 輔導室高低階模型與下載中繼資料，未帶入其他進行中的推薦室內容。沒有回滾或擴大完整驗收。
+- 正式版 release manifest 已讀回一致。來源、證據及部署紀錄見 `docs/counseling-double-faces-20261025.md`、`deliverables/counseling-room/double-faces-20261025/`、`build/releases/20261025-cf-c915bee8bee26338/`。
+
+---
+
+<!-- counseling-low-published:cf-bafcd361353fd1ce:18e3b3e1-29bb-4db0-b484-210282aa366a -->
+# 輔導室低階資源包 — 2026-10-25（已發布並保存）
+
+正式網址：https://star-path-little-world.star-path-little-world.workers.dev/。版本 `cf-bafcd361353fd1ce`，來源 `packs-2b38d7a24c341eba`，Cloudflare version `18e3b3e1-29bb-4db0-b484-210282aa366a`。
+
+- 以 r8 暖窗書房製作獨立低階副本，保留房間結構、窗簾、主要家具、壁架與部分植栽；適量減少重複書本、小盆栽與細部縫線。
+- 低階模型 58,386 三角面、貼圖上限 256px；保留兩個年級量表區、4 個座位、木椅移動、出口與 17 個碰撞代理。高階原始美術維持原樣。
+- 接入既有資源包選擇與切換，低階設定載入專用輔導室；桌面 Web、手機 Web 和 Windows 發行包均已建置。
+- 資產／本輪整合來源、Windows、Web 三份 ZIP 位於 `build/counseling-low-delivery-20261025/`。資產 ZIP 並非完整遊戲原始碼；其餘來源仍在工作區與先前完整來源封存。
+- 依使用者要求未執行遊戲、手機或部署後驗收；發布成功依 Cloudflare 部署回覆，紀錄位於 `build/counseling-low-deploy-retry-20261025.log`。
+
+---
+
+<!-- counseling-r8-published:cf-be9d59433f64fd24:d9752512-2625-4472-b961-21569a81e55b -->
+# 第一站輔導室 r8 家具與可移動木椅 — 2026-10-24（已發布）
+
+已發布至 https://star-path-little-world.star-path-little-world.workers.dev/ ，build `cf-be9d59433f64fd24`、來源 `packs-f3106eab31bb4621`、Cloudflare version `d9752512-2625-4472-b961-21569a81e55b`。實際成功回覆保存在 `build/counseling-r8-cloudflare-deploy.log`；發布封存位置為 `build/releases/20261024-cf-be9d59433f64fd24/`，完整壓縮包在 `build/counseling-delivery-20261024-r8/`。
+
+- 沙發向窗邊移動25公分並移除底墊，旁邊圓木桌向入口前移50公分；兩個地毯區電腦桌前各有一張木椅。
+- 木椅操作：E坐下、WASD以2.6m/s帶動椅子、E起身、F開啟量表；面板開啟期間停止移動。房間共有4個座位、17個碰撞代理、8個空間網格、155,556三角面、40材質和11張貼圖。
+- 高一集中六項RIASEC；高三保留33項知識、最適合／適合與Z分數。沒有施測日期，房間裝置與設定仍共用本人帳號資料及Godot面板。
+- 本輪實際通過51項原生簡短檢查與23項動線／視線檢查；材質相依11張貼圖、15個引用、0失敗。保存11張原生PNG，主流程已查看其中5張關鍵圖。報告位於 `deliverables/counseling-room/r8/`。
+- 初輪fixture計時、地板排除與小縫線UV閾值修正紀錄保存在 `r8/history/`，未刪除或改稱最終通過。此次未擴大為完整帳號、瀏覽器操作、手機或持續效能驗收。
+- 公開站點4檔讀回：`index.html`、`index.release.json`、`index.packs.json`、`mobile/index.packs.json`，4項HTTP200／逐byte比對通過；結果來自 `r8/public-release-checks.json`，不是完整瀏覽器操作測試。
+- 3份ZIP的大小、CRC與SHA-256以封裝工具實際metadata為準，記錄於交付資料夾的 `packages.json`、`assets.json`。Firebase規則與索引和r6已部署副本一致，本輪未變更；r6發布封存及r7設計證據保留。
+
+---
+
+# 輔導室 r7 追加設計 — 2026-10-24（本機設計已保存，暫不驗收）
+
+r6 已發布並固定封存後，依最新要求完成這輪追加美術。這輪只更新本機來源及 Blender 設計預覽，沒有進行 Godot 匯入、完整驗收、遊戲發行包重建或再次部署。
+
+- 已加入窗下木作護牆、細緻天花周邊線板、右側淺壁櫃、書刊分類架、帶蓋收納盒與帆布提把收納盒。
+- 沙發扶手毯布改為有厚度、自然垂墜、回折層和縫邊的模型；新增物件收在牆面與既有家具內，未增加路中展示車或重複桌椅。
+- 高一／高三兩個資料區、裝置、出生點、出口、座位及碰撞配置保留。模型目前 151,828 三角面、40 材質、6 個空間網格，沿用 11 張貼圖與唯一高階資產。
+- 可編輯來源：`art/CounselingRoom/CounselingRoom.blend`、`tools/build_counseling_room.py`、`tools/counseling_soft_furnishings.py`；本機 GLB 位於 `game/assets/counseling_room/counseling_room.glb`。
+- 設計預覽：`deliverables/counseling-room/r7/blender-design-overview.png`、`blender-design-wall-storage.png`。這是 Blender 作者視角，並非 Godot／Web 遊戲畫面或操作驗收。
+- 正式網站仍為已發布 r6 `cf-46e7f42872298ffb`；r7 尚未驗收、尚未發布。r6 壓縮包、部署目錄與發布紀錄維持原樣。
+
+---
+
+# 第一站暖窗書房與帳號量表 r6 — 2026-10-24（已發布並封存）
+
+已完成輔導室 r6 全面重設及 Web／Windows 封裝，Web build `cf-46e7f42872298ffb`、遊戲來源 `packs-5e19389db77eaca4`。Firebase rules／indexes 與 Cloudflare 網站已發布成功。正式網址 https://star-path-little-world.star-path-little-world.workers.dev/ ，Cloudflare version `869aa1c9-1536-42d0-8575-760c9ef4ff53`；最新封存記錄於 `build/releases/20261024-cf-46e7f42872298ffb/` 及 `build/releases/LATEST.json`。
+
+- 房間只有高一、高三兩個資料區：高一集中六項 RIASEC；高三包含 33 項知識、最適合／適合與 Z 分數。沒有施測日期。房間裝置和遊戲設定共用 Godot 面板及本人帳號資料，不導向網站表單。
+- 10.8×8.6×3.5m 暖窗書房：實牆、深窗台、木作操作區、共用沙發、壁架、書頁、陶器、植物及立體鬱金香；已完成窄幅摺簾、燕麥色地毯、中空燈罩與窗光。移除舊入口展示車與路中書架。123,744 三角面、40 材質、11 張原始 2K／1K 貼圖，只有一套高階資產。
+- 39 項必填、兩組初始 25 列可新增適配資料、草稿、歷次紀錄、推薦依據、版本衝突與帳號隔離保持既有實作。歷史證據保留 54 項表單、31 項 Windows／WRY、15 項 Web 帳號往返及 r4 完整 Web 38 項檢查；本次未改動表單／帳號功能程式，不把舊測試改稱為 r6 最終驗收。
+- r6 初版配置曾通過 37 項直線動線／視線與 25 項 headless 檢查；它們早於最後出生點、螢幕與材質調整。最終美術已正常匯入並保存 7 張 Godot 原生圖片。依使用者要求，未追加最終完整原生、材質、動線、效能或 Web 驗收；詳見 `deliverables/counseling-room/r6/verification-status.json`。r5 入口阻路的失敗基準也保留。
+- 輔導室使用獨立延後載入包，兩種主資源設定共用完整房間。本次 Web／Windows 建置與分包完成，沿用既有低階世界資產，未新增低階輔導室。
+- 交付封裝：`build/counseling-delivery-20261024-r6/`，含 Windows ZIP、Cloudflare ZIP、可編輯來源資產 ZIP、Firestore 規則與 SHA-256。Firebase 成功紀錄為 `build/counseling-r6-firebase-deploy.log`；Cloudflare 紀錄為 `build/counseling-r6-cloudflare-retry.log`。舊正式版與 r4／r5 封存保留，未 stage、commit 或 push。
+- 最新指示：先完成本版上傳及封存，再繼續追加本機設計，暫不驗收。後續設計另記修訂，不覆寫 r6 封存或自動覆蓋正式網站。
+
+詳細說明與限制見 `docs/counseling-interest-20261024.md`、資產說明 `art/CounselingRoom/README.md`。以下保留原發布紀錄。
+
+---
+
+# 低階／滿血材質包發布與版本封存 — 2026-10-24
+
+已發布至 https://star-path-little-world.star-path-little-world.workers.dev/ ，build `cf-0666eb774cdfdd23`、來源 `packs-54fe4b02e9261e93`、Cloudflare version `420550c1-01d6-4d48-af1c-878e7a1726db`。
+
+- 包含低階／滿血選包與下載切換、舊包保留／刪除、持續登入與登出／切換帳號、手機 PWA 入口，以及目前整合的遊戲與帳號網站內容。
+- 低階適量減少建物、植栽、船舶與魚群，保留原有風格及主要互動；滿血原始美術保留。詳細內容見 `docs/resource-packs.md`。
+- 最新封存：`build/releases/20261024-cf-0666eb774cdfdd23/`，含來源 ZIP、Windows ZIP、Cloudflare 完整發布 ZIP、`version.json` 與平台發布紀錄。最新位置另存 `build/releases/LATEST.json`。
+- 本次依使用者要求不追加測試或發布後功能驗證；發布成功依 Cloudflare deploy 回報。Git 暫存、提交與推送維持原狀。
+- 回退目錄 `build/cloudflare-device-interaction-20261023/` 保留；回退需沿用完整登入 Worker、Durable Object bindings 與既有 migration。
+
+---
+
+# 校園交流花園整體更新 — 2026-10-23
+
+本機專案已完成五區縮距、連接環道、建築與植栽整理、照明／水面、互動HUD、鏡頭與避障導覽。廣場到各入口縮短31–38%；40座留言裝置保留獨立固定地址與近距離操作。
+
+- 最低環境273,068三角形（原962,594），14網格／106 surfaces；共同貼圖、裝置MultiMesh、分幀建立與背景角色預載已整合。RX5700XT暖啟最大幀由231–238ms降到66–73ms；中心仍比原版多18draws，沒有任意最低硬體皆流暢的保證。
+- 實際連續步行338／338、近柱鏡頭12,544樣本零穿入；裝置契約105、場景整合112、導航85與新增自由探索避障53項全部通過。標準／最低版28張遊戲實拍已檢查。
+- 新Windows輸出：`build/windows-discussion-overhaul-20261023/LittleWorld.exe`；模型、腳本、shader與layout核對通過。Web最低版已驗證不載入標準環境，這輪尚未部署新3D內容至正式網站。
+- 本輪沒有變更原WordKing Cloudflare、Firebase、使用者帳號或資料。
+
+詳見[整體更新與驗收](docs/discussion-overhaul-20261023.md)、[效能數據及限制](docs/discussion-render-pipeline.md)。以下為先前更新歷史。
+
+---
+
+# 跨裝置移動負載與自動效能保護 — 2026-10-21
+
+瀏覽器版已部署至原星途網址，build `cf-128fa286e43bff69`、來源 `packs-7398aa350089301f`、Cloudflare version `94e7a583-2f86-48f0-a770-f336508fd643`。
+
+- 最低檔全平台、手機低檔與自動保護直接使用烘焙世界漫遊，不再載入整區細節。保留 527 永久碰撞體、24 座位、六入口；省略近景裝飾與動態細節演員。六入口相同材質／像素的隔離渲染 draws 降 25–49%、三角形提交降 25–36%。
+- 持續前景過載自動啟用保護，沒有型號白名單或新畫質選項；最高 30 FPS、閒置八秒後 15 FPS，恢復輸入即醒。儲存偏好與物理 tick 保持，HUD 顯示實際限制。手機降解析度後本次執行不再自動升回。
+- 低檔小地圖底圖最多 5 Hz、導航 20 Hz；同路線累積 CPU 桌面減約 89%，compact 減約 44%。落點書房及展廳的漏套用陰影設定已修復。
+- 正式本機 Web 真實移動 30 項通過：桌面約 30 FPS，4× 合成 CPU 約 29.54 FPS，手機介面觸控約 29.99 FPS；三段各約 12 秒且無 >100 ms 幀。12× 壓力注入確認自動卸載 7→0 chunks，但該段有長幀，僅作保護功能證據。手機介面使用桌面 GPU／資源格式，並非 iPhone 真機。
+- 新串流 50、runtime 14、自適應 62、圖形 UI 91、室內品質 73、室內往返等 208 項通過；既有串流／材質／地圖回歸亦通過。Web desktop/mobile 各 20 包、438／436 匯入資源解碼，8 支更新腳本跨包一致。登入 Worker、DO bindings、落點來源與 Firebase 設定核對不變。
+- 公開網址已完成真正冷啟動、W/S 移動、地圖開關與返回漫遊 7／7 驗收；10 路徑內容 SHA256 核對通過。未測實體 iPhone／舊電腦的長時間幀率、耗電與溫度，沒有「任意裝置必定流暢」結論。本輪未重建 Windows 執行檔，未操作 Git commit／push／staging。
+
+詳細：[實作與驗收](docs/low-end-runtime-20261021.md)、[交付紀錄](deliverables/low-end-20261021/delivery.json)。回退保留 `build/cloudflare-minimap-performance-20261020/`，需使用其原完整登入 Worker 設定。
+
+---
+
+# 小地圖提交瓶頸與同畫質快取 — 2026-10-21
+
+已更新正式星途網址，build `cf-ffd112c5d2c569f4`、來源 `packs-57cfcbe5ad52ae62`、Cloudflare version `d8f87613-f2c1-401b-a427-2b70a6511c0a`。本次追查上一輪 low／mobile 沒有變快的原因，固定像素／AA 做同程序 A/B/A；沒有變動畫質設定、可見模型或世界著色器。
+
+- 找到主要成本之一是 HUD 小地圖 retained commands 每幀仍提交數百次繪圖。改為按實際物理像素的 SubViewport 快取，內容變動才重建，導航獨立更新；保留原字型、線條 AA 與更新頻率。高 DPI 分數位置修正後，三尺寸像素對照最大通道差 2/255。
+- 原生靜止場景 draws 1042→397；Web 標準 HUD 958→313、手機 compact HUD 638→274。Web compact 移動同路線各 4 秒／80 refresh／79 重畫有效，root viewport render CPU 中位數相鄰 A 平均 1.45→0.90 ms；呈現仍約 60 Hz，沒有 FPS 提升主張。
+- **未解決**：原生移動時底圖重建幀約 15.5 ms，沒有下降；Web 標準 HUD 移動階段因長幀無效，不作改善證據。手機 HUD 在桌面瀏覽器驗證，不是老手機長時間 FPS／耗電／溫度測試。
+- 離屏線段篩選候選雖少 58–65% 頂點，但 GDScript 掃描反而更慢，因此只留測試 fixture，未加入產品。材質合併候選未經有效收益驗證，亦未加入。
+- HUD 進度改用輕量查詢，戶外啟動完成後停止 10 Hz 的下載快照跨 JS 查詢及歷史深拷貝；室內按需載入保持獨立。120 項載入測試通過。
+- 小地圖快取 73 項、投影 35,562 面／320,058 coverage probes、實際世界對齊等回歸通過。Web desktop/mobile 各 20 包、438／436 個匯入資源通過；10 個公開路徑的 HTTP／內容與登入 headers 驗證通過。
+- Windows 新包 `build/StarPath-Windows-Minimap-20261020.zip`，280,128,246 bytes、22 檔；CRC／逐檔 SHA256 通過，ZIP SHA256 `4fde82b5d6d38633059778827857533547be3f4a8c688d6e29707df0b599d539`。三平台四支腳本與 21 個封版來源檢查通過。
+
+公網首開仍待完成：截至 00:12 首包 31.6／46.1 MB，傳輸極慢但有前進、無瀏覽器錯誤，故未將小型公開路徑的成功誤記為線上遊戲畫面驗收。完整本機正式輸出的操作驗證已通過。
+
+詳細：[同畫質效能驗收](docs/minimap-render-performance-20261020.md)、[交付索引](deliverables/render-budget/minimap-delivery.json)。上一版 Cloudflare／Windows 包保留，登入與落點來源未變。本輪未操作 Git 提交、推送或 staging。
+
+---
+
+# 全畫質幾何與背景負載清理 — 2026-10-20
+
+已部署至既有星途 Cloudflare 網址，build `cf-bf1907d93039df49`、來源 `packs-93e6276151a31be6`、Cloudflare version `ca78cabe-a836-45cb-8180-293784d385da`。使用者要求不綁手機型號，保留既有畫質；本輪沒有下調各檔原有解析度、AA、陰影或可見物件密度。
+
+- 所有畫質共用精確地形分區與保守球體遮擋剔除；原幾何／UV／法線／材質及碰撞保持。離屏投影來源保留，快速換側與剔除快取邊界已有檢查。
+- 匯出副本移除 222 個永久隱藏的舊來源節點，涉及 113,078 個實例三角形；491 個碰撞與全景可見模型面數不變。這是資產及節點清理，不能直接當成逐幀省下的面數。
+- 練功區完整細節減少 8,077 面，啟動替代版減少 7,357 面；落點書房減少 142 面，大學展示組件減少 10 個退化面。安全的閉合不透明表面啟用背面剔除，可編輯 Blender 來源保留。
+- 真正背景／Windows 最小化時停止繪圖，暫時最多 10 FPS；返回後恢復使用者設定。iframe 焦點不觸發停繪。原生實際最小化／恢復通過；自動化 Chrome 未產生真正的 hidden 事件，所以 Web 背景流程仍待真實事件驗收。
+- 原生最高檔四個有效水岸視角的 primitive 提交減少約 15%～24%，其中溪谷 GPU 中位數約減 19%。兩個受帳號 modal 干擾的基準排除。low／mobile 的部分 GPU 耗時反而略增，同程序 A/B 未證實為保留投影資格造成；不能宣稱每檔普遍變快，更不能換算成手機 FPS。
+- 世界剔除 20 項、實際幾何／材質 1,892 項、串流 44 項、世界建置 4,900 項、座位 86 項等檢查通過。42 張世界前後圖與 29 張室內／座位圖未見新增缺面。Chrome 四檔切換、恢復原解析度／2× MSAA 與移動通過。
+- Web 兩套輸出各 20 包、436／438 個匯入資源驗證通過；378 個發布檔、9 個分片原檔重組 SHA-256 通過，10 個公開路徑 HTTP／內容與登入 headers 驗證通過。Firebase 與登入 Worker 來源未變。
+
+Windows 新包：`build/StarPath-Windows-Performance-20261020.zip`，280,123,936 bytes、22 檔，CRC／逐檔 SHA-256／發布清單通過。ZIP SHA-256 `ad3ae9343820f79eba0f72e5a0da1716539ce610abd5558ebf2aeda1d5523839`。
+
+詳細證據與限制：[效能驗收](docs/graphics-performance-20261020.md)、`deliverables/render-budget/`。沒有手機真機持續幀率、發熱與耗電證據，不能宣稱任意老機最高畫質皆流暢、不過熱。上一版發布目錄 `build/cloudflare-admissions-studio-final-20261020/` 與 Windows ZIP 均保留，可用含原登入 DO bindings／migration 的設定回退。本輪未操作 Git 提交、推送或 staging。
+
+---
+
+# 落點分析工作室與 Firebase 整合 — 2026-10-20（歷史紀錄）
+
+已完成可行走的 Blender 工作室、一般大學／特殊招生／APCS 三個獨立工作桌，以及帳號／成績紀錄入口。一般大學排除 APCS 校系，APCS 桌只顯示採 APCS 的校系；桌面上不提供跨分類切換，需關閉後走到另一張桌。特殊招生保留原站官方管道資料，未虛構原站未收錄的錄取計算。
+
+- 八個椅子／沙發座位支援 E 坐下與起身，桌邊坐著可按 F 開啟工作桌；關閉後還原座位及鏡頭。依使用者最後更正，茶杯只有擺設，沒有喝茶或茶杯互動。
+- 填分區可直接選擇已儲存的模擬考／自行練習紀錄；保留目前年度及校系條件。新增、更新與另存分開，留白不轉成零分，輸入與試算不自動新增考試。
+- 正式 Firebase `star-path-75457` 使用 Spark、Firestore `asia-east1`；本人資料規則、索引與 Cloudflare 登入交接服務已部署。專用簽章私鑰已放 Worker secret，本機下載副本已刪除。遊戲場景不接收 Firebase 憑證。
+- 房間 61 項、座椅整合 86 項、連續走動／鏡頭 64 項檢查通過；完整網頁遊戲實測進入房間、開關特殊桌、移動、坐下與 F 操作。背景頁籤曾出現關閉後重繪延遲，輸入後恢復，未將此宣稱為前景效能驗收。
+- 正式 Email 瀏覽器操作與 Firestore 讀寫、權限、原子交接協定測試通過；測試資料與測試帳號已清理。帳號連結、Email 註冊／信箱驗證／重設密碼、取消登入與錯誤恢復、Windows 配對中關閉／取消／到期／錯誤配對及重試、實際手機完整操作仍待驗收，不能宣稱所有測試完成。
+- 正式 Google 瀏覽器登入已驗收：使用者完成登入，CUA 確認正式帳號頁顯示預期使用者、電子信箱已驗證與登入方式 Google。證據：[驗收紀錄](build/admissions-evidence/google-browser-acceptance.json)、[登入後畫面](build/admissions-evidence/google-browser-signed-in.png)。
+- Windows 登入交接及同帳號跨裝置成績同步於 2026-10-20 記為「使用者實測通過」：使用者在得知這兩項仍待實測後回覆「我測過了 可以」。agent 未獨立重跑，也未據此認定異常配對流程通過。證據：[使用者驗收回報](build/admissions-evidence/user-native-sync-acceptance.json)。
+- 網站來源 r4 已封存至 `integrations/admissions/`，150 檔與全新上游 clone/apply 驗證通過。結果／說明頁切換年度保持原頁的修正已納入。
+- 正式 Windows WebView host 13／13 檢查通過，包含三個頁面實際載入、Esc IPC 關閉與重用同一視窗；登入交接與同帳號同步另以使用者實測回報記錄驗收。
+
+最終發布包為 `build/cloudflare-admissions-studio-final-20261020/`，build `cf-cb6f04660e3ab7c3`，來源 `packs-c84d10340059ec60`；已發布至既有 Cloudflare 網址，version `d2c4d339-d909-42a7-84ac-01f4008af54e`。八個公開路徑 HTTP／內容 SHA-256／登入相關 headers 驗證通過，正式版本與證據見 `build/admissions-evidence/`。Windows 完整包為 `build/StarPath-Windows-20261020.zip`，22 檔 CRC／來源比對通過，SHA-256 `78d6e5437611c2172865605fc204edaab842db56c4dfd72e54deaec709dd357c`。
+
+詳細已驗／待驗範圍與保留 DO migration 的回退流程見 `docs/admissions-release-acceptance.md`。原 GitHub Pages 未修改；本輪未操作 Git 提交、推送或 staging。
+
+---
+
+# 練功區抖動、路牌與世界距離修正 — 2026-10-18（歷史紀錄）
+
+使用者再次確認：保留目前人物與建築的相對大小及正常走路節奏，縮短各區間的實際距離。下方 2026-10-17 的「0.4 倍人物仍走 3.8 m/s」是已修正的舊設定，不能再當作正常步速。
+
+- 戶外人物與資產維持 0.4 倍；走／跑使用原始人物尺度的 3.8／6.4，換算實際世界為 1.52／2.56 m/s，步頻與原室內人物一致。沒有加速動畫、物理時間或人物。球半徑 24→21.6，製作半徑 60→54，相鄰區中心距離 37.70→33.93 m（縮短 10%）。完整道路、海岸、橋梁、串流區塊與地圖已重建。
+- 大學區中央原有路面間隙補上實體鋪面，避免正常步速撞上路緣。實際控制器 24 趟雙向跨區行走全數通過，耗時 22.40–25.05 秒；174 項檢查確認每條實際路程比修正前短、地面連續，且未跑步或中途傳送。不能沿用舊版加速後的 10 秒數字宣稱正常行走時間。
+- 練功區鏡頭和角色顯示共用插值位置，鏡頭先跟隨位移，再平滑轉向／避障；起身與傳送重設插值。原先 45／90 FPS 下約 3.6–4 cm 的鏡頭距離振盪，原生實測修正後低於 0.002 mm。30／45／90 FPS 都通過。213 項家具／閱讀互動與 44 項室內往返檢查通過；往返測試退出時仍有既有資源清理警告，不能聲稱整次程序零錯誤。
+- 橋梁、步道與入口牌的支桿止於牌面下緣；橋牌與步道牌提供兩側正常朝向文字。110 項牌面／支桿檢查及原生正反面實拍通過。
+- 載入期簡化背牆原有破碎條紋，初始場景改用既有完整背牆幾何，沿用內嵌啟動材質，不預載整個細節包；只增加約 75 KB。完整來源模型未修改。
+- 手機／桌面 Web 已重建，兩版各 19 包、416／418 個匯入資源掛載通過；發布包 `cf-dfe7e29832db62ff` 的 152 檔案及 9 個分片原檔 SHA-256 重組驗證通過。此處不代表手機真機幀率驗收。
+
+已部署至 https://star-path-little-world.star-path-little-world.workers.dev/ ，Cloudflare 版本 `7e6e69ed-e89b-4dae-9796-85dc23fb1b24`。線上版本清單一致，6 個入口／資源清單 SHA-256 一致，150 個公開資源皆回應 200；`_headers` 是伺服器設定，不作公開資源驗收。
+
+本輪原生畫面與前後量測：`deliverables/world-correction/`，線上驗證見 `public-verification.json`，交付紀錄見 `delivery.json`。本輪未操作 Git 提交、推送或 staging。
+
+---
+
+# 手機畫面、移動與人物比例更新 — 2026-10-17（歷史紀錄）
+
+已部署至既有免費 Cloudflare 網址：https://star-path-little-world.star-path-little-world.workers.dev/ 。本輪沒有操作 GitHub、推送、提交或修改 Git staging。
+
+- 戶外球體半徑 24，場景與人物同為 0.4 倍；碰撞、跳躍、鏡頭及座椅互動一致縮放。走路 3.8／跑步 6.4 不變，相鄰區 24 趟實測約 10～11 秒；室內保留原尺寸。
+- 手機／平板隱藏桌面側欄，使用收合選單、虛擬搖桿、螢幕安全區、全圖視窗與全螢幕入口，新增 standalone manifest。全螢幕成功進入及手機真機 FPS 尚未驗證。
+- 移動顯示插值、緊湊小地圖、手機植被與地面可見性，以及背景下載預算與依賴重試修正；不以桌面量測保證手機順跑。
+- 發布套件 `cf-d73e2d2b92ac5688`，Cloudflare 版本 `d21e2aef-8d02-4bdc-98f3-159650b66905`。完整檢查與線上驗證見 [本輪報告](deliverables/mobile-smooth-screen/README.md)。
+
+以下保留 2026-10-14 歷史紀錄，並非目前尺度或 GitHub 操作指示。
+
+# 球形生態世界重建與展館行走鏡頭 — 2026-10-14
+
+**使用者要求先推送備份，後續繼續。** 原始碼與已生成的世界已納入本次備份；新版 Web／Windows 發布與瀏覽器驗收尚待完成。完整驗證數字與接續步驟見 [重建備份進度](docs/world-redesign-checkpoint.md)。
+
+統一Globe、Neighborhood、Stations、串流細節、碰撞與地圖的世界座標。保留完整六方向球面與12條跨海連接，半徑48→600m；10m距離的地面下降從1.04m降為8.3cm，20m為33.3cm。
+
+六區擴展為濱湖草甸、岩岸港灣、砂岩高地、山地針葉林、秋季混合林與蘆葦濕地。手工地形脊線12–28m、外圍湖泊、岩層、林群和山徑皆有實際地形碰撞；港灣保留碼頭與船舶的水域。海岸、外湖與步道共用資料產生小地圖。
+
+重建48棟建築外觀、3款真尺寸車輛、3種船舶與4種樹木；新車船、植物可編輯Blender來源與生成器包含於儲存庫。18輛道路車依真車長避讓；船舶使用完整船體尺度及碼頭繫纜。六站抵達區、入口、招牌與01–06地圖站號同源。展館相機修正位置平滑與注視點不同步造成的行走震盪。小地圖的共線清理改用線性流程並剔除視野外球面區域，保留原投影精度。
+
+實際原生GPU畫面與驗證報告保存在本機 `deliverables/world-redesign/`、`deliverables/vehicles/`、`deliverables/vessels/`；重建來源與操作方式見 `game/README.md`。發布前須重建Web與Windows包並驗證來源一致。
+
+---
+
 # 練功區家具互動、閱讀與湖岸石修正 — 2026-09-29
 
 湖邊原本皺裂狀的物件是 `bank_stones` 岸石，原網格變形過大並有反向面。已改成三顆低矮圓石，更新大世界原有 37 組配置；地形、水面、植栽與其餘世界配置保持不變。前後實拍及接地檢查在 `deliverables/lake-bank-revision/`。
@@ -192,3 +408,13 @@ Web 的 18 項既有操作及 66 項新增可見游標檢查全部通過，error
 ## 保留的限制
 
 場館仍是入口預覽，網站與帳號尚未整合。汽車為環境交通，不可駕駛。樹木是風格化植物幾何，非寫實掃描。瀏覽器首次需載入引擎與大型角色資源，本輪不承諾所有裝置的幀率。
+
+---
+
+<!-- recommendations-local-20261025 -->
+# 選校研究所推薦系統 — 2026-10-25（本機候選，整合驗證進行中）
+
+- 以完成量表或手選學類，搭配單份成績建立 115 年校系推薦；提供興趣／均衡／成績三檔排序，同層只按校系編號陳列。缺資料另列，沒有錄取率或心理適配百分比。
+- TypeScript host 已完成按需資料載入、64 校大學館對照、原生面板協定、私人設定與校系收藏；Firestore 僅做本機 emulator 驗證，未發布正式規則。
+- Typecheck、7 檔 70 項單元／回歸、2 檔 11 項 emulator 測試通過；/admissions 靜態網站建置成功。房間、原生／Web bridge 與候選包驗證另行追加，不由這些結果代替。
+- 架構、演算法、資料界線及後續證據見 [推薦室技術說明](docs/recommendation-room.md)。

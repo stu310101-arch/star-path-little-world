@@ -1,0 +1,144 @@
+{
+	"authoring_radius": 54.0,
+	"build": {
+		"authoring_source_cleanup": {
+			"editable_sources_preserved": true,
+			"permanent_collision_preserved": true,
+			"removed_instanced_triangles": 0,
+			"removed_nodes": 0,
+			"scope": "explicitly marked obsolete hidden facade/furniture source copies"
+		},
+		"chunk_count": 0,
+		"chunk_target_nodes": 80,
+		"chunk_target_triangles": 45000,
+		"material_optimization": {
+			"standard_material_reuses": 586,
+			"standard_material_sources": 663,
+			"standard_material_unique": 77,
+			"texture_aliases": {}
+		},
+		"max_chunk_bytes": 0,
+		"max_chunk_mesh_triangles": 0,
+		"max_chunk_nodes": 0,
+		"mobile_overview_tiles": {
+			"authored_cell_metres": 16.0,
+			"geometry_unchanged": true,
+			"physical_cell_metres": 6.4,
+			"source_meshes": 18,
+			"tiles": 344,
+			"triangles_preserved": 649900
+		},
+		"mobile_render_lod": {
+			"changed_meshes": 0,
+			"collision_changed": false,
+			"connected_lod_floor": 0.4,
+			"foliage": {
+				"keep_fraction": 0.42,
+				"leaf_components_after": 0,
+				"leaf_components_before": 0,
+				"meshes_reduced": 0,
+				"original_bounds_preserved": true
+			},
+			"mobile_instanced_triangles": 0,
+			"source_instanced_triangles": 0,
+			"walkable_surface_geometry_changed": false
+		},
+		"overview_color_batching": {
+			"baked_surfaces": 537,
+			"baked_vertices": 1698003,
+			"max_added_color_error": 0.00392156862745098,
+			"scope": "opaque Compatibility static overview copies"
+		},
+		"overview_foliage_lod": {
+			"keep_fraction": 0.22,
+			"leaf_components_after": 0,
+			"leaf_components_before": 0,
+			"meshes_reduced": 0,
+			"original_bounds_preserved": true
+		},
+		"overview_input_triangles": 960420,
+		"overview_meshes": 81,
+		"overview_shader_normalization": {
+			"neutral_color_surfaces": 145,
+			"normalized_materials": 593,
+			"normalized_meshes": 238,
+			"skipped_complex_meshes": 0
+		},
+		"overview_triangles": 766904,
+		"overview_vertices": 673174,
+		"permanent_collision_bodies": 541,
+		"protected_surface_meshes": 343,
+		"protected_surface_triangles": 503096
+	},
+	"districts": [
+		{
+			"center": [
+				0.0,
+				21.6000003814697,
+				0.0
+			],
+			"chunks": [],
+			"detail_nodes": 0,
+			"id": "counseling",
+			"overview_triangles": 127364
+		},
+		{
+			"center": [
+				21.6000003814697,
+				0.0,
+				0.0
+			],
+			"chunks": [],
+			"detail_nodes": 0,
+			"id": "admissions",
+			"overview_triangles": 135955
+		},
+		{
+			"center": [
+				0.0,
+				0.0,
+				-21.6000003814697
+			],
+			"chunks": [],
+			"detail_nodes": 0,
+			"id": "recommendations",
+			"overview_triangles": 123106
+		},
+		{
+			"center": [
+				-21.6000003814697,
+				0.0,
+				0.0
+			],
+			"chunks": [],
+			"detail_nodes": 0,
+			"id": "universities",
+			"overview_triangles": 126491
+		},
+		{
+			"center": [
+				0.0,
+				0.0,
+				21.6000003814697
+			],
+			"chunks": [],
+			"detail_nodes": 0,
+			"id": "life",
+			"overview_triangles": 121509
+		},
+		{
+			"center": [
+				0.0,
+				-21.6000003814697,
+				0.0
+			],
+			"chunks": [],
+			"detail_nodes": 0,
+			"id": "wordking",
+			"overview_triangles": 132479
+		}
+	],
+	"outdoor_scale": 0.4,
+	"radius": 21.6,
+	"version": 2
+}

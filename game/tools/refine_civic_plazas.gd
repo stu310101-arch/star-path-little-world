@@ -2,6 +2,7 @@ extends RefCounted
 
 const Geo = preload("res://scripts/planet_geometry.gd")
 const Routes = preload("res://scripts/world_routes.gd")
+const Arrivals = preload("res://tools/world_station_arrivals.gd")
 
 # A small entrance court, kept inside the existing civic paving footprint.
 # Furniture is placed only where road, path, portal and building clearances hold.
@@ -31,7 +32,7 @@ static func build(builder: SceneTree,parent: Node3D,up: Vector3,radius: float,in
 	var seats: int = 0
 	var planters: int = 0
 	for side_sign: float in [-1.0,1.0]:
-		var candidates: Array[Vector2] = [centre+Vector2(side_sign*2.55,.1),centre+Vector2(side_sign*3.15,.6),centre+Vector2(side_sign*2.55,1.5),centre+Vector2(side_sign*4.1,-.65)]
+		var candidates: Array[Vector2] = [centre+Vector2(side_sign*4.9,-1.0),centre+Vector2(side_sign*5.8,-.8),centre+Vector2(side_sign*4.9,2.2)]
 		for location: Vector2 in candidates:
 			if not clear_for_prop(location,.78,centre,info,radius,occupied):
 				continue
@@ -67,6 +68,8 @@ static func anchor_transform(up: Vector3,radius: float,point: Vector2) -> Transf
 	return Transform3D(Basis(Quaternion(up,n))*Geo.frame(up),n*(radius+.20))
 
 static func clear_for_prop(point: Vector2,clearance: float,centre: Vector2,info: Dictionary,radius: float,occupied: Array[Vector2]) -> bool:
+	if Arrivals.reserves_circulation(point, clearance, centre, str(info.station)):
+		return false
 	if point.distance_to(centre)<1.5+clearance:
 		return false
 	for existing: Vector2 in occupied:
@@ -136,27 +139,42 @@ static func bench(st: SurfaceTool,transform: Transform3D,accent: Color) -> void:
 	for x: float in [-.72,.72]:
 		box(st,transform,Vector3(x,.66,.025),Vector3(.055,.055,.47),metal.lerp(accent,.2))
 
-static func planter(st: SurfaceTool,transform: Transform3D,accent: Color) -> void:
-	box(st,transform,Vector3(0,.22,0),Vector3(.59,.44,.59),Color("8c968c").lerp(accent,.16))
-	box(st,transform,Vector3(0,.405,0),Vector3(.62,.065,.62),accent.darkened(.16))
-	box(st,transform,Vector3(0,.447,0),Vector3(.48,.025,.48),Color("594f3e"))
-	var foliage: SphereMesh = SphereMesh.new()
-	foliage.radius=.22
-	foliage.height=.35
-	foliage.radial_segments=8
-	foliage.rings=4
-	var crown: Transform3D = transform
-	crown.origin=transform*Vector3(0,.58,0)
-	append_mesh(st,foliage,crown,Color("526e42"))
-	var bloom: SphereMesh = SphereMesh.new()
-	bloom.radius=.055
-	bloom.height=.075
-	bloom.radial_segments=6
-	bloom.rings=3
-	for offset: Vector3 in [Vector3(-.12,.70,.03),Vector3(.08,.73,-.09),Vector3(.11,.68,.12)]:
-		var petal: Transform3D = transform
-		petal.origin=transform*offset
-		append_mesh(st,bloom,petal,accent.lightened(.15))
+static func planter(st: SurfaceTool,transform: Transform3D,_accent: Color) -> void:
+	# Retain the existing pedestal and collider envelope. Fine evergreen blades
+	# replace the solid spherical crown and floating coloured flower balls.
+	box(st,transform,Vector3(0,.22,0),Vector3(.59,.44,.59),Color("353f3b"))
+	box(st,transform,Vector3(0,.421,0),Vector3(.62,.033,.62),Color("5a6358"))
+	box(st,transform,Vector3(0,.447,0),Vector3(.48,.025,.48),Color("302c23"))
+	for clump: int in range(5):
+		var phase: float = TAU*float(clump)/5.0
+		var origin: Vector3 = Vector3(cos(phase)*.105,.464,sin(phase)*.105)
+		for leaf: int in range(9):
+			var angle: float = float(leaf)*2.399+phase
+			var outward: Vector3 = Vector3(cos(angle),0,sin(angle))
+			var side: Vector3 = Vector3(-sin(angle),0,cos(angle))
+			var height: float = .28+.13*(.5+.5*sin(leaf*1.7+clump))
+			var reach: float = .08+.035*sin(leaf*2.1+clump)
+			var color: Color = Color("506344").lightened(.08*sin(leaf*1.9+clump))
+			for segment: int in range(3):
+				var t0: float = float(segment)/3.0
+				var t1: float = float(segment+1)/3.0
+				var a: Vector3 = origin+Vector3.UP*height*t0+outward*reach*t0*t0
+				var b: Vector3 = origin+Vector3.UP*height*t1+outward*reach*t1*t1
+				var w0: float = .017*(1.0-t0)
+				var w1: float = .017*(1.0-t1)
+				leaf_blade(st,transform,a-side*w0,a+side*w0,b+side*w1,b-side*w1,color)
+
+static func leaf_blade(st: SurfaceTool,transform: Transform3D,a: Vector3,b: Vector3,c: Vector3,d: Vector3,color: Color) -> void:
+	var normal: Vector3 = (b-a).cross(c-a).normalized()
+	# Both sides share the existing civic material and mesh batch; no alpha
+	# textures, added per-leaf nodes or extra draw surfaces are introduced.
+	for side: float in [1.0,-1.0]:
+		var points: Array[Vector3] = [a,c,b,a,d,c]
+		if side<0.0: points = [a,b,c,a,c,d]
+		for point: Vector3 in points:
+			st.set_normal((transform.basis*normal*side).normalized())
+			st.set_color(color)
+			st.add_vertex(transform*point)
 
 static func box(st: SurfaceTool,transform: Transform3D,centre: Vector3,size: Vector3,color: Color) -> void:
 	var mesh: BoxMesh = BoxMesh.new()

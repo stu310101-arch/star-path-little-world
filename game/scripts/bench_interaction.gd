@@ -50,23 +50,26 @@ func available() -> bool:
 	return destinations == null or not destinations.visible
 
 func front_point(seat: StaticBody3D, distance: float = .95) -> Vector3:
-	return seat.to_global(Vector3(0, 0, -distance))
+	return seat.global_transform.orthonormalized() * Vector3(0, 0, -distance * player.avatar_scale)
 
 func safe_stand(seat: StaticBody3D) -> Dictionary:
 	# Prefer the centre of the open front. Other candidates remain in front of
 	# the same bench, never behind its back or across a perimeter railing.
 	for offset: Vector3 in [Vector3(0,0,-.95), Vector3(-.42,0,-1.08), Vector3(.42,0,-1.08), Vector3(0,0,-1.35)]:
-		var raw: Vector3 = seat.to_global(offset)
+		# Body transforms stay orthonormal; scale physical clearance distances
+		# with the avatar, just as the rendered model and capsule are scaled.
+		var frame: Transform3D = seat.global_transform.orthonormalized()
+		var raw: Vector3 = frame * (offset * player.avatar_scale)
 		var hit: Dictionary = player.ground_at(raw.normalized())
 		if hit.is_empty():
 			continue
-		var point: Vector3 = (hit.position as Vector3) + raw.normalized() * .025
-		if absf(point.length() - seat.global_position.length()) > .35:
+		var point: Vector3 = (hit.position as Vector3) + raw.normalized() * .025 * player.avatar_scale
+		if absf(point.length() - seat.global_position.length()) > .35 * player.avatar_scale:
 			continue
 		if not capsule_clear(point):
 			continue
-		var from: Vector3 = seat.to_global(Vector3(0,.85,-.30))
-		var to: Vector3 = point + point.normalized() * .85
+		var from: Vector3 = frame * (Vector3(0,.85,-.30) * player.avatar_scale)
+		var to: Vector3 = point + point.normalized() * .85 * player.avatar_scale
 		var query := PhysicsRayQueryParameters3D.create(from, to, 8)
 		query.exclude = [seat.get_rid(), player.get_rid()]
 		if player.get_world_3d().direct_space_state.intersect_ray(query).is_empty():
@@ -75,17 +78,17 @@ func safe_stand(seat: StaticBody3D) -> Dictionary:
 
 func capsule_clear(point: Vector3) -> bool:
 	var capsule := CapsuleShape3D.new()
-	capsule.radius = .28
-	capsule.height = 1.6
+	capsule.radius = .28 * player.avatar_scale
+	capsule.height = 1.6 * player.avatar_scale
 	var query := PhysicsShapeQueryParameters3D.new()
 	query.shape = capsule
-	query.transform = Transform3D(PlanetGeometry.frame(point.normalized()), point + point.normalized() * .84)
+	query.transform = Transform3D(PlanetGeometry.frame(point.normalized()), point + point.normalized() * .84 * player.avatar_scale)
 	query.collision_mask = 8
 	query.exclude = [player.get_rid()]
 	return player.get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty()
 
 func can_approach(seat: StaticBody3D) -> bool:
-	var local: Vector3 = seat.to_local(player.global_position)
+	var local: Vector3 = (seat.global_transform.orthonormalized().affine_inverse() * player.global_position) / player.avatar_scale
 	if local.z > -.34 or absf(local.x) > 1.15 or local.length() > 1.85:
 		return false
 	var target: Dictionary = safe_stand(seat)
@@ -93,11 +96,11 @@ func can_approach(seat: StaticBody3D) -> bool:
 		return false
 	# A swept capsule rules out sitting through a fence or adjoining furniture.
 	var capsule := CapsuleShape3D.new()
-	capsule.radius = .27
-	capsule.height = 1.6
+	capsule.radius = .27 * player.avatar_scale
+	capsule.height = 1.6 * player.avatar_scale
 	var query := PhysicsShapeQueryParameters3D.new()
 	query.shape = capsule
-	query.transform = Transform3D(player.global_basis, player.global_position + player.up_direction * .84)
+	query.transform = Transform3D(player.global_basis, player.global_position + player.up_direction * .84 * player.avatar_scale)
 	query.motion = (target.point as Vector3) - player.global_position
 	query.collision_mask = 8
 	query.exclude = [player.get_rid()]
@@ -108,7 +111,7 @@ func refresh_nearest() -> void:
 	nearest = null
 	if state != &"idle" or not available() or player.needs_settle or player.jump_state != &"grounded":
 		return
-	var distance: float = 1.85
+	var distance: float = 1.85 * player.avatar_scale
 	for seat: StaticBody3D in seats:
 		var candidate: float = seat.global_position.distance_to(player.global_position)
 		if candidate < distance and can_approach(seat):
@@ -136,7 +139,7 @@ func interact() -> bool:
 		return false
 	if pose == null:
 		pose = load("res://scripts/bench_pose.gd").new() as RefCounted
-		pose.call("configure", player.visual, player.locomotion_model)
+		pose.call("configure", player.visual, player.locomotion_model, nearest.global_basis.get_scale().x, player.avatar_scale)
 	active = nearest
 	nearest = null
 	seat_transform = active.global_transform.orthonormalized()
@@ -204,6 +207,7 @@ func cancel() -> void:
 	player.global_basis = Basis(player.heading.cross(up).normalized(), up, -player.heading)
 	var local_facing: Vector3 = player.global_basis.inverse() * facing
 	player.visual.rotation = Vector3(0, atan2(local_facing.x, local_facing.z), 0)
+	player.reset_render_interpolation()
 	state = &"idle"
 	active = null
 	nearest = null

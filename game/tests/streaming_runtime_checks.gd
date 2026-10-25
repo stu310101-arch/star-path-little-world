@@ -16,6 +16,7 @@ var a: Vector3 = Vector3(0, 48, 0)
 var b: Vector3 = Vector3(100, 48, 0)
 var ground_samples: Array[Vector3] = []
 var before_ground: Array[Vector3] = []
+var ground_radius: float = 48.0
 
 func _initialize() -> void:
 	call_deferred("run")
@@ -126,7 +127,7 @@ func ground_positions() -> Array[Vector3]:
 	var positions: Array[Vector3] = []
 	var space: PhysicsDirectSpaceState3D = world.get_world_3d().direct_space_state
 	for normal: Vector3 in ground_samples:
-		var hit: Dictionary = Geo.ground_probe(space, normal, 48.0)
+		var hit: Dictionary = Geo.ground_probe(space, normal, ground_radius)
 		positions.append(hit.position as Vector3 if not hit.is_empty() else Vector3.ZERO)
 	return positions
 
@@ -149,10 +150,12 @@ func run() -> void:
 	setup_fixture()
 	await physics_frame
 	await physics_frame
-	var directions: Array[Vector3] = Routes.directions()
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
+	ground_radius = float(layout.radius)
 	for edge: Vector2i in Routes.bridge_edges():
+		var endpoints: Array[Vector3] = Routes.bridge_endpoints(edge, ground_radius)
 		for step: int in range(33):
-			ground_samples.append(directions[edge.x].slerp(directions[edge.y], .35 + .30 * float(step) / 32.0))
+			ground_samples.append(endpoints[0].slerp(endpoints[1], float(step) / 32.0))
 	check_ground(false)
 	await advance(true, a, 4)
 	check("Initial panorama loads zero high-detail chunks", int(streaming.call("metrics").loaded_chunks) == 0)

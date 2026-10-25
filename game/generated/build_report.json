@@ -3,43 +3,43 @@
 		"districts": [
 			{
 				"description": "市政湖的睡蓮與觀魚淺灘；開闊中央水面保留橋景，兩側香蒲和卵石勾出水岸。",
-				"fish": 6.0,
-				"plant_clusters": 16.0,
+				"fish": 6,
+				"plant_clusters": 16,
 				"station": "counseling"
 			},
 			{
 				"description": "商務碼頭旁的河口蘆葦帶；河灣卵石、岸蕨與沿水道巡游的魚群，保留碼頭出入和河面視線。",
-				"fish": 9.0,
-				"plant_clusters": 12.0,
+				"fish": 9,
+				"plant_clusters": 12,
 				"station": "admissions"
 			},
 			{
 				"description": "文化院落東側的靜水花池；淡色睡蓮與蕨類石岸形成閱讀散步時的觀景焦點。",
-				"fish": 6.0,
-				"plant_clusters": 16.0,
+				"fish": 6,
+				"plant_clusters": 16,
 				"station": "recommendations"
 			},
 			{
 				"description": "大學校園的清淺溪谷；低矮蕨叢和成組溪石沿水流排列，小魚在跨溪步道兩側游動。",
-				"fish": 9.0,
-				"plant_clusters": 14.0,
+				"fish": 9,
+				"plant_clusters": 14,
 				"station": "universities"
 			},
 			{
 				"description": "住宅區的小型睡蓮池；近岸花葉與低矮溪石親切可近，香蒲集中在對岸，保留環湖散步空間。",
-				"fish": 6.0,
-				"plant_clusters": 11.0,
+				"fish": 6,
+				"plant_clusters": 11,
 				"station": "life"
 			},
 			{
 				"description": "濕地工坊的香蒲保育池；密疏交錯的挺水植物、浮葉和淺水魚群，木棧道穿過濕地仍保持完整通行寬度。",
-				"fish": 9.0,
-				"plant_clusters": 20.0,
+				"fish": 9,
+				"plant_clusters": 20,
 				"station": "wordking"
 			}
 		],
-		"fish": 45.0,
-		"plant_clusters": 89.0,
+		"fish": 45,
+		"plant_clusters": 89,
 		"walkable_water": false
 	},
 	"assets": [
@@ -53,7 +53,7 @@
 				"asset": "commercial/Models/GLB format/building-skyscraper-a.glb",
 				"door_height": 2.0499998220139,
 				"door_inward_correction": 0.0,
-				"door_samples": 40.0,
+				"door_samples": 40,
 				"door_width": 0.950000035183299,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.00925921501569,
@@ -66,7 +66,7 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.184864863753319,
-						0.00000000000000136,
+						0.0000000000000013643654136908,
 						-0.5
 					],
 					"size": [
@@ -87,7 +87,7 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.0700000002980232,
-						0.00000000000000046,
+						0.000000000000000461721259438345,
 						-0.5
 					],
 					"size": [
@@ -96,9 +96,9 @@
 						0.0
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1396.0,
-				"triangles_before": 1292.0
+				"surfaces": 1,
+				"triangles_after": 1396,
+				"triangles_before": 1292
 			},
 			"height": 9.40925921501569,
 			"kind": "building",
@@ -122,7 +122,7 @@
 				"asset": "commercial/Models/GLB format/building-b.glb",
 				"door_height": 2.04999990780411,
 				"door_inward_correction": 0.0,
-				"door_samples": 40.0,
+				"door_samples": 40,
 				"door_width": 0.95000003457346,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.49024660660207,
@@ -135,13 +135,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.257835000753403,
-						0.00000000000000037,
+						0.000000000000000375274029753637,
 						0.0499999970197678
 					],
 					"size": [
 						0.245670005679131,
 						0.530129969120026,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
 				"source_door_centre": [
@@ -156,18 +156,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.204999998211861,
-						0.00000000000000019,
+						0.000000000000000191130456683981,
 						0.0499999970197678
 					],
 					"size": [
 						0.140000000596046,
 						0.269999980926514,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1344.0,
-				"triangles_before": 1276.0
+				"surfaces": 1,
+				"triangles_after": 1344,
+				"triangles_before": 1276
 			},
 			"height": 6.49024660660207,
 			"kind": "building",
@@ -178,7 +178,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-b.glb",
 			"scale": 3.86697607608743,
 			"station": "counseling",
-			"up_dot": 0.999999940395355,
+			"up_dot": 1.0,
 			"yaw": 0.0
 		},
 		{
@@ -191,7 +191,7 @@
 				"asset": "commercial/Models/GLB format/building-d.glb",
 				"door_height": 2.04999986170616,
 				"door_inward_correction": 0.0,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.949999953902053,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.79960469268906,
@@ -210,7 +210,7 @@
 					"size": [
 						0.307087481021881,
 						0.662662446498871,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
 				"source_door_centre": [
@@ -231,12 +231,12 @@
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1156.0,
-				"triangles_before": 1100.0
+				"surfaces": 1,
+				"triangles_after": 1156,
+				"triangles_before": 1100
 			},
 			"height": 5.79960469268906,
 			"kind": "building",
@@ -260,20 +260,20 @@
 				"asset": "suburban-edited/house-e-red.glb",
 				"door_height": 2.04999981660109,
 				"door_inward_correction": 0.0,
-				"door_samples": 20.0,
+				"door_samples": 20,
 				"door_width": 0.950000034387296,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.96011392061265,
 				"height": 5.02261416132373,
 				"refined_door_centre": [
 					0.0,
-					0.00000000000000027,
+					0.000000000000000270716785670378,
 					0.456
 				],
 				"refined_panel_bounds": {
 					"min": [
 						-0.176428571343422,
-						0.00000000000000079,
+						0.000000000000000790021859492133,
 						0.455999970436096
 					],
 					"size": [
@@ -284,7 +284,7 @@
 				},
 				"source_door_centre": [
 					0.0,
-					0.00000000000000027,
+					0.000000000000000270716785670378,
 					0.456
 				],
 				"source_door_size": [
@@ -294,7 +294,7 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.0700000002980232,
-						0.00000000000000045,
+						0.00000000000000045486061020294,
 						0.455999970436096
 					],
 					"size": [
@@ -303,9 +303,9 @@
 						0.0
 					]
 				},
-				"surfaces": 2.0,
-				"triangles_after": 1925.0,
-				"triangles_before": 1731.0
+				"surfaces": 2,
+				"triangles_after": 1925,
+				"triangles_before": 1731
 			},
 			"height": 5.02261416132373,
 			"kind": "building",
@@ -316,7 +316,7 @@
 			"path": "res://assets/kenney/suburban-edited/house-e-red.glb",
 			"scale": 2.69230779106095,
 			"station": "counseling",
-			"up_dot": 1.0,
+			"up_dot": 0.999999940395355,
 			"yaw": 180.0
 		},
 		{
@@ -329,7 +329,7 @@
 				"asset": "suburban/Models/GLB format/building-type-k.glb",
 				"door_height": 2.04999982371568,
 				"door_inward_correction": 0.0,
-				"door_samples": 20.0,
+				"door_samples": 20,
 				"door_width": 0.949999802976343,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.71483365718953,
@@ -342,7 +342,7 @@
 				"refined_panel_bounds": {
 					"min": [
 						0.059444472193718,
-						0.00000000000000046,
+						0.000000000000000464637276238386,
 						0.459999978542328
 					],
 					"size": [
@@ -363,7 +363,7 @@
 				"source_panel_bounds": {
 					"min": [
 						0.133118867874146,
-						0.0000000000000002,
+						0.000000000000000202284332117213,
 						0.459999978542328
 					],
 					"size": [
@@ -372,9 +372,9 @@
 						0.0
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1136.0,
-				"triangles_before": 1024.0
+				"surfaces": 1,
+				"triangles_after": 1136,
+				"triangles_before": 1024
 			},
 			"height": 5.51483365718953,
 			"kind": "building",
@@ -385,7 +385,7 @@
 			"path": "res://assets/kenney/suburban/Models/GLB format/building-type-k.glb",
 			"scale": 3.30550844961877,
 			"station": "counseling",
-			"up_dot": 0.999999940395355,
+			"up_dot": 1.0,
 			"yaw": 180.0
 		},
 		{
@@ -398,7 +398,7 @@
 				"asset": "commercial/Models/GLB format/building-f.glb",
 				"door_height": 2.04999986973587,
 				"door_inward_correction": 0.0857759704431389,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.949999950710869,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.02108906270062,
@@ -411,13 +411,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.35324564576149,
-						0.00000000000000001,
+						0.0000000000000000168598053489314,
 						-0.345000207424164
 					],
 					"size": [
 						0.374034881591797,
 						0.807127892971039,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
 				"source_door_centre": [
@@ -432,18 +432,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.319999992847443,
-						0.0,
+						0.00000000000000000563993289693611,
 						-0.345000207424164
 					],
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1890.0,
-				"triangles_before": 1794.0
+				"surfaces": 1,
+				"triangles_after": 1890,
+				"triangles_before": 1794
 			},
 			"height": 6.32108906270062,
 			"kind": "building",
@@ -467,7 +467,7 @@
 				"asset": "commercial/Models/GLB format/building-h.glb",
 				"door_height": 2.04999988014534,
 				"door_inward_correction": 0.0380465018366689,
-				"door_samples": 40.0,
+				"door_samples": 40,
 				"door_width": 0.949999976951026,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.98521954434126,
@@ -480,13 +480,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.344376862049103,
-						0.00000000000000131,
+						0.00000000000000131726127621928,
 						-0.356054335832596
 					],
 					"size": [
 						0.361279398202896,
 						0.779602885246277,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
 				"source_door_centre": [
@@ -501,18 +501,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.248206049203873,
-						0.00000000000000045,
+						0.000000000000000456207286709956,
 						-0.356054335832596
 					],
 					"size": [
 						0.140000000596046,
 						0.269999980926514,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1616.0,
-				"triangles_before": 1512.0
+				"surfaces": 1,
+				"triangles_after": 1616,
+				"triangles_before": 1512
 			},
 			"height": 5.38521954434126,
 			"kind": "building",
@@ -536,7 +536,7 @@
 				"asset": "commercial/Models/GLB format/building-d.glb",
 				"door_height": 2.04999979716903,
 				"door_inward_correction": 0.0,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.949999944682464,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.70679726686296,
@@ -555,7 +555,7 @@
 					"size": [
 						0.285662770271301,
 						0.616430163383484,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
 				"source_door_centre": [
@@ -576,12 +576,12 @@
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1156.0,
-				"triangles_before": 1100.0
+				"surfaces": 1,
+				"triangles_after": 1156,
+				"triangles_before": 1100
 			},
 			"height": 6.00679726686296,
 			"kind": "building",
@@ -605,7 +605,7 @@
 				"asset": "commercial/Models/GLB format/building-skyscraper-c.glb",
 				"door_height": 2.04999981008324,
 				"door_inward_correction": 0.0,
-				"door_samples": 60.0,
+				"door_samples": 60,
 				"door_width": 0.950000037252904,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.26252721863252,
@@ -618,13 +618,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.245316460728645,
-						0.00000000000000106,
+						0.0000000000000010615448881794,
 						-0.446054399013519
 					],
 					"size": [
 						0.490632921457291,
 						1.0587340593338,
-						0.00000005960464477
+						0.0000000596046447753906
 					]
 				},
 				"source_door_centre": [
@@ -639,18 +639,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.120000004768372,
-						0.00000000000000027,
+						0.000000000000000270716785670378,
 						-0.446054399013519
 					],
 					"size": [
 						0.240000009536743,
 						0.269999980926514,
-						0.00000005960464477
+						0.0000000596046447753906
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1832.0,
-				"triangles_before": 1704.0
+				"surfaces": 1,
+				"triangles_after": 1832,
+				"triangles_before": 1704
 			},
 			"height": 10.1625272186325,
 			"kind": "building",
@@ -674,7 +674,7 @@
 				"asset": "commercial/Models/GLB format/building-f.glb",
 				"door_height": 2.04999993310761,
 				"door_inward_correction": 0.0,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.949999952471195,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.73756869776953,
@@ -687,13 +687,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.346213638782501,
-						0.00000000000000001,
+						0.0000000000000000131813025592254,
 						-0.345000207424164
 					],
 					"size": [
 						0.292427271604538,
 						0.631027281284332,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
 				"source_door_centre": [
@@ -708,18 +708,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.319999992847443,
-						0.0,
+						0.00000000000000000563993289693611,
 						-0.345000207424164
 					],
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1890.0,
-				"triangles_before": 1794.0
+				"surfaces": 1,
+				"triangles_after": 1890,
+				"triangles_before": 1794
 			},
 			"height": 7.23756869776953,
 			"kind": "building",
@@ -743,7 +743,7 @@
 				"asset": "commercial/Models/GLB format/building-f.glb",
 				"door_height": 2.04999990142174,
 				"door_inward_correction": 0.14484271806603,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.95,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.13922254808858,
@@ -756,13 +756,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.347093760967255,
-						0.00000000000000001,
+						0.0000000000000000190782011814027,
 						-0.345000207424164
 					],
 					"size": [
 						0.423250019550323,
 						0.913328945636749,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
 				"source_door_centre": [
@@ -777,18 +777,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.319999992847443,
-						0.0,
+						0.00000000000000000563993289693611,
 						-0.345000207424164
 					],
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1890.0,
-				"triangles_before": 1794.0
+				"surfaces": 1,
+				"triangles_after": 1890,
+				"triangles_before": 1794
 			},
 			"height": 5.93922254808857,
 			"kind": "building",
@@ -812,7 +812,7 @@
 				"asset": "commercial/Models/GLB format/building-g.glb",
 				"door_height": 2.04999986973587,
 				"door_inward_correction": 0.0,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.949999950710869,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.02108906270062,
@@ -831,7 +831,7 @@
 					"size": [
 						0.374034881591797,
 						0.807127892971039,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
 				"source_door_centre": [
@@ -852,12 +852,12 @@
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 2134.0,
-				"triangles_before": 2006.0
+				"surfaces": 1,
+				"triangles_after": 2134,
+				"triangles_before": 2006
 			},
 			"height": 6.32108906270062,
 			"kind": "building",
@@ -881,7 +881,7 @@
 				"asset": "commercial/Models/GLB format/building-h.glb",
 				"door_height": 2.04999977872985,
 				"door_inward_correction": 0.0,
-				"door_samples": 40.0,
+				"door_samples": 40,
 				"door_width": 0.95,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.86147630990646,
@@ -894,13 +894,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.33983102440834,
-						0.00000000000000117,
+						0.00000000000000117860219451198,
 						-0.356054335832596
 					],
 					"size": [
 						0.323249995708466,
 						0.697539389133453,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
 				"source_door_centre": [
@@ -915,18 +915,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.248206049203873,
-						0.00000000000000045,
+						0.000000000000000456207286709956,
 						-0.356054335832596
 					],
 					"size": [
 						0.140000000596046,
 						0.269999980926514,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1616.0,
-				"triangles_before": 1512.0
+				"surfaces": 1,
+				"triangles_after": 1616,
+				"triangles_before": 1512
 			},
 			"height": 5.66147630990646,
 			"kind": "building",
@@ -950,7 +950,7 @@
 				"asset": "commercial/Models/GLB format/building-i.glb",
 				"door_height": 2.04999984034471,
 				"door_inward_correction": 0.0,
-				"door_samples": 60.0,
+				"door_samples": 60,
 				"door_width": 0.950000067410012,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.01322755391005,
@@ -963,13 +963,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.185581415891647,
-						0.00000000000000013,
+						0.000000000000000133842759724976,
 						-0.589000225067139
 					],
 					"size": [
 						0.371162831783295,
 						0.800930202007294,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
 				"source_door_centre": [
@@ -984,18 +984,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.120000004768372,
-						0.00000000000000004,
+						0.0000000000000000451194631754889,
 						-0.589000225067139
 					],
 					"size": [
 						0.240000009536743,
 						0.269999980926514,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 2682.0,
-				"triangles_before": 2544.0
+				"surfaces": 1,
+				"triangles_after": 2682,
+				"triangles_before": 2544
 			},
 			"height": 6.31322755391005,
 			"kind": "building",
@@ -1006,7 +1006,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-i.glb",
 			"scale": 2.55952370781748,
 			"station": "admissions",
-			"up_dot": 1.00000011920929,
+			"up_dot": 1.0,
 			"yaw": 180.0
 		},
 		{
@@ -1019,7 +1019,7 @@
 				"asset": "commercial/Models/GLB format/building-j.glb",
 				"door_height": 2.04999981691692,
 				"door_inward_correction": 0.0,
-				"door_samples": 62.0,
+				"door_samples": 62,
 				"door_width": 0.950000955464812,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.36511921204569,
@@ -1032,13 +1032,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.260978698730469,
-						0.00000000000000113,
+						0.00000000000000113320938123127,
 						-0.600000262260437
 					],
 					"size": [
 						0.565545916557312,
 						1.22038722038269,
-						0.00000041723251342
+						0.000000417232513427734
 					]
 				},
 				"source_door_centre": [
@@ -1053,18 +1053,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.0982060432434082,
-						0.00000000000000025,
+						0.00000000000000025071264678309,
 						-0.600000262260437
 					],
 					"size": [
 						0.240000233054161,
 						0.269999980926514,
-						0.00000041723251342
+						0.000000417232513427734
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 5634.0,
-				"triangles_before": 5246.0
+				"surfaces": 1,
+				"triangles_after": 5634,
+				"triangles_before": 5246
 			},
 			"height": 5.20901153768366,
 			"kind": "building",
@@ -1075,7 +1075,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-j.glb",
 			"scale": 1.67979456247836,
 			"station": "admissions",
-			"up_dot": 1.0,
+			"up_dot": 0.99999988079071,
 			"yaw": 90.0
 		},
 		{
@@ -1088,7 +1088,7 @@
 				"asset": "commercial/Models/GLB format/building-d.glb",
 				"door_height": 2.04999980638862,
 				"door_inward_correction": 0.0,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.950000009219589,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.67586145825426,
@@ -1107,7 +1107,7 @@
 					"size": [
 						0.279170453548431,
 						0.602420389652252,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
 				"source_door_centre": [
@@ -1128,12 +1128,12 @@
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1156.0,
-				"triangles_before": 1100.0
+				"surfaces": 1,
+				"triangles_after": 1156,
+				"triangles_before": 1100
 			},
 			"height": 6.07586145825426,
 			"kind": "building",
@@ -1157,7 +1157,7 @@
 				"asset": "commercial/Models/GLB format/building-skyscraper-b.glb",
 				"door_height": 2.04999982437917,
 				"door_inward_correction": 0.0,
-				"door_samples": 40.0,
+				"door_samples": 40,
 				"door_width": 0.94999998403447,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.28703704023014,
@@ -1170,7 +1170,7 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.253333330154419,
-						0.00000000000000186,
+						0.00000000000000186968610590228,
 						-0.5
 					],
 					"size": [
@@ -1191,7 +1191,7 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.0700000002980232,
-						0.00000000000000046,
+						0.000000000000000461721259438345,
 						-0.5
 					],
 					"size": [
@@ -1200,9 +1200,9 @@
 						0.0
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1696.0,
-				"triangles_before": 1592.0
+				"surfaces": 1,
+				"triangles_after": 1696,
+				"triangles_before": 1592
 			},
 			"height": 10.6870370402301,
 			"kind": "building",
@@ -1213,7 +1213,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-skyscraper-b.glb",
 			"scale": 1.87499999201724,
 			"station": "recommendations",
-			"up_dot": 1.0,
+			"up_dot": 1.00000011920929,
 			"yaw": 0.0
 		},
 		{
@@ -1226,7 +1226,7 @@
 				"asset": "commercial/Models/GLB format/building-j.glb",
 				"door_height": 2.04999983408096,
 				"door_inward_correction": 0.0,
-				"door_samples": 62.0,
+				"door_samples": 62,
 				"door_width": 0.950000955464813,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.00036382133611,
@@ -1239,13 +1239,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.161484614014626,
-						0.00000000000000073,
+						0.000000000000000734487573673503,
 						-0.600000262260437
 					],
 					"size": [
 						0.366557538509369,
 						0.790991723537445,
-						0.00000041723251342
+						0.000000417232513427734
 					]
 				},
 				"source_door_centre": [
@@ -1260,18 +1260,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.0982060432434082,
-						0.00000000000000025,
+						0.00000000000000025071264678309,
 						-0.600000262260437
 					],
 					"size": [
 						0.240000233054161,
 						0.269999980926514,
-						0.00000041723251342
+						0.000000417232513427734
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 5634.0,
-				"triangles_before": 5246.0
+				"surfaces": 1,
+				"triangles_after": 5634,
+				"triangles_before": 5246
 			},
 			"height": 6.38808340946326,
 			"kind": "building",
@@ -1295,7 +1295,7 @@
 				"asset": "commercial/Models/GLB format/building-i.glb",
 				"door_height": 2.04999981550944,
 				"door_inward_correction": 0.0,
-				"door_samples": 60.0,
+				"door_samples": 60,
 				"door_width": 0.950000067410012,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.13227516822714,
@@ -1308,13 +1308,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.210000023245811,
-						0.00000000000000015,
+						0.000000000000000151453646724466,
 						-0.589000225067139
 					],
 					"size": [
 						0.420000046491623,
 						0.906315743923187,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
 				"source_door_centre": [
@@ -1329,18 +1329,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.120000004768372,
-						0.00000000000000004,
+						0.0000000000000000451194631754889,
 						-0.589000225067139
 					],
 					"size": [
 						0.240000009536743,
 						0.269999980926514,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 2682.0,
-				"triangles_before": 2544.0
+				"surfaces": 1,
+				"triangles_after": 2682,
+				"triangles_before": 2544
 			},
 			"height": 5.93227516822714,
 			"kind": "building",
@@ -1364,7 +1364,7 @@
 				"asset": "commercial/Models/GLB format/building-j.glb",
 				"door_height": 2.04999981691692,
 				"door_inward_correction": 0.0,
-				"door_samples": 62.0,
+				"door_samples": 62,
 				"door_width": 0.950000955464812,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.36511921204569,
@@ -1377,13 +1377,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.260978698730469,
-						0.00000000000000113,
+						0.00000000000000113320938123127,
 						-0.600000262260437
 					],
 					"size": [
 						0.565545916557312,
 						1.22038722038269,
-						0.00000041723251342
+						0.000000417232513427734
 					]
 				},
 				"source_door_centre": [
@@ -1398,18 +1398,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.0982060432434082,
-						0.00000000000000025,
+						0.00000000000000025071264678309,
 						-0.600000262260437
 					],
 					"size": [
 						0.240000233054161,
 						0.269999980926514,
-						0.00000041723251342
+						0.000000417232513427734
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 5634.0,
-				"triangles_before": 5246.0
+				"surfaces": 1,
+				"triangles_after": 5634,
+				"triangles_before": 5246
 			},
 			"height": 5.20901153768366,
 			"kind": "building",
@@ -1433,7 +1433,7 @@
 				"asset": "commercial/Models/GLB format/building-b.glb",
 				"door_height": 2.04999993085308,
 				"door_inward_correction": 0.0,
-				"door_samples": 40.0,
+				"door_samples": 40,
 				"door_width": 0.950000069146921,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.64492564964556,
@@ -1446,13 +1446,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.271483331918716,
-						0.00000000000000041,
+						0.000000000000000416971132406361,
 						0.0499999970197678
 					],
 					"size": [
 						0.272966682910919,
 						0.589033305644989,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
 				"source_door_centre": [
@@ -1467,18 +1467,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.204999998211861,
-						0.00000000000000019,
+						0.000000000000000191130456683981,
 						0.0499999970197678
 					],
 					"size": [
 						0.140000000596046,
 						0.269999980926514,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1344.0,
-				"triangles_before": 1276.0
+				"surfaces": 1,
+				"triangles_after": 1344,
+				"triangles_before": 1276
 			},
 			"height": 6.14492564964556,
 			"kind": "building",
@@ -1502,7 +1502,7 @@
 				"asset": "commercial/Models/GLB format/building-l.glb",
 				"door_height": 2.04999987921526,
 				"door_inward_correction": 0.0,
-				"door_samples": 60.0,
+				"door_samples": 60,
 				"door_width": 0.950000018380287,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.27932777956913,
@@ -1521,7 +1521,7 @@
 					"size": [
 						0.501511633396149,
 						1.0822092294693,
-						0.00000011920928955
+						0.000000119209289550781
 					]
 				},
 				"source_door_centre": [
@@ -1542,12 +1542,12 @@
 					"size": [
 						0.240000009536743,
 						0.269999980926514,
-						0.00000011920928955
+						0.000000119209289550781
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 3686.0,
-				"triangles_before": 3512.0
+				"surfaces": 1,
+				"triangles_after": 3686,
+				"triangles_before": 3512
 			},
 			"height": 6.57932777956913,
 			"kind": "building",
@@ -1571,7 +1571,7 @@
 				"asset": "commercial/Models/GLB format/building-l.glb",
 				"door_height": 2.04999976893353,
 				"door_inward_correction": 0.0,
-				"door_samples": 60.0,
+				"door_samples": 60,
 				"door_width": 0.950000010503021,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.43791808927171,
@@ -1590,7 +1590,7 @@
 					"size": [
 						0.634264707565308,
 						1.3686763048172,
-						0.00000011920928955
+						0.000000119209289550781
 					]
 				},
 				"source_door_centre": [
@@ -1611,12 +1611,12 @@
 					"size": [
 						0.240000009536743,
 						0.269999980926514,
-						0.00000011920928955
+						0.000000119209289550781
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 3686.0,
-				"triangles_before": 3512.0
+				"surfaces": 1,
+				"triangles_after": 3686,
+				"triangles_before": 3512
 			},
 			"height": 5.83791808927171,
 			"kind": "building",
@@ -1640,7 +1640,7 @@
 				"asset": "commercial/Models/GLB format/building-a.glb",
 				"door_height": 2.04999986170616,
 				"door_inward_correction": -0.0523732729750417,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.950000046097947,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.95428373573256,
@@ -1659,7 +1659,7 @@
 					"size": [
 						0.350957155227661,
 						0.757328510284424,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
 				"source_door_centre": [
@@ -1680,12 +1680,12 @@
 					"size": [
 						0.240000009536743,
 						0.269999980926514,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1340.0,
-				"triangles_before": 1252.0
+				"surfaces": 1,
+				"triangles_after": 1340,
+				"triangles_before": 1252
 			},
 			"height": 5.45428373573256,
 			"kind": "building",
@@ -1709,7 +1709,7 @@
 				"asset": "commercial/Models/GLB format/building-l.glb",
 				"door_height": 2.04999984245468,
 				"door_inward_correction": 0.0,
-				"door_samples": 60.0,
+				"door_samples": 60,
 				"door_width": 0.950000031509063,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.19122205195658,
@@ -1728,7 +1728,7 @@
 					"size": [
 						0.449270844459534,
 						0.969479084014893,
-						0.00000011920928955
+						0.000000119209289550781
 					]
 				},
 				"source_door_centre": [
@@ -1749,12 +1749,12 @@
 					"size": [
 						0.240000009536743,
 						0.269999980926514,
-						0.00000011920928955
+						0.000000119209289550781
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 3686.0,
-				"triangles_before": 3512.0
+				"surfaces": 1,
+				"triangles_after": 3686,
+				"triangles_before": 3512
 			},
 			"height": 6.99122205195658,
 			"kind": "building",
@@ -1765,7 +1765,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-l.glb",
 			"scale": 2.11453746270115,
 			"station": "universities",
-			"up_dot": 1.0,
+			"up_dot": 0.999999940395355,
 			"yaw": 0.0
 		},
 		{
@@ -1778,7 +1778,7 @@
 				"asset": "commercial/Models/GLB format/building-i.glb",
 				"door_height": 2.04999979776996,
 				"door_inward_correction": 0.0,
-				"door_samples": 60.0,
+				"door_samples": 60,
 				"door_width": 0.950000051444483,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.72751327954903,
@@ -1791,13 +1791,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.14509092271328,
-						0.0000000000000001,
+						0.000000000000000104640696680898,
 						-0.589000225067139
 					],
 					"size": [
 						0.290181845426559,
 						0.626181781291962,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
 				"source_door_centre": [
@@ -1812,18 +1812,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.120000004768372,
-						0.00000000000000004,
+						0.0000000000000000451194631754889,
 						-0.589000225067139
 					],
 					"size": [
 						0.240000009536743,
 						0.269999980926514,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 2682.0,
-				"triangles_before": 2544.0
+				"surfaces": 1,
+				"triangles_after": 2682,
+				"triangles_before": 2544
 			},
 			"height": 7.22751327954903,
 			"kind": "building",
@@ -1834,7 +1834,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-i.glb",
 			"scale": 3.27380939372003,
 			"station": "universities",
-			"up_dot": 1.0,
+			"up_dot": 0.999999940395355,
 			"yaw": 0.0
 		},
 		{
@@ -1847,7 +1847,7 @@
 				"asset": "commercial/Models/GLB format/building-l.glb",
 				"door_height": 2.04999991597583,
 				"door_inward_correction": 0.0,
-				"door_samples": 60.0,
+				"door_samples": 60,
 				"door_width": 0.95,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.36743350718167,
@@ -1866,7 +1866,7 @@
 					"size": [
 						0.567499995231628,
 						1.22460520267487,
-						0.00000011920928955
+						0.000000119209289550781
 					]
 				},
 				"source_door_centre": [
@@ -1887,12 +1887,12 @@
 					"size": [
 						0.240000009536743,
 						0.269999980926514,
-						0.00000011920928955
+						0.000000119209289550781
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 3686.0,
-				"triangles_before": 3512.0
+				"surfaces": 1,
+				"triangles_after": 3686,
+				"triangles_before": 3512
 			},
 			"height": 6.16743350718167,
 			"kind": "building",
@@ -1916,7 +1916,7 @@
 				"asset": "commercial/Models/GLB format/building-d.glb",
 				"door_height": 2.05000002765877,
 				"door_inward_correction": 0.0,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.949999958511848,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.61398984103686,
@@ -1935,7 +1935,7 @@
 					"size": [
 						0.267032593488693,
 						0.576228260993958,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
 				"source_door_centre": [
@@ -1956,12 +1956,12 @@
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1156.0,
-				"triangles_before": 1100.0
+				"surfaces": 1,
+				"triangles_after": 1156,
+				"triangles_before": 1100
 			},
 			"height": 6.21398984103686,
 			"kind": "building",
@@ -1985,7 +1985,7 @@
 				"asset": "commercial/Models/GLB format/building-n.glb",
 				"door_height": 2.05000004624498,
 				"door_inward_correction": 0.0,
-				"door_samples": 36.0,
+				"door_samples": 36,
 				"door_width": 0.949999966600848,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.67655176878826,
@@ -1998,7 +1998,7 @@
 				"refined_panel_bounds": {
 					"min": [
 						0.0251428242772818,
-						0.00000000000000027,
+						0.000000000000000275729844289584,
 						-0.690000057220459
 					],
 					"size": [
@@ -2019,7 +2019,7 @@
 				"source_panel_bounds": {
 					"min": [
 						0.0399999916553497,
-						0.00000000000000005,
+						0.0000000000000000507282605805782,
 						-0.690000057220459
 					],
 					"size": [
@@ -2028,9 +2028,9 @@
 						0.0
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 4558.0,
-				"triangles_before": 4350.0
+				"surfaces": 1,
+				"triangles_after": 4558,
+				"triangles_before": 4350
 			},
 			"height": 6.41793083107572,
 			"kind": "building",
@@ -2041,7 +2041,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-n.glb",
 			"scale": 1.50862057802936,
 			"station": "universities",
-			"up_dot": 1.00000011920929,
+			"up_dot": 1.0,
 			"yaw": 90.0
 		},
 		{
@@ -2054,7 +2054,7 @@
 				"asset": "commercial/Models/GLB format/building-a.glb",
 				"door_height": 2.04999979716903,
 				"door_inward_correction": 0.0,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.949999944682464,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.70679726686296,
@@ -2073,7 +2073,7 @@
 					"size": [
 						0.285662770271301,
 						0.616430163383484,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
 				"source_door_centre": [
@@ -2094,12 +2094,12 @@
 					"size": [
 						0.240000009536743,
 						0.269999980926514,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1340.0,
-				"triangles_before": 1252.0
+				"surfaces": 1,
+				"triangles_after": 1340,
+				"triangles_before": 1252
 			},
 			"height": 6.00679726686296,
 			"kind": "building",
@@ -2110,7 +2110,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-a.glb",
 			"scale": 3.32559942543519,
 			"station": "universities",
-			"up_dot": 1.00000011920929,
+			"up_dot": 1.0,
 			"yaw": -90.0
 		},
 		{
@@ -2123,7 +2123,7 @@
 				"asset": "commercial/Models/GLB format/building-n.glb",
 				"door_height": 2.04999995193174,
 				"door_inward_correction": 0.0,
-				"door_samples": 36.0,
+				"door_samples": 36,
 				"door_width": 0.950000009613652,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.73161290744341,
@@ -2136,7 +2136,7 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.00647060060873628,
-						0.0000000000000003,
+						0.000000000000000303414692654118,
 						-0.690000057220459
 					],
 					"size": [
@@ -2157,7 +2157,7 @@
 				"source_panel_bounds": {
 					"min": [
 						0.0399999916553497,
-						0.00000000000000005,
+						0.0000000000000000507282605805782,
 						-0.690000057220459
 					],
 					"size": [
@@ -2166,9 +2166,9 @@
 						0.0
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 4558.0,
-				"triangles_before": 4350.0
+				"surfaces": 1,
+				"triangles_after": 4558,
+				"triangles_before": 4350
 			},
 			"height": 6.13161290744341,
 			"kind": "building",
@@ -2192,7 +2192,7 @@
 				"asset": "commercial/Models/GLB format/building-c.glb",
 				"door_height": 2.04999990555948,
 				"door_inward_correction": 0.0,
-				"door_samples": 40.0,
+				"door_samples": 40,
 				"door_width": 0.950000023610131,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.61103289582012,
@@ -2205,13 +2205,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.311445474624634,
-						0.0000000000000004,
+						0.000000000000000407060714574588,
 						-0.275000005960464
 					],
 					"size": [
 						0.266478896141052,
 						0.575033366680145,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
 				"source_door_centre": [
@@ -2226,18 +2226,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.248206049203873,
-						0.00000000000000019,
+						0.000000000000000191130456683981,
 						-0.275000005960464
 					],
 					"size": [
 						0.140000000596046,
 						0.269999980926514,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1339.0,
-				"triangles_before": 1195.0
+				"surfaces": 1,
+				"triangles_after": 1339,
+				"triangles_before": 1195
 			},
 			"height": 4.79458716488589,
 			"kind": "building",
@@ -2261,7 +2261,7 @@
 				"asset": "suburban-edited/house-b-red.glb",
 				"door_height": 2.04999986957409,
 				"door_inward_correction": 0.0,
-				"door_samples": 20.0,
+				"door_samples": 20,
 				"door_width": 0.949999895659269,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.98670884891905,
@@ -2274,13 +2274,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.724895894527435,
-						0.00000000000000055,
+						0.000000000000000552656069677606,
 						0.399999976158142
 					],
 					"size": [
 						0.361791640520096,
 						0.780708312988281,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
 				"source_door_centre": [
@@ -2295,18 +2295,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.614000022411346,
-						0.00000000000000019,
+						0.000000000000000191130456683981,
 						0.399999976158142
 					],
 					"size": [
 						0.139999985694885,
 						0.269999980926514,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
-				"surfaces": 2.0,
-				"triangles_after": 2102.0,
-				"triangles_before": 1748.0
+				"surfaces": 2,
+				"triangles_after": 2102,
+				"triangles_before": 1748
 			},
 			"height": 4.97357975908846,
 			"kind": "building",
@@ -2330,7 +2330,7 @@
 				"asset": "commercial/Models/GLB format/building-c.glb",
 				"door_height": 2.04999992344359,
 				"door_inward_correction": 0.0,
-				"door_samples": 40.0,
+				"door_samples": 40,
 				"door_width": 0.94999995351932,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.01868869573017,
@@ -2343,13 +2343,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.272342413663864,
-						0.00000000000000028,
+						0.000000000000000287596670001499,
 						-0.275000005960464
 					],
 					"size": [
 						0.188272744417191,
 						0.406272768974304,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
 				"source_door_centre": [
@@ -2364,18 +2364,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.248206049203873,
-						0.00000000000000019,
+						0.000000000000000191130456683981,
 						-0.275000005960464
 					],
 					"size": [
 						0.140000000596046,
 						0.269999980926514,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1339.0,
-				"triangles_before": 1195.0
+				"surfaces": 1,
+				"triangles_after": 1339,
+				"triangles_before": 1195
 			},
 			"height": 5.52465140138257,
 			"kind": "building",
@@ -2386,7 +2386,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-c.glb",
 			"scale": 5.04587085326717,
 			"station": "life",
-			"up_dot": 0.999999940395355,
+			"up_dot": 1.0,
 			"yaw": 0.0
 		},
 		{
@@ -2399,7 +2399,7 @@
 				"asset": "suburban-edited/house-f-red.glb",
 				"door_height": 2.04999994156407,
 				"door_inward_correction": 0.0,
-				"door_samples": 20.0,
+				"door_samples": 20,
 				"door_width": 0.950000058435928,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.86056642680233,
@@ -2412,13 +2412,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.105499975383282,
-						0.0000000000000012,
+						0.00000000000000120333290959385,
 						0.644945621490479
 					],
 					"size": [
 						0.323000013828278,
 						0.696999967098236,
-						0.00000005960464477
+						0.0000000596046447753906
 					]
 				},
 				"source_door_centre": [
@@ -2433,18 +2433,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.0139999911189079,
-						0.00000000000000046,
+						0.000000000000000466140442082407,
 						0.644945621490479
 					],
 					"size": [
 						0.140000015497208,
 						0.269999980926514,
-						0.00000005960464477
+						0.0000000596046447753906
 					]
 				},
-				"surfaces": 2.0,
-				"triangles_after": 1770.0,
-				"triangles_before": 1616.0
+				"surfaces": 2,
+				"triangles_after": 1770,
+				"triangles_before": 1616
 			},
 			"height": 5.20615486490349,
 			"kind": "building",
@@ -2468,7 +2468,7 @@
 				"asset": "suburban-edited/house-a-red.glb",
 				"door_height": 2.04999982577103,
 				"door_inward_correction": 0.0,
-				"door_samples": 20.0,
+				"door_samples": 20,
 				"door_width": 0.949999954150272,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.56011390594074,
@@ -2481,13 +2481,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.128645822405815,
-						0.00000000000000038,
+						0.000000000000000386198319553494,
 						0.455931067466736
 					],
 					"size": [
 						0.25729164481163,
 						0.555208265781403,
-						0.00000005960464477
+						0.0000000596046447753906
 					]
 				},
 				"source_door_centre": [
@@ -2502,18 +2502,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.0700000002980232,
-						0.00000000000000018,
+						0.000000000000000187809769893389,
 						0.455931067466736
 					],
 					"size": [
 						0.140000000596046,
 						0.269999980926514,
-						0.00000005960464477
+						0.0000000596046447753906
 					]
 				},
-				"surfaces": 2.0,
-				"triangles_after": 1438.0,
-				"triangles_before": 1174.0
+				"surfaces": 2,
+				"triangles_after": 1438,
+				"triangles_before": 1174
 			},
 			"height": 4.63780355646494,
 			"kind": "building",
@@ -2524,7 +2524,7 @@
 			"path": "res://assets/kenney/suburban-edited/house-a-red.glb",
 			"scale": 3.69230782774074,
 			"station": "life",
-			"up_dot": 0.999999940395355,
+			"up_dot": 1.0,
 			"yaw": 180.0
 		},
 		{
@@ -2537,7 +2537,7 @@
 				"asset": "suburban-edited/house-c-red.glb",
 				"door_height": 2.04999983782692,
 				"door_inward_correction": 0.0,
-				"door_samples": 20.0,
+				"door_samples": 20,
 				"door_width": 0.950000046335166,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.69995187485469,
@@ -2550,13 +2550,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.148920103907585,
-						0.00000000000000041,
+						0.000000000000000418261745920181,
 						0.455931067466736
 					],
 					"size": [
 						0.284200310707092,
 						0.613274276256561,
-						0.00000005960464477
+						0.0000000596046447753906
 					]
 				},
 				"source_door_centre": [
@@ -2571,18 +2571,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.0768098309636116,
-						0.00000000000000018,
+						0.000000000000000184143811297672,
 						0.455931067466736
 					],
 					"size": [
 						0.140000000596046,
 						0.269999980926514,
-						0.00000005960464477
+						0.0000000596046447753906
 					]
 				},
-				"surfaces": 2.0,
-				"triangles_after": 1382.0,
-				"triangles_before": 1196.0
+				"surfaces": 2,
+				"triangles_after": 1382,
+				"triangles_before": 1196
 			},
 			"height": 5.15478259395793,
 			"kind": "building",
@@ -2593,7 +2593,7 @@
 			"path": "res://assets/kenney/suburban-edited/house-c-red.glb",
 			"scale": 3.34271290545587,
 			"station": "life",
-			"up_dot": 1.00000011920929,
+			"up_dot": 1.0,
 			"yaw": 180.0
 		},
 		{
@@ -2606,7 +2606,7 @@
 				"asset": "suburban-edited/house-d-red.glb",
 				"door_height": 2.04999983031965,
 				"door_inward_correction": 0.0,
-				"door_samples": 20.0,
+				"door_samples": 20,
 				"door_width": 0.950000088233781,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.94387971878471,
@@ -2619,7 +2619,7 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.0156328622251749,
-						0.00000000000000126,
+						0.0000000000000012637051829094,
 						0.455999970436096
 					],
 					"size": [
@@ -2640,7 +2640,7 @@
 				"source_panel_bounds": {
 					"min": [
 						0.0881901755928993,
-						0.00000000000000045,
+						0.00000000000000045486061020294,
 						0.455999970436096
 					],
 					"size": [
@@ -2649,9 +2649,9 @@
 						0.0
 					]
 				},
-				"surfaces": 2.0,
-				"triangles_after": 1997.0,
-				"triangles_before": 1757.0
+				"surfaces": 2,
+				"triangles_after": 1997,
+				"triangles_before": 1757
 			},
 			"height": 5.3258353675996,
 			"kind": "building",
@@ -2675,7 +2675,7 @@
 				"asset": "commercial/Models/GLB format/building-b.glb",
 				"door_height": 2.04999988014534,
 				"door_inward_correction": 0.0,
-				"door_samples": 40.0,
+				"door_samples": 40,
 				"door_width": 0.950000055317537,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.98521954434126,
@@ -2688,13 +2688,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.315639704465866,
-						0.00000000000000055,
+						0.000000000000000551873570053021,
 						0.0499999970197678
 					],
 					"size": [
 						0.361279428005219,
 						0.779602885246277,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
 				"source_door_centre": [
@@ -2709,18 +2709,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.204999998211861,
-						0.00000000000000019,
+						0.000000000000000191130456683981,
 						0.0499999970197678
 					],
 					"size": [
 						0.140000000596046,
 						0.269999980926514,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1344.0,
-				"triangles_before": 1276.0
+				"surfaces": 1,
+				"triangles_after": 1344,
+				"triangles_before": 1276
 			},
 			"height": 5.38521954434126,
 			"kind": "building",
@@ -2731,7 +2731,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-b.glb",
 			"scale": 2.62954373173945,
 			"station": "life",
-			"up_dot": 1.0,
+			"up_dot": 0.999999940395355,
 			"yaw": -90.0
 		},
 		{
@@ -2744,7 +2744,7 @@
 				"asset": "commercial/Models/GLB format/building-d.glb",
 				"door_height": 2.04999986170616,
 				"door_inward_correction": 0.0,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.949999953902053,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.79960469268906,
@@ -2763,7 +2763,7 @@
 					"size": [
 						0.307087481021881,
 						0.662662446498871,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
 				"source_door_centre": [
@@ -2784,12 +2784,12 @@
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1156.0,
-				"triangles_before": 1100.0
+				"surfaces": 1,
+				"triangles_after": 1156,
+				"triangles_before": 1100
 			},
 			"height": 5.79960469268906,
 			"kind": "building",
@@ -2800,7 +2800,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-d.glb",
 			"scale": 3.09358086086994,
 			"station": "life",
-			"up_dot": 1.0,
+			"up_dot": 0.999999940395355,
 			"yaw": 90.0
 		},
 		{
@@ -2813,7 +2813,7 @@
 				"asset": "commercial/Models/GLB format/building-skyscraper-a.glb",
 				"door_height": 2.04999989651971,
 				"door_inward_correction": 0.0,
-				"door_samples": 40.0,
+				"door_samples": 40,
 				"door_width": 0.949999966886307,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.87037032014794,
@@ -2826,7 +2826,7 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.162857130169868,
-						0.0000000000000012,
+						0.00000000000000120194102270327,
 						-0.5
 					],
 					"size": [
@@ -2847,7 +2847,7 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.0700000002980232,
-						0.00000000000000046,
+						0.000000000000000461721259438345,
 						-0.5
 					],
 					"size": [
@@ -2856,9 +2856,9 @@
 						0.0
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1396.0,
-				"triangles_before": 1292.0
+				"surfaces": 1,
+				"triangles_after": 1396,
+				"triangles_before": 1292
 			},
 			"height": 10.2703703201479,
 			"kind": "building",
@@ -2869,7 +2869,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-skyscraper-a.glb",
 			"scale": 2.91666679222275,
 			"station": "wordking",
-			"up_dot": 0.999999940395355,
+			"up_dot": 1.00000011920929,
 			"yaw": 0.0
 		},
 		{
@@ -2882,7 +2882,7 @@
 				"asset": "commercial/Models/GLB format/building-h.glb",
 				"door_height": 2.04999990780411,
 				"door_inward_correction": 0.0,
-				"door_samples": 40.0,
+				"door_samples": 40,
 				"door_width": 0.95000003457346,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.33556756355857,
@@ -2895,13 +2895,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.289874225854874,
-						0.00000000000000081,
+						0.000000000000000814306929364624,
 						-0.356054335832596
 					],
 					"size": [
 						0.22333636879921,
 						0.48193633556366,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
 				"source_door_centre": [
@@ -2916,18 +2916,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.248206049203873,
-						0.00000000000000045,
+						0.000000000000000456207286709956,
 						-0.356054335832596
 					],
 					"size": [
 						0.140000000596046,
 						0.269999980926514,
-						0.00000002980232238
+						0.0000000298023223876953
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1616.0,
-				"triangles_before": 1512.0
+				"surfaces": 1,
+				"triangles_after": 1616,
+				"triangles_before": 1512
 			},
 			"height": 6.83556756355857,
 			"kind": "building",
@@ -2938,7 +2938,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-h.glb",
 			"scale": 4.25367368369617,
 			"station": "wordking",
-			"up_dot": 0.999999940395355,
+			"up_dot": 1.00000011920929,
 			"yaw": 0.0
 		},
 		{
@@ -2951,7 +2951,7 @@
 				"asset": "commercial/Models/GLB format/building-d.glb",
 				"door_height": 2.04999977872985,
 				"door_inward_correction": -0.00596949980039589,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.95,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.86147630990646,
@@ -2970,7 +2970,7 @@
 					"size": [
 						0.323249995708466,
 						0.697539389133453,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
 				"source_door_centre": [
@@ -2991,12 +2991,12 @@
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1156.0,
-				"triangles_before": 1100.0
+				"surfaces": 1,
+				"triangles_after": 1156,
+				"triangles_before": 1100
 			},
 			"height": 5.66147630990646,
 			"kind": "building",
@@ -3007,7 +3007,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-d.glb",
 			"scale": 2.93890181782644,
 			"station": "wordking",
-			"up_dot": 1.00000011920929,
+			"up_dot": 1.0,
 			"yaw": 180.0
 		},
 		{
@@ -3020,7 +3020,7 @@
 				"asset": "commercial/Models/GLB format/building-a.glb",
 				"door_height": 2.04999993085308,
 				"door_inward_correction": 0.0,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.950000069146921,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.64492564964556,
@@ -3039,7 +3039,7 @@
 					"size": [
 						0.272966682910919,
 						0.589033305644989,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
 				"source_door_centre": [
@@ -3060,12 +3060,12 @@
 					"size": [
 						0.240000009536743,
 						0.269999980926514,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1340.0,
-				"triangles_before": 1252.0
+				"surfaces": 1,
+				"triangles_after": 1340,
+				"triangles_before": 1252
 			},
 			"height": 6.14492564964556,
 			"kind": "building",
@@ -3089,7 +3089,7 @@
 				"asset": "commercial/Models/GLB format/building-f.glb",
 				"door_height": 2.04999990142174,
 				"door_inward_correction": 0.14484271806603,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.95,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.13922254808858,
@@ -3102,13 +3102,13 @@
 				"refined_panel_bounds": {
 					"min": [
 						-0.347093760967255,
-						0.00000000000000001,
+						0.0000000000000000190782011814027,
 						-0.345000207424164
 					],
 					"size": [
 						0.423250019550323,
 						0.913328945636749,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
 				"source_door_centre": [
@@ -3123,18 +3123,18 @@
 				"source_panel_bounds": {
 					"min": [
 						-0.319999992847443,
-						0.0,
+						0.00000000000000000563993289693611,
 						-0.345000207424164
 					],
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000035762786865
+						0.000000357627868652344
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1890.0,
-				"triangles_before": 1794.0
+				"surfaces": 1,
+				"triangles_after": 1890,
+				"triangles_before": 1794
 			},
 			"height": 5.93922254808857,
 			"kind": "building",
@@ -3158,7 +3158,7 @@
 				"asset": "commercial/Models/GLB format/building-g.glb",
 				"door_height": 2.04999986973587,
 				"door_inward_correction": 0.0,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.949999950710869,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.02108906270062,
@@ -3177,7 +3177,7 @@
 					"size": [
 						0.374034881591797,
 						0.807127892971039,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
 				"source_door_centre": [
@@ -3198,12 +3198,12 @@
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 2134.0,
-				"triangles_before": 2006.0
+				"surfaces": 1,
+				"triangles_after": 2134,
+				"triangles_before": 2006
 			},
 			"height": 6.32108906270062,
 			"kind": "building",
@@ -3214,7 +3214,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-g.glb",
 			"scale": 2.53986993584104,
 			"station": "wordking",
-			"up_dot": 0.999999940395355,
+			"up_dot": 1.0,
 			"yaw": 180.0
 		},
 		{
@@ -3227,7 +3227,7 @@
 				"asset": "commercial/Models/GLB format/building-d.glb",
 				"door_height": 2.04999988014534,
 				"door_inward_correction": -0.0678411314003542,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.949999976951026,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 1.98521954434126,
@@ -3246,7 +3246,7 @@
 					"size": [
 						0.361279398202896,
 						0.779602885246277,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
 				"source_door_centre": [
@@ -3267,12 +3267,12 @@
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 1156.0,
-				"triangles_before": 1100.0
+				"surfaces": 1,
+				"triangles_after": 1156,
+				"triangles_before": 1100
 			},
 			"height": 5.38521954434126,
 			"kind": "building",
@@ -3283,7 +3283,7 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-d.glb",
 			"scale": 2.62954373173945,
 			"station": "wordking",
-			"up_dot": 1.0,
+			"up_dot": 1.00000011920929,
 			"yaw": 90.0
 		},
 		{
@@ -3296,7 +3296,7 @@
 				"asset": "commercial/Models/GLB format/building-g.glb",
 				"door_height": 2.04999989790109,
 				"door_inward_correction": 0.0,
-				"door_samples": 64.0,
+				"door_samples": 64,
 				"door_width": 0.949999943669565,
 				"floor_boundary_source": 0.4,
 				"floor_gain": 2.21010263932135,
@@ -3315,7 +3315,7 @@
 					"size": [
 						0.459528565406799,
 						0.991614282131195,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
 				"source_door_centre": [
@@ -3336,12 +3336,12 @@
 					"size": [
 						0.239999994635582,
 						0.269999980926514,
-						0.00000038743019104
+						0.000000387430191040039
 					]
 				},
-				"surfaces": 1.0,
-				"triangles_after": 2134.0,
-				"triangles_before": 2006.0
+				"surfaces": 1,
+				"triangles_after": 2134,
+				"triangles_before": 2006
 			},
 			"height": 5.71010263932135,
 			"kind": "building",
@@ -3352,11 +3352,11 @@
 			"path": "res://assets/kenney/commercial/Models/GLB format/building-g.glb",
 			"scale": 2.06733599428922,
 			"station": "wordking",
-			"up_dot": 1.0,
+			"up_dot": 0.99999988079071,
 			"yaw": -90.0
 		}
 	],
-	"boats": 7.0,
+	"boats": 7,
 	"civic_refinements": [
 		{
 			"clear_centre": true,
@@ -3364,8 +3364,8 @@
 				3.4,
 				4.02
 			],
-			"planters": 2.0,
-			"seats": 2.0,
+			"planters": 0,
+			"seats": 0,
 			"station": "counseling"
 		},
 		{
@@ -3374,8 +3374,8 @@
 				3.4,
 				4.02
 			],
-			"planters": 2.0,
-			"seats": 2.0,
+			"planters": 0,
+			"seats": 0,
 			"station": "admissions"
 		},
 		{
@@ -3384,8 +3384,8 @@
 				3.4,
 				4.02
 			],
-			"planters": 2.0,
-			"seats": 2.0,
+			"planters": 0,
+			"seats": 0,
 			"station": "recommendations"
 		},
 		{
@@ -3394,8 +3394,8 @@
 				3.4,
 				4.02
 			],
-			"planters": 2.0,
-			"seats": 2.0,
+			"planters": 1,
+			"seats": 1,
 			"station": "universities"
 		},
 		{
@@ -3404,8 +3404,8 @@
 				3.4,
 				4.02
 			],
-			"planters": 3.0,
-			"seats": 2.0,
+			"planters": 2,
+			"seats": 1,
 			"station": "life"
 		},
 		{
@@ -3414,14 +3414,14 @@
 				3.4,
 				4.02
 			],
-			"planters": 2.0,
-			"seats": 2.0,
+			"planters": 0,
+			"seats": 0,
 			"station": "wordking"
 		}
 	],
 	"districts": [
 		{
-			"buildings": 8.0,
+			"buildings": 8,
 			"civic": [
 				6.0,
 				-2.6
@@ -3449,7 +3449,7 @@
 			"theme": "湖畔市政中心"
 		},
 		{
-			"buildings": 8.0,
+			"buildings": 8,
 			"civic": [
 				-9.0,
 				-3.6
@@ -3481,7 +3481,7 @@
 			"theme": "曲岸商務碼頭"
 		},
 		{
-			"buildings": 8.0,
+			"buildings": 8,
 			"civic": [
 				6.0,
 				-2.3
@@ -3517,7 +3517,7 @@
 			"theme": "文化步行院落"
 		},
 		{
-			"buildings": 8.0,
+			"buildings": 8,
 			"civic": [
 				8.0,
 				-3.65
@@ -3545,7 +3545,7 @@
 			"theme": "溪谷大學校園"
 		},
 		{
-			"buildings": 8.0,
+			"buildings": 8,
 			"civic": [
 				6.0,
 				-1.3
@@ -3585,7 +3585,7 @@
 			"theme": "林蔭慢行住宅"
 		},
 		{
-			"buildings": 8.0,
+			"buildings": 8,
 			"civic": [
 				-6.0,
 				-3.6
@@ -3615,7 +3615,7 @@
 	],
 	"ecology": {
 		"authored_planting": true,
-		"districts": 6.0,
+		"districts": 6,
 		"planting_groups": [
 			{
 				"groups": [
@@ -3644,8 +3644,8 @@
 								218.0
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 3.0,
+						"trees": 3,
+						"understory_clusters": 3,
 						"understory_positions": [
 							[
 								"fern",
@@ -3695,8 +3695,8 @@
 								291.0
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 2.0,
+						"trees": 3,
+						"understory_clusters": 2,
 						"understory_positions": [
 							[
 								"fern",
@@ -3732,8 +3732,8 @@
 								146.0
 							]
 						],
-						"trees": 2.0,
-						"understory_clusters": 5.0,
+						"trees": 2,
+						"understory_clusters": 5,
 						"understory_positions": [
 							[
 								"fern",
@@ -3798,9 +3798,489 @@
 								0.0
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 0.0,
+						"trees": 3,
+						"understory_clusters": 0,
 						"understory_positions": []
+					},
+					{
+						"name": "Authored outdoor groves",
+						"source": "res://data/biomes.json",
+						"tree_positions": [
+							[
+								"birch",
+								-16.1161155700684,
+								-38.0,
+								0.989,
+								0.0
+							],
+							[
+								"birch",
+								-18.1288604736328,
+								-37.0899658203125,
+								1.0465,
+								137.507764065585
+							],
+							[
+								"birch",
+								-16.8272094726563,
+								-39.732593536377,
+								1.104,
+								275.01552813117
+							],
+							[
+								"birch",
+								-15.5771436691284,
+								-36.3668403625488,
+								1.1615,
+								412.523292196755
+							],
+							[
+								"alder",
+								-37.226001739502,
+								9.58544158935547,
+								1.075,
+								40.6800034542884
+							],
+							[
+								"alder",
+								-39.7668838500977,
+								9.04919528961182,
+								1.1375,
+								178.187767519873
+							],
+							[
+								"alder",
+								-36.3667869567871,
+								7.59724903106689,
+								1.2,
+								315.695531585458
+							],
+							[
+								"birch",
+								16.1533241271973,
+								36.8879547119141,
+								1.118,
+								81.3600069085769
+							],
+							[
+								"birch",
+								14.6236228942871,
+								35.0237998962402,
+								1.183,
+								218.867770974162
+							],
+							[
+								"birch",
+								18.2776126861572,
+								35.8730392456055,
+								1.248,
+								356.375535039747
+							]
+						],
+						"trees": 10,
+						"understory_clusters": 80,
+						"understory_positions": [
+							[
+								"fern",
+								-14.6161155700684,
+								-38.0
+							],
+							[
+								"fern",
+								-17.7000598907471,
+								-36.5461692810059
+							],
+							[
+								"fern",
+								-15.8766975402832,
+								-40.7897453308105
+							],
+							[
+								"fern",
+								-15.2000207901001,
+								-36.8122406005859
+							],
+							[
+								"fern",
+								-18.234676361084,
+								-38.3663330078125
+							],
+							[
+								"fern",
+								-13.7608661651611,
+								-39.5141983032227
+							],
+							[
+								"fern",
+								-16.497142791748,
+								-36.549201965332
+							],
+							[
+								"fern",
+								-17.1199073791504,
+								-39.9012908935547
+							],
+							[
+								"fern",
+								-19.2349128723145,
+								-36.0767288208008
+							],
+							[
+								"fern",
+								-17.9429588317871,
+								-39.2319145202637
+							],
+							[
+								"fern",
+								-16.4209537506104,
+								-34.8711700439453
+							],
+							[
+								"fern",
+								-19.6066799163818,
+								-37.3469696044922
+							],
+							[
+								"fern",
+								-16.3192462921143,
+								-38.2509117126465
+							],
+							[
+								"fern",
+								-18.8427219390869,
+								-34.382495880127
+							],
+							[
+								"fern",
+								-18.8279037475586,
+								-38.417121887207
+							],
+							[
+								"fern",
+								-16.1043930053711,
+								-36.3660659790039
+							],
+							[
+								"fern",
+								-16.6960716247559,
+								-41.2268486022949
+							],
+							[
+								"fern",
+								-15.5174226760864,
+								-38.0276107788086
+							],
+							[
+								"fern",
+								-19.5853424072266,
+								-40.2149887084961
+							],
+							[
+								"fern",
+								-15.5639085769653,
+								-40.5413398742676
+							],
+							[
+								"fern",
+								-17.3773555755615,
+								-37.6541709899902
+							],
+							[
+								"fern",
+								-18.1297016143799,
+								-42.2112045288086
+							],
+							[
+								"fern",
+								-15.4152774810791,
+								-39.226188659668
+							],
+							[
+								"fern",
+								-18.8089752197266,
+								-38.8988647460938
+							],
+							[
+								"fern",
+								-14.6644849777222,
+								-35.1764373779297
+							],
+							[
+								"fern",
+								-17.694637298584,
+								-36.7392921447754
+							],
+							[
+								"fern",
+								-13.2175283432007,
+								-37.8742256164551
+							],
+							[
+								"fern",
+								-15.9623622894287,
+								-34.9171485900879
+							],
+							[
+								"fern",
+								-16.5754375457764,
+								-38.2710227966309
+							],
+							[
+								"fern",
+								-12.9424486160278,
+								-35.4190101623535
+							],
+							[
+								"fern",
+								-16.9603309631348,
+								-35.7865028381348
+							],
+							[
+								"fern",
+								-14.6790256500244,
+								-38.3202705383301
+							],
+							[
+								"fern",
+								-36.0884590148926,
+								10.5631923675537
+							],
+							[
+								"fern",
+								-39.3748588562012,
+								9.65550327301025
+							],
+							[
+								"fern",
+								-35.2259864807129,
+								7.6258659362793
+							],
+							[
+								"fern",
+								-37.305492401123,
+								11.0833339691162
+							],
+							[
+								"fern",
+								-38.5938491821289,
+								7.92668008804321
+							],
+							[
+								"fern",
+								-34.4528656005859,
+								9.97236156463623
+							],
+							[
+								"fern",
+								-38.4606399536133,
+								10.4373054504395
+							],
+							[
+								"fern",
+								-36.7479133605957,
+								7.48927021026611
+							],
+							[
+								"fern",
+								-41.2661323547363,
+								9.09663105010986
+							],
+							[
+								"fern",
+								-38.2297096252441,
+								7.54600095748901
+							],
+							[
+								"fern",
+								-39.9179573059082,
+								11.8451166152954
+							],
+							[
+								"fern",
+								-40.7200813293457,
+								7.89100122451782
+							],
+							[
+								"fern",
+								-37.6377983093262,
+								9.34834575653076
+							],
+							[
+								"fern",
+								-42.073070526123,
+								10.6371202468872
+							],
+							[
+								"fern",
+								-39.4319267272949,
+								7.58707237243652
+							],
+							[
+								"fern",
+								-38.7034683227539,
+								10.9177894592285
+							],
+							[
+								"fern",
+								-35.2933311462402,
+								6.54954242706299
+							],
+							[
+								"fern",
+								-36.4848594665527,
+								9.74400520324707
+							],
+							[
+								"fern",
+								-38.1440048217773,
+								5.43357372283936
+							],
+							[
+								"fern",
+								-34.8815803527832,
+								7.80738925933838
+							],
+							[
+								"fern",
+								-38.1387825012207,
+								8.81484222412109
+							],
+							[
+								"fern",
+								-35.7389030456543,
+								4.8685564994812
+							],
+							[
+								"fern",
+								-35.6261253356934,
+								8.90163326263428
+							],
+							[
+								"fern",
+								-38.4131355285645,
+								6.93773365020752
+							],
+							[
+								"fern",
+								16.378662109375,
+								38.3709335327148
+							],
+							[
+								"fern",
+								14.4780435562134,
+								35.5403900146484
+							],
+							[
+								"fern",
+								18.9473781585693,
+								36.70556640625
+							],
+							[
+								"fern",
+								15.1166648864746,
+								37.9720840454102
+							],
+							[
+								"fern",
+								16.1972370147705,
+								34.7384033203125
+							],
+							[
+								"fern",
+								18.0041580200195,
+								38.9890060424805
+							],
+							[
+								"fern",
+								14.6617488861084,
+								36.7291984558105
+							],
+							[
+								"fern",
+								17.8822422027588,
+								35.6099319458008
+							],
+							[
+								"fern",
+								13.4557285308838,
+								34.0825119018555
+							],
+							[
+								"fern",
+								16.7691898345947,
+								34.8858184814453
+							],
+							[
+								"fern",
+								12.686577796936,
+								37.0456428527832
+							],
+							[
+								"fern",
+								14.6557035446167,
+								33.5241432189941
+							],
+							[
+								"fern",
+								16.0432453155518,
+								36.6384735107422
+							],
+							[
+								"fern",
+								11.839635848999,
+								34.7247695922852
+							],
+							[
+								"fern",
+								15.8307027816772,
+								34.1333198547363
+							],
+							[
+								"fern",
+								14.212064743042,
+								37.1340408325195
+							],
+							[
+								"fern",
+								19.7746124267578,
+								35.7782135009766
+							],
+							[
+								"fern",
+								16.7887439727783,
+								37.4240951538086
+							],
+							[
+								"fern",
+								18.3401927947998,
+								33.0737380981445
+							],
+							[
+								"fern",
+								19.266960144043,
+								37.0005111694336
+							],
+							[
+								"fern",
+								16.1401309967041,
+								35.6413688659668
+							],
+							[
+								"fern",
+								20.5324287414551,
+								34.2129783630371
+							],
+							[
+								"fern",
+								17.9890613555908,
+								37.3450241088867
+							],
+							[
+								"fern",
+								17.1556339263916,
+								34.0390090942383
+							]
+						]
 					}
 				],
 				"station": "counseling",
@@ -3839,8 +4319,8 @@
 								134.0
 							]
 						],
-						"trees": 2.0,
-						"understory_clusters": 4.0,
+						"trees": 2,
+						"understory_clusters": 4,
 						"understory_positions": [
 							[
 								"fern",
@@ -3897,8 +4377,8 @@
 								315.0
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 4.0,
+						"trees": 3,
+						"understory_clusters": 4,
 						"understory_positions": [
 							[
 								"fern",
@@ -3948,8 +4428,8 @@
 								217.0
 							]
 						],
-						"trees": 2.0,
-						"understory_clusters": 2.0,
+						"trees": 2,
+						"understory_clusters": 2,
 						"understory_positions": [
 							[
 								"fern",
@@ -3993,9 +4473,489 @@
 								57.2957795130823
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 0.0,
+						"trees": 3,
+						"understory_clusters": 0,
 						"understory_positions": []
+					},
+					{
+						"name": "Authored outdoor groves",
+						"source": "res://data/biomes.json",
+						"tree_positions": [
+							[
+								"pine",
+								-12.1161165237427,
+								-39.0,
+								0.989,
+								0.0
+							],
+							[
+								"pine",
+								-14.1288604736328,
+								-38.0899658203125,
+								1.0465,
+								137.507764065585
+							],
+							[
+								"pine",
+								-12.8272094726563,
+								-40.732593536377,
+								1.104,
+								275.01552813117
+							],
+							[
+								"pine",
+								-11.5771436691284,
+								-37.3668403625488,
+								1.1615,
+								412.523292196755
+							],
+							[
+								"pine",
+								-35.226001739502,
+								15.5854415893555,
+								1.032,
+								40.6800034542884
+							],
+							[
+								"pine",
+								-37.7668838500977,
+								15.0491952896118,
+								1.092,
+								178.187767519873
+							],
+							[
+								"pine",
+								-34.3667869567871,
+								13.5972490310669,
+								1.152,
+								315.695531585458
+							],
+							[
+								"alder",
+								17.1533241271973,
+								37.8879547119141,
+								0.86,
+								81.3600069085769
+							],
+							[
+								"alder",
+								15.6236228942871,
+								36.0237998962402,
+								0.91,
+								218.867770974162
+							],
+							[
+								"alder",
+								19.2776126861572,
+								36.8730392456055,
+								0.96,
+								356.375535039747
+							]
+						],
+						"trees": 10,
+						"understory_clusters": 80,
+						"understory_positions": [
+							[
+								"fern",
+								-10.6161165237427,
+								-39.0
+							],
+							[
+								"fern",
+								-13.7000598907471,
+								-37.5461692810059
+							],
+							[
+								"fern",
+								-11.8766984939575,
+								-41.7897453308105
+							],
+							[
+								"fern",
+								-11.2000217437744,
+								-37.8122406005859
+							],
+							[
+								"fern",
+								-14.2346782684326,
+								-39.3663330078125
+							],
+							[
+								"fern",
+								-9.76086711883545,
+								-40.5141983032227
+							],
+							[
+								"fern",
+								-12.4971446990967,
+								-37.549201965332
+							],
+							[
+								"fern",
+								-13.119909286499,
+								-40.9012908935547
+							],
+							[
+								"fern",
+								-15.2349138259888,
+								-37.0767288208008
+							],
+							[
+								"fern",
+								-13.9429578781128,
+								-40.2319145202637
+							],
+							[
+								"fern",
+								-12.4209537506104,
+								-35.8711700439453
+							],
+							[
+								"fern",
+								-15.6066799163818,
+								-38.3469696044922
+							],
+							[
+								"fern",
+								-12.3192462921143,
+								-39.2509117126465
+							],
+							[
+								"fern",
+								-14.8427209854126,
+								-35.382495880127
+							],
+							[
+								"fern",
+								-14.8279027938843,
+								-39.417121887207
+							],
+							[
+								"fern",
+								-12.1043930053711,
+								-37.3660659790039
+							],
+							[
+								"fern",
+								-12.6960706710815,
+								-42.2268486022949
+							],
+							[
+								"fern",
+								-11.5174226760864,
+								-39.0276107788086
+							],
+							[
+								"fern",
+								-15.5853414535522,
+								-41.2149887084961
+							],
+							[
+								"fern",
+								-11.5639085769653,
+								-41.5413398742676
+							],
+							[
+								"fern",
+								-13.3773546218872,
+								-38.6541709899902
+							],
+							[
+								"fern",
+								-14.1297016143799,
+								-43.2112045288086
+							],
+							[
+								"fern",
+								-11.4152774810791,
+								-40.226188659668
+							],
+							[
+								"fern",
+								-14.8089761734009,
+								-39.8988647460938
+							],
+							[
+								"fern",
+								-10.6644849777222,
+								-36.1764373779297
+							],
+							[
+								"fern",
+								-13.694637298584,
+								-37.7392921447754
+							],
+							[
+								"fern",
+								-9.21752834320068,
+								-38.8742256164551
+							],
+							[
+								"fern",
+								-11.9623622894287,
+								-35.9171485900879
+							],
+							[
+								"fern",
+								-12.5754375457764,
+								-39.2710227966309
+							],
+							[
+								"fern",
+								-8.94244861602783,
+								-36.4190101623535
+							],
+							[
+								"fern",
+								-12.9603309631348,
+								-36.7865028381348
+							],
+							[
+								"fern",
+								-10.6790256500244,
+								-39.3202705383301
+							],
+							[
+								"fern",
+								-34.0884590148926,
+								16.5631923675537
+							],
+							[
+								"fern",
+								-37.3748588562012,
+								15.6555032730103
+							],
+							[
+								"fern",
+								-33.2259864807129,
+								13.6258659362793
+							],
+							[
+								"fern",
+								-35.305492401123,
+								17.0833339691162
+							],
+							[
+								"fern",
+								-36.5938491821289,
+								13.9266796112061
+							],
+							[
+								"fern",
+								-32.4528656005859,
+								15.9723615646362
+							],
+							[
+								"fern",
+								-36.4606399536133,
+								16.4373054504395
+							],
+							[
+								"fern",
+								-34.7479133605957,
+								13.4892702102661
+							],
+							[
+								"fern",
+								-39.2661323547363,
+								15.0966310501099
+							],
+							[
+								"fern",
+								-36.2297096252441,
+								13.5460014343262
+							],
+							[
+								"fern",
+								-37.9179573059082,
+								17.8451156616211
+							],
+							[
+								"fern",
+								-38.7200813293457,
+								13.8910007476807
+							],
+							[
+								"fern",
+								-35.6377983093262,
+								15.3483457565308
+							],
+							[
+								"fern",
+								-40.073070526123,
+								16.6371192932129
+							],
+							[
+								"fern",
+								-37.4319267272949,
+								13.5870723724365
+							],
+							[
+								"fern",
+								-36.7034683227539,
+								16.9177894592285
+							],
+							[
+								"fern",
+								-33.2933311462402,
+								12.549542427063
+							],
+							[
+								"fern",
+								-34.4848594665527,
+								15.7440052032471
+							],
+							[
+								"fern",
+								-36.1440048217773,
+								11.4335737228394
+							],
+							[
+								"fern",
+								-32.8815803527832,
+								13.8073892593384
+							],
+							[
+								"fern",
+								-36.1387825012207,
+								14.8148422241211
+							],
+							[
+								"fern",
+								-33.7389030456543,
+								10.8685569763184
+							],
+							[
+								"fern",
+								-33.6261253356934,
+								14.9016332626343
+							],
+							[
+								"fern",
+								-36.4131355285645,
+								12.9377336502075
+							],
+							[
+								"fern",
+								17.378662109375,
+								39.3709335327148
+							],
+							[
+								"fern",
+								15.4780435562134,
+								36.5403900146484
+							],
+							[
+								"fern",
+								19.9473781585693,
+								37.70556640625
+							],
+							[
+								"fern",
+								16.1166648864746,
+								38.9720840454102
+							],
+							[
+								"fern",
+								17.1972370147705,
+								35.7384033203125
+							],
+							[
+								"fern",
+								19.0041580200195,
+								39.9890060424805
+							],
+							[
+								"fern",
+								15.6617488861084,
+								37.7291984558105
+							],
+							[
+								"fern",
+								18.8822422027588,
+								36.6099319458008
+							],
+							[
+								"fern",
+								14.4557285308838,
+								35.0825119018555
+							],
+							[
+								"fern",
+								17.7691898345947,
+								35.8858184814453
+							],
+							[
+								"fern",
+								13.686577796936,
+								38.0456428527832
+							],
+							[
+								"fern",
+								15.6557035446167,
+								34.5241432189941
+							],
+							[
+								"fern",
+								17.0432453155518,
+								37.6384735107422
+							],
+							[
+								"fern",
+								12.839635848999,
+								35.7247695922852
+							],
+							[
+								"fern",
+								16.8307037353516,
+								35.1333198547363
+							],
+							[
+								"fern",
+								15.212064743042,
+								38.1340408325195
+							],
+							[
+								"fern",
+								20.7746124267578,
+								36.7782135009766
+							],
+							[
+								"fern",
+								17.7887439727783,
+								38.4240951538086
+							],
+							[
+								"fern",
+								19.3401927947998,
+								34.0737380981445
+							],
+							[
+								"fern",
+								20.266960144043,
+								38.0005111694336
+							],
+							[
+								"fern",
+								17.1401309967041,
+								36.6413688659668
+							],
+							[
+								"fern",
+								21.5324287414551,
+								35.2129783630371
+							],
+							[
+								"fern",
+								18.9890613555908,
+								38.3450241088867
+							],
+							[
+								"fern",
+								18.1556339263916,
+								35.0390090942383
+							]
+						]
 					}
 				],
 				"station": "admissions",
@@ -4053,8 +5013,8 @@
 								269.0
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 3.0,
+						"trees": 3,
+						"understory_clusters": 3,
 						"understory_positions": [
 							[
 								"fern",
@@ -4104,8 +5064,8 @@
 								292.0
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 3.0,
+						"trees": 3,
+						"understory_clusters": 3,
 						"understory_positions": [
 							[
 								"fern",
@@ -4148,8 +5108,8 @@
 								219.0
 							]
 						],
-						"trees": 2.0,
-						"understory_clusters": 4.0,
+						"trees": 2,
+						"understory_clusters": 4,
 						"understory_positions": [
 							[
 								"fern",
@@ -4207,9 +5167,239 @@
 								114.591559026165
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 0.0,
+						"trees": 3,
+						"understory_clusters": 0,
 						"understory_positions": []
+					},
+					{
+						"name": "Authored outdoor groves",
+						"source": "res://data/biomes.json",
+						"tree_positions": [
+							[
+								"alder",
+								-19.1161155700684,
+								-36.0,
+								0.688,
+								0.0
+							],
+							[
+								"alder",
+								-21.1288604736328,
+								-35.0899658203125,
+								0.728,
+								137.507764065585
+							],
+							[
+								"alder",
+								-19.8272094726563,
+								-37.732593536377,
+								0.768,
+								275.01552813117
+							],
+							[
+								"alder",
+								-18.5771446228027,
+								-34.3668403625488,
+								0.808,
+								412.523292196755
+							],
+							[
+								"pine",
+								18.7740001678467,
+								36.5854415893555,
+								0.774,
+								40.6800034542884
+							],
+							[
+								"pine",
+								16.233118057251,
+								36.0491943359375,
+								0.819,
+								178.187767519873
+							],
+							[
+								"pine",
+								19.6332130432129,
+								34.5972480773926,
+								0.864,
+								315.695531585458
+							],
+							[
+								"alder",
+								-36.8466758728027,
+								-9.11204624176025,
+								0.645,
+								81.3600069085769
+							],
+							[
+								"alder",
+								-38.3763771057129,
+								-10.9762001037598,
+								0.6825,
+								218.867770974162
+							],
+							[
+								"alder",
+								-34.7223892211914,
+								-10.1269588470459,
+								0.72,
+								356.375535039747
+							]
+						],
+						"trees": 10,
+						"understory_clusters": 30,
+						"understory_positions": [
+							[
+								"fern",
+								-17.6161155700684,
+								-36.0
+							],
+							[
+								"fern",
+								-20.7000598907471,
+								-34.5461692810059
+							],
+							[
+								"fern",
+								-18.8766975402832,
+								-38.7897453308105
+							],
+							[
+								"fern",
+								-22.2349128723145,
+								-34.0767288208008
+							],
+							[
+								"fern",
+								-20.9429588317871,
+								-37.2319145202637
+							],
+							[
+								"fern",
+								-19.4209537506104,
+								-32.8711700439453
+							],
+							[
+								"fern",
+								-19.6960716247559,
+								-39.2268486022949
+							],
+							[
+								"fern",
+								-18.5174236297607,
+								-36.0276107788086
+							],
+							[
+								"fern",
+								-22.5853424072266,
+								-38.2149887084961
+							],
+							[
+								"fern",
+								-17.6644859313965,
+								-33.1764373779297
+							],
+							[
+								"fern",
+								-20.6946392059326,
+								-34.7392921447754
+							],
+							[
+								"fern",
+								-16.217529296875,
+								-35.8742256164551
+							],
+							[
+								"fern",
+								19.9115428924561,
+								37.5631904602051
+							],
+							[
+								"fern",
+								16.6251411437988,
+								36.6555023193359
+							],
+							[
+								"fern",
+								20.7740154266357,
+								34.6258659362793
+							],
+							[
+								"fern",
+								14.733868598938,
+								36.0966300964355
+							],
+							[
+								"fern",
+								17.7702941894531,
+								34.5460014343262
+							],
+							[
+								"fern",
+								16.0820426940918,
+								38.8451156616211
+							],
+							[
+								"fern",
+								20.7066707611084,
+								33.5495414733887
+							],
+							[
+								"fern",
+								19.5151405334473,
+								36.7440032958984
+							],
+							[
+								"fern",
+								17.855993270874,
+								32.4335746765137
+							],
+							[
+								"fern",
+								-36.621337890625,
+								-7.62906837463379
+							],
+							[
+								"fern",
+								-38.5219573974609,
+								-10.4596118927002
+							],
+							[
+								"fern",
+								-34.0526237487793,
+								-9.29443550109863
+							],
+							[
+								"fern",
+								-39.5442733764648,
+								-11.9174880981445
+							],
+							[
+								"fern",
+								-36.2308082580566,
+								-11.114182472229
+							],
+							[
+								"fern",
+								-40.3134231567383,
+								-8.95435523986816
+							],
+							[
+								"fern",
+								-33.2253875732422,
+								-10.2217836380005
+							],
+							[
+								"fern",
+								-36.2112579345703,
+								-8.57590484619141
+							],
+							[
+								"fern",
+								-34.6598091125488,
+								-12.9262590408325
+							]
+						]
 					}
 				],
 				"station": "recommendations",
@@ -4255,8 +5445,8 @@
 								247.0
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 4.0,
+						"trees": 3,
+						"understory_clusters": 4,
 						"understory_positions": [
 							[
 								"fern",
@@ -4306,8 +5496,8 @@
 								186.0
 							]
 						],
-						"trees": 2.0,
-						"understory_clusters": 3.0,
+						"trees": 2,
+						"understory_clusters": 3,
 						"understory_positions": [
 							[
 								"fern",
@@ -4350,8 +5540,8 @@
 								291.0
 							]
 						],
-						"trees": 2.0,
-						"understory_clusters": 4.0,
+						"trees": 2,
+						"understory_clusters": 4,
 						"understory_positions": [
 							[
 								"fern",
@@ -4409,9 +5599,489 @@
 								171.887338539247
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 0.0,
+						"trees": 3,
+						"understory_clusters": 0,
 						"understory_positions": []
+					},
+					{
+						"name": "Authored outdoor groves",
+						"source": "res://data/biomes.json",
+						"tree_positions": [
+							[
+								"pine",
+								-11.1161165237427,
+								-40.0,
+								1.419,
+								0.0
+							],
+							[
+								"pine",
+								-13.1288604736328,
+								-39.0899658203125,
+								1.5015,
+								137.507764065585
+							],
+							[
+								"pine",
+								-11.8272094726563,
+								-41.732593536377,
+								1.584,
+								275.01552813117
+							],
+							[
+								"pine",
+								-10.5771436691284,
+								-38.3668403625488,
+								1.6665,
+								412.523292196755
+							],
+							[
+								"pine",
+								34.773998260498,
+								-18.4145584106445,
+								1.333,
+								40.6800034542884
+							],
+							[
+								"pine",
+								32.2331161499023,
+								-18.9508037567139,
+								1.4105,
+								178.187767519873
+							],
+							[
+								"pine",
+								35.6332130432129,
+								-20.4027500152588,
+								1.488,
+								315.695531585458
+							],
+							[
+								"pine",
+								-37.8466758728027,
+								12.8879537582397,
+								1.376,
+								81.3600069085769
+							],
+							[
+								"pine",
+								-39.3763771057129,
+								11.0237998962402,
+								1.456,
+								218.867770974162
+							],
+							[
+								"pine",
+								-35.7223892211914,
+								11.8730411529541,
+								1.536,
+								356.375535039747
+							]
+						],
+						"trees": 10,
+						"understory_clusters": 80,
+						"understory_positions": [
+							[
+								"fern",
+								-9.61611652374268,
+								-40.0
+							],
+							[
+								"fern",
+								-12.7000598907471,
+								-38.5461692810059
+							],
+							[
+								"fern",
+								-10.8766984939575,
+								-42.7897453308105
+							],
+							[
+								"fern",
+								-10.2000217437744,
+								-38.8122406005859
+							],
+							[
+								"fern",
+								-13.2346782684326,
+								-40.3663330078125
+							],
+							[
+								"fern",
+								-8.76086711883545,
+								-41.5141983032227
+							],
+							[
+								"fern",
+								-11.4971446990967,
+								-38.549201965332
+							],
+							[
+								"fern",
+								-12.119909286499,
+								-41.9012908935547
+							],
+							[
+								"fern",
+								-14.2349138259888,
+								-38.0767288208008
+							],
+							[
+								"fern",
+								-12.9429578781128,
+								-41.2319145202637
+							],
+							[
+								"fern",
+								-11.4209537506104,
+								-36.8711700439453
+							],
+							[
+								"fern",
+								-14.6066799163818,
+								-39.3469696044922
+							],
+							[
+								"fern",
+								-11.3192462921143,
+								-40.2509117126465
+							],
+							[
+								"fern",
+								-13.8427209854126,
+								-36.382495880127
+							],
+							[
+								"fern",
+								-13.8279027938843,
+								-40.417121887207
+							],
+							[
+								"fern",
+								-11.1043930053711,
+								-38.3660659790039
+							],
+							[
+								"fern",
+								-11.6960706710815,
+								-43.2268486022949
+							],
+							[
+								"fern",
+								-10.5174226760864,
+								-40.0276107788086
+							],
+							[
+								"fern",
+								-14.5853414535522,
+								-42.2149887084961
+							],
+							[
+								"fern",
+								-10.5639085769653,
+								-42.5413398742676
+							],
+							[
+								"fern",
+								-12.3773546218872,
+								-39.6541709899902
+							],
+							[
+								"fern",
+								-13.1297016143799,
+								-44.2112045288086
+							],
+							[
+								"fern",
+								-10.4152774810791,
+								-41.226188659668
+							],
+							[
+								"fern",
+								-13.8089761734009,
+								-40.8988647460938
+							],
+							[
+								"fern",
+								-9.66448497772217,
+								-37.1764373779297
+							],
+							[
+								"fern",
+								-12.694637298584,
+								-38.7392921447754
+							],
+							[
+								"fern",
+								-8.21752834320068,
+								-39.8742256164551
+							],
+							[
+								"fern",
+								-10.9623622894287,
+								-36.9171485900879
+							],
+							[
+								"fern",
+								-11.5754375457764,
+								-40.2710227966309
+							],
+							[
+								"fern",
+								-7.94244861602783,
+								-37.4190101623535
+							],
+							[
+								"fern",
+								-11.9603309631348,
+								-37.7865028381348
+							],
+							[
+								"fern",
+								-9.67902565002441,
+								-40.3202705383301
+							],
+							[
+								"fern",
+								35.9115409851074,
+								-17.4368076324463
+							],
+							[
+								"fern",
+								32.6251411437988,
+								-18.3444957733154
+							],
+							[
+								"fern",
+								36.7740135192871,
+								-20.3741340637207
+							],
+							[
+								"fern",
+								34.694507598877,
+								-16.9166660308838
+							],
+							[
+								"fern",
+								33.4061508178711,
+								-20.0733203887939
+							],
+							[
+								"fern",
+								37.5471343994141,
+								-18.0276374816895
+							],
+							[
+								"fern",
+								33.5393600463867,
+								-17.5626945495605
+							],
+							[
+								"fern",
+								35.2520866394043,
+								-20.5107288360596
+							],
+							[
+								"fern",
+								30.733865737915,
+								-18.9033679962158
+							],
+							[
+								"fern",
+								33.7702903747559,
+								-20.4539985656738
+							],
+							[
+								"fern",
+								32.0820426940918,
+								-16.1548824310303
+							],
+							[
+								"fern",
+								31.2799186706543,
+								-20.1089973449707
+							],
+							[
+								"fern",
+								34.3622016906738,
+								-18.6516532897949
+							],
+							[
+								"fern",
+								29.926929473877,
+								-17.3628787994385
+							],
+							[
+								"fern",
+								32.5680732727051,
+								-20.4129276275635
+							],
+							[
+								"fern",
+								33.2965316772461,
+								-17.0822086334229
+							],
+							[
+								"fern",
+								36.7066688537598,
+								-21.4504566192627
+							],
+							[
+								"fern",
+								35.5151405334473,
+								-18.2559947967529
+							],
+							[
+								"fern",
+								33.8559951782227,
+								-22.5664253234863
+							],
+							[
+								"fern",
+								37.1184196472168,
+								-20.1926097869873
+							],
+							[
+								"fern",
+								33.8612174987793,
+								-19.1851577758789
+							],
+							[
+								"fern",
+								36.2610969543457,
+								-23.1314430236816
+							],
+							[
+								"fern",
+								36.3738746643066,
+								-19.0983657836914
+							],
+							[
+								"fern",
+								33.5868644714355,
+								-21.0622653961182
+							],
+							[
+								"fern",
+								-37.621337890625,
+								14.3709316253662
+							],
+							[
+								"fern",
+								-39.5219573974609,
+								11.5403881072998
+							],
+							[
+								"fern",
+								-35.0526237487793,
+								12.7055644989014
+							],
+							[
+								"fern",
+								-38.8833351135254,
+								13.9720840454102
+							],
+							[
+								"fern",
+								-37.8027648925781,
+								10.7384023666382
+							],
+							[
+								"fern",
+								-35.9958419799805,
+								14.9890041351318
+							],
+							[
+								"fern",
+								-39.338249206543,
+								12.7291965484619
+							],
+							[
+								"fern",
+								-36.1177597045898,
+								11.6099300384521
+							],
+							[
+								"fern",
+								-40.5442733764648,
+								10.0825119018555
+							],
+							[
+								"fern",
+								-37.2308082580566,
+								10.885817527771
+							],
+							[
+								"fern",
+								-41.3134231567383,
+								13.0456447601318
+							],
+							[
+								"fern",
+								-39.344295501709,
+								9.52414321899414
+							],
+							[
+								"fern",
+								-37.9567565917969,
+								12.6384744644165
+							],
+							[
+								"fern",
+								-42.1603622436523,
+								10.7247714996338
+							],
+							[
+								"fern",
+								-38.1692962646484,
+								10.1333179473877
+							],
+							[
+								"fern",
+								-39.7879333496094,
+								13.1340417861938
+							],
+							[
+								"fern",
+								-34.2253875732422,
+								11.7782163619995
+							],
+							[
+								"fern",
+								-37.2112579345703,
+								13.4240951538086
+							],
+							[
+								"fern",
+								-35.6598091125488,
+								9.07374095916748
+							],
+							[
+								"fern",
+								-34.733039855957,
+								13.0005121231079
+							],
+							[
+								"fern",
+								-37.8598709106445,
+								11.6413707733154
+							],
+							[
+								"fern",
+								-33.4675750732422,
+								10.2129793167114
+							],
+							[
+								"fern",
+								-36.0109405517578,
+								13.3450260162354
+							],
+							[
+								"fern",
+								-36.844367980957,
+								10.0390110015869
+							]
+						]
 					}
 				],
 				"station": "universities",
@@ -4457,8 +6127,8 @@
 								272.0
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 3.0,
+						"trees": 3,
+						"understory_clusters": 3,
 						"understory_positions": [
 							[
 								"fern",
@@ -4501,8 +6171,8 @@
 								213.0
 							]
 						],
-						"trees": 2.0,
-						"understory_clusters": 3.0,
+						"trees": 2,
+						"understory_clusters": 3,
 						"understory_positions": [
 							[
 								"fern",
@@ -4545,8 +6215,8 @@
 								180.0
 							]
 						],
-						"trees": 2.0,
-						"understory_clusters": 3.0,
+						"trees": 2,
+						"understory_clusters": 3,
 						"understory_positions": [
 							[
 								"fern",
@@ -4578,7 +6248,7 @@
 							[
 								"birch",
 								-5.0,
-								-1.0,
+								-2.59999990463257,
 								0.65,
 								229.183118052329
 							],
@@ -4597,9 +6267,479 @@
 								229.183118052329
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 0.0,
+						"trees": 3,
+						"understory_clusters": 0,
 						"understory_positions": []
+					},
+					{
+						"name": "Authored outdoor groves",
+						"source": "res://data/biomes.json",
+						"tree_positions": [
+							[
+								"birch",
+								-13.1161165237427,
+								-39.0,
+								1.29,
+								0.0
+							],
+							[
+								"birch",
+								-15.1288604736328,
+								-38.0899658203125,
+								1.365,
+								137.507764065585
+							],
+							[
+								"birch",
+								-13.8272094726563,
+								-40.732593536377,
+								1.44,
+								275.01552813117
+							],
+							[
+								"birch",
+								-12.5771436691284,
+								-37.3668403625488,
+								1.515,
+								412.523292196755
+							],
+							[
+								"alder",
+								23.7740001678467,
+								-34.4145584106445,
+								1.29,
+								40.6800034542884
+							],
+							[
+								"alder",
+								21.233118057251,
+								-34.9508056640625,
+								1.365,
+								178.187767519873
+							],
+							[
+								"alder",
+								24.6332130432129,
+								-36.4027519226074,
+								1.44,
+								315.695531585458
+							],
+							[
+								"birch",
+								-22.8466758728027,
+								36.8879547119141,
+								1.29,
+								81.3600069085769
+							],
+							[
+								"birch",
+								-24.3763771057129,
+								35.0237998962402,
+								1.365,
+								218.867770974162
+							],
+							[
+								"birch",
+								-20.7223873138428,
+								35.8730392456055,
+								1.44,
+								356.375535039747
+							]
+						],
+						"trees": 10,
+						"understory_clusters": 78,
+						"understory_positions": [
+							[
+								"fern",
+								-11.6161165237427,
+								-39.0
+							],
+							[
+								"fern",
+								-14.7000598907471,
+								-37.5461692810059
+							],
+							[
+								"fern",
+								-12.8766984939575,
+								-41.7897453308105
+							],
+							[
+								"fern",
+								-12.2000217437744,
+								-37.8122406005859
+							],
+							[
+								"fern",
+								-15.2346782684326,
+								-39.3663330078125
+							],
+							[
+								"fern",
+								-10.7608671188354,
+								-40.5141983032227
+							],
+							[
+								"fern",
+								-13.4971446990967,
+								-37.549201965332
+							],
+							[
+								"fern",
+								-14.119909286499,
+								-40.9012908935547
+							],
+							[
+								"fern",
+								-16.2349128723145,
+								-37.0767288208008
+							],
+							[
+								"fern",
+								-14.9429578781128,
+								-40.2319145202637
+							],
+							[
+								"fern",
+								-13.4209537506104,
+								-35.8711700439453
+							],
+							[
+								"fern",
+								-16.6066799163818,
+								-38.3469696044922
+							],
+							[
+								"fern",
+								-13.3192462921143,
+								-39.2509117126465
+							],
+							[
+								"fern",
+								-15.8427209854126,
+								-35.382495880127
+							],
+							[
+								"fern",
+								-15.8279027938843,
+								-39.417121887207
+							],
+							[
+								"fern",
+								-13.1043930053711,
+								-37.3660659790039
+							],
+							[
+								"fern",
+								-13.6960706710815,
+								-42.2268486022949
+							],
+							[
+								"fern",
+								-12.5174226760864,
+								-39.0276107788086
+							],
+							[
+								"fern",
+								-16.5853424072266,
+								-41.2149887084961
+							],
+							[
+								"fern",
+								-12.5639085769653,
+								-41.5413398742676
+							],
+							[
+								"fern",
+								-14.3773546218872,
+								-38.6541709899902
+							],
+							[
+								"fern",
+								-15.1297016143799,
+								-43.2112045288086
+							],
+							[
+								"fern",
+								-12.4152774810791,
+								-40.226188659668
+							],
+							[
+								"fern",
+								-15.8089761734009,
+								-39.8988647460938
+							],
+							[
+								"fern",
+								-11.6644849777222,
+								-36.1764373779297
+							],
+							[
+								"fern",
+								-14.694637298584,
+								-37.7392921447754
+							],
+							[
+								"fern",
+								-10.2175283432007,
+								-38.8742256164551
+							],
+							[
+								"fern",
+								-12.9623622894287,
+								-35.9171485900879
+							],
+							[
+								"fern",
+								-13.5754375457764,
+								-39.2710227966309
+							],
+							[
+								"fern",
+								-9.94244861602783,
+								-36.4190101623535
+							],
+							[
+								"fern",
+								-13.9603309631348,
+								-36.7865028381348
+							],
+							[
+								"fern",
+								-11.6790256500244,
+								-39.3202705383301
+							],
+							[
+								"fern",
+								24.9115428924561,
+								-33.4368095397949
+							],
+							[
+								"fern",
+								21.6251411437988,
+								-34.3444976806641
+							],
+							[
+								"fern",
+								25.7740154266357,
+								-36.3741340637207
+							],
+							[
+								"fern",
+								23.6945095062256,
+								-32.9166641235352
+							],
+							[
+								"fern",
+								22.4061508178711,
+								-36.0733184814453
+							],
+							[
+								"fern",
+								26.5471382141113,
+								-34.0276374816895
+							],
+							[
+								"fern",
+								22.539363861084,
+								-33.5626945495605
+							],
+							[
+								"fern",
+								24.2520866394043,
+								-36.5107307434082
+							],
+							[
+								"fern",
+								19.7338676452637,
+								-34.9033699035645
+							],
+							[
+								"fern",
+								22.7702941894531,
+								-36.4539985656738
+							],
+							[
+								"fern",
+								21.0820426940918,
+								-32.1548843383789
+							],
+							[
+								"fern",
+								20.2799205780029,
+								-36.109001159668
+							],
+							[
+								"fern",
+								23.3622055053711,
+								-34.6516571044922
+							],
+							[
+								"fern",
+								18.9269313812256,
+								-33.3628807067871
+							],
+							[
+								"fern",
+								21.5680751800537,
+								-36.4129295349121
+							],
+							[
+								"fern",
+								22.2965354919434,
+								-33.0822105407715
+							],
+							[
+								"fern",
+								25.7066707611084,
+								-37.4504585266113
+							],
+							[
+								"fern",
+								24.5151405334473,
+								-34.2559967041016
+							],
+							[
+								"fern",
+								22.855993270874,
+								-38.5664253234863
+							],
+							[
+								"fern",
+								26.1184196472168,
+								-36.1926116943359
+							],
+							[
+								"fern",
+								22.8612174987793,
+								-35.1851577758789
+							],
+							[
+								"fern",
+								25.2610950469971,
+								-39.1314430236816
+							],
+							[
+								"fern",
+								25.3738765716553,
+								-35.0983657836914
+							],
+							[
+								"fern",
+								22.5868644714355,
+								-37.0622673034668
+							],
+							[
+								"fern",
+								-22.621337890625,
+								38.3709335327148
+							],
+							[
+								"fern",
+								-24.5219573974609,
+								35.5403900146484
+							],
+							[
+								"fern",
+								-20.0526218414307,
+								36.70556640625
+							],
+							[
+								"fern",
+								-23.8833351135254,
+								37.9720840454102
+							],
+							[
+								"fern",
+								-22.8027629852295,
+								34.7384033203125
+							],
+							[
+								"fern",
+								-20.9958419799805,
+								38.9890060424805
+							],
+							[
+								"fern",
+								-24.3382511138916,
+								36.7291984558105
+							],
+							[
+								"fern",
+								-21.1177577972412,
+								35.6099319458008
+							],
+							[
+								"fern",
+								-25.5442714691162,
+								34.0825119018555
+							],
+							[
+								"fern",
+								-22.2308101654053,
+								34.8858184814453
+							],
+							[
+								"fern",
+								-24.344295501709,
+								33.5241432189941
+							],
+							[
+								"fern",
+								-22.9567546844482,
+								36.6384735107422
+							],
+							[
+								"fern",
+								-23.1692962646484,
+								34.1333198547363
+							],
+							[
+								"fern",
+								-24.787935256958,
+								37.1340408325195
+							],
+							[
+								"fern",
+								-19.2253875732422,
+								35.7782135009766
+							],
+							[
+								"fern",
+								-22.2112560272217,
+								37.4240951538086
+							],
+							[
+								"fern",
+								-20.6598072052002,
+								33.0737380981445
+							],
+							[
+								"fern",
+								-19.733039855957,
+								37.0005111694336
+							],
+							[
+								"fern",
+								-22.8598690032959,
+								35.6413688659668
+							],
+							[
+								"fern",
+								-18.4675712585449,
+								34.2129783630371
+							],
+							[
+								"fern",
+								-21.0109386444092,
+								37.3450241088867
+							],
+							[
+								"fern",
+								-21.8443660736084,
+								34.0390090942383
+							]
+						]
 					}
 				],
 				"station": "life",
@@ -4625,8 +6765,8 @@
 						"tree_positions": [
 							[
 								"alder",
-								29.0,
-								8.0,
+								31.0,
+								4.0,
 								0.94,
 								25.0
 							],
@@ -4645,13 +6785,13 @@
 								271.0
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 4.0,
+						"trees": 3,
+						"understory_clusters": 4,
 						"understory_positions": [
 							[
 								"fern",
-								29.8,
-								7.6,
+								31.8,
+								3.6,
 								0.68,
 								82.0
 							],
@@ -4689,8 +6829,8 @@
 								206.0
 							]
 						],
-						"trees": 1.0,
-						"understory_clusters": 4.0,
+						"trees": 1,
+						"understory_clusters": 4,
 						"understory_positions": [
 							[
 								"fern",
@@ -4747,8 +6887,8 @@
 								290.0
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 2.0,
+						"trees": 3,
+						"understory_clusters": 2,
 						"understory_positions": [
 							[
 								"fern",
@@ -4792,9 +6932,474 @@
 								286.478897565412
 							]
 						],
-						"trees": 3.0,
-						"understory_clusters": 0.0,
+						"trees": 3,
+						"understory_clusters": 0,
 						"understory_positions": []
+					},
+					{
+						"name": "Authored outdoor groves",
+						"source": "res://data/biomes.json",
+						"tree_positions": [
+							[
+								"willow",
+								-14.1161165237427,
+								-39.0,
+								1.161,
+								0.0
+							],
+							[
+								"willow",
+								-16.1288604736328,
+								-38.0899658203125,
+								1.2285,
+								137.507764065585
+							],
+							[
+								"willow",
+								-14.8272094726563,
+								-40.732593536377,
+								1.296,
+								275.01552813117
+							],
+							[
+								"willow",
+								-13.5771436691284,
+								-37.3668403625488,
+								1.3635,
+								412.523292196755
+							],
+							[
+								"alder",
+								24.7740001678467,
+								-33.4145584106445,
+								0.989,
+								40.6800034542884
+							],
+							[
+								"alder",
+								22.233118057251,
+								-33.9508056640625,
+								1.0465,
+								178.187767519873
+							],
+							[
+								"alder",
+								25.6332130432129,
+								-35.4027519226074,
+								1.104,
+								315.695531585458
+							],
+							[
+								"willow",
+								-24.8466758728027,
+								34.8879547119141,
+								1.075,
+								81.3600069085769
+							],
+							[
+								"willow",
+								-26.3763771057129,
+								33.0237998962402,
+								1.1375,
+								218.867770974162
+							],
+							[
+								"willow",
+								-22.7223873138428,
+								33.8730392456055,
+								1.2,
+								356.375535039747
+							]
+						],
+						"trees": 10,
+						"understory_clusters": 77,
+						"understory_positions": [
+							[
+								"fern",
+								-12.6161165237427,
+								-39.0
+							],
+							[
+								"fern",
+								-15.7000598907471,
+								-37.5461692810059
+							],
+							[
+								"fern",
+								-13.8766984939575,
+								-41.7897453308105
+							],
+							[
+								"fern",
+								-13.2000217437744,
+								-37.8122406005859
+							],
+							[
+								"fern",
+								-16.2346782684326,
+								-39.3663330078125
+							],
+							[
+								"fern",
+								-11.7608671188354,
+								-40.5141983032227
+							],
+							[
+								"fern",
+								-14.4971446990967,
+								-37.549201965332
+							],
+							[
+								"fern",
+								-15.119909286499,
+								-40.9012908935547
+							],
+							[
+								"fern",
+								-17.2349128723145,
+								-37.0767288208008
+							],
+							[
+								"fern",
+								-15.9429578781128,
+								-40.2319145202637
+							],
+							[
+								"fern",
+								-14.4209537506104,
+								-35.8711700439453
+							],
+							[
+								"fern",
+								-17.6066799163818,
+								-38.3469696044922
+							],
+							[
+								"fern",
+								-14.3192462921143,
+								-39.2509117126465
+							],
+							[
+								"fern",
+								-16.8427219390869,
+								-35.382495880127
+							],
+							[
+								"fern",
+								-16.8279037475586,
+								-39.417121887207
+							],
+							[
+								"fern",
+								-14.1043930053711,
+								-37.3660659790039
+							],
+							[
+								"fern",
+								-14.6960706710815,
+								-42.2268486022949
+							],
+							[
+								"fern",
+								-13.5174226760864,
+								-39.0276107788086
+							],
+							[
+								"fern",
+								-17.5853424072266,
+								-41.2149887084961
+							],
+							[
+								"fern",
+								-13.5639085769653,
+								-41.5413398742676
+							],
+							[
+								"fern",
+								-15.3773546218872,
+								-38.6541709899902
+							],
+							[
+								"fern",
+								-13.4152774810791,
+								-40.226188659668
+							],
+							[
+								"fern",
+								-16.8089752197266,
+								-39.8988647460938
+							],
+							[
+								"fern",
+								-12.6644849777222,
+								-36.1764373779297
+							],
+							[
+								"fern",
+								-15.694637298584,
+								-37.7392921447754
+							],
+							[
+								"fern",
+								-11.2175283432007,
+								-38.8742256164551
+							],
+							[
+								"fern",
+								-13.9623622894287,
+								-35.9171485900879
+							],
+							[
+								"fern",
+								-14.5754375457764,
+								-39.2710227966309
+							],
+							[
+								"fern",
+								-10.9424486160278,
+								-36.4190101623535
+							],
+							[
+								"fern",
+								-14.9603309631348,
+								-36.7865028381348
+							],
+							[
+								"fern",
+								-12.6790256500244,
+								-39.3202705383301
+							],
+							[
+								"fern",
+								25.9115428924561,
+								-32.4368095397949
+							],
+							[
+								"fern",
+								22.6251411437988,
+								-33.3444976806641
+							],
+							[
+								"fern",
+								26.7740154266357,
+								-35.3741340637207
+							],
+							[
+								"fern",
+								24.6945095062256,
+								-31.9166660308838
+							],
+							[
+								"fern",
+								23.4061508178711,
+								-35.0733184814453
+							],
+							[
+								"fern",
+								27.5471382141113,
+								-33.0276374816895
+							],
+							[
+								"fern",
+								23.539363861084,
+								-32.5626945495605
+							],
+							[
+								"fern",
+								25.2520866394043,
+								-35.5107307434082
+							],
+							[
+								"fern",
+								20.7338676452637,
+								-33.9033699035645
+							],
+							[
+								"fern",
+								23.7702941894531,
+								-35.4539985656738
+							],
+							[
+								"fern",
+								22.0820426940918,
+								-31.1548843383789
+							],
+							[
+								"fern",
+								21.2799205780029,
+								-35.109001159668
+							],
+							[
+								"fern",
+								24.3622055053711,
+								-33.6516571044922
+							],
+							[
+								"fern",
+								19.9269313812256,
+								-32.3628807067871
+							],
+							[
+								"fern",
+								22.5680751800537,
+								-35.4129295349121
+							],
+							[
+								"fern",
+								23.2965354919434,
+								-32.0822105407715
+							],
+							[
+								"fern",
+								26.7066707611084,
+								-36.4504585266113
+							],
+							[
+								"fern",
+								25.5151405334473,
+								-33.2559967041016
+							],
+							[
+								"fern",
+								23.855993270874,
+								-37.5664253234863
+							],
+							[
+								"fern",
+								27.1184196472168,
+								-35.1926116943359
+							],
+							[
+								"fern",
+								23.8612174987793,
+								-34.1851577758789
+							],
+							[
+								"fern",
+								26.2610950469971,
+								-38.1314430236816
+							],
+							[
+								"fern",
+								26.3738765716553,
+								-34.0983657836914
+							],
+							[
+								"fern",
+								23.5868644714355,
+								-36.0622673034668
+							],
+							[
+								"fern",
+								-24.621337890625,
+								36.3709335327148
+							],
+							[
+								"fern",
+								-26.5219573974609,
+								33.5403900146484
+							],
+							[
+								"fern",
+								-22.0526218414307,
+								34.70556640625
+							],
+							[
+								"fern",
+								-25.8833351135254,
+								35.9720840454102
+							],
+							[
+								"fern",
+								-24.8027629852295,
+								32.7384033203125
+							],
+							[
+								"fern",
+								-22.9958419799805,
+								36.9890060424805
+							],
+							[
+								"fern",
+								-26.3382511138916,
+								34.7291984558105
+							],
+							[
+								"fern",
+								-23.1177577972412,
+								33.6099319458008
+							],
+							[
+								"fern",
+								-27.5442714691162,
+								32.0825119018555
+							],
+							[
+								"fern",
+								-24.2308101654053,
+								32.8858184814453
+							],
+							[
+								"fern",
+								-26.344295501709,
+								31.5241432189941
+							],
+							[
+								"fern",
+								-24.9567546844482,
+								34.6384735107422
+							],
+							[
+								"fern",
+								-29.160364151001,
+								32.7247695922852
+							],
+							[
+								"fern",
+								-25.1692962646484,
+								32.1333198547363
+							],
+							[
+								"fern",
+								-21.2253875732422,
+								33.7782135009766
+							],
+							[
+								"fern",
+								-24.2112560272217,
+								35.4240951538086
+							],
+							[
+								"fern",
+								-22.6598072052002,
+								31.0737380981445
+							],
+							[
+								"fern",
+								-21.733039855957,
+								35.0005111694336
+							],
+							[
+								"fern",
+								-24.8598690032959,
+								33.6413688659668
+							],
+							[
+								"fern",
+								-20.4675712585449,
+								32.2129783630371
+							],
+							[
+								"fern",
+								-23.0109386444092,
+								35.3450241088867
+							],
+							[
+								"fern",
+								-23.8443660736084,
+								32.0390090942383
+							]
+						]
 					}
 				],
 				"station": "wordking",
@@ -4814,15 +7419,155 @@
 				]
 			}
 		],
-		"planting_version": 1.0,
-		"pocket_specimens_omitted": 0.0,
-		"pocket_specimens_preserved": 18.0,
-		"radius": 48.0,
-		"trees": 62.0,
-		"understory_clusters": 60.0,
+		"planting_version": 1,
+		"pocket_specimens_omitted": 0,
+		"pocket_specimens_preserved": 18,
+		"radius": 54.0,
+		"trees": 122,
+		"understory_clusters": 561,
 		"water_collision": false
 	},
-	"fish": 28.0,
+	"fish": 28,
+	"landforms": [
+		{
+			"authored_ridges": [
+				[
+					-25.0,
+					-18.0,
+					9.0,
+					6.0,
+					1.7
+				],
+				[
+					-31.0,
+					-1.0,
+					3.8,
+					7.0,
+					0.8
+				]
+			],
+			"maximum_height_m": 1.02694727599924,
+			"protected_edges": 33,
+			"raised_samples": 13778,
+			"same_visual_and_collision_mesh": true,
+			"station": "counseling"
+		},
+		{
+			"authored_ridges": [
+				[
+					30.0,
+					12.0,
+					5.0,
+					12.0,
+					1.7
+				],
+				[
+					-25.0,
+					21.0,
+					8.0,
+					5.0,
+					0.9
+				]
+			],
+			"maximum_height_m": 1.04127083889352,
+			"protected_edges": 34,
+			"raised_samples": 15709,
+			"same_visual_and_collision_mesh": true,
+			"station": "admissions"
+		},
+		{
+			"authored_ridges": [
+				[
+					-17.0,
+					-24.0,
+					12.0,
+					5.0,
+					1.6
+				],
+				[
+					28.0,
+					3.0,
+					4.5,
+					8.0,
+					1.2
+				]
+			],
+			"maximum_height_m": 0.952846757911829,
+			"protected_edges": 30,
+			"raised_samples": 13135,
+			"same_visual_and_collision_mesh": true,
+			"station": "recommendations"
+		},
+		{
+			"authored_ridges": [
+				[
+					-16.0,
+					29.0,
+					11.0,
+					4.5,
+					1.9
+				],
+				[
+					24.0,
+					-19.0,
+					6.0,
+					7.0,
+					1.0
+				]
+			],
+			"maximum_height_m": 1.07780183204926,
+			"protected_edges": 36,
+			"raised_samples": 16284,
+			"same_visual_and_collision_mesh": true,
+			"station": "universities"
+		},
+		{
+			"authored_ridges": [
+				[
+					-29.0,
+					2.0,
+					4.5,
+					11.0,
+					2.1
+				],
+				[
+					-13.0,
+					29.0,
+					10.0,
+					4.5,
+					1.6
+				]
+			],
+			"maximum_height_m": 1.00692227887379,
+			"protected_edges": 41,
+			"raised_samples": 13551,
+			"same_visual_and_collision_mesh": true,
+			"station": "life"
+		},
+		{
+			"authored_ridges": [
+				[
+					29.0,
+					9.0,
+					6.0,
+					7.0,
+					1.5
+				],
+				[
+					12.0,
+					26.0,
+					8.0,
+					4.5,
+					1.1
+				]
+			],
+			"maximum_height_m": 1.02668412355527,
+			"protected_edges": 30,
+			"raised_samples": 14712,
+			"same_visual_and_collision_mesh": true,
+			"station": "wordking"
+		}
+	],
 	"landscapes": [
 		{
 			"offset": [
@@ -4923,7 +7668,7 @@
 		{
 			"offset": [
 				-7.0,
-				-1.0
+				-2.6
 			],
 			"preset": "planned pocket garden",
 			"station": "life"
@@ -4970,10 +7715,10 @@
 		}
 	],
 	"marina": {
-		"benches": 2.0,
+		"benches": 2,
 		"deck_width": 5.4,
 		"guardrails": true,
-		"moored_boats": 1.0
+		"moored_boats": 1
 	},
 	"road_markings": [
 		{
@@ -4999,9 +7744,9 @@
 					-2.0
 				]
 			],
-			"crossings": 5.0,
+			"crossings": 5,
 			"junction_aware": true,
-			"mesh_batches": 3.0,
+			"mesh_batches": 3,
 			"station": "counseling"
 		},
 		{
@@ -5011,25 +7756,25 @@
 					1.0
 				],
 				[
-					17.2956199645996,
-					-3.49639010429382
+					17.7272720336914,
+					6.0
+				],
+				[
+					-2.49999904632568,
+					-16.8913040161133
+				],
+				[
+					-2.5,
+					13.7571430206299
 				],
 				[
 					-17.0,
 					-3.0
-				],
-				[
-					0.0,
-					-17.2173919677734
-				],
-				[
-					0.00000190734863281,
-					13.542857170105
 				]
 			],
-			"crossings": 5.0,
+			"crossings": 5,
 			"junction_aware": true,
-			"mesh_batches": 3.0,
+			"mesh_batches": 3,
 			"station": "admissions"
 		},
 		{
@@ -5040,7 +7785,7 @@
 				],
 				[
 					15.0,
-					0.0000009536743164
+					0.00000095367431640625
 				],
 				[
 					-17.0,
@@ -5055,9 +7800,9 @@
 					-8.0
 				]
 			],
-			"crossings": 5.0,
+			"crossings": 5,
 			"junction_aware": true,
-			"mesh_batches": 3.0,
+			"mesh_batches": 3,
 			"station": "recommendations"
 		},
 		{
@@ -5075,17 +7820,17 @@
 					15.0
 				],
 				[
-					-17.0,
-					-4.0
-				],
-				[
 					17.0,
 					4.0
+				],
+				[
+					-17.0,
+					-4.0
 				]
 			],
-			"crossings": 5.0,
+			"crossings": 5,
 			"junction_aware": true,
-			"mesh_batches": 3.0,
+			"mesh_batches": 3,
 			"station": "universities"
 		},
 		{
@@ -5096,24 +7841,24 @@
 				],
 				[
 					-17.6538467407227,
-					0.0000009536743164
-				],
-				[
-					19.0,
 					0.0
 				],
 				[
-					0.0,
-					17.529411315918
+					19.0,
+					-3.0
+				],
+				[
+					0.800000190734863,
+					17.4823532104492
 				],
 				[
 					-17.1973419189453,
 					-11.8691291809082
 				]
 			],
-			"crossings": 5.0,
+			"crossings": 5,
 			"junction_aware": true,
-			"mesh_batches": 3.0,
+			"mesh_batches": 3,
 			"station": "life"
 		},
 		{
@@ -5131,17 +7876,17 @@
 					13.8709678649902
 				],
 				[
-					-18.0,
-					-3.0
+					1.5,
+					-16.0
 				],
 				[
-					11.8626403808594,
-					-3.49170613288879
+					1.50000190734863,
+					1.0
 				]
 			],
-			"crossings": 5.0,
+			"crossings": 5,
 			"junction_aware": true,
-			"mesh_batches": 3.0,
+			"mesh_batches": 3,
 			"station": "wordking"
 		}
 	],
@@ -5153,7 +7898,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5167,7 +7912,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5181,7 +7926,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5195,7 +7940,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5209,7 +7954,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5223,7 +7968,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5237,7 +7982,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5251,7 +7996,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5265,7 +8010,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5279,7 +8024,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5293,7 +8038,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5307,7 +8052,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5321,7 +8066,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5335,7 +8080,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5349,7 +8094,7 @@
 				-15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5363,7 +8108,7 @@
 				-14.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5377,7 +8122,7 @@
 				-12.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5391,7 +8136,7 @@
 				-10.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5405,7 +8150,7 @@
 				-8.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5419,7 +8164,7 @@
 				-6.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5433,7 +8178,7 @@
 				-4.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5447,7 +8192,7 @@
 				-2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5461,7 +8206,7 @@
 				0.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5475,7 +8220,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5489,7 +8234,7 @@
 				4.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5503,7 +8248,7 @@
 				6.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5517,7 +8262,7 @@
 				8.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5531,7 +8276,7 @@
 				10.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5545,7 +8290,7 @@
 				12.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5559,7 +8304,7 @@
 				14.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5573,7 +8318,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5587,7 +8332,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5601,7 +8346,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5615,7 +8360,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5629,7 +8374,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5643,7 +8388,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5657,7 +8402,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5671,7 +8416,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5685,7 +8430,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5699,7 +8444,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5713,7 +8458,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5727,7 +8472,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5741,7 +8486,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5755,7 +8500,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5769,7 +8514,7 @@
 				15.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5783,7 +8528,7 @@
 				14.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5797,7 +8542,7 @@
 				12.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5811,7 +8556,7 @@
 				10.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5825,7 +8570,7 @@
 				8.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5839,7 +8584,7 @@
 				6.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5853,7 +8598,7 @@
 				4.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5867,7 +8612,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5881,7 +8626,7 @@
 				0.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5895,7 +8640,7 @@
 				-2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5909,7 +8654,7 @@
 				-4.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5923,7 +8668,7 @@
 				-6.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5937,7 +8682,7 @@
 				-8.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5951,7 +8696,7 @@
 				-10.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5965,7 +8710,7 @@
 				-12.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5979,7 +8724,7 @@
 				-14.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -5993,7 +8738,7 @@
 				-14.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6007,7 +8752,7 @@
 				-12.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6021,7 +8766,7 @@
 				-10.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6035,7 +8780,7 @@
 				-8.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6049,7 +8794,7 @@
 				-6.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6063,7 +8808,7 @@
 				-4.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6077,7 +8822,7 @@
 				-2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6091,7 +8836,7 @@
 				0.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6105,7 +8850,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6119,7 +8864,7 @@
 				4.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6133,7 +8878,7 @@
 				6.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6147,7 +8892,7 @@
 				8.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6161,7 +8906,7 @@
 				10.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6175,7 +8920,7 @@
 				12.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6189,7 +8934,7 @@
 				14.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6203,7 +8948,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6217,7 +8962,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6231,7 +8976,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6245,7 +8990,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6259,7 +9004,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6273,7 +9018,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6287,7 +9032,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6301,7 +9046,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6315,7 +9060,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6329,7 +9074,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6343,7 +9088,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6357,7 +9102,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6371,7 +9116,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6385,7 +9130,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6399,7 +9144,7 @@
 				2.0
 			],
 			"station": "counseling",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				1.0,
@@ -6413,7 +9158,7 @@
 				-15.125
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6427,7 +9172,7 @@
 				-15.375
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6441,7 +9186,7 @@
 				-15.625
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6455,7 +9200,7 @@
 				-15.875
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6469,7 +9214,7 @@
 				-16.125
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6483,7 +9228,7 @@
 				-16.375
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6497,7 +9242,7 @@
 				-16.625
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6511,7 +9256,7 @@
 				-16.875
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6525,7 +9270,7 @@
 				-17.125
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6539,7 +9284,7 @@
 				-17.375
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6553,7 +9298,7 @@
 				-17.625
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6567,7 +9312,7 @@
 				-17.875
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6581,7 +9326,7 @@
 				-17.4285717010498
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6595,7 +9340,7 @@
 				-16.2857151031494
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6609,7 +9354,7 @@
 				-15.1428565979004
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6623,7 +9368,7 @@
 				-14.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6637,7 +9382,7 @@
 				-12.8571434020996
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6651,7 +9396,7 @@
 				-11.7142858505249
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6665,7 +9410,7 @@
 				-10.5714282989502
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6679,7 +9424,7 @@
 				-9.08333301544189
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6693,7 +9438,7 @@
 				-7.25
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6707,7 +9452,7 @@
 				-5.41666698455811
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6721,7 +9466,7 @@
 				-3.58333349227905
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6735,7 +9480,7 @@
 				-1.75
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6749,7 +9494,7 @@
 				0.0833339691162109
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6763,7 +9508,7 @@
 				1.91666698455811
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6777,7 +9522,7 @@
 				3.75
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6791,7 +9536,7 @@
 				5.58333301544189
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6805,7 +9550,7 @@
 				7.41666793823242
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6819,7 +9564,7 @@
 				9.25
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6833,7 +9578,7 @@
 				11.0833320617676
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6847,7 +9592,7 @@
 				12.0833330154419
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6861,7 +9606,7 @@
 				12.25
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6875,7 +9620,7 @@
 				12.4166669845581
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6889,7 +9634,7 @@
 				12.5833330154419
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6903,7 +9648,7 @@
 				12.75
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6917,7 +9662,7 @@
 				12.9166669845581
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6931,7 +9676,7 @@
 				13.0833330154419
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6945,7 +9690,7 @@
 				13.25
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6959,7 +9704,7 @@
 				13.4166669845581
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6973,7 +9718,7 @@
 				13.5833330154419
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -6987,7 +9732,7 @@
 				13.75
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7001,7 +9746,7 @@
 				13.9166669845581
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7015,7 +9760,7 @@
 				14.0833330154419
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7029,7 +9774,7 @@
 				14.25
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7043,7 +9788,7 @@
 				14.4166669845581
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7057,7 +9802,7 @@
 				14.5833330154419
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7071,7 +9816,7 @@
 				14.75
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7085,7 +9830,7 @@
 				14.9166660308838
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7099,7 +9844,7 @@
 				14.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7113,7 +9858,7 @@
 				12.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7127,7 +9872,7 @@
 				10.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7141,7 +9886,7 @@
 				8.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7155,7 +9900,7 @@
 				6.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7169,7 +9914,7 @@
 				4.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7183,7 +9928,7 @@
 				2.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7197,7 +9942,7 @@
 				0.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7211,7 +9956,7 @@
 				-2.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7225,7 +9970,7 @@
 				-4.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7239,7 +9984,7 @@
 				-6.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7253,7 +9998,7 @@
 				-8.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7267,7 +10012,7 @@
 				-10.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7281,7 +10026,7 @@
 				-12.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7295,7 +10040,7 @@
 				-14.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7309,7 +10054,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7323,7 +10068,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7337,7 +10082,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7351,7 +10096,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7365,7 +10110,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7379,7 +10124,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7393,7 +10138,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7407,7 +10152,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7421,7 +10166,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7435,7 +10180,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7449,7 +10194,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7463,7 +10208,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7477,7 +10222,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7491,7 +10236,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7505,7 +10250,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7519,7 +10264,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7533,7 +10278,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7547,7 +10292,7 @@
 				1.0
 			],
 			"station": "admissions",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				1.0,
 				0.0,
@@ -7561,7 +10306,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7575,7 +10320,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7589,7 +10334,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7603,7 +10348,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7617,7 +10362,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7631,7 +10376,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7645,7 +10390,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7659,7 +10404,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7673,7 +10418,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7687,7 +10432,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7701,7 +10446,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7715,7 +10460,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7729,7 +10474,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7743,7 +10488,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7757,7 +10502,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7771,7 +10516,7 @@
 				-15.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7785,7 +10530,7 @@
 				-14.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7799,7 +10544,7 @@
 				-12.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7813,7 +10558,7 @@
 				-10.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7827,7 +10572,7 @@
 				-8.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7841,7 +10586,7 @@
 				-6.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7855,7 +10600,7 @@
 				-4.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7869,7 +10614,7 @@
 				-2.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7883,7 +10628,7 @@
 				0.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7897,7 +10642,7 @@
 				2.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7911,7 +10656,7 @@
 				4.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7925,7 +10670,7 @@
 				6.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7939,7 +10684,7 @@
 				8.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7953,7 +10698,7 @@
 				10.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7967,7 +10712,7 @@
 				12.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7981,7 +10726,7 @@
 				13.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -7995,7 +10740,7 @@
 				13.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8009,7 +10754,7 @@
 				13.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8023,7 +10768,7 @@
 				13.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8037,7 +10782,7 @@
 				13.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8051,7 +10796,7 @@
 				13.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8065,7 +10810,7 @@
 				13.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8079,7 +10824,7 @@
 				13.8333330154419
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8093,7 +10838,7 @@
 				15.5
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8107,7 +10852,7 @@
 				17.1666660308838
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8121,7 +10866,7 @@
 				18.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8135,7 +10880,7 @@
 				18.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8149,7 +10894,7 @@
 				18.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8163,7 +10908,7 @@
 				18.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8177,7 +10922,7 @@
 				18.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8191,7 +10936,7 @@
 				18.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8205,7 +10950,7 @@
 				18.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8219,7 +10964,7 @@
 				18.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8233,7 +10978,7 @@
 				18.0
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8247,7 +10992,7 @@
 				17.029411315918
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8261,7 +11006,7 @@
 				15.0882349014282
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8275,7 +11020,7 @@
 				13.1470584869385
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8289,7 +11034,7 @@
 				11.2058820724487
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8303,7 +11048,7 @@
 				9.26470565795898
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8317,7 +11062,7 @@
 				7.32352924346924
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8331,7 +11076,7 @@
 				5.38235282897949
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8345,7 +11090,7 @@
 				3.44117641448975
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8359,7 +11104,7 @@
 				1.5
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8373,7 +11118,7 @@
 				-0.44117546081543
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8387,7 +11132,7 @@
 				-2.38235282897949
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8401,7 +11146,7 @@
 				-4.32352828979492
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8415,7 +11160,7 @@
 				-6.26470565795898
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8429,7 +11174,7 @@
 				-8.20588111877441
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8443,7 +11188,7 @@
 				-10.1470584869385
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8457,7 +11202,7 @@
 				-12.0882339477539
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8471,7 +11216,7 @@
 				-14.029411315918
 			],
 			"station": "recommendations",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -8485,7 +11230,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8499,7 +11244,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8513,7 +11258,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8527,7 +11272,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8541,7 +11286,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8555,7 +11300,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8569,7 +11314,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8583,7 +11328,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8597,7 +11342,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8611,7 +11356,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8625,7 +11370,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8639,7 +11384,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8653,7 +11398,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8667,7 +11412,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8681,7 +11426,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8695,7 +11440,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8709,7 +11454,7 @@
 				-15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8723,7 +11468,7 @@
 				-14.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8737,7 +11482,7 @@
 				-12.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8751,7 +11496,7 @@
 				-10.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8765,7 +11510,7 @@
 				-8.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8779,7 +11524,7 @@
 				-6.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8793,7 +11538,7 @@
 				-4.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8807,7 +11552,7 @@
 				-2.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8821,7 +11566,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8835,7 +11580,7 @@
 				2.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8849,7 +11594,7 @@
 				4.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8863,7 +11608,7 @@
 				6.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8877,7 +11622,7 @@
 				8.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8891,7 +11636,7 @@
 				10.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8905,7 +11650,7 @@
 				12.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8919,7 +11664,7 @@
 				14.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8933,7 +11678,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8947,7 +11692,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8961,7 +11706,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8975,7 +11720,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -8989,7 +11734,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9003,7 +11748,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9017,7 +11762,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9031,7 +11776,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9045,7 +11790,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9059,7 +11804,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9073,7 +11818,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9087,7 +11832,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9101,7 +11846,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9115,7 +11860,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9129,7 +11874,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9143,7 +11888,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9157,7 +11902,7 @@
 				15.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9171,7 +11916,7 @@
 				14.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9185,7 +11930,7 @@
 				12.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9199,7 +11944,7 @@
 				10.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9213,7 +11958,7 @@
 				8.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9227,7 +11972,7 @@
 				6.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9241,7 +11986,7 @@
 				4.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9255,7 +12000,7 @@
 				2.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9269,7 +12014,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9283,7 +12028,7 @@
 				-2.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9297,7 +12042,7 @@
 				-4.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9311,7 +12056,7 @@
 				-6.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9325,7 +12070,7 @@
 				-8.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9339,7 +12084,7 @@
 				-10.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9353,7 +12098,7 @@
 				-12.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9367,7 +12112,7 @@
 				-14.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9381,7 +12126,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9395,7 +12140,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9409,7 +12154,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9423,7 +12168,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9437,7 +12182,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9451,7 +12196,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9465,7 +12210,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9479,7 +12224,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9493,7 +12238,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9507,7 +12252,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9521,7 +12266,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9535,7 +12280,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9549,7 +12294,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9563,7 +12308,7 @@
 				0.0
 			],
 			"station": "universities",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				-1.0,
 				0.0,
@@ -9577,7 +12322,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9591,7 +12336,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9605,7 +12350,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9619,7 +12364,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9633,7 +12378,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9647,7 +12392,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9661,7 +12406,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9675,7 +12420,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9689,7 +12434,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9703,7 +12448,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9717,7 +12462,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9731,7 +12476,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9745,7 +12490,7 @@
 				-17.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9759,7 +12504,7 @@
 				-16.4285717010498
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9773,7 +12518,7 @@
 				-15.2857141494751
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9787,7 +12532,7 @@
 				-14.1428565979004
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9801,7 +12546,7 @@
 				-13.0
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9815,7 +12560,7 @@
 				-11.8571434020996
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9829,7 +12574,7 @@
 				-10.7142858505249
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9843,7 +12588,7 @@
 				-9.5714282989502
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9857,7 +12602,7 @@
 				-8.05555534362793
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9871,7 +12616,7 @@
 				-6.16666650772095
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9885,7 +12630,7 @@
 				-4.27777767181396
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9899,7 +12644,7 @@
 				-2.38888883590698
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9913,7 +12658,7 @@
 				-0.5
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9927,7 +12672,7 @@
 				1.38888835906982
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9941,7 +12686,7 @@
 				3.27777767181396
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9955,7 +12700,7 @@
 				5.16666603088379
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9969,7 +12714,7 @@
 				7.05555534362793
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9983,7 +12728,7 @@
 				8.64285755157471
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -9997,7 +12742,7 @@
 				9.9285717010498
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10011,7 +12756,7 @@
 				11.2142858505249
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10025,7 +12770,7 @@
 				12.5
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10039,7 +12784,7 @@
 				13.7857141494751
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10053,7 +12798,7 @@
 				15.0714282989502
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10067,7 +12812,7 @@
 				16.3571434020996
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10081,7 +12826,7 @@
 				17.0555553436279
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10095,7 +12840,7 @@
 				17.1666660308838
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10109,7 +12854,7 @@
 				17.2777786254883
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10123,7 +12868,7 @@
 				17.3888893127441
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10137,7 +12882,7 @@
 				17.5
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10151,7 +12896,7 @@
 				17.6111106872559
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10165,7 +12910,7 @@
 				17.7222213745117
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10179,7 +12924,7 @@
 				17.8333339691162
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10193,7 +12938,7 @@
 				17.9444446563721
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10207,7 +12952,7 @@
 				17.3571434020996
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10221,7 +12966,7 @@
 				16.0714282989502
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10235,7 +12980,7 @@
 				14.7857141494751
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10249,7 +12994,7 @@
 				13.5
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10263,7 +13008,7 @@
 				12.2142858505249
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10277,7 +13022,7 @@
 				10.9285717010498
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10291,7 +13036,7 @@
 				9.64285755157471
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10305,7 +13050,7 @@
 				8.0714282989502
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10319,7 +13064,7 @@
 				6.2142858505249
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10333,7 +13078,7 @@
 				4.35714292526245
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10347,7 +13092,7 @@
 				2.5
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10361,7 +13106,7 @@
 				0.642857551574707
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10375,7 +13120,7 @@
 				-1.2142858505249
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10389,7 +13134,7 @@
 				-3.0714282989502
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10403,7 +13148,7 @@
 				-4.92857074737549
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10417,7 +13162,7 @@
 				-6.7857141494751
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10431,7 +13176,7 @@
 				-8.64285659790039
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10445,7 +13190,7 @@
 				-10.5
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10459,7 +13204,7 @@
 				-12.3571434020996
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10473,7 +13218,7 @@
 				-14.2142848968506
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10487,7 +13232,7 @@
 				-16.0714282989502
 			],
 			"station": "life",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				0.0,
@@ -10501,7 +13246,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10515,7 +13260,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10529,7 +13274,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10543,7 +13288,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10557,7 +13302,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10571,7 +13316,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10585,7 +13330,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10599,7 +13344,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10613,7 +13358,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10627,7 +13372,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10641,7 +13386,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10655,7 +13400,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10669,7 +13414,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10683,7 +13428,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10697,7 +13442,7 @@
 				-16.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10711,7 +13456,7 @@
 				-15.033332824707
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10725,7 +13470,7 @@
 				-13.1000003814697
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10739,7 +13484,7 @@
 				-11.1666660308838
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10753,7 +13498,7 @@
 				-9.23333358764648
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10767,7 +13512,7 @@
 				-7.29999923706055
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10781,7 +13526,7 @@
 				-5.36666679382324
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10795,7 +13540,7 @@
 				-3.43333339691162
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10809,7 +13554,7 @@
 				-1.5
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10823,7 +13568,7 @@
 				0.433332443237305
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10837,7 +13582,7 @@
 				2.36666679382324
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10851,7 +13596,7 @@
 				4.29999923706055
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10865,7 +13610,7 @@
 				6.23333358764648
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10879,7 +13624,7 @@
 				8.16666603088379
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10893,7 +13638,7 @@
 				10.0999984741211
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10907,7 +13652,7 @@
 				12.033332824707
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10921,7 +13666,7 @@
 				13.09375
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10935,7 +13680,7 @@
 				13.28125
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10949,7 +13694,7 @@
 				13.46875
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10963,7 +13708,7 @@
 				13.65625
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10977,7 +13722,7 @@
 				13.84375
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -10991,7 +13736,7 @@
 				14.03125
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11005,7 +13750,7 @@
 				14.21875
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11019,7 +13764,7 @@
 				14.40625
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11033,7 +13778,7 @@
 				14.59375
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11047,7 +13792,7 @@
 				14.78125
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11061,7 +13806,7 @@
 				14.96875
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11075,7 +13820,7 @@
 				15.15625
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11089,7 +13834,7 @@
 				15.34375
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11103,7 +13848,7 @@
 				15.53125
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11117,7 +13862,7 @@
 				15.71875
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11131,7 +13876,7 @@
 				15.90625
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11145,7 +13890,7 @@
 				15.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11159,7 +13904,7 @@
 				13.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11173,7 +13918,7 @@
 				11.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11187,7 +13932,7 @@
 				9.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11201,7 +13946,7 @@
 				7.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11215,7 +13960,7 @@
 				5.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11229,7 +13974,7 @@
 				3.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11243,7 +13988,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11257,7 +14002,7 @@
 				-1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11271,7 +14016,7 @@
 				-3.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11285,7 +14030,7 @@
 				-5.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11299,7 +14044,7 @@
 				-7.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11313,7 +14058,7 @@
 				-9.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11327,7 +14072,7 @@
 				-11.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11341,7 +14086,7 @@
 				-13.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11355,7 +14100,7 @@
 				-15.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11369,7 +14114,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11383,7 +14128,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11397,7 +14142,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11411,7 +14156,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11425,7 +14170,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11439,7 +14184,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11453,7 +14198,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11467,7 +14212,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11481,7 +14226,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11495,7 +14240,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11509,7 +14254,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11523,7 +14268,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11537,7 +14282,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11551,7 +14296,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11565,7 +14310,7 @@
 				1.0
 			],
 			"station": "wordking",
-			"surfaces": 1.0,
+			"surfaces": 1,
 			"up": [
 				0.0,
 				-1.0,
@@ -11577,107 +14322,149 @@
 		"continuous_arch": true,
 		"deck_width": 2.7,
 		"finish": [
-			0.457304954528809,
-			0.722674787044525,
-			0.518278956413269
+			0.516770601272583,
+			0.663201868534088,
+			0.54139769077301
 		],
-		"segments": 30.0,
+		"segments": 19,
 		"start": [
-			0.370048105716705,
-			0.828961968421936,
-			0.419387876987457
+			0.459458142518997,
+			0.730622708797455,
+			0.505063056945801
 		],
-		"town_open_landing_length": 4.97106693920336,
+		"town_open_landing_length": 3.87360099703073,
 		"town_sidewalk_clearance": 0.22
 	},
 	"sakura_design": "authored blossom garden: accessible loop, open bridge arrival, two recessed scenic seating terraces",
-	"sakura_layout_version": 4,
-	"sakura_seating": {
-		"changed_nodes": [
-			"SakuraGrove/EastViewBench",
-			"SakuraGrove/WestViewBench",
-			"SakuraGrove/OverlookGuardrails"
-		],
-		"guard_return_x": 7.8,
-		"layout_version": 4,
-		"marina_benches_turned_inward": 2,
-		"open_entrance_width": 2.75,
-		"outer_guard_x": 8.25,
-		"seats": [
-			{
-				"approach": [
-					6.55000019073486,
-					2.15000009536743
-				],
-				"id": "EastViewBench",
-				"position": [
-					7.65000009536743,
-					2.15000009536743
-				],
-				"yaw": 1.5707963267949
-			},
-			{
-				"approach": [
-					-6.55000019073486,
-					2.15000009536743
-				],
-				"id": "WestViewBench",
-				"position": [
-					-7.65000009536743,
-					2.15000009536743
-				],
-				"yaw": -1.5707963267949
-			}
-		]
-	},
-	"sakura_trees": 12.0,
+	"sakura_layout_version": 9,
+	"sakura_trees": 12,
+	"station_arrivals": [
+		{
+			"arrival_local": [
+				9.05000019073486,
+				-2.59999990463257
+			],
+			"arrival_radius_m": 1.02,
+			"portal_local": [
+				6.0,
+				-2.59999990463257
+			],
+			"station": "counseling",
+			"walkway_width_m": 1.55
+		},
+		{
+			"arrival_local": [
+				-12.0500001907349,
+				-3.59999990463257
+			],
+			"arrival_radius_m": 1.02,
+			"portal_local": [
+				-9.0,
+				-3.59999990463257
+			],
+			"station": "admissions",
+			"walkway_width_m": 1.55
+		},
+		{
+			"arrival_local": [
+				9.05000019073486,
+				-2.29999995231628
+			],
+			"arrival_radius_m": 1.02,
+			"portal_local": [
+				6.0,
+				-2.29999995231628
+			],
+			"station": "recommendations",
+			"walkway_width_m": 1.55
+		},
+		{
+			"arrival_local": [
+				11.0500001907349,
+				-3.65000009536743
+			],
+			"arrival_radius_m": 1.02,
+			"portal_local": [
+				8.0,
+				-3.65000009536743
+			],
+			"station": "universities",
+			"walkway_width_m": 1.55
+		},
+		{
+			"arrival_local": [
+				2.95000004768372,
+				-1.29999995231628
+			],
+			"arrival_radius_m": 1.02,
+			"portal_local": [
+				6.0,
+				-1.29999995231628
+			],
+			"station": "life",
+			"walkway_width_m": 1.55
+		},
+		{
+			"arrival_local": [
+				-2.95000004768372,
+				-3.59999990463257
+			],
+			"arrival_radius_m": 1.02,
+			"portal_local": [
+				-6.0,
+				-3.59999990463257
+			],
+			"station": "wordking",
+			"walkway_width_m": 1.55
+		}
+	],
 	"stations": [
 		{
 			"id": "counseling",
 			"position": [
-				5.96738052368164,
-				47.7390441894531,
-				-2.58586478233337
+				5.97634124755859,
+				53.7870712280273,
+				-2.58974766731262
 			]
 		},
 		{
 			"id": "admissions",
 			"position": [
-				47.2266464233398,
-				8.85499572753906,
-				-3.54199814796448
+				53.3276481628418,
+				8.88794136047363,
+				-3.55517649650574
 			]
 		},
 		{
 			"id": "recommendations",
 			"position": [
-				5.96925020217896,
-				-2.28821229934692,
-				-47.7540016174316
+				5.97782611846924,
+				-2.29149985313416,
+				-53.8004341125488
 			]
 		},
 		{
 			"id": "universities",
 			"position": [
-				-47.3913345336914,
-				7.89855527877808,
-				-3.60371613502502
+				-53.4756469726563,
+				7.92231845855713,
+				-3.61455798149109
 			]
 		},
 		{
 			"id": "life",
 			"position": [
-				-5.97383689880371,
-				-1.29433131217957,
-				47.7906951904297
+				-5.98146772384644,
+				-1.29598462581635,
+				53.8332138061523
 			]
 		},
 		{
 			"id": "wordking",
 			"position": [
-				5.95951271057129,
-				-47.6761016845703,
-				-3.57570743560791
+				5.97008943557739,
+				-53.7308044433594,
+				-3.58205342292786
 			]
 		}
 	]

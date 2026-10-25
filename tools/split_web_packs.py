@@ -189,15 +189,41 @@ def plan_pack(pack: Pack, inventory: dict) -> tuple[dict, dict, dict, dict]:
     if tuple(engine.get(key) for key in ("major", "minor", "patch")) != pack.engine:
         raise ValueError("Dependency inventory and exported PCK use different Godot versions")
     groups = inventory["groups"]
+    profiles = inventory.get("profiles", {})
+    on_demand = inventory.get("shared_on_demand", [])
+    if not isinstance(on_demand, list) or any(not isinstance(key, str) or key == "boot" or key not in groups for key in on_demand):
+        raise ValueError("Invalid shared on-demand group")
+    if any(set(on_demand).intersection(members) for members in profiles.values()):
+        raise ValueError("Shared on-demand groups cannot be installed with a main profile")
+    def shared_owner(users):
+        if not profiles:
+            return "shared"
+        domains = set()
+        for user in users:
+            if user == "shared" or user in on_demand:
+                # Optional rooms are available to both profiles. Keep shared
+                # ownership independent of their deferred download timing.
+                domains.update(profiles)
+            elif user.startswith("shared_"):
+                domains.add(user.removeprefix("shared_"))
+            else:
+                domains.update(key for key, members in profiles.items() if user in members)
+        return "shared_" + next(iter(domains)) if len(domains) == 1 else "shared"
     if "boot" not in groups or "shared" in groups:
         raise ValueError("Inventory requires boot and reserves the shared group name")
     if any(not re.fullmatch(r"[a-z][a-z0-9_]*", key) for key in groups):
         raise ValueError("Invalid resource pack group identifier")
     graph = inventory["dependencies"]
     sources = {key: closure(roots, graph) for key, roots in groups.items()}
-    for source in groups.get("training_room", []):
-        if source in sources["boot"]:
-            raise ValueError(f"Full indoor resource leaked into boot dependency closure: {source}")
+    for profile, members in profiles.items():
+        installed_sources = set().union(*(sources[key] for key in members))
+        for optional in on_demand:
+            if installed_sources.intersection(groups[optional]):
+                raise ValueError(f"Shared on-demand resource leaked into {profile} installation dependencies ({optional})")
+    for interior in ("training_room", "university_hall", "admissions_room", "counseling_room", "recommendation_room", "recommendation_low", "discussion_common", "discussion_garden", "discussion_garden_low"):
+        for source in groups.get(interior, []):
+            if source in sources["boot"]:
+                raise ValueError(f"Full indoor resource leaked into boot dependency closure ({interior}): {source}")
     source_entries = {source: exported_entries(source, pack.entries) for source in set().union(*sources.values())}
     group_entries = {key: set().union(*(source_entries[source] for source in resources))
                      for key, resources in sources.items()}
@@ -212,7 +238,7 @@ def plan_pack(pack: Pack, inventory: dict) -> tuple[dict, dict, dict, dict]:
     owners: dict[str, str] = {}
     for name in set().union(*group_entries.values()):
         users = [key for key, names in group_entries.items() if name in names]
-        owners[name] = "boot" if "boot" in users else users[0] if len(users) == 1 else "shared"
+        owners[name] = "boot" if "boot" in users else users[0] if len(users) == 1 else shared_owner(users)
     # Byte-identical entries must live in the same pack to share one payload.
     # If the boot needs a copy, all aliases stay there; otherwise common bytes
     # become shared, with explicit dependencies on the shared pack below.
@@ -222,7 +248,7 @@ def plan_pack(pack: Pack, inventory: dict) -> tuple[dict, dict, dict, dict]:
     for names in equal_payloads.values():
         users = {owners[name] for name in names}
         if len(users) > 1:
-            owner = "boot" if "boot" in users else "shared"
+            owner = "boot" if "boot" in users else shared_owner(users)
             for name in names:
                 if pack.entries[name] != pack.entries[names[0]]:
                     raise ValueError("SHA-256 collision while assigning shared payloads")
@@ -234,10 +260,10 @@ def plan_pack(pack: Pack, inventory: dict) -> tuple[dict, dict, dict, dict]:
     for key, names in group_entries.items():
         if key != "boot":
             dependencies[key] = sorted({owners[name] for name in names} - {"boot", key})
-    if "shared" in contents:
+    for shared in set(contents) & {"shared", "shared_full", "shared_low"}:
         # Shared payloads are dependency leaves because they contain every
         # non-boot dependency used by two or more closures.
-        dependencies["shared"] = []
+        dependencies[shared] = []
     for key, required in inventory.get("prerequisites", {}).items():
         if key not in groups or any(value not in groups or value == key for value in required):
             raise ValueError("Invalid explicit pack prerequisite")
@@ -247,13 +273,21 @@ def plan_pack(pack: Pack, inventory: dict) -> tuple[dict, dict, dict, dict]:
         users = [key for key, paths in sources.items() if source in paths]
         if "boot" in users:
             continue
-        owner = users[0] if len(users) == 1 else "shared"
+        owner = users[0] if len(users) == 1 else shared_owner(users)
         # A group can have no unique bytes (e.g. aliases). Keep a tiny marker
         # pack so its readiness contract can still include required shared
         # resources without assuming a caller knows physical entry ownership.
         contents.setdefault(owner, {})
         dependencies.setdefault(owner, sorted({owners[name] for name in names} - {"boot", owner}))
         resources[source] = owner
+    if profiles:
+        for key in set(groups) - {"boot"}:
+            contents.setdefault(key, {})
+            dependencies.setdefault(key, [])
+        for profile, roots in profiles.items():
+            installed = set().union(*(pack_dependency_closure(key, dependencies, set(contents)) for key in roots))
+            if installed.intersection(on_demand):
+                raise ValueError(f"Shared on-demand group leaked into {profile} installation dependencies")
     # Check logical readiness against physical ownership. This catches a future
     # importer/remap change before publishing packs which mount successfully but
     # fail when a dependent resource is first accessed.
@@ -262,6 +296,14 @@ def plan_pack(pack: Pack, inventory: dict) -> tuple[dict, dict, dict, dict]:
         for source in sources.get(key, []):
             if not {owners[name] for name in source_entries[source]} <= available:
                 raise ValueError(f"Pack {key} does not include every dependency of {source}")
+    # Keep quality alternatives physically separate. A common texture may be
+    # shared, but pulling a standard scene through the low graph defeats the
+    # deferred-download and memory budget before the scene is even opened.
+    if "discussion_garden_low" in contents and "discussion_garden" in groups:
+        available = pack_dependency_closure("discussion_garden_low", dependencies, set(contents)) | {"boot"}
+        for source in groups["discussion_garden"]:
+            if {owners[name] for name in source_entries[source]} <= available:
+                raise ValueError("Standard garden geometry leaked into the minimum-profile dependency closure")
     report = {
         "source_entries": len(pack.entries), "runtime_source_count": len(source_entries),
         "required_entries": len(owners), "omitted_entries": [
@@ -296,7 +338,7 @@ def update_html_size(path: Path, size: int) -> None:
     path.write_text(text, encoding="utf-8", newline="\n")
 
 
-def split(source: Path, inventory_path: Path, output: Path, report_path: Path) -> dict:
+def split(source: Path, inventory_path: Path, output: Path, report_path: Path, boot_name: str = "index.pck") -> dict:
     source_hash = file_hash(source)
     source_bytes = source.stat().st_size
     pack = read_pack(source)
@@ -316,8 +358,17 @@ def split(source: Path, inventory_path: Path, output: Path, report_path: Path) -
         if len(parsed.parts) != 2 or parsed.parts[0] != "packs" or not re.fullmatch(r"[a-z0-9_]+-[0-9a-f]{16}\.pck", parsed.name):
             raise ValueError("Previous manifest has an unsafe pack path; refusing cleanup")
     manifest = {"version": 1, "packs": {}, "resources": dict(sorted(resources.items()))}
+    if inventory.get("profiles"):
+        manifest["profiles"] = {
+            profile: sorted(set().union(*(pack_dependency_closure(key, dependencies, set(contents)) for key in keys)))
+            for profile, keys in inventory["profiles"].items()
+        }
+    if inventory.get("shared_on_demand"):
+        manifest["shared_on_demand"] = sorted(set().union(*(
+            pack_dependency_closure(key, dependencies, set(contents)) for key in inventory["shared_on_demand"]
+        )))
     details = {}
-    startup = pack_dependency_closure("avatar", dependencies, set(contents)) | {"avatar"} if "avatar" in contents else set()
+    startup = pack_dependency_closure("avatar", dependencies, set(contents)) | {"avatar"} if "avatar" in contents and not manifest.get("profiles") else set()
     for key in sorted(set(contents) - {"boot"}):
         temporary = packs_dir / f"{key}.pck.tmp"
         info = write_pack(temporary, contents[key], pack.engine)
@@ -329,11 +380,12 @@ def split(source: Path, inventory_path: Path, output: Path, report_path: Path) -
         details[key] = info
     encoded_manifest = (json.dumps(manifest, sort_keys=True, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     contents["boot"][MANIFEST_PATH] = encoded_manifest
-    temporary_boot = output / "index.pck.tmp"
+    temporary_boot = output / (boot_name + ".tmp")
     details["boot"] = write_pack(temporary_boot, contents["boot"], pack.engine)
     # Update only after all packs have passed structural and digest validation.
-    update_html_size(output / "index.html", details["boot"]["bytes"])
-    temporary_boot.replace(output / "index.pck")
+    if boot_name == "index.pck":
+        update_html_size(output / "index.html", details["boot"]["bytes"])
+    temporary_boot.replace(output / boot_name)
     previous.write_bytes(encoded_manifest)
     current_urls = {row["url"] for row in manifest["packs"].values()}
     for url in old_urls:

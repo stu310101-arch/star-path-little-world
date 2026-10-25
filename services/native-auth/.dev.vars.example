@@ -1,0 +1,6 @@
+# Local development only; never commit real signing keys.
+PUBLIC_ORIGIN=http://localhost:8787
+FIREBASE_PROJECT_ID=
+FIREBASE_API_KEY=
+SERVICE_ACCOUNT_EMAIL=
+SERVICE_ACCOUNT_PRIVATE_KEY=

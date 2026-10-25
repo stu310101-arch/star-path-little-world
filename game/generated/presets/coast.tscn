@@ -155,50 +155,52 @@ transform_format = 1
 instance_count = 15
 mesh = SubResource("SphereMesh_v1bua")
 
-[node name="coast" type="Node3D" unique_id=1663802924]
+[node name="coast" type="Node3D" unique_id=2027575337]
 
-[node name="tree-large" type="Node3D" parent="." unique_id=1424002323]
+[node name="tree-large" type="Node3D" parent="." unique_id=1065540090]
 transform = Transform3D(0.87758255, 0, 0.47942555, 0, 1, 0, -0.47942555, 0, 0.87758255, -0.8, 0, -0.5)
 
-[node name="tree-large2" type="Node3D" parent="tree-large" unique_id=1879367283]
+[node name="tree-large2" type="Node3D" parent="tree-large" unique_id=559586451]
 transform = Transform3D(3.5202088, 0, 0, 0, 3.5202088, 0, 0, 0, 3.5202088, 0, 0, 0)
 
-[node name="tree-large" type="MeshInstance3D" parent="tree-large/tree-large2" unique_id=762316945]
+[node name="tree-large" type="MeshInstance3D" parent="tree-large/tree-large2" unique_id=1553627125]
 mesh = SubResource("ArrayMesh_asewo")
 surface_material_override/0 = SubResource("StandardMaterial3D_vq6au")
 
-[node name="tree-small" type="Node3D" parent="." unique_id=1375195450]
+[node name="tree-small" type="Node3D" parent="." unique_id=1415194706]
 transform = Transform3D(-0.22720204, 0, 0.9738476, 0, 1, 0, -0.9738476, 0, -0.22720204, 1, 0, -0.8)
 
-[node name="tree-small2" type="Node3D" parent="tree-small" unique_id=402467211]
+[node name="tree-small2" type="Node3D" parent="tree-small" unique_id=1163059924]
 transform = Transform3D(3.174603, 0, 0, 0, 3.174603, 0, 0, 0, 3.174603, 0, 0, 0)
 
-[node name="tree-small" type="MeshInstance3D" parent="tree-small/tree-small2" unique_id=1340342952]
+[node name="tree-small" type="MeshInstance3D" parent="tree-small/tree-small2" unique_id=1704556288]
 mesh = SubResource("ArrayMesh_8g7bb")
 surface_material_override/0 = SubResource("StandardMaterial3D_ybkvf")
 
-[node name="GardenBench" type="Node3D" parent="." unique_id=1964811629]
+[node name="GardenBench" type="Node3D" parent="." unique_id=1829364046]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1)
 
-[node name="SlattedSeat" type="MeshInstance3D" parent="GardenBench" unique_id=1659823955]
+[node name="SlattedSeat" type="MeshInstance3D" parent="GardenBench" unique_id=966906191]
 material_override = SubResource("StandardMaterial3D_3iist")
 mesh = SubResource("ArrayMesh_o8t8u")
+metadata/authored_surface = "SlattedSeat"
 
-[node name="SeatCollision" type="StaticBody3D" parent="GardenBench/SlattedSeat" unique_id=897189871]
+[node name="SeatCollision" type="StaticBody3D" parent="GardenBench/SlattedSeat" unique_id=1228324385]
 collision_layer = 8
+metadata/rest_seat = true
 
-[node name="@CollisionShape3D@273" type="CollisionShape3D" parent="GardenBench/SlattedSeat/SeatCollision" unique_id=1348974109]
+[node name="@CollisionShape3D@571" type="CollisionShape3D" parent="GardenBench/SlattedSeat/SeatCollision" unique_id=611285403]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48, 0.04)
 shape = SubResource("BoxShape3D_6um2n")
 
-[node name="FlowerBed" type="MultiMeshInstance3D" parent="." unique_id=949072642]
+[node name="FlowerBed" type="MultiMeshInstance3D" parent="." unique_id=1453833497]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0, 0.5)
 custom_aabb = AABB(-0.7925957, -0.125, -0.61096954, 1.6924535, 0.56, 1.2809507)
 multimesh = SubResource("MultiMesh_r4fch")
 script = ExtResource("2_ejbs6")
 metadata/placements = Array[Transform3D]([Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.12, 0), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12535693, 0.155, 0.08038012), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018374786, 0.19, -0.1464362), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15208782, 0.12, 0.13889188), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28555948, 0.155, -0.035388336), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2784718, 0.19, -0.12394834), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09613242, 0.12, 0.25010535), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18887822, 0.155, -0.25473174), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42264915, 0.19, 0.1081442), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45299116, 0.12, 0.13076892), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22481488, 0.155, -0.33596957), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1703718, 0.19, 0.38075975), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5276438, 0.12, -0.21426404), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6349059, 0.155, -0.09748491), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.39712983, 0.19, 0.3949811)])
 
-[node name="@MultiMeshInstance3D@274" type="MultiMeshInstance3D" parent="." unique_id=1243892213]
+[node name="@MultiMeshInstance3D@572" type="MultiMeshInstance3D" parent="." unique_id=1177060768]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 custom_aabb = AABB(-0.7925957, -0.125, -0.61096954, 1.6924535, 0.56, 1.2809507)
 multimesh = SubResource("MultiMesh_1b46c")

@@ -1,5 +1,9 @@
 {
-  "radius": 48.0,
+  "radius": 21.6,
+  "authoring_radius": 54.0,
+  "outdoor_scale": 0.4,
+  "outdoor_walk_speed": 3.8,
+  "outdoor_run_speed": 6.4,
   "stations": [
     {
       "id": "counseling",
@@ -37,7 +41,7 @@
     {
       "id": "universities",
       "label": "大學展覽館",
-      "subtitle": "看見不同的校園",
+      "subtitle": "探索各校特色與生活",
       "normal": [
         -1,
         0,
@@ -179,5 +183,12 @@
       "height": 0.55,
       "kind": "prop"
     }
-  ]
+  ],
+  "world_design": "spherical_biomes",
+  "overview_center": [
+    0,
+    0,
+    0
+  ],
+  "overview_distance": 88.8
 }

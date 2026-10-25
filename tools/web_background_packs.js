@@ -9,6 +9,7 @@
     if (!(highWater > 0)) throw Error('Invalid streaming buffer limit');
     const jobs = new Map();
     const active = new Set();
+    const ready = new Set();
     let base = null, delivery = {}, reserved = 0, buffered = 0, peak = 0, maxChunk = 0, closed = false;
     const wakeReaders = () => {for (const job of active) {job.wake?.(); job.wake = null;}};
     const now = () => performance.now();
@@ -88,7 +89,10 @@
     function pump() {
       if (closed) return;
       while (active.size < concurrency) {
-        const pending = [...jobs.values()].filter(job => job.state === 'queued')
+        // A bounded dependent stream must not take the only mobile slot before
+        // Godot can mount its prerequisites. In particular, a failed dependency
+        // must remain retryable without waiting for an unread dependent body.
+        const pending = [...jobs.values()].filter(job => job.state === 'queued' && job.dependencies.every(id => ready.has(id)))
           .sort((a, b) => b.priority - a.priority);
         const job = pending[0];
         if (!job || reserved + job.bytes > memoryLimit) return;
@@ -104,18 +108,24 @@
       configure(url, manifest) {
         const next = new URL(url);
         if (base && base.href !== next.href && jobs.size) throw Error('Pack base changed during downloads');
+        if (base && base.href !== next.href) ready.clear();
         base = next;
         if (manifest) delivery = manifest;
       },
-      enqueue(id, relative, bytes, priority) {
+      enqueue(id, relative, bytes, priority, dependencies = '[]') {
         if (!base) throw Error('Background packs not configured');
         if (!Number.isSafeInteger(bytes) || bytes <= 0 || bytes > memoryLimit) throw Error('Pack exceeds temporary download budget');
+        const required = typeof dependencies === 'string' ? JSON.parse(dependencies) : dependencies;
+        if (!Array.isArray(required) || required.some(dep => typeof dep !== 'string' || !dep || dep === id))
+          throw Error('Invalid pack dependencies');
+        const dependencyIds = [...new Set(required)].sort();
         const url = new URL(relative, base);
         if (url.origin !== base.origin || !url.pathname.startsWith(base.pathname) || url.search || url.hash)
           throw Error('Invalid pack URL');
         let job = jobs.get(id);
         if (job) {
-          if (job.url !== url.href || job.bytes !== bytes) throw Error('Pack identity changed');
+          if (job.url !== url.href || job.bytes !== bytes || JSON.stringify(job.dependencies) !== JSON.stringify(dependencyIds))
+            throw Error('Pack identity changed');
           job.priority = Math.max(job.priority, priority);
         } else {
           let compressed = null;
@@ -126,12 +136,15 @@
               throw Error('Invalid compressed pack URL');
             compressed = candidate.href;
           }
-          job = { id, url: url.href, delivery: compressed, bytes, priority, state: 'queued', received: 0, error: '', chunks:[], head:0, buffered:0, consumed:0, reserved:false, started:0, finished:0 };
+          job = { id, url: url.href, delivery: compressed, dependencies: dependencyIds, bytes, priority, state: 'queued', received: 0, error: '', chunks:[], head:0, buffered:0, consumed:0, reserved:false, started:0, finished:0 };
           jobs.set(id, job);
         }
         pump();
       },
       status(id) { return view(jobs.get(id)); },
+      // Only the engine can confirm complete size/SHA validation AND mounting.
+      // Download completion and release() deliberately do not unlock dependents.
+      markReady(id) { ready.add(id); pump(); },
       invalidate(id) {
         const job = jobs.get(id);
         if (!job) return;
@@ -178,7 +191,8 @@
   }
   if (typeof module !== 'undefined' && module.exports) module.exports = { createBackgroundPacks };
   else {
-    const mobile = /Android|iPhone|iPad|iPod/.test(scope.navigator?.userAgent || '') || (scope.navigator?.platform === 'MacIntel' && scope.navigator.maxTouchPoints > 1);
+    const mobile = scope.LittleWorldMobileMode === true || /Android|iPhone|iPad|iPod/.test(scope.navigator?.userAgent || '') || (scope.navigator?.platform === 'MacIntel' && scope.navigator.maxTouchPoints > 1)
+      || (scope.navigator?.maxTouchPoints > 0 && Boolean(scope.matchMedia?.('(any-pointer: coarse)').matches));
     scope.LittleWorldBackgroundPacks = mobile
       ? createBackgroundPacks(scope.fetch.bind(scope), 64 * 1024 * 1024, 1, 2 * 1024 * 1024)
       : createBackgroundPacks(scope.fetch.bind(scope));

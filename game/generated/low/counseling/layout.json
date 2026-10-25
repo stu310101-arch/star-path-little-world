@@ -1,0 +1,476 @@
+{
+	"bounds": {
+		"max": [
+			5.4,
+			3.5,
+			4.3
+		],
+		"min": [
+			-5.4,
+			0.0,
+			-4.3
+		]
+	},
+	"colliders": [
+		{
+			"camera_only": false,
+			"center": [
+				-5.4,
+				1.75,
+				0.0
+			],
+			"id": "WestWall",
+			"rotation_y": 1.5707963267949,
+			"size": [
+				8.6,
+				3.5,
+				0.34
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				5.4,
+				1.75,
+				0.1
+			],
+			"id": "EastWall",
+			"rotation_y": -1.5707963267949,
+			"size": [
+				8.6,
+				3.5,
+				0.34
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				0.0,
+				1.75,
+				-4.3
+			],
+			"id": "BackWall",
+			"rotation_y": 0.0,
+			"size": [
+				10.8,
+				3.5,
+				0.34
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				0.0,
+				-0.1,
+				0.0
+			],
+			"id": "Floor",
+			"rotation_y": 0.0,
+			"size": [
+				10.8,
+				0.2,
+				8.6
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				0.0,
+				1.75,
+				4.38
+			],
+			"id": "EntrySafety",
+			"rotation_y": 0.0,
+			"size": [
+				10.8,
+				3.5,
+				0.15
+			]
+		},
+		{
+			"camera_only": true,
+			"center": [
+				0.0,
+				3.56,
+				0.0
+			],
+			"id": "CeilingSafety",
+			"rotation_y": 0.0,
+			"size": [
+				10.8,
+				0.12,
+				8.6
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				-2.95,
+				0.445,
+				-2.65
+			],
+			"id": "HighOneDesk",
+			"rotation_y": 0.0,
+			"size": [
+				2.56,
+				0.89,
+				1.02
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				-2.95,
+				1.65,
+				-3.8
+			],
+			"id": "HighOneBacking",
+			"rotation_y": 0.0,
+			"size": [
+				3.1,
+				2.35,
+				0.18
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				2.65,
+				0.445,
+				-2.65
+			],
+			"id": "HighThreeDesk",
+			"rotation_y": 0.0,
+			"size": [
+				2.55,
+				0.89,
+				1.02
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				3.8,
+				0.445,
+				-3.05
+			],
+			"id": "HighThreeReturn",
+			"rotation_y": 0.0,
+			"size": [
+				0.58,
+				0.89,
+				1.72
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				2.65,
+				1.65,
+				-3.8
+			],
+			"id": "HighThreeBacking",
+			"rotation_y": 0.0,
+			"size": [
+				3.1,
+				2.35,
+				0.18
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				-4.68,
+				0.55,
+				0.35
+			],
+			"id": "WindowSofa",
+			"rotation_y": -1.5707963267949,
+			"size": [
+				2.55,
+				1.1,
+				1.04
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				-4.18,
+				0.3,
+				2.45
+			],
+			"id": "WindowSideTable",
+			"rotation_y": 0.0,
+			"size": [
+				0.63,
+				0.6,
+				0.63
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				-4.75,
+				0.85,
+				-1.27
+			],
+			"id": "WindowLamp",
+			"rotation_y": 0.0,
+			"size": [
+				0.58,
+				1.7,
+				0.58
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				-2.95,
+				0.47,
+				-1.7425
+			],
+			"id": "HighOneWoodChair",
+			"rotation_y": 0.0,
+			"size": [
+				0.54,
+				0.94,
+				0.565
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				2.65,
+				0.47,
+				-1.7425
+			],
+			"id": "HighThreeWoodChair",
+			"rotation_y": 0.0,
+			"size": [
+				0.54,
+				0.94,
+				0.565
+			]
+		},
+		{
+			"camera_only": false,
+			"center": [
+				4.96,
+				0.95,
+				0.7
+			],
+			"id": "EastBuiltIn",
+			"rotation_y": 0.0,
+			"size": [
+				0.48,
+				1.3,
+				2.84
+			]
+		}
+	],
+	"exit": {
+		"position": [
+			0.0,
+			0.06,
+			3.65
+		]
+	},
+	"interactables": [
+		{
+			"collider_id": "WindowSofa",
+			"facing": 1.5707963267949,
+			"id": "window_sofa_0",
+			"kind": "seat",
+			"radius": 0.9,
+			"seat_point": [
+				-4.68,
+				0.55,
+				-0.24
+			],
+			"stand_point": [
+				-3.77,
+				0.06,
+				-0.24
+			],
+			"title": "窗邊共用沙發"
+		},
+		{
+			"collider_id": "WindowSofa",
+			"facing": 1.5707963267949,
+			"id": "window_sofa_1",
+			"kind": "seat",
+			"radius": 0.9,
+			"seat_point": [
+				-4.68,
+				0.55,
+				0.94
+			],
+			"stand_point": [
+				-3.77,
+				0.06,
+				0.94
+			],
+			"title": "窗邊共用沙發"
+		},
+		{
+			"collider_id": "HighOneWoodChair",
+			"facing": 3.14159265358979,
+			"id": "interest_high1_chair",
+			"kind": "seat",
+			"movable": true,
+			"movement_speed": 2.6,
+			"radius": 0.72,
+			"seat_point": [
+				-2.95,
+				0.5,
+				-1.772
+			],
+			"stand_point": [
+				-2.95,
+				0.06,
+				-0.88
+			],
+			"station_view": "interest_high1",
+			"title": "高一木椅",
+			"visual_node": "SM_Counseling_HighOneWoodChair"
+		},
+		{
+			"collider_id": "HighThreeWoodChair",
+			"facing": 3.14159265358979,
+			"id": "interest_high3_chair",
+			"kind": "seat",
+			"movable": true,
+			"movement_speed": 2.6,
+			"radius": 0.72,
+			"seat_point": [
+				2.65,
+				0.5,
+				-1.772
+			],
+			"stand_point": [
+				2.65,
+				0.06,
+				-0.88
+			],
+			"station_view": "interest_high3",
+			"title": "高三木椅",
+			"visual_node": "SM_Counseling_HighThreeWoodChair"
+		}
+	],
+	"low_resources": true,
+	"revision": "2026-10-24-counseling-studio-r8",
+	"schemaVersion": 1.0,
+	"spawn": {
+		"facing": [
+			0.0,
+			0.0,
+			-1.0
+		],
+		"position": [
+			0.0,
+			0.06,
+			1.0
+		]
+	},
+	"stations": [
+		{
+			"approach": [
+				-2.95,
+				0.06,
+				-0.88
+			],
+			"radius": 1.2,
+			"screen": {
+				"center": [
+					-2.87,
+					1.238,
+					-2.4715
+				],
+				"height": 0.4,
+				"normal": [
+					0.0,
+					0.0,
+					1.0
+				],
+				"right": [
+					1.0,
+					0.0,
+					0.0
+				],
+				"width": 0.62
+			},
+			"sign": {
+				"color": "355b4c",
+				"position": [
+					-2.95,
+					2.1,
+					-3.699
+				],
+				"width": 1.45
+			},
+			"subtitle": "六項 RIASEC 興趣分數",
+			"title": "高一・興趣量表",
+			"view": "interest_high1"
+		},
+		{
+			"approach": [
+				2.65,
+				0.06,
+				-0.88
+			],
+			"radius": 1.2,
+			"screen": {
+				"center": [
+					2.61,
+					1.238,
+					-2.4715
+				],
+				"height": 0.4,
+				"normal": [
+					0.0,
+					0.0,
+					1.0
+				],
+				"right": [
+					1.0,
+					0.0,
+					0.0
+				],
+				"width": 0.62
+			},
+			"sign": {
+				"color": "355b4c",
+				"position": [
+					2.65,
+					2.1,
+					-3.699
+				],
+				"width": 1.75
+			},
+			"subtitle": "33 種知識興趣・適配度與 Z 分數",
+			"title": "高三・學系探索量表",
+			"view": "interest_high3"
+		},
+		{
+			"approach": [
+				0.0,
+				0.06,
+				3.65
+			],
+			"radius": 0.9,
+			"sign": {
+				"color": "355b4c",
+				"position": [
+					0.0,
+					2.72,
+					4.1
+				],
+				"rotation_y": 3.14159265358979,
+				"width": 1.2
+			},
+			"subtitle": "回到原來的位置",
+			"title": "返回星途",
+			"view": "exit"
+		}
+	]
+}

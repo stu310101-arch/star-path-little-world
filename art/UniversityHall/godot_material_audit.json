@@ -1,0 +1,825 @@
+{
+  "assets": {
+    "atrium": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_plaster",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/plaster_base.png",
+          "normal_texture": "res://assets/university_hall/textures/plaster_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/plaster_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_green",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_green_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_green_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_green_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_paper",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/paper_base.png",
+          "normal_texture": "res://assets/university_hall/textures/paper_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/paper_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_red",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_red_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_red_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_red_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_blue",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_blue_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_blue_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_blue_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone_dark",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_dark_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_dark_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_dark_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_lamp",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_glass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_crevice",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_floor_atrium",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/floor_atrium_base.png",
+          "normal_texture": "res://assets/university_hall/textures/floor_atrium_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/floor_atrium_rough.png"
+        }
+      }
+    ],
+    "booth": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_green",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_green_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_green_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_green_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_glass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_paper",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/paper_base.png",
+          "normal_texture": "res://assets/university_hall/textures/paper_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/paper_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_red",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_red_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_red_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_red_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_blue",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_blue_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_blue_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_blue_rough.png"
+        }
+      }
+    ],
+    "feature_book": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_red",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_red_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_red_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_red_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_paper",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/paper_base.png",
+          "normal_texture": "res://assets/university_hall/textures/paper_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/paper_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_green",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_green_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_green_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_green_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_blue",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_blue_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_blue_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_blue_rough.png"
+        }
+      }
+    ],
+    "feature_dairy": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      }
+    ],
+    "feature_palm": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      }
+    ],
+    "feature_tea": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      }
+    ],
+    "gallery": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_glass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_plaster",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/plaster_base.png",
+          "normal_texture": "res://assets/university_hall/textures/plaster_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/plaster_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_green",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_green_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_green_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_green_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_red",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_red_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_red_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_red_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_blue",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_blue_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_blue_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_blue_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_paper",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/paper_base.png",
+          "normal_texture": "res://assets/university_hall/textures/paper_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/paper_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone_dark",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_dark_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_dark_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_dark_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_lamp",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_crevice",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_floor_gallery",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/floor_gallery_base.png",
+          "normal_texture": "res://assets/university_hall/textures/floor_gallery_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/floor_gallery_rough.png"
+        }
+      }
+    ],
+    "theme_arts": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_paper",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/paper_base.png",
+          "normal_texture": "res://assets/university_hall/textures/paper_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/paper_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone_dark",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_dark_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_dark_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_dark_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_blue",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_blue_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_blue_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_blue_rough.png"
+        }
+      }
+    ],
+    "theme_coast": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_paper",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/paper_base.png",
+          "normal_texture": "res://assets/university_hall/textures/paper_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/paper_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_blue",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_blue_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_blue_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_blue_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone_dark",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_dark_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_dark_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_dark_rough.png"
+        }
+      }
+    ],
+    "theme_hills": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_paper",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/paper_base.png",
+          "normal_texture": "res://assets/university_hall/textures/paper_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/paper_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone_dark",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_dark_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_dark_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_dark_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_blue",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_blue_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_blue_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_blue_rough.png"
+        }
+      }
+    ],
+    "theme_urban": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_paper",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/paper_base.png",
+          "normal_texture": "res://assets/university_hall/textures/paper_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/paper_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone_dark",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_dark_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_dark_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_dark_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_blue",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_blue_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_blue_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_blue_rough.png"
+        }
+      }
+    ],
+    "theme_woodland": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_paper",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/paper_base.png",
+          "normal_texture": "res://assets/university_hall/textures/paper_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/paper_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone_dark",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_dark_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_dark_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_dark_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_blue",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_blue_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_blue_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_blue_rough.png"
+        }
+      }
+    ],
+    "theme_workshop": [
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_walnut",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/walnut_base.png",
+          "normal_texture": "res://assets/university_hall/textures/walnut_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/walnut_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_paper",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/paper_base.png",
+          "normal_texture": "res://assets/university_hall/textures/paper_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/paper_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_brass",
+        "normal_enabled": false,
+        "textures": {}
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_stone_dark",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/stone_dark_base.png",
+          "normal_texture": "res://assets/university_hall/textures/stone_dark_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/stone_dark_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_leather_blue",
+        "normal_enabled": true,
+        "textures": {
+          "albedo_texture": "res://assets/university_hall/textures/leather_blue_base.png",
+          "normal_texture": "res://assets/university_hall/textures/leather_blue_normal.png",
+          "roughness_texture": "res://assets/university_hall/textures/leather_blue_rough.png"
+        }
+      },
+      {
+        "filter": 5,
+        "name": "MAT_University_Library_glass",
+        "normal_enabled": false,
+        "textures": {}
+      }
+    ]
+  },
+  "failures": [],
+  "floors": {
+    "atrium": {
+      "lods": {},
+      "triangles": 2,
+      "vertices": 4
+    },
+    "gallery": {
+      "lods": {},
+      "triangles": 2,
+      "vertices": 4
+    }
+  },
+  "textures": {
+    "res://assets/university_hall/textures/floor_atrium_base.png": -9223371999710018010,
+    "res://assets/university_hall/textures/floor_atrium_normal.png": -9223371998955043283,
+    "res://assets/university_hall/textures/floor_atrium_rough.png": -9223371999307364823,
+    "res://assets/university_hall/textures/floor_gallery_base.png": -9223371997713529386,
+    "res://assets/university_hall/textures/floor_gallery_normal.png": -9223371996958554555,
+    "res://assets/university_hall/textures/floor_gallery_rough.png": -9223371997310876203,
+    "res://assets/university_hall/textures/leather_blue_base.png": -9223372003182901749,
+    "res://assets/university_hall/textures/leather_blue_normal.png": -9223372002411149807,
+    "res://assets/university_hall/textures/leather_blue_rough.png": -9223372002797025778,
+    "res://assets/university_hall/textures/leather_green_base.png": -9223372007813413401,
+    "res://assets/university_hall/textures/leather_green_normal.png": -9223372007041661459,
+    "res://assets/university_hall/textures/leather_green_rough.png": -9223372007427537430,
+    "res://assets/university_hall/textures/leather_red_base.png": -9223372004340529662,
+    "res://assets/university_hall/textures/leather_red_normal.png": -9223372003568777720,
+    "res://assets/university_hall/textures/leather_red_rough.png": -9223372003954653691,
+    "res://assets/university_hall/textures/paper_base.png": -9223372005498157575,
+    "res://assets/university_hall/textures/paper_normal.png": -9223372004726405633,
+    "res://assets/university_hall/textures/paper_rough.png": -9223372005112281604,
+    "res://assets/university_hall/textures/plaster_base.png": -9223372008803269161,
+    "res://assets/university_hall/textures/plaster_normal.png": -9223372008199289381,
+    "res://assets/university_hall/textures/plaster_rough.png": -9223372008585165352,
+    "res://assets/university_hall/textures/stone_base.png": -9223372000867645923,
+    "res://assets/university_hall/textures/stone_dark_base.png": -9223372002025273836,
+    "res://assets/university_hall/textures/stone_dark_normal.png": -9223372001253521894,
+    "res://assets/university_hall/textures/stone_dark_rough.png": -9223372001639397865,
+    "res://assets/university_hall/textures/stone_normal.png": -9223372000095893981,
+    "res://assets/university_hall/textures/stone_rough.png": -9223372000481769952,
+    "res://assets/university_hall/textures/walnut_base.png": -9223372006655785488,
+    "res://assets/university_hall/textures/walnut_normal.png": -9223372005884033546,
+    "res://assets/university_hall/textures/walnut_rough.png": -9223372006269909517
+  }
+}

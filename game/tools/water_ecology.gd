@@ -20,6 +20,8 @@ static func apply(globe: Node3D,layout: Dictionary,districts: Array) -> Dictiona
 		assert(not settings.is_empty())
 		var u: Array = layout.stations[index].normal
 		var up: Vector3 = Vector3(u[0],u[1],u[2])
+		var landforms: RefCounted = preload("res://tools/world_landforms.gd").new()
+		landforms.call("configure",data,index,radius,up)
 		var reserve: Node3D = globe.get_node("EcologicalReserves/Reserve_"+str(data.station)) as Node3D
 		var old: Node = reserve.get_node_or_null("AquaticHabitat")
 		if old!=null:
@@ -70,7 +72,10 @@ static func apply(globe: Node3D,layout: Dictionary,districts: Array) -> Dictiona
 			var p: Vector2 = Vector2(plant.point[0],plant.point[1])
 			var normal: Vector3 = Geo.surface(up,p,radius).normalized()
 			var basis: Basis = (Geo.frame(normal)*Basis(Vector3.UP,float(plant.yaw))).scaled(Vector3.ONE*float(plant.scale))
-			(batches[kind] as Array).append(Transform3D(basis,normal*(radius+float(plant.height))))
+			var plant_height: float = float(plant.height)
+			if float(landforms.call("dry_distance",p))>.05:
+				plant_height += maxf(0.0,float(landforms.call("height_at",p))-.16)
+			(batches[kind] as Array).append(Transform3D(basis,normal*(radius+plant_height)))
 		for kind: String in batches:
 			plant_batch(habitat,kind,batches[kind])
 		var fish_count: int = 0

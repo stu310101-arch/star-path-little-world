@@ -76,6 +76,7 @@ class ProbeMap:
 
 var world: TestWorld
 var map: ProbeMap
+var failures: int = 0
 var report: Dictionary = {"samples":[], "method":"Headless native GDScript CPU timing: actual CanvasItem redraw notifications invoke super._draw, including projection/clipping/triangulation. Rendering backend is dummy: excludes GPU cost, not Web FPS. Minimal world fixture uses production JSON/route cartography and PlanetPlayer without preparing any avatar assets; no world mesh or audio decoding. Optional Marina nodes are absent. Timed component wrappers add instrumentation overhead."}
 
 func _initialize() -> void:
@@ -92,7 +93,7 @@ func summarize(values: Array[int]) -> Dictionary:
 	return {"count":sorted.size(),"total_ms":total/1000.0,"mean_ms":float(total)/sorted.size()/1000.0,"p95_ms":sorted[mini(sorted.size()-1,ceili(sorted.size()*.95)-1)]/1000.0,"max_ms":sorted.back()/1000.0}
 
 func sample(label: String, normal: Vector3, guarded: bool, moving: bool = false) -> void:
-	world.player.global_position = normal.normalized() * 48.6
+	world.player.global_position = normal.normalized() * (float(world.layout.radius)+.6)
 	map.skip_unchanged = guarded
 	map.previous_position = Vector3.INF
 	map.refresh()
@@ -107,6 +108,9 @@ func sample(label: String, normal: Vector3, guarded: bool, moving: bool = false)
 		await process_frame
 	var duration: float = float(Time.get_ticks_usec() - started) / 1000000.0
 	var draw: Dictionary = summarize(map.draw_usec)
+	if moving and (int(draw.count) == 0 or float(draw.mean_ms) > 20.0):
+		failures += 1
+		push_error("Moving minimap exceeded its 20 ms CPU redraw regression budget: " + label + " " + str(draw))
 	var row: Dictionary = {"stage":label,"duration_s":duration,"guarded":guarded,"moving":moving,"size":str(map.size),"patches":map.patches.size(),"draw_notifications":map.draw_notifications,"refresh":summarize(map.refresh_usec),"draw":draw,"draw_script_ms_per_second":float(draw.total_ms)/duration}
 	row["components"] = map.component_times.duplicate(true)
 	row["component_note"] = "Nested inclusive timing: project_polygons includes project_line and clean_polygon. Do not sum overlapping components; profiling adds stopwatch/dictionary overhead."
@@ -119,6 +123,7 @@ func run() -> void:
 	world = TestWorld.new()
 	world.layout = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_layout.json")) as Dictionary
 	world.player = PlanetPlayer.new()
+	world.player.planet_radius = float(world.layout.radius)
 	world.player.process_mode = Node.PROCESS_MODE_DISABLED
 	world.add_child(world.player)
 	var stations: Node3D = Node3D.new()
@@ -128,13 +133,17 @@ func run() -> void:
 		var station: Node3D = Node3D.new()
 		station.name = str(row.id)
 		var normal: Array = row.normal as Array
-		station.position = Vector3(normal[0],normal[1],normal[2]) * 48.0
+		station.position = Vector3(normal[0],normal[1],normal[2]) * float(world.layout.radius)
 		stations.add_child(station)
 	root.add_child(world)
-	world.player.global_position = Vector3.UP * 48.6
+	world.player.global_position = Vector3.UP * (float(world.layout.radius)+.6)
 	map = ProbeMap.new()
 	map.world = world
 	map.size = Vector2(246,180)
+	var arguments: PackedStringArray = OS.get_cmdline_user_args()
+	map.compact_preview = arguments.has("--compact")
+	if map.compact_preview:
+		map.size = Vector2(128, 90)
 	var started: int = Time.get_ticks_usec()
 	root.add_child(map)
 	report["cartography_ready_ms"] = float(Time.get_ticks_usec() - started)/1000.0
@@ -143,12 +152,31 @@ func run() -> void:
 	report["production_source_sha256"] = FileAccess.get_sha256("res://scripts/world_minimap.gd")
 	report["probe_source_sha256"] = FileAccess.get_sha256("res://tests/minimap_performance_probe.gd")
 	await sample("stationary_counseling", Vector3.UP, false)
-	await sample("stationary_bridge", Vector3(0,1,1), false)
-	await sample("stationary_wordking", Vector3.DOWN, false)
+	var directions: Array[Vector3] = preload("res://scripts/world_routes.gd").directions()
+	await sample("stationary_bridge", directions[0].slerp(directions[1],.5), false)
+	await sample("stationary_wordking", directions[5], false)
 	await sample("guarded_stationary_counseling", Vector3.UP, true)
 	await sample("guarded_moving_counseling", Vector3.UP, true, true)
+	await sample("moving_global_bridge", directions[0].slerp(directions[1], .5), false, true)
+	await sample("moving_marina", Geo.surface(directions[1], Vector2(30, 6), float(world.layout.radius)).normalized(), false, true)
+	report["compact_preview"] = map.compact_preview
+	report["map_metrics"] = map.metrics()
+	if map.compact_preview:
+		var max_error: float = 0.0
+		for source: PackedVector3Array in map._compact_lines:
+			var reduced: PackedVector3Array = map._compact_lines[source]
+			for point: Vector3 in source:
+				var distance: float = INF
+				for index: int in range(reduced.size() - 1):
+					distance = minf(distance, point.distance_to(Geometry3D.get_closest_point_to_segment(point, reduced[index], reduced[index + 1])))
+				max_error = maxf(max_error, distance)
+		report["max_simplification_error_m"] = max_error * map.radius
+		if max_error > .00301:
+			failures += 1
+			push_error("Mobile preview geometry exceeded its visual error tolerance")
+	report["passed"] = failures == 0
+	report["failures"] = failures
 	var output_path: String = OUTPUT.trim_suffix(".json") + "-breakdown.json"
-	var arguments: PackedStringArray = OS.get_cmdline_user_args()
 	var output_index: int = arguments.find("--output")
 	if output_index >= 0 and output_index + 1 < arguments.size():
 		output_path = arguments[output_index + 1]
@@ -156,4 +184,4 @@ func run() -> void:
 	output.store_string(JSON.stringify(report,"\t"))
 	output.close()
 	print("MINIMAP_CPU_RESULT ", output_path)
-	quit()
+	quit(0 if failures == 0 else 1)

@@ -1,0 +1,55 @@
+{
+  "authorship": "Original parametric branch topology and original algorithmic bark/leaf textures; no external asset sources.",
+  "units": "meters",
+  "root": "Ground at y=0 in Godot; trunk extends 0.16 m below ground. No exposed sculpted roots.",
+  "models": {
+    "alder": {
+      "triangles": 10774,
+      "leaf_sprays": 683,
+      "materials": 2,
+      "dimensions_blender_xyz": [
+        7.220846891403198,
+        7.737143039703369,
+        7.080521687865257
+      ],
+      "source_file": "art/Vegetation/TemperateTrees.blend",
+      "asset": "alder.glb"
+    },
+    "birch": {
+      "triangles": 10774,
+      "leaf_sprays": 683,
+      "materials": 2,
+      "dimensions_blender_xyz": [
+        4.639706373214722,
+        5.005892992019653,
+        7.9281019270420074
+      ],
+      "source_file": "art/Vegetation/TemperateTrees.blend",
+      "asset": "birch.glb"
+    },
+    "pine": {
+      "triangles": 9734,
+      "leaf_sprays": 684,
+      "materials": 2,
+      "dimensions_blender_xyz": [
+        5.183332681655884,
+        4.971902847290039,
+        7.574282020330429
+      ],
+      "source_file": "art/Vegetation/TemperateTrees.blend",
+      "asset": "pine.glb"
+    },
+    "willow": {
+      "triangles": 11326,
+      "leaf_sprays": 717,
+      "materials": 2,
+      "dimensions_blender_xyz": [
+        7.1097235679626465,
+        7.122052431106567,
+        7.30827122926712
+      ],
+      "source_file": "art/Vegetation/TemperateTrees.blend",
+      "asset": "willow.glb"
+    }
+  }
+}

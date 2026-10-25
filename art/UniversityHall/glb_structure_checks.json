@@ -1,0 +1,198 @@
+{
+  "revision": "2026-10-11-r3.1-library",
+  "assets": {
+    "atrium": {
+      "triangles": 286892,
+      "bytes": 41278356,
+      "materials": [
+        "MAT_University_Library_plaster",
+        "MAT_University_Library_leather_green",
+        "MAT_University_Library_walnut",
+        "MAT_University_Library_brass",
+        "MAT_University_Library_paper",
+        "MAT_University_Library_leather_red",
+        "MAT_University_Library_leather_blue",
+        "MAT_University_Library_stone_dark",
+        "MAT_University_Library_lamp",
+        "MAT_University_Library_stone",
+        "MAT_University_Library_glass",
+        "MAT_University_Library_crevice",
+        "MAT_University_Library_floor_atrium"
+      ],
+      "embedded_images": 27,
+      "surfaces": 13
+    },
+    "gallery": {
+      "triangles": 306549,
+      "bytes": 43126876,
+      "materials": [
+        "MAT_University_Library_walnut",
+        "MAT_University_Library_brass",
+        "MAT_University_Library_glass",
+        "MAT_University_Library_plaster",
+        "MAT_University_Library_leather_green",
+        "MAT_University_Library_leather_red",
+        "MAT_University_Library_leather_blue",
+        "MAT_University_Library_paper",
+        "MAT_University_Library_stone",
+        "MAT_University_Library_stone_dark",
+        "MAT_University_Library_lamp",
+        "MAT_University_Library_crevice",
+        "MAT_University_Library_floor_gallery"
+      ],
+      "embedded_images": 27,
+      "surfaces": 13
+    },
+    "booth": {
+      "triangles": 5848,
+      "bytes": 16423380,
+      "materials": [
+        "MAT_University_Library_walnut",
+        "MAT_University_Library_brass",
+        "MAT_University_Library_leather_green",
+        "MAT_University_Library_glass",
+        "MAT_University_Library_paper",
+        "MAT_University_Library_stone",
+        "MAT_University_Library_leather_red",
+        "MAT_University_Library_leather_blue"
+      ],
+      "embedded_images": 18,
+      "surfaces": 8
+    },
+    "theme_urban": {
+      "triangles": 18396,
+      "bytes": 11864016,
+      "materials": [
+        "MAT_University_Library_walnut",
+        "MAT_University_Library_paper",
+        "MAT_University_Library_brass",
+        "MAT_University_Library_stone",
+        "MAT_University_Library_stone_dark",
+        "MAT_University_Library_leather_blue"
+      ],
+      "embedded_images": 15,
+      "surfaces": 6
+    },
+    "theme_woodland": {
+      "triangles": 17208,
+      "bytes": 11780880,
+      "materials": [
+        "MAT_University_Library_walnut",
+        "MAT_University_Library_paper",
+        "MAT_University_Library_brass",
+        "MAT_University_Library_stone",
+        "MAT_University_Library_stone_dark",
+        "MAT_University_Library_leather_blue"
+      ],
+      "embedded_images": 15,
+      "surfaces": 6
+    },
+    "theme_hills": {
+      "triangles": 12456,
+      "bytes": 11448224,
+      "materials": [
+        "MAT_University_Library_walnut",
+        "MAT_University_Library_paper",
+        "MAT_University_Library_brass",
+        "MAT_University_Library_stone_dark",
+        "MAT_University_Library_stone",
+        "MAT_University_Library_leather_blue"
+      ],
+      "embedded_images": 15,
+      "surfaces": 6
+    },
+    "theme_coast": {
+      "triangles": 8644,
+      "bytes": 11175216,
+      "materials": [
+        "MAT_University_Library_walnut",
+        "MAT_University_Library_paper",
+        "MAT_University_Library_brass",
+        "MAT_University_Library_leather_blue",
+        "MAT_University_Library_stone",
+        "MAT_University_Library_stone_dark"
+      ],
+      "embedded_images": 15,
+      "surfaces": 6
+    },
+    "theme_arts": {
+      "triangles": 7788,
+      "bytes": 11112360,
+      "materials": [
+        "MAT_University_Library_walnut",
+        "MAT_University_Library_paper",
+        "MAT_University_Library_brass",
+        "MAT_University_Library_stone",
+        "MAT_University_Library_stone_dark",
+        "MAT_University_Library_leather_blue"
+      ],
+      "embedded_images": 15,
+      "surfaces": 6
+    },
+    "theme_workshop": {
+      "triangles": 13536,
+      "bytes": 11524052,
+      "materials": [
+        "MAT_University_Library_walnut",
+        "MAT_University_Library_paper",
+        "MAT_University_Library_brass",
+        "MAT_University_Library_stone",
+        "MAT_University_Library_stone_dark",
+        "MAT_University_Library_leather_blue",
+        "MAT_University_Library_glass"
+      ],
+      "embedded_images": 15,
+      "surfaces": 7
+    },
+    "feature_palm": {
+      "triangles": 692,
+      "bytes": 1982364,
+      "materials": [
+        "MAT_University_Library_brass",
+        "MAT_University_Library_walnut"
+      ],
+      "embedded_images": 3,
+      "surfaces": 2
+    },
+    "feature_dairy": {
+      "triangles": 524,
+      "bytes": 3587028,
+      "materials": [
+        "MAT_University_Library_walnut",
+        "MAT_University_Library_stone",
+        "MAT_University_Library_brass"
+      ],
+      "embedded_images": 6,
+      "surfaces": 3
+    },
+    "feature_book": {
+      "triangles": 648,
+      "bytes": 12518780,
+      "materials": [
+        "MAT_University_Library_leather_red",
+        "MAT_University_Library_paper",
+        "MAT_University_Library_leather_green",
+        "MAT_University_Library_leather_blue"
+      ],
+      "embedded_images": 12,
+      "surfaces": 4
+    },
+    "feature_tea": {
+      "triangles": 536,
+      "bytes": 3589332,
+      "materials": [
+        "MAT_University_Library_walnut",
+        "MAT_University_Library_stone",
+        "MAT_University_Library_brass"
+      ],
+      "embedded_images": 6,
+      "surfaces": 3
+    }
+  },
+  "failures": [],
+  "texture_count": 30,
+  "raw_glb_bytes": 191410864,
+  "canonical_png_bytes": 20738901,
+  "all_asset_triangles": 679717,
+  "note": "Raw GLBs are self-contained. Imported Godot resources must reference canonical PNGs; inspect_godot_material.gd verifies this separately."
+}

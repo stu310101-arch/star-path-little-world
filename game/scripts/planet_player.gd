@@ -6,6 +6,14 @@ extends CharacterBody3D
 @export var run_speed: float = 6.4
 @export var jump_speed: float = 7.8
 @export var gravity_strength: float = 18.0
+@export_range(0.1, 2.0, 0.01) var avatar_scale: float = 1.0
+# Optional animation matching for test variants. The game retains its authored
+# Walk/Run selection and playback limits at the original movement speeds.
+@export var speed_matched_locomotion: bool = false
+const WALK_CYCLE_SPEED: float = 2.2
+const RUN_CYCLE_SPEED: float = 3.8
+const RUN_ENTER_SPEED: float = 4.4
+const RUN_EXIT_SPEED: float = 3.8
 const JUMP_ANTICIPATION: float = 0.12
 const JUMP_START_DURATION: float = 0.24
 const JUMP_LAND_DURATION: float = 1.20
@@ -20,10 +28,13 @@ const WALK_MODEL: String = "res://assets/character/runtime/graduate.glb"
 const JUMP_MODEL: String = "res://assets/character/runtime/graduate_jump.glb"
 const WEB_WALK_MODEL: String = "res://assets/character/runtime_web/graduate.glb"
 const WEB_JUMP_MODEL: String = "res://assets/character/runtime_web/graduate_jump.glb"
+const MOBILE_WALK_MODEL: String = "res://assets/character/runtime_mobile/graduate.glb"
+const MOBILE_JUMP_MODEL: String = "res://assets/character/runtime_mobile/graduate_jump.glb"
+const GraphicsProfile = preload("res://scripts/graphics_settings.gd")
 # Same material values, skin and animation times; Web batches synchronized cloth
 # poses into fewer surfaces. Native retains its existing resource path.
-var _walk_model_path: String = WEB_WALK_MODEL if OS.has_feature("web") else WALK_MODEL
-var _jump_model_path: String = WEB_JUMP_MODEL if OS.has_feature("web") else JUMP_MODEL
+var _walk_model_path: String = MOBILE_WALK_MODEL if GraphicsProfile.is_mobile_web() or GraphicsProfile.uses_low_resources() else WEB_WALK_MODEL if OS.has_feature("web") else WALK_MODEL
+var _jump_model_path: String = MOBILE_JUMP_MODEL if GraphicsProfile.is_mobile_web() or GraphicsProfile.uses_low_resources() else WEB_JUMP_MODEL if OS.has_feature("web") else JUMP_MODEL
 var heading: Vector3 = Vector3.FORWARD
 var controls_enabled: bool = true
 var is_resting: bool = false
@@ -83,29 +94,68 @@ var _animation_sample_time: float = 0.0
 var animation_physics_updates: int = 0
 var animation_pose_samples: int = 0
 var animation_seek_calls: int = 0
+# Follow-camera scenes opt in. Collision stays on the physics tick while
+# this top-level pivot and the follow camera share the same displayed pose.
+var render_motion: Node3D
+var _render_previous: Transform3D = Transform3D.IDENTITY
 
 func _ready() -> void:
+	# Keep CharacterBody3D and its basis at unit scale. Scale the primitive
+	# dimensions and visual subtree instead; interiors retain the default 1.
+	avatar_scale = clampf(avatar_scale, 0.1, 2.0)
+	jump_speed *= avatar_scale
+	gravity_strength *= avatar_scale
+	shore_margin *= avatar_scale
 	collision_layer = 4
 	collision_mask = 9
-	floor_snap_length = 0.5
+	floor_snap_length = 0.5 * avatar_scale
 	floor_max_angle = deg_to_rad(55.0)
 	floor_stop_on_slope = true
 	floor_constant_speed = true
-	safe_margin = 0.015
+	safe_margin = 0.015 * avatar_scale
 	var capsule: CapsuleShape3D = CapsuleShape3D.new()
-	capsule.radius = 0.27
-	capsule.height = 1.6
+	capsule.radius = 0.27 * avatar_scale
+	capsule.height = 1.6 * avatar_scale
 	var collision: CollisionShape3D = CollisionShape3D.new()
 	collision.shape = capsule
-	collision.position.y = 0.82
+	collision.position.y = 0.82 * avatar_scale
 	add_child(collision)
 	visual = Node3D.new()
 	visual.name = "VisualPivot"
 	add_child(visual)
 	visual.rotation.y = PI
+	visual.scale = Vector3.ONE * avatar_scale
 
 func _process(_delta: float) -> void:
+	if render_motion != null:
+		render_motion.global_transform = get_render_transform()
 	sample_motion_animation()
+
+func enable_render_interpolation() -> void:
+	if render_motion != null:
+		return
+	render_motion = Node3D.new()
+	render_motion.name = "RenderMotion"
+	render_motion.top_level = true
+	add_child(render_motion)
+	visual.reparent(render_motion, false)
+	reset_render_interpolation()
+
+func get_render_transform() -> Transform3D:
+	if render_motion == null:
+		return global_transform
+	return _render_previous.interpolate_with(global_transform, Engine.get_physics_interpolation_fraction())
+
+func get_render_heading(render_up: Vector3) -> Vector3:
+	# The seated camera can orbit independently of the bench's body basis.
+	# Transport its current heading to the displayed surface normal; dragging
+	# stays immediate without mixing a physics position and rendered position.
+	return (Quaternion(global_position.normalized(), render_up) * heading).slide(render_up).normalized()
+
+func reset_render_interpolation() -> void:
+	_render_previous = global_transform
+	if render_motion != null and render_motion.is_inside_tree():
+		render_motion.global_transform = global_transform
 
 func begin_prepare_visuals() -> void:
 	if _visual_stage != 0 or not _visual_error.is_empty():
@@ -124,6 +174,8 @@ func visuals_error() -> String:
 
 func get_visual_preparation_state() -> Dictionary:
 	return {"stage": _visual_stage, "ready": visuals_ready(), "error": _visual_error,
+		"avatar_scale": avatar_scale,
+		"mobile_skeletal_avatar": _walk_model_path == MOBILE_WALK_MODEL,
 		"last_operation_ms": float(_visual_operation_usec) / 1000.0,
 		"max_operation_ms": float(_visual_max_operation_usec) / 1000.0}
 
@@ -230,8 +282,14 @@ func set_clip(clip: StringName) -> void:
 	if jump_model != null:
 		jump_model.visible = use_jump_model
 	var preserve_recovery_phase: bool = active_clip == &"JumpLand" and not use_jump_model and recovery_clip == clip
+	var next_clock: float = recovery_clock if preserve_recovery_phase else 0.0
+	if speed_matched_locomotion and active_clip in [&"Walk", &"Run"] and clip in [&"Walk", &"Run"]:
+		# Both loops begin on left contact. Keep that phase when the analog
+		# stick crosses the gait threshold instead of restarting every stride.
+		var previous_length: float = maxf(animator.get_animation(animator.current_animation).length, 0.001)
+		next_clock = fposmod(animation_clock, previous_length) / previous_length * animator.get_animation(resolved).length
 	active_clip = clip
-	animation_clock = recovery_clock if preserve_recovery_phase else 0.0
+	animation_clock = next_clock
 	animator.play(resolved)
 	_animation_reset_pending = true
 	_queue_animation_pose(animation_clock)
@@ -295,6 +353,7 @@ func reset_jump_motion() -> void:
 	# Deliberately retain the physical key latch and monotonic launch counters.
 
 func _physics_process(delta: float) -> void:
+	_render_previous = global_transform
 	if entering or is_resting:
 		return
 	if not Input.is_action_pressed("jump"):
@@ -312,7 +371,8 @@ func _physics_process(delta: float) -> void:
 	var axis: Vector2 = Vector2.ZERO
 	var running: bool = false
 	if controls_enabled:
-		axis = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+		# The browser joystick applies its radial deadzone before the bridge.
+		axis = Input.get_vector("move_left", "move_right", "move_forward", "move_back", 0.0)
 		running = Input.is_action_pressed("run")
 	if allow_test_input:
 		axis = test_direction
@@ -345,10 +405,10 @@ func _physics_process(delta: float) -> void:
 	# can support the capsule just like a timber deck.
 	if land_only and wish.length_squared() > 0.001:
 		var ahead: Vector3 = (global_position + wish.normalized() * (speed * delta + shore_margin)).normalized()
-		if ground_at(ahead).is_empty() and solid_support_at(ahead, global_position.length() + 0.35).is_empty():
+		if ground_at(ahead).is_empty() and solid_support_at(ahead, global_position.length() + 0.35 * avatar_scale).is_empty():
 			wish = Vector3.ZERO
 	var airborne_before: bool = jump_state == &"airborne"
-	floor_snap_length = 0.0 if airborne_before else 0.5
+	floor_snap_length = 0.0 if airborne_before else 0.5 * avatar_scale
 	if grounded_before and not airborne_before and wish.length_squared() < 0.001:
 		# Reapplying radial gravity on a triangulated slope slowly walks the
 		# capsule downhill. A grounded, idle character retains its exact foothold.
@@ -356,7 +416,7 @@ func _physics_process(delta: float) -> void:
 		radial_velocity = 0.0
 	else:
 		if grounded_before and not airborne_before:
-			radial_velocity = -0.8
+			radial_velocity = -0.8 * avatar_scale
 		else:
 			radial_velocity -= gravity_strength * delta
 		var tangent: Vector3 = wish
@@ -377,26 +437,30 @@ func _physics_process(delta: float) -> void:
 		elif not is_on_floor() and not airborne_before:
 			start_falling()
 	var new_up: Vector3 = global_position.normalized()
-	var support: Dictionary = solid_support_at(new_up, global_position.length() + 0.12)
+	var recovered: bool = false
+	var support: Dictionary = solid_support_at(new_up, global_position.length() + 0.12 * avatar_scale)
 	ground_distance = global_position.length() - (support.position as Vector3).length() if not support.is_empty() else -1.0
 	if is_on_floor() and not needs_settle and jump_state != &"airborne":
 		if not support.is_empty() or not ground_at(new_up).is_empty():
 			# Never record an airborne coordinate as the shoreline recovery point.
 			last_safe_position = global_position
 	if land_only and ground_at(new_up).is_empty() and support.is_empty():
-		if global_position.length() < planet_radius + 0.1 and last_safe_position.length_squared() > 1.0:
+		if global_position.length() < planet_radius + 0.1 * avatar_scale and last_safe_position.length_squared() > 1.0:
 			global_position = last_safe_position
 			velocity = Vector3.ZERO
 			reset_jump_motion()
 			needs_settle = true
+			recovered = true
 			new_up = global_position.normalized()
 	heading = (Quaternion(radial, new_up) * heading).slide(new_up).normalized()
 	previous_up = new_up
 	up_direction = new_up
 	global_basis = Basis(heading.cross(new_up).normalized(), new_up, -heading)
+	if recovered:
+		reset_render_interpolation()
 	var actual_motion: Vector3 = (global_position - old_position).slide(new_up)
 	var actual_speed: float = actual_motion.length() / maxf(delta, 0.001)
-	if actual_speed > 0.08 and wish.length_squared() > 0.001:
+	if actual_speed > 0.08 * avatar_scale and wish.length_squared() > 0.001:
 		var local: Vector3 = global_basis.inverse() * actual_motion
 		visual.rotation.y = lerp_angle(visual.rotation.y, atan2(local.x, local.z), 1.0 - exp(-12.0 * delta))
 	if jump_state == &"airborne":
@@ -428,6 +492,24 @@ func advance_flip(delta: float, support: Dictionary) -> void:
 		remaining_time = minf(remaining_time, maxf(delta, contact_time - 0.055))
 	flip_progress = minf(1.0, flip_progress + (1.0 - flip_progress) * delta / remaining_time)
 
+func _locomotion_clip(actual_speed: float, running: bool, previous_clip: StringName) -> StringName:
+	if actual_speed <= 0.08 * avatar_scale:
+		return &"Idle"
+	if not speed_matched_locomotion:
+		return &"Run" if running else &"Walk"
+	# A small hysteresis band prevents collision/joystick noise from switching
+	# clips on every tick. Low analog input still uses a proportional walk.
+	var threshold: float = (RUN_EXIT_SPEED if previous_clip == &"Run" else RUN_ENTER_SPEED) * avatar_scale
+	return &"Run" if actual_speed >= threshold else &"Walk"
+
+func _locomotion_rate(actual_speed: float, clip: StringName) -> float:
+	if clip == &"Idle":
+		return 0.0
+	var rate: float = maxf(actual_speed, 0.0) / ((RUN_CYCLE_SPEED if clip == &"Run" else WALK_CYCLE_SPEED) * avatar_scale)
+	# The fast outdoor profile must follow travelled meters even above 2.2x;
+	# capping it leaves planted feet sliding while the body keeps accelerating.
+	return rate if speed_matched_locomotion else minf(rate, 2.2)
+
 func update_motion_animation(delta: float, actual_speed: float, running: bool) -> void:
 	# Do not skip physics deltas when several ticks precede a rendered frame.
 	# Updating tracks here would resample the same mesh multiple times per draw.
@@ -439,7 +521,8 @@ func update_motion_animation(delta: float, actual_speed: float, running: bool) -
 	elif jump_state == &"landing":
 		set_clip(&"JumpLand")
 	else:
-		set_clip((&"Run" if running else &"Walk") if actual_speed > 0.08 else &"Idle")
+		var previous_gait: StringName = recovery_clip if active_clip == &"JumpLand" else active_clip
+		set_clip(_locomotion_clip(actual_speed, running, previous_gait))
 	if animator != null and animator.current_animation != &"":
 		var clip: Animation = animator.get_animation(animator.current_animation)
 		if active_clip == &"JumpStart":
@@ -450,7 +533,7 @@ func update_motion_animation(delta: float, actual_speed: float, running: bool) -
 			_queue_animation_pose(minf(landing_clock, clip.length))
 			advance_landing_locomotion(delta, actual_speed, running)
 		elif active_clip != &"Idle":
-			animation_clock += delta * clampf(actual_speed / (3.8 if running else 2.2), 0.0, 2.2)
+			animation_clock += delta * _locomotion_rate(actual_speed, active_clip)
 			_queue_animation_pose(fposmod(animation_clock, maxf(clip.length, 0.001)))
 
 func _queue_animation_pose(sample_time: float) -> void:
@@ -482,19 +565,23 @@ func _seek_animation_pose(animation_player: AnimationPlayer, sample_time: float)
 func advance_landing_locomotion(delta: float, actual_speed: float, running: bool) -> void:
 	if landing_clock < LAND_LOCOMOTION_START or locomotion_animator == null or recovery_bones.is_empty():
 		return
-	var desired: StringName = (&"Run" if running else &"Walk") if actual_speed > 0.08 else &"Idle"
+	var desired: StringName = _locomotion_clip(actual_speed, running, recovery_clip)
 	if desired != recovery_clip:
 		for candidate: StringName in locomotion_animator.get_animation_list():
 			if String(candidate).get_file().to_lower() == String(desired).to_lower():
+				var next_clock: float = 0.0
+				if speed_matched_locomotion and recovery_clip in [&"Walk", &"Run"] and desired in [&"Walk", &"Run"]:
+					var previous_length: float = maxf(locomotion_animator.get_animation(locomotion_animator.current_animation).length, 0.001)
+					next_clock = fposmod(recovery_clock, previous_length) / previous_length * locomotion_animator.get_animation(candidate).length
 				recovery_clip = desired
-				recovery_clock = 0.0
+				recovery_clock = next_clock
 				locomotion_animator.play(candidate)
 				break
 	if recovery_clip != desired:
 		return
 	var clip: Animation = locomotion_animator.get_animation(locomotion_animator.current_animation)
 	if desired != &"Idle":
-		recovery_clock = fposmod(recovery_clock + delta * clampf(actual_speed / (3.8 if running else 2.2), 0.0, 2.2), maxf(clip.length, 0.001))
+		recovery_clock = fposmod(recovery_clock + delta * _locomotion_rate(actual_speed, desired), maxf(clip.length, 0.001))
 
 func _sample_landing_locomotion() -> void:
 	if landing_clock < LAND_LOCOMOTION_START or locomotion_animator == null or recovery_bones.is_empty() or recovery_clip == &"":
@@ -512,7 +599,7 @@ func _sample_landing_locomotion() -> void:
 		jump_skeleton.set_bone_pose_scale(pair.x, jump_skeleton.get_bone_pose_scale(pair.x).lerp(locomotion_skeleton.get_bone_pose_scale(pair.y), blend))
 
 func solid_support_at(normal: Vector3, from_radius: float) -> Dictionary:
-	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(normal * from_radius, normal * (planet_radius - 0.3), collision_mask)
+	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(normal * from_radius, normal * (planet_radius - 0.3 * avatar_scale), collision_mask)
 	query.exclude = [get_rid()]
 	var hit: Dictionary = get_world_3d().direct_space_state.intersect_ray(query)
 	if hit.is_empty() or (hit.normal as Vector3).dot(normal) < cos(floor_max_angle):
@@ -534,6 +621,7 @@ func teleport(normal: Vector3, feet_radius: float) -> void:
 	reset_jump_motion()
 	last_safe_position = global_position
 	needs_settle = true
+	reset_render_interpolation()
 
 func rotate_heading(angle: float) -> void:
 	heading = heading.rotated(global_position.normalized(), angle).normalized()
@@ -560,7 +648,7 @@ func begin_entry() -> void:
 
 func sample_entry(progress: float) -> void:
 	var t: float = clampf(progress,0.0,1.0)
-	visual.position.y = -0.08*sin(t/0.16*PI) if t < 0.16 else sin((t-0.16)/0.84*PI*0.7)*1.5
+	visual.position.y = (-0.08*sin(t/0.16*PI) if t < 0.16 else sin((t-0.16)/0.84*PI*0.7)*1.5) * avatar_scale
 	var fade: float = smoothstep(0.63,1.0,t)
 	for mat: StandardMaterial3D in entry_materials:
 		mat.set("transparency",BaseMaterial3D.TRANSPARENCY_ALPHA if fade > 0.001 else int(mat.get_meta("original_transparency")))

@@ -1,0 +1,889 @@
+{
+	"bookcase": {
+		"label": "按 E 選取書籍閱讀",
+		"position": [
+			8.1,
+			0.04,
+			1.95
+		],
+		"radius": 1.6
+	},
+	"books": [
+		{
+			"color": "#708474",
+			"id": "book_01",
+			"node_name": "BOOK_01",
+			"position": [
+				9.46,
+				0.944,
+				2.55
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 01"
+		},
+		{
+			"color": "#345c58",
+			"id": "book_02",
+			"node_name": "BOOK_02",
+			"position": [
+				9.46,
+				0.974,
+				2.4
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 02"
+		},
+		{
+			"color": "#846747",
+			"id": "book_03",
+			"node_name": "BOOK_03",
+			"position": [
+				9.46,
+				0.954,
+				2.24
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 03"
+		},
+		{
+			"color": "#d4cd84",
+			"id": "book_04",
+			"node_name": "BOOK_04",
+			"position": [
+				9.46,
+				0.929,
+				2.07
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 04"
+		},
+		{
+			"color": "#345c58",
+			"id": "book_05",
+			"node_name": "BOOK_05",
+			"position": [
+				9.46,
+				0.969,
+				1.86
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 05"
+		},
+		{
+			"color": "#708474",
+			"id": "book_06",
+			"node_name": "BOOK_06",
+			"position": [
+				9.46,
+				0.944,
+				1.69
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 06"
+		},
+		{
+			"color": "#708474",
+			"id": "book_07",
+			"node_name": "BOOK_07",
+			"position": [
+				9.46,
+				1.524,
+				1.37
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 07"
+		},
+		{
+			"color": "#846747",
+			"id": "book_08",
+			"node_name": "BOOK_08",
+			"position": [
+				9.46,
+				1.544,
+				1.54
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 08"
+		},
+		{
+			"color": "#345c58",
+			"id": "book_09",
+			"node_name": "BOOK_09",
+			"position": [
+				9.46,
+				1.559,
+				1.73
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 09"
+		},
+		{
+			"color": "#d4cd84",
+			"id": "book_10",
+			"node_name": "BOOK_10",
+			"position": [
+				9.46,
+				1.529,
+				1.92
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 10"
+		},
+		{
+			"color": "#345c58",
+			"id": "book_11",
+			"node_name": "BOOK_11",
+			"position": [
+				9.46,
+				2.139,
+				2.45
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 11"
+		},
+		{
+			"color": "#708474",
+			"id": "book_12",
+			"node_name": "BOOK_12",
+			"position": [
+				9.46,
+				2.114,
+				2.23
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 12"
+		},
+		{
+			"color": "#846747",
+			"id": "book_13",
+			"node_name": "BOOK_13",
+			"position": [
+				9.46,
+				2.159,
+				2.02
+			],
+			"rotation_y": -1.5707963267949,
+			"title": "書籍 13"
+		}
+	],
+	"cabinet_doors": [],
+	"colliders": [
+		{
+			"center": [
+				-7.82309,
+				0.66377,
+				4.9432
+			],
+			"name": "Sofa_Left_Run",
+			"rotation_y": 0.0,
+			"size": [
+				1.49582,
+				1.08355,
+				4.67907
+			]
+		},
+		{
+			"center": [
+				-6.03496,
+				0.6642,
+				7.1936
+			],
+			"name": "Sofa_Return_Run",
+			"rotation_y": 0.0,
+			"size": [
+				5.02525,
+				1.0844,
+				1.40135
+			]
+		},
+		{
+			"center": [
+				-7.7532,
+				0.45956,
+				6.6832
+			],
+			"name": "Sofa_Corner",
+			"rotation_y": 0.0,
+			"size": [
+				1.10445,
+				0.22243,
+				1.16383
+			]
+		},
+		{
+			"center": [
+				-5.218,
+				0.30905,
+				4.8048
+			],
+			"name": "Coffee_Table",
+			"rotation_y": 0.0,
+			"size": [
+				2.03,
+				0.4089,
+				1.682
+			]
+		},
+		{
+			"center": [
+				-6.686,
+				0.36792,
+				2.4028
+			],
+			"name": "Side_Table",
+			"rotation_y": 0.0,
+			"size": [
+				0.812,
+				0.61364,
+				0.812
+			]
+		},
+		{
+			"center": [
+				-8.24544,
+				0.44,
+				-3.65209
+			],
+			"name": "Gaming_Desk",
+			"rotation_y": -0.174532925199433,
+			"size": [
+				1.08,
+				0.8,
+				5.28
+			]
+		},
+		{
+			"center": [
+				-7.46158,
+				0.965,
+				-1.84917
+			],
+			"name": "Gaming_Chair_1",
+			"rotation_y": 0.0,
+			"size": [
+				0.86969,
+				1.09,
+				0.87236
+			]
+		},
+		{
+			"center": [
+				-7.17506,
+				0.965,
+				-3.4741
+			],
+			"name": "Gaming_Chair_2",
+			"rotation_y": 0.0,
+			"size": [
+				0.86969,
+				1.09,
+				0.87236
+			]
+		},
+		{
+			"center": [
+				-6.88854,
+				0.965,
+				-5.09904
+			],
+			"name": "Gaming_Chair_3",
+			"rotation_y": 0.0,
+			"size": [
+				0.86969,
+				1.09,
+				0.87236
+			]
+		},
+		{
+			"center": [
+				-8.35,
+				0.22,
+				-7.75
+			],
+			"name": "Planter_Rear left fern",
+			"rotation_y": 0.0,
+			"size": [
+				0.63294,
+				0.4,
+				0.63294
+			]
+		},
+		{
+			"center": [
+				8.55,
+				0.22,
+				-7.75
+			],
+			"name": "Planter_Rear right fern",
+			"rotation_y": 0.0,
+			"size": [
+				0.63294,
+				0.4,
+				0.63294
+			]
+		},
+		{
+			"center": [
+				-2.5,
+				0.22,
+				8.1
+			],
+			"name": "Planter_Entry left plant",
+			"rotation_y": 0.0,
+			"size": [
+				0.63294,
+				0.4,
+				0.63294
+			]
+		},
+		{
+			"center": [
+				8.2,
+				0.22,
+				7.75
+			],
+			"name": "Planter_Entry right plant",
+			"rotation_y": 0.0,
+			"size": [
+				0.63294,
+				0.4,
+				0.63294
+			]
+		},
+		{
+			"center": [
+				-9.15,
+				0.22,
+				8.15
+			],
+			"name": "Planter_Lounge fern",
+			"rotation_y": 0.0,
+			"size": [
+				0.63294,
+				0.4,
+				0.63294
+			]
+		},
+		{
+			"center": [
+				9.54,
+				1.40375,
+				1.95
+			],
+			"name": "Reading_Bookcase",
+			"rotation_y": 0.0,
+			"size": [
+				0.74,
+				2.7275,
+				1.73
+			]
+		},
+		{
+			"center": [
+				9.25,
+				0.30318,
+				4.5
+			],
+			"name": "Reading_Bench",
+			"rotation_y": 0.0,
+			"size": [
+				1.08,
+				0.52636,
+				3.22
+			]
+		},
+		{
+			"center": [
+				9.7125,
+				1.39,
+				4.5
+			],
+			"name": "Reading_Bench_Back",
+			"rotation_y": 0.0,
+			"size": [
+				0.425,
+				2.54,
+				3.18
+			]
+		},
+		{
+			"center": [
+				9.55,
+				2.64,
+				4.5
+			],
+			"name": "Reading_Bench_Canopy",
+			"rotation_y": 0.0,
+			"size": [
+				0.63,
+				0.105,
+				3.23
+			]
+		},
+		{
+			"center": [
+				9.862,
+				1.9,
+				7.15
+			],
+			"name": "Reading_Painting",
+			"rotation_y": 0.0,
+			"size": [
+				0.18,
+				1.6097,
+				1.99
+			]
+		},
+		{
+			"center": [
+				5.0,
+				0.48,
+				8.55
+			],
+			"name": "Welcome_Console",
+			"rotation_y": 0.0,
+			"size": [
+				2.7,
+				0.62,
+				0.58
+			]
+		},
+		{
+			"center": [
+				-3.43,
+				0.99,
+				7.1
+			],
+			"name": "Reading_Floor_Lamp",
+			"rotation_y": 0.0,
+			"size": [
+				0.45,
+				1.9,
+				0.45
+			]
+		}
+	],
+	"computers": [
+		{
+			"approach": [
+				-6.50746,
+				0.04,
+				-1.11004
+			],
+			"collider_name": "Gaming_Desk",
+			"id": "computer_01",
+			"label": "電腦 1",
+			"node_name": "SCREEN_01",
+			"position": [
+				-7.74412,
+				0.04,
+				-1.88824
+			]
+		},
+		{
+			"approach": [
+				-6.22094,
+				0.04,
+				-2.73497
+			],
+			"collider_name": "Gaming_Desk",
+			"id": "computer_02",
+			"label": "電腦 2",
+			"node_name": "SCREEN_02",
+			"position": [
+				-7.4576,
+				0.04,
+				-3.51318
+			]
+		},
+		{
+			"approach": [
+				-5.93442,
+				0.04,
+				-4.35991
+			],
+			"collider_name": "Gaming_Desk",
+			"id": "computer_03",
+			"label": "電腦 3",
+			"node_name": "SCREEN_03",
+			"position": [
+				-7.17108,
+				0.04,
+				-5.13811
+			]
+		}
+	],
+	"coordinate_convention": "GLB/Godot Y-up; [Blender x, Blender z, -Blender y]; distances metres; collider rotation_y radians",
+	"decor_targets": [
+		{
+			"approach": [
+				5.0,
+				0.04,
+				7.4
+			],
+			"collider_name": "Welcome_Console",
+			"id": "welcome_console",
+			"kind": "decoration",
+			"label": "陶藝與木作",
+			"node_name": "DECOR_Console",
+			"position": [
+				5.0,
+				0.95,
+				8.13
+			]
+		},
+		{
+			"approach": [
+				-2.4,
+				0.04,
+				7.1
+			],
+			"collider_name": "Reading_Floor_Lamp",
+			"id": "reading_lamp",
+			"kind": "lamp",
+			"label": "閱讀落地燈",
+			"light_position": [
+				-3.8,
+				1.64,
+				7.1
+			],
+			"node_name": "LAMP_Reading",
+			"position": [
+				-3.43,
+				1.45,
+				7.1
+			]
+		},
+		{
+			"approach": [
+				-3.8,
+				0.04,
+				5.3
+			],
+			"collider_name": "Coffee_Table",
+			"id": "tea_cup",
+			"kind": "tea",
+			"label": "茶杯",
+			"node_name": "TEA_Cup",
+			"position": [
+				-4.56,
+				0.64,
+				5.3
+			]
+		},
+		{
+			"approach": [
+				8.3,
+				0.04,
+				7.15
+			],
+			"collider_name": "Reading_Painting",
+			"id": "starry_night",
+			"kind": "painting",
+			"label": "梵谷・星空",
+			"node_name": "PAINTING_StarryNight",
+			"position": [
+				9.7,
+				1.9,
+				7.15
+			]
+		}
+	],
+	"device": [
+		0.65,
+		0.034,
+		-0.8
+	],
+	"device_collision": {
+		"center": [
+			0.65,
+			0.3,
+			-0.8
+		],
+		"height": 0.55,
+		"radius": 0.93
+	},
+	"device_count": 1.0,
+	"empty_display_sockets": [],
+	"exit": [
+		0.0,
+		0.04,
+		8.48
+	],
+	"floor_y": 0.0375,
+	"low_resources": true,
+	"portal_opening": {
+		"center": [
+			0.0,
+			1.67,
+			9.08
+		],
+		"size": [
+			2.44,
+			3.2,
+			0.4
+		]
+	},
+	"projector_optics": {
+		"beam_bottom_y": 0.529,
+		"emitter": [
+			0.65,
+			0.527,
+			-0.8
+		],
+		"screen_bottom_half_width": 0.8,
+		"screen_bottom_y": 1.384,
+		"screen_center_x": 0.65,
+		"screen_top_half_width": 1.1,
+		"screen_top_y": 2.584,
+		"screen_z": -0.835
+	},
+	"reading_spot": [
+		7.4,
+		0.04,
+		3.1
+	],
+	"room_bounds": {
+		"max": [
+			10.0,
+			3.4,
+			9.0
+		],
+		"min": [
+			-10.0,
+			0.0375,
+			-9.0
+		]
+	},
+	"room_display_name": "練功區",
+	"seats": [
+		{
+			"approach": [
+				-6.5564,
+				0.04,
+				3.47
+			],
+			"collider_name": "Sofa_Left_Run",
+			"facing": 1.5707963267949,
+			"id": "sofa_left_1",
+			"label": "沙發",
+			"pose_forward": 0.28,
+			"position": [
+				-7.7764,
+				0.56661,
+				3.47
+			],
+			"surface_height": 0.56661
+		},
+		{
+			"approach": [
+				-6.686,
+				0.04,
+				6.024
+			],
+			"collider_name": "Sofa_Return_Run",
+			"facing": 3.14159265358979,
+			"id": "sofa_return_1",
+			"label": "沙發",
+			"pose_forward": 0.26,
+			"position": [
+				-6.686,
+				0.56607,
+				7.124
+			],
+			"surface_height": 0.56607
+		},
+		{
+			"approach": [
+				-6.5564,
+				0.04,
+				4.5256
+			],
+			"collider_name": "Sofa_Left_Run",
+			"facing": 1.5707963267949,
+			"id": "sofa_left_2",
+			"label": "沙發",
+			"pose_forward": 0.28,
+			"position": [
+				-7.7764,
+				0.5675,
+				4.5256
+			],
+			"surface_height": 0.5675
+		},
+		{
+			"approach": [
+				-5.5492,
+				0.04,
+				6.024
+			],
+			"collider_name": "Sofa_Return_Run",
+			"facing": 3.14159265358979,
+			"id": "sofa_return_2",
+			"label": "沙發",
+			"pose_forward": 0.26,
+			"position": [
+				-5.5492,
+				0.5638,
+				7.124
+			],
+			"surface_height": 0.5638
+		},
+		{
+			"approach": [
+				-6.5564,
+				0.04,
+				5.5812
+			],
+			"collider_name": "Sofa_Left_Run",
+			"facing": 1.5707963267949,
+			"id": "sofa_left_3",
+			"label": "沙發",
+			"pose_forward": 0.28,
+			"position": [
+				-7.7764,
+				0.56699,
+				5.5812
+			],
+			"surface_height": 0.56699
+		},
+		{
+			"approach": [
+				-4.4124,
+				0.04,
+				6.024
+			],
+			"collider_name": "Sofa_Return_Run",
+			"facing": 3.14159265358979,
+			"id": "sofa_return_3",
+			"label": "沙發",
+			"pose_forward": 0.26,
+			"position": [
+				-4.4124,
+				0.56215,
+				7.124
+			],
+			"surface_height": 0.56215
+		},
+		{
+			"approach": [
+				-6.5232,
+				0.04,
+				6.0232
+			],
+			"collider_name": "Sofa_Corner",
+			"facing": 2.35619449019234,
+			"id": "sofa_corner",
+			"label": "沙發轉角",
+			"pose_forward": 0.66,
+			"position": [
+				-7.7532,
+				0.56277,
+				6.6832
+			],
+			"surface_height": 0.56277
+		},
+		{
+			"approach": [
+				-6.40746,
+				0.04,
+				-1.73004
+			],
+			"collider_name": "Gaming_Chair_1",
+			"facing": -1.74532925199433,
+			"id": "gaming_1",
+			"label": "電競椅 1",
+			"pose_forward": 0.06,
+			"position": [
+				-7.52746,
+				0.56734,
+				-1.85004
+			],
+			"surface_height": 0.56734
+		},
+		{
+			"approach": [
+				-6.12094,
+				0.04,
+				-3.35497
+			],
+			"collider_name": "Gaming_Chair_2",
+			"facing": -1.74532925199433,
+			"id": "gaming_2",
+			"label": "電競椅 2",
+			"pose_forward": 0.06,
+			"position": [
+				-7.24094,
+				0.56734,
+				-3.47497
+			],
+			"surface_height": 0.56734
+		},
+		{
+			"approach": [
+				-5.83442,
+				0.04,
+				-4.97991
+			],
+			"collider_name": "Gaming_Chair_3",
+			"facing": -1.74532925199433,
+			"id": "gaming_3",
+			"label": "電競椅 3",
+			"pose_forward": 0.06,
+			"position": [
+				-6.95442,
+				0.56734,
+				-5.09991
+			],
+			"surface_height": 0.56734
+		},
+		{
+			"approach": [
+				8.01,
+				0.04,
+				5.26
+			],
+			"collider_name": "Reading_Bench",
+			"facing": -1.5707963267949,
+			"id": "reading_1",
+			"label": "閱讀座 1",
+			"pose_forward": 0.24,
+			"position": [
+				9.24,
+				0.55836,
+				5.26
+			],
+			"surface_height": 0.55836
+		},
+		{
+			"approach": [
+				8.01,
+				0.04,
+				3.74
+			],
+			"collider_name": "Reading_Bench",
+			"facing": -1.5707963267949,
+			"id": "reading_2",
+			"label": "閱讀座 2",
+			"pose_forward": 0.24,
+			"position": [
+				9.24,
+				0.55836,
+				3.74
+			],
+			"surface_height": 0.55836
+		}
+	],
+	"spawn": [
+		0.0,
+		0.09,
+		6.2
+	],
+	"style_palette": {
+		"limestone": "b4b6a3",
+		"oak": "b39673",
+		"plaster": "dedcc7",
+		"teal": "345c58",
+		"wordking_accent": "d4cd84"
+	}
+}

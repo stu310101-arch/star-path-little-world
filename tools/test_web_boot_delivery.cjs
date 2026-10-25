@@ -189,6 +189,16 @@ test('boot UI fallback and unsupported paths leave original engine progress in c
   f.api.dispose();assert.equal(f.cleared(),true);
 });
 
+test('boot UI shows actual chunk transfer progress before whole-file decoding starts', () => {
+  const f = uiFixture();
+  Object.assign(f.env.planetBootDelivery.files.pck, {decodedBytes: 0, downloadedBytes: 20000000, downloadTotalBytes: 84800000});
+  f.tick();
+  assert.match(f.detail.textContent, /分段下載 20\.0 \/ 84\.8 MB/);
+  assert.match(f.detail.textContent, /已解壓/);
+  assert.equal(f.progress.value, 20); // The existing bar still represents decoded bytes.
+  f.api.dispose();
+});
+
 test('boot UI stops when loader displays a real error',()=>{
   const f=uiFixture();f.notice.style.display='block';f.tick();
   assert.equal(f.overlay.children[0].style.display,'none');

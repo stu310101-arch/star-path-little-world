@@ -136,7 +136,7 @@ func prompt() -> String:
 		&"sitting": return "正在坐下…"
 		&"seated":
 			if computer_game_open:
-				return "正在遊玩 · 關閉網頁後回到座位"
+				return "正在遊玩圍棋 · Esc 返回座位"
 			if message_clock > 0:
 				return message
 			if active.has("computer_id"):
@@ -207,6 +207,7 @@ func _unlock_player() -> void:
 	player.set_clip(&"Idle")
 	player.needs_settle = true
 	player.last_safe_position = player.global_position
+	player.reset_render_interpolation()
 	state = &"idle"
 	active = {}
 	nearest = {}
@@ -279,6 +280,7 @@ func _update_seat() -> void:
 			_unlock_player()
 			return
 	player.global_transform = Transform3D(seat_basis, point)
+	player.reset_render_interpolation()
 	player.up_direction = Vector3.UP
 	player.previous_up = Vector3.UP
 	var turn: float = smoothstep(0, .38, clock / SIT_SECONDS) if state == &"sitting" else 1.0

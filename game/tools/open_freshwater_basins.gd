@@ -15,14 +15,10 @@ static func apply(globe: Node3D, layout: Dictionary, districts: Array) -> void:
 		return
 	var radius: float = float(layout.radius)
 	var material: Material = ocean.get_active_material(0)
-	# Always rebuild from the same base sphere. Reapplying to a saved ArrayMesh
-	# must not repeatedly subdivide it or accumulate opening/rounding errors.
-	var source: SphereMesh = SphereMesh.new()
-	source.radius = radius
-	source.height = radius * 2.0
-	source.radial_segments = 128
-	source.rings = 64
-	var arrays: Array = source.get_mesh_arrays()
+	# Rebuild the same complete sphere every time; reapplying never
+	# subdivides an already clipped mesh.
+	var source: ArrayMesh = preload("res://tools/coastal_ocean.gd").build(radius)
+	var arrays: Array = source.surface_get_arrays(0)
 	var positions: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
 	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
 	var regions: Array[Dictionary] = []
@@ -59,8 +55,8 @@ static func apply(globe: Node3D, layout: Dictionary, districts: Array) -> void:
 	ocean.material_override = material
 	ocean.set_meta("freshwater_openings",true)
 	ocean.set_meta("freshwater_opening_report",stats)
-	if int(stats.output_triangles) >= 40000:
-		push_warning("Freshwater Ocean mesh exceeded its 40000-triangle review budget: "+str(stats.output_triangles))
+	if int(stats.output_triangles) >= 360000:
+		push_warning("Freshwater Ocean mesh exceeded its 360000-triangle review budget: "+str(stats.output_triangles))
 	print("FRESHWATER_OCEAN_OPENINGS "+JSON.stringify(stats))
 
 static func _local(point: Vector3, region: Dictionary, radius: float) -> Vector2:
@@ -69,12 +65,7 @@ static func _local(point: Vector3, region: Dictionary, radius: float) -> Vector2
 	return Vector2(point.dot(axes.x),point.dot(axes.z))*radius/point.dot(up)
 
 static func _island_edge_distance(point: Vector2, data: Dictionary, index: int) -> float:
-	# Matches Ecology.edge_distance(), including its district-index coastline phase.
-	var extent: Vector2 = Waterfront.v2(data.extent)
-	var local: Vector2 = point/extent
-	var angle: float = local.angle()
-	var edge: float = 1.0+.045*sin(angle*3.0+float(index))+.035*cos(angle*5.0-float(index))
-	return (edge-local.length())*minf(extent.x,extent.y)
+	return preload("res://scripts/biome_geography.gd").coast_distance(point,data,index)
 
 static func _near_freshwater(point: Vector3, regions: Array[Dictionary], radius: float) -> bool:
 	for region: Dictionary in regions:

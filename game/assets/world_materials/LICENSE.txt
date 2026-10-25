@@ -1,0 +1,4 @@
+Poly Haven assets: CC0 1.0 Universal. https://polyhaven.com/license
+Forest Ground 04 / Cobblestone Floor 03: Rob Tuytel (Forest Ground adjustment: Rico Cilliers).
+Rocky Terrain 02: Amal Kumar. Wooden Planks: Charlotte Baglioni and Dario Barresi. Leafy Grass: Charlotte Baglioni.
+Source maps are unmodified. Runtime shader controls color, texture scale and roughness.

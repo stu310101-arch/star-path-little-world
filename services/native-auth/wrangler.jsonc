@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "star-path-little-world",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-19",
+  "send_metrics": false,
+  "observability": { "enabled": false },
+  "durable_objects": {
+    "bindings": [
+      { "name": "NATIVE_AUTH", "class_name": "NativeAuthHandoff" },
+      { "name": "NATIVE_AUTH_LIMITS", "class_name": "NativeAuthLimits" }
+    ]
+  },
+  "migrations": [
+    { "tag": "native-auth-v1", "new_sqlite_classes": ["NativeAuthHandoff", "NativeAuthLimits"] }
+  ],
+  "vars": {
+    "PUBLIC_ORIGIN": "https://REPLACE-WITH-PRODUCTION-ORIGIN.invalid",
+    "FIREBASE_PROJECT_ID": "",
+    "FIREBASE_API_KEY": "",
+    "SERVICE_ACCOUNT_EMAIL": ""
+  }
+}

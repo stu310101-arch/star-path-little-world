@@ -1,0 +1,14 @@
+{
+  "fern": {
+    "original_triangles": 3456,
+    "bed_lod_triangles": 898,
+    "source": "C:\\Users\\admin\\Documents\\\u5de5\u7a0b\u8ab23D\u904a\u6232\\star-path-little-world\\art\\Vegetation\\fern_beds.blend",
+    "method": "Live decimation export copy; original botanical mesh and vertex colours preserved"
+  },
+  "cattail": {
+    "original_triangles": 1456,
+    "bed_lod_triangles": 610,
+    "source": "C:\\Users\\admin\\Documents\\\u5de5\u7a0b\u8ab23D\u904a\u6232\\star-path-little-world\\art\\Vegetation\\cattail_beds.blend",
+    "method": "Live decimation export copy; original botanical mesh and vertex colours preserved"
+  }
+}

@@ -6,7 +6,7 @@ original materials and form an editable morph animation, including a lap and
 free hanging front hem; no cloth simulation is needed on the user's laptop.
 """
 from __future__ import annotations
-import copy, json, math, struct
+import argparse, copy, json, math, struct
 from pathlib import Path
 import numpy as np
 
@@ -98,19 +98,20 @@ def normals(points, indices):
     return values.astype(np.float32)
 
 
-def support_contact(points,indices):
+def support_contact(points,indices,seat_scale=1.0):
     """Compress contact folds against the seat including triangle interiors."""
     points=points.copy();triangles=indices.reshape(-1,3)
-    barycentric=[np.array([a,b,5-a-b],float)/5 for a in range(6) for b in range(6-a)]
-    for _ in range(8):
+    subdivisions=16 if seat_scale<.75 else 5
+    barycentric=[np.array([a,b,subdivisions-a-b],float)/subdivisions for a in range(subdivisions+1) for b in range(subdivisions+1-a)]
+    for _ in range(12 if seat_scale<.75 else 8):
         lift=np.zeros(len(points));found=False
         triangles_now=points[triangles]
         for weights in barycentric:
             sample=(triangles_now*weights[None,:,None]).sum(1)
-            collision=(np.abs(sample[:,0])<.71)&(np.abs(sample[:,2])<.233)&(sample[:,1]>.419)&(sample[:,1]<.533)
+            collision=(np.abs(sample[:,0])<.71*seat_scale)&(np.abs(sample[:,2])<.233*seat_scale)&(sample[:,1]>.419*seat_scale)&(sample[:,1]<.533*seat_scale)
             if not collision.any():continue
             found=True
-            penetration=.537-sample[collision,1]
+            penetration=.537*seat_scale-sample[collision,1]
             # Minimum vertical displacement, shared between the triangle's
             # vertices. Taking each vertex's maximum preserves all contacts.
             correction=penetration[:,None]*weights[None,:]/np.dot(weights,weights)
@@ -120,7 +121,11 @@ def support_contact(points,indices):
     return points
 
 
-def build():
+def build(seat_top=.52,destination=DEST):
+    destination=destination.resolve()
+    seat_scale=seat_top/.52
+    low_seat=seat_scale<.75
+    seat_drop=seat_top-.52
     source=InputGLB(SOURCE); doc=source.doc; nodes=copy.deepcopy(doc['nodes'])
     idle=next(a for a in doc['animations'] if a['name']=='Idle')
     morph_weights={}
@@ -151,27 +156,47 @@ def build():
     def shift(name,translation):
         i=index[name]
         for j in descendants(i):seated[j][:3,3]+=translation
-    def aim(name,direction):
+    def aim(name,direction,child_name=None):
         i=index[name]; transform=seated[i]; old=transform.copy()
-        rot=align(transform[:3,1],np.array(direction)); pivot=transform[:3,3].copy()
+        # Foot controls are root children in this delivered rig. Reconstruct
+        # their virtual limb tip from the lower-leg rotation, not the still
+        # unparented foot control after the thigh has already rotated.
+        old_direction=transform[:3,1] if child_name is None else transform[:3,:3] @ np.linalg.inv(joint_base[i][:3,:3]) @ (joint_base[index[child_name]][:3,3]-joint_base[i][:3,3])
+        rot=align(old_direction,np.array(direction)); pivot=transform[:3,3].copy()
         for j in descendants(i):
             seated[j][:3,:3]=rot @ seated[j][:3,:3]
             seated[j][:3,3]=pivot + rot @ (seated[j][:3,3]-pivot)
-    shift('Body',np.array([0,-.17,.065]))
+    shift('Body',np.array([0,-.17+seat_drop,.065]))
     # Knees pass the front edge before the thighs slope down. The raised
     # bench is .52m high; sitting slightly forward lets both shoes meet land.
     for side,sign in [('L',1),('R',-1)]:
         upper=index['UpperLeg.'+side]; lower=index['LowerLeg.'+side]; foot=index['Foot.'+side]
         knee_target=np.array([sign*.142,.515,.395])
-        aim('UpperLeg.'+side,knee_target-seated[upper][:3,3])
         ankle_target=np.array([sign*.155,.022,.46])
-        aim('LowerLeg.'+side,ankle_target-seated[lower][:3,3])
+        if low_seat:
+            # Two-bone IK keeps the original thigh/shin lengths. A forward
+            # pole produces a deep seated crouch, with feet planted on land.
+            ankle_target=np.array([sign*.155,.022,.40])
+            hip=seated[upper][:3,3]
+            thigh=np.linalg.norm(joint_base[lower][:3,3]-joint_base[upper][:3,3])
+            shin=np.linalg.norm(joint_base[foot][:3,3]-joint_base[lower][:3,3])
+            axis=ankle_target-hip; distance=np.linalg.norm(axis); axis/=distance
+            along=(thigh*thigh-shin*shin+distance*distance)/(2*distance)
+            pole=np.array([0.,0.,1.]);pole-=axis*np.dot(pole,axis);pole/=np.linalg.norm(pole)
+            knee_target=hip+axis*along+pole*math.sqrt(max(0.,thigh*thigh-along*along))
+        aim('UpperLeg.'+side,knee_target-seated[upper][:3,3],'LowerLeg.'+side if low_seat else None)
+        aim('LowerLeg.'+side,ankle_target-seated[lower][:3,3],'Foot.'+side if low_seat else None)
         shift('Foot.'+side,ankle_target-seated[foot][:3,3])
+        if low_seat:
+            # The foot follows the ankle location but retains its standing
+            # orientation, so toes and heels stay level after a deep bend.
+            seated[foot][:3,:3]=joint_base[foot][:3,:3]
         shoulder=index['UpperArm.'+side]
-        elbow_target=np.array([sign*.255,.955,.105])
+        elbow_target=np.array([sign*.255,.955+seat_drop,.105])
         aim('UpperArm.'+side,elbow_target-seated[shoulder][:3,3])
         elbow=index['LowerArm.'+side]
-        wrist_target=np.array([sign*.185,.705,.28])
+        wrist_target=np.array([sign*.185,.705+seat_drop,.28])
+        if low_seat:wrist_target=np.array([sign*.185,knee_target[1]+.09,knee_target[2]-.04])
         aim('LowerArm.'+side,wrist_target-seated[elbow][:3,3])
         aim('Palm.'+side,np.array([0,-.26,.966]))
     # Small backward upper-body relaxation, head level; no exaggerated lean.
@@ -203,7 +228,7 @@ def build():
     output={'asset':{'version':'2.0','generator':'Codex editable graduate bench rest'},
             'scene':0,'scenes':[{'nodes':[0]}],'nodes':[{'name':'GraduateRest','children':[]}],
             'meshes':[],'materials':copy.deepcopy(doc['materials']),'accessors':[],'bufferViews':[],
-            'extras':{'seat_top_m':.52,'forward':'+Z','pose_samples':STEPS+1,'source':'graduate.glb / Idle at 0s'}}
+            'extras':{'seat_top_m':seat_top,'avatar_scale':1.0,'forward':'+Z','pose_samples':STEPS+1,'source':'graduate.glb / Idle at 0s'}}
     blob=bytearray()
     def accessor(values,kind='VEC3',ctype=5126):
         dtype={5126:'<f4',5125:'<u4'}[ctype]; values=np.asarray(values,dtype=dtype)
@@ -237,14 +262,14 @@ def build():
             posed=(blend @ np.c_[points,np.ones(len(points))][:,:,None])[:,:3,0]
             unclothed=posed.copy()
             if any(s in name for s in ['Pleated_bachelor_gown','Blue_and_gold_stole','Stole_woven_bar']):
-                posed=drape(points,posed,name)
+                posed=drape(points,posed,name,seat_scale)
                 max_cloth_delta=max(max_cloth_delta,float(np.linalg.norm(posed-points,axis=1).max()))
             elif 'original_face_hands_and_trousers' in name:
                 # Soft tissue/trouser compression at the bench contact patch.
-                contact=(np.abs(posed[:,2])<.25)&(posed[:,1]>.42)&(posed[:,1]<.524)
-                posed[contact,1]=.524
+                contact=(np.abs(posed[:,2])<.25*seat_scale)&(posed[:,1]>.42*seat_scale)&(posed[:,1]<.524*seat_scale)
+                posed[contact,1]=.524*seat_scale
             if 'Pleated_bachelor_gown' in name or 'original_face_hands_and_trousers' in name:
-                posed=support_contact(posed,triangles)
+                posed=support_contact(posed,triangles,seat_scale)
             primitive={'attributes':{'POSITION':accessor(points),'NORMAL':accessor(normals(points,triangles))},
                        'indices':accessor(triangles,'SCALAR',5125),'material':part['source'].get('material',0),'targets':[]}
             for key in ['TEXCOORD_0','COLOR_0']:
@@ -262,6 +287,12 @@ def build():
                 hinge=math.sin(math.pi*t)*.055
                 high=np.clip((points[:,1]-.72)/.65,0,1)
                 sample[:,2]+=hinge*high
+                if low_seat:
+                    # Preserve shoe/ground clearance throughout the lowering
+                    # arc; this is a local foot correction, never model scale.
+                    feet=points[:,1]<.13
+                    if feet.any():sample[feet,1]=np.maximum(sample[feet,1],points[feet,1])
+                    sample[:,1]=np.maximum(sample[:,1],.002)
                 # Feet remain at standing height throughout the transition.
                 primitive['targets'].append({'POSITION':accessor(sample-points),
                                               'NORMAL':accessor(normals(sample,triangles)-normals(points,triangles))})
@@ -273,16 +304,17 @@ def build():
     output['buffers']=[{'byteLength':len(blob)}]
     payload=json.dumps(output,separators=(',',':')).encode()
     payload+=b' '*((-len(payload))%4);blob+=b'\0'*((-len(blob))%4)
-    DEST.write_bytes(struct.pack('<III',0x46546c67,2,28+len(payload)+len(blob))+struct.pack('<II',len(payload),0x4e4f534a)+payload+struct.pack('<II',len(blob),0x004e4942)+blob)
-    report={'asset':str(DEST.relative_to(ROOT)),'bytes':DEST.stat().st_size,'pose_samples':STEPS+1,
+    destination.write_bytes(struct.pack('<III',0x46546c67,2,28+len(payload)+len(blob))+struct.pack('<II',len(payload),0x4e4f534a)+payload+struct.pack('<II',len(blob),0x004e4942)+blob)
+    report={'asset':str(destination.relative_to(ROOT)),'bytes':destination.stat().st_size,'pose_samples':STEPS+1,'seat_top_m':seat_top,
             'source_bounds':reports,'seated_bones':{nodes[i]['name']:seated[i][:3,3].tolist() for i in joints},
+            'standing_bones':{nodes[i]['name']:joint_base[i][:3,3].tolist() for i in joints},
             'original_character_untouched':True,'max_garment_vertex_travel_m':max_cloth_delta}
-    folder=ROOT/'deliverables/bench-rest';folder.mkdir(parents=True,exist_ok=True)
+    folder=ROOT/('deliverables/bench-rest-small' if low_seat else 'deliverables/bench-rest');folder.mkdir(parents=True,exist_ok=True)
     (folder/'pose-authoring.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
-    print(json.dumps({k:v for k,v in report.items() if k not in ['source_bounds','seated_bones']}),flush=True)
+    print(json.dumps({k:v for k,v in report.items() if k not in ['source_bounds','seated_bones','standing_bones']}),flush=True)
 
 
-def drape(original, skinned, name):
+def drape(original, skinned, name, seat_scale=1.0):
     """Front cloth lies above the thighs then falls vertically below the knees.
 
     Rear cloth gathers onto the cushion behind the pelvis instead of passing
@@ -302,6 +334,13 @@ def drape(original, skinned, name):
     lap_z=.125+forward_length*.98 + (z-.10)*.24
     back_y=.535+np.maximum(.15-length,0)*.9
     back_z=-.10-np.minimum(length,.26)*.40
+    if seat_scale<.75:
+        # Low-seat knees rise above the hips. Cloth follows that upward lap
+        # before hanging beyond the knees, instead of cutting through them.
+        lap_y=.420+.140*np.minimum(length/.24,1)-np.maximum(length-.24,0)
+        lap_z=.115+np.minimum(length,.24)*.99+(z-.10)*.24
+        back_y=.539*seat_scale+np.maximum(.15-length,0)*.9
+        back_z=-.04-np.minimum(length,.26)*.40
     target_y=back_y*(1-front)+lap_y*front
     target_z=back_z*(1-front)+lap_z*front
     # Side folds drape outside the trouser legs rather than cutting across them.
@@ -312,9 +351,19 @@ def drape(original, skinned, name):
     result[:,0]+=np.sign(x)*.032*side*hanging
     # The seat supports gathered back/side cloth. Only cloth beyond its front
     # edge falls freely; this avoids pushing folded cloth through the slats.
-    supported=(result[:,2]<.25)&(result[:,2]>-.25)&(y<waist)
-    result[supported,1]=np.maximum(result[supported,1],.539)
+    supported=(result[:,2]<.25*seat_scale)&(result[:,2]>-.25*seat_scale)&(y<waist)
+    if seat_scale<.75:supported&=np.abs(result[:,0])<.71*seat_scale
+    result[supported,1]=np.maximum(result[supported,1],.539*seat_scale)
+    if seat_scale<.75:result[:,1]=np.maximum(result[:,1],.012)
     return result
 
 
-if __name__=='__main__':build()
+if __name__=='__main__':
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--seat-top',type=float,default=.52)
+    parser.add_argument('--output',type=Path,default=DEST)
+    args=parser.parse_args()
+    if args.seat_top<=0:parser.error('seat-top must be positive')
+    if args.seat_top!=.52 and args.output.resolve()==DEST.resolve():
+        parser.error('a changed seat height requires an independent --output')
+    build(args.seat_top,args.output)

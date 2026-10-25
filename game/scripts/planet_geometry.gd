@@ -13,18 +13,19 @@ static func surface(up: Vector3, offset: Vector2, radius: float) -> Vector3:
 	return (up * radius + axes.x * offset.x + axes.z * offset.y).normalized() * radius
 
 static func ground_probe(space: PhysicsDirectSpaceState3D,normal: Vector3,radius: float) -> Dictionary:
-	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(normal*(radius+1.4),normal*(radius-.3),1)
+	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(normal*(radius+50.0),normal*(radius-.3),1)
 	var hit: Dictionary = space.intersect_ray(query)
 	if not hit.is_empty():
 		return hit
 	# Float32 concave triangles can reject a ray exactly on a shared edge.
-	# Recover only when ALL four points 2 mm around it have real walkable
-	# geometry. This cannot bridge a shore, a path edge, or a visible hole.
+	# Recover only when ALL four diagonal points 2 mm around it have real
+	# walkable geometry. Cardinal offsets can remain on the same grid edge.
+	# This cannot bridge a shore, a path edge, or a visible hole.
 	var axes: Basis = frame(normal)
 	var neighbour: Dictionary = {}
-	for direction: Vector3 in [axes.x,-axes.x,axes.z,-axes.z]:
-		var n: Vector3 = (normal*radius+direction*.002).normalized()
-		query.from=n*(radius+1.4)
+	for direction: Vector3 in [axes.x+axes.z,axes.x-axes.z,-axes.x+axes.z,-axes.x-axes.z]:
+		var n: Vector3 = (normal*radius+direction.normalized()*.002).normalized()
+		query.from=n*(radius+50.0)
 		query.to=n*(radius-.3)
 		neighbour=space.intersect_ray(query)
 		if neighbour.is_empty():
@@ -44,6 +45,7 @@ static func material(color: Color, emission: float = 0.0) -> StandardMaterial3D:
 static func mesh_node(parent: Node3D, node_name: String, mesh: Mesh, mat: Material = null, collision: bool = false) -> MeshInstance3D:
 	var node: MeshInstance3D = MeshInstance3D.new()
 	node.name = node_name
+	node.set_meta("authored_surface",node_name)
 	node.mesh = mesh
 	if mat != null:
 		node.material_override = mat
@@ -174,4 +176,11 @@ static func save_scene(node: Node, path: String) -> void:
 	own_tree(node, node)
 	var packed: PackedScene = PackedScene.new()
 	assert(packed.pack(node) == OK)
-	assert(ResourceSaver.save(packed, path) == OK)
+	if path == "res://generated/globe.tscn":
+		# Keep the stable editable scene entry point, with the heavy terrain
+		# stored in Godot's compressed binary scene format. This avoids huge
+		# decimal vertex arrays in Git while retaining every mesh/collider.
+		assert(ResourceSaver.save(packed,"res://generated/globe.scn",ResourceSaver.FLAG_COMPRESS)==OK)
+		FileAccess.open(path,FileAccess.WRITE).store_string('[gd_scene load_steps=2 format=3]\n\n[ext_resource type="PackedScene" path="res://generated/globe.scn" id="1"]\n\n[node name="Globe" instance=ExtResource("1")]\n')
+	else:
+		assert(ResourceSaver.save(packed, path) == OK)

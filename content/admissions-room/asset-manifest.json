@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 2,
+  "name": "星途落點分析站：採光書房",
+  "source": "art/AdmissionsRoom/AdmissionsStudio.blend",
+  "builder": "tools/build_admissions_studio.py",
+  "runtimeModel": "game/assets/admissions_room/admissions_studio.glb",
+  "layout": "game/assets/admissions_room/layout.json",
+  "scene": "game/scenes/admissions_room.tscn",
+  "controller": "game/scripts/admissions_room.gd",
+  "style": "docs/admissions-room-art-direction.md",
+  "generation": "Project-authored Blender geometry with editable bevels and shared existing university hall textures; no external generated assets",
+  "dimensionsMeters": [
+    17,
+    5,
+    14
+  ],
+  "environmentTriangleBudget": 180000,
+  "geometry": {
+    "triangles": 111744,
+    "spatialMeshes": 7,
+    "materials": 20,
+    "collision": "Dedicated layout box proxies, camera-only layer 256",
+    "textureResolution": 512
+  },
+  "sourceValidation": "art/AdmissionsRoom/export-report.json",
+  "loadPolicy": "Optional admissions_room WebPack requested only on room entry; shared avatar prerequisite",
+  "stations": [
+    "general",
+    "special",
+    "apcs",
+    "scores",
+    "account",
+    "exit"
+  ],
+  "reuse": [
+    {
+      "path": "game/assets/university_hall/textures/",
+      "purpose": "Project-authored walnut, plaster, stone, leather and paper textures"
+    },
+    {
+      "path": "game/scripts/indoor_player.gd",
+      "purpose": "Existing avatar, controls, locomotion and jump"
+    },
+    {
+      "path": "game/scripts/bench_pose.gd",
+      "purpose": "Existing seated rest pose"
+    },
+    {
+      "path": "game/assets/fonts/NotoSansTC.ttf",
+      "purpose": "Readable Traditional Chinese signage"
+    },
+    {
+      "path": "game/scripts/account_room_bridge.gd",
+      "purpose": "Modal state capture and restoration, shared account host"
+    }
+  ],
+  "validation": [
+    "game/tests/check_admissions_room.gd",
+    "game/tests/check_admissions_walk.gd",
+    "game/tests/admissions_seat_integration_checks.gd"
+  ],
+  "runtimeReports": [
+    "deliverables/admissions-room/checks.json",
+    "deliverables/admissions-room/studio-walk/report.json"
+  ]
+}

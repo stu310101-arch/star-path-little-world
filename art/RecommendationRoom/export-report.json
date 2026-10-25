@@ -1,0 +1,140 @@
+{
+  "full": {
+    "profile": "full",
+    "triangles": 98212,
+    "budget": 180000,
+    "materials": 13,
+    "zones": {
+      "Architecture": {
+        "triangles": 8196,
+        "source_parts": 47,
+        "nonmanifold_edges": 0
+      },
+      "CompassInlay": {
+        "triangles": 5984,
+        "source_parts": 74,
+        "nonmanifold_edges": 0
+      },
+      "NorthChart": {
+        "triangles": 27904,
+        "source_parts": 115,
+        "nonmanifold_edges": 0
+      },
+      "DataWorkbench": {
+        "triangles": 3704,
+        "source_parts": 22,
+        "nonmanifold_edges": 0
+      },
+      "RecommendationWorkbench": {
+        "triangles": 8604,
+        "source_parts": 96,
+        "nonmanifold_edges": 0
+      },
+      "CompareWorkbench": {
+        "triangles": 7332,
+        "source_parts": 39,
+        "nonmanifold_edges": 0
+      },
+      "WorkChairs": {
+        "triangles": 9704,
+        "source_parts": 51,
+        "nonmanifold_edges": 0
+      },
+      "QuietSeats": {
+        "triangles": 11464,
+        "source_parts": 42,
+        "nonmanifold_edges": 0
+      },
+      "LibraryDetails": {
+        "triangles": 11608,
+        "source_parts": 74,
+        "nonmanifold_edges": 0
+      },
+      "AnimatedInstrument": {
+        "triangles": 3712,
+        "source_parts": 5,
+        "nonmanifold_edges": 0
+      }
+    },
+    "animated_nodes": [
+      "OrreryOuterRing",
+      "OrreryInnerRing",
+      "OrreryOrbit",
+      "OrreryPlanetA",
+      "OrreryPlanetB"
+    ],
+    "issues": [],
+    "texture_max": 2048,
+    "bytes": 12758136
+  },
+  "low": {
+    "profile": "low",
+    "triangles": 31168,
+    "budget": 60000,
+    "materials": 13,
+    "zones": {
+      "Architecture": {
+        "triangles": 1972,
+        "source_parts": 47,
+        "nonmanifold_edges": 0
+      },
+      "CompassInlay": {
+        "triangles": 2144,
+        "source_parts": 42,
+        "nonmanifold_edges": 0
+      },
+      "NorthChart": {
+        "triangles": 10496,
+        "source_parts": 83,
+        "nonmanifold_edges": 0
+      },
+      "DataWorkbench": {
+        "triangles": 1024,
+        "source_parts": 22,
+        "nonmanifold_edges": 0
+      },
+      "RecommendationWorkbench": {
+        "triangles": 3064,
+        "source_parts": 64,
+        "nonmanifold_edges": 0
+      },
+      "CompareWorkbench": {
+        "triangles": 2068,
+        "source_parts": 39,
+        "nonmanifold_edges": 0
+      },
+      "WorkChairs": {
+        "triangles": 3288,
+        "source_parts": 51,
+        "nonmanifold_edges": 0
+      },
+      "QuietSeats": {
+        "triangles": 3048,
+        "source_parts": 42,
+        "nonmanifold_edges": 0
+      },
+      "LibraryDetails": {
+        "triangles": 2872,
+        "source_parts": 66,
+        "nonmanifold_edges": 0
+      },
+      "AnimatedInstrument": {
+        "triangles": 1192,
+        "source_parts": 5,
+        "nonmanifold_edges": 0
+      }
+    },
+    "animated_nodes": [
+      "OrreryOuterRing",
+      "OrreryInnerRing",
+      "OrreryOrbit",
+      "OrreryPlanetA",
+      "OrreryPlanetB"
+    ],
+    "issues": [],
+    "texture_max": 256,
+    "bytes": 1742896
+  },
+  "blender": "5.2.2 LTS",
+  "scope": "Geometry/material export validation only; native rendering and walking evidence recorded separately."
+}

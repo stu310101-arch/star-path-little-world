@@ -93,12 +93,12 @@ main { max-width: 984px; margin: 0 auto; padding: 0 24px; }
 .secondary-button:hover { background: #223242; border-color: #6e8c95; }
 .game-layout { display: grid; grid-template-columns: minmax(0,1fr) 272px; gap: 24px; align-items: start; }
 .board-column { min-width: 0; }
-.board-frame { position: relative; background: #101c2c; border: 1px solid #374c61; border-radius: 12px; overflow: hidden; isolation: isolate; box-shadow: 0 12px 36px #00000026; }
+.board-frame { position: relative; background: #dfb780; border: 1px solid #b48a55; border-radius: 12px; overflow: hidden; isolation: isolate; box-shadow: 0 12px 36px #00000026; }
 #board { display: block; width: 100%; aspect-ratio: 1; height: auto; }
 .board-input { position: absolute; display: grid; z-index: 1; }
 .board-row { display: grid; min-height: 0; }
 .point { position: relative; appearance: none; border: 0; background: transparent !important; border-radius: 50%; min-width: 0; min-height: 0; width: 100%; height: 100%; padding: 0; filter: none !important; outline-offset: -3px !important; }
-.point:focus-visible { outline: 2px solid var(--accent); }
+.point:focus-visible { outline: 2px solid #08664f; }
 .point:disabled, .point[aria-disabled="true"] { opacity: 1; cursor: default; }
 .board-caption { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; color: var(--muted); font-size: 11px; }
 .shortcut-caption { color: #8194aa; }
@@ -108,7 +108,7 @@ main { max-width: 984px; margin: 0 auto; padding: 0 24px; }
 .player-card { display: flex; align-items: center; gap: 10px; padding: 12px 0; min-width: 0; }
 .player-card + .player-card { border-top: 1px solid #263648; }
 .stone-icon { width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; display: inline-block; }
-.stone-icon.black { background: radial-gradient(circle at 30% 25%,#485a71,#1a2636 58%,#0a111b); box-shadow: inset 0 0 0 1px #7895b277,0 2px 5px #0006; }
+.stone-icon.black { background: radial-gradient(circle at 30% 25%,#55585e,#202226 58%,#08090a); box-shadow: inset 0 0 0 1.5px #b8c8d6,0 2px 5px #0006; }
 .stone-icon.white { background: radial-gradient(circle at 30% 25%,#fff,#e6f2fc 52%,#aac3da); box-shadow: inset 0 0 0 1px #deefff,0 2px 5px #0004; }
 .player-details { flex: 1; min-width: 0; }
 .player-name { font-size: 14px; line-height: 1.4; font-weight: 600; display: flex; align-items: center; gap: 7px; }
@@ -313,7 +313,7 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
           <label class="choice size-choice"><input type="radio" name="size" value="19"><strong>19×19</strong><small>完整棋盤</small></label>
         </div>
       </fieldset>
-      <p class="setup-note">黑棋先行 · 白棋貼 6.5 點 · 可隨時悔棋</p>
+      <p class="setup-note">黑棋先行 · 黑棋貼給白棋 6.5 點 · 可隨時悔棋</p>
       <div class="setup-summary" aria-live="polite" aria-atomic="true"><span>本局配置</span><strong id="setup-summary-text">單人對戰 · 高手 AI · 9×9</strong></div>
       <p id="new-warning" class="dialog-warning" hidden>開始新局會取代目前棋局。</p>
       <button id="new-submit" class="primary wide start-button" type="submit">確認配置，開始對局<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
@@ -323,7 +323,7 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
 
   <section id="game-view" class="game-view" aria-labelledby="board-title" hidden>
     <header class="game-heading">
-      <div><h1 id="board-title" tabindex="-1">9 × 9 棋盤</h1><div class="game-meta"><span id="game-mode">單人 · 對戰 AI</span><span class="meta-divider" aria-hidden="true"></span><span>白貼 6.5 點</span></div></div>
+      <div><h1 id="board-title" tabindex="-1">9 × 9 棋盤</h1><div class="game-meta"><span id="game-mode">單人 · 對戰 AI</span><span class="meta-divider" aria-hidden="true"></span><span>黑棋貼給白棋 6.5 點</span></div></div>
       <button id="new-btn" class="secondary-button" type="button" aria-label="新對局設定"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>新局設定</button>
     </header>
     <div class="game-layout">
@@ -348,7 +348,7 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
         </section>
         <section class="score-panel" id="score-panel" aria-label="計分" hidden>
           <h2 class="score-title" id="score-title">自動終局計分</h2><p class="score-guide" id="score-guide">雙方停著後，自動判斷兩方死子並結算。點選棋子可更正。</p>
-          <table class="score-table"><thead><tr><th scope="col">面積計分</th><th scope="col">黑棋</th><th scope="col">白棋</th></tr></thead><tbody><tr><th scope="row">盤上活子</th><td id="score-black-stones">0</td><td id="score-white-stones">0</td></tr><tr><th scope="row">所圍空地</th><td id="score-black-territory">0</td><td id="score-white-territory">0</td></tr><tr><th scope="row">判定死子（已扣除）</th><td id="score-black-dead">0</td><td id="score-white-dead">0</td></tr><tr><th scope="row">貼目</th><td>—</td><td>6.5</td></tr><tr class="total-row"><th scope="row">合計</th><td id="score-black-total">0</td><td id="score-white-total">6.5</td></tr></tbody></table>
+          <table class="score-table"><thead><tr><th scope="col">面積計分</th><th scope="col">黑棋</th><th scope="col">白棋</th></tr></thead><tbody><tr><th scope="row">盤上活子</th><td id="score-black-stones">0</td><td id="score-white-stones">0</td></tr><tr><th scope="row">所圍空地</th><td id="score-black-territory">0</td><td id="score-white-territory">0</td></tr><tr><th scope="row">判定死子（已扣除）</th><td id="score-black-dead">0</td><td id="score-white-dead">0</td></tr><tr><th scope="row">黑棋貼給白棋</th><td>—</td><td>+6.5</td></tr><tr class="total-row"><th scope="row">合計</th><td id="score-black-total">0</td><td id="score-white-total">6.5</td></tr></tbody></table>
           <div class="score-result" id="score-result">白棋暫領先 6.5 點</div><p class="score-footnote" id="score-footnote">本局自動辨識雙方死子。死活未定的棋塊可點選調整。</p>
           <div class="score-buttons"><button id="finish-btn" class="primary" type="button">重新自動判死</button><button id="resume-btn" class="action-button" type="button">返回對局</button></div>
         </section>
@@ -373,7 +373,7 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
   <li><strong>氣與提子</strong><p>棋子旁邊上下左右的空點叫「氣」。落子後，對方整塊棋若沒有氣，就會被提走。不可下在使自己無氣的位置；若能先提掉對方而獲得氣，則可以落子。</p></li>
   <li><strong>棋局不可重複</strong><p>本遊戲採全局同形禁著：落子後不得重現本局曾出現的棋盤。停一手不受此限，悔棋則會退回對應歷史。</p></li>
   <li><strong>結束對局與計分</strong><p>沒有想下的位置時可「停一手」。連續兩次停著後會自動判斷黑白死子、移除計分並公布勝負。點選整塊棋可修正死子並立即重算；若仍有爭議，可返回對局。</p></li>
-  <li><strong>以面積計勝負</strong><p>分數＝盤上活子＋只被己方包圍的空點；白棋另加 6.5 點。提子數不另外加分，共有空地不計。局面估算會先暫扣判出的死子；死活未定、劫爭與雙活需在結算時確認。</p></li>
+  <li><strong>以面積計勝負</strong><p>分數＝盤上活子＋只被己方包圍的空點。黑棋先行，因此黑棋貼給白棋 6.5 點，結算時加在白棋總分。提子數不另外加分，共有空地不計。局面估算會先暫扣判出的死子；死活未定、劫爭與雙活需在結算時確認。</p></li>
 </ol><div class="keyboard-note"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> 選點，<kbd>Enter</kbd> 落子<br><kbd>U</kbd> 悔棋　<kbd>P</kbd> 停一手　<kbd>N</kbd> 新局　<kbd>?</kbd> 規則<br>人機模式悔棋會退回你落子之前。手機可用雙指放大棋盤。</div><div class="ai-note"><strong>選擇適合你的 AI 難度</strong><p>入門採單步判斷；進階推演多手攻防；高手結合全盤模擬、死活閱讀與征子攻防，每手思考約 5 秒；完全離線，不需下載模型。</p><p>在「對局選項」可切換 AI 難度、顯示手數或估算局面。AI 思考時也能悔棋或開新局。</p></div><div class="dialog-bottom"><button type="button" class="primary" data-close="rules-dialog">知道了</button></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <noscript>請啟用瀏覽器的 JavaScript，便可開始這局圍棋。</noscript>
@@ -2739,6 +2739,9 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
   const { GoGame } = window.GoEngine;
   const $ = id => document.getElementById(id);
   const STORAGE_KEY = 'songfeng-go-v1';
+  const cloudMode = new URLSearchParams(location.search).get('starpath') === '1';
+  let cloudRepository = null, cloudRevision = 0, cloudEpoch = 0, cloudOwner = null;
+  let pendingCloudSave = null, cloudSaving = false, cloudReady = !cloudMode;
   const LETTERS = 'ABCDEFGHJKLMNOPQRST';
   const SIZE_NAMES = { 9: '9 × 9 棋盤', 13: '13 × 13 棋盤', 19: '19 × 19 棋盤' };
   const AI_LEVELS = {
@@ -2775,30 +2778,28 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
     });
   }
 
-  function loadGame() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const data = JSON.parse(raw);
-      if (!data || data.version !== 1 || !data.settings || data.started === false) return;
+  function restoreSave(data, label) {
+      if (!data || data.version !== 1 || !data.settings || data.started === false) throw new Error('棋局存檔格式無效。');
       const candidate = GoGame.restore(data.game);
-      if (![9, 13, 19].includes(candidate.size) || candidate.komi !== 6.5) return;
+      if (![9, 13, 19].includes(candidate.size) || candidate.komi !== 6.5) throw new Error('棋盤設定不支援。');
       const candidateSettings = {
         mode: data.settings.mode === 'local' ? 'local' : 'ai',
         difficulty: Object.hasOwn(AI_LEVELS, data.settings.difficulty) ? data.settings.difficulty : 'hard',
-        sound: data.settings.sound !== false,
-        numbers: data.settings.numbers === true,
-        territory: data.settings.territory === true
+        sound: data.settings.sound !== false, numbers: data.settings.numbers === true, territory: data.settings.territory === true
       };
       const candidateDead = new Set(candidate.phase === 'finished' ? candidate.finalScore.deadIndices :
         candidate.phase === 'scoring' ? candidate.estimate(Array.isArray(data.dead) ? data.dead : []).deadIndices : []);
       game = candidate; settings = candidateSettings; dead = candidateDead;
-      rebuildActions();
-      selected = game.lastMove === null ? Math.floor(game.board.length / 2) : game.lastMove;
-      // Legacy saves did not have a started marker. Their validated board is
-      // still eligible for continuation, including an empty, configured game.
-      hasGame = true;
-      $('save-note').textContent = '已找到本機存檔';
+      rebuildActions(); selected = game.lastMove === null ? Math.floor(game.board.length / 2) : game.lastMove;
+      hasGame = true; $('save-note').textContent = label;
+  }
+
+  function loadGame() {
+    try {
+      if (cloudMode) return;
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      restoreSave(JSON.parse(raw), '已找到本機存檔');
     } catch (_) {
       // Private mode, unavailable file-origin storage or invalid saves must not
       // stop the game. A fresh in-memory board remains usable.
@@ -2808,6 +2809,11 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
 
   function saveGame() {
     if (!hasGame || setupActive) return;
+    if (cloudMode) {
+      if (!cloudReady || !cloudRepository) return;
+      pendingCloudSave = JSON.parse(JSON.stringify({ version: 1, started: true, game: game.serialize(), settings, dead: Array.from(dead) }));
+      void flushCloudSave(); return;
+    }
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, started: true,
         game: game.serialize(), settings, dead: Array.from(dead) }));
@@ -2815,6 +2821,68 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
     } catch (_) {
       $('save-note').textContent = '此瀏覽器無法保存棋局';
     }
+  }
+
+  async function flushCloudSave() {
+    if (cloudSaving || !pendingCloudSave || !cloudRepository) return;
+    cloudSaving = true; const mine = cloudEpoch;
+    try {
+      while (pendingCloudSave && mine === cloudEpoch) {
+        const value = pendingCloudSave; pendingCloudSave = null;
+        try { const saved = await cloudRepository.saveGo(value, cloudRevision); if (mine !== cloudEpoch) return;
+          cloudRevision = saved.revision; $('save-note').textContent = '已保存到目前星途帳號';
+        } catch (error) { if (mine !== cloudEpoch) return;
+          pendingCloudSave = pendingCloudSave || value; $('save-note').textContent = error.message + '（棋局仍留在畫面，可重試或匯出。）'; return;
+        }
+      }
+    } finally { if (mine === cloudEpoch) cloudSaving = false; }
+  }
+
+  async function connectCloud() {
+    document.querySelector('.footer > span:first-child').textContent = '星途帳號 · 雲端棋局';
+    const cover = document.createElement('div'); cover.style.cssText = 'position:fixed;inset:0;z-index:9999;background:#faf7ed;color:#234047;display:grid;place-content:center;padding:24px;text-align:center';
+    cover.textContent = '正在載入目前星途帳號的棋局…'; document.body.append(cover);
+    const controls = document.createElement('div'); controls.style.cssText = 'display:flex;gap:12px;flex-wrap:wrap;padding:12px';
+    controls.setAttribute('aria-label', '星途棋局保存');
+    const retry = document.createElement('button'); retry.textContent = '重試雲端保存'; retry.onclick = () => void flushCloudSave();
+    const old = document.createElement('button'); old.textContent = '匯入此瀏覽器的舊棋局';
+    const download = document.createElement('button'); download.textContent = '匯出目前棋局';
+    controls.append(retry, old, download); document.body.append(controls);
+    download.onclick = () => { if (!hasGame) return;
+      const payload = { version: 1, started: true, game: game.serialize(), settings, dead: Array.from(dead) };
+      const url = URL.createObjectURL(new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+      const a = document.createElement('a'); a.href = url; a.download = 'starpath-go.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+    old.onclick = async () => {
+      const mine = cloudEpoch;
+      try { if (!cloudReady || !cloudRepository) throw new Error('請先登入星途。');
+        if (cloudRevision !== 0 || hasGame) throw new Error('已有星途棋局，保留現有資料；舊棋局尚未匯入。');
+        const raw = localStorage.getItem(STORAGE_KEY); if (!raw) throw new Error('此瀏覽器沒有舊棋局。');
+        const data = JSON.parse(raw); const candidate = GoGame.restore(data.game);
+        if (!window.confirm(`舊棋局為 ${candidate.size}×${candidate.size}，第 ${candidate.moveNumber} 手。確認複製至目前星途帳號？原本本機存檔會保留。`)) return;
+        const saved = await cloudRepository.importGo(data); if (mine !== cloudEpoch) return;
+        cloudRevision = saved.revision; restoreSave(data, '已匯入星途帳號'); buildBoardInputs(); openNewGame(false);
+      } catch (error) { if (mine === cloudEpoch) $('save-note').textContent = error.message; }
+    };
+    try {
+      if (parent === window || parent.location.origin !== location.origin || !parent.location.pathname.endsWith('/host/') || !parent.__starPathFirebase) throw new Error('請從星途帳號內開啟圍棋。');
+      const runtime = await parent.__starPathFirebase;
+      runtime.observeUser(async user => {
+        const uid = user?.uid ?? null; if (uid === cloudOwner && cloudOwner !== null) return;
+        cloudOwner = uid; const mine = ++cloudEpoch; cancelAI(); cloudReady = false; cloudRepository = null;
+        pendingCloudSave = null; cloudSaving = false; cloudRevision = 0; hasGame = enteredGame = false;
+        game = new GoGame(); settings = { mode: 'ai', difficulty: 'hard', sound: true, numbers: false, territory: false }; dead = new Set(); actions = []; clearAreaAnalysis();
+        buildBoardInputs(); openNewGame(false); cover.hidden = false; cover.style.display = 'grid';
+        if (!user) { cover.textContent = '請先登入星途帳號。'; return; }
+        cover.textContent = '正在載入目前星途帳號的棋局…'; cloudRepository = runtime.progress(user.uid);
+        try { const saved = await cloudRepository.loadGo(); if (mine !== cloudEpoch) return;
+          cloudRevision = saved.revision; if (saved.state) restoreSave(saved.state, '已載入目前星途帳號的棋局');
+          cloudReady = true; buildBoardInputs(); openNewGame(false); cover.style.display = 'none';
+        } catch (error) { if (mine !== cloudEpoch) return; cover.textContent = error.message;
+          const reload = document.createElement('button'); reload.textContent = '重新載入'; reload.onclick = () => location.reload(); cover.append(reload);
+        }
+      });
+    } catch (error) { cover.textContent = error.message; }
   }
 
   function clearAreaAnalysis() {
@@ -2927,23 +2995,23 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
   function drawStone(x, y, radius, color, opacity = 1) {
     ctx.save(); ctx.globalAlpha = opacity;
     ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2);
-    ctx.shadowColor = color === 1 ? 'rgba(0, 4, 12, .65)' : 'rgba(116, 183, 255, .18)';
+    ctx.shadowColor = 'rgba(49, 30, 12, .38)';
     ctx.shadowBlur = radius * .28;
     ctx.shadowOffsetX = 0; ctx.shadowOffsetY = radius * .12;
     const gradient = ctx.createRadialGradient(x - radius * .34, y - radius * .4, radius * .04, x, y, radius);
     if (color === 1) {
-      gradient.addColorStop(0, '#415369'); gradient.addColorStop(.3, '#253448');
-      gradient.addColorStop(.8, '#101724'); gradient.addColorStop(1, '#080e18');
+      gradient.addColorStop(0, '#55585e'); gradient.addColorStop(.3, '#24262a');
+      gradient.addColorStop(.8, '#101114'); gradient.addColorStop(1, '#08090a');
     } else {
-      gradient.addColorStop(0, '#ffffff'); gradient.addColorStop(.45, '#effaff');
-      gradient.addColorStop(.83, '#dceefa'); gradient.addColorStop(1, '#b0cde5');
+      gradient.addColorStop(0, '#ffffff'); gradient.addColorStop(.45, '#ffffff');
+      gradient.addColorStop(.83, '#eeefed'); gradient.addColorStop(1, '#d6d6d2');
     }
     ctx.fillStyle = gradient; ctx.fill(); ctx.shadowColor = 'transparent';
-    ctx.strokeStyle = color === 1 ? 'rgba(125, 175, 222, .72)' : 'rgba(230, 245, 255, .82)';
-    ctx.lineWidth = Math.max(.85, radius * .035); ctx.stroke();
+    ctx.strokeStyle = color === 1 ? '#050607' : '#706c61';
+    ctx.lineWidth = Math.max(1, radius * .04); ctx.stroke();
     ctx.beginPath();
     ctx.arc(x, y, radius * .88, Math.PI * 1.1, Math.PI * 1.72);
-    ctx.strokeStyle = color === 1 ? 'rgba(197, 225, 255, .13)' : 'rgba(255, 255, 255, .6)';
+    ctx.strokeStyle = color === 1 ? 'rgba(235, 240, 245, .2)' : 'rgba(255, 255, 255, .8)';
     ctx.lineWidth = Math.max(.6, radius * .025); ctx.stroke(); ctx.restore();
   }
 
@@ -2956,12 +3024,12 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
     ctx.setTransform(pixels / width, 0, 0, pixels / width, 0, 0);
     ctx.clearRect(0, 0, width, width);
     const boardGradient = ctx.createRadialGradient(width * .5, width * .42, 0, width * .5, width * .5, width * .72);
-    boardGradient.addColorStop(0, '#101c2c'); boardGradient.addColorStop(1, '#0c1523');
+    boardGradient.addColorStop(0, '#edd0a0'); boardGradient.addColorStop(1, '#d2a36c');
     ctx.fillStyle = boardGradient; ctx.fillRect(0, 0, width, width);
     const n = game.size, margin = width * .082, span = width - 2 * margin;
     const gap = span / (n - 1), radius = gap * .445;
     const xy = index => [margin + (index % n) * gap, margin + Math.floor(index / n) * gap];
-    ctx.strokeStyle = '#4e6c8b'; ctx.lineWidth = Math.max(.8, width / 950);
+    ctx.strokeStyle = '#795b36'; ctx.lineWidth = Math.max(.85, width / 950);
     ctx.beginPath();
     for (let i = 0; i < n; i++) {
       const pos = margin + i * gap;
@@ -2969,16 +3037,16 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
       ctx.moveTo(pos, margin); ctx.lineTo(pos, width - margin);
     }
     ctx.stroke();
-    ctx.strokeStyle = '#49617c'; ctx.lineWidth = Math.max(1, width / 750);
+    ctx.strokeStyle = '#624321'; ctx.lineWidth = Math.max(1.15, width / 750);
     ctx.strokeRect(margin, margin, span, span);
     const starOffset = n === 9 ? 2 : 3, center = (n - 1) / 2, starFar = n - 1 - starOffset;
     let stars = [[starOffset, starOffset], [starOffset, starFar], [center, center], [starFar, starOffset], [starFar, starFar]];
     if (n === 19) stars = [starOffset, center, starFar].flatMap(row => [starOffset, center, starFar].map(col => [row, col]));
-    ctx.fillStyle = '#65f4d2';
+    ctx.fillStyle = '#503718';
     for (const [row, col] of stars) {
       ctx.beginPath(); ctx.arc(margin + col * gap, margin + row * gap, Math.max(2, gap * .063), 0, Math.PI * 2); ctx.fill();
     }
-    ctx.fillStyle = '#8ba4bf'; ctx.font = `500 ${Math.max(8, Math.min(12, width * .02))}px ui-monospace, SFMono-Regular, Consolas, monospace`;
+    ctx.fillStyle = '#503718'; ctx.font = `600 ${Math.max(8, Math.min(12, width * .02))}px ui-monospace, SFMono-Regular, Consolas, monospace`;
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     for (let i = 0; i < n; i++) {
       const pos = margin + i * gap;
@@ -2990,9 +3058,9 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
         if (game.board[index] && !displayDead.has(index)) continue;
         const owner = lastScore.ownership[index]; if (!owner) continue;
         const [x, y] = xy(index), square = gap * .21;
-        ctx.fillStyle = owner === 1 ? 'rgba(16, 34, 61, .94)' : 'rgba(230, 245, 255, .92)';
+        ctx.fillStyle = owner === 1 ? '#171b20' : '#ffffff';
         ctx.fillRect(x - square / 2, y - square / 2, square, square);
-        ctx.strokeStyle = owner === 1 ? '#78b7ff' : '#b7d8f3'; ctx.lineWidth = .85;
+        ctx.strokeStyle = owner === 1 ? '#08090a' : '#706c61'; ctx.lineWidth = .85;
         ctx.strokeRect(x - square / 2, y - square / 2, square, square);
       }
     }
@@ -3003,7 +3071,7 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
       const [x, y] = xy(index), isDead = displayDead.has(index);
       drawStone(x, y, radius, color, isDead ? .32 : 1);
       if (isDead) {
-        const k = radius * .32; ctx.strokeStyle = '#ff728e'; ctx.lineWidth = Math.max(1.5, radius * .095);
+        const k = radius * .32; ctx.strokeStyle = '#98213f'; ctx.lineWidth = Math.max(1.5, radius * .095);
         ctx.beginPath(); ctx.moveTo(x - k, y - k); ctx.lineTo(x + k, y + k); ctx.moveTo(x - k, y + k); ctx.lineTo(x + k, y - k); ctx.stroke();
       } else if (settings.numbers && stoneNumbers.has(index)) {
         const label = String(stoneNumbers.get(index));
@@ -3033,7 +3101,7 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
     $('score-title').textContent = finished ? '對局結果' : preview ? '即時形勢評估' : '終局計分';
     let guide = '點選整塊死子，標記或取消；確認後完成計分。';
     if (finished) {
-      guide = '已自動判斷雙方死子、扣除死子後數空，並加上白棋貼目。點選整塊棋子可更正，勝負會立即重算。';
+      guide = '已自動判斷雙方死子並計分；黑棋貼給白棋的 6.5 點已加入白棋總分。點選整塊棋子可更正，勝負會立即重算。';
       if (scoringReview && scoringReview.edited) guide = '已依你的死子修正重新計分。可繼續點棋子調整，或重新自動判定。';
     }
     else if (preview) guide = analysis ? '已暫扣判出的死子；死活未定、劫爭與共活仍須確認。' :
@@ -3451,6 +3519,7 @@ noscript { display: block; margin: 20px; padding: 18px; border: 1px solid #855d5
   });
   window.addEventListener('pageshow', () => scheduleAI());
   loadGame(); buildBoardInputs(); openNewGame(false);
+  if (cloudMode) void connectCloud();
   if ('ResizeObserver' in window) new ResizeObserver(draw).observe($('board-frame'));
   else window.addEventListener('resize', draw);
 })();

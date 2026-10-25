@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "downloaded": "2026-10-24",
+  "asset": "Poly Haven Wood Floor",
+  "asset_id": "wood_floor",
+  "author": "Dimitrios Savva",
+  "asset_url": "https://polyhaven.com/a/wood_floor",
+  "api_metadata_url": "https://api.polyhaven.com/files/wood_floor",
+  "license": "CC0-1.0",
+  "license_url": "https://polyhaven.com/license",
+  "license_legalcode": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+  "resolution": "2K original download, not upscaled",
+  "normal_convention": "OpenGL",
+  "verified": true,
+  "assets": [
+    {
+      "map": "Diffuse",
+      "file": "wood_floor_diff_2k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_diff_2k.jpg",
+      "resolved_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_diff_2k.jpg",
+      "bytes": 2983667,
+      "sha256": "7c3ff1164c8dd0758ef2c048e9a266d28174120de01052ec40e6ca486177345c",
+      "upstream_md5": "d209b7416b022ed06093aef068c7fe23",
+      "upstream_size": 2983667,
+      "upstream_digest_verified": true,
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "format": "JPEG",
+      "mode": "RGB",
+      "content_type": "image/jpeg",
+      "recommended_color_space": "sRGB",
+      "modified": false
+    },
+    {
+      "map": "Normal OpenGL",
+      "file": "wood_floor_nor_gl_2k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_nor_gl_2k.jpg",
+      "resolved_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_nor_gl_2k.jpg",
+      "bytes": 1863576,
+      "sha256": "eff2e4db46bab930dc05997faf5085157eec4fd652cdfc6cd01fa11edd56ef10",
+      "upstream_md5": "e1d8a588c1fc3d62cc60da1e4cd1a689",
+      "upstream_size": 1863576,
+      "upstream_digest_verified": true,
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "format": "JPEG",
+      "mode": "RGB",
+      "content_type": "image/jpeg",
+      "recommended_color_space": "non-color",
+      "modified": false
+    },
+    {
+      "map": "Roughness",
+      "file": "wood_floor_rough_2k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_rough_2k.jpg",
+      "resolved_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_rough_2k.jpg",
+      "bytes": 2267559,
+      "sha256": "297eda0d75f2020cc541dbf242e1f5fd058053249567f49a4506fc2c5b1a172b",
+      "upstream_md5": "325868b3352d71059753498b1c94385b",
+      "upstream_size": 2267559,
+      "upstream_digest_verified": true,
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "format": "JPEG",
+      "mode": "L",
+      "content_type": "image/jpeg",
+      "recommended_color_space": "non-color",
+      "modified": false
+    }
+  ],
+  "scope": "Staged authentic source images only. No art/game files or preparation scripts modified. Final engine material integration and visual acceptance are separate."
+}

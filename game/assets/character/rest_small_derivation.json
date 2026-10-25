@@ -1,0 +1,16 @@
+{
+  "source": "game/assets/character/graduate.glb",
+  "source_sha256": "cef60f3c9b551cbdbbf6ad8e0e7967575b1e9b53e671375dc51395dad6cb5e4b",
+  "derived_asset": "graduate_rest_small.glb",
+  "authoring_tool": "tools/author_bench_rest.py --seat-top .208 --output game/assets/character/graduate_rest_small.glb",
+  "method": "Original-size Idle mesh with 12 editable seated morph samples; original-length two-bone leg IK, root-parented foot controls, raised low-seat lap draping, triangle-interior seat contact correction",
+  "animation_motion": "In-place pose; bench interaction controls world translation",
+  "forward_axis": "+Z",
+  "seat_top_metres": 0.208,
+  "avatar_scale": 1.0,
+  "mesh_parts": 27,
+  "materials": 11,
+  "triangles": 11874,
+  "morph_targets_per_part": 12,
+  "changes_original_character_assets": false
+}

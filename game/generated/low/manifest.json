@@ -1,0 +1,332 @@
+{
+	"admissions_scenery": {
+		"groups": [
+			"SM_Low_Studio_APCS",
+			"SM_Low_Studio_Architecture",
+			"SM_Low_Studio_Exterior",
+			"SM_Low_Studio_General",
+			"SM_Low_Studio_Lounge",
+			"SM_Low_Studio_Passport",
+			"SM_Low_Studio_Special"
+		],
+		"removed": {
+			"exterior_plant": 16.0,
+			"extra_pot": 52.0,
+			"micro_detail": 107.0,
+			"repeated_file": 21.0
+		},
+		"removed_tree_positions": [],
+		"retained_objects": 612.0,
+		"source_sha256": "481e96ae4f1a3e3fbff8fd316af641a2503ba7d283e78b607fd0081f63475100",
+		"triangles": 35520.0
+	},
+	"campus_miniatures": true,
+	"campus_modules_per_exhibit": 4.0,
+	"counseling_scenery": {
+		"colliders_retained": 17.0,
+		"groups": [
+			"SM_Counseling_GradeOneAssessment",
+			"SM_Counseling_GradeThreeAssessment",
+			"SM_Counseling_HighOneWoodChair",
+			"SM_Counseling_HighThreeWoodChair",
+			"SM_Counseling_OriginalDecor",
+			"SM_Counseling_OutsideGarden",
+			"SM_Counseling_SharedQuietSeating",
+			"SM_Counseling_StudioArchitecture"
+		],
+		"removed": {
+			"extra_small_plant": 29.0,
+			"micro_detail": 9.0,
+			"repeated_book": 45.0
+		},
+		"removed_tree_positions": [],
+		"retained_objects": 1087.0,
+		"runtime_triangles": 58470.0,
+		"seats_retained": 4.0,
+		"source_revision": "2026-10-24-counseling-studio-r8",
+		"source_sha256": "1bc9033c292515ddfa073284e5fac414c2742d5b3400f0037c579f328faa3abb",
+		"stations_retained": 3.0,
+		"texture_limit": 256.0,
+		"triangles": 111652.0
+	},
+	"discussion_scenery": {
+		"groups": [
+			"SM_Low_GardenConnections_campus",
+			"SM_Low_GardenConnections_career",
+			"SM_Low_GardenConnections_high_school",
+			"SM_Low_GardenConnections_major",
+			"SM_Low_GardenConnections_university",
+			"SM_Low_GardenGround",
+			"SM_Low_GardenHub",
+			"SM_Low_GardenLandscape",
+			"SM_Low_GardenRingWalk",
+			"SM_Low_Zone_campus",
+			"SM_Low_Zone_career",
+			"SM_Low_Zone_high_school",
+			"SM_Low_Zone_major",
+			"SM_Low_Zone_university"
+		],
+		"removed": {
+			"micro_detail": 720.0,
+			"repeated_plant": 752.0,
+			"repeated_tree": 26.0,
+			"secondary_building": 897.0
+		},
+		"removed_tree_positions": [
+			[
+				-5.30000019073486,
+				0.0,
+				-18.8099994659424
+			],
+			[
+				-5.30000019073486,
+				0.0,
+				-18.8099994659424
+			],
+			[
+				15.8391895294189,
+				0.0,
+				8.34385681152344
+			],
+			[
+				15.8391895294189,
+				0.0,
+				8.34385681152344
+			],
+			[
+				13.4448537826538,
+				0.0,
+				-11.8209962844849
+			],
+			[
+				13.4448537826538,
+				0.0,
+				-11.8209962844849
+			],
+			[
+				-17.7735328674316,
+				0.0,
+				-2.14512157440186
+			],
+			[
+				-17.7735328674316,
+				0.0,
+				-2.14512157440186
+			],
+			[
+				11.0,
+				0.569999992847443,
+				1.0
+			],
+			[
+				11.0,
+				0.569999992847443,
+				1.0
+			],
+			[
+				9.39999961853027,
+				0.550000011920929,
+				-38.5999984741211
+			],
+			[
+				9.39999961853027,
+				0.550000011920929,
+				-38.5999984741211
+			],
+			[
+				-16.0,
+				0.0,
+				-20.2000007629395
+			],
+			[
+				-16.0,
+				0.0,
+				-20.2000007629395
+			],
+			[
+				31.2207889556885,
+				0.0,
+				-25.4700298309326
+			],
+			[
+				31.2207889556885,
+				0.0,
+				-25.4700298309326
+			],
+			[
+				41.0047607421875,
+				0.0,
+				-6.29364013671875
+			],
+			[
+				41.0047607421875,
+				0.0,
+				-6.29364013671875
+			],
+			[
+				37.0051727294922,
+				0.0,
+				-22.5802383422852
+			],
+			[
+				37.0051727294922,
+				0.0,
+				-22.5802383422852
+			],
+			[
+				43.5606498718262,
+				0.0,
+				-7.43706512451172
+			],
+			[
+				43.5606498718262,
+				0.0,
+				-7.43706512451172
+			],
+			[
+				-22.3388290405273,
+				0.0,
+				2.54988670349121
+			],
+			[
+				-22.3388290405273,
+				0.0,
+				2.54988670349121
+			],
+			[
+				-43.9113235473633,
+				0.0,
+				27.647876739502
+			],
+			[
+				-43.9113235473633,
+				0.0,
+				27.647876739502
+			]
+		],
+		"retained_objects": 4711.0,
+		"source_sha256": "0a1e7cd3bfa0d79a1697400725fc5ae3c6c8cb663bf6c36ed1463ac8a8a1e5f4",
+		"triangles": 277853.0
+	},
+	"eligible_triangles_after": 1351756.0,
+	"eligible_triangles_before": 1965300.0,
+	"foliage": {
+		"keep_fraction": 0.35,
+		"leaf_components_after": 34599.0,
+		"leaf_components_before": 97768.0,
+		"meshes_reduced": 216.0,
+		"original_bounds_preserved": true
+	},
+	"message_devices": 40.0,
+	"ocean_triangles": {
+		"after": 9408.0,
+		"before": 29621.0,
+		"radius_after": 54.0,
+		"radius_before": 54.0
+	},
+	"recommendation_scenery": {
+		"animated_nodes": [
+			"OrreryOuterRing",
+			"OrreryInnerRing",
+			"OrreryOrbit",
+			"OrreryPlanetA",
+			"OrreryPlanetB"
+		],
+		"budget": 60000.0,
+		"bytes": 1742896.0,
+		"issues": [],
+		"materials": 13.0,
+		"profile": "low",
+		"source_sha256": "1d3d0d4fe7c45fa961b560e85248fa284cedcf5fc0a62e0a33b6164973714f9c",
+		"texture_max": 256.0,
+		"triangles": 31168.0,
+		"zones": {
+			"AnimatedInstrument": {
+				"nonmanifold_edges": 0.0,
+				"source_parts": 5.0,
+				"triangles": 1192.0
+			},
+			"Architecture": {
+				"nonmanifold_edges": 0.0,
+				"source_parts": 47.0,
+				"triangles": 1972.0
+			},
+			"CompareWorkbench": {
+				"nonmanifold_edges": 0.0,
+				"source_parts": 39.0,
+				"triangles": 2068.0
+			},
+			"CompassInlay": {
+				"nonmanifold_edges": 0.0,
+				"source_parts": 42.0,
+				"triangles": 2144.0
+			},
+			"DataWorkbench": {
+				"nonmanifold_edges": 0.0,
+				"source_parts": 22.0,
+				"triangles": 1024.0
+			},
+			"LibraryDetails": {
+				"nonmanifold_edges": 0.0,
+				"source_parts": 66.0,
+				"triangles": 2872.0
+			},
+			"NorthChart": {
+				"nonmanifold_edges": 0.0,
+				"source_parts": 83.0,
+				"triangles": 10496.0
+			},
+			"QuietSeats": {
+				"nonmanifold_edges": 0.0,
+				"source_parts": 42.0,
+				"triangles": 3048.0
+			},
+			"RecommendationWorkbench": {
+				"nonmanifold_edges": 0.0,
+				"source_parts": 64.0,
+				"triangles": 3064.0
+			},
+			"WorkChairs": {
+				"nonmanifold_edges": 0.0,
+				"source_parts": 51.0,
+				"triangles": 3288.0
+			}
+		}
+	},
+	"reduced_features": [
+		"trees",
+		"secondary_buildings",
+		"ships",
+		"fish",
+		"water_tessellation",
+		"micro_decoration"
+	],
+	"reduced_meshes": 195.0,
+	"removed_buildings": 18.0,
+	"removed_decor_nodes": 135.0,
+	"removed_features": [
+		"sakura_grove"
+	],
+	"retained_buildings": 30.0,
+	"retained_landscape_trees": 108.0,
+	"simplification_target": 0.5,
+	"texture_limit": 256.0,
+	"training_scenery": {
+		"computers_retained": 3.0,
+		"decor_targets_retained": 4.0,
+		"readable_books_retained": 13.0,
+		"removed_decor_groups": 25.0
+	},
+	"version": 3.0,
+	"walkable_collision_changed": false,
+	"water_life": {
+		"boat": {
+			"before": 7.0,
+			"retained": 2.0
+		},
+		"fish": {
+			"before": 102.0,
+			"retained": 21.0
+		}
+	}
+}

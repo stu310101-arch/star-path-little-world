@@ -1,0 +1,100 @@
+{
+  "reviewed_on": "2026-10-11",
+  "note": "短版導覽與美術線索參考官方資料重新編輯，附近生活亦結合原始文件。官方資料用於場所、教學資源與校區事實，不代表學生評價；五類完整正文仍保留使用者提供的 2026-10-09 文件及其年代、校區與個人經驗限制。",
+  "entries": {
+    "001": {
+      "summary": "沿椰林大道、湖畔與校史館認識臺大，再把公館日常與跨院學習連起來。",
+      "highlights": ["沿椰林大道尋找傅鐘與醉月湖", "探索公館書店和水源市場", "從校史與農業展館看多元學習"],
+      "sources": [
+        {"title": "臺大訪客中心・校園景點", "url": "https://visitorcenter.ntu.edu.tw/News_n_74842_sms_71209.html", "note": "官方景點列表列出椰林大道、傅鐘、醉月湖、校史館及農業陳列館；供短版導覽與特色縮景查考。"},
+        {"title": "臺大校友雙月刊・傅鐘造型與校園記憶", "url": "https://ntualumnibm.ntu.edu.tw/bm.bimonthly.article/detail/sn/9155", "note": "官方校友刊物描述傅鐘紅色四柱鐵架向外張開的造型、銅綠鐘身、圓形平台、八座短柱及台階，作為專用縮景的造型依據。"}
+      ],
+      "art_notes": [
+        {"modules": ["component_palm_avenue", "component_ntu_bell", "component_lake"], "statement": "以樹列、獨立鐘架與偏側湖景區分三個官方列出的校園景點；不重建真實間距或方位。", "source_urls": ["https://visitorcenter.ntu.edu.tw/News_n_74842_sms_71209.html"]},
+        {"modules": ["component_ntu_bell"], "statement": "傅鐘專用模型採紅色四柱向外伸展的鐘架、銅綠鐘體與圓形台座，搭配八座短柱及台階；依校友刊物描述保留辨識元素，比例仍作藝術化調整。", "source_urls": ["https://ntualumnibm.ntu.edu.tw/bm.bimonthly.article/detail/sn/9155"]}
+      ]
+    },
+    "003": {
+      "summary": "中興湖、實習商店與農業生命科學，連起臺中南區的綠地和日常。",
+      "highlights": ["沿中興湖與林蔭看校園生活", "從實習商店認識鮮乳與惠蓀咖啡", "走逛學府路與國光路生活圈"],
+      "sources": [
+        {"title": "中興大學國際事務處・校內設施", "url": "https://www.oia.nchu.edu.tw/index.php/zh/6-intl-guests-and-scholars-tw/6-6-campus-resources-tw/6-6-1-campus-resources-facilities-tw", "note": "官方設施介紹列出中興湖、實習商店及惠蓀堂；實習商店介紹包含興大鮮奶與惠蓀咖啡。品項資訊不作每日供應保證。"}
+      ],
+      "art_notes": [
+        {"modules": ["component_lake", "component_dairy_stall", "component_farm_plots"], "statement": "中興湖低平水面對照乳品商店與農業學習小景，形成湖岸、食品與教研三組不同輪廓。", "source_urls": ["https://www.oia.nchu.edu.tw/index.php/zh/6-intl-guests-and-scholars-tw/6-6-campus-resources-tw/6-6-1-campus-resources-facilities-tw"]}
+      ]
+    },
+    "006": {
+      "summary": "河岸、坡地與橋梁串起政大，指南路生活圈之外還有公共議題與跨域討論。",
+      "highlights": ["分清山上山下與渡賢橋動線", "沿指南路與景美溪看生活圈", "探索公共議題、語言與傳播"],
+      "sources": [
+        {"title": "政治大學校友服務中心・校園導覽", "url": "https://www.alumni.nccu.edu.tw/elearning/module/43", "note": "官方導覽介紹醉夢溪、渡賢橋、山上山下連結，以及綠瓦灰磚、四維堂和噴水池等校園空間。"}
+      ],
+      "art_notes": [
+        {"modules": ["component_terrace", "component_river", "component_bridge", "component_academic_block"], "statement": "以分層平台與跨河橋梁表現上下坡的校園動線；原文的景美溪、道南橋與官方導覽的醉夢溪、渡賢橋各保留名稱，不混成同一座真實橋。", "source_urls": ["https://www.alumni.nccu.edu.tw/elearning/module/43"]}
+      ]
+    },
+    "009": {
+      "summary": "曲面教堂、林蔭與牧場交織東海校園，創藝和乳品探索再接上東海別墅生活。",
+      "highlights": ["辨認路思義教堂四片上收曲面", "走訪創藝實習中心與乳品小棧", "比較校內用餐和東海別墅商圈"],
+      "sources": [
+        {"title": "東海大學・路思義教堂介紹", "url": "https://www.thu.edu.tw/web/about/detail.php?scid=89&sid=189", "note": "官方介紹四片分離曲面、脊部天窗及前後高度差，作為教堂縮景輪廓依據；模型仍為藝術化簡化。"},
+        {"title": "東海大學美術系・校園參訪路線", "url": "https://fineart.thu.edu.tw/web/visit/page.php?scid=44&sid=72", "note": "官方參訪路線連接教堂、陽光草皮、東海四十三號創藝實習中心與乳品小棧。"}
+      ],
+      "art_notes": [
+        {"modules": ["component_thu_chapel"], "statement": "東海專用教堂採四片分離、上收的曲面，保留脊部光隙與前後高低差；一般禮堂模組不共用此校特定輪廓。", "source_urls": ["https://www.thu.edu.tw/web/about/detail.php?scid=89&sid=189"]},
+        {"modules": ["component_tree_grove", "component_dairy_stall"], "statement": "樹列與乳品陳列對照教堂高輪廓；參訪與生活線索以少量模組表現，不宣稱是等比例校園。", "source_urls": ["https://fineart.thu.edu.tw/web/visit/page.php?scid=44&sid=72"]}
+      ]
+    },
+    "020": {
+      "summary": "海大的山海校園把海洋研究與生態觀察放在一起，課餘再往基隆港灣探索。",
+      "highlights": ["辨認倚山面海與龍崗生態景觀", "另排時間走訪正濱漁港與和平島", "從系所課程比較海洋與航運訓練"],
+      "sources": [
+        {"title": "臺灣海洋大學・關於海大", "url": "https://www.ntou.edu.tw/about", "note": "官方介紹校園與基隆港、山海地形及龍崗生態園區的關係，並列鄰近正濱漁港、和平島等周邊場域。"}
+      ],
+      "art_notes": [
+        {"modules": ["component_coast", "component_hill", "component_ship"], "statement": "岸線、山體和船舶各自形成清楚剪影；附近港灣作生活情境，不當作全部位於校內。", "source_urls": ["https://www.ntou.edu.tw/about"]}
+      ]
+    },
+    "025": {
+      "summary": "關渡山坡上的美術館與劇場串起北藝大創作日常，山下河岸提供另一段生活。",
+      "highlights": ["對照荒山劇場與關渡美術館", "從排練、作品和場館理解藝術學習", "比較山下關渡採買與晚間返校"],
+      "sources": [
+        {"title": "臺北藝術大學・官方校園地圖", "url": "https://admissionex.tnua.edu.tw/wp-content/uploads/2023/12/113_recruit_map.pdf", "note": "官方招生地圖標示荒山劇場、關渡美術館、戲劇廳、舞蹈廳、音樂廳與科技藝術館；地圖版本為113招生資料，保留其年代。"}
+      ],
+      "art_notes": [
+        {"modules": ["component_stage", "component_terrace", "component_gallery"], "statement": "露天劇場、階坡和開放展廊形成表演與美術兩翼；以官方場館名稱作辨識線索，不把平面位置當成最新精測資料。", "source_urls": ["https://admissionex.tnua.edu.tw/wp-content/uploads/2023/12/113_recruit_map.pdf"]}
+      ]
+    },
+    "056": {
+      "summary": "北醫在信義與雙和連結醫療、實驗和生醫資源，校區課程與都市生活各有安排。",
+      "highlights": ["按學系分清信義與雙和課程", "認識教學、醫院和生醫研究連結", "走看吳興街日常採買與用餐"],
+      "sources": [
+        {"title": "臺北醫學大學・高中生招生問答", "url": "https://prospective-students.tmu.edu.tw/zh-TW/page/qa_high_school", "note": "官方招生問答說明信義多元教學實驗、雙和教研與生醫科技大樓，以及雙和醫院及生醫資源連結；上課校區依學系課程不同。"}
+      ],
+      "art_notes": [
+        {"modules": ["component_hospital", "component_laboratory"], "statement": "醫療與實驗雙量體呈現跨專業連結；展台上的相鄰擺設是教學關係，不表示信義與雙和兩校區能步行跨越。", "source_urls": ["https://prospective-students.tmu.edu.tw/zh-TW/page/qa_high_school"]}
+      ]
+    },
+    "075": {
+      "summary": "臺科大在公館把工程實驗、數位製作與設計模型放進集中校園，生活圈緊接城市。",
+      "highlights": ["認識數位創作工坊的兩類3D列印", "比較工程實驗與設計模型製作", "沿公館街區安排用餐與採買"],
+      "sources": [
+        {"title": "臺科大數位創作工坊・3D列印概覽", "url": "https://ttda.ad.ntust.edu.tw/wiki/3D-Printing/Overview/", "note": "官方工坊資料介紹FDM與光固化3D列印設備；設備使用仍須依工坊與課程規範。"},
+        {"title": "臺科大材料科學與工程系・公用實驗室", "url": "https://mse.ntust.edu.tw/p/412-1019-249.php?Lang=zh-tw", "note": "官方公用實驗室頁列出3D列印實作場域，作為工程實作導覽補充。"}
+      ],
+      "art_notes": [
+        {"modules": ["component_3d_printer", "component_laboratory", "component_workshop"], "statement": "放大FDM龍門、噴頭、列印平台、線材盤與成形工件，旁設較小的光固化設備，呈現官方列出的兩種列印方式；實驗與模型工坊在側翼。造型是教學資源示意，不指認設備型號。", "source_urls": ["https://ttda.ad.ntust.edu.tw/wiki/3D-Printing/Overview/", "https://mse.ntust.edu.tw/p/412-1019-249.php?Lang=zh-tw"]}
+      ],
+      "module_cues": {
+        "official-ntust-printing": {
+          "feature": "3D列印設備",
+          "statement": "官方數位創作工坊介紹FDM與光固化3D列印設備；材料系亦列出3D列印實作場域。",
+          "source_urls": ["https://ttda.ad.ntust.edu.tw/wiki/3D-Printing/Overview/", "https://mse.ntust.edu.tw/p/412-1019-249.php?Lang=zh-tw"],
+          "context_scope": "learning_symbol",
+          "interpretation": "以FDM龍門、列印平台與小型光固化設備呈現官方教學資源；非機械手臂或特定設備型號的實測重建。"
+        }
+      }
+    }
+  }
+}

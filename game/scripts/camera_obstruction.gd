@@ -9,6 +9,7 @@ var decision_interval: float = .1
 var immediate_move_distance: float = 1.5
 var immediate_turn_cosine: float = .94
 var fade_speed: float = 5.0
+var subject_scale: float = 1.0
 var vegetation: RefCounted = Vegetation.new()
 var faded: Dictionary = {}
 var indexed_world: int = 0
@@ -32,6 +33,12 @@ var _last_forward: Vector3 = Vector3.ZERO
 var _ray_offsets: Array[Vector3] = [Vector3.ZERO,Vector3.ZERO,Vector3.ZERO,Vector3.ZERO]
 var _excluded: Array[RID] = []
 var _query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.new()
+
+func set_subject_scale(value: float) -> void:
+	subject_scale = value
+	immediate_move_distance = 1.5 * value
+	vegetation.set("subject_scale",value)
+	force_update()
 
 func set_active(value: bool) -> void:
 	if value == _active:
@@ -113,6 +120,8 @@ func register_region(region_root: Node) -> void:
 	if region_root is Node3D:
 		nodes.append(region_root)
 	for candidate: Node in nodes:
+		if _preserved_source(candidate):
+			continue
 		var canopy: bool = str(candidate.name).begins_with("SakuraTree_") or str(candidate.name).begins_with("sakura_")
 		if not canopy and not candidate.has_node("Foundation") and not candidate.has_meta("camera_visual_group"):
 			continue
@@ -128,7 +137,7 @@ func register_region(region_root: Node) -> void:
 			var mesh: MeshInstance3D = mesh_node as MeshInstance3D
 			# Imported canopy roots can also use the sakura_ prefix. Their
 			# enclosing authored tree group already owns the complete silhouette.
-			if mesh.mesh == null or _mesh_groups.has(mesh.get_instance_id()):
+			if mesh.mesh == null or _mesh_groups.has(mesh.get_instance_id()) or _preserved_source(mesh):
 				continue
 			members.append(weakref(mesh))
 			member_ids.append(mesh.get_instance_id())
@@ -146,6 +155,14 @@ func register_region(region_root: Node) -> void:
 		(region.groups as Array).append(id)
 		_rebuild_group(id)
 	force_update()
+
+func _preserved_source(node: Node) -> bool:
+	var ancestor: Node=node
+	while ancestor != null:
+		if ancestor.has_meta("world_architecture_source_preserved") or ancestor.has_meta("street_furniture_source_preserved"):
+			return true
+		ancestor=ancestor.get_parent()
+	return false
 
 func unregister_region(region_root: Node) -> void:
 	if not is_instance_valid(region_root):
@@ -169,8 +186,8 @@ func stats() -> Dictionary:
 func _decide(world: Node3D,camera: Camera3D,aim: Vector3) -> void:
 	_obstructing.clear()
 	var eye: Vector3 = camera.global_position
-	var upper_aim: Vector3 = aim+camera.global_basis.y*.35
-	var candidates: Array[int] = _grid.call("query",eye,upper_aim,.36)
+	var upper_aim: Vector3 = aim+camera.global_basis.y*.35*subject_scale
+	var candidates: Array[int] = _grid.call("query",eye,upper_aim,.36*subject_scale)
 	candidate_count = 0
 	for group_id: int in candidates:
 		var group: Dictionary = _groups[group_id]
@@ -186,9 +203,9 @@ func _decide(world: Node3D,camera: Camera3D,aim: Vector3) -> void:
 			if blocked:
 				_mark_group(group)
 				break
-	_ray_offsets[1] = camera.global_basis.x*.24
+	_ray_offsets[1] = camera.global_basis.x*.24*subject_scale
 	_ray_offsets[2] = -_ray_offsets[1]
-	_ray_offsets[3] = camera.global_basis.y*.35
+	_ray_offsets[3] = camera.global_basis.y*.35*subject_scale
 	_query.collision_mask = 8
 	_query.hit_from_inside = true
 	_query.hit_back_faces = true

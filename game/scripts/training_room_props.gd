@@ -25,7 +25,7 @@ func configure(host: Node3D, art: Node3D, interactions: Node, layout: Dictionary
 	router = interactions
 	name = "FurnitureActions"
 	router.connect("custom_action", _activate)
-	_register("projector", "開關單字王投影", _vec(layout.get("device", [.65,.034,-.8]) as Array), 1.85, "projector")
+	_register("wordking_website", "進入單字王（開啟瀏覽器）", _vec(layout.get("device", [.65,.034,-.8]) as Array), 1.85, "wordking")
 	for row: Dictionary in layout.get("computers", []):
 		var id: String = str(row.get("id", "computer_%d" % screens.size()))
 		var node: Node3D = _part(str(row.get("node_name", "")))
@@ -34,7 +34,7 @@ func configure(host: Node3D, art: Node3D, interactions: Node, layout: Dictionary
 		screens[id] = node
 		# Computer actions belong to their explicitly assigned chair. Keeping
 		# a second E target here would steal the nearby chair's sit action.
-	_build_doors(layout.get("cabinet_doors", []) as Array)
+	# Cabinet doors stay in their authored closed transform, with no E target.
 	for row: Dictionary in layout.get("decor_targets", []):
 		var id: String = str(row.get("id", "decor_%d" % targets.size()))
 		var kind: String = str(row.get("kind", "decoration"))
@@ -71,41 +71,14 @@ func _register(id: String, label: String, point: Vector3, radius: float, kind: S
 	point.y = float((room.get("layout") as Dictionary).get("floor_y", .0375)) + .035
 	router.call("register_target", {"id":id,"kind":"custom","label":label,"position":point,"radius":radius,"collider_name":details.get("collider_name", "__none")})
 
-func _build_doors(rows: Array) -> void:
-	for row: Dictionary in rows:
-		var door: Node3D = _part(str(row.get("node_name", "")))
-		if door == null:
-			continue
-		var pivot: Node3D = Node3D.new()
-		pivot.name = "CabinetHinge_%02d" % door_pivots.size()
-		pivot.position = _vec(row.get("hinge", [0,0,0]) as Array)
-		add_child(pivot)
-		door.reparent(pivot, true)
-		door_pivots.append(pivot)
-		door_angles.append(float(row.get("open_angle", deg_to_rad(-85.0))))
-		# Both tiers open together; every bay offers the same cabinet action.
-		_register("cabinet_%02d" % door_pivots.size(), "開關展示櫃門", _vec(row.get("approach", [6,.04,-3.6]) as Array), 1.55, "cabinet", row)
-
 func _activate(id: String) -> void:
 	if not targets.has(id):
 		return
 	var row: Dictionary = targets[id] as Dictionary
 	var details: Dictionary = row.details as Dictionary
 	match str(row.kind):
-		"projector":
-			projector_on = not projector_on
-			for part: Node in model.find_children("SM_Device_Hologram*", "MeshInstance3D", true, false):
-				(part as Node3D).visible = projector_on
-			var effect: Node3D = room.get_node_or_null("WordKingProjection") as Node3D
-			if effect != null:
-				effect.visible = projector_on
-		"cabinet":
-			if door_tween != null and door_tween.is_running():
-				return
-			cabinet_open = not cabinet_open
-			door_tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-			for index: int in range(door_pivots.size()):
-				door_tween.tween_property(door_pivots[index], "rotation:y", door_angles[index] if cabinet_open else 0.0, .7)
+		"wordking":
+			room.call("open_wordking")
 		"lamp":
 			lamp_on = not lamp_on
 			if lamp_light != null:

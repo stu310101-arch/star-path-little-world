@@ -301,7 +301,6 @@ else:
             box('DISPLAY | inset ceiling light',(6.22,y,z+1.27),(.045,1.45,.017),M['white'],C['display'],.006)
     box('DISPLAY | canopy',(6.1,1.8,3.18),(1.1,5.53,.35),M['black'],C['display'],.033)
     label('DISPLAY | Genshin brand','GENSHIN IMPACT',(5.526,1.8,3.19),.24,M['white'],C['display'],(math.pi/2,0,-math.pi/2))
-    label('DISPLAY | reserve caption','原神角色展示區',(5.53,1.8,2.965),.13,M['cyan'],C['display'],(math.pi/2,0,-math.pi/2))
 
     # Both reference zones angle gently toward the central entrance.
     bpy.context.view_layer.update()

@@ -1,0 +1,68 @@
+{
+  "fishing_boat": {
+    "triangles": 16290,
+    "source_objects": 190,
+    "dimensions_m": [
+      2.9600000381469727,
+      8.22726821899414,
+      5.243586540222168
+    ],
+    "origin": "waterline, centered plan; Godot +Z bow",
+    "materials": [
+      "MAT_Vessel_Antifouling",
+      "MAT_Vessel_AtlanticPaint",
+      "MAT_Vessel_DarkGalvanized",
+      "MAT_Vessel_MarineGlazing",
+      "MAT_Vessel_NavigationGreen",
+      "MAT_Vessel_NavigationRed",
+      "MAT_Vessel_NonSlipDeck",
+      "MAT_Vessel_OiledTeak",
+      "MAT_Vessel_RubberFender",
+      "MAT_Vessel_SafetyOchre",
+      "MAT_Vessel_WarmEnamel"
+    ]
+  },
+  "tugboat": {
+    "triangles": 23372,
+    "source_objects": 406,
+    "dimensions_m": [
+      6.691874027252197,
+      17.195056915283203,
+      9.699999809265137
+    ],
+    "origin": "waterline, centered plan; Godot +Z bow",
+    "materials": [
+      "MAT_Vessel_Antifouling",
+      "MAT_Vessel_AtlanticPaint",
+      "MAT_Vessel_DarkGalvanized",
+      "MAT_Vessel_MarineGlazing",
+      "MAT_Vessel_NonSlipDeck",
+      "MAT_Vessel_OiledTeak",
+      "MAT_Vessel_RubberFender",
+      "MAT_Vessel_SafetyOchre",
+      "MAT_Vessel_WarmEnamel"
+    ]
+  },
+  "liner": {
+    "triangles": 31058,
+    "source_objects": 1008,
+    "dimensions_m": [
+      10.154213905334473,
+      36.10707092285156,
+      13.1899995803833
+    ],
+    "origin": "waterline, centered plan; Godot +Z bow",
+    "materials": [
+      "MAT_Vessel_Antifouling",
+      "MAT_Vessel_AtlanticPaint",
+      "MAT_Vessel_DarkGalvanized",
+      "MAT_Vessel_MarineGlazing",
+      "MAT_Vessel_NonSlipDeck",
+      "MAT_Vessel_OiledTeak",
+      "MAT_Vessel_RubberFender",
+      "MAT_Vessel_SafetyOchre",
+      "MAT_Vessel_WarmEnamel"
+    ]
+  },
+  "total_triangles": 70720
+}

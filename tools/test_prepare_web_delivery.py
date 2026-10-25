@@ -41,13 +41,18 @@ class BootDeliveryBuildTests(unittest.TestCase):
 
     def test_interior_is_not_startup_and_cannot_be_required_by_startup(self):
         manifest = {"version":1,"packs":{"outside":{"bytes":4000,"url":"packs/outside.pck"},
-                     "training_room":{"bytes":4096,"url":"packs/room.pck","startup":False}}}
+                     "training_room":{"bytes":4096,"url":"packs/room.pck","startup":False},
+                     "university_hall":{"bytes":8192,"url":"packs/university.pck","startup":False}}}
         target = self.root / "index.packs.json"
         target.write_text(json.dumps(manifest), encoding="utf-8")
         self.assertEqual(verify_background_budget(self.root), 4000)
         self.build()
         self.assertNotIn("transport.enqueue(", (self.root / "index.html").read_text(encoding="utf-8"))
         manifest["packs"]["outside"]["dependencies"] = ["training_room"]
+        target.write_text(json.dumps(manifest), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "on-demand"):
+            verify_background_budget(self.root)
+        manifest["packs"]["outside"]["dependencies"] = ["university_hall"]
         target.write_text(json.dumps(manifest), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "on-demand"):
             verify_background_budget(self.root)

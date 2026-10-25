@@ -2,6 +2,14 @@ extends SceneTree
 
 const Loader = preload("res://scripts/web_packs.gd")
 
+class BudgetPlayer:
+	extends Node
+	var controls_enabled: bool = false
+
+class BudgetScene:
+	extends Node
+	var player: BudgetPlayer
+
 # Exercise the same FileAccess allocation on native without spoofing Web.
 # The framing cases below must still reject short/oversize/corrupted bodies
 # even though the temporary file already has the expected final length.
@@ -25,6 +33,13 @@ class RequestTracingLoader extends PreallocatingLoader:
 	func _request_pack(id: String, priority: int) -> void:
 		requests.append(id)
 		super._request_pack(id, priority)
+
+class ProgressTracingLoader extends Loader:
+	var background_snapshots: int = 0
+
+	func _refresh_background_status() -> void:
+		background_snapshots += 1
+		super._refresh_background_status()
 
 # Exercise actual HTTPClient wire framing, especially EOF without Content-Length.
 # Web uses that mode even when Fetch receives a Content-Length response header.
@@ -133,6 +148,15 @@ func run() -> void:
 	var loader: PreallocatingLoader = PreallocatingLoader.new()
 	root.add_child(loader)
 	loader.call("configure", manifest, "http://127.0.0.1:8947/build/pack-fixtures/", fixture_dir.path_join("downloads"))
+	var scene: BudgetScene = BudgetScene.new()
+	scene.player = BudgetPlayer.new()
+	scene.add_child(scene.player)
+	root.add_child(scene)
+	current_scene = scene
+	loader._mobile_web = true
+	loader._update_work_budget()
+	check(float(loader.get_status().download_work_budget_ms) == 8.0, "mobile startup keeps fast ingestion while input is gated")
+	scene.player.controls_enabled = true
 	check(not bool(loader.call("is_resource_ready", b)), "deferred resource starts unavailable")
 	check(not bool(loader.call("all_resources_ready")), "complete game remains gated before startup download")
 	check(bool(loader.call("is_resource_ready", "res://boot.txt")), "boot path is ready")
@@ -155,6 +179,11 @@ func run() -> void:
 	check(FileAccess.file_exists(c), "retry mounts validated pack")
 	check(int((loader.call("get_status") as Dictionary).ready_packs) == 3, "three packs mounted exactly once")
 	check(int((loader.call("get_status") as Dictionary).max_download_frame_bytes) <= 4194304, "download writes remain bounded to 4 MiB per frame")
+	check(int(loader.get_status().max_download_frame_bytes) <= 524288, "mobile gameplay transfers and hashes real HTTP packs within 512 KiB per frame")
+	check(float(loader.get_status().download_work_budget_ms) == 2.0, "mobile gameplay yields to rendering after bounded hash work")
+	scene.player.controls_enabled = false
+	loader._update_work_budget()
+	check(float(loader.get_status().download_work_budget_ms) == 8.0, "gated input restores startup transfer budget")
 	loader.call("start_all_downloads")
 	check(bool(loader.call("all_resources_ready")), "startup readiness requires every pack mounted")
 	var timings: Dictionary = (loader.call("get_status") as Dictionary).pack_timings
@@ -162,6 +191,8 @@ func run() -> void:
 		check(int(timings[id].verified_ms) - int(timings[id].received_ms) < 100, "incremental SHA needs no second full-file frame sweep for " + id)
 	check_preallocation(loader)
 	loader.queue_free()
+	current_scene = null
+	scene.queue_free()
 	await process_frame
 	await check_mounting_retry()
 	await check_http_framing()
@@ -170,21 +201,41 @@ func run() -> void:
 	quit(0 if failures.is_empty() else 1)
 
 func check_indoor_startup_partition() -> void:
-	var loader: Loader = Loader.new()
+	var loader: ProgressTracingLoader = ProgressTracingLoader.new()
 	root.add_child(loader)
 	loader.set_process(false)
-	var manifest: Dictionary = {"packs":{"outside":{"url":"outside.pck", "bytes":100, "dependencies":[]}, "training_room":{"url":"inside.pck", "bytes":200, "dependencies":["outside"], "startup":false}}, "resources":{"res://inside.res":"training_room"}}
+	var manifest: Dictionary = {"packs":{"outside":{"url":"outside.pck", "bytes":100, "dependencies":[]}, "training_room":{"url":"inside.pck", "bytes":200, "dependencies":["outside"], "startup":false}, "university_hall":{"url":"university.pck", "bytes":400, "dependencies":["outside"], "startup":false}}, "resources":{"res://inside.res":"training_room", "res://atrium.glb":"university_hall"}}
 	loader.configure(manifest, "http://127.0.0.1:8947/", fixture_dir.path_join("partition"))
 	loader.start_all_downloads()
 	check(loader._queue.has("outside") and not loader._queue.has("training_room"), "startup excludes complete indoor pack")
+	check(not loader._queue.has("university_hall"), "startup does not request university hall meshes")
+	loader._states["outside"] = "downloading"
+	loader._current = "outside"
+	loader._downloaded_bytes = 40
+	check(int(loader.get_startup_status().network_received_bytes) == 40, "light HUD reports active startup download bytes")
+	check(loader.background_snapshots == 1, "pending startup refreshes background transfer progress")
+	loader._current = ""
 	loader._states["outside"] = "ready"
 	check(loader.all_resources_ready(), "unrequested indoor detail does not block roaming")
+	loader.background_snapshots = 0
+	var progress_stable: bool = true
+	for tick: int in range(100):
+		var progress: Dictionary = loader.get_startup_status()
+		progress_stable = progress_stable and progress.all_ready and int(progress.network_received_bytes) == 100
+	check(progress_stable, "completed startup progress stays ready across repeated HUD polls")
+	check(loader.background_snapshots == 0, "completed gameplay HUD makes no background snapshot calls")
+	check(not loader.get_startup_status().has("pack_timings"), "gameplay progress does not copy diagnostic histories")
 	loader._errors["training_room"] = "fixture failure"
+	loader._errors["university_hall"] = "university fixture failure"
 	check(loader.startup_error().is_empty(), "indoor failure does not block outdoor play")
 	loader._errors.clear()
 	loader.request_resource("res://inside.res", 200)
 	check(loader._queue.has("training_room"), "indoor entry requests its complete pack")
-	check(int(loader.get_status().total_bytes) == 100 and int(loader.get_status().all_pack_bytes) == 300, "startup progress excludes on-demand bytes")
+	check(not loader._queue.has("university_hall"), "training entry keeps university hall deferred")
+	check(loader.get_startup_status().all_ready and loader.background_snapshots == 0, "on-demand room request preserves ready outdoor progress without snapshots")
+	loader.request_resource("res://atrium.glb", 200)
+	check(loader._queue.has("university_hall"), "university entry requests its complete model pack")
+	check(int(loader.get_status().total_bytes) == 100 and int(loader.get_status().all_pack_bytes) == 700, "startup progress excludes on-demand bytes")
 	check(str(loader.get_resource_progress("res://inside.res").phase) == "queued", "indoor progress distinguishes queued phase")
 	loader.free()
 

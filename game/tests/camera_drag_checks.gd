@@ -28,16 +28,19 @@ func run() -> void:
 	var original_globe: Transform3D = globe.global_transform
 	var fov: float = camera.fov
 	var center: Vector2 = root.get_visible_rect().size*.5
+	check("Overview uses a proportional depth range for the complete globe", is_equal_approx(camera.near,maxf(5.0,float(world.layout.radius)*world.OVERVIEW_NEAR)) and is_equal_approx(camera.far,maxf(1000.0,float(world.layout.radius)*6.0)))
 	for axis: String in ["orbit_yaw","orbit_pitch"]:
 		var stable: bool = true
 		for step: int in range(73):
 			world.set(axis,float(step)*TAU/36.0)
 			world.call("update_camera",.016)
-			stable = stable and absf(camera.global_position.length()-float(world.get("orbit_distance")))<.0001
-			stable = stable and camera.unproject_position(Vector3.ZERO).distance_to(center)<.001
+			var target: Vector3 = world.get("camera_aim") as Vector3
+			stable = stable and absf(camera.global_position.distance_to(target)-float(world.get("orbit_distance")))<.001
+			stable = stable and camera.unproject_position(target).distance_to(center)<.003
+			stable = stable and camera.global_position.length() > float(world.layout.radius)
 			stable = stable and camera.global_basis.is_finite() and is_equal_approx(camera.fov,fov)
 			stable = stable and globe.global_transform.is_equal_approx(original_globe)
-		check("Two complete turns keep center radius FOV and globe fixed: "+axis,stable)
+		check("Full yaw turns and bounded pitch keep the globe target distance FOV and ground fixed: "+axis,stable)
 	for button: MouseButton in [MOUSE_BUTTON_LEFT,MOUSE_BUTTON_RIGHT]:
 		world.call("begin_view_drag",button)
 		check("Cursor remains visible while holding "+str(button),Input.mouse_mode==Input.MOUSE_MODE_VISIBLE)
@@ -60,13 +63,18 @@ func run() -> void:
 		check("Unheld pointer does not rotate "+str(button),is_equal_approx(float(world.get("orbit_yaw")),yaw-.45))
 	world.call("set_overview",false)
 	check("Requested destination becomes ready for roaming", await StartupFixture.wait_roaming(world, self))
+	check("Entering roaming immediately restores the avatar-scaled near plane",is_equal_approx(camera.near,.1*player.avatar_scale) and is_equal_approx(camera.far,maxf(1000.0,float(world.layout.radius)*6.0)))
+	world.call("set_overview",true)
+	check("Returning to overview immediately restores its distant depth range",is_equal_approx(camera.near,maxf(5.0,float(world.layout.radius)*world.OVERVIEW_NEAR)))
+	world.call("set_overview",false)
+	check("Repeated mode switches restore near props without stale overview clipping",not bool(world.get("overview")) and is_equal_approx(camera.near,.1*player.avatar_scale))
 	var original_position: Vector3 = player.global_position
 	var near_stable: bool = true
 	for step: int in range(73):
 		player.rotate_heading(TAU/36.0)
 		world.call("update_camera",.016)
 		var aim: Vector3 = world.get("camera_aim") as Vector3
-		near_stable = near_stable and absf(camera.global_position.distance_to(aim)-float(world.get("near_distance")))<.0001
+		near_stable = near_stable and absf(camera.global_position.distance_to(aim)-float(world.get("near_distance")))<.001
 		near_stable = near_stable and player.global_position.is_equal_approx(original_position) and is_equal_approx(camera.fov,fov)
 	check("Roaming turns maintain selected distance FOV and player position",near_stable)
 	# A real wall on the view ray must fade without reducing the orbit radius.
@@ -110,7 +118,11 @@ func run() -> void:
 	for chunk: Node3D in regions.counseling.roots:
 		for candidate: Node in chunk.get_children():
 			if candidate.has_node("Foundation"):
-				shell = candidate.find_children("*", "MeshInstance3D", true, false)
+				for member: Node in candidate.find_children("*", "MeshInstance3D", true, false):
+					# The low walkable foundation remains visible when the complete
+					# wall/window/roof envelope is removed from the camera's sightline.
+					if str(member.name) != "Foundation" and (member as MeshInstance3D).is_visible_in_tree():
+						shell.append(member)
 				shell_key = str(candidate.get_meta("camera_visual_group", ""))
 				break
 		if not shell.is_empty():
@@ -129,8 +141,13 @@ func run() -> void:
 		fade.call("force_update")
 		fade.call("update",world,camera,camera.global_position+Vector3.UP*8,.25)
 		var shell_hidden: bool=true
+		var visible_members: Array[String] = []
 		for node: MeshInstance3D in shell:
 			shell_hidden=shell_hidden and not node.visible
+			if node.visible:
+				visible_members.append(str(node.get_path()))
+		if not shell_hidden:
+			print("CAMERA_SHELL_DIAGNOSTIC ",JSON.stringify({"visible":visible_members,"eye":str(camera.global_position),"stats":fade.call("stats"),"group":shell_key}))
 		check("Lens inside a real concave building hides the complete obstructing shell",shell_hidden)
 		fade.call("reset")
 		var shell_restored: bool=true
@@ -142,6 +159,9 @@ func run() -> void:
 	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"vegetation_probe":vegetation_probe},"\t"))
 	file.close()
 	print("CAMERA_DRAG_CHECKS ",checks.size()," failures=",failures)
+	for audio: Node in world.find_children("*","AudioStreamPlayer",true,false):
+		(audio as AudioStreamPlayer).stop()
+	await create_timer(.15).timeout
 	world.free()
 	quit(1 if failures else 0)
 

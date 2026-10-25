@@ -8,20 +8,30 @@ from pathlib import Path
 import hashlib
 import json
 import shutil
-from fontTools import subset
-from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parents[1]
 GAME = ROOT / "game"
 SOURCE = GAME / "assets/fonts/NotoSansTC.ttf"
 DEST = GAME / "assets/fonts/web"
 
-def build():
+def collect_characters(game=GAME):
+    """Include long-form university JSON alongside the visible UI strings."""
     chars = set(range(32, 127)) | {0x3000, 0xfffd}
     for folder in ("scripts", "scenes", "data", "tools", "generated"):
-        for file in (GAME / folder).rglob("*"):
+        for file in (game / folder).rglob("*"):
             if file.suffix in (".gd", ".json", ".tscn", ".tres"):
                 chars.update(map(ord, file.read_text(encoding="utf-8")))
+    # Authored rooms carry station and furniture labels beside their GLB.
+    for file in (game / "assets").rglob("*.json"):
+        chars.update(map(ord, file.read_text(encoding="utf-8")))
+    return chars
+
+
+def build():
+    from fontTools import subset
+    from fontTools.ttLib import TTFont
+
+    chars = collect_characters()
     font = TTFont(SOURCE, recalcTimestamp=False)
     cmap = font.getBestCmap()
     selected = chars & set(cmap)

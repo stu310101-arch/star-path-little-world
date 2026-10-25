@@ -1,9 +1,12 @@
 (function () {
   'use strict';
-  const mobile = /Android|iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const mobile = /Android|iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) || (navigator.maxTouchPoints > 0 && Boolean(window.matchMedia?.('(any-pointer: coarse)').matches));
   const here = new URL(location.href);
   const mobilePath = /\/mobile\/(?:index\.html)?$/.test(here.pathname);
   const choice = here.searchParams.get('renderer');
+  // Preserve an explicit mobile preference even if this GPU needs desktop
+  // texture compression. Gameplay quality and input are not texture formats.
+  window.LittleWorldMobileMode = mobile || choice === 'mobile';
   // User agent alone is insufficient (desktop-mode phones and emulators).
   // Probe the actual GPU formats before choosing the ETC2-only package.
   let etc2 = false;
@@ -30,7 +33,12 @@
       const root = new URL(mobilePath ? '../' : './', here);
       await Promise.race([
         (async () => {
-          await navigator.serviceWorker.register(new URL('index.service-worker.js', root), {scope:root.pathname});
+          const registration = await navigator.serviceWorker.register(new URL('index.service-worker.js', root), {scope:root.pathname});
+          const activate = () => registration.waiting?.postMessage({type:'little-world-activate-before-start'});
+          // The worker accepts activation only when this is the sole game tab;
+          // other running games retain their existing release until closed.
+          activate();
+          if (registration.installing) registration.installing.addEventListener('statechange', activate);
           await navigator.serviceWorker.ready;
           if (!navigator.serviceWorker.controller) await new Promise(resolve => navigator.serviceWorker.addEventListener('controllerchange', resolve, {once:true}));
         })(),

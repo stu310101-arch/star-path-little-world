@@ -20,11 +20,13 @@ func place_at(point: Vector3, facing: Vector3 = Vector3.FORWARD) -> void:
 	needs_settle = true
 	last_safe_position = point
 	finish_entry()
+	reset_render_interpolation()
 
 func rotate_heading(angle: float) -> void:
 	heading = heading.rotated(Vector3.UP, angle).normalized()
 
 func _physics_process(delta: float) -> void:
+	_render_previous = global_transform
 	if entering or is_resting:
 		return
 	if not Input.is_action_pressed("jump"):
@@ -36,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	var axis: Vector2 = Vector2.ZERO
 	var running: bool = false
 	if controls_enabled:
-		axis = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+		axis = Input.get_vector("move_left", "move_right", "move_forward", "move_back", 0.0)
 		running = Input.is_action_pressed("run")
 	if allow_test_input:
 		axis = test_direction
