@@ -3,7 +3,7 @@ extends RefCounted
 ## 每一站固定三個選項；需要驗證真實操作的前兩站由主場景檢查。
 
 static func stations() -> Array[Dictionary]:
-	return [
+	var items: Array[Dictionary] = [
 		{
 			"title": "01 起步與跳躍", "short": "WASD / Shift / Space", "color": "#82cb80",
 			"lesson": "龍：先在方塊草地走一走！WASD 移動、Shift 跑步、空白鍵跳躍。手機可用畫面上的方向鍵和跳躍鈕。星途世界的角色也會走、跑、跳；碰到阻擋物要繞路。",
@@ -110,3 +110,4 @@ static func stations() -> Array[Dictionary]:
 			"answer": 1, "tip": "全數完成會點亮龍的畢業星冠；可反覆重玩這個教學。"
 		}
 	]
+	return items
