@@ -16,6 +16,7 @@ var player: CharacterBody3D
 var dragon_visual: Node3D
 var left_wing: Node3D
 var right_wing: Node3D
+var crown_root: Node3D
 var camera: Camera3D
 var camera_yaw: float = 0.0
 var camera_pitch: float = 0.55
@@ -240,6 +241,13 @@ func _create_dragon() -> void:
 	dragon_visual.add_child(right_wing)
 	_cube(right_wing, "RightWing", Vector3(.74, .08, 0), Vector3(1.45, .22, .95), Color("#168d81"))
 	_cube(right_wing, "RightWingTip", Vector3(1.43, .17, -.19), Vector3(.65, .2, .7), Color("#76d7ba"))
+	crown_root = Node3D.new()
+	crown_root.name = "DragonGraduationCrown"
+	dragon_visual.add_child(crown_root)
+	_cube(crown_root, "CrownBand", Vector3(0, 2.58, -.62), Vector3(1.3, .2, .9), Color("#f5c65c"))
+	for sign in [-1.0, 0.0, 1.0]:
+		_cube(crown_root, "StarPoint", Vector3(sign * .43, 2.86, -.62), Vector3(.22, .38, .3), Color("#fff3af"))
+	crown_root.visible = false
 
 func _create_camera() -> void:
 	camera = Camera3D.new()
@@ -311,6 +319,12 @@ func _update_camera(delta: float) -> void:
 	var desired := target + direction * camera_distance
 	camera.global_position = camera.global_position.lerp(desired, minf(1.0, delta * 10.0))
 	camera.look_at(target, Vector3.UP)
+
+func _input(event: InputEvent) -> void:
+	# 收鍵要不受 GUI 點擊影響，避免在按鈕上放開滑鼠後鏡頭持續拖曳。
+	if event is InputEventMouseButton and not event.pressed:
+		if event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]:
+			dragging = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -417,6 +431,9 @@ func _answer(option: int) -> void:
 	if active_station == 1 and camera_drag_amount < 35.0:
 		modal_feedback.text = "龍：答對了！先關閉卡片，在 3D 世界拖曳鏡頭看看我，再回來領星星。"
 		return
+	if active_station == steps.size() - 1 and _completed_count() < steps.size() - 1 and not finished[active_station]:
+		modal_feedback.text = "龍：先去收集前面 14 座展台的星星，最後再回來參加畢業挑戰！"
+		return
 	if not finished[active_station]:
 		finished[active_station] = true
 		beacons[active_station].material_override = _material(Color("#ffe184"))
@@ -484,6 +501,8 @@ func _refresh_hud() -> void:
 		hint_label.text = "WASD 移動  •  Shift 跑步  •  Space 跳躍  •  拖曳轉鏡頭"
 		action_button.disabled = true
 		action_button.text = "靠近展台按 E"
+	if crown_root != null:
+		crown_root.visible = count == steps.size()
 	if count == steps.size():
 		dialogue_label.text = "龍：全部 15 顆教學星星收集成功！你已完成星途新手探險！"
 
