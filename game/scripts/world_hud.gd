@@ -275,7 +275,7 @@ func _ready() -> void:
 	settings_button.focus_mode = Control.FOCUS_ALL
 	settings_button.pressed.connect(open_graphics_settings)
 	sidebar.add_child(settings_button)
-	tutorial_button = button("🐉 龍的 3D 方塊教學", true)
+	tutorial_button = button("龍的 3D 方塊教學", true)
 	tutorial_button.name = "DragonTutorialButton"
 	tutorial_button.tooltip_text = "獨立的 15 站體素世界互動教學，不會修改你的正式成績或收藏"
 	tutorial_button.pressed.connect(func() -> void: world.call("open_pixel_tutorial"))
