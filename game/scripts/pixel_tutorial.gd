@@ -49,6 +49,10 @@ var modal_feedback: Label
 var map_overlay: Control
 var map_grid: GridContainer
 var touch_controls: Control
+var touch_enabled: bool = false
+var modal_card: PanelContainer
+var modal_scroll: ScrollContainer
+var map_scroll: ScrollContainer
 
 func set_shared_music(value: Node) -> void:
 	shared_music = value
@@ -63,6 +67,8 @@ func _ready() -> void:
 	_create_dragon()
 	_create_camera()
 	_create_ui()
+	get_viewport().size_changed.connect(_resize_ui)
+	_resize_ui.call_deferred()
 	_refresh_hud()
 	print("PIXEL_TUTORIAL_READY stations=", steps.size())
 
@@ -395,6 +401,7 @@ func _open_station(index: int) -> void:
 		btn.pressed.connect(_answer.bind(i))
 		answer_list.add_child(btn)
 	modal.show()
+	_update_touch_controls()
 	get_viewport().gui_release_focus()
 
 func _answer(option: int) -> void:
@@ -419,6 +426,7 @@ func _answer(option: int) -> void:
 
 func _close_modal() -> void:
 	modal.hide()
+	_update_touch_controls()
 	active_station = -1
 	_refresh_hud()
 
@@ -433,10 +441,12 @@ func _toggle_map() -> void:
 func _open_map() -> void:
 	_refresh_map()
 	map_overlay.show()
+	_update_touch_controls()
 
 func _close_map() -> void:
 	if map_overlay != null:
 		map_overlay.hide()
+		_update_touch_controls()
 
 func _refresh_map() -> void:
 	for child in map_grid.get_children():
@@ -511,6 +521,7 @@ func _button(text: String, gold: bool = false) -> Button:
 	btn.add_theme_stylebox_override("hover", _style(Color("#fff0c3")))
 	btn.add_theme_stylebox_override("pressed", _style(Color("#a7dece")))
 	btn.focus_mode = Control.FOCUS_NONE
+	btn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	return btn
 
 func _create_ui() -> void:
@@ -575,6 +586,7 @@ func _create_ui() -> void:
 	_build_modal(screen)
 	_build_map(screen)
 	_build_touch_controls(screen)
+	_update_touch_controls()
 
 func _build_modal(screen: Control) -> void:
 	modal = Control.new()
@@ -590,13 +602,19 @@ func _build_modal(screen: Control) -> void:
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	modal.add_child(center)
 	var card := PanelContainer.new()
+	modal_card = card
 	card.name = "ChallengeCard"
 	card.custom_minimum_size = Vector2(630, 0)
 	card.add_theme_stylebox_override("panel", _style(Color("#f8f4e8")))
 	center.add_child(card)
 	var content := VBoxContainer.new()
 	content.add_theme_constant_override("separation", 13)
-	card.add_child(content)
+	modal_scroll = ScrollContainer.new()
+	modal_scroll.name = "ChallengeScroll"
+	modal_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	modal_scroll.custom_minimum_size = Vector2(600, 510)
+	card.add_child(modal_scroll)
+	modal_scroll.add_child(content)
 	modal_title = _label("", 25, Color("#184651"))
 	content.add_child(modal_title)
 	modal_body = _label("", 17, Color("#375961"))
@@ -634,15 +652,15 @@ func _build_map(screen: Control) -> void:
 	panel.add_child(column)
 	column.add_child(_label("龍的方塊島地圖  ·  點關卡立即傳送", 23, Color("#234751")))
 	column.add_child(_label("□ 尚未完成　★ 已解鎖星星　｜　此傳送只限教學島", 15, Color("#49686c")))
-	var scroll := ScrollContainer.new()
-	scroll.custom_minimum_size = Vector2(565, 420)
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	column.add_child(scroll)
+	map_scroll = ScrollContainer.new()
+	map_scroll.custom_minimum_size = Vector2(565, 420)
+	map_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	column.add_child(map_scroll)
 	map_grid = GridContainer.new()
 	map_grid.columns = 3
 	map_grid.add_theme_constant_override("h_separation", 8)
 	map_grid.add_theme_constant_override("v_separation", 8)
-	scroll.add_child(map_grid)
+	map_scroll.add_child(map_grid)
 	var close := _button("關閉地圖（M／Esc）", true)
 	close.pressed.connect(_close_map)
 	column.add_child(close)
@@ -658,8 +676,8 @@ func _build_touch_controls(screen: Control) -> void:
 	touch_controls.offset_right = 240
 	touch_controls.offset_bottom = -150
 	screen.add_child(touch_controls)
-	var should_show: bool = DisplayServer.is_touchscreen_available() or OS.has_feature("mobile")
-	touch_controls.visible = should_show
+	touch_enabled = DisplayServer.is_touchscreen_available() or OS.has_feature("mobile")
+	touch_controls.visible = touch_enabled
 	var directions: Array = [
 		["move_forward", "↑", Vector2(75, 0)],
 		["move_left", "←", Vector2(0, 54)],
@@ -675,6 +693,21 @@ func _build_touch_controls(screen: Control) -> void:
 		btn.button_down.connect(func() -> void: Input.action_press(action))
 		btn.button_up.connect(func() -> void: Input.action_release(action))
 		touch_controls.add_child(btn)
+
+
+func _update_touch_controls() -> void:
+	if touch_controls != null:
+		touch_controls.visible = touch_enabled and not modal.visible and not map_overlay.visible
+
+func _resize_ui() -> void:
+	if modal_card == null or map_scroll == null:
+		return
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	var narrow: bool = viewport_size.x < 740.0
+	modal_card.custom_minimum_size.x = minf(630.0, maxf(260.0, viewport_size.x - 36.0))
+	modal_scroll.custom_minimum_size = Vector2(minf(600.0, maxf(220.0, viewport_size.x - 72.0)), minf(510.0, maxf(240.0, viewport_size.y - 32.0)))
+	map_grid.columns = 1 if narrow else 3
+	map_scroll.custom_minimum_size = Vector2(minf(565.0, maxf(220.0, viewport_size.x - 72.0)), minf(420.0, maxf(220.0, viewport_size.y - 180.0)))
 
 func _exit_tree() -> void:
 	for action: StringName in [&"move_left", &"move_right", &"move_forward", &"move_back", &"run", &"jump"]:
