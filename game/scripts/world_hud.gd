@@ -449,6 +449,10 @@ func _reduced_motion() -> bool:
 	return OS.get_environment("REDUCED_MOTION") == "1"
 
 
+func _set_transition_progress(value: float) -> void:
+	transition_material.set_shader_parameter("progress", value)
+
+
 func _cinematic_travel(station_id: String) -> void:
 	_cinematic_action("teleport_to", [station_id])
 
@@ -465,13 +469,11 @@ func _cinematic_action(action: String, args: Array) -> void:
 	transition_material.set_shader_parameter("progress", 0.0)
 	transition_layer.visible = true
 	var appear: Tween = create_tween()
-	appear.tween_method(func(value: float) -> void:
-		transition_material.set_shader_parameter("progress", value), 0.0, 1.0, 0.42).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	appear.tween_method(_set_transition_progress, 0.0, 1.0, 0.42).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	await appear.finished
 	world.callv(action, args)
 	var disappear: Tween = create_tween()
-	disappear.tween_method(func(value: float) -> void:
-		transition_material.set_shader_parameter("progress", value), 1.0, 0.0, 0.56).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	disappear.tween_method(_set_transition_progress, 1.0, 0.0, 0.56).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	await disappear.finished
 	transition_layer.visible = false
 	for entry: Button in station_buttons:
