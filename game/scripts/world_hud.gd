@@ -4,6 +4,12 @@ const MinimapScript = preload("res://scripts/world_minimap.gd")
 const FullMapScript = preload("res://scripts/world_full_map.gd")
 const GraphicsSettingsScript = preload("res://scripts/graphics_settings.gd")
 const InterestPanelScript = preload("res://scripts/interest_panel.gd")
+const CelestialTransitionShader = preload("res://shaders/celestial_transition.gdshader")
+const NIGHT := Color("101a30")
+const SURFACE := Color("18263b")
+const GOLD := Color("e5cf9e")
+const IVORY := Color("f6f0e3")
+const MUTED := Color("bac8d5")
 
 var world: Node3D
 var view_button: Button
@@ -55,7 +61,10 @@ var background_download_label: Label
 var background_download_retry: Button
 var quality_buttons: Array[Button] = []
 var font: Font = preload("res://assets/fonts/NotoSansTC.ttf")
-var ink: Color = Color("203e46")
+var ink: Color = IVORY
+var transition_layer: ColorRect
+var transition_material: ShaderMaterial
+var travel_in_progress: bool = false
 var compact_hud: bool = false
 var compact_menu: Control
 var compact_menu_button: Button
@@ -72,7 +81,7 @@ var account_status: Label
 var account_controls: VBoxContainer
 var _account_previous_visible: bool = true
 
-func label(text: String, size: int = 18, color: Color = Color("203e46")) -> Label:
+func label(text: String, size: int = 18, color: Color = IVORY) -> Label:
 	var node: Label = Label.new()
 	node.text = text
 	node.add_theme_font_override("font", font)
@@ -98,7 +107,7 @@ func button(text: String, accent: bool = false) -> Button:
 	var node: Button = Button.new()
 	node.text = text
 	node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	node.focus_mode = Control.FOCUS_NONE
+	node.focus_mode = Control.FOCUS_ALL
 	node.add_theme_font_override("font", font)
 	node.add_theme_font_size_override("font_size", 17)
 	node.add_theme_color_override("font_color", ink)
@@ -106,9 +115,14 @@ func button(text: String, accent: bool = false) -> Button:
 	node.add_theme_color_override("font_pressed_color", ink)
 	node.add_theme_color_override("font_focus_color", ink)
 	node.add_theme_color_override("font_hover_pressed_color", ink)
-	node.add_theme_stylebox_override("normal", style(Color("efd7a5") if accent else Color("edf1e9"), 12))
-	node.add_theme_stylebox_override("hover", style(Color("f5e4bf") if accent else Color("d7e6db"), 12))
-	node.add_theme_stylebox_override("pressed", style(Color("c3d7cb"), 12))
+	node.add_theme_stylebox_override("normal", style(Color("bca16d") if accent else SURFACE, 10))
+	node.add_theme_stylebox_override("hover", style(Color("d6bb87") if accent else Color("263a54"), 10))
+	node.add_theme_stylebox_override("pressed", style(Color("927e59") if accent else Color("314761"), 10))
+	if accent:
+		node.add_theme_color_override("font_color", NIGHT)
+		node.add_theme_color_override("font_hover_color", NIGHT)
+		node.add_theme_color_override("font_pressed_color", NIGHT)
+		node.add_theme_color_override("font_focus_color", NIGHT)
 	return node
 
 func _ready() -> void:
@@ -148,7 +162,7 @@ func _ready() -> void:
 	margin.name = "Margin"
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for side: String in ["left", "right", "top", "bottom"]:
-		margin.add_theme_constant_override("margin_" + side, 32)
+		margin.add_theme_constant_override("margin_" + side, 28)
 	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	screen.add_child(margin)
 	var column: VBoxContainer = VBoxContainer.new()
@@ -161,8 +175,8 @@ func _ready() -> void:
 	column.add_child(top)
 	var brand: VBoxContainer = VBoxContainer.new()
 	top.add_child(brand)
-	brand.add_child(label("星途", 38, Color("f8eed7")))
-	brand.add_child(label("L I T T L E   W O R L D", 12, Color("bfd3d5")))
+	brand.add_child(label("星途", 38, IVORY))
+	brand.add_child(label("L I T T L E   W O R L D  /  ATLAS 01", 11, GOLD))
 	var spacer: Control = Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -202,10 +216,10 @@ func _ready() -> void:
 	world.get("music").connect("state_changed", refresh_music_controls)
 	refresh_music_controls()
 	var badge: PanelContainer = PanelContainer.new()
-	badge.add_theme_stylebox_override("panel", style(Color("244954"), 24))
+	badge.add_theme_stylebox_override("panel", style(SURFACE, 24))
 	badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	top.add_child(badge)
-	mode_label = label("●   世界總覽", 16, Color("e6eada"))
+	mode_label = label("◇   世界總覽", 15, GOLD)
 	badge.add_child(mode_label)
 	background_download_label = label("", 14, Color("f8eed7"))
 	background_download_label.name = "BackgroundDownloadStatus"
@@ -234,7 +248,9 @@ func _ready() -> void:
 	var map_card: PanelContainer = PanelContainer.new()
 	map_card.name = "MinimapCard"
 	map_card.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var map_style: StyleBoxFlat = style(Color("183b45"),16)
+	var map_style: StyleBoxFlat = style(Color("15283c"),12)
+	map_style.set_border_width_all(1)
+	map_style.border_color = Color("526077")
 	map_style.content_margin_left = 12
 	map_style.content_margin_right = 12
 	map_card.add_theme_stylebox_override("panel",map_style)
@@ -309,7 +325,10 @@ func _ready() -> void:
 	card.visible = false
 	card.visibility_changed.connect(_sync_destination_layout)
 	card.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	card.add_theme_stylebox_override("panel", style(Color("f6f3e9"), 18))
+	var destination_style: StyleBoxFlat = style(SURFACE, 14)
+	destination_style.set_border_width_all(1)
+	destination_style.border_color = Color("4e5c73")
+	card.add_theme_stylebox_override("panel", destination_style)
 	sidebar.add_child(card)
 	var scroll: ScrollContainer = ScrollContainer.new()
 	scroll.name = "DestinationScroll"
@@ -319,8 +338,8 @@ func _ready() -> void:
 	destinations.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	destinations.add_theme_constant_override("separation", 8)
 	scroll.add_child(destinations)
-	destinations.add_child(label("探索目的地", 18))
-	destinations.add_child(label("選擇一站，直接抵達", 13, Color("748a86")))
+	destinations.add_child(label("THE CONSTELLATIONS  /  目的地", 16, GOLD))
+	destinations.add_child(label("六處座標，等待你的下一段旅程", 13, MUTED))
 	var config: Dictionary = world.get("layout")
 	for i: int in range(config.stations.size()):
 		var station: Dictionary = config.stations[i]
@@ -328,14 +347,14 @@ func _ready() -> void:
 		entry.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		entry.pressed.connect(func() -> void:
 			close_compact_menu()
-			world.call("teleport_to", str(station.id)))
+			_cinematic_travel(str(station.id)))
 		destinations.add_child(entry)
 		station_buttons.append(entry)
 	var sakura: Button = button("✿    櫻花林散步    ›")
 	sakura.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	sakura.pressed.connect(func() -> void:
 		close_compact_menu()
-		world.call("visit_sakura"))
+		_cinematic_action("visit_sakura", []))
 	sakura.visible = not bool(get_node("/root/ResourceProfile").call("is_low"))
 	destinations.add_child(sakura)
 	station_buttons.append(sakura)
@@ -345,8 +364,8 @@ func _ready() -> void:
 	ecology.add_theme_font_override("font",font)
 	ecology.add_theme_font_size_override("font_size",17)
 	ecology.add_theme_color_override("font_color",ink)
-	ecology.add_theme_stylebox_override("normal",style(Color("edf1e9"),12))
-	ecology.add_theme_stylebox_override("hover",style(Color("d7e6db"),12))
+	ecology.add_theme_stylebox_override("normal",style(SURFACE,10))
+	ecology.add_theme_stylebox_override("hover",style(Color("263a54"),10))
 	var popup: PopupMenu=ecology.get_popup()
 	popup.add_theme_font_override("font",font)
 	popup.add_theme_font_size_override("font_size",18)
@@ -355,7 +374,7 @@ func _ready() -> void:
 		popup.add_item(nature_names[i],i)
 	popup.id_pressed.connect(func(id: int) -> void:
 		close_compact_menu()
-		world.call("visit_ecology", id))
+		_cinematic_action("visit_ecology", [id]))
 	destinations.add_child(ecology)
 	station_buttons.append(ecology)
 	var bottom: HBoxContainer = HBoxContainer.new()
@@ -388,7 +407,7 @@ func _ready() -> void:
 	modal.visible = false
 	screen.add_child(modal)
 	var panel: PanelContainer = PanelContainer.new()
-	panel.add_theme_stylebox_override("panel", style(Color("f7f3e7"), 22))
+	panel.add_theme_stylebox_override("panel", style(SURFACE, 16))
 	panel.custom_minimum_size = Vector2(520, 280)
 	modal.add_child(panel)
 	var content: VBoxContainer = VBoxContainer.new()
@@ -403,12 +422,66 @@ func _ready() -> void:
 	var close: Button = button("繼續探索", true)
 	close.pressed.connect(func() -> void: world.call("resume_world", {}))
 	content.add_child(close)
+	_install_transition(screen)
 	_build_graphics_settings(screen)
 	_build_full_map(screen)
 	if compact_hud:
 		_build_compact_hud(screen)
 		get_viewport().size_changed.connect(_resize_compact_hud)
 		_resize_compact_hud.call_deferred()
+
+func _install_transition(screen: Control) -> void:
+	# Only one canvas shader pass exists and it is hidden outside travel.
+	transition_material = ShaderMaterial.new()
+	transition_material.shader = CelestialTransitionShader
+	transition_layer = ColorRect.new()
+	transition_layer.name = "CelestialTravelTransition"
+	transition_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	transition_layer.mouse_filter = Control.MOUSE_FILTER_STOP
+	transition_layer.material = transition_material
+	transition_layer.visible = false
+	screen.add_child(transition_layer)
+
+
+func _reduced_motion() -> bool:
+	if bool(get_node("/root/ResourceProfile").call("is_low")):
+		return true
+	if OS.has_feature("web"):
+		return bool(JavaScriptBridge.eval("window.matchMedia('(prefers-reduced-motion: reduce)').matches"))
+	return OS.get_environment("REDUCED_MOTION") == "1"
+
+
+func _set_transition_progress(value: float) -> void:
+	transition_material.set_shader_parameter("progress", value)
+
+
+func _cinematic_travel(station_id: String) -> void:
+	_cinematic_action("teleport_to", [station_id])
+
+
+func _cinematic_action(action: String, args: Array) -> void:
+	if travel_in_progress:
+		return
+	if _reduced_motion():
+		world.callv(action, args)
+		return
+	travel_in_progress = true
+	for entry: Button in station_buttons:
+		entry.disabled = true
+	transition_material.set_shader_parameter("progress", 0.0)
+	transition_layer.visible = true
+	var appear: Tween = create_tween()
+	appear.tween_method(_set_transition_progress, 0.0, 1.0, 0.42).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	await appear.finished
+	world.callv(action, args)
+	var disappear: Tween = create_tween()
+	disappear.tween_method(_set_transition_progress, 1.0, 0.0, 0.56).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	await disappear.finished
+	transition_layer.visible = false
+	for entry: Button in station_buttons:
+		entry.disabled = false
+	travel_in_progress = false
+
 
 func _sync_destination_layout() -> void:
 	# The expanded sidebar belongs to travel. Secondary account/settings rows
@@ -1095,7 +1168,7 @@ func update_status(is_overview: bool, nearby: String, _radial_height: float) -> 
 			control.visible = is_overview
 		destination_card.visible = false
 		destination_toggle.text = "選擇目的地    +"
-	mode_label.text = "●   世界總覽" if is_overview else "●   自由漫遊"
+	mode_label.text = "◇   世界總覽" if is_overview else "◇   自由漫遊"
 	view_button.text = "開始漫遊    ↗" if is_overview else "回到世界總覽    ↗"
 	prompt_label.text = "E  進入「%s」" % nearby if nearby != "" and not is_overview else "六個目的地，自由探索整個世界"
 	if compact_hud:
