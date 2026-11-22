@@ -437,13 +437,15 @@ func _install_transition(screen: Control) -> void:
 	transition_layer = ColorRect.new()
 	transition_layer.name = "CelestialTravelTransition"
 	transition_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	transition_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	transition_layer.mouse_filter = Control.MOUSE_FILTER_STOP
 	transition_layer.material = transition_material
 	transition_layer.visible = false
 	screen.add_child(transition_layer)
 
 
 func _reduced_motion() -> bool:
+	if bool(get_node("/root/ResourceProfile").call("is_low")):
+		return true
 	if OS.has_feature("web"):
 		return bool(JavaScriptBridge.eval("window.matchMedia('(prefers-reduced-motion: reduce)').matches"))
 	return OS.get_environment("REDUCED_MOTION") == "1"
