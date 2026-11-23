@@ -13,6 +13,7 @@ const BenchScript = preload("res://scripts/bench_interaction.gd")
 const TrainingTransition = preload("res://scripts/training_room_transition.gd")
 const IndoorTransition = preload("res://scripts/indoor_transition.gd")
 const AccountSession = preload("res://scripts/account_session.gd")
+const PIXEL_TUTORIAL_SCENE: String = "res://scenes/pixel_tutorial.tscn"
 const UNIVERSITY_SCENE: String = "res://scenes/university_hall.tscn"
 const ADMISSIONS_SCENE: String = "res://scenes/admissions_room.tscn"
 const COUNSELING_SCENE: String = "res://scenes/counseling_room.tscn"
@@ -797,6 +798,27 @@ func pause_world() -> void:
 	player.cancel_jump_input()
 	paused = true
 	player.controls_enabled = false
+
+## 玩家自主進入的全新互動教學，與原本六個站台及舊引導互不覆蓋。
+## 使用現成室內轉場：保留世界實例、位置、鏡頭和共享音樂。
+func open_pixel_tutorial() -> void:
+	if entering or preparing_roam or preparing_room or account_view_open:
+		return
+	if hud == null or bool(hud.call("is_full_map_open")) or bool(hud.call("is_settings_open")):
+		return
+	hud.call("close_compact_menu")
+	if paused:
+		return
+	var token: Dictionary = {"position": player.global_position, "heading": player.heading}
+	pause_world()
+	var transition: Node = IndoorTransition.new()
+	transition.name = "DragonTutorialTransition"
+	get_tree().root.add_child(transition)
+	if not bool(transition.call("open_from_world", self, token, PIXEL_TUTORIAL_SCENE, "world")):
+		var error: String = str(transition.get("last_error"))
+		transition.queue_free()
+		resume_world(token)
+		hud.call("set_preparation", error, false)
 
 func open_account(view: String = "account") -> bool:
 	if view not in ["query", "general", "special", "apcs", "scores", "account"] or entering or preparing_roam or preparing_room:

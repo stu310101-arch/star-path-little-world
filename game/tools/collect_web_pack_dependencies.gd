@@ -17,7 +17,7 @@ func _initialize() -> void:
 		push_error("Usage: --script res://tools/collect_web_pack_dependencies.gd -- output.json [--mobile]")
 		quit(2)
 		return
-	var boot: Array[String] = ["res://scenes/login_entry.tscn", "res://scenes/training_room.tscn", "res://scenes/university_hall.tscn", "res://scenes/admissions_room.tscn", "res://scenes/counseling_room.tscn", "res://scenes/recommendation_room.tscn", "res://scenes/discussion_garden.tscn"]
+	var boot: Array[String] = ["res://scenes/login_entry.tscn", "res://scenes/training_room.tscn", "res://scenes/university_hall.tscn", "res://scenes/admissions_room.tscn", "res://scenes/counseling_room.tscn", "res://scenes/recommendation_room.tscn", "res://scenes/discussion_garden.tscn", "res://scenes/pixel_tutorial.tscn"]
 	_append_files("res://scripts", boot, ["gd"])
 	boot.erase("res://scripts/world_art_direction.gd")
 	_append_files("res://data", boot, ["json"])

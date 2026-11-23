@@ -35,6 +35,7 @@ var music_slider: HSlider
 var music_title: Label
 var music_percent: Label
 var graphics_settings: Node
+var tutorial_button: Button
 var settings_button: Button
 var interest_settings_button: Button
 var interest_panel: Control
@@ -274,6 +275,11 @@ func _ready() -> void:
 	settings_button.focus_mode = Control.FOCUS_ALL
 	settings_button.pressed.connect(open_graphics_settings)
 	sidebar.add_child(settings_button)
+	tutorial_button = button("龍的 3D 方塊教學", true)
+	tutorial_button.name = "DragonTutorialButton"
+	tutorial_button.tooltip_text = "獨立的 15 站體素世界互動教學，不會修改你的正式成績或收藏"
+	tutorial_button.pressed.connect(func() -> void: world.call("open_pixel_tutorial"))
+	sidebar.add_child(tutorial_button)
 	account_controls = VBoxContainer.new()
 	account_controls.name = "AccountControls"
 	account_controls.add_theme_constant_override("separation", 5)
@@ -418,6 +424,8 @@ func _sync_destination_layout() -> void:
 		account_controls.visible = not expanded
 	if settings_button != null:
 		settings_button.visible = not expanded
+	if tutorial_button != null:
+		tutorial_button.visible = not expanded
 
 func _activate_view_button() -> void:
 	close_compact_menu()
